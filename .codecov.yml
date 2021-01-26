@@ -1,0 +1,35 @@
+
+# See: https://docs.codecov.io/docs/codecov-yaml
+
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "40...100"
+
+  status:
+    project:
+      default:
+        target: 80%
+    patch: no # See: https://docs.codecov.io/docs/commit-status#section-patch-status
+    changes: no
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment: # See: https://docs.codecov.io/docs/pull-request-comments
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+  require_base: true
+  require_head: true
+
+# ignore: # See: https://docs.codecov.io/docs/ignoring-paths
