@@ -1,5 +1,9 @@
 # pedax
 
+<p align="center">
+<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/pedax_logo.png?raw=true" alt="pedax_logo" />
+</p>
+
 TODO: describe
 
 ---
@@ -11,21 +15,26 @@ TODO: describe
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
 ### commands
+
 #### format
+
 ```sh
 flutter format -l 120 .
 ```
 
 #### test
+
 ```sh
 flutter test
 ```
 
 #### analyze
+
 ```sh
 flutter analyze
 ```
 
 ### reference
+
 - [Desktop support for Flutter](https://flutter.dev/desktop)
 - [Effective Dart: Documentation](https://dart.dev/guides/language/effective-dart/documentation)
