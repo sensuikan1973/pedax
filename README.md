@@ -1,8 +1,9 @@
 # pedax
 
 <p align="center">
-<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/pedax_logo.png?raw=true" alt="pedax_logo" />
+<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/pedax_logo.png?raw=true" alt="pedax_logo" width="200"/>
 </p>
+<br/>
 
 TODO: describe
 
