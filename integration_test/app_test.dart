@@ -7,8 +7,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+// See: The library 'package:integration_test/integration_test.dart' is legacy,
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:integration_test/integration_test.dart';
-
 import 'package:pedax/main.dart' as app;
 
 void main() => run(_testMain);

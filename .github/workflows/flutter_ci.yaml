@@ -1,0 +1,43 @@
+name: Flutter CI
+
+on:
+  pull_request:
+    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', '.github/workflows/flutter_ci.yaml']
+  push:
+    branches: [ main ]
+    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', '.github/workflows/flutter_ci.yaml']
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: flutter format -l 120 --set-exit-if-changed .
+
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - name: install dependencies
+        run: flutter pub get
+      - run: flutter analyze --fatal-infos --fatal-warnings .
+
+  widget_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - name: install dependencies
+        run: flutter pub get
+      - run: flutter test --coverage --coverage-path=~/coverage/lcov.info
+      - uses: codecov/codecov-action@v1
+        with:
+          file: ~/coverage/lcov.info

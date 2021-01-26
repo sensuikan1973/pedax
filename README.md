@@ -1,16 +1,31 @@
 # pedax
 
-A new Flutter project.
+TODO: describe
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Development
 
-A few resources to get you started if this is your first Flutter project:
+[![flutter-channel](https://img.shields.io/badge/Flutter-dev-64B5F6.svg?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)
+![Flutter CI](https://github.com/sensuikan1973/pedax/workflows/Flutter%20CI/badge.svg)
+[![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=0EE7KZ8DVJ)](https://codecov.io/gh/sensuikan1973/pedax)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### commands
+#### format
+```sh
+flutter format -l 120 .
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### test
+```sh
+flutter test
+```
+
+#### analyze
+```sh
+flutter analyze
+```
+
+### reference
+- [Desktop support for Flutter](https://flutter.dev/desktop)
+- [Effective Dart: Documentation](https://dart.dev/guides/language/effective-dart/documentation)

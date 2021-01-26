@@ -1,9 +1,6 @@
 name: pedax
-description: A new Flutter project.
-
-# The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: edax-reversi Board.
+publish_to: 'none'
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,10 +12,11 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.1+1
 
-environment:
-  sdk: ">=2.7.0 <3.0.0"
+environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
+  sdk: '>=2.12.0-224.0.dev <3.0.0'
+  flutter: ^1.26.0-0
 
 dependencies:
   flutter:
@@ -34,6 +32,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
+  pedantic_sensuikan1973: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
