@@ -5,10 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+// @dart = 2.11
+// See: https://github.com/flutter/flutter/issues/71379
+// See: https://dart.dev/null-safety/unsound-null-safety
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-// See: https://github.com/flutter/flutter/issues/71379
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:integration_test/integration_test.dart';
 import 'package:pedax/main.dart' as app;
 
