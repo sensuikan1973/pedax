@@ -56,6 +56,9 @@ jobs:
           path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
           echo "artifact_target=$path" >> $GITHUB_ENV
 
+      - name: output build info
+        run: .github/scripts/output_build_info.sh ${{ env.artifact_target }}
+
       - uses: actions/upload-artifact@v2
         with:
           name: pedax-${{ runner.os }}-${{ matrix.mode }}
