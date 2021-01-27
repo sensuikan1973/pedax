@@ -41,4 +41,9 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: drive
-        run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
+      - uses: nick-invision/retry@v2
+        with:
+          timeout_seconds: 8
+          max_attempts: 3
+          retry_on: error
+          command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
