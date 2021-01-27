@@ -22,14 +22,14 @@ jobs:
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
             subcommand: linux
-            set-script: |-
+            setup-script: |-
               flutter config --enable-linux-desktop
               sudo apt-get update
               sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
             distribution_path: build/macos/Build/Products/_mode_/pedax.app # See: https://flutter.dev/desktop#distribution
           - os: windows-latest
             subcommand: windows
-            set-script: flutter config --enable-windows-desktop
+            setup-script: flutter config --enable-windows-desktop
             distribution_path: build/windows/runner/_mode_/ # See: https://flutter.dev/desktop#distribution
           - os: macos-latest
             subcommand: mac
