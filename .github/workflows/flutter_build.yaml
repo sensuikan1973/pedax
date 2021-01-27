@@ -28,7 +28,7 @@ jobs:
             subcommand: windows
             set-config: flutter config --enable-windows-desktop
             distribution_path: build/windows/runner/_mode_/ # See: https://flutter.dev/desktop#distribution
-          - os: maca-latest
+          - os: macos-latest
             subcommand: mac
             distribution_path: build/linux # ??? # See: https://flutter.dev/desktop#distribution
 
