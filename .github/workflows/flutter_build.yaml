@@ -22,14 +22,18 @@ jobs:
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
             subcommand: linux
-            set-config: flutter config --enable-linux-desktop
+            set-script: |-
+              flutter config --enable-linux-desktop
+              sudo apt-get update
+              sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
             distribution_path: build/macos/Build/Products/_mode_/pedax.app # See: https://flutter.dev/desktop#distribution
           - os: windows-latest
             subcommand: windows
-            set-config: flutter config --enable-windows-desktop
+            set-script: flutter config --enable-windows-desktop
             distribution_path: build/windows/runner/_mode_/ # See: https://flutter.dev/desktop#distribution
           - os: macos-latest
             subcommand: mac
+            setup-script: flutter config --enable-macos-desktop
             distribution_path: build/linux # ??? # See: https://flutter.dev/desktop#distribution
 
     steps:
@@ -39,7 +43,8 @@ jobs:
           channel: 'dev'
       - name: doctor
         run: flutter doctor -v
-      - run: ${{ matrix.set-config }}
+      - name: setup
+        run: ${{ matrix.setup-script }}
       - name: install dependencies
         run: flutter pub get
       - name: build
