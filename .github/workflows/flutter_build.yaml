@@ -51,6 +51,7 @@ jobs:
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
 
       - name: set output path
+        shell: bash
         run: |-
           path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
           echo "artifact_target=$path" >> $GITHUB_ENV
