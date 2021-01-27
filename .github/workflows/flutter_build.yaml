@@ -1,0 +1,65 @@
+# NOTE: Experimental Job. See: https://flutter.dev/desktop#distribution
+# ref: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
+
+name: Flutter Build
+
+on:
+  pull_request:
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+  push:
+    branches: [ main ]
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false # I want results from all OSes even if one fails.
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        mode: [debug, release]
+        include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
+          - os: ubuntu-latest
+            subcommand: linux
+            setup-script: |-
+              flutter config --enable-linux-desktop
+              sudo apt-get update
+              sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
+            distribution_path: build/linux # ??? # See: https://flutter.dev/desktop#distribution
+          - os: windows-latest
+            subcommand: windows
+            setup-script: flutter config --enable-windows-desktop
+            distribution_path: build/windows/runner/_mode_/ # See: https://flutter.dev/desktop#distribution
+          - os: macos-latest
+            subcommand: macos
+            setup-script: flutter config --enable-macos-desktop
+            distribution_path: build/macos/Build/Products/_mode_ # See: https://flutter.dev/desktop#distribution
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - name: setup
+        run: ${{ matrix.setup-script }}
+      - name: install dependencies
+        run: flutter pub get
+      - name: doctor
+        run: flutter doctor -v
+      - name: build
+        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
+
+      - name: set output path
+        shell: bash
+        run: |-
+          path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
+          echo "artifact_target=$path" >> $GITHUB_ENV
+
+      - name: output build info
+        run: .github/scripts/output_build_info.sh ${{ env.artifact_target }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pedax-${{ runner.os }}-${{ matrix.mode }}
+          path: ${{ env.artifact_target }}
