@@ -41,7 +41,7 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: drive
-      - uses: nick-invision/retry@v2
+        uses: nick-invision/retry@v2
         with:
           timeout_seconds: 8
           max_attempts: 3
