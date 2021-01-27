@@ -1,0 +1,56 @@
+# NOTE: Experimental Job. See: https://flutter.dev/desktop#distribution
+# ref: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
+
+name: Flutter Build
+
+on:
+  pull_request:
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+  push:
+    branches: [ main ]
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false # I want results from all OSes even if one fails.
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        mode: [debug, release]
+        include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
+          - os: ubuntu-latest
+            subcommand: linux
+            set-config: flutter config --enable-linux-desktop
+            distribution_path: build/macos/Build/Products/_mode_/pedax.app # See: https://flutter.dev/desktop#distribution
+          - os: windows-latest
+            subcommand: windows
+            set-config: flutter config --enable-windows-desktop
+            distribution_path: build/windows/runner/_mode_/ # See: https://flutter.dev/desktop#distribution
+          - os: maca-latest
+            subcommand: mac
+            distribution_path: build/linux # ??? # See: https://flutter.dev/desktop#distribution
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: $ {{ matrix.set-config }}
+      - name: doctor
+        run: flutter doctor -v
+      - name: install dependencies
+        run: flutter pub get
+      - name: build
+        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
+
+      - name: set output path
+        run: |-
+          path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
+          echo "artifact_target=$path" >> $$GITHUB_ENV
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pedax
+          path: ${{ env.artifact_target }}
