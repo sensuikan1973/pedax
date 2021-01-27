@@ -47,3 +47,8 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
+
+      # DEBUG
+      - name: setup tmate session for debug
+        if: runner.os == 'Linux'
+        uses: mxschmitt/action-tmate@v3
