@@ -34,7 +34,7 @@ jobs:
           - os: macos-latest
             subcommand: macos
             setup-script: flutter config --enable-macos-desktop
-            distribution_path: build/macos/Build/Products/_mode_/pedax.app # See: https://flutter.dev/desktop#distribution
+            distribution_path: build/macos/Build/Products/_mode_ # See: https://flutter.dev/desktop#distribution
 
     steps:
       - uses: actions/checkout@v2
