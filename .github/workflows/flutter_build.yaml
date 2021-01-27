@@ -53,7 +53,7 @@ jobs:
       - name: set output path
         run: |-
           path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
-          echo "artifact_target=$path" >> $$GITHUB_ENV
+          echo "artifact_target=$path" >> $GITHUB_ENV
 
       - uses: actions/upload-artifact@v2
         with:
