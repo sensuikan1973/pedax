@@ -34,7 +34,7 @@ jobs:
           - os: macos-latest
             subcommand: macos
             setup-script: flutter config --enable-macos-desktop
-            distribution_path: build/linux # ??? # See: https://flutter.dev/desktop#distribution
+            distribution_path: build/ # ??? # See: https://flutter.dev/desktop#distribution
 
     steps:
       - uses: actions/checkout@v2
@@ -57,5 +57,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: pedax-${{ runner.os }}
+          name: pedax-${{ runner.os }}-${{ matrix.mode }}
           path: ${{ env.artifact_target }}
