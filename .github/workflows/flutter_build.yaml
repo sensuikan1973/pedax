@@ -44,7 +44,7 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: setup
-        run: sh ${{ matrix.setup-script }}
+        run: ${{ matrix.setup-script }}
       - name: install dependencies
         run: flutter pub get
       - name: build
