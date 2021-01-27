@@ -8,7 +8,7 @@ on:
     paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:
-  build:
+  integration_test:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
