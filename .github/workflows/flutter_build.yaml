@@ -41,12 +41,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'dev'
-      - name: doctor
-        run: flutter doctor -v
       - name: setup
         run: ${{ matrix.setup-script }}
       - name: install dependencies
         run: flutter pub get
+      - name: doctor
+        run: flutter doctor -v
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
 
