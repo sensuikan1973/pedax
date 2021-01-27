@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-latest] # Why isn't there ubuntsu-latest? See: https://github.com/sensuikan1973/pedax/issues/7
+        os: [windows-latest, macos-latest] # TODO: add ubuntsu-latest. See: https://github.com/sensuikan1973/pedax/issues/7
         include:
           # - os: ubuntu-latest
           #   device: linux
