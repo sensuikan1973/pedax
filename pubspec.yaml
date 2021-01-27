@@ -1,6 +1,9 @@
 name: pedax
 description: edax-reversi Board.
 publish_to: 'none'
+homepage: https://github.com/sensuikan1973/pedax # TODO: change to blanding site
+repository: https://github.com/sensuikan1973/pedax
+issue_tracker: https://github.com/sensuikan1973/pedax/issues
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
