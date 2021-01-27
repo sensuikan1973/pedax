@@ -37,9 +37,9 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'dev'
-      - run: $ {{ matrix.set-config }}
       - name: doctor
         run: flutter doctor -v
+      - run: ${{ matrix.set-config }}
       - name: install dependencies
         run: flutter pub get
       - name: build
