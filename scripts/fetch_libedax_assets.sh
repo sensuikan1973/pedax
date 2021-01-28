@@ -12,6 +12,7 @@ mkdir -p $tmp_dst
 
 tag=libedax-assets_2
 asset_url_prefix=https://github.com/sensuikan1973/libedax4dart/releases/download/$tag
+# See: https://github.com/sensuikan1973/libedax4dart/releases/latest
 
 function unpack_dyamic_library() {
   platform=$1
