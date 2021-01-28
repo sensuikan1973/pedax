@@ -25,10 +25,24 @@ TODO: describe
 flutter format -l 120 .
 ```
 
+#### build
+
+```sh
+flutter build macos
+```
+
 #### test
+
+##### widget test
 
 ```sh
 flutter test
+```
+
+##### integration test
+
+```sh
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d mac
 ```
 
 #### analyze
