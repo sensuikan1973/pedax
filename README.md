@@ -37,6 +37,12 @@ flutter test
 flutter analyze
 ```
 
+#### fetch libedax assets as pedax assets
+
+```sh
+./scripts/fetch_libedax_assets.sh
+```
+
 ### reference
 
 - [Desktop support for Flutter](https://flutter.dev/desktop)
