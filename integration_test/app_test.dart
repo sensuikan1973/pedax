@@ -19,7 +19,7 @@ import 'package:pedax/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
     app.main();
 

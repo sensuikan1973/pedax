@@ -3,6 +3,7 @@
 // See: https://dart.dev/null-safety/unsound-null-safety
 
 import 'package:flutter/foundation.dart';
+// ignore: unused_import
 import 'package:path_provider/path_provider.dart'; // 使う
 
 @immutable
@@ -13,7 +14,7 @@ class Edax {
     // preferences が無い/定義が無い場合は、Asset Bundle から「book, eval, dll, 設定ファイル(yaml かな? 扱いやすければ何でもok)」をコピってきて、そこを参照するようにする
   }
 
-  setBookPath() {
+  void setBookPath() {
     // TODO: 実装
     // updatePreferences()
     // 後続の処理で book load が必要
@@ -21,21 +22,23 @@ class Edax {
     // まあ優先度低いので、アプリ自体の再起動が必要、というメッセージを明示しておく でもok。
   }
 
-  setEvalPath() {
+  void setEvalPath() {
     // TODO: 実装
     // updatePreferences()
     // アプリ自体の再起動が必要、というメッセージを明示しておく
   }
 
-  setDllPath() {
+  void setDllPath() {
     // TODO: 実装
     // updatePreferences()
     // アプリ自体の再起動が必要、というメッセージを明示しておく
   }
 
+  // ignore: prefer_expression_function_bodies
   String loadPreferences() {
     // TODO: 実装
     // path_provider で platform に応じた領域を参照する
+    return '';
   }
 
   void updatePreferences() {
