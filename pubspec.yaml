@@ -31,6 +31,8 @@ dependencies:
 
   # FIXME: 1.16.15 以降だと、path_provider の依存する ffi が null-safety でないため、libedax4dart と競合してしまう
   path_provider: ^1.6.14 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  # FIXME: 0.5.11 以降だと、shared_preferences の依存する ffi が null-safety でないため、libedax4dart と競合してしまう
+  shared_preferences: ^0.5.10
 
 dev_dependencies:
   flutter_test:
