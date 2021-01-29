@@ -5,6 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+// See: https://flutter.dev/docs/testing/integration-tests
+
 // @dart = 2.11
 // See: https://github.com/flutter/flutter/issues/71379
 // See: https://dart.dev/null-safety/unsound-null-safety
@@ -14,10 +16,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pedax/main.dart' as app;
 
-void main() => run(_testMain);
+void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-void _testMain() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
     app.main();
 

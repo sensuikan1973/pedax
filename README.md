@@ -25,16 +25,36 @@ TODO: describe
 flutter format -l 120 .
 ```
 
+#### build
+
+```sh
+flutter build macos
+```
+
 #### test
+
+##### widget test
 
 ```sh
 flutter test
+```
+
+##### integration test
+
+```sh
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d mac
 ```
 
 #### analyze
 
 ```sh
 flutter analyze
+```
+
+#### fetch libedax assets as pedax assets
+
+```sh
+./scripts/fetch_libedax_assets.sh
 ```
 
 ### reference
