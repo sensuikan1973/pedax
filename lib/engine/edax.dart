@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart'; // 使う
 
 @immutable
-class edax {
-  edax() {
+class Edax {
+  Edax() {
     // TODO: 実装
     // loadPreferences で book, eval, dll の path を入手し、edax を起動する
     // preferences が無い/定義が無い場合は、Asset Bundle から「book, eval, dll, 設定ファイル(yaml かな? 扱いやすければ何でもok)」をコピってきて、そこを参照するようにする
