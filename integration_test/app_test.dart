@@ -21,7 +21,7 @@ void main() {
 
   testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
-    app.main();
+    await app.main();
 
     // Trigger a frame.
     await tester.pumpAndSettle();
