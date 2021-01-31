@@ -17,7 +17,9 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pedax/main.dart' as app;
 
 void main() {
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(() async {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  });
 
   testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
