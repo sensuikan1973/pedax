@@ -1,10 +1,14 @@
 // @dart = 2.11
-// path_provider が null safety でないため
+// See: https://github.com/flutter/plugins/pull/3330 (path_provider)
+// See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
 // See: https://dart.dev/null-safety/unsound-null-safety
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-// ignore: unused_import
-import 'package:path_provider/path_provider.dart'; // 使う
+import 'package:flutter/services.dart';
+import 'package:libedax4dart/libedax4dart.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @immutable
 class Edax {
@@ -45,4 +49,57 @@ class Edax {
     // TODO: 実装
     // path_provider で platform に応じた領域へ書き込む
   }
+}
+
+/// TODO: remove this Experiment function
+Future<String> tryToCallEdax() async {
+  final docDir = await getApplicationDocumentsDirectory();
+
+  final pref = await SharedPreferences.getInstance();
+  if (pref.getString('bookFilePath') == null) {
+    await pref.setString('bookFilePath', '${docDir.path}/book.dat'); // for now
+  }
+  if (pref.getString('evalFilePath') == null) {
+    final evalData = await rootBundle.load('assets/libedax/data/eval.dat');
+    final evalFilePath = '${docDir.path}/eval.dat';
+    File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+    await pref.setString('evalFilePath', evalFilePath);
+  } else {
+    final evalFilePath = pref.getString('evalFilePath');
+    if (!File(evalFilePath).existsSync()) {
+      final evalData = await rootBundle.load('assets/libedax/data/eval.dat');
+      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+    }
+  }
+  if (pref.getString('libedaxPath') == null) {
+    var libedaxName = '';
+    if (Platform.isMacOS) libedaxName = 'libedax.dylib';
+    if (Platform.isWindows) libedaxName = 'libedax-x64.dll';
+    if (Platform.isLinux) libedaxName = 'libedax.so';
+    final libedaxData = await rootBundle.load('assets/libedax/dll/$libedaxName');
+    final libedaxPath = '${docDir.path}/$libedaxName';
+    File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
+    await pref.setString('libedaxPath', libedaxPath);
+  } else {
+    final libedaxPath = pref.getString('libedaxPath');
+    if (!File(libedaxPath).existsSync()) {
+      var libedaxName = '';
+      if (Platform.isMacOS) libedaxName = 'libedax.dylib';
+      if (Platform.isWindows) libedaxName = 'libedax-x64.dll';
+      if (Platform.isLinux) libedaxName = 'libedax.so';
+      final libedaxData = await rootBundle.load('assets/libedax/dll/$libedaxName');
+      File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
+    }
+  }
+  if (Platform.isMacOS) {
+    await Process.run('xattr', ['-d', 'com.apple.quarantine', pref.getString('libedaxPath')], runInShell: true);
+  }
+
+  final edax = LibEdax(pref.getString('libedaxPath'))
+    ..libedaxInitialize(
+      ['', '-eval-file', pref.getString('evalFilePath'), '-book-file', pref.getString('bookFilePath')],
+    )
+    ..edaxInit()
+    ..edaxVersion();
+  return edax.edaxGetBoard().prettyString(TurnColor.black);
 }

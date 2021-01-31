@@ -4,10 +4,12 @@
 <img src="https://github.com/sensuikan1973/pedax/blob/main/assets/pedax_logo.png?raw=true" alt="pedax_logo" width="200"/>
 </p>
 <br/>
+TODO: paste GUI image.
 
-TODO: describe
+_pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
 
----
+- support Mac/Windows/Linux.
+- you can see `eval value`(e.g. `+4`, `-10`) comfortablely.
 
 ## Development
 
