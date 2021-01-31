@@ -40,5 +40,7 @@ jobs:
         run: flutter pub get
       - name: doctor
         run: flutter doctor -v
+      - name: xattr
+        run: xattr -d -r com.apple.quarantine assets/libedax/dll
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
