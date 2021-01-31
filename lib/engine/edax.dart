@@ -91,6 +91,9 @@ Future<String> tryToCallEdax() async {
       File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
     }
   }
+  if (Platform.isMacOS) {
+    await Process.run('xattr', ['-d', 'com.apple.quarantine', pref.getString('libedaxPath')], runInShell: true);
+  }
 
   final edax = LibEdax(pref.getString('libedaxPath'))
     ..libedaxInitialize(
