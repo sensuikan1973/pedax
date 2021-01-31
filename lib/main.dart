@@ -35,11 +35,13 @@ Future<void> main() async {
     await pref.setString('libedaxPath', libedaxPath);
   }
 
-  LibEdax(pref.getString('libedaxPath'))
+  final edax = LibEdax(pref.getString('libedaxPath'))
     ..libedaxInitialize(
       ['', '-eval-file', pref.getString('evalFilePath'), '-book-file', pref.getString('bookFilePath')],
     )
     ..edaxVersion();
+  // ignore: avoid_print
+  print(edax.edaxGetBoard().prettyString(TurnColor.black));
 
   runApp(const MyApp());
 }
