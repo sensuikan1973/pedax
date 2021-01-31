@@ -3,8 +3,6 @@
 // See: https://dart.dev/null-safety/unsound-null-safety
 
 import 'package:flutter/foundation.dart';
-// ignore: unused_import
-import 'package:path_provider/path_provider.dart'; // 使う
 
 @immutable
 class Edax {
