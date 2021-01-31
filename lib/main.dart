@@ -26,11 +26,11 @@ Future<void> main() async {
   }
   if (pref.getString('libedaxPath') == null) {
     var libedaxName = '';
-    if (Platform.isMacOS) libedaxName = 'libedaxt.dylib';
+    if (Platform.isMacOS) libedaxName = 'libedax.dylib';
     if (Platform.isWindows) libedaxName = 'libedax-x64.dll';
     if (Platform.isLinux) libedaxName = 'libedax.so';
     final libedaxData = await rootBundle.load('assets/libedax/dll/$libedaxName');
-    final libedaxPath = '${docDir.path}/libedax.dylib';
+    final libedaxPath = '${docDir.path}/$libedaxName';
     File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
     await pref.setString('libedaxPath', libedaxPath);
   }
