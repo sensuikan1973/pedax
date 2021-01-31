@@ -43,5 +43,5 @@ Future<void> main() async {
   // ignore: avoid_print
   print(edax.edaxGetBoard().prettyString(TurnColor.black));
 
-  runApp(const MyApp());
+  runApp(const PedaxApp());
 }
