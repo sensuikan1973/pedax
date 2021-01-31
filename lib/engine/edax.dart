@@ -64,6 +64,12 @@ Future<String> tryToCallEdax() async {
     final evalFilePath = '${docDir.path}/eval.dat';
     File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
     await pref.setString('evalFilePath', evalFilePath);
+  } else {
+    final evalFilePath = pref.getString('evalFilePath');
+    if (!File(evalFilePath).existsSync()) {
+      final evalData = await rootBundle.load('assets/libedax/data/eval.dat');
+      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+    }
   }
   if (pref.getString('libedaxPath') == null) {
     var libedaxName = '';
@@ -74,6 +80,16 @@ Future<String> tryToCallEdax() async {
     final libedaxPath = '${docDir.path}/$libedaxName';
     File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
     await pref.setString('libedaxPath', libedaxPath);
+  } else {
+    final libedaxPath = pref.getString('libedaxPath');
+    if (!File(libedaxPath).existsSync()) {
+      var libedaxName = '';
+      if (Platform.isMacOS) libedaxName = 'libedax.dylib';
+      if (Platform.isWindows) libedaxName = 'libedax-x64.dll';
+      if (Platform.isLinux) libedaxName = 'libedax.so';
+      final libedaxData = await rootBundle.load('assets/libedax/dll/$libedaxName');
+      File(libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
+    }
   }
 
   final edax = LibEdax(pref.getString('libedaxPath'))
