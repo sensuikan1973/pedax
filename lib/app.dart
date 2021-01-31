@@ -1,8 +1,14 @@
+// @dart = 2.11
+// See: https://github.com/flutter/plugins/pull/3330 (path_provider)
+// See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
+// See: https://dart.dev/null-safety/unsound-null-safety
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'engine/edax.dart' show tryToCallEdax;
 
 class PedaxApp extends StatelessWidget {
-  const PedaxApp({Key? key}) : super(key: key);
+  const PedaxApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -13,7 +19,7 @@ class PedaxApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({required this.title, Key? key}) : super(key: key);
+  const HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -44,31 +50,36 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(widget.title)),
-        body: Center(
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('You have pushed the button this many times:'),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
+        body: FutureBuilder<String>(
+          future: tryToCallEdax(),
+          builder: (context, snapshot) {
+            final text = snapshot.connectionState != ConnectionState.done
+                ? 'You have pushed the button this many times:'
+                : snapshot.data;
+            return Center(
+              child: Column(
+                // Column is also a layout widget. It takes a list of children and
+                // arranges them vertically. By default, it sizes itself to fit its
+                // children horizontally, and tries to be as tall as its parent.
+                //
+                // Invoke "debug painting" (press "p" in the console, choose the
+                // "Toggle Debug Paint" action from the Flutter Inspector in Android
+                // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+                // to see the wireframe for each widget.
+                //
+                // Column has various properties to control how it sizes itself and
+                // how it positions its children. Here we use mainAxisAlignment to
+                // center the children vertically; the main axis here is the vertical
+                // axis because Columns are vertical (the cross axis would be
+                // horizontal).
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(text),
+                  Text('$_counter', style: Theme.of(context).textTheme.headline4),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: _incrementCounter,
