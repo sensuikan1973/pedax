@@ -37,7 +37,7 @@ jobs:
           channel: 'dev'
       - name: install dependencies
         run: flutter pub get
-      - run: flutter test # --coverage --coverage-path=./coverage/lcov.info
-      # - uses: codecov/codecov-action@v1
-      #   with:
-      #     file: ./coverage/lcov.info
+      - run: flutter test --coverage --coverage-path=./coverage/lcov.info
+      - uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage/lcov.info
