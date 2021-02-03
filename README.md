@@ -63,7 +63,7 @@ flutter analyze
 
 - [Desktop support for Flutter](https://flutter.dev/desktop)
 - [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
-- mac
+- [mac](https://developer.apple.com/account/#/overview)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
   - [Notarizing macOS Software Before Distribution](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution)
 - windows
