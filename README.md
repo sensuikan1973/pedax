@@ -53,7 +53,7 @@ flutter drive --driver integration_test/driver.dart --target integration_test/ap
 flutter analyze
 ```
 
-#### fetch libedax assets as pedax assets
+#### fetch libedax assets as pedax assets for Linux/Windows
 
 ```sh
 ./scripts/fetch_libedax_assets.sh

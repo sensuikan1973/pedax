@@ -1,5 +1,4 @@
-# NOTE: 現状は全ての Platform の dynamic library を asset に配置してる。
-# TODO: Platform 単位でビルドに含めるかを分ける。
+# about macos, See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
 
 mkdir -p assets/libedax
 dll_dst=assets/libedax/dll
@@ -22,8 +21,6 @@ function unpack_dyamic_library() {
   mv $tmp_dst/${platform}/libedax_output/bin/${lib_name} $dll_dst
 }
 
-# Mac dynamic library
-unpack_dyamic_library mac $asset_url_prefix/libedax_macOS.zip libedax.dylib
 # Linux dynamic library
 unpack_dyamic_library linux $asset_url_prefix/libedax_Linux.zip libedax.so
 # Windows dynamic library
