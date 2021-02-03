@@ -75,7 +75,9 @@ class Edax {
       ])
       ..edaxInit()
       ..edaxVersion();
-    return edax.edaxGetBoard().prettyString(TurnColor.black);
+    final boardString = edax.edaxGetBoard().prettyString(TurnColor.black);
+    edax.libedaxTerminate();
+    return boardString;
   }
 
   Future<String> get _libedaxPath async {
