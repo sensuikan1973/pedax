@@ -10,11 +10,18 @@
 // See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
 // See: https://dart.dev/null-safety/unsound-null-safety
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
+import 'package:pedax/engine/edax.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  setUpAll(() async => _mockLibedaxAssets());
+
   testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const PedaxApp());
@@ -31,4 +38,19 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+}
+
+Future<void> _mockLibedaxAssets() async {
+  // See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files#testing
+  final dir = await Directory.systemTemp.createTemp();
+  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((methodCall) async {
+    if (methodCall.method == 'getApplicationDocumentsDirectory') return dir.path;
+    return null;
+  });
+  // See: https://pub.dev/packages/shared_preferences#testing
+  final pref = <String, String>{
+    Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
+    Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
+  };
+  SharedPreferences.setMockInitialValues(pref);
 }
