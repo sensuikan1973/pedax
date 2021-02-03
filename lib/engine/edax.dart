@@ -26,13 +26,6 @@ class Edax {
     // NOTE: require restart
   }
 
-  // NOTE: If you need, implement.
-  // Future<void> setDllPath(String path) async {
-  //   final pref = await _pref;
-  //   await pref.setString(libedaxPathPrefKey, path);
-  //   // require restart
-  // }
-
   Future<String> get bookPath async {
     final pref = await _pref;
     return pref.getString(bookFilePathPrefKey);
@@ -42,12 +35,6 @@ class Edax {
     final pref = await _pref;
     return pref.getString(evalFilePathPrefKey);
   }
-
-  // NOTE: If you need, implement.
-  // Future<String> get dllPath async {
-  //   final pref = await _pref;
-  //   return pref.getString(libedaxPathPrefKey);
-  // }
 
   /// TODO: remove this Experiment function
   /// ref: https://github.com/flutter/flutter/issues/17160
@@ -115,10 +102,6 @@ class Edax {
 
   @visibleForTesting
   static const evalFilePathPrefKey = 'evalFilePath';
-
-  // NOTE: If you need, implement.
-  // @visibleForTesting
-  // static const libedaxPathPrefKey = 'libedaxPath';
 
   @visibleForTesting
   static const defaultEvalFileName = 'eval.dat';
