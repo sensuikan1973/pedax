@@ -35,6 +35,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'dev'
+          flutter-version: '1.26.0-17.1.pre-dev' # debug
       - name: install dependencies
         run: flutter pub get
       - run: flutter test --coverage --coverage-path=./coverage/lcov.info
