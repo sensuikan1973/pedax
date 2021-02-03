@@ -37,7 +37,7 @@ class Edax {
   }
 
   /// TODO: remove this Experiment function
-  /// ref: https://github.com/flutter/flutter/issues/17160
+  /// See: https://github.com/flutter/flutter/issues/17160
   Future<String> tryToCallEdax() async {
     final docDir = await _docDir;
     final pref = await _pref;
