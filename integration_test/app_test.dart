@@ -26,6 +26,9 @@ void main() {
     // Trigger a frame.
     await tester.pumpAndSettle();
 
+    // d4 e4
+    expect(find.textContaining('O *'), findsOneWidget);
+
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);

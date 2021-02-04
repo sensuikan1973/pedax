@@ -39,7 +39,7 @@ class Edax {
   /// TODO: remove this Experiment function
   /// See: https://github.com/flutter/flutter/issues/17160
   /// See: https://github.com/flutter/flutter/issues/28162
-  Future<String> tryToCallEdax() async {
+  Future<String> getBoardString() async {
     final docDir = await _docDir;
     final pref = await _pref;
 
