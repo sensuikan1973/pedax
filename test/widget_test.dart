@@ -65,5 +65,5 @@ Future<void> _mockLibedaxAssets() async {
 }
 
 // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-void _createTmpLibedaxDylib() => File('macos/libedax.dylib').copySync('libedax.dylib');
-void _deleteTmpLibedaxDylib() => File('libedax.dylib').deleteSync();
+void _createTmpLibedaxDylib() => File('macos/${Edax.defaultLibedaxName}').copySync(Edax.defaultLibedaxName);
+void _deleteTmpLibedaxDylib() => File(Edax.defaultLibedaxName).deleteSync();
