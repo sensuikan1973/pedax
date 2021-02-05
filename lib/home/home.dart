@@ -24,6 +24,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
+  Future<String> _boardPrettyString;
+
+  @override
+  void initState() {
+    super.initState();
+    _boardPrettyString = const Edax().getBoardString();
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -40,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(widget.title)),
         body: FutureBuilder<String>(
-          future: const Edax().tryToCallEdax(),
+          future: _boardPrettyString,
           builder: (context, snapshot) {
             final text = snapshot.connectionState != ConnectionState.done
                 ? 'You have pushed the button this many times:'

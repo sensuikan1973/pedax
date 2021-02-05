@@ -20,14 +20,14 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 0.0.1+1
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: '>=2.12.0-224.0.dev <3.0.0'
+  sdk: '>=2.12.0-0 <3.0.0'
   flutter: ^1.26.0-0
 
 dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  libedax4dart: ^0.2.1-dev.4
+  libedax4dart: ^0.3.0-beta.1
   path_provider: ^1.6.27 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0-nullsafety.3
   shared_preferences: ^0.5.12+4
@@ -37,7 +37,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  mockito: ^5.0.0-nullsafety.5
+  mockito: ^5.0.0-nullsafety.7
   pedantic_sensuikan1973: any
 
 flutter:

@@ -21,10 +21,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   setUpAll(() async => _mockLibedaxAssets());
+  tearDownAll(_deleteTmpLibedaxDylib);
 
   testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const PedaxApp());
+
+    // Trigger a frame.
+    await tester.pumpAndSettle();
+
+    // d4 e4
+    expect(find.textContaining('O *'), findsOneWidget);
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
@@ -53,4 +60,10 @@ Future<void> _mockLibedaxAssets() async {
     Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
   };
   SharedPreferences.setMockInitialValues(pref);
+
+  _createTmpLibedaxDylib();
 }
+
+// See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+void _createTmpLibedaxDylib() => File('macos/libedax.dylib').copySync('libedax.dylib');
+void _deleteTmpLibedaxDylib() => File('libedax.dylib').deleteSync();

@@ -212,7 +212,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1-dev.4"
+    version: "0.3.0-beta.1"
   logging:
     dependency: transitive
     description:
@@ -240,7 +240,7 @@ packages:
       name: mockito
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0-nullsafety.5"
+    version: "5.0.0-nullsafety.7"
   nested:
     dependency: transitive
     description:
@@ -408,7 +408,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2+2"
+    version: "0.0.2+3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -527,5 +527,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.12.0-224.0.dev <3.0.0"
+  dart: ">=2.12.0-0.0 <3.0.0"
   flutter: ">=1.26.0-0"
