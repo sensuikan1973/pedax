@@ -37,7 +37,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  mockito: ^5.0.0-nullsafety.5
+  mockito: ^5.0.0-nullsafety.7
   pedantic_sensuikan1973: any
 
 flutter:
