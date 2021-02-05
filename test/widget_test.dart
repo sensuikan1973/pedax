@@ -21,7 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   setUpAll(() async => _mockLibedaxAssets());
-  tearDownAll(_deleteTmpLibedaxDylib);
+  tearDownAll(() {
+    if (Platform.isMacOS) _deleteTmpLibedaxDylib();
+  });
 
   testWidgets('Counter increments smoke test', (tester) async {
     // Build our app and trigger a frame.
@@ -61,9 +63,9 @@ Future<void> _mockLibedaxAssets() async {
   };
   SharedPreferences.setMockInitialValues(pref);
 
-  _createTmpLibedaxDylib();
+  if (Platform.isMacOS) _createTmpLibedaxDylib();
 }
 
 // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-void _createTmpLibedaxDylib() => File('macos/libedax.dylib').copySync('libedax.dylib');
-void _deleteTmpLibedaxDylib() => File('libedax.dylib').deleteSync();
+void _createTmpLibedaxDylib() => File('macos/${Edax.defaultLibedaxName}').copySync(Edax.defaultLibedaxName);
+void _deleteTmpLibedaxDylib() => File(Edax.defaultLibedaxName).deleteSync();
