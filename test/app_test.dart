@@ -1,10 +1,3 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 // @dart = 2.11
 // See: https://github.com/flutter/plugins/pull/3330 (path_provider)
 // See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
