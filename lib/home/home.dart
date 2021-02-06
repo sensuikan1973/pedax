@@ -31,7 +31,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).homeTitle),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/pedax_logo.png', fit: BoxFit.contain, height: 32),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(AppLocalizations.of(context).homeTitle),
+              ),
+            ],
+          ),
         ),
         body: FutureBuilder<String>(
           future: _boardPrettyString,
