@@ -20,7 +20,7 @@ class Edax {
     await _initEvalFilePref();
     await _initDll();
     final pref = await _pref;
-    lib = LibEdax(await _libedaxPath)
+    lib ??= LibEdax(await _libedaxPath)
       ..libedaxInitialize([
         '',
         '-eval-file',

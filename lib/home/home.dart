@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
   final _edax = Edax();
   Future<String> _boardPrettyString;
 
@@ -29,55 +28,22 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context).homeTitle)),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context).homeTitle),
+        ),
         body: FutureBuilder<String>(
           future: _boardPrettyString,
-          builder: (context, snapshot) {
-            final text = snapshot.connectionState != ConnectionState.done
-                ? 'You have pushed the button this many times:'
-                : snapshot.data;
+          builder: (_, snapshot) {
+            final text = snapshot.connectionState != ConnectionState.done ? 'initializing libedax...' : snapshot.data;
             return Center(
               child: Column(
-                // Column is also a layout widget. It takes a list of children and
-                // arranges them vertically. By default, it sizes itself to fit its
-                // children horizontally, and tries to be as tall as its parent.
-                //
-                // Invoke "debug painting" (press "p" in the console, choose the
-                // "Toggle Debug Paint" action from the Flutter Inspector in Android
-                // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-                // to see the wireframe for each widget.
-                //
-                // Column has various properties to control how it sizes itself and
-                // how it positions its children. Here we use mainAxisAlignment to
-                // center the children vertically; the main axis here is the vertical
-                // axis because Columns are vertical (the cross axis would be
-                // horizontal).
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(text),
-                  Text('$_counter', style: Theme.of(context).textTheme.headline4),
-                ],
+                children: <Widget>[Text(text)],
               ),
             );
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
         ),
       );
 }
