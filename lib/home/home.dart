@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:package_info/package_info.dart';
 import '../engine/edax.dart' show Edax;
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
   final _edax = Edax();
   Future<String> _boardPrettyString;
 
@@ -29,20 +29,20 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context).homeTitle)),
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context).homeTitle),
+          actions: [
+            IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () async {
+                  final packageInfo = await PackageInfo.fromPlatform();
+                  // ignore: avoid_print
+                  print(packageInfo.version);
+                })
+          ],
+        ),
         body: FutureBuilder<String>(
           future: _boardPrettyString,
           builder: (context, snapshot) {
@@ -66,18 +66,10 @@ class _HomePageState extends State<HomePage> {
                 // axis because Columns are vertical (the cross axis would be
                 // horizontal).
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(text),
-                  Text('$_counter', style: Theme.of(context).textTheme.headline4),
-                ],
+                children: <Widget>[Text(text)],
               ),
             );
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
         ),
       );
 }
