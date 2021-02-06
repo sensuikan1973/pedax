@@ -5,6 +5,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:libedax4dart/libedax4dart.dart';
 import '../engine/edax.dart' show Edax;
 
 class HomePage extends StatefulWidget {
@@ -24,12 +25,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
+  final _edax = Edax();
   Future<String> _boardPrettyString;
 
   @override
   void initState() {
     super.initState();
-    _boardPrettyString = const Edax().getBoardString();
+    _boardPrettyString = _edax.initLibedax().then(
+          (_) async => _edax.lib.edaxGetBoard().prettyString(TurnColor.black),
+        );
   }
 
   void _incrementCounter() {
