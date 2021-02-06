@@ -27,10 +27,10 @@ _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which
 flutter format -l 120 .
 ```
 
-#### build
+#### run
 
 ```sh
-flutter build macos
+flutter run -d macos
 ```
 
 #### test
@@ -50,7 +50,7 @@ flutter drive --driver integration_test/driver.dart --target integration_test/ap
 #### analyze
 
 ```sh
-flutter analyze
+flutter analyze .
 ```
 
 #### fetch libedax assets as pedax assets for Linux/Windows
