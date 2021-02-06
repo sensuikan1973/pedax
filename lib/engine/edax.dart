@@ -10,9 +10,27 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@immutable
 class Edax {
-  const Edax();
+  Edax();
+
+  LibEdax lib;
+
+  Future<void> initLibedax() async {
+    await _initBookFilePref();
+    await _initEvalFilePref();
+    await _initDll();
+    final pref = await _pref;
+    lib = LibEdax(await _libedaxPath)
+      ..libedaxInitialize([
+        '',
+        '-eval-file',
+        pref.getString(evalFilePathPrefKey),
+        '-book-file',
+        pref.getString(bookFilePathPrefKey),
+      ])
+      ..edaxInit()
+      ..edaxVersion();
+  }
 
   Future<void> setBookPath(String path) async {
     final pref = await _pref;
@@ -36,16 +54,18 @@ class Edax {
     return pref.getString(evalFilePathPrefKey);
   }
 
-  /// TODO: remove this Experiment function
-  /// See: https://github.com/flutter/flutter/issues/17160
-  /// See: https://github.com/flutter/flutter/issues/28162
-  Future<String> getBoardString() async {
+  Future<void> _initBookFilePref() async {
     final docDir = await _docDir;
     final pref = await _pref;
+    if (pref.getString(bookFilePathPrefKey) != null) return;
+    await pref.setString(bookFilePathPrefKey, '${docDir.path}/$defaultBookFileName');
+  }
 
-    if (pref.getString(bookFilePathPrefKey) == null) {
-      await pref.setString(bookFilePathPrefKey, '${docDir.path}/$defaultBookFileName');
-    }
+  Future<void> _initEvalFilePref() async {
+    final docDir = await _docDir;
+    final pref = await _pref;
+    // ref: https://github.com/flutter/flutter/issues/17160
+    // ref: https://github.com/flutter/flutter/issues/28162
     if (pref.getString(evalFilePathPrefKey) == null) {
       final evalData = await _evalAssetData;
       final evalFilePath = '${docDir.path}/$defaultEvalFileName';
@@ -58,32 +78,21 @@ class Edax {
         File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
       }
     }
+  }
 
-    // FIXME: remove this.
+  Future<void> _initDll() async {
+    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+    if (Platform.isMacOS) return;
+    // TODO: consider to fix this copy handling
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = await _libedaxAssetData;
       File(await _libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
     }
-
-    final edax = LibEdax(await _libedaxPath)
-      ..libedaxInitialize([
-        '',
-        '-eval-file',
-        pref.getString(evalFilePathPrefKey),
-        '-book-file',
-        pref.getString(bookFilePathPrefKey),
-      ])
-      ..edaxInit()
-      ..edaxVersion();
-    final boardString = edax.edaxGetBoard().prettyString(TurnColor.black);
-    edax.libedaxTerminate();
-    return boardString;
   }
 
   Future<String> get _libedaxPath async {
     // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     if (Platform.isMacOS) return defaultLibedaxName;
-
     // FIXME: temporary implement.
     final docDir = await _docDir;
     if (Platform.isWindows) return '${docDir.path}/$defaultLibedaxName';
