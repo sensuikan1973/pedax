@@ -219,7 +219,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.4"
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:
@@ -317,7 +317,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.2"
+    version: "1.10.0"
   pedantic_sensuikan1973:
     dependency: "direct dev"
     description:
