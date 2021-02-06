@@ -26,6 +26,9 @@ void main() {
     // Trigger a frame.
     await tester.pumpAndSettle();
 
+    // Home Title
+    expect(find.text('home'), findsOneWidget);
+
     // d4 e4
     expect(find.textContaining('O *'), findsOneWidget);
 
