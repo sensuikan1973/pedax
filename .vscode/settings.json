@@ -6,5 +6,8 @@
     "titleBar.activeForeground": "#000000",
     "activityBar.background": "#3b4fa7",
     "activityBar.foreground": "#000000"
+  },
+  "files.associations": {
+    "*.arb": "json"
   }
 }

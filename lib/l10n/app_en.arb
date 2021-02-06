@@ -1,0 +1,7 @@
+{
+  "appTitle": "pedax",
+  "@appTitle": {
+    "description": "app title"
+  },
+  "homeTitle": "home"
+}
