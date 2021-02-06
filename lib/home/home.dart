@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:package_info/package_info.dart';
 import '../engine/edax.dart' show Edax;
 
 class HomePage extends StatefulWidget {
@@ -33,16 +32,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context).homeTitle),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () async {
-                final packageInfo = await PackageInfo.fromPlatform();
-                // ignore: avoid_print
-                print(packageInfo.version);
-              },
-            ),
-          ],
         ),
         body: FutureBuilder<String>(
           future: _boardPrettyString,
