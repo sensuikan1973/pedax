@@ -23,13 +23,16 @@ Future<void> prepareLibedaxAssets() async {
   };
   SharedPreferences.setMockInitialValues(pref);
 
-  if (Platform.isMacOS) _createTmpLibedaxDylib();
+  _createTmpLibedaxDylibOnMacOS();
 }
 
-void cleanLibedaxAssets() {
-  if (Platform.isMacOS) _deleteTmpLibedaxDylib();
-}
+void cleanLibedaxAssets() => _deleteTmpLibedaxDylibOnMacOS();
 
 // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-void _createTmpLibedaxDylib() => File('macos/${Edax.defaultLibedaxName}').copySync(Edax.defaultLibedaxName);
-void _deleteTmpLibedaxDylib() => File(Edax.defaultLibedaxName).deleteSync();
+void _createTmpLibedaxDylibOnMacOS() {
+  if (Platform.isMacOS) File('macos/${Edax.defaultLibedaxName}').copySync(Edax.defaultLibedaxName);
+}
+
+void _deleteTmpLibedaxDylibOnMacOS() {
+  if (Platform.isMacOS) File(Edax.defaultLibedaxName).deleteSync();
+}
