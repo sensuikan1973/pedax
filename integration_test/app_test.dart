@@ -15,6 +15,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pedax/main.dart' as app;
 
+import '../test_helper/asset_image_finder.dart';
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -27,6 +29,9 @@ void main() {
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
+
+    // Logo
+    expect(findByAssetKey('assets/pedax_logo.png'), findsOneWidget);
 
     // d4 e4
     expect(find.textContaining('O *'), findsOneWidget);

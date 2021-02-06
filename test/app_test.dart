@@ -18,6 +18,8 @@ import 'package:pedax/app.dart';
 import 'package:pedax/engine/edax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../test_helper/asset_image_finder.dart';
+
 void main() {
   setUpAll(() async => _mockLibedaxAssets());
   tearDownAll(() {
@@ -33,6 +35,9 @@ void main() {
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
+
+    // Logo
+    expect(findByAssetKey('assets/pedax_logo.png'), findsOneWidget);
 
     // d4 e4
     expect(find.textContaining('O *'), findsOneWidget);
