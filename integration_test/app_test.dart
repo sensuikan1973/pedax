@@ -20,7 +20,7 @@ import '../test_helper/asset_image_finder.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Counter increments smoke test', (tester) async {
+  testWidgets('launch app', (tester) async {
     // Build our app and trigger a frame.
     await app.main();
 
@@ -32,8 +32,5 @@ void main() {
 
     // Logo
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
-
-    // d4 e4
-    expect(find.textContaining('O *'), findsOneWidget);
   });
 }

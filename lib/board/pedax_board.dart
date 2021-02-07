@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'square.dart';
 
 class PedaxBoard extends StatelessWidget {
   const PedaxBoard(this.libEdax, this.length, {Key? key}) : super(key: key);
@@ -9,26 +10,36 @@ class PedaxBoard extends StatelessWidget {
   final double length;
 
   @override
-  Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _blackStoneImage,
-            _whiteStoneImage,
-            Text(libEdax.edaxGetBoard().prettyString(TurnColor.black)),
-          ],
+  Widget build(BuildContext context) => SizedBox(
+        height: length,
+        width: length,
+        child: Table(
+          children: List.generate(
+            _boardSize,
+            (yIndex) => TableRow(
+              children: List.generate(
+                _boardSize,
+                (xIndex) => _square(yIndex, xIndex),
+              ),
+            ),
+          ),
         ),
       );
 
   int get _boardSize => 8;
-  double get _marginForStones => (length / _boardSize) * 0.1;
-  double get _stoneSize => (length / _boardSize) - (_marginForStones * 2);
-  Image get _blackStoneImage => Image.asset('assets/images/black_stone.png', fit: BoxFit.contain, height: _stoneSize);
-  Image get _whiteStoneImage => Image.asset('assets/images/white_stone.png', fit: BoxFit.contain, height: _stoneSize);
+  double get _stoneMargin => (length / _boardSize) * 0.1;
+  double get _stoneSize => (length / _boardSize) - (_stoneMargin * 2);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties..add(DoubleProperty('length', length))..add(DiagnosticsProperty<LibEdax>('libEdax', libEdax));
   }
+
+  Square _square(int y, int x) => Square(
+        type: SquareType.black,
+        length: _stoneSize,
+        margin: _stoneMargin,
+        coordinate: move2String(y * 8 + x),
+      );
 }

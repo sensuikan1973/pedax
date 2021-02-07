@@ -13,7 +13,7 @@ void main() {
   setUpAll(() async => prepareLibedaxAssets());
   tearDownAll(cleanLibedaxAssets);
 
-  testWidgets('Counter increments smoke test', (tester) async {
+  testWidgets('launch app', (tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const PedaxApp());
 
@@ -25,8 +25,5 @@ void main() {
 
     // Logo
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
-
-    // d4 e4
-    expect(find.textContaining('O *'), findsOneWidget);
   });
 }
