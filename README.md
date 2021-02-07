@@ -1,7 +1,7 @@
 # pedax
 
 <p align="center">
-<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/pedax_logo.png?raw=true" alt="pedax_logo" width="200"/>
+<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" width="200"/>
 </p>
 <br/>
 TODO: paste GUI image.

@@ -31,7 +31,7 @@ void main() {
     expect(find.text('home'), findsOneWidget);
 
     // Logo
-    expect(findByAssetKey('assets/pedax_logo.png'), findsOneWidget);
+    expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
 
     // d4 e4
     expect(find.textContaining('O *'), findsOneWidget);
