@@ -49,7 +49,10 @@ class _HomePageState extends State<HomePage> {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[Text(text)],
+                children: <Widget>[
+                  Text(text),
+                  Image.asset('assets/images/black_stone.png', fit: BoxFit.contain, height: 32),
+                ],
               ),
             );
           },
