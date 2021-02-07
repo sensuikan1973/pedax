@@ -10,17 +10,16 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@immutable
 class Edax {
-  Edax();
+  const Edax();
 
-  LibEdax lib;
-
-  Future<void> initLibedax() async {
+  Future<LibEdax> initLibedax() async {
     await _initBookFilePref();
     await _initEvalFilePref();
     await _initDll();
     final pref = await _pref;
-    lib ??= LibEdax(await _libedaxPath)
+    return LibEdax(await _libedaxPath)
       ..libedaxInitialize([
         '',
         '-eval-file',

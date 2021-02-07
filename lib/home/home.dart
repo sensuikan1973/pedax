@@ -3,6 +3,7 @@
 // See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
 // See: https://dart.dev/null-safety/unsound-null-safety
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,31 +19,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _edax = Edax();
-  Future<String> _boardPrettyString;
+  Future<LibEdax> _libedax;
 
   @override
   void initState() {
     super.initState();
-    _boardPrettyString = _edax.initLibedax().then(
-          (_) async => _edax.lib.edaxGetBoard().prettyString(TurnColor.black),
-        );
+    _libedax = const Edax().initLibedax();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: _appBarTitle()),
-        body: FutureBuilder<String>(
-          future: _boardPrettyString,
+        body: FutureBuilder<LibEdax>(
+          future: _libedax,
           builder: (_, snapshot) {
-            final text = snapshot.connectionState != ConnectionState.done ? 'initializing libedax...' : snapshot.data;
+            if (snapshot.connectionState != ConnectionState.done) return const CupertinoActivityIndicator();
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(text),
-                  const PedaxBoard(),
-                ],
+                children: <Widget>[PedaxBoard(snapshot.data, 480)],
               ),
             );
           },
