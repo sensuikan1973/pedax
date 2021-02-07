@@ -9,7 +9,7 @@ TODO: paste GUI image.
 _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
 
 - support Mac/Windows/Linux.
-- you can see `eval value`(e.g. `+4`, `-10`) comfortablely.
+- you can see `eval value`(e.g. `+4`, `-10`) comfortably.
 
 ## Development
 
