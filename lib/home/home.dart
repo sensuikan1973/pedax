@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   Widget _appBarTitle() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
+          Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32, cacheHeight: 32),
           Padding(
             padding: const EdgeInsets.all(8),
             child: Text(AppLocalizations.of(context).homeTitle),
