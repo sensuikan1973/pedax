@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
 
 class HomePage extends StatefulWidget {
@@ -30,18 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(AppLocalizations.of(context).homeTitle),
-              ),
-            ],
-          ),
-        ),
+        appBar: AppBar(title: _appBarTitle()),
         body: FutureBuilder<String>(
           future: _boardPrettyString,
           builder: (_, snapshot) {
@@ -51,11 +41,22 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(text),
-                  Image.asset('assets/images/black_stone.png', fit: BoxFit.contain, height: 32),
+                  const PedaxBoard(),
                 ],
               ),
             );
           },
         ),
+      );
+
+  Widget _appBarTitle() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(AppLocalizations.of(context).homeTitle),
+          ),
+        ],
       );
 }
