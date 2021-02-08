@@ -5,8 +5,10 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
+import 'package:pedax/board/square.dart';
 
 import '../test_helper/asset_image_finder.dart';
+import '../test_helper/board_finder.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
@@ -22,6 +24,8 @@ void main() {
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
+
+    expectStoneNum(tester, SquareType.black, 2);
 
     // Logo
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);

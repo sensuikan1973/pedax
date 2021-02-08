@@ -13,9 +13,11 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:pedax/board/square.dart';
 import 'package:pedax/main.dart' as app;
 
 import '../test_helper/asset_image_finder.dart';
+import '../test_helper/board_finder.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,8 @@ void main() {
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
+
+    expectStoneNum(tester, SquareType.black, 2);
 
     // Logo
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
