@@ -32,6 +32,12 @@ void main() {
     // e4, d5
     expectStoneNum(tester, SquareType.black, 2);
 
+    await tester.tap(findByCoordinate('f5'));
+    await tester.pump();
+
+    // e4, d5, e5, f5
+    expectStoneNum(tester, SquareType.black, 4);
+
     // Logo
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
   });

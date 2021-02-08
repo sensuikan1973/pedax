@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/board/square.dart';
 
 void expectLastMove(WidgetTester tester, String coordinate) {
-  final finder = _findByCoordinate(coordinate);
+  final finder = findByCoordinate(coordinate);
   expect(finder, findsOneWidget);
   final square = tester.firstWidget<Square>(finder);
   expect(square.isLastMove, true);
@@ -15,12 +15,12 @@ void expectStoneNum(WidgetTester tester, SquareType type, int n) {
   expect(squares.length, n);
 }
 
+Finder findByCoordinate(String coordinate) => find.byWidgetPredicate((widget) {
+      if (widget is! Square) return false;
+      return widget.coordinate == coordinate;
+    });
+
 Finder _findSquareByType(SquareType type) => find.byWidgetPredicate((widget) {
       if (widget is! Square) return false;
       return widget.type == type;
-    });
-
-Finder _findByCoordinate(String coordinate) => find.byWidgetPredicate((widget) {
-      if (widget is! Square) return false;
-      return widget.coordinate == coordinate;
     });
