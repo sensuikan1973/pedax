@@ -33,7 +33,7 @@ void main() {
     expectStoneNum(tester, SquareType.black, 2);
 
     await tester.tap(findByCoordinate('f5'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // e4, d5, e5, f5
     expectStoneNum(tester, SquareType.black, 4);
