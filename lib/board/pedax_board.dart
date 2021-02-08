@@ -4,9 +4,9 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatelessWidget {
-  const PedaxBoard(this.libEdax, this.length, {Key? key}) : super(key: key);
+  const PedaxBoard(this.engine, this.length, {Key? key}) : super(key: key);
 
-  final LibEdax libEdax;
+  final LibEdax engine;
   final double length;
 
   @override
@@ -33,7 +33,7 @@ class PedaxBoard extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DoubleProperty('length', length))..add(DiagnosticsProperty<LibEdax>('libEdax', libEdax));
+    properties..add(DoubleProperty('length', length))..add(DiagnosticsProperty<LibEdax>('libEdax', engine));
   }
 
   Square _square(int y, int x) => Square(
