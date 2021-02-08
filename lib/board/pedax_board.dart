@@ -52,18 +52,26 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Square _square(int y, int x) {
     final turn = widget.engine.edaxGetCurrentPlayer();
     final move = y * 8 + x;
+    final isBlackTurn = turn == TurnColor.black;
     var type = SquareType.empty;
     if (_board.squaresOfPlayer.contains(move)) {
-      type = turn == TurnColor.black ? SquareType.black : SquareType.white;
+      type = isBlackTurn ? SquareType.black : SquareType.white;
     } else if (_board.squaresOfOpponent.contains(move)) {
-      type = turn == TurnColor.black ? SquareType.white : SquareType.black;
+      type = isBlackTurn ? SquareType.white : SquareType.black;
     }
+    final moveString = move2String(move);
 
     return Square(
       type: type,
       length: _stoneSize,
       margin: _stoneMargin,
-      coordinate: move2String(move),
+      coordinate: moveString,
+      onTap: () {
+        setState(() {
+          widget.engine.edaxMove(moveString);
+          _board = widget.engine.edaxGetBoard();
+        });
+      },
     );
   }
 }
