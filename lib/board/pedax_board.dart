@@ -60,12 +60,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
       type = isBlackTurn ? SquareType.white : SquareType.black;
     }
     final moveString = move2String(move);
+    final moves = widget.engine.edaxGetMoves();
+    final hints = widget.engine.edaxHint(1).where((h) => h.move == move).toList();
+    final hint = hints.isEmpty ? null : hints.first;
+    final score = hint == null ? null : hints.first.score;
 
     return Square(
       type: type,
       length: _stoneSize,
       margin: _stoneMargin,
       coordinate: moveString,
+      isLastMove: moves.isNotEmpty && widget.engine.edaxGetLastMove().x == move,
+      score: score,
+      scoreColor: _scoreColor(score, hint != null && hint.move == move),
       onTap: () {
         setState(() {
           widget.engine.edaxMove(moveString);
@@ -73,5 +80,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
         });
       },
     );
+  }
+
+  Color? _scoreColor(int? score, bool bestMove) {
+    if (score == null) return null;
+    if (score == 0) {
+      if (bestMove) return Colors.cyan[900]!;
+      return Colors.cyan;
+    } else if (score > 0) {
+      if (bestMove) return Colors.blue[900]!;
+      return Colors.blue;
+    } else /* score < 0*/ {
+      if (bestMove) return Colors.lime[900]!;
+      return Colors.lime;
+    }
   }
 }

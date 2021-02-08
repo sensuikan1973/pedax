@@ -9,7 +9,7 @@ class Square extends StatelessWidget {
     required this.coordinate,
     this.onTap,
     this.score,
-    this.scoreColor = Colors.black,
+    this.scoreColor,
     this.isLastMove = false,
     Key? key,
   }) : super(key: key);
@@ -20,7 +20,7 @@ class Square extends StatelessWidget {
   final String coordinate;
   final Function()? onTap;
   final int? score;
-  final Color scoreColor;
+  final Color? scoreColor;
   final bool isLastMove;
 
   @override
