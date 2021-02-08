@@ -23,15 +23,13 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('launch app', (tester) async {
-    // Build our app and trigger a frame.
     await app.main();
-
-    // Trigger a frame.
     await tester.pumpAndSettle();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
 
+    // e4, d5
     expectStoneNum(tester, SquareType.black, 2);
 
     // Logo

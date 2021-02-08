@@ -3,6 +3,7 @@
 // See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
 // See: https://dart.dev/null-safety/unsound-null-safety
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
@@ -15,16 +16,20 @@ void main() {
   setUpAll(() async => prepareLibedaxAssets());
   tearDownAll(cleanLibedaxAssets);
 
-  testWidgets('launch app', (tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('debugDumpApp', (tester) async {
     await tester.pumpWidget(const PedaxApp());
+    await tester.pumpAndSettle();
+    debugDumpApp();
+  });
 
-    // Trigger a frame.
+  testWidgets('launch app', (tester) async {
+    await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
 
+    // e4, d5
     expectStoneNum(tester, SquareType.black, 2);
 
     // Logo
