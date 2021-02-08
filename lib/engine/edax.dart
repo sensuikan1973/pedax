@@ -26,6 +26,8 @@ class Edax {
         pref.getString(evalFilePathPrefKey),
         '-book-file',
         pref.getString(bookFilePathPrefKey),
+        // 'n-tasks',
+        // '12',
       ])
       ..edaxInit()
       ..edaxVersion();
