@@ -24,9 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    debugPrint('will initLibedax');
     _libedax = const Edax().initLibedax();
-    debugPrint('finish initLibedax');
   }
 
   @override
