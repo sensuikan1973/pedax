@@ -13,7 +13,7 @@ import '../test_helper/board_finder.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
-  setUpAll(() async => prepareLibedaxAssets());
+  setUp(() async => prepareLibedaxAssets());
   tearDownAll(cleanLibedaxAssets);
 
   testWidgets('debugDumpApp', (tester) async {
@@ -24,7 +24,7 @@ void main() {
 
   testWidgets('launch app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
