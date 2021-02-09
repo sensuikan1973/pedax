@@ -13,18 +13,19 @@ import '../test_helper/board_finder.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
-  setUp(() async => prepareLibedaxAssets());
+  setUpAll(() async => prepareLibedaxAssets());
   tearDownAll(cleanLibedaxAssets);
 
-  testWidgets('debugDumpApp', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-    debugDumpApp();
-  });
+  // testWidgets('debugDumpApp', (tester) async {
+  //   await tester.pumpWidget(const PedaxApp());
+  //   await tester.pumpAndSettle();
+  //   debugDumpApp();
+  // });
 
   testWidgets('launch app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
+    debugDumpApp();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
