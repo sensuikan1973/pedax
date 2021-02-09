@@ -24,7 +24,7 @@ void main() {
 
   testWidgets('launch app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
