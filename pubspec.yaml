@@ -30,9 +30,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0-nullsafety.2
-  libedax4dart: ^0.3.0-beta.1
+  libedax4dart: ^0.3.0-beta.2
   path_provider: ^1.6.27 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  provider: ^5.0.0-nullsafety.3
   shared_preferences: ^0.5.12+4
 
 dev_dependencies:
@@ -49,6 +48,6 @@ flutter:
 
   # See: https://flutter.dev/docs/development/ui/assets-and-images
   assets:
-    - assets/
+    - assets/images/
     - assets/libedax/data/
     - assets/libedax/dll/

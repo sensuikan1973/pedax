@@ -224,7 +224,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0-beta.1"
+    version: "0.3.0-beta.2"
   logging:
     dependency: transitive
     description:
@@ -253,13 +253,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0-nullsafety.7"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.5-nullsafety.1"
   node_interop:
     dependency: transitive
     description:
@@ -358,13 +351,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0-nullsafety.4"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0-nullsafety.3"
   pub_semver:
     dependency: transitive
     description:
