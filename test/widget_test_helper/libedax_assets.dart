@@ -6,21 +6,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meta/meta.dart';
 
 @isTest
-Future<void> prepareLibedaxAssets() async {
+Future<void> prepareLibedaxAssets({bool setPref = true}) async {
   // See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files#testing
   final dir = await Directory.systemTemp.createTemp();
   const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((methodCall) async {
     if (methodCall.method == 'getApplicationDocumentsDirectory') return dir.path;
     return null;
   });
+
+  _createTmpLibedaxDylibOnMacOS();
+
+  if (!setPref) return SharedPreferences.setMockInitialValues({});
   // See: https://pub.dev/packages/shared_preferences#testing
   final pref = <String, String>{
     Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
     Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
   };
   SharedPreferences.setMockInitialValues(pref);
-
-  _createTmpLibedaxDylibOnMacOS();
 }
 
 @isTest

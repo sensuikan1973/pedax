@@ -60,8 +60,8 @@ class Edax {
   Future<void> _initEvalFilePref() async {
     final docDir = await _docDir;
     final evalFilePath = await evalPath;
-    // ref: https://github.com/flutter/flutter/issues/17160
-    // ref: https://github.com/flutter/flutter/issues/28162
+    // REF: https://github.com/flutter/flutter/issues/17160
+    // REF: https://github.com/flutter/flutter/issues/28162
     if (evalFilePath.isEmpty) {
       final evalData = await _evalAssetData;
       final newEvalFilePath = '${docDir.path}/$defaultEvalFileName';
