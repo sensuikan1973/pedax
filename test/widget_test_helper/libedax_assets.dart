@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:pedax/engine/edax.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meta/meta.dart';
 
 @isTest
@@ -14,11 +14,11 @@ Future<void> prepareLibedaxAssets() async {
     return null;
   });
   // See: https://pub.dev/packages/shared_preferences#testing
-  final pref = <String, String>{
-    Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
-    Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
-  };
-  SharedPreferences.setMockInitialValues(pref);
+  // final pref = <String, String>{
+  //   Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
+  //   Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
+  // };
+  // SharedPreferences.setMockInitialValues(pref);
 
   _createTmpLibedaxDylibOnMacOS();
 }
