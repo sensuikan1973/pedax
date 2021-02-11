@@ -9,7 +9,7 @@ mkdir -p $data_dst
 tmp_dst=libedax_assets_tmp
 mkdir -p $tmp_dst
 
-tag=libedax-assets_2
+tag=libedax-assets_4
 asset_url_prefix=https://github.com/sensuikan1973/libedax4dart/releases/download/$tag
 # See: https://github.com/sensuikan1973/libedax4dart/releases/latest
 
