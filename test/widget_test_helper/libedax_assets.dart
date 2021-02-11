@@ -16,12 +16,13 @@ Future<void> prepareLibedaxAssets({bool setPref = true}) async {
 
   _createTmpLibedaxDylibOnMacOS();
 
-  if (!setPref) return SharedPreferences.setMockInitialValues({});
   // See: https://pub.dev/packages/shared_preferences#testing
-  final pref = <String, String>{
-    Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
-    Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
-  };
+  final pref = setPref
+      ? <String, String>{
+          Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
+          Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
+        }
+      : <String, String>{};
   SharedPreferences.setMockInitialValues(pref);
 }
 
