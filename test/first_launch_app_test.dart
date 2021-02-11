@@ -7,7 +7,7 @@ import '../test_helper/board_finder.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
-  setUp(() async => prepareLibedaxAssets());
+  setUp(() async => prepareLibedaxAssets(setPref: false));
   testWidgets('launch app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
