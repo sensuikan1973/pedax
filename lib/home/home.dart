@@ -23,6 +23,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  Future<void> dispose() async {
+    super.dispose();
+    (await _libedax).libedaxTerminate();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: _appBarTitle()),
         body: FutureBuilder<LibEdax>(
