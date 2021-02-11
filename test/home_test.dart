@@ -12,7 +12,7 @@ void main() {
     testWidgets('launch app', _launchApp);
   });
 
-  group('with libedax assets pref', () {
+  group('without libedax assets pref', () {
     setUp(() async => prepareLibedaxAssets(setPref: false));
     testWidgets('launch app', _launchApp);
   });
