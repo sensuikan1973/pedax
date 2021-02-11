@@ -51,10 +51,9 @@ class Edax {
   }
 
   Future<void> _initBookFilePref() async {
+    if ((await bookPath).isNotEmpty) return;
     final docDir = await _docDir;
-    final pref = await _pref;
-    if (pref.getString(bookFilePathPrefKey) != null) return;
-    await pref.setString(bookFilePathPrefKey, '${docDir.path}/$defaultBookFileName');
+    await setBookPath('${docDir.path}/$defaultBookFileName');
   }
 
   Future<void> _initEvalFilePref() async {
