@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:pedax/engine/edax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meta/meta.dart';
 
+@isTest
 Future<void> prepareLibedaxAssets() async {
   // See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files#testing
   final dir = await Directory.systemTemp.createTemp();
@@ -21,6 +23,7 @@ Future<void> prepareLibedaxAssets() async {
   _createTmpLibedaxDylibOnMacOS();
 }
 
+@isTest
 void cleanLibedaxAssets() => _deleteTmpLibedaxDylibOnMacOS();
 
 // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
