@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/12
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
@@ -42,7 +42,7 @@ jobs:
           channel: 'dev'
       - name: install dependencies
         run: flutter pub get
-      - run: flutter test --coverage --coverage-path=./coverage/lcov.info
+      - run: flutter test --coverage --coverage-path=./coverage/lcov.info --verbose
       - uses: codecov/codecov-action@v1
         with:
           file: ./coverage/lcov.info
