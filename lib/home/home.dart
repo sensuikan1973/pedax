@@ -1,8 +1,3 @@
-// @dart = 2.11
-// See: https://github.com/flutter/plugins/pull/3330 (path_provider)
-// See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
-// See: https://dart.dev/null-safety/unsound-null-safety
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,21 +7,19 @@ import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<LibEdax> _libedax;
+  late Future<LibEdax> _libedax;
 
   @override
   void initState() {
     super.initState();
-    debugPrint('will initLibedax');
     _libedax = const Edax().initLibedax();
-    debugPrint('finish initLibedax');
   }
 
   @override
@@ -41,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[PedaxBoard(snapshot.data, 480)],
+                children: <Widget>[PedaxBoard(snapshot.data!, 480)],
               ),
             );
           },
@@ -54,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(AppLocalizations.of(context).homeTitle),
+            child: Text(AppLocalizations.of(context)!.homeTitle),
           ),
         ],
       );
