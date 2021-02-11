@@ -22,8 +22,6 @@ jobs:
               sudo apt-get update
               sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
               flutter config --enable-linux-desktop
-              flutter clean
-              flutter upgrade
           - os: windows-latest
             device: windows
             setup-script: flutter config --enable-windows-desktop
