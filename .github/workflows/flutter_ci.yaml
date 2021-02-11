@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/12
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
