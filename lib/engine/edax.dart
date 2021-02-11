@@ -14,7 +14,8 @@ class Edax {
     await _initBookFilePref();
     await _initEvalFilePref();
     await _initDll();
-    return LibEdax(await _libedaxPath)
+    final libedax = LibEdax(await _libedaxPath);
+    return libedax
       ..libedaxInitialize([
         '',
         '-eval-file',
@@ -51,17 +52,16 @@ class Edax {
   }
 
   Future<void> _initBookFilePref() async {
+    if ((await bookPath).isNotEmpty) return;
     final docDir = await _docDir;
-    final pref = await _pref;
-    if (pref.getString(bookFilePathPrefKey) != null) return;
-    await pref.setString(bookFilePathPrefKey, '${docDir.path}/$defaultBookFileName');
+    await setBookPath('${docDir.path}/$defaultBookFileName');
   }
 
   Future<void> _initEvalFilePref() async {
     final docDir = await _docDir;
     final evalFilePath = await evalPath;
-    // ref: https://github.com/flutter/flutter/issues/17160
-    // ref: https://github.com/flutter/flutter/issues/28162
+    // REF: https://github.com/flutter/flutter/issues/17160
+    // REF: https://github.com/flutter/flutter/issues/28162
     if (evalFilePath.isEmpty) {
       final evalData = await _evalAssetData;
       final newEvalFilePath = '${docDir.path}/$defaultEvalFileName';

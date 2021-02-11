@@ -1,14 +1,14 @@
 # NOTE: Experimental Job. See: https://flutter.dev/desktop#distribution
-# ref: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
+# REF: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
 
 name: Flutter Build
 
 on:
   pull_request:
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
   push:
-    branches: [ main ]
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    branches: [main]
+    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:
   build:
