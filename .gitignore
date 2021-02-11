@@ -45,5 +45,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# libedax
+libedax.dylib
+
 # test
 coverage/

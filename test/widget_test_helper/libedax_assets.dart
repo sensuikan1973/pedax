@@ -32,5 +32,6 @@ void _createTmpLibedaxDylibOnMacOS() {
 }
 
 void _deleteTmpLibedaxDylibOnMacOS() {
-  if (Platform.isMacOS) File(Edax.defaultLibedaxName).deleteSync();
+  final file = File(Edax.defaultLibedaxName);
+  if (Platform.isMacOS && !file.existsSync()) file.deleteSync();
 }
