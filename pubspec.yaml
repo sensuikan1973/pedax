@@ -30,9 +30,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0-nullsafety.2
-  libedax4dart: ^0.3.0-beta.2
-  path_provider: ^1.6.27 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  shared_preferences: ^0.5.12+4
+  libedax4dart: ^0.4.0-beta.0
+  path_provider: ^2.0.0-nullsafety # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  shared_preferences: ^2.0.0-nullsafety
 
 dev_dependencies:
   flutter_test:
