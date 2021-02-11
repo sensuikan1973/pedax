@@ -1,9 +1,5 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
-// @dart = 2.11
-// See: https://github.com/flutter/flutter/issues/71379
-// See: https://dart.dev/null-safety/unsound-null-safety
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:pedax/board/square.dart';

@@ -1,7 +1,3 @@
-// @dart = 2.11
-// See: https://github.com/flutter/plugins/pull/3330 (path_provider)
-// See: https://github.com/flutter/plugins/pull/3466 (shared_preferences)
-// See: https://dart.dev/null-safety/unsound-null-safety
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -18,14 +14,13 @@ class Edax {
     await _initBookFilePref();
     await _initEvalFilePref();
     await _initDll();
-    final pref = await _pref;
     return LibEdax(await _libedaxPath)
       ..libedaxInitialize([
         '',
         '-eval-file',
-        pref.getString(evalFilePathPrefKey),
+        await evalPath,
         '-book-file',
-        pref.getString(bookFilePathPrefKey),
+        await bookPath,
         // 'n-tasks',
         // '12',
       ])
@@ -47,12 +42,12 @@ class Edax {
 
   Future<String> get bookPath async {
     final pref = await _pref;
-    return pref.getString(bookFilePathPrefKey);
+    return pref.getString(bookFilePathPrefKey) ?? '';
   }
 
   Future<String> get evalPath async {
     final pref = await _pref;
-    return pref.getString(evalFilePathPrefKey);
+    return pref.getString(evalFilePathPrefKey) ?? '';
   }
 
   Future<void> _initBookFilePref() async {
@@ -64,20 +59,17 @@ class Edax {
 
   Future<void> _initEvalFilePref() async {
     final docDir = await _docDir;
-    final pref = await _pref;
+    final evalFilePath = await evalPath;
     // ref: https://github.com/flutter/flutter/issues/17160
     // ref: https://github.com/flutter/flutter/issues/28162
-    if (pref.getString(evalFilePathPrefKey) == null) {
+    if (evalFilePath.isEmpty) {
       final evalData = await _evalAssetData;
-      final evalFilePath = '${docDir.path}/$defaultEvalFileName';
+      final newEvalFilePath = '${docDir.path}/$defaultEvalFileName';
+      File(newEvalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+      await setEvalPath(newEvalFilePath);
+    } else if (!File(evalFilePath).existsSync()) {
+      final evalData = await _evalAssetData;
       File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
-      await pref.setString(evalFilePathPrefKey, evalFilePath);
-    } else {
-      final evalFilePath = pref.getString(evalFilePathPrefKey);
-      if (!File(evalFilePath).existsSync()) {
-        final evalData = await _evalAssetData;
-        File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
-      }
     }
   }
 
@@ -106,7 +98,11 @@ class Edax {
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
 
   // e.g. Mac: ~/Library/Containers/com.example.pedax/Data/Documents
-  Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
+  Future<Directory> get _docDir async {
+    final docDir = await getApplicationDocumentsDirectory();
+    if (docDir == null) throw Exception('Documents Directory is not found');
+    return docDir;
+  }
 
   Future<SharedPreferences> get _pref async => SharedPreferences.getInstance();
 
