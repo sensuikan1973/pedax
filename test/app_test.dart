@@ -11,16 +11,15 @@ void main() {
   setUpAll(() async => prepareLibedaxAssets());
   tearDownAll(cleanLibedaxAssets);
 
-  // testWidgets('debugDumpApp', (tester) async {
-  //   await tester.pumpWidget(const PedaxApp());
-  //   await tester.pumpAndSettle();
-  //   debugDumpApp();
-  // });
+  testWidgets('debugDumpApp', (tester) async {
+    await tester.pumpWidget(const PedaxApp());
+    await tester.pumpAndSettle();
+    debugDumpApp();
+  });
 
   testWidgets('launch app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
-    debugDumpApp();
 
     // Home Title
     expect(find.text('home'), findsOneWidget);
