@@ -11,10 +11,16 @@ class Edax {
   const Edax();
 
   Future<LibEdax> initLibedax() async {
+    debugPrint('will call _initBookFilePref');
     await _initBookFilePref();
+    debugPrint('will call _initEvalFilePref');
     await _initEvalFilePref();
+    debugPrint('will call _initDll');
     await _initDll();
-    return LibEdax(await _libedaxPath)
+    debugPrint('will call LibEdax()');
+    final libedax = LibEdax(await _libedaxPath);
+    debugPrint('will call libedaxInitialize');
+    return libedax
       ..libedaxInitialize([
         '',
         '-eval-file',
