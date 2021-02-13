@@ -15,19 +15,14 @@ void main() {
     await app.main();
     await tester.pumpAndSettle();
 
-    // Home Title
     expect(find.text('home'), findsOneWidget);
+    expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
 
-    // e4, d5
-    expectStoneNum(tester, SquareType.black, 2);
+    expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
     await tester.tap(findByCoordinate('f5'));
     await tester.pump();
 
-    // e4, d5, e5, f5
-    expectStoneNum(tester, SquareType.black, 4);
-
-    // Logo
-    expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
+    expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
   });
 }
