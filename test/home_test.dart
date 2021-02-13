@@ -40,4 +40,15 @@ Future<void> main() async {
     await tester.pumpAndSettle();
     expect(find.byType(LicensePage), findsOneWidget);
   });
+
+  testWidgets('set book file path', (tester) async {
+    await tester.pumpWidget(const PedaxApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(l10nEn.bookFilePathSetting));
+    await tester.pumpAndSettle();
+    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+  });
 }
