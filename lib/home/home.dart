@@ -34,15 +34,8 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done || !snapshot.hasData) {
-              return const CupertinoActivityIndicator();
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[PedaxBoard(snapshot.data!, 480)],
-              ),
-            );
+            if (!snapshot.hasData) return const CupertinoActivityIndicator();
+            return Center(child: PedaxBoard(snapshot.data!, 480));
           },
         ),
       );
