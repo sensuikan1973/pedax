@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _bookFilePathTextController = TextEditingController();
   final _edax = const Edax();
   late Future<LibEdax> _libedax;
 
@@ -26,7 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Future<void> dispose() async {
-    _bookFilePathTextController.dispose();
     super.dispose();
     (await _libedax).libedaxTerminate();
   }
@@ -79,22 +77,23 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _showDialogForSettingBookFilePath() async {
     final currentBookFilePath = await _edax.bookPath;
+    final bookFilePathTextController = TextEditingController();
     await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
         content: TextFormField(
-          controller: _bookFilePathTextController..text = currentBookFilePath,
+          controller: bookFilePathTextController..text = currentBookFilePath,
           autofocus: true,
         ),
         actions: <Widget>[
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
           TextButton(
             onPressed: () async {
-              await _edax.setBookPath(_bookFilePathTextController.text);
+              await _edax.setBookPath(bookFilePathTextController.text);
               final libedax = await _libedax;
               // FIXME: very slow when book is big.
-              libedax.edaxBookLoad(_bookFilePathTextController.text);
+              libedax.edaxBookLoad(bookFilePathTextController.text);
               Navigator.pop(context);
             },
             child: const Text('OK'),
