@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Future<void> dispose() async {
+    _bookFilePathTextController.dispose();
     super.dispose();
     (await _libedax).libedaxTerminate();
   }
