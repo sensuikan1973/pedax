@@ -7,7 +7,7 @@ on:
   pull_request:
     paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
   push:
-    branches: [main]
+    branches: [main, hey_ci_*]
     paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:
