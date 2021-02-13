@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               await _edax.setBookPath(bookFilePathTextController.text);
               final libedax = await _libedax;
               // FIXME: very slow when book is big.
-              libedax.edaxBookLoad(bookFilePathTextController.text);
+              libedax.edaxBookLoad(await _edax.bookPath);
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
