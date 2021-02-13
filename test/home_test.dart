@@ -13,7 +13,7 @@ Future<void> main() async {
 
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
-  testWidgets('home', (tester) async {
+  testWidgets('play a game', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
@@ -41,14 +41,27 @@ Future<void> main() async {
     expect(find.byType(LicensePage), findsOneWidget);
   });
 
-  testWidgets('set book file path', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
+  group('menu events', () {
+    testWidgets('show LICENSE page', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
 
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.bookFilePathSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('LICENSE'));
+      await tester.pumpAndSettle();
+      expect(find.byType(LicensePage), findsOneWidget);
+    });
+
+    testWidgets('set book file path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+    });
   });
 }
