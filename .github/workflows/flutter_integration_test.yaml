@@ -4,7 +4,7 @@ on:
   pull_request:
     paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
   push:
-    branches: [main, hey_ci_*]
+    branches: [main]
     paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:

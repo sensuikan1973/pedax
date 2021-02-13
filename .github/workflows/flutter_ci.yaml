@@ -4,7 +4,7 @@ on:
   pull_request:
     paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml']
   push:
-    branches: [main, hey_ci_*]
+    branches: [main]
     paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml']
 
 jobs:
