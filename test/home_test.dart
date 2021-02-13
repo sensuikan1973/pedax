@@ -13,7 +13,7 @@ Future<void> main() async {
 
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
-  testWidgets('home app', (tester) async {
+  testWidgets('home', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
