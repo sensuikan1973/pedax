@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
           const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
-          const PopupMenuItem<_Menu>(value: _Menu.bookFilePath, child: Text('book file path')),
+          PopupMenuItem<_Menu>(
+            value: _Menu.bookFilePath,
+            child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+          ),
         ],
       );
 
@@ -79,7 +82,7 @@ class _HomePageState extends State<HomePage> {
     await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('book file path setting'),
+        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
         content: TextFormField(
           controller: _bookFilePathTextController..text = currentBookFilePath,
           autofocus: true,

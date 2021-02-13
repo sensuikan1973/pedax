@@ -3,5 +3,6 @@
   "@appTitle": {
     "description": "app title"
   },
-  "homeTitle": "home"
+  "homeTitle": "home",
+  "bookFilePathSetting": "edax book file path setting"
 }

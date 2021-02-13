@@ -1,4 +1,5 @@
 {
   "appTitle": "pedax",
-  "homeTitle": "home"
+  "homeTitle": "home",
+  "bookFilePathSetting": "edax の book ファイルのパス設定"
 }
