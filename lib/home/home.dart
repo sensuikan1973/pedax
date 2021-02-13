@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
+            // FIXME: very slow when book is big.
             if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
             return Center(child: PedaxBoard(snapshot.data!, 480));
           },
@@ -89,6 +90,9 @@ class _HomePageState extends State<HomePage> {
           TextButton(
             onPressed: () async {
               await _edax.setBookPath(_bookFilePathTextController.text);
+              final libedax = await _libedax;
+              // FIXME: very slow when book is big.
+              libedax.edaxBookLoad(_bookFilePathTextController.text);
               Navigator.pop(context);
             },
             child: const Text('OK'),
