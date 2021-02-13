@@ -24,9 +24,12 @@ class PedaxApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en', ''), // English, no country code
-          Locale('ja', ''), // Japanese, no country code
-        ],
+        supportedLocales: const [localeEn, localeEn],
       );
+
+  @visibleForTesting
+  static const localeEn = Locale('en', ''); // English, no country code
+
+  @visibleForTesting
+  static const localeJa = Locale('ja', ''); // Japanese, no country code
 }

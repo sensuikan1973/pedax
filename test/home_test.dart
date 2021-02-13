@@ -5,15 +5,19 @@ import 'package:pedax/board/square.dart';
 
 import '../test_helper/asset_image_finder.dart';
 import '../test_helper/board_finder.dart';
+import '../test_helper/localizations.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
-void main() {
+Future<void> main() async {
   setUp(() async => prepareLibedaxAssets());
+
+  final l10nEn = await loadLocalizations(PedaxApp.localeEn);
+
   testWidgets('home app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('home'), findsOneWidget);
+    expect(find.text(l10nEn.homeTitle), findsOneWidget);
     expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
 
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
