@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: _appBarTitle()),
+        appBar: AppBar(leading: _menu(), title: _appBarTitle()),
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
@@ -50,4 +50,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       );
+
+  PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
+        onSelected: _onSelectedMenu,
+        itemBuilder: (context) => [
+          const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
+        ],
+      );
+
+  void Function(_Menu)? _onSelectedMenu(_Menu menu) {
+    switch (menu) {
+      case _Menu.license:
+        showLicensePage(context: context);
+    }
+  }
 }
+
+enum _Menu { license }
