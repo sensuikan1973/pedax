@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(Icons.menu),
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
-          const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
+          PopupMenuItem<_Menu>(
+            value: _Menu.license,
+            child: Text(AppLocalizations.of(context)!.license),
+          ),
           PopupMenuItem<_Menu>(
             value: _Menu.bookFilePath,
             child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
@@ -90,7 +93,10 @@ class _HomePageState extends State<HomePage> {
           autofocus: true,
         ),
         actions: <Widget>[
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancelOnDialog),
+          ),
           TextButton(
             onPressed: () async {
               await _edax.setBookPath(bookFilePathTextController.text);
@@ -99,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               libedax.edaxBookLoad(bookFilePathTextController.text);
               Navigator.pop(context);
             },
-            child: const Text('OK'),
+            child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
           ),
         ],
       ),

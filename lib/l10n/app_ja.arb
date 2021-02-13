@@ -1,5 +1,8 @@
 {
   "appTitle": "pedax",
   "homeTitle": "home",
-  "bookFilePathSetting": "edax の book ファイルのパス設定"
+  "bookFilePathSetting": "edax の book ファイルのパス設定",
+  "license": "ライセンス",
+  "cancelOnDialog": "キャンセル",
+  "updateSettingOnDialog": "更新する"
 }

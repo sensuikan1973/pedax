@@ -10,7 +10,6 @@ import 'widget_test_helper/libedax_assets.dart';
 
 Future<void> main() async {
   setUp(() async => prepareLibedaxAssets());
-
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
   testWidgets('play a game', (tester) async {
@@ -36,7 +35,7 @@ Future<void> main() async {
 
     await tester.tap(find.byIcon(Icons.menu));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('LICENSE'));
+    await tester.tap(find.text(l10nEn.license));
     await tester.pumpAndSettle();
     expect(find.byType(LicensePage), findsOneWidget);
   });
@@ -48,12 +47,12 @@ Future<void> main() async {
 
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('LICENSE'));
+      await tester.tap(find.text(l10nEn.license));
       await tester.pumpAndSettle();
       expect(find.byType(LicensePage), findsOneWidget);
     });
 
-    testWidgets('set book file path', (tester) async {
+    testWidgets('read book file path', (tester) async {
       await tester.pumpWidget(const PedaxApp());
       await tester.pumpAndSettle();
 
@@ -62,6 +61,23 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.bookFilePathSetting));
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
+    testWidgets('update book file path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
     });
   });
 }

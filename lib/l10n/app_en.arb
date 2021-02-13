@@ -4,5 +4,8 @@
     "description": "app title"
   },
   "homeTitle": "home",
-  "bookFilePathSetting": "edax book file path setting"
+  "bookFilePathSetting": "edax book file path setting",
+  "license": "LICENSE",
+  "cancelOnDialog": "Cancel",
+  "updateSettingOnDialog": "Update"
 }
