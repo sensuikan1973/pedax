@@ -3,5 +3,9 @@
   "@appTitle": {
     "description": "app title"
   },
-  "homeTitle": "home"
+  "homeTitle": "home",
+  "bookFilePathSetting": "edax book file path setting",
+  "license": "LICENSE",
+  "cancelOnDialog": "Cancel",
+  "updateSettingOnDialog": "Update"
 }

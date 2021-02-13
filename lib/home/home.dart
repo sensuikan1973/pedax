@@ -14,18 +14,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _edax = const Edax();
   late Future<LibEdax> _libedax;
 
   @override
   void initState() {
     super.initState();
-    _libedax = const Edax().initLibedax();
+    _libedax = _edax.initLibedax();
   }
 
   @override
   Future<void> dispose() async {
     super.dispose();
-    (await _libedax).libedaxTerminate();
+    (await _libedax)
+      ..libedaxTerminate()
+      ..closeDll();
   }
 
   @override
@@ -34,7 +37,8 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
-            if (!snapshot.hasData) return const Center(child: CupertinoActivityIndicator());
+            // FIXME: very slow when book is big.
+            if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
             return Center(child: PedaxBoard(snapshot.data!, 480));
           },
         ),
@@ -43,6 +47,7 @@ class _HomePageState extends State<HomePage> {
   Widget _appBarTitle() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // TODO: remove this. logo should be shown as app icon.
           Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
           Padding(
             padding: const EdgeInsets.all(8),
@@ -55,16 +60,57 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(Icons.menu),
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
-          const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
+          PopupMenuItem<_Menu>(
+            value: _Menu.license,
+            child: Text(AppLocalizations.of(context)!.license),
+          ),
+          PopupMenuItem<_Menu>(
+            value: _Menu.bookFilePath,
+            child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+          ),
         ],
       );
 
-  void Function(_Menu)? _onSelectedMenu(_Menu menu) {
+  Future<void> _onSelectedMenu(_Menu menu) async {
     switch (menu) {
       case _Menu.license:
         showLicensePage(context: context);
+        break;
+      case _Menu.bookFilePath:
+        await _showDialogForSettingBookFilePath();
     }
+  }
+
+  Future<void> _showDialogForSettingBookFilePath() async {
+    final currentBookFilePath = await _edax.bookPath;
+    final bookFilePathTextController = TextEditingController();
+    await showDialog<void>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+        content: TextFormField(
+          controller: bookFilePathTextController..text = currentBookFilePath,
+          autofocus: true,
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancelOnDialog),
+          ),
+          TextButton(
+            onPressed: () async {
+              await _edax.setBookPath(bookFilePathTextController.text);
+              final libedax = await _libedax;
+              // FIXME: very slow when book is big.
+              libedax.edaxBookLoad(bookFilePathTextController.text);
+              Navigator.pop(context);
+            },
+            child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
+          ),
+        ],
+      ),
+    );
   }
 }
 
-enum _Menu { license }
+enum _Menu { license, bookFilePath }
