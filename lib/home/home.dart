@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
   Widget _appBarTitle() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // TODO: remove this. logo should be shown as app icon.
           Image.asset('assets/images/pedax_logo.png', fit: BoxFit.contain, height: 32),
           Padding(
             padding: const EdgeInsets.all(8),
