@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +88,6 @@ class _HomePageState extends State<HomePage> {
         content: TextFormField(
           controller: _bookFilePathTextController..text = currentBookFilePath,
           autofocus: true,
-          validator: (line) {/*TODO: implement*/},
         ),
         actions: <Widget>[
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
