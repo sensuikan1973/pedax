@@ -14,12 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _bookFilePathTextController = TextEditingController();
+  final _edax = const Edax();
   late Future<LibEdax> _libedax;
 
   @override
   void initState() {
     super.initState();
-    _libedax = const Edax().initLibedax();
+    _libedax = _edax.initLibedax();
   }
 
   @override
@@ -34,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
-            if (!snapshot.hasData) return const Center(child: CupertinoActivityIndicator());
+            if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
             return Center(child: PedaxBoard(snapshot.data!, 480));
           },
         ),
@@ -56,15 +58,44 @@ class _HomePageState extends State<HomePage> {
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
           const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
+          const PopupMenuItem<_Menu>(value: _Menu.bookFilePath, child: Text('book file path')),
         ],
       );
 
-  void Function(_Menu)? _onSelectedMenu(_Menu menu) {
+  Future<void> _onSelectedMenu(_Menu menu) async {
     switch (menu) {
       case _Menu.license:
         showLicensePage(context: context);
+        break;
+      case _Menu.bookFilePath:
+        await _showDialogForSettingBookFilePath();
     }
+  }
+
+  Future<void> _showDialogForSettingBookFilePath() async {
+    final currentBookFilePath = await _edax.bookPath;
+    await showDialog<void>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('book file path setting'),
+        content: TextFormField(
+          controller: _bookFilePathTextController..text = currentBookFilePath,
+          autofocus: true,
+          validator: (line) {/*TODO: implement*/},
+        ),
+        actions: <Widget>[
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () async {
+              await _edax.setBookPath(_bookFilePathTextController.text);
+              Navigator.pop(context);
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }
 
-enum _Menu { license }
+enum _Menu { license, bookFilePath }
