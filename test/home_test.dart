@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
@@ -8,7 +9,7 @@ import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
   setUp(() async => prepareLibedaxAssets());
-  testWidgets('launch app', (tester) async {
+  testWidgets('home app', (tester) async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
@@ -28,5 +29,11 @@ void main() {
     await tester.tap(findByCoordinate('e3'));
     await tester.pump();
     expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('LICENSE'));
+    await tester.pumpAndSettle();
+    expect(find.byType(LicensePage), findsOneWidget);
   });
 }

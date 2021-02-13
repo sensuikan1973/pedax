@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
-            if (!snapshot.hasData) return const CupertinoActivityIndicator();
+            if (!snapshot.hasData) return const Center(child: CupertinoActivityIndicator());
             return Center(child: PedaxBoard(snapshot.data!, 480));
           },
         ),
@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
       );
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
+        icon: const Icon(Icons.menu),
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
           const PopupMenuItem<_Menu>(value: _Menu.license, child: Text('LICENSE')),
