@@ -5,6 +5,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/main.dart' as app;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_helper/asset_image_finder.dart';
 import '../test_helper/board_finder.dart';
@@ -12,6 +13,10 @@ import '../test_helper/localizations.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({}); // always first launch
+  });
 
   testWidgets('home', (tester) async {
     await app.main();
