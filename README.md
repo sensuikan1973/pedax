@@ -65,6 +65,7 @@ flutter analyze .
 - [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 - [macos](https://developer.apple.com/account/#/overview)
   - [App Sandbox](https://developer.apple.com/documentation/security/app_sandbox)
+  - [Harded Runtime](https://developer.apple.com/documentation/security/hardened_runtime)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
   - [Notarizing macOS Software Before Distribution](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution)
 - windows
