@@ -33,7 +33,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(leading: _menu(), title: _appBarTitle()),
+        appBar: AppBar(
+          leading: _menu(),
+          title: Text(AppLocalizations.of(context)!.homeTitle),
+        ),
         body: FutureBuilder<bool>(
           future: _libedaxInitialized,
           builder: (_, snapshot) {
@@ -42,16 +45,6 @@ class _HomeState extends State<Home> {
             return Center(child: PedaxBoard(_edax.lib, 480));
           },
         ),
-      );
-
-  Widget _appBarTitle() => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(AppLocalizations.of(context)!.homeTitle),
-          ),
-        ],
       );
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
