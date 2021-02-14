@@ -120,7 +120,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
       await tester.enterText(find.byType(EditableText), 1.toString());
-      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
       await tester.pumpAndSettle();
       expect(find.byType(NTasksSettingDialog), findsNothing);
     });
