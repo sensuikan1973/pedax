@@ -29,10 +29,10 @@ class Edax {
       ..edaxVersion();
   }
 
+  /// after you call this, you have to call edaxBookLoad or libedaxInitialize with book-file option.
   Future<void> setBookPath(String path) async {
     final pref = await _pref;
     await pref.setString(bookFilePathPrefKey, path);
-    // NOTE: require restart (OR call edax_book_load)
   }
 
   Future<void> setEvalPath(String path) async {
