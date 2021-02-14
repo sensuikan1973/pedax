@@ -75,10 +75,8 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.bookFilePathSetting));
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-      await tester.runAsync(() async {
-        await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
-        await tester.pump();
-      });
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       expect(find.byType(PedaxApp), findsOneWidget);
     });
   });
