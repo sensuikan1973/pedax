@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
 import 'book_file_path_setting_dialog.dart';
+import 'n_tasks_setting_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -56,6 +57,10 @@ class _HomeState extends State<Home> {
             child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
           ),
           PopupMenuItem<_Menu>(
+            value: _Menu.nTasks,
+            child: Text(AppLocalizations.of(context)!.nTasksSetting),
+          ),
+          PopupMenuItem<_Menu>(
             value: _Menu.license,
             child: Text(AppLocalizations.of(context)!.license),
           ),
@@ -64,13 +69,21 @@ class _HomeState extends State<Home> {
 
   Future<void> _onSelectedMenu(_Menu menu) async {
     switch (menu) {
+      case _Menu.bookFilePath:
+        await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
+        break;
       case _Menu.license:
         showLicensePage(context: context);
         break;
-      case _Menu.bookFilePath:
-        await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
+      case _Menu.nTasks:
+        await showDialog<void>(context: context, builder: (_) => NTasksSettingDialog(edax: _edax));
+        break;
     }
   }
 }
 
-enum _Menu { license, bookFilePath }
+enum _Menu {
+  nTasks,
+  bookFilePath,
+  license,
+}

@@ -4,9 +4,10 @@
     "description": "app title"
   },
   "homeTitle": "home",
-  "bookFilePathSetting": "edax book file path setting",
+  "bookFilePathSetting": "edax book file path",
   "license": "LICENSE",
   "cancelOnDialog": "Cancel",
   "updateSettingOnDialog": "Update",
-  "userSpecifiedFileNotFound": "the file is not found"
+  "userSpecifiedFileNotFound": "the file is not found",
+  "nTasksSetting": "number of parallel threads (Advanced options)"
 }

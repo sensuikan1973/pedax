@@ -1,9 +1,10 @@
 {
   "appTitle": "pedax",
   "homeTitle": "home",
-  "bookFilePathSetting": "book ファイルのパス設定",
+  "bookFilePathSetting": "book ファイルのパス",
   "license": "ライセンス",
   "cancelOnDialog": "キャンセル",
   "updateSettingOnDialog": "更新する",
-  "userSpecifiedFileNotFound": "指定したファイルが見つかりません"
+  "userSpecifiedFileNotFound": "指定したファイルが見つかりません",
+  "nTasksSetting": "並列スレッド数 (上級者向け)"
 }

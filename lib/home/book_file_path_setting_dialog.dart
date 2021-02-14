@@ -14,16 +14,14 @@ class BookFilePathSettingDialog extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<String>(
-      future: edax.bookPath,
-      builder: (_, snapshot) {
-        if (!snapshot.hasData) return const Center(child: CupertinoActivityIndicator());
-        return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
-          content: Form(
+  Widget build(BuildContext context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+        content: FutureBuilder<String>(
+          future: edax.bookPath,
+          builder: (_, snapshot) => Form(
             key: _formKey,
             child: TextFormField(
-              controller: _textController..text = snapshot.data!,
+              controller: _textController..text = snapshot.hasData ? snapshot.data! : '',
               autofocus: true,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (path) {
@@ -33,25 +31,25 @@ class BookFilePathSettingDialog extends StatelessWidget {
               },
             ),
           ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancelOnDialog),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (!_formKey.currentState!.validate()) return;
-                final newBookFilePath = _textController.text;
-                await edax.setBookPath(newBookFilePath);
-                // TODO: load asynchronously. this is slow when book is big.
-                edax.lib.edaxBookLoad(newBookFilePath);
-                Navigator.pop(context);
-              },
-              child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
-            ),
-          ],
-        );
-      });
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(AppLocalizations.of(context)!.cancelOnDialog),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (!_formKey.currentState!.validate()) return;
+              final newBookFilePath = _textController.text;
+              await edax.setBookPath(newBookFilePath);
+              // TODO: load asynchronously. this is slow when book is big.
+              edax.lib.edaxBookLoad(newBookFilePath);
+              Navigator.pop(context);
+            },
+            child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
+          ),
+        ],
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
