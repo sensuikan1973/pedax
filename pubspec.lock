@@ -127,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  dart_dot_reporter:
+    dependency: "direct dev"
+    description:
+      name: dart_dot_reporter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   dart_style:
     dependency: transitive
     description:

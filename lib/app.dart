@@ -17,14 +17,9 @@ class PedaxApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
         theme: ThemeData(primarySwatch: Colors.brown),
-        home: const HomePage(),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [localeEn, localeEn],
+        home: const Home(),
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: const [localeEn, localeJa],
       );
 
   @visibleForTesting
@@ -32,4 +27,12 @@ class PedaxApp extends StatelessWidget {
 
   @visibleForTesting
   static const localeJa = Locale('ja', ''); // Japanese, no country code
+
+  @visibleForTesting
+  static const localizationsDelegates = [
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
 }

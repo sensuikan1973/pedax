@@ -6,16 +6,17 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@immutable
 class Edax {
-  const Edax();
+  Edax();
 
-  Future<LibEdax> initLibedax() async {
+  late final LibEdax lib;
+
+  Future<bool> initLibedax() async {
     await _initBookFilePref();
     await _initEvalFilePref();
     await _initDll();
-    final libedax = LibEdax(await _libedaxPath);
-    return libedax
+    lib = LibEdax(await _libedaxPath);
+    lib
       ..libedaxInitialize([
         '',
         '-eval-file',
@@ -27,18 +28,28 @@ class Edax {
       ])
       ..edaxInit()
       ..edaxVersion();
+    return true;
   }
 
+  /// after you call this, you have to call edaxBookLoad or libedaxInitialize with book-file option.
   Future<void> setBookPath(String path) async {
     final pref = await _pref;
-    await pref.setString(bookFilePathPrefKey, path);
-    // NOTE: require restart (OR call edax_book_load)
+    if (path.isEmpty) {
+      await pref.setString(bookFilePathPrefKey, await _defaultBookFilePath);
+    } else {
+      await pref.setString(bookFilePathPrefKey, path);
+    }
   }
 
+  // after you call this, you have to recall libedaxInitialize with eval-file option.
+  // for now, libedax4dart doesn't have eval_load command.
   Future<void> setEvalPath(String path) async {
     final pref = await _pref;
-    await pref.setString(evalFilePathPrefKey, path);
-    // NOTE: require restart
+    if (path.isEmpty) {
+      await pref.setString(evalFilePathPrefKey, await _defaultEvalFilePath);
+    } else {
+      await pref.setString(evalFilePathPrefKey, path);
+    }
   }
 
   Future<String> get bookPath async {
@@ -52,21 +63,27 @@ class Edax {
   }
 
   Future<void> _initBookFilePref() async {
-    if ((await bookPath).isNotEmpty) return;
-    final docDir = await _docDir;
-    await setBookPath('${docDir.path}/$defaultBookFileName');
+    final bookFilePath = await bookPath;
+    // REF: https://github.com/flutter/flutter/issues/17160
+    // REF: https://github.com/flutter/flutter/issues/28162
+    if (bookFilePath.isEmpty) {
+      final bookData = await _bookAssetData;
+      File(await _defaultBookFilePath).writeAsBytesSync(bookData.buffer.asUint8List());
+      await setBookPath(await _defaultBookFilePath);
+    } else if (!File(bookFilePath).existsSync()) {
+      final bookData = await _bookAssetData;
+      File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List());
+    }
   }
 
   Future<void> _initEvalFilePref() async {
-    final docDir = await _docDir;
     final evalFilePath = await evalPath;
     // REF: https://github.com/flutter/flutter/issues/17160
     // REF: https://github.com/flutter/flutter/issues/28162
     if (evalFilePath.isEmpty) {
       final evalData = await _evalAssetData;
-      final newEvalFilePath = '${docDir.path}/$defaultEvalFileName';
-      File(newEvalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
-      await setEvalPath(newEvalFilePath);
+      File(await _defaultEvalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+      await setEvalPath(await _defaultEvalFilePath);
     } else if (!File(evalFilePath).existsSync()) {
       final evalData = await _evalAssetData;
       File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
@@ -93,9 +110,12 @@ class Edax {
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
-  Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
+  Future<String> get _defaultEvalFilePath async => '${(await _docDir).path}/$defaultEvalFileName';
+  Future<String> get _defaultBookFilePath async => '${(await _docDir).path}/$defaultBookFileName';
 
+  Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
+  Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
   Future<Directory> get _docDir async {

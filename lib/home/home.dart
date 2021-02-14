@@ -2,44 +2,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:libedax4dart/libedax4dart.dart';
 import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
+import 'book_file_path_setting_dialog.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _edax = const Edax();
-  late Future<LibEdax> _libedax;
+class _HomeState extends State<Home> {
+  final _edax = Edax();
+  late Future<bool> _libedaxInitialized;
 
   @override
   void initState() {
     super.initState();
-    _libedax = _edax.initLibedax();
+    _libedaxInitialized = _edax.initLibedax();
   }
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-    (await _libedax)
+    _edax.lib
       ..libedaxTerminate()
       ..closeDll();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(leading: _menu(), title: _appBarTitle()),
-        body: FutureBuilder<LibEdax>(
-          future: _libedax,
+        body: FutureBuilder<bool>(
+          future: _libedaxInitialized,
           builder: (_, snapshot) {
-            // FIXME: very slow when book is big.
+            // FIXME: this is slow when book is big.
             if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
-            return Center(child: PedaxBoard(snapshot.data!, 480));
+            return Center(child: PedaxBoard(_edax.lib, 480));
           },
         ),
       );
@@ -77,39 +77,8 @@ class _HomePageState extends State<HomePage> {
         showLicensePage(context: context);
         break;
       case _Menu.bookFilePath:
-        await _showDialogForSettingBookFilePath();
+        await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
     }
-  }
-
-  Future<void> _showDialogForSettingBookFilePath() async {
-    final currentBookFilePath = await _edax.bookPath;
-    final bookFilePathTextController = TextEditingController();
-    await showDialog<void>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
-        content: TextFormField(
-          controller: bookFilePathTextController..text = currentBookFilePath,
-          autofocus: true,
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.cancelOnDialog),
-          ),
-          TextButton(
-            onPressed: () async {
-              await _edax.setBookPath(bookFilePathTextController.text);
-              final libedax = await _libedax;
-              // FIXME: very slow when book is big.
-              libedax.edaxBookLoad(bookFilePathTextController.text);
-              Navigator.pop(context);
-            },
-            child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
-          ),
-        ],
-      ),
-    );
   }
 }
 

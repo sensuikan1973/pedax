@@ -4,5 +4,6 @@
   "bookFilePathSetting": "edax の book ファイルのパス設定",
   "license": "ライセンス",
   "cancelOnDialog": "キャンセル",
-  "updateSettingOnDialog": "更新する"
+  "updateSettingOnDialog": "更新する",
+  "userSpecifiedFileNotFound": "指定したファイルが見つかりません"
 }
