@@ -4,7 +4,6 @@ import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 
-import '../test_helper/asset_image_finder.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/localizations.dart';
 import 'widget_test_helper/libedax_assets.dart';
@@ -18,7 +17,6 @@ Future<void> main() async {
     await tester.pumpAndSettle();
 
     expect(find.text(l10nEn.homeTitle), findsOneWidget);
-    expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
 
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
 

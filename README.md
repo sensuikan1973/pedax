@@ -72,4 +72,4 @@ flutter analyze .
 - windows
   - [windows sandbox](https://docs.microsoft.com/ja-jp/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview)
 - linux
-  - TODO: add anything
+  - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
