@@ -9,5 +9,5 @@
   "cancelOnDialog": "Cancel",
   "updateSettingOnDialog": "Update",
   "userSpecifiedFileNotFound": "the file is not found",
-  "nTasksSetting": "number of parallel threads (Advanced options)"
+  "nTasksSetting": "number of parallel threads (Advanced option)"
 }
