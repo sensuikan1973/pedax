@@ -100,10 +100,8 @@ class _HomePageState extends State<HomePage> {
           TextButton(
             onPressed: () async {
               await _edax.setBookPath(bookFilePathTextController.text);
-              final libedax = await _libedax;
               // FIXME: very slow when book is big.
-              libedax.edaxBookLoad(await _edax.bookPath);
-              await Future<void>.delayed(const Duration(seconds: 3));
+              (await _libedax).edaxBookLoad(await _edax.bookPath);
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
