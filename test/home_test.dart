@@ -110,6 +110,20 @@ Future<void> main() async {
       expect(find.byType(BookFilePathSettingDialog), findsNothing);
     });
 
+    testWidgets('read n-tasks', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.nTasksSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
     testWidgets('update n-tasks', (tester) async {
       await tester.pumpWidget(const PedaxApp());
       await tester.pumpAndSettle();
