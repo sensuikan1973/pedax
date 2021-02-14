@@ -61,12 +61,12 @@ class _HomeState extends State<Home> {
         onSelected: _onSelectedMenu,
         itemBuilder: (context) => [
           PopupMenuItem<_Menu>(
-            value: _Menu.license,
-            child: Text(AppLocalizations.of(context)!.license),
-          ),
-          PopupMenuItem<_Menu>(
             value: _Menu.bookFilePath,
             child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+          ),
+          PopupMenuItem<_Menu>(
+            value: _Menu.license,
+            child: Text(AppLocalizations.of(context)!.license),
           ),
         ],
       );
