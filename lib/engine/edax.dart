@@ -23,8 +23,8 @@ class Edax {
         await evalPath,
         '-book-file',
         await bookPath,
-        // 'n-tasks',
-        // '12',
+        'n-tasks',
+        (await nTasks).toString(),
       ])
       ..edaxInit()
       ..edaxVersion();
@@ -52,6 +52,15 @@ class Edax {
     }
   }
 
+  Future<void> setNTasks(int n) async {
+    final pref = await _pref;
+    if (n < 1 || Platform.numberOfProcessors < n) {
+      await pref.setInt(nTasksPrefKey, _defaultNTasks);
+    } else {
+      await pref.setInt(nTasksPrefKey, n);
+    }
+  }
+
   Future<String> get bookPath async {
     final pref = await _pref;
     return pref.getString(bookFilePathPrefKey) ?? '';
@@ -60,6 +69,11 @@ class Edax {
   Future<String> get evalPath async {
     final pref = await _pref;
     return pref.getString(evalFilePathPrefKey) ?? '';
+  }
+
+  Future<int> get nTasks async {
+    final pref = await _pref;
+    return pref.getInt(nTasksPrefKey) ?? _defaultNTasks;
   }
 
   Future<void> _initBookFilePref() async {
@@ -112,6 +126,7 @@ class Edax {
 
   Future<String> get _defaultEvalFilePath async => '${(await _docDir).path}/$defaultEvalFileName';
   Future<String> get _defaultBookFilePath async => '${(await _docDir).path}/$defaultBookFileName';
+  int get _defaultNTasks => (Platform.numberOfProcessors / 4).floor();
 
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
@@ -131,6 +146,9 @@ class Edax {
 
   @visibleForTesting
   static const evalFilePathPrefKey = 'evalFilePath';
+
+  @visibleForTesting
+  static const nTasksPrefKey = 'nTasks';
 
   @visibleForTesting
   static const defaultEvalFileName = 'eval.dat';

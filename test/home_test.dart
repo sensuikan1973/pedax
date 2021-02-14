@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
+import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
 import '../test_helper/board_finder.dart';
 import '../test_helper/localizations.dart';
@@ -107,6 +108,35 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
       await tester.pumpAndSettle();
       expect(find.byType(BookFilePathSettingDialog), findsNothing);
+    });
+
+    testWidgets('read n-tasks', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.nTasksSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
+    testWidgets('update n-tasks', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.nTasksSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), 1.toString());
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(NTasksSettingDialog), findsNothing);
     });
   });
 }
