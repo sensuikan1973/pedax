@@ -75,6 +75,10 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.bookFilePathSetting));
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), 'not existing path');
+      await tester.pump();
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // nothing happens
+      await tester.pump();
       await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
       await tester.pump();
       expect(find.byType(PedaxApp), findsOneWidget);
