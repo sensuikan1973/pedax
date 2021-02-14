@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
+import 'package:pedax/home/book_file_path_setting_dialog.dart';
 
 import '../test_helper/asset_image_finder.dart';
 import '../test_helper/board_finder.dart';
@@ -66,7 +67,7 @@ Future<void> main() async {
       expect(find.byType(PedaxApp), findsOneWidget);
     });
 
-    testWidgets('update book file path', (tester) async {
+    testWidgets('update book file path with wrong path', (tester) async {
       await tester.pumpWidget(const PedaxApp());
       await tester.pumpAndSettle();
 
@@ -76,12 +77,38 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
       await tester.enterText(find.byType(EditableText), 'not existing path');
-      await tester.pump();
-      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // nothing happens
-      await tester.pump();
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
+    });
+
+    testWidgets('update book file path with empty path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), ''); // use default book
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsNothing);
+    });
+
+    testWidgets('update book file path as it is', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
       await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
-      await tester.pump();
-      expect(find.byType(PedaxApp), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsNothing);
     });
   });
 }
