@@ -35,10 +35,11 @@ class Edax {
     await pref.setString(bookFilePathPrefKey, path);
   }
 
+  // NOTE: require restart
+  // for now, libedax4dart doesn't have eval_load command.
   Future<void> setEvalPath(String path) async {
     final pref = await _pref;
     await pref.setString(evalFilePathPrefKey, path);
-    // NOTE: require restart
   }
 
   Future<String> get bookPath async {
