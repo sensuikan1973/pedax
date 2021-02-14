@@ -25,10 +25,10 @@ class _HomeState extends State<Home> {
 
   @override
   Future<void> dispose() async {
-    super.dispose();
     _edax.lib
       ..libedaxTerminate()
       ..closeDll();
+    super.dispose();
   }
 
   @override
