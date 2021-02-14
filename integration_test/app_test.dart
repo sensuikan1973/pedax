@@ -7,7 +7,6 @@ import 'package:pedax/board/square.dart';
 import 'package:pedax/main.dart' as app;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../test_helper/asset_image_finder.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/localizations.dart';
 
@@ -25,7 +24,6 @@ void main() {
     final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
     expect(find.text(l10nEn.homeTitle), findsOneWidget);
-    expect(findByAssetKey('assets/images/pedax_logo.png'), findsOneWidget);
 
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
