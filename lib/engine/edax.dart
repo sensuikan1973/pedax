@@ -126,7 +126,7 @@ class Edax {
 
   Future<String> get _defaultEvalFilePath async => '${(await _docDir).path}/$defaultEvalFileName';
   Future<String> get _defaultBookFilePath async => '${(await _docDir).path}/$defaultBookFileName';
-  int get _defaultNTasks => (Platform.numberOfProcessors / 2).floor();
+  int get _defaultNTasks => (Platform.numberOfProcessors / 4).floor();
 
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
