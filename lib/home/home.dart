@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         body: FutureBuilder<LibEdax>(
           future: _libedax,
           builder: (_, snapshot) {
-            // FIXME: very slow when book is big.
+            // FIXME: this is slow when book is big.
             if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
             return Center(child: PedaxBoard(snapshot.data!, 480));
           },
@@ -84,13 +86,23 @@ class _HomePageState extends State<HomePage> {
   Future<void> _showDialogForSettingBookFilePath() async {
     final currentBookFilePath = await _edax.bookPath;
     final bookFilePathTextController = TextEditingController();
+    final bookFilePathFormKey = GlobalKey<FormState>();
     await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
-        content: TextFormField(
-          controller: bookFilePathTextController..text = currentBookFilePath,
-          autofocus: true,
+        content: Form(
+          key: bookFilePathFormKey,
+          child: TextFormField(
+            controller: bookFilePathTextController..text = currentBookFilePath,
+            autofocus: true,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: (path) {
+              if (path == null) return null;
+              if (path.isEmpty) return null; // use default book
+              if (!File(path).existsSync()) return AppLocalizations.of(context)!.userSpecifiedFileNotFound;
+            },
+          ),
         ),
         actions: <Widget>[
           TextButton(
@@ -99,10 +111,14 @@ class _HomePageState extends State<HomePage> {
           ),
           TextButton(
             onPressed: () async {
-              await _edax.setBookPath(bookFilePathTextController.text);
-              final bookPath = await _edax.bookPath;
-              // FIXME: very slow when book is big.
-              if (bookPath != bookFilePathTextController.text) (await _libedax).edaxBookLoad(bookPath);
+              if (!bookFilePathFormKey.currentState!.validate()) return;
+              final currentBookPath = await _edax.bookPath;
+              final newBookPath = bookFilePathTextController.text;
+              await _edax.setBookPath(newBookPath);
+              if (currentBookPath != newBookPath) {
+                // TODO: load asynchronously. this is slow when book is big.
+                (await _libedax).edaxBookLoad(newBookPath);
+              }
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),

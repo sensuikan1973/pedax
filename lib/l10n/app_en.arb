@@ -7,5 +7,6 @@
   "bookFilePathSetting": "edax book file path setting",
   "license": "LICENSE",
   "cancelOnDialog": "Cancel",
-  "updateSettingOnDialog": "Update"
+  "updateSettingOnDialog": "Update",
+  "userSpecifiedFileNotFound": "the file is not found"
 }
