@@ -17,7 +17,7 @@ class PedaxApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
         theme: ThemeData(primarySwatch: Colors.brown),
-        home: const HomePage(),
+        home: const Home(),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

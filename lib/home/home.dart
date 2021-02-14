@@ -8,14 +8,14 @@ import 'package:libedax4dart/libedax4dart.dart';
 import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   final _edax = const Edax();
   late Future<LibEdax> _libedax;
 
