@@ -32,7 +32,7 @@ void main() {
       ..closeDll();
   });
 
-  testWidgets('BookFilePathSettingDialog', (tester) async {
+  testWidgets('NTasksSettingDialog', (tester) async {
     final edax = Edax();
     await edax.initLibedax();
     await tester.pumpWidget(MaterialApp(
