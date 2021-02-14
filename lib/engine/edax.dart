@@ -6,16 +6,17 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@immutable
 class Edax {
-  const Edax();
+  Edax();
 
-  Future<LibEdax> initLibedax() async {
+  late final LibEdax lib;
+
+  Future<bool> initLibedax() async {
     await _initBookFilePref();
     await _initEvalFilePref();
     await _initDll();
-    final libedax = LibEdax(await _libedaxPath);
-    return libedax
+    lib = LibEdax(await _libedaxPath);
+    lib
       ..libedaxInitialize([
         '',
         '-eval-file',
@@ -27,6 +28,7 @@ class Edax {
       ])
       ..edaxInit()
       ..edaxVersion();
+    return true;
   }
 
   /// after you call this, you have to call edaxBookLoad or libedaxInitialize with book-file option.

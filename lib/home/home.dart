@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:libedax4dart/libedax4dart.dart';
 import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
+import 'book_file_path_setting_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,19 +14,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _edax = const Edax();
-  late Future<LibEdax> _libedax;
+  final _edax = Edax();
+  late Future<bool> _libedaxInitialized;
 
   @override
   void initState() {
     super.initState();
-    _libedax = _edax.initLibedax();
+    _libedaxInitialized = _edax.initLibedax();
   }
 
   @override
   Future<void> dispose() async {
     super.dispose();
-    (await _libedax)
+    _edax.lib
       ..libedaxTerminate()
       ..closeDll();
   }
@@ -36,12 +34,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(leading: _menu(), title: _appBarTitle()),
-        body: FutureBuilder<LibEdax>(
-          future: _libedax,
+        body: FutureBuilder<bool>(
+          future: _libedaxInitialized,
           builder: (_, snapshot) {
             // FIXME: this is slow when book is big.
             if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
-            return Center(child: PedaxBoard(snapshot.data!, 480));
+            return Center(child: PedaxBoard(_edax.lib, 480));
           },
         ),
       );
@@ -79,53 +77,8 @@ class _HomeState extends State<Home> {
         showLicensePage(context: context);
         break;
       case _Menu.bookFilePath:
-        await _showDialogForSettingBookFilePath();
+        await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
     }
-  }
-
-  Future<void> _showDialogForSettingBookFilePath() async {
-    final currentBookFilePath = await _edax.bookPath;
-    final bookFilePathTextController = TextEditingController();
-    final bookFilePathFormKey = GlobalKey<FormState>();
-    await showDialog<void>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
-        content: Form(
-          key: bookFilePathFormKey,
-          child: TextFormField(
-            controller: bookFilePathTextController..text = currentBookFilePath,
-            autofocus: true,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (path) {
-              if (path == null) return null;
-              if (path.isEmpty) return null; // use default book
-              if (!File(path).existsSync()) return AppLocalizations.of(context)!.userSpecifiedFileNotFound;
-            },
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.cancelOnDialog),
-          ),
-          TextButton(
-            onPressed: () async {
-              if (!bookFilePathFormKey.currentState!.validate()) return;
-              final currentBookPath = await _edax.bookPath;
-              final newBookPath = bookFilePathTextController.text;
-              await _edax.setBookPath(newBookPath);
-              if (currentBookPath != newBookPath) {
-                // TODO: load asynchronously. this is slow when book is big.
-                (await _libedax).edaxBookLoad(newBookPath);
-              }
-              Navigator.pop(context);
-            },
-            child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
-          ),
-        ],
-      ),
-    );
   }
 }
 
