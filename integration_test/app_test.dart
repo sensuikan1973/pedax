@@ -23,7 +23,7 @@ void main() {
 
     final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
-    expect(find.text(l10nEn.homeTitle), findsOneWidget);
+    expect(find.text(l10nEn.analysisMode), findsOneWidget);
 
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
 

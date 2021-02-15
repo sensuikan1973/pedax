@@ -1,6 +1,6 @@
 {
   "appTitle": "pedax",
-  "homeTitle": "home",
+  "analysisMode": "解析モード",
   "bookFilePathSetting": "book ファイルのパス",
   "license": "ライセンス",
   "cancelOnDialog": "キャンセル",

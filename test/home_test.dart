@@ -18,7 +18,7 @@ Future<void> main() async {
     await tester.pumpWidget(const PedaxApp());
     await tester.pumpAndSettle();
 
-    expect(find.text(l10nEn.homeTitle), findsOneWidget);
+    expect(find.text(l10nEn.analysisMode), findsOneWidget);
 
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
 

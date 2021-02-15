@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: _menu(),
-          title: Text(AppLocalizations.of(context)!.homeTitle),
+          title: Text(AppLocalizations.of(context)!.analysisMode),
         ),
         body: FutureBuilder<bool>(
           future: _libedaxInitialized,
