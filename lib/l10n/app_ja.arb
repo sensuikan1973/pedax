@@ -6,5 +6,6 @@
   "cancelOnDialog": "キャンセル",
   "updateSettingOnDialog": "更新する",
   "userSpecifiedFileNotFound": "指定したファイルが見つかりません",
-  "nTasksSetting": "並列スレッド数 (上級者向け)"
+  "nTasksSetting": "並列スレッド数 (上級者向け)",
+  "levelSetting": "レベル (検索の深さ)"
 }
