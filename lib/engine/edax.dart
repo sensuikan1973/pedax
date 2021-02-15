@@ -23,7 +23,7 @@ class Edax {
         await evalPath,
         '-book-file',
         await bookPath,
-        'n-tasks',
+        '-n-tasks',
         (await nTasks).toString(),
       ])
       ..edaxInit()
