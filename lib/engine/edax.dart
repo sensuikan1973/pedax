@@ -6,6 +6,9 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'options/edax_option.dart';
+import 'options/n_tasks_option.dart';
+
 class Edax {
   Edax();
 
@@ -17,18 +20,25 @@ class Edax {
     await _initDll();
     lib = LibEdax(await _libedaxPath);
     lib
-      ..libedaxInitialize([
-        '',
-        '-eval-file',
-        await evalPath,
-        '-book-file',
-        await bookPath,
-        '-n-tasks',
-        (await nTasks).toString(),
-      ])
+      ..libedaxInitialize(await _initParams)
       ..edaxInit()
       ..edaxVersion();
     return true;
+  }
+
+  Future<List<String>> get _initParams async {
+    const options = <EdaxOption>[NTasksOption()];
+    final result = [
+      '',
+      '-eval-file',
+      await evalPath,
+      '-book-file',
+      await bookPath,
+    ];
+    for (final option in options) {
+      result..add(option.nativeName)..add((await option.val).toString());
+    }
+    return result;
   }
 
   /// after you call this, you have to call edaxBookLoad or libedaxInitialize with book-file option.
@@ -52,15 +62,6 @@ class Edax {
     }
   }
 
-  Future<void> setNTasks(int n) async {
-    final pref = await _pref;
-    if (n < 1 || Platform.numberOfProcessors < n) {
-      await pref.setInt(nTasksPrefKey, _defaultNTasks);
-    } else {
-      await pref.setInt(nTasksPrefKey, n);
-    }
-  }
-
   Future<String> get bookPath async {
     final pref = await _pref;
     return pref.getString(bookFilePathPrefKey) ?? '';
@@ -69,11 +70,6 @@ class Edax {
   Future<String> get evalPath async {
     final pref = await _pref;
     return pref.getString(evalFilePathPrefKey) ?? '';
-  }
-
-  Future<int> get nTasks async {
-    final pref = await _pref;
-    return pref.getInt(nTasksPrefKey) ?? _defaultNTasks;
   }
 
   Future<void> _initBookFilePref() async {
@@ -126,7 +122,6 @@ class Edax {
 
   Future<String> get _defaultEvalFilePath async => '${(await _docDir).path}/$defaultEvalFileName';
   Future<String> get _defaultBookFilePath async => '${(await _docDir).path}/$defaultBookFileName';
-  int get _defaultNTasks => (Platform.numberOfProcessors / 4).floor();
 
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
@@ -146,9 +141,6 @@ class Edax {
 
   @visibleForTesting
   static const evalFilePathPrefKey = 'evalFilePath';
-
-  @visibleForTesting
-  static const nTasksPrefKey = 'nTasks';
 
   @visibleForTesting
   static const defaultEvalFileName = 'eval.dat';
