@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -32,6 +33,7 @@ class NTasksOption implements EdaxOption<int> {
   Future<int> update(int val) async {
     final pref = await _pref;
     if (val < 1 || Platform.numberOfProcessors < val) {
+      developer.log('$val is out of range acceptable for edax. So, pedax sets $appDefaultValue.');
       await pref.setInt(prefKey, appDefaultValue);
       return appDefaultValue;
     } else {
