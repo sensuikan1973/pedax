@@ -4,19 +4,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../engine/edax.dart';
+import '../engine/options/n_tasks_option.dart';
 
 class NTasksSettingDialog extends StatelessWidget {
   NTasksSettingDialog({required this.edax, Key? key}) : super(key: key);
 
   final Edax edax;
+  final _option = const NTasksOption();
   final _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.nTasksSetting),
         content: FutureBuilder<int>(
-          future: edax.nTasks,
+          future: _option.val,
           builder: (_, snapshot) => TextFormField(
             controller: _textController..text = snapshot.hasData ? snapshot.data!.toString() : ' ',
             autofocus: true,
@@ -33,7 +36,10 @@ class NTasksSettingDialog extends StatelessWidget {
           TextButton(
             onPressed: () async {
               final n = int.tryParse(_textController.text);
-              if (n != null) await edax.setNTasks(n);
+              if (n != null) {
+                edax.lib.edaxSetOption(_option.nativeName, n.toString());
+                await _option.update(n);
+              }
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),

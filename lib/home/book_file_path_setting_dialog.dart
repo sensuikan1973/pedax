@@ -4,12 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../engine/edax.dart';
+import '../engine/options/book_file_option.dart';
 
 class BookFilePathSettingDialog extends StatelessWidget {
   BookFilePathSettingDialog({required this.edax, Key? key}) : super(key: key);
 
   final Edax edax;
+  final _option = const BookFileOption();
   final _textController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -17,7 +20,7 @@ class BookFilePathSettingDialog extends StatelessWidget {
   Widget build(BuildContext context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
         content: FutureBuilder<String>(
-          future: edax.bookPath,
+          future: _option.val,
           builder: (_, snapshot) => Form(
             key: _formKey,
             child: TextFormField(
@@ -41,7 +44,7 @@ class BookFilePathSettingDialog extends StatelessWidget {
             onPressed: () async {
               if (!_formKey.currentState!.validate()) return;
               final newBookFilePath = _textController.text;
-              await edax.setBookPath(newBookFilePath);
+              await _option.update(newBookFilePath);
               // TODO: load asynchronously. this is slow when book is big.
               edax.lib.edaxBookLoad(newBookFilePath);
               Navigator.pop(context);
