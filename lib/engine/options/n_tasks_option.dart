@@ -5,7 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
 
+@immutable
 class NTasksOption implements EdaxOption<int> {
+  const NTasksOption();
+
   @override
   String get nativeName => '-n-tasks';
 
