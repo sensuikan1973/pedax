@@ -52,46 +52,48 @@ class _HomeState extends State<Home> {
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
         icon: const Icon(Icons.menu),
-        onSelected: _onSelectedMenu,
-        itemBuilder: (context) => [
-          PopupMenuItem<_Menu>(
-            value: _Menu.bookFilePath,
-            child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
-          ),
-          PopupMenuItem<_Menu>(
-            value: _Menu.nTasks,
-            child: Text(AppLocalizations.of(context)!.nTasksSetting),
-          ),
-          PopupMenuItem<_Menu>(
-            value: _Menu.level,
-            child: Text(AppLocalizations.of(context)!.levelSetting),
-          ),
-          PopupMenuItem<_Menu>(
-            value: _Menu.license,
-            child: Text(AppLocalizations.of(context)!.license),
-          ),
-        ],
+        onSelected: (menu) => menu.onSelected(),
+        itemBuilder: (context) => _sortedMenuList
+            .map<PopupMenuItem<_Menu>>((menu) => PopupMenuItem<_Menu>(
+                  value: menu,
+                  child: Text(menu.label),
+                ))
+            .toList(),
       );
 
-  Future<void> _onSelectedMenu(_Menu menu) async {
-    switch (menu) {
-      case _Menu.bookFilePath:
-        await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
-        break;
-      case _Menu.nTasks:
-        await showDialog<void>(context: context, builder: (_) => NTasksSettingDialog(edax: _edax));
-        break;
-      case _Menu.level:
-        await showDialog<void>(context: context, builder: (_) => LevelSettingDialog(edax: _edax));
-        break;
-      case _Menu.license:
-        showLicensePage(context: context);
-        break;
-    }
-  }
+  List<_Menu> get _sortedMenuList => [
+        _Menu(
+          _MenuType.bookFilePath,
+          AppLocalizations.of(context)!.bookFilePathSetting,
+          () async => showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax)),
+        ),
+        _Menu(
+          _MenuType.nTasks,
+          AppLocalizations.of(context)!.nTasksSetting,
+          () async => showDialog<void>(context: context, builder: (_) => NTasksSettingDialog(edax: _edax)),
+        ),
+        _Menu(
+          _MenuType.level,
+          AppLocalizations.of(context)!.levelSetting,
+          () async => showDialog<void>(context: context, builder: (_) => LevelSettingDialog(edax: _edax)),
+        ),
+        _Menu(
+          _MenuType.license,
+          AppLocalizations.of(context)!.license,
+          () => showLicensePage(context: context),
+        ),
+      ];
 }
 
-enum _Menu {
+@immutable
+class _Menu {
+  const _Menu(this.type, this.label, this.onSelected);
+  final _MenuType type;
+  final String label;
+  final Function() onSelected;
+}
+
+enum _MenuType {
   bookFilePath,
   nTasks,
   level,
