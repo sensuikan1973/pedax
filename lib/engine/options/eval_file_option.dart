@@ -1,7 +1,6 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
 
@@ -26,7 +25,7 @@ class EvalFileOption extends EdaxOption<String> {
 
   @override
   Future<String> get val async {
-    final pref = await _pref;
+    final pref = await preferences;
     return pref.getString(prefKey) ?? await appDefaultValue;
   }
 
@@ -42,6 +41,4 @@ class EvalFileOption extends EdaxOption<String> {
       return val;
     }
   }
-
-  Future<SharedPreferences> get _pref async => SharedPreferences.getInstance();
 }
