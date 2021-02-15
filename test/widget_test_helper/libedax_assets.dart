@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:pedax/engine/edax.dart';
+import 'package:pedax/engine/options/book_file_option.dart';
+import 'package:pedax/engine/options/eval_file_option.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meta/meta.dart';
 
@@ -17,10 +19,12 @@ Future<void> prepareLibedaxAssets({bool setPref = true}) async {
   _createTmpLibedaxDylibOnMacOS();
 
   // See: https://pub.dev/packages/shared_preferences#testing
+  const evalFileOption = EvalFileOption();
+  const bookFileOption = BookFileOption();
   final pref = setPref
       ? <String, String>{
-          Edax.evalFilePathPrefKey: '${dir.path}/${Edax.defaultEvalFileName}',
-          Edax.bookFilePathPrefKey: '${dir.path}/${Edax.defaultBookFileName}',
+          evalFileOption.prefKey: await evalFileOption.appDefaultValue,
+          bookFileOption.prefKey: await bookFileOption.appDefaultValue,
         }
       : <String, String>{};
   SharedPreferences.setMockInitialValues(pref);

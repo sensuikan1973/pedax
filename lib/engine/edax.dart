@@ -4,9 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import 'options/book_file_option.dart';
 import 'options/edax_option.dart';
+import 'options/eval_file_option.dart';
 import 'options/n_tasks_option.dart';
 
 class Edax {
@@ -27,59 +28,23 @@ class Edax {
   }
 
   Future<List<String>> get _initParams async {
-    const options = <EdaxOption>[NTasksOption()];
-    final result = [
-      '',
-      '-eval-file',
-      await evalPath,
-      '-book-file',
-      await bookPath,
-    ];
+    const options = <EdaxOption>[NTasksOption(), EvalFileOption(), BookFileOption()];
+    final result = [''];
     for (final option in options) {
       result..add(option.nativeName)..add((await option.val).toString());
     }
     return result;
   }
 
-  /// after you call this, you have to call edaxBookLoad or libedaxInitialize with book-file option.
-  Future<void> setBookPath(String path) async {
-    final pref = await _pref;
-    if (path.isEmpty) {
-      await pref.setString(bookFilePathPrefKey, await _defaultBookFilePath);
-    } else {
-      await pref.setString(bookFilePathPrefKey, path);
-    }
-  }
-
-  // after you call this, you have to recall libedaxInitialize with eval-file option.
-  // for now, libedax4dart doesn't have eval_load command.
-  Future<void> setEvalPath(String path) async {
-    final pref = await _pref;
-    if (path.isEmpty) {
-      await pref.setString(evalFilePathPrefKey, await _defaultEvalFilePath);
-    } else {
-      await pref.setString(evalFilePathPrefKey, path);
-    }
-  }
-
-  Future<String> get bookPath async {
-    final pref = await _pref;
-    return pref.getString(bookFilePathPrefKey) ?? '';
-  }
-
-  Future<String> get evalPath async {
-    final pref = await _pref;
-    return pref.getString(evalFilePathPrefKey) ?? '';
-  }
-
   Future<void> _initBookFilePref() async {
-    final bookFilePath = await bookPath;
+    const option = BookFileOption();
+    final bookFilePath = await option.val;
     // REF: https://github.com/flutter/flutter/issues/17160
     // REF: https://github.com/flutter/flutter/issues/28162
     if (bookFilePath.isEmpty) {
       final bookData = await _bookAssetData;
-      File(await _defaultBookFilePath).writeAsBytesSync(bookData.buffer.asUint8List());
-      await setBookPath(await _defaultBookFilePath);
+      File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
+      await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
       File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List());
@@ -87,13 +52,14 @@ class Edax {
   }
 
   Future<void> _initEvalFilePref() async {
-    final evalFilePath = await evalPath;
+    const option = EvalFileOption();
+    final evalFilePath = await option.val;
     // REF: https://github.com/flutter/flutter/issues/17160
     // REF: https://github.com/flutter/flutter/issues/28162
     if (evalFilePath.isEmpty) {
       final evalData = await _evalAssetData;
-      File(await _defaultEvalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
-      await setEvalPath(await _defaultEvalFilePath);
+      File(await option.appDefaultValue).writeAsBytesSync(evalData.buffer.asUint8List());
+      await option.update(await option.appDefaultValue);
     } else if (!File(evalFilePath).existsSync()) {
       final evalData = await _evalAssetData;
       File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
@@ -120,9 +86,6 @@ class Edax {
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
-  Future<String> get _defaultEvalFilePath async => '${(await _docDir).path}/$defaultEvalFileName';
-  Future<String> get _defaultBookFilePath async => '${(await _docDir).path}/$defaultBookFileName';
-
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
@@ -133,20 +96,6 @@ class Edax {
     if (docDir == null) throw Exception('Documents Directory is not found');
     return docDir;
   }
-
-  Future<SharedPreferences> get _pref async => SharedPreferences.getInstance();
-
-  @visibleForTesting
-  static const bookFilePathPrefKey = 'bookFilePath';
-
-  @visibleForTesting
-  static const evalFilePathPrefKey = 'evalFilePath';
-
-  @visibleForTesting
-  static const defaultEvalFileName = 'eval.dat';
-
-  @visibleForTesting
-  static const defaultBookFileName = 'book.dat';
 
   @visibleForTesting
   static String get defaultLibedaxName {
