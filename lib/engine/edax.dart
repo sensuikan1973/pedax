@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'options/book_file_option.dart';
 import 'options/edax_option.dart';
 import 'options/eval_file_option.dart';
+import 'options/level_option.dart';
 import 'options/n_tasks_option.dart';
 
 class Edax {
@@ -28,7 +29,12 @@ class Edax {
   }
 
   Future<List<String>> get _initParams async {
-    const options = <EdaxOption>[NTasksOption(), EvalFileOption(), BookFileOption()];
+    const options = <EdaxOption>[
+      NTasksOption(),
+      EvalFileOption(),
+      BookFileOption(),
+      LevelOption(),
+    ];
     final result = [''];
     for (final option in options) {
       result..add(option.nativeName)..add((await option.val).toString());

@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../board/pedax_board.dart';
 import '../engine/edax.dart' show Edax;
 import 'book_file_path_setting_dialog.dart';
+import 'level_setting_dialog.dart';
 import 'n_tasks_setting_dialog.dart';
 
 class Home extends StatefulWidget {
@@ -61,6 +63,10 @@ class _HomeState extends State<Home> {
             child: Text(AppLocalizations.of(context)!.nTasksSetting),
           ),
           PopupMenuItem<_Menu>(
+            value: _Menu.level,
+            child: Text(AppLocalizations.of(context)!.levelSetting),
+          ),
+          PopupMenuItem<_Menu>(
             value: _Menu.license,
             child: Text(AppLocalizations.of(context)!.license),
           ),
@@ -72,18 +78,22 @@ class _HomeState extends State<Home> {
       case _Menu.bookFilePath:
         await showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax));
         break;
-      case _Menu.license:
-        showLicensePage(context: context);
-        break;
       case _Menu.nTasks:
         await showDialog<void>(context: context, builder: (_) => NTasksSettingDialog(edax: _edax));
+        break;
+      case _Menu.level:
+        await showDialog<void>(context: context, builder: (_) => LevelSettingDialog(edax: _edax));
+        break;
+      case _Menu.license:
+        showLicensePage(context: context);
         break;
     }
   }
 }
 
 enum _Menu {
-  nTasks,
   bookFilePath,
+  nTasks,
+  level,
   license,
 }
