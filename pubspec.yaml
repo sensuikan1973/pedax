@@ -31,7 +31,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0-nullsafety.2
-  libedax4dart: ^0.5.0-beta.2
+  libedax4dart: ^0.5.0-beta.3
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
