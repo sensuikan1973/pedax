@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
@@ -19,7 +20,7 @@ class NTasksOption extends EdaxOption<int> {
   int get nativeDefaultValue => 1;
 
   @override
-  Future<int> get appDefaultValue async => (Platform.numberOfProcessors / 4).floor();
+  Future<int> get appDefaultValue async => min(Platform.numberOfProcessors / 4, 1).floor();
 
   @override
   Future<int> get val async {
