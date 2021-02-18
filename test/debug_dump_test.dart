@@ -48,7 +48,6 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: BookFilePathSettingDialog(edaxServerPort: edaxServerPort),
       localizationsDelegates: PedaxApp.localizationsDelegates,
-      locale: PedaxApp.localeEn,
     ));
     await tester.pumpAndSettle();
     await waitEdaxSetuped(tester);
@@ -59,7 +58,6 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: NTasksSettingDialog(edaxServerPort: edaxServerPort),
       localizationsDelegates: PedaxApp.localizationsDelegates,
-      locale: PedaxApp.localeEn,
     ));
     await tester.pumpAndSettle();
     await waitEdaxSetuped(tester);
@@ -70,7 +68,6 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: LevelSettingDialog(edaxServerPort: edaxServerPort),
       localizationsDelegates: PedaxApp.localizationsDelegates,
-      locale: PedaxApp.localeEn,
     ));
     await tester.pumpAndSettle();
     await waitEdaxSetuped(tester);
