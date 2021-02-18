@@ -39,8 +39,6 @@ flutter run -d macos
 
 ```sh
 flutter test
-
-flutter test | tee test_report.log && flutter pub run dart_dot_reporter test_report.log --show-message
 ```
 
 ##### integration test
