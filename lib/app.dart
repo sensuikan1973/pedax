@@ -19,8 +19,11 @@ class PedaxApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.brown),
         home: const Home(),
         localizationsDelegates: localizationsDelegates,
-        supportedLocales: const [localeEn, localeJa],
+        supportedLocales: supportedLocales,
       );
+
+  @visibleForTesting
+  static const supportedLocales = [localeEn, localeJa];
 
   @visibleForTesting
   static const localeEn = Locale('en', ''); // English, no country code

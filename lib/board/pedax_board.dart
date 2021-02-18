@@ -1,14 +1,20 @@
-import 'dart:math';
+import 'dart:async';
+import 'dart:isolate';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+
+import '../engine/api/init.dart';
+import '../engine/api/move.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
-  const PedaxBoard(this.engine, this.length, {Key? key}) : super(key: key);
+  const PedaxBoard(this.edaxServerPort, this.edaxServerParentPort, this.length, {Key? key}) : super(key: key);
 
-  final LibEdax engine;
+  final SendPort edaxServerPort;
+  final Stream<dynamic> edaxServerParentPort;
   final double length;
 
   @override
@@ -17,7 +23,10 @@ class PedaxBoard extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DoubleProperty('length', length))..add(DiagnosticsProperty<LibEdax>('libEdax', engine));
+    properties
+      ..add(DiagnosticsProperty<SendPort>('edaxServerPort', edaxServerPort))
+      ..add(DiagnosticsProperty<Stream>('edaxServerParentPort', edaxServerParentPort))
+      ..add(DoubleProperty('length', length));
   }
 }
 
@@ -26,44 +35,62 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late List<int> _squaresOfPlayer;
   late List<int> _squaresOfOpponent;
   late int _currentColor;
-  late String _moves;
-  late List<Hint> _hints;
   late Move? _lastMove;
-  late int? _bestScore;
+  final List<Hint> _hints = []; // FIXME:
+  // ignore: unnecessary_nullable_for_final_variable_declarations
+  final int? _bestScore = 0; // FIXME:
+  final Completer<bool> _edaxInit = Completer<bool>();
 
   @override
   void initState() {
     super.initState();
-    updateState();
-  }
-
-  void updateState() {
-    _board = widget.engine.edaxGetBoard();
-    _squaresOfPlayer = _board.squaresOfPlayer;
-    _squaresOfOpponent = _board.squaresOfOpponent;
-    _currentColor = widget.engine.edaxGetCurrentPlayer();
-    _moves = widget.engine.edaxGetMoves();
-    _lastMove = _moves.isEmpty ? null : widget.engine.edaxGetLastMove();
-    _hints = widget.engine.edaxHint(2); // for now, n is 2 and synchronous.
-    _bestScore = _hints.isEmpty ? null : _hints.map<int>((h) => h.score).reduce(max);
+    // ignore: avoid_annotating_with_dynamic
+    widget.edaxServerParentPort.listen((dynamic message) {
+      if (message is MoveResponse) {
+        setState(() {
+          _board = message.board;
+          _squaresOfPlayer = _board.squaresOfPlayer;
+          _squaresOfOpponent = _board.squaresOfOpponent;
+          _currentColor = message.currentColor;
+          _lastMove = message.lastMove;
+        });
+      } else if (message is InitResponse) {
+        _edaxInit.complete(true);
+        setState(() {
+          _board = message.board;
+          _squaresOfPlayer = _board.squaresOfPlayer;
+          _squaresOfOpponent = _board.squaresOfOpponent;
+          _currentColor = message.currentColor;
+          _lastMove = message.lastMove;
+        });
+      }
+    });
+    widget.edaxServerPort.send(const InitRequest());
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: widget.length,
-        width: widget.length,
-        child: Table(
-          children: List.generate(
-            _boardSize,
-            (yIndex) => TableRow(
-              children: List.generate(
-                _boardSize,
-                (xIndex) => _square(yIndex, xIndex),
+  Widget build(BuildContext context) => FutureBuilder<bool>(
+      future: _edaxInit.future,
+      builder: (_, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        return SizedBox(
+          height: widget.length,
+          width: widget.length,
+          child: Table(
+            children: List.generate(
+              _boardSize,
+              (yIndex) => TableRow(
+                children: List.generate(
+                  _boardSize,
+                  (xIndex) => _square(yIndex, xIndex),
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
+      });
 
   int get _boardSize => 8;
   double get _stoneMargin => (widget.length / _boardSize) * 0.1;
@@ -86,8 +113,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       onTap: type != SquareType.empty
           ? null
           : () => setState(() {
-                widget.engine.edaxMove(moveString);
-                updateState();
+                widget.edaxServerPort.send(MoveRequest(moveString));
               }),
     );
   }

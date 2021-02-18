@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:pedax/engine/edax.dart';
+import 'package:pedax/engine/edax_asset.dart';
 import 'package:pedax/engine/options/book_file_option.dart';
 import 'package:pedax/engine/options/eval_file_option.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,10 +35,10 @@ void cleanLibedaxAssets() => _deleteTmpLibedaxDylibOnMacOS();
 
 // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
 void _createTmpLibedaxDylibOnMacOS() {
-  if (Platform.isMacOS) File('macos/${Edax.defaultLibedaxName}').copySync(Edax.defaultLibedaxName);
+  if (Platform.isMacOS) File('macos/${EdaxAsset.defaultLibedaxName}').copySync(EdaxAsset.defaultLibedaxName);
 }
 
 void _deleteTmpLibedaxDylibOnMacOS() {
-  final file = File(Edax.defaultLibedaxName);
+  final file = File(EdaxAsset.defaultLibedaxName);
   if (Platform.isMacOS && !file.existsSync()) file.deleteSync();
 }
