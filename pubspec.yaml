@@ -30,16 +30,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0-nullsafety.2
-  libedax4dart: ^0.5.0-beta.4
+  intl: ^0.17.0
+  libedax4dart: ^0.5.0-beta.5
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
-  path_provider: ^2.0.0-nullsafety # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  path_provider: ^2.0.0-nullsafety.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   shared_preferences: ^2.0.0-nullsafety
 
 dev_dependencies:
-  dart_dot_reporter: ^1.0.3
   flutter_test:
     sdk: flutter
   integration_test:
