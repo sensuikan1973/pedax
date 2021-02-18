@@ -45,6 +45,7 @@ jobs:
       - name: run test
         run: flutter test --verbose --reporter json --coverage --coverage-path=./coverage/lcov.info | tee test_report.json
       - name: simple test report
+        if: always()
         run: flutter pub run dart_dot_reporter test_report.json --show-message
       - uses: codecov/codecov-action@v1
         with:
