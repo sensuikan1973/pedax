@@ -19,9 +19,12 @@ void main() {
   late ReceivePort receivePort;
   late SendPort edaxServerPort;
 
-  setUp(() async {
+  setUpAll(() async {
     await prepareLibedaxAssets();
     await edaxAsset.setupDllAndData();
+  });
+
+  setUp(() async {
     final initLibedaxParameters = await edaxAsset.buildInitLibEdaxParams();
     receivePort = ReceivePort();
     await Isolate.spawn(

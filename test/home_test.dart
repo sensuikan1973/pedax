@@ -14,7 +14,7 @@ import '../test_helper/localizations.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 Future<void> main() async {
-  setUp(() async => prepareLibedaxAssets());
+  setUpAll(() async => prepareLibedaxAssets());
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
   testWidgets('play a game', (tester) async {
