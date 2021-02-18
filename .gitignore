@@ -50,4 +50,4 @@ libedax.dylib
 
 # test
 coverage/
-test_report.json
+test_report.log
