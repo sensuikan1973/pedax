@@ -31,8 +31,9 @@ class BookFileOption extends EdaxOption<String> {
   Future<String> update(String val) async {
     final pref = await preferences;
     if (val.isEmpty) {
-      debugPrint('scpecified path is empty. So, pedax sets $appDefaultValue.');
-      await pref.setString(prefKey, await appDefaultValue);
+      final newPath = await appDefaultValue;
+      debugPrint('scpecified path is empty. So, pedax sets $newPath.');
+      await pref.setString(prefKey, newPath);
       return appDefaultValue;
     } else {
       await pref.setString(prefKey, val);
