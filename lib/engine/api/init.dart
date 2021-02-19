@@ -29,10 +29,10 @@ class InitResponse extends ResponseSchema<InitRequest> {
 }
 
 InitResponse executeInit(LibEdax edax, InitRequest request) {
-  final moves = edax.edaxGetMoves();
   edax
     ..edaxStop()
     ..edaxInit();
+  final moves = edax.edaxGetMoves();
   return InitResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),
