@@ -35,10 +35,10 @@ void main() {
     edaxServerPort = await receiveStream.first as SendPort;
   });
 
-  tearDown(() async {
-    receivePort.close();
-    edaxServerPort.send(const ShutdownRequest());
-  });
+  // tearDown(() async {
+  //   receivePort.close();
+  //   edaxServerPort.send(const ShutdownRequest());
+  // });
 
   testWidgets('PedaxApp', (tester) async {
     await tester.pumpWidget(const PedaxApp());
