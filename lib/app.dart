@@ -8,11 +8,6 @@ import 'home/home.dart';
 class PedaxApp extends StatelessWidget {
   const PedaxApp({Key? key}) : super(key: key);
 
-  // static Widget inProviders({Key key}) => MultiProvider(
-  //       providers: [],
-  //       child: PedaxApp._(key: key),
-  //     );
-
   @override
   Widget build(BuildContext context) => MaterialApp(
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
