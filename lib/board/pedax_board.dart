@@ -46,6 +46,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     super.initState();
     // ignore: avoid_annotating_with_dynamic
     widget.edaxServerParentPort.listen((dynamic message) {
+      // TODO: separate handling code from this.
       if (message is MoveResponse) {
         setState(() {
           _board = message.board;
