@@ -6,4 +6,4 @@ Future<void> asyncDelay(WidgetTester tester, Duration duration) async =>
     tester.runAsync(() async => Future<void>.delayed(duration));
 
 @isTest
-Future<void> asyncDelay100millisec(WidgetTester tester) async => asyncDelay(tester, const Duration(milliseconds: 100));
+Future<void> asyncDelay150millisec(WidgetTester tester) async => asyncDelay(tester, const Duration(milliseconds: 150));

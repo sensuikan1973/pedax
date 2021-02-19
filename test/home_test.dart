@@ -29,17 +29,17 @@ Future<void> main() async {
     expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
     await tester.tap(findByCoordinate('f5'));
-    await asyncDelay100millisec(tester);
+    await asyncDelay150millisec(tester);
     await tester.pump();
     expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
 
     await tester.tap(findByCoordinate('f4'));
-    await asyncDelay100millisec(tester);
+    await asyncDelay150millisec(tester);
     await tester.pump();
     expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
     await tester.tap(findByCoordinate('e3'));
-    await asyncDelay100millisec(tester);
+    await asyncDelay150millisec(tester);
     await tester.pump();
     expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
   });
