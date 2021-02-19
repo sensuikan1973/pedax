@@ -50,7 +50,8 @@ class EdaxAsset {
     // TODO: consider to fix this copy handling
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = await _libedaxAssetData;
-      File(await libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List());
+      final file = File(await libedaxPath);
+      if (!file.existsSync()) file.writeAsBytesSync(libedaxData.buffer.asUint8List());
     }
   }
 
