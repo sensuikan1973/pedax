@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../board/pedax_board.dart';
+import '../engine/api/shutdown.dart';
 import '../engine/edax_asset.dart' show EdaxAsset;
 import '../engine/edax_server.dart';
 import 'book_file_path_setting_dialog.dart';
@@ -51,6 +52,7 @@ class _HomeState extends State<Home> {
   @override
   void dispose() {
     _receivePort.close();
+    _edaxServerPort.send(const ShutdownRequest());
     super.dispose();
   }
 
