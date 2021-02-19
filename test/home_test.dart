@@ -44,149 +44,149 @@ Future<void> main() async {
     expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
   });
 
-  // group('menu events', () {
-  testWidgets('show LICENSE page', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
+  group('menu events', () {
+    testWidgets('show LICENSE page', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
 
-    await waitEdaxSetuped(tester);
+      await waitEdaxSetuped(tester);
 
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.license));
-    await tester.pumpAndSettle();
-    expect(find.byType(LicensePage), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.license));
+      await tester.pumpAndSettle();
+      expect(find.byType(LicensePage), findsOneWidget);
+    });
+
+    testWidgets('read book file path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
+    testWidgets('update book file path with wrong path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), 'not existing path');
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
+    });
+
+    testWidgets('update book file path with empty path', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), ''); // use default book
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsNothing);
+    });
+
+    testWidgets('update book file path as it is', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
+      await tester.pumpAndSettle();
+      expect(find.byType(BookFilePathSettingDialog), findsNothing);
+    });
+
+    testWidgets('read n-tasks', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.nTasksSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
+    testWidgets('update n-tasks', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.nTasksSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), 1.toString());
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(NTasksSettingDialog), findsNothing);
+    });
+
+    testWidgets('read level', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.levelSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.levelSetting), findsOneWidget);
+      await tester.tap(find.text(l10nEn.cancelOnDialog));
+      await tester.pump();
+      expect(find.byType(PedaxApp), findsOneWidget);
+    });
+
+    testWidgets('update level', (tester) async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nEn.levelSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10nEn.levelSetting), findsOneWidget);
+      await tester.enterText(find.byType(EditableText), 1.toString());
+      await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+      await tester.pumpAndSettle();
+      expect(find.byType(LevelSettingDialog), findsNothing);
+    });
   });
-
-  testWidgets('read book file path', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.bookFilePathSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-    await tester.tap(find.text(l10nEn.cancelOnDialog));
-    await tester.pump();
-    expect(find.byType(PedaxApp), findsOneWidget);
-  });
-
-  testWidgets('update book file path with wrong path', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.bookFilePathSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-    await tester.enterText(find.byType(EditableText), 'not existing path');
-    await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-    await tester.pumpAndSettle();
-    expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
-  });
-
-  testWidgets('update book file path with empty path', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.bookFilePathSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-    await tester.enterText(find.byType(EditableText), ''); // use default book
-    await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-    await tester.pumpAndSettle();
-    expect(find.byType(BookFilePathSettingDialog), findsNothing);
-  });
-
-  testWidgets('update book file path as it is', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.bookFilePathSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-    await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
-    await tester.pumpAndSettle();
-    expect(find.byType(BookFilePathSettingDialog), findsNothing);
-  });
-
-  testWidgets('read n-tasks', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.nTasksSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
-    await tester.tap(find.text(l10nEn.cancelOnDialog));
-    await tester.pump();
-    expect(find.byType(PedaxApp), findsOneWidget);
-  });
-
-  testWidgets('update n-tasks', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.nTasksSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
-    await tester.enterText(find.byType(EditableText), 1.toString());
-    await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-    await tester.pumpAndSettle();
-    expect(find.byType(NTasksSettingDialog), findsNothing);
-  });
-
-  testWidgets('read level', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.levelSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.levelSetting), findsOneWidget);
-    await tester.tap(find.text(l10nEn.cancelOnDialog));
-    await tester.pump();
-    expect(find.byType(PedaxApp), findsOneWidget);
-  });
-
-  testWidgets('update level', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-
-    await waitEdaxSetuped(tester);
-
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(l10nEn.levelSetting));
-    await tester.pumpAndSettle();
-    expect(find.text(l10nEn.levelSetting), findsOneWidget);
-    await tester.enterText(find.byType(EditableText), 1.toString());
-    await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-    await tester.pumpAndSettle();
-    expect(find.byType(LevelSettingDialog), findsNothing);
-  });
-  // });
 }
