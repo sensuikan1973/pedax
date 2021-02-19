@@ -11,6 +11,7 @@ import 'api/move.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
 
+// NOTE: top level function for `isolate.spawn`.
 Future<void> startEdaxServer(StartEdaxServerParams params) async {
   final server = EdaxServer(dllPath: params.dllPath);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
@@ -35,6 +36,7 @@ class EdaxServer {
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
 
+  // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
