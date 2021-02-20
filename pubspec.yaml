@@ -36,7 +36,7 @@ dependencies:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
   path_provider: ^2.0.0-nullsafety.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  shared_preferences: ^2.0.0-nullsafety
+  shared_preferences: ^2.0.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:

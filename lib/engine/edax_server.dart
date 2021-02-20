@@ -66,7 +66,7 @@ class EdaxServer {
         _receivePort.close();
         debugPrint('[EdaxServer] shutdowned');
       } else {
-        throw Exception('[EdaxServer] $message request is not supported');
+        throw Exception('[EdaxServer] request ${message.runtimeType} is not supported');
       }
     }); // TODO: error handling
   }

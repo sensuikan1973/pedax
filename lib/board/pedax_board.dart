@@ -6,8 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
+import '../engine/api/book_load.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/set_option.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
@@ -44,29 +46,40 @@ class _PedaxBoardState extends State<PedaxBoard> {
   @override
   void initState() {
     super.initState();
-    // ignore: avoid_annotating_with_dynamic
-    widget.edaxServerParentPort.listen((dynamic message) {
-      // TODO: separate handling code from this.
-      if (message is MoveResponse) {
-        setState(() {
-          _board = message.board;
-          _squaresOfPlayer = _board.squaresOfPlayer;
-          _squaresOfOpponent = _board.squaresOfOpponent;
-          _currentColor = message.currentColor;
-          _lastMove = message.lastMove;
-        });
-      } else if (message is InitResponse) {
-        _edaxInit.complete(true);
-        setState(() {
-          _board = message.board;
-          _squaresOfPlayer = _board.squaresOfPlayer;
-          _squaresOfOpponent = _board.squaresOfOpponent;
-          _currentColor = message.currentColor;
-          _lastMove = message.lastMove;
-        });
-      }
-    });
+    widget.edaxServerParentPort.listen(_updateStateByEdaxServerMessage);
     widget.edaxServerPort.send(const InitRequest());
+  }
+
+  // ignore: avoid_annotating_with_dynamic
+  void _updateStateByEdaxServerMessage(dynamic message) {
+    if (message is MoveResponse) {
+      debugPrint('moved');
+      setState(() {
+        _board = message.board;
+        _squaresOfPlayer = _board.squaresOfPlayer;
+        _squaresOfOpponent = _board.squaresOfOpponent;
+        _currentColor = message.currentColor;
+        _lastMove = message.lastMove;
+      });
+    } else if (message is InitResponse) {
+      debugPrint('inited');
+      _edaxInit.complete(true);
+      setState(() {
+        _board = message.board;
+        _squaresOfPlayer = _board.squaresOfPlayer;
+        _squaresOfOpponent = _board.squaresOfOpponent;
+        _currentColor = message.currentColor;
+        _lastMove = message.lastMove;
+      });
+    } else if (message is BookLoadResponse) {
+      debugPrint('book loaded');
+    } else if (message is SetOptionResponse) {
+      debugPrint('option updated');
+    } else {
+      final str = 'response "${message.runtimeType}" is not unexpected';
+      debugPrint(str);
+      throw Exception(str);
+    }
   }
 
   @override
