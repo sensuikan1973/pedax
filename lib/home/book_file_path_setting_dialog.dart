@@ -45,6 +45,8 @@ class BookFilePathSettingDialog extends StatelessWidget {
             onPressed: () async {
               if (!_formKey.currentState!.validate()) return;
               final newBookFilePath = _textController.text;
+              final currentBookFilePath = await _option.val;
+              if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
               await _option.update(newBookFilePath);
               // TODO: load asynchronously. this is slow when book is big.
               edaxServerPort.send(BookLoadRequest(newBookFilePath));
