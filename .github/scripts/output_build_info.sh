@@ -7,10 +7,6 @@ touch $dst_file
 echo "=== pedax sha ===" >> $dst_file
 echo $GITHUB_SHA >> $dst_file
 
-# TODO: output libedax assets revision
-# echo "=== libedax assets revision ===" >> $dst_file
-# aaa
-
 echo "=== os image ===" >> $dst_file
 echo $ImageOS >> $dst_file
 
