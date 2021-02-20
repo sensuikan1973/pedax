@@ -132,6 +132,7 @@ Future<void> main() async {
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
         await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
         await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 3));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
       });
     });
