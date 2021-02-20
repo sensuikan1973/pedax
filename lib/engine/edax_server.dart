@@ -26,6 +26,7 @@ class StartEdaxServerParams {
   final List<String> initLibedaxParameters;
 }
 
+// TODO: consider to separate as edax_server package
 @immutable
 class EdaxServer {
   EdaxServer({required this.dllPath});
