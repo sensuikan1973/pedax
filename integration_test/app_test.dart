@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
+import '../test_helper/edax_server.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -21,26 +22,28 @@ Future<void> main() async {
   });
 
   testWidgets('home', (tester) async {
-    await app.main();
-    await tester.pumpAndSettle();
+    await tester.runAsync(() async {
+      await app.main();
+      await tester.pumpAndSettle();
 
-    final context = tester.element(find.byWidgetPredicate((widget) => widget is Home));
-    final localizations = AppLocalizations.of(context)!;
+      final context = tester.element(find.byWidgetPredicate((widget) => widget is Home));
+      final localizations = AppLocalizations.of(context)!;
 
-    expect(find.text(localizations.analysisMode), findsOneWidget);
+      expect(find.text(localizations.analysisMode), findsOneWidget);
 
-    await asyncDelay(tester, const Duration(seconds: 1)); // `book_load` takes too long
-    await tester.pump();
-    expect(find.byType(Home), findsOneWidget);
-    expect(find.byType(PedaxBoard), findsOneWidget);
+      await waitEdaxSetuped(tester);
+      await tester.pump();
+      expect(find.byType(Home), findsOneWidget);
+      expect(find.byType(PedaxBoard), findsOneWidget);
 
-    await asyncDelay150millisec(tester);
-    await tester.pump();
-    expectStoneNum(tester, SquareType.black, 2); // e4, d5
+      await delay150millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-    await tester.tap(findByCoordinate('f5'));
-    await asyncDelay150millisec(tester);
-    await tester.pump();
-    expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+      await tester.tap(findByCoordinate('f5'));
+      await delay150millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+    });
   });
 }

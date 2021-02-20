@@ -41,39 +41,47 @@ void main() {
   });
 
   testWidgets('PedaxApp', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
-    await waitEdaxSetuped(tester);
-    debugDumpApp();
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+      await waitEdaxSetuped(tester);
+      debugDumpApp();
+    });
   });
 
   testWidgets('BookFilePathSettingDialog', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: BookFilePathSettingDialog(edaxServerPort: edaxServerPort),
-      localizationsDelegates: PedaxApp.localizationsDelegates,
-    ));
-    await tester.pumpAndSettle();
-    await waitEdaxSetuped(tester);
-    debugDumpApp();
+    await tester.runAsync(() async {
+      await tester.pumpWidget(MaterialApp(
+        home: BookFilePathSettingDialog(edaxServerPort: edaxServerPort),
+        localizationsDelegates: PedaxApp.localizationsDelegates,
+      ));
+      await tester.pumpAndSettle();
+      await waitEdaxSetuped(tester);
+      debugDumpApp();
+    });
   });
 
   testWidgets('NTasksSettingDialog', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: NTasksSettingDialog(edaxServerPort: edaxServerPort),
-      localizationsDelegates: PedaxApp.localizationsDelegates,
-    ));
-    await tester.pumpAndSettle();
-    await waitEdaxSetuped(tester);
-    debugDumpApp();
+    await tester.runAsync(() async {
+      await tester.pumpWidget(MaterialApp(
+        home: NTasksSettingDialog(edaxServerPort: edaxServerPort),
+        localizationsDelegates: PedaxApp.localizationsDelegates,
+      ));
+      await tester.pumpAndSettle();
+      await waitEdaxSetuped(tester);
+      debugDumpApp();
+    });
   });
 
   testWidgets('LevelSettingDialog', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: LevelSettingDialog(edaxServerPort: edaxServerPort),
-      localizationsDelegates: PedaxApp.localizationsDelegates,
-    ));
-    await tester.pumpAndSettle();
-    await waitEdaxSetuped(tester);
-    debugDumpApp();
+    await tester.runAsync(() async {
+      await tester.pumpWidget(MaterialApp(
+        home: LevelSettingDialog(edaxServerPort: edaxServerPort),
+        localizationsDelegates: PedaxApp.localizationsDelegates,
+      ));
+      await tester.pumpAndSettle();
+      await waitEdaxSetuped(tester);
+      debugDumpApp();
+    });
   });
 }

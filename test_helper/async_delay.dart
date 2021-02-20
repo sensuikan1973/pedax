@@ -1,9 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 
+// EdaxServer process: less than 150 millisec with default book
 @isTest
-Future<void> asyncDelay(WidgetTester tester, Duration duration) async =>
-    tester.runAsync(() async => Future<void>.delayed(duration));
-
-@isTest
-Future<void> asyncDelay150millisec(WidgetTester tester) async => asyncDelay(tester, const Duration(milliseconds: 150));
+Future<void> delay150millisec(WidgetTester tester) async => Future<void>.delayed(const Duration(milliseconds: 150));

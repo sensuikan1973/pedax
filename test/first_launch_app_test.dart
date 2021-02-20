@@ -10,16 +10,18 @@ import 'widget_test_helper/libedax_assets.dart';
 void main() {
   setUp(() async => prepareLibedaxAssets(setPref: false)); // when first launch, pref is empty.
   testWidgets('launch app', (tester) async {
-    await tester.pumpWidget(const PedaxApp());
-    await tester.pumpAndSettle();
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
 
-    await waitEdaxSetuped(tester);
+      await waitEdaxSetuped(tester);
 
-    expectStoneNum(tester, SquareType.black, 2); // e4, d5
+      expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-    await tester.tap(findByCoordinate('f5'));
-    await asyncDelay150millisec(tester);
-    await tester.pump();
-    expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+      await tester.tap(findByCoordinate('f5'));
+      await delay150millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+    });
   });
 }
