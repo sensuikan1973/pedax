@@ -114,7 +114,7 @@ Future<void> main() async {
         await tester.enterText(find.byType(EditableText), ''); // use default book
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 3));
+        await Future<void>.delayed(const Duration(seconds: 2));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
       });
     });
@@ -133,7 +133,7 @@ Future<void> main() async {
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
         await tester.tap(find.text(l10nEn.updateSettingOnDialog)); // update as it is
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 3));
+        await Future<void>.delayed(const Duration(seconds: 2));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
       });
     });
@@ -170,7 +170,7 @@ Future<void> main() async {
         await tester.enterText(find.byType(EditableText), 1.toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 3));
+        await Future<void>.delayed(const Duration(seconds: 2));
         expect(find.byType(NTasksSettingDialog), findsNothing);
       });
     });
@@ -208,7 +208,7 @@ Future<void> main() async {
         await tester.enterText(find.byType(EditableText), 1.toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 3));
+        await Future<void>.delayed(const Duration(seconds: 2));
         expect(find.byType(LevelSettingDialog), findsNothing);
       });
     });
