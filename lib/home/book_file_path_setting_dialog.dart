@@ -1,17 +1,18 @@
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../engine/api/book_load.dart';
 
-import '../engine/edax.dart';
 import '../engine/options/book_file_option.dart';
 
 class BookFilePathSettingDialog extends StatelessWidget {
-  BookFilePathSettingDialog({required this.edax, Key? key}) : super(key: key);
+  BookFilePathSettingDialog({required this.edaxServerPort, Key? key}) : super(key: key);
 
-  final Edax edax;
+  final SendPort edaxServerPort;
   final _option = const BookFileOption();
   final _textController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -44,9 +45,11 @@ class BookFilePathSettingDialog extends StatelessWidget {
             onPressed: () async {
               if (!_formKey.currentState!.validate()) return;
               final newBookFilePath = _textController.text;
+              final currentBookFilePath = await _option.val;
+              if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
               await _option.update(newBookFilePath);
               // TODO: load asynchronously. this is slow when book is big.
-              edax.lib.edaxBookLoad(newBookFilePath);
+              edaxServerPort.send(BookLoadRequest(newBookFilePath));
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
@@ -57,6 +60,6 @@ class BookFilePathSettingDialog extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Edax>('edax', edax));
+    properties.add(DiagnosticsProperty<SendPort>('edaxServerPort', edaxServerPort));
   }
 }

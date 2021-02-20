@@ -1,10 +1,14 @@
+import 'dart:async';
+import 'dart:isolate';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../board/pedax_board.dart';
-import '../engine/edax.dart' show Edax;
+import '../engine/edax_asset.dart' show EdaxAsset;
+import '../engine/edax_server.dart';
 import 'book_file_path_setting_dialog.dart';
 import 'level_setting_dialog.dart';
 import 'n_tasks_setting_dialog.dart';
@@ -17,20 +21,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _edax = Edax();
-  late Future<bool> _libedaxInitialized;
+  final _edaxAsset = const EdaxAsset();
+  final Completer<bool> _edaxServerSpawned = Completer<bool>();
+  late final SendPort _edaxServerPort;
+  final _receivePort = ReceivePort();
+  late final Stream<dynamic> _receiveStream;
 
   @override
   void initState() {
     super.initState();
-    _libedaxInitialized = _edax.initLibedax();
+    _spawnEdaxServer();
+  }
+
+  Future<void> _spawnEdaxServer() async {
+    await _edaxAsset.setupDllAndData();
+    final initLibedaxParameters = await _edaxAsset.buildInitLibEdaxParams();
+    await Isolate.spawn(
+      startEdaxServer,
+      StartEdaxServerParams(_receivePort.sendPort, await _edaxAsset.libedaxPath, initLibedaxParameters),
+    );
+    _receiveStream = _receivePort.asBroadcastStream();
+    _edaxServerPort = await _receiveStream.first as SendPort;
+    setState(() {
+      _edaxServerSpawned.complete(true);
+    });
+    debugPrint('spawned edax server');
   }
 
   @override
-  Future<void> dispose() async {
-    _edax.lib
-      ..libedaxTerminate()
-      ..closeDll();
+  void dispose() {
+    _receivePort.close();
     super.dispose();
   }
 
@@ -38,14 +58,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           leading: _menu(),
-          title: Text(AppLocalizations.of(context)!.homeTitle),
+          title: Text(AppLocalizations.of(context)!.analysisMode),
         ),
         body: FutureBuilder<bool>(
-          future: _libedaxInitialized,
+          future: _edaxServerSpawned.future,
           builder: (_, snapshot) {
-            // FIXME: this is slow when book is big.
-            if (!snapshot.hasData) return const Center(child: Text('initializing engine...'));
-            return Center(child: PedaxBoard(_edax.lib, 480));
+            // TODO: this is slow when book is big. So, load should be executed later.
+            if (snapshot.hasData && snapshot.data!) {
+              return Center(child: PedaxBoard(_edaxServerPort, _receiveStream, 480));
+            }
+            return const Center(child: Text('initializing engine...'));
           },
         ),
       );
@@ -65,17 +87,26 @@ class _HomeState extends State<Home> {
         _Menu(
           _MenuType.bookFilePath,
           AppLocalizations.of(context)!.bookFilePathSetting,
-          () async => showDialog<void>(context: context, builder: (_) => BookFilePathSettingDialog(edax: _edax)),
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => BookFilePathSettingDialog(edaxServerPort: _edaxServerPort),
+          ),
         ),
         _Menu(
           _MenuType.nTasks,
           AppLocalizations.of(context)!.nTasksSetting,
-          () async => showDialog<void>(context: context, builder: (_) => NTasksSettingDialog(edax: _edax)),
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => NTasksSettingDialog(edaxServerPort: _edaxServerPort),
+          ),
         ),
         _Menu(
           _MenuType.level,
           AppLocalizations.of(context)!.levelSetting,
-          () async => showDialog<void>(context: context, builder: (_) => LevelSettingDialog(edax: _edax)),
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => LevelSettingDialog(edaxServerPort: _edaxServerPort),
+          ),
         ),
         _Menu(
           _MenuType.license,

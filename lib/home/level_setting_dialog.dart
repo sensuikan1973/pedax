@@ -1,15 +1,17 @@
+import 'dart:isolate';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../engine/api/set_option.dart';
 
-import '../engine/edax.dart';
 import '../engine/options/level_option.dart';
 
 class LevelSettingDialog extends StatelessWidget {
-  LevelSettingDialog({required this.edax, Key? key}) : super(key: key);
+  LevelSettingDialog({required this.edaxServerPort, Key? key}) : super(key: key);
 
-  final Edax edax;
+  final SendPort edaxServerPort;
   final _option = const LevelOption();
   final _textController = TextEditingController();
 
@@ -34,7 +36,7 @@ class LevelSettingDialog extends StatelessWidget {
             onPressed: () async {
               final n = int.tryParse(_textController.text);
               if (n != null) {
-                edax.lib.edaxSetOption(_option.nativeName, n.toString());
+                edaxServerPort.send(SetOptionRequest(_option.nativeName, n.toString()));
                 await _option.update(n);
               }
               Navigator.pop(context);
@@ -47,6 +49,6 @@ class LevelSettingDialog extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Edax>('edax', edax));
+    properties.add(DiagnosticsProperty<SendPort>('edaxServerPort', edaxServerPort));
   }
 }

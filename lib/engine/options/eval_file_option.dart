@@ -1,5 +1,3 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/foundation.dart';
 
 import 'edax_option.dart';
@@ -33,8 +31,9 @@ class EvalFileOption extends EdaxOption<String> {
   Future<String> update(String val) async {
     final pref = await preferences;
     if (val.isEmpty) {
-      developer.log('scpecified path is empty. So, pedax sets $appDefaultValue.');
-      await pref.setString(prefKey, await appDefaultValue);
+      final newPath = await appDefaultValue;
+      debugPrint('scpecified path is empty. So, pedax sets $newPath.');
+      await pref.setString(prefKey, newPath);
       return appDefaultValue;
     } else {
       await pref.setString(prefKey, val);

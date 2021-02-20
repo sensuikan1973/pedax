@@ -8,19 +8,17 @@ import 'home/home.dart';
 class PedaxApp extends StatelessWidget {
   const PedaxApp({Key? key}) : super(key: key);
 
-  // static Widget inProviders({Key key}) => MultiProvider(
-  //       providers: [],
-  //       child: PedaxApp._(key: key),
-  //     );
-
   @override
   Widget build(BuildContext context) => MaterialApp(
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
         theme: ThemeData(primarySwatch: Colors.brown),
         home: const Home(),
         localizationsDelegates: localizationsDelegates,
-        supportedLocales: const [localeEn, localeJa],
+        supportedLocales: supportedLocales,
       );
+
+  @visibleForTesting
+  static const supportedLocales = [localeEn, localeJa];
 
   @visibleForTesting
   static const localeEn = Locale('en', ''); // English, no country code
