@@ -38,7 +38,6 @@ void main() {
   tearDown(() async {
     receivePort.close();
     edaxServerPort.send(const ShutdownRequest());
-    await Future<void>.delayed(const Duration(seconds: 1));
   });
 
   testWidgets('PedaxApp', (tester) async {
