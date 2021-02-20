@@ -5,11 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:pedax/engine/api/book_load.dart';
-import 'package:pedax/engine/api/set_option.dart';
 
+import '../engine/api/book_load.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/set_option.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
