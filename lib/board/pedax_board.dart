@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
@@ -14,6 +15,7 @@ import '../engine/api/init.dart';
 import '../engine/api/move.dart';
 import '../engine/api/set_option.dart';
 import '../engine/api/stop.dart';
+import '../engine/options/book_file_option.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
@@ -53,6 +55,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
     super.initState();
     widget.edaxServerParentPort.listen(_updateStateByEdaxServerMessage);
     widget.edaxServerPort.send(const InitRequest());
+    const BookFileOption().val.then(
+      (path) {
+        WidgetsBinding.instance?.addPostFrameCallback((_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
+              duration: const Duration(minutes: 1),
+            ),
+          );
+          widget.edaxServerPort.send(BookLoadRequest(path));
+        });
+      },
+    );
   }
 
   // ignore: avoid_annotating_with_dynamic
@@ -90,7 +105,12 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _bestScore = _hints.map<int>((h) => h.score).reduce(max);
       });
     } else if (message is BookLoadResponse) {
-      // for now, nothing
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
+        ),
+      );
     } else if (message is SetOptionResponse) {
       // for now, nothing
     } else if (message is StopResponse) {
