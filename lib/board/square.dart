@@ -11,6 +11,7 @@ class Square extends StatelessWidget {
     this.score,
     this.scoreColor,
     this.isLastMove = false,
+    this.isBookMove = false,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +23,7 @@ class Square extends StatelessWidget {
   final int? score;
   final Color? scoreColor;
   final bool isLastMove;
+  final bool isBookMove;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -44,6 +46,7 @@ class Square extends StatelessWidget {
       ..add(DiagnosticsProperty<Function()>('onTap', onTap))
       ..add(IntProperty('score', score))
       ..add(DiagnosticsProperty<bool>('isLastMove', isLastMove))
+      ..add(DiagnosticsProperty<bool>('isBookMove', isBookMove))
       ..add(ColorProperty('scoreColor', scoreColor));
   }
 
@@ -58,16 +61,21 @@ class Square extends StatelessWidget {
     }
   }
 
-  SizedBox _scoreText() => SizedBox(
-        height: length,
-        width: length,
-        child: Center(
-          child: Text(
-            score! > 0 ? '+$score' : score.toString(),
-            style: TextStyle(color: scoreColor),
-          ),
-        ),
-      );
+  SizedBox _scoreText() {
+    final scoreText = Text(_scoreString(score!), style: TextStyle(color: scoreColor));
+    return SizedBox(
+      height: length,
+      width: length,
+      child: isBookMove
+          ? Stack(
+              children: [
+                Center(child: scoreText),
+                Positioned(top: 0, right: 0, child: Text(_noteBookEmojiUnicode)),
+              ],
+            )
+          : Center(child: scoreText),
+    );
+  }
 
   Container _lastMoveMark() => Container(
         height: length / 3,
@@ -75,6 +83,11 @@ class Square extends StatelessWidget {
         margin: EdgeInsets.all(length / 3),
         color: Colors.red,
       );
+
+  String _scoreString(int score) => score > 0 ? '+$score' : score.toString();
+
+  // See: https://emojipedia.org/notebook/
+  String get _noteBookEmojiUnicode => '\u{1F4D3}';
 }
 
 enum SquareType { black, white, empty }
