@@ -10,6 +10,7 @@ import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
+import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
@@ -45,6 +46,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
+      await delay150millisec(tester);
     });
   });
 
@@ -57,6 +59,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
+      await delay150millisec(tester);
     });
   });
 
@@ -69,6 +72,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
+      await delay150millisec(tester);
     });
   });
 
@@ -81,6 +85,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
+      await delay150millisec(tester);
     });
   });
 }
