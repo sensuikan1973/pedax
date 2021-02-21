@@ -37,7 +37,7 @@ void main() {
 
   tearDown(() async {
     receivePort.close();
-    edaxServerPort.send(const ShutdownRequest());
+    // edaxServerPort.send(const ShutdownRequest());
   });
 
   testWidgets('PedaxApp', (tester) async {
