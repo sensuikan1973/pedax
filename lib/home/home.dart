@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:logger/logger.dart';
 
 import '../board/pedax_board.dart';
 import '../engine/edax_asset.dart' show EdaxAsset;
@@ -45,7 +46,7 @@ class _HomeState extends State<Home> {
     setState(() {
       _edaxServerSpawned.complete(true);
     });
-    debugPrint('spawned edax server');
+    Logger().d('spawned edax server');
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
 import 'edax_option.dart';
 
@@ -32,7 +33,7 @@ class BookFileOption extends EdaxOption<String> {
     final pref = await preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;
-      debugPrint('scpecified path is empty. So, pedax sets $newPath.');
+      Logger().i('scpecified path is empty. So, pedax sets $newPath.');
       await pref.setString(prefKey, newPath);
       return appDefaultValue;
     } else {

@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:logger/logger.dart';
 
 import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
@@ -28,12 +29,15 @@ class StartEdaxServerParams {
 }
 
 // TODO: consider to separate as edax_server package
-@immutable
 class EdaxServer {
   EdaxServer({required this.dllPath});
 
   final String dllPath;
   final _receivePort = ReceivePort();
+  final _maxSearchWorkerNum = 2;
+  final _logger = Logger();
+
+  int _searchWorker = 0;
 
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
@@ -43,7 +47,7 @@ class EdaxServer {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
-    debugPrint('[EdaxServer] sent my port to parentSendPort');
+    _logger.d('sent my port to parentSendPort');
 
     final edax = LibEdax(dllPath)
       ..libedaxInitialize(initLibedaxParameters)
@@ -51,12 +55,15 @@ class EdaxServer {
       ..edaxVersion();
 
     // ignore: avoid_annotating_with_dynamic
-    _receivePort.listen((dynamic message) {
-      debugPrint('[EdaxServer] received ${message.runtimeType}');
+    _receivePort.listen((dynamic message) async {
+      _logger.i('received request "${message.runtimeType}"');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is HintOneByOneRequest) {
-        executeHintOneByOne(edax, message).listen(parentSendPort.send);
+        if (_searchWorker >= _maxSearchWorkerNum) return;
+        _searchWorker++;
+        await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
+        _searchWorker--;
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
       } else if (message is BookLoadRequest) {
@@ -68,10 +75,24 @@ class EdaxServer {
       } else if (message is ShutdownRequest) {
         parentSendPort.send(executeShutdown(edax, message));
         _receivePort.close();
-        debugPrint('[EdaxServer] shutdowned');
+        _logger.i('shutdowned');
       } else {
         throw Exception('[EdaxServer] request ${message.runtimeType} is not supported');
       }
     }); // TODO: error handling
   }
+}
+
+@immutable
+class CalcHintNextParams {
+  const CalcHintNextParams(this.dllPath, this.request, this.listener);
+  final String dllPath;
+  final HintOneByOneRequest request;
+  final SendPort listener;
+}
+
+// NOTE: top level function for `compute`.
+void _calcHintNext(CalcHintNextParams params) {
+  final edax = LibEdax(params.dllPath);
+  executeHintOneByOne(edax, params.request).listen(params.listener.send);
 }

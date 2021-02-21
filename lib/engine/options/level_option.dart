@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
 import 'edax_option.dart';
 
@@ -30,7 +31,7 @@ class LevelOption extends EdaxOption<int> {
     final pref = await preferences;
     if (val < 0) {
       final newLevel = await appDefaultValue;
-      debugPrint('$val is invalid. So, pedax sets $newLevel.');
+      Logger().i('$val is invalid. So, pedax sets $newLevel.');
       await pref.setInt(prefKey, newLevel);
       return appDefaultValue;
     } else {
