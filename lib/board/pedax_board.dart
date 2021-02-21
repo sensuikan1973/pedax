@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:isolate';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -7,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
 import '../engine/api/book_load.dart';
+import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
 import '../engine/api/set_option.dart';
+import '../engine/api/stop.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
@@ -38,9 +41,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late List<int> _squaresOfOpponent;
   late int _currentColor;
   late Move? _lastMove;
-  final List<Hint> _hints = []; // FIXME:
-  // ignore: unnecessary_nullable_for_final_variable_declarations
-  final int? _bestScore = 0; // FIXME:
+  final List<Hint> _hints = [];
+  int? _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
 
   @override
@@ -55,6 +57,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     if (message is MoveResponse) {
       debugPrint('moved');
       setState(() {
+        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
@@ -65,16 +68,25 @@ class _PedaxBoardState extends State<PedaxBoard> {
       debugPrint('inited');
       _edaxInit.complete(true);
       setState(() {
+        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
         _currentColor = message.currentColor;
         _lastMove = message.lastMove;
       });
+    } else if (message is HintOneByOneResponse) {
+      debugPrint('get one hint');
+      setState(() {
+        _hints.add(message.hint);
+        _bestScore = _hints.map<int>((h) => h.score).reduce(max);
+      });
     } else if (message is BookLoadResponse) {
       debugPrint('book loaded');
     } else if (message is SetOptionResponse) {
       debugPrint('option updated');
+    } else if (message is StopResponse) {
+      debugPrint('stopped');
     } else {
       final str = 'response "${message.runtimeType}" is not unexpected';
       debugPrint(str);
@@ -126,9 +138,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
       scoreColor: _scoreColor(hint?.score, hint?.score == _bestScore),
       onTap: type != SquareType.empty
           ? null
-          : () => setState(() {
-                widget.edaxServerPort.send(MoveRequest(moveString));
-              }),
+          : () {
+              widget.edaxServerPort.send(MoveRequest(moveString));
+              widget.edaxServerPort.send(const HintOneByOneRequest());
+            },
     );
   }
 
