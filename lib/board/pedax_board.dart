@@ -143,6 +143,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       margin: _stoneMargin,
       coordinate: moveString,
       isLastMove: _lastMove?.x == move,
+      isBookMove: hint != null && hint.isBookMove,
       score: hint?.score,
       scoreColor: _scoreColor(hint?.score, hint?.score == _bestScore),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
