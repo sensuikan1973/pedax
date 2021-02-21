@@ -136,13 +136,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
       isLastMove: _lastMove?.x == move,
       score: hint?.score,
       scoreColor: _scoreColor(hint?.score, hint?.score == _bestScore),
-      onTap: type != SquareType.empty
-          ? null
-          : () {
-              widget.edaxServerPort.send(MoveRequest(moveString));
-              widget.edaxServerPort.send(const HintOneByOneRequest());
-            },
+      onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
+  }
+
+  void _squareOnTap(String moveString) {
+    widget.edaxServerPort.send(MoveRequest(moveString));
+    widget.edaxServerPort.send(const HintOneByOneRequest());
   }
 
   SquareType _squareType(int move) {
