@@ -17,7 +17,7 @@ class LevelOption extends EdaxOption<int> {
   int get nativeDefaultValue => 21;
 
   @override
-  Future<int> get appDefaultValue async => nativeDefaultValue;
+  Future<int> get appDefaultValue async => 10;
 
   @override
   Future<int> get val async {
