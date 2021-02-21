@@ -29,6 +29,7 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
   // ignore: literal_only_boolean_expressions
   while (true) {
     final hint = edax.edaxHintNextNoMultiPvDepth();
+    debugPrint('${hint.moveString}: ${hint.scoreString}');
     if (hint.isNoMove) break;
     yield HintOneByOneResponse(hint: hint, request: request);
   }

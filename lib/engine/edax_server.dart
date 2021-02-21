@@ -10,6 +10,7 @@ import 'api/init.dart';
 import 'api/move.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
+import 'api/stop.dart';
 
 // NOTE: top level function for `isolate.spawn`.
 Future<void> startEdaxServer(StartEdaxServerParams params) async {
@@ -26,6 +27,7 @@ class StartEdaxServerParams {
   final List<String> initLibedaxParameters;
 }
 
+// TODO: consider to separate as edax_server package
 @immutable
 class EdaxServer {
   EdaxServer({required this.dllPath});
@@ -61,6 +63,8 @@ class EdaxServer {
         parentSendPort.send(executeBookLoad(edax, message));
       } else if (message is SetOptionRequest) {
         parentSendPort.send(executeSetOption(edax, message));
+      } else if (message is StopRequest) {
+        parentSendPort.send(executeStop(edax, message));
       } else if (message is ShutdownRequest) {
         parentSendPort.send(executeShutdown(edax, message));
         _receivePort.close();
