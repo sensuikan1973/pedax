@@ -11,6 +11,8 @@ _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which
 - support Mac/Windows/Linux.
 - you can see `eval value`(e.g. `+4`, `-10`) comfortably.
 
+---
+
 ## Development
 
 [![flutter-channel](https://img.shields.io/badge/Flutter-dev-64B5F6.svg?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)  
