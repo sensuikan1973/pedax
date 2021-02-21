@@ -1,7 +1,7 @@
-# pedax <img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" height="30"/>
+# pedax <img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" height="40"/>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/23427957/108631333-d0ba4f80-74ac-11eb-9b89-b266fed88619.png" alt="screenshot_macos" height="300"/>
+<img src="https://user-images.githubusercontent.com/23427957/108631333-d0ba4f80-74ac-11eb-9b89-b266fed88619.png" alt="screenshot_macos" height="350"/>
 </p>
 <br/>
 
