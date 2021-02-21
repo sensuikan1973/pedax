@@ -41,6 +41,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late List<int> _squaresOfOpponent;
   late int _currentColor;
   late Move? _lastMove;
+  late String _currentMoves;
   final List<Hint> _hints = [];
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
@@ -54,18 +55,21 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   // ignore: avoid_annotating_with_dynamic
   void _updateStateByEdaxServerMessage(dynamic message) {
+    debugPrint('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      debugPrint('moved');
-      setState(() {
+      if (_currentMoves != message.moves) {
         _hints.clear();
+        widget.edaxServerPort.send(const HintOneByOneRequest());
+      }
+      setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
         _currentColor = message.currentColor;
         _lastMove = message.lastMove;
+        _currentMoves = message.moves;
       });
     } else if (message is InitResponse) {
-      debugPrint('inited');
       _edaxInit.complete(true);
       setState(() {
         _hints.clear();
@@ -74,19 +78,21 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _squaresOfOpponent = _board.squaresOfOpponent;
         _currentColor = message.currentColor;
         _lastMove = message.lastMove;
+        _currentMoves = message.moves;
       });
     } else if (message is HintOneByOneResponse) {
-      debugPrint('get one hint');
       setState(() {
+        debugPrint('[pedaxBoard] ${message.hint.moveString}: ${message.hint.scoreString}');
+        if (message.searchTargetMoves != _currentMoves) return _hints.clear();
         _hints.add(message.hint);
         _bestScore = _hints.map<int>((h) => h.score).reduce(max);
       });
     } else if (message is BookLoadResponse) {
-      debugPrint('book loaded');
+      // for now, nothing
     } else if (message is SetOptionResponse) {
-      debugPrint('option updated');
+      // for now, nothing
     } else if (message is StopResponse) {
-      debugPrint('stopped');
+      // for now, nothing
     } else {
       final str = 'response "${message.runtimeType}" is not unexpected';
       debugPrint(str);
@@ -105,6 +111,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
           height: widget.length,
           width: widget.length,
           child: Table(
+            border: TableBorder.all(),
             children: List.generate(
               _boardSize,
               (yIndex) => TableRow(
@@ -142,7 +149,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   void _squareOnTap(String moveString) {
     widget.edaxServerPort.send(MoveRequest(moveString));
-    widget.edaxServerPort.send(const HintOneByOneRequest());
   }
 
   SquareType _squareType(int move) {

@@ -28,12 +28,14 @@ class StartEdaxServerParams {
 }
 
 // TODO: consider to separate as edax_server package
-@immutable
 class EdaxServer {
   EdaxServer({required this.dllPath});
 
   final String dllPath;
   final _receivePort = ReceivePort();
+  final _maxSearchWorkerNum = 2;
+
+  int _searchWorker = 0;
 
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
@@ -51,12 +53,15 @@ class EdaxServer {
       ..edaxVersion();
 
     // ignore: avoid_annotating_with_dynamic
-    _receivePort.listen((dynamic message) {
+    _receivePort.listen((dynamic message) async {
       debugPrint('[EdaxServer] received ${message.runtimeType}');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is HintOneByOneRequest) {
-        executeHintOneByOne(edax, message).listen(parentSendPort.send);
+        if (_searchWorker >= _maxSearchWorkerNum) return;
+        _searchWorker++;
+        await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
+        _searchWorker--;
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
       } else if (message is BookLoadRequest) {
@@ -74,4 +79,18 @@ class EdaxServer {
       }
     }); // TODO: error handling
   }
+}
+
+@immutable
+class CalcHintNextParams {
+  const CalcHintNextParams(this.dllPath, this.request, this.listener);
+  final String dllPath;
+  final HintOneByOneRequest request;
+  final SendPort listener;
+}
+
+// NOTE: top level function for `compute`.
+void _calcHintNext(CalcHintNextParams params) {
+  final edax = LibEdax(params.dllPath);
+  executeHintOneByOne(edax, params.request).listen(params.listener.send);
 }

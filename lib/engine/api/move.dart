@@ -31,10 +31,12 @@ class MoveResponse extends ResponseSchema<MoveRequest> {
 }
 
 MoveResponse executeMove(LibEdax edax, MoveRequest request) {
-  edax
-    ..edaxStop()
-    ..edaxMove(request.move);
+  edax.edaxStop();
+  debugPrint('[executeMove]: stopped');
+  edax.edaxMove(request.move);
+  debugPrint('[executeMove]: moved ${request.move}');
   final moves = edax.edaxGetMoves();
+  debugPrint('[executeMove]: $moves');
   return MoveResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),

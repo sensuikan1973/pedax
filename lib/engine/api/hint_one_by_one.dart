@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
@@ -16,21 +18,30 @@ class HintOneByOneRequest extends RequestSchema {
 class HintOneByOneResponse extends ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
     required this.hint,
+    required this.searchTargetMoves,
     required HintOneByOneRequest request,
   }) : super(request);
 
   final Hint hint;
+  final String searchTargetMoves;
 }
 
 Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneRequest request) async* {
-  edax
-    ..edaxStop()
-    ..edaxHintPrepare();
+  edax.edaxStop();
+  debugPrint('[executeHintOneByOne]: stopped');
+  final currentMoves = edax.edaxGetMoves();
+  debugPrint('[executeHintOneByOne]: currentMoves is $currentMoves');
+  edax.edaxHintPrepare();
+  debugPrint('[executeHintOneByOne]: prepared');
   // ignore: literal_only_boolean_expressions
   while (true) {
+    sleep(const Duration(milliseconds: 10));
+    if (edax.edaxGetMoves() != currentMoves) break;
+
+    debugPrint('[executeHintOneByOne] will call edaxHintNextNoMultiPvDepth');
     final hint = edax.edaxHintNextNoMultiPvDepth();
-    debugPrint('${hint.moveString}: ${hint.scoreString}');
+    debugPrint('[executeHintOneByOne] ${hint.moveString}: ${hint.scoreString}');
     if (hint.isNoMove) break;
-    yield HintOneByOneResponse(hint: hint, request: request);
+    yield HintOneByOneResponse(hint: hint, searchTargetMoves: currentMoves, request: request);
   }
 }
