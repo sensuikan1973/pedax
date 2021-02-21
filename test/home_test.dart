@@ -43,7 +43,7 @@ Future<void> main() async {
       await delay150millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
-      await delay150millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 4));
     });
   });
 

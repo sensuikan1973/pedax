@@ -43,7 +43,11 @@ jobs:
       - name: install dependencies
         run: flutter pub get
       - name: run test
-        run: flutter test --verbose --coverage --coverage-path=./coverage/lcov.info
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 2
+          command: flutter test --verbose --coverage --coverage-path=./coverage/lcov.info
       - uses: codecov/codecov-action@v1
         with:
           file: ./coverage/lcov.info
