@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:logger/logger.dart';
 
 import '../engine/api/book_load.dart';
 import '../engine/api/hint_one_by_one.dart';
@@ -45,6 +46,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   final List<Hint> _hints = [];
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
+  final _logger = Logger();
 
   @override
   void initState() {
@@ -55,7 +57,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   // ignore: avoid_annotating_with_dynamic
   void _updateStateByEdaxServerMessage(dynamic message) {
-    debugPrint('received response "${message.runtimeType}"');
+    _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
@@ -82,7 +84,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       });
     } else if (message is HintOneByOneResponse) {
       setState(() {
-        debugPrint('[pedaxBoard] ${message.hint.moveString}: ${message.hint.scoreString}');
+        _logger.d('${message.hint.moveString}: ${message.hint.scoreString}');
         if (message.searchTargetMoves != _currentMoves) return _hints.clear();
         _hints.add(message.hint);
         _bestScore = _hints.map<int>((h) => h.score).reduce(max);
@@ -95,7 +97,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       // for now, nothing
     } else {
       final str = 'response "${message.runtimeType}" is not unexpected';
-      debugPrint(str);
+      _logger.e(str);
       throw Exception(str);
     }
   }

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
 import 'edax_option.dart';
 
@@ -33,7 +34,7 @@ class NTasksOption extends EdaxOption<int> {
     final pref = await preferences;
     if (val < 1 || Platform.numberOfProcessors < val) {
       final newN = await appDefaultValue;
-      debugPrint('$val is out of range acceptable for edax. So, pedax sets $newN.');
+      Logger().i('$val is out of range acceptable for edax. So, pedax sets $newN.');
       await pref.setInt(prefKey, newN);
       return appDefaultValue;
     } else {

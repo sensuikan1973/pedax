@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:logger/logger.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
+
+final _logger = Logger();
 
 @immutable
 class MoveRequest extends RequestSchema {
@@ -32,11 +35,11 @@ class MoveResponse extends ResponseSchema<MoveRequest> {
 
 MoveResponse executeMove(LibEdax edax, MoveRequest request) {
   edax.edaxStop();
-  debugPrint('[executeMove]: stopped');
+  _logger.d('stopped edax serach');
   edax.edaxMove(request.move);
-  debugPrint('[executeMove]: moved ${request.move}');
+  _logger.d('moved "${request.move}"');
   final moves = edax.edaxGetMoves();
-  debugPrint('[executeMove]: $moves');
+  _logger.d('current moves: $moves');
   return MoveResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),

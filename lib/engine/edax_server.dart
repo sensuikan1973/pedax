@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:logger/logger.dart';
 
 import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
@@ -34,6 +35,7 @@ class EdaxServer {
   final String dllPath;
   final _receivePort = ReceivePort();
   final _maxSearchWorkerNum = 2;
+  final _logger = Logger();
 
   int _searchWorker = 0;
 
@@ -45,7 +47,7 @@ class EdaxServer {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
-    debugPrint('[EdaxServer] sent my port to parentSendPort');
+    _logger.d('sent my port to parentSendPort');
 
     final edax = LibEdax(dllPath)
       ..libedaxInitialize(initLibedaxParameters)
@@ -54,7 +56,7 @@ class EdaxServer {
 
     // ignore: avoid_annotating_with_dynamic
     _receivePort.listen((dynamic message) async {
-      debugPrint('[EdaxServer] received ${message.runtimeType}');
+      _logger.i('received request "${message.runtimeType}"');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is HintOneByOneRequest) {
@@ -73,7 +75,7 @@ class EdaxServer {
       } else if (message is ShutdownRequest) {
         parentSendPort.send(executeShutdown(edax, message));
         _receivePort.close();
-        debugPrint('[EdaxServer] shutdowned');
+        _logger.i('shutdowned');
       } else {
         throw Exception('[EdaxServer] request ${message.runtimeType} is not supported');
       }
