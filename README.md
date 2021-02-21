@@ -1,15 +1,17 @@
-# pedax
+<h1>
+<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" height="35"/>
+<span>pedax</span>
+</h1>
 
-<p align="center">
-<img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" width="200"/>
+<p>
+<img src="https://user-images.githubusercontent.com/23427957/108631333-d0ba4f80-74ac-11eb-9b89-b266fed88619.png" alt="screenshot_macos" height="350"/>
 </p>
 <br/>
-TODO: paste GUI image.
 
 _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
 
-- support Mac/Windows/Linux.
-- you can see `eval value`(e.g. `+4`, `-10`) comfortably.
+- support **Mac/Windows/Linux**.
+- you can see `eval value`(e.g. `+4`, `-10`) **comfortably**.
 
 ---
 
