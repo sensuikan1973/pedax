@@ -42,7 +42,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late int _currentColor;
   late Move? _lastMove;
   final List<Hint> _hints = [];
-  int? _bestScore = 0;
+  int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
 
   @override
