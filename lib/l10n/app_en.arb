@@ -10,5 +10,7 @@
   "updateSettingOnDialog": "Update",
   "userSpecifiedFileNotFound": "the file is not found",
   "nTasksSetting": "number of parallel threads [advanced option]",
-  "levelSetting": "level (search depth)"
+  "levelSetting": "level (search depth)",
+  "loadingBookFile": "loading book file ...",
+  "finishedLoadingBookFile": "book file has been loaded ＼(^o^)／"
 }

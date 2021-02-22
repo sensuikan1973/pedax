@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
   late final SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
+  final _logger = Logger();
 
   @override
   void initState() {
@@ -45,8 +46,8 @@ class _HomeState extends State<Home> {
     _edaxServerPort = await _receiveStream.first as SendPort;
     setState(() {
       _edaxServerSpawned.complete(true);
+      _logger.d('spawned edax server');
     });
-    Logger().d('spawned edax server');
   }
 
   @override
@@ -64,7 +65,6 @@ class _HomeState extends State<Home> {
         body: FutureBuilder<bool>(
           future: _edaxServerSpawned.future,
           builder: (_, snapshot) {
-            // TODO: this is slow when book is big. So, load should be executed later.
             if (snapshot.hasData && snapshot.data!) {
               return Center(child: PedaxBoard(_edaxServerPort, _receiveStream, 480));
             }

@@ -34,10 +34,13 @@ class EdaxServer {
 
   final String dllPath;
   final _receivePort = ReceivePort();
-  final _maxSearchWorkerNum = 2;
   final _logger = Logger();
 
-  int _searchWorker = 0;
+  final _maxSearchWorkerNum = 2;
+  int _searchWorkerNum = 0;
+
+  final _maxBookLoadingWorkerNum = 1;
+  int _bookLoadingWorkerNum = 0;
 
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
@@ -60,14 +63,17 @@ class EdaxServer {
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is HintOneByOneRequest) {
-        if (_searchWorker >= _maxSearchWorkerNum) return;
-        _searchWorker++;
+        if (_searchWorkerNum >= _maxSearchWorkerNum) return;
+        _searchWorkerNum++;
         await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
-        _searchWorker--;
+        _searchWorkerNum--;
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
       } else if (message is BookLoadRequest) {
-        parentSendPort.send(executeBookLoad(edax, message));
+        if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
+        _bookLoadingWorkerNum++;
+        await compute(_execBookLoad, BookLoadParams(dllPath, message, parentSendPort));
+        _bookLoadingWorkerNum--;
       } else if (message is SetOptionRequest) {
         parentSendPort.send(executeSetOption(edax, message));
       } else if (message is StopRequest) {
@@ -95,4 +101,19 @@ class CalcHintNextParams {
 void _calcHintNext(CalcHintNextParams params) {
   final edax = LibEdax(params.dllPath);
   executeHintOneByOne(edax, params.request).listen(params.listener.send);
+}
+
+@immutable
+class BookLoadParams {
+  const BookLoadParams(this.dllPath, this.request, this.listener);
+  final String dllPath;
+  final BookLoadRequest request;
+  final SendPort listener;
+}
+
+// NOTE: top level function for `compute`.
+void _execBookLoad(BookLoadParams params) {
+  final edax = LibEdax(params.dllPath);
+  final result = executeBookLoad(edax, params.request);
+  params.listener.send(result);
 }

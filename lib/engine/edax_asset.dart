@@ -24,7 +24,7 @@ class EdaxAsset {
     const options = <EdaxOption>[
       NTasksOption(),
       EvalFileOption(),
-      BookFileOption(),
+      // BookFileOption(), // NOTE: when book is large, initialize is very slow. So, loading book should be processed on background.
       LevelOption(),
     ];
     final result = [''];
