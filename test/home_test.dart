@@ -7,7 +7,6 @@ import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/localizations.dart';
@@ -30,17 +29,14 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.tap(findByCoordinate('f5'));
-      await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
 
       await tester.tap(findByCoordinate('f4'));
-      await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
       await tester.tap(findByCoordinate('e3'));
-      await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
       await Future<void>.delayed(const Duration(seconds: 4));
@@ -60,7 +56,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.license));
         await tester.pumpAndSettle();
         expect(find.byType(LicensePage), findsOneWidget);
-        await delay200millisec(tester);
       });
     });
 
@@ -79,7 +74,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay200millisec(tester);
       });
     });
 
@@ -99,7 +93,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
-        await delay200millisec(tester);
       });
     });
 
@@ -120,7 +113,6 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await delay200millisec(tester);
       });
     });
 
@@ -140,7 +132,6 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await delay200millisec(tester);
       });
     });
 
@@ -158,7 +149,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay200millisec(tester);
       });
     });
 
@@ -179,7 +169,6 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await delay200millisec(tester);
       });
     });
 
@@ -198,7 +187,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay200millisec(tester);
       });
     });
 
@@ -219,7 +207,6 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await delay200millisec(tester);
       });
     });
   });
