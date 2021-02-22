@@ -36,12 +36,12 @@ Future<void> main() async {
       expect(find.byType(Home), findsOneWidget);
       expect(find.byType(PedaxBoard), findsOneWidget);
 
-      await delay400millisec(tester);
+      await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.tap(findByCoordinate('f5'));
-      await delay400millisec(tester);
+      await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
     });
