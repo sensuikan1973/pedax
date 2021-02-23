@@ -14,6 +14,7 @@ import '../engine/api/book_load.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/undo.dart';
 import '../engine/options/book_file_option.dart';
@@ -112,6 +113,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _lastMove = message.lastMove;
         _currentMoves = message.moves;
       });
+    } else if (message is PlayResponse) {
+      if (_currentMoves != message.moves) {
+        _hints.clear();
+        widget.edaxServerPort.send(const HintOneByOneRequest());
+      }
+      setState(() {
+        _board = message.board;
+        _squaresOfPlayer = _board.squaresOfPlayer;
+        _squaresOfOpponent = _board.squaresOfOpponent;
+        _currentColor = message.currentColor;
+        _lastMove = message.lastMove;
+        _currentMoves = message.moves;
+      });
     } else if (message is InitResponse) {
       _edaxInit.complete(true);
       setState(() {
@@ -174,6 +188,12 @@ class _PedaxBoardState extends State<PedaxBoard> {
     if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyC)) ||
         (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyC))) {
       await Clipboard.setData(ClipboardData(text: _currentMoves));
+    }
+    if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyV)) ||
+        (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyV))) {
+      final clipboardData = await Clipboard.getData('text/plain');
+      if (clipboardData == null || clipboardData.text == null) return;
+      widget.edaxServerPort.send(PlayRequest(clipboardData.text!));
     }
   }
 

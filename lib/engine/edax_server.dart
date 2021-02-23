@@ -9,6 +9,7 @@ import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
+import 'api/play.dart';
 import 'api/redo.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
@@ -63,6 +64,8 @@ class EdaxServer {
       _logger.i('received request "${message.runtimeType}"');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
+      } else if (message is PlayRequest) {
+        parentSendPort.send(executePlay(edax, message));
       } else if (message is HintOneByOneRequest) {
         if (_searchWorkerNum >= _maxSearchWorkerNum) return;
         _searchWorkerNum++;
