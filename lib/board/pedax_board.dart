@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
@@ -13,8 +14,10 @@ import '../engine/api/book_load.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/redo.dart';
 import '../engine/api/set_option.dart';
 import '../engine/api/stop.dart';
+import '../engine/api/undo.dart';
 import '../engine/options/book_file_option.dart';
 import 'square.dart';
 
@@ -68,6 +71,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         });
       },
     );
+    RawKeyboard.instance.addListener(_handleRawKeyEvent);
   }
 
   // ignore: avoid_annotating_with_dynamic
@@ -88,6 +92,34 @@ class _PedaxBoardState extends State<PedaxBoard> {
       });
     } else if (message is InitResponse) {
       _edaxInit.complete(true);
+      setState(() {
+        _hints.clear();
+        _board = message.board;
+        _squaresOfPlayer = _board.squaresOfPlayer;
+        _squaresOfOpponent = _board.squaresOfOpponent;
+        _currentColor = message.currentColor;
+        _lastMove = message.lastMove;
+        _currentMoves = message.moves;
+      });
+    } else if (message is UndoResponse) {
+      if (_currentMoves != message.moves) {
+        _hints.clear();
+        widget.edaxServerPort.send(const HintOneByOneRequest());
+      }
+      setState(() {
+        _hints.clear();
+        _board = message.board;
+        _squaresOfPlayer = _board.squaresOfPlayer;
+        _squaresOfOpponent = _board.squaresOfOpponent;
+        _currentColor = message.currentColor;
+        _lastMove = message.lastMove;
+        _currentMoves = message.moves;
+      });
+    } else if (message is RedoResponse) {
+      if (_currentMoves != message.moves) {
+        _hints.clear();
+        widget.edaxServerPort.send(const HintOneByOneRequest());
+      }
       setState(() {
         _hints.clear();
         _board = message.board;
@@ -122,13 +154,16 @@ class _PedaxBoardState extends State<PedaxBoard> {
     }
   }
 
+  void _handleRawKeyEvent(RawKeyEvent event) {
+    if (event.isKeyPressed(LogicalKeyboardKey.keyU)) widget.edaxServerPort.send(const UndoRequest());
+    if (event.isKeyPressed(LogicalKeyboardKey.keyR)) widget.edaxServerPort.send(const RedoRequest());
+  }
+
   @override
   Widget build(BuildContext context) => FutureBuilder<bool>(
       future: _edaxInit.future,
       builder: (_, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return const Center(child: CupertinoActivityIndicator());
-        }
+        if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
         return SizedBox(
           height: widget.length,
           width: widget.length,

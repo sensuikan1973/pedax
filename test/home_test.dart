@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
@@ -43,7 +44,18 @@ Future<void> main() async {
       await delay200millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
-      await Future<void>.delayed(const Duration(seconds: 4));
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyU);
+      await delay200millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyR);
+      await delay200millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
+      await Future<void>.delayed(const Duration(seconds: 4)); // wait hint process
     });
   });
 

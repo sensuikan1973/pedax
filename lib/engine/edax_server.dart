@@ -4,11 +4,13 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
+import 'package:pedax/engine/api/undo.dart';
 
 import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
+import 'api/redo.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
 import 'api/stop.dart';
@@ -69,6 +71,10 @@ class EdaxServer {
         _searchWorkerNum--;
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
+      } else if (message is UndoRequest) {
+        parentSendPort.send(executeUndo(edax, message));
+      } else if (message is RedoRequest) {
+        parentSendPort.send(executeRedo(edax, message));
       } else if (message is BookLoadRequest) {
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;
