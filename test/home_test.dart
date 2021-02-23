@@ -109,7 +109,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.bookFilePathSetting));
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-        await tester.enterText(find.byType(EditableText), 'not existing path');
+        await tester.enterText(find.byType(EditableText), 'not/existing/path');
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
