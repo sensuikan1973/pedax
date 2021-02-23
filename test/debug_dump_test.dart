@@ -90,7 +90,7 @@ void main() {
     });
   });
 
-  testWidgets('LevelSettingDialog', (tester) async {
+  testWidgets('HintStepByStepSettingDialog', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const MaterialApp(
         home: HintStepByStepSettingDialog(),
