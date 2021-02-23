@@ -7,6 +7,7 @@ import 'package:pedax/app.dart';
 import 'package:pedax/engine/edax_asset.dart';
 import 'package:pedax/engine/edax_server.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
+import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
@@ -86,6 +87,17 @@ void main() {
       await waitEdaxSetuped(tester);
       debugDumpApp();
       await delay400millisec(tester);
+    });
+  });
+
+  testWidgets('LevelSettingDialog', (tester) async {
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const MaterialApp(
+        home: HintStepByStepSettingDialog(),
+        localizationsDelegates: PedaxApp.localizationsDelegates,
+      ));
+      await tester.pumpAndSettle();
+      debugDumpApp();
     });
   });
 }
