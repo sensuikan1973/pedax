@@ -15,8 +15,6 @@ import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
 import '../engine/api/redo.dart';
-import '../engine/api/set_option.dart';
-import '../engine/api/stop.dart';
 import '../engine/api/undo.dart';
 import '../engine/options/book_file_option.dart';
 import 'square.dart';
