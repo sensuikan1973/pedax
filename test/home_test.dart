@@ -60,6 +60,27 @@ Future<void> main() async {
     });
   });
 
+  testWidgets('paste moves', (tester) async {
+    const moves = 'f5f6';
+    SystemChannels.platform.setMockMethodCallHandler((methodCall) async {
+      if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
+      return null;
+    });
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const PedaxApp());
+      await tester.pumpAndSettle();
+      await waitEdaxSetuped(tester);
+
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+
+      await tester.pumpAndSettle();
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+    });
+  });
+
   group('menu events', () {
     testWidgets('show LICENSE page', (tester) async {
       await tester.runAsync(() async {
