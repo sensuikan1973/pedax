@@ -51,6 +51,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
   final Completer<bool> _edaxInit = Completer<bool>();
   final _logger = Logger();
 
+  int get _boardSize => 8;
+  double get _stoneMargin => (widget.length / _boardSize) * 0.1;
+  double get _stoneSize => (widget.length / _boardSize) - (_stoneMargin * 2);
+
   @override
   void initState() {
     super.initState();
@@ -71,6 +75,26 @@ class _PedaxBoardState extends State<PedaxBoard> {
     );
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
   }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<bool>(
+      future: _edaxInit.future,
+      builder: (_, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
+        return SizedBox(
+          height: widget.length,
+          width: widget.length,
+          child: Table(
+            border: TableBorder.all(),
+            children: List.generate(
+              _boardSize,
+              (yIndex) => TableRow(
+                children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
+              ),
+            ),
+          ),
+        );
+      });
 
   // ignore: avoid_annotating_with_dynamic
   void _updateStateByEdaxServerMessage(dynamic message) {
@@ -152,30 +176,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
       await Clipboard.setData(ClipboardData(text: _currentMoves));
     }
   }
-
-  @override
-  Widget build(BuildContext context) => FutureBuilder<bool>(
-      future: _edaxInit.future,
-      builder: (_, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
-        return SizedBox(
-          height: widget.length,
-          width: widget.length,
-          child: Table(
-            border: TableBorder.all(),
-            children: List.generate(
-              _boardSize,
-              (yIndex) => TableRow(
-                children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
-              ),
-            ),
-          ),
-        );
-      });
-
-  int get _boardSize => 8;
-  double get _stoneMargin => (widget.length / _boardSize) * 0.1;
-  double get _stoneSize => (widget.length / _boardSize) - (_stoneMargin * 2);
 
   Square _square(int y, int x) {
     final move = y * 8 + x;
