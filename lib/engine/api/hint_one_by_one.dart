@@ -38,11 +38,10 @@ class HintOneByOneResponse extends ResponseSchema<HintOneByOneRequest> {
 List<int> generateLevelList3Steps(int maxLevel) => [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
 
 Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneRequest request) async* {
-  edax.edaxStop();
-  _logger.d('stopped edax serach');
-
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   for (final level in levelList) {
+    edax.edaxStop();
+    _logger.d('stopped edax serach');
     final currentMoves = edax.edaxGetMoves();
     edax
       ..edaxSetOption('-level', level.toString())
@@ -50,7 +49,6 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
     _logger.d('prepared getting hint one by one.\nlevel: $level.\ncurrent moves: $currentMoves');
     // ignore: literal_only_boolean_expressions
     while (true) {
-      sleep(const Duration(milliseconds: 5));
       if (edax.edaxGetMoves() != currentMoves) break;
 
       _logger.d('will call edaxHintNextNoMultiPvDepth');
