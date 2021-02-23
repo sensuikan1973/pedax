@@ -136,7 +136,7 @@ Future<void> main() async {
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await delay200millisec(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update book file path as it is', (tester) async {
       await tester.runAsync(() async {
