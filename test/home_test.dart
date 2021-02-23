@@ -23,9 +23,7 @@ Future<void> main() async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await tester.pumpAndSettle();
-
       expect(find.text(l10nEn.analysisMode), findsOneWidget);
-
       await waitEdaxSetuped(tester);
 
       expect(find.byType(PedaxBoard), findsOneWidget);
@@ -86,7 +84,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -102,7 +99,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -121,7 +117,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -141,7 +136,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -162,7 +156,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -200,7 +193,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -221,7 +213,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -240,7 +231,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
@@ -261,7 +251,6 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await tester.pumpAndSettle();
-
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
