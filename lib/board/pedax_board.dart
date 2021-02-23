@@ -154,9 +154,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
     }
   }
 
-  void _handleRawKeyEvent(RawKeyEvent event) {
+  Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
     if (event.isKeyPressed(LogicalKeyboardKey.keyU)) widget.edaxServerPort.send(const UndoRequest());
     if (event.isKeyPressed(LogicalKeyboardKey.keyR)) widget.edaxServerPort.send(const RedoRequest());
+    if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyC)) ||
+        (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyC))) {
+      await Clipboard.setData(ClipboardData(text: _currentMoves));
+    }
   }
 
   @override
