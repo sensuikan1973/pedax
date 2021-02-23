@@ -48,7 +48,7 @@ class BookFilePathSettingDialog extends StatelessWidget {
               final currentBookFilePath = await _option.val;
               if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
               await _option.update(newBookFilePath);
-              edaxServerPort.send(BookLoadRequest(newBookFilePath));
+              edaxServerPort.send(BookLoadRequest(await _option.val));
               Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
