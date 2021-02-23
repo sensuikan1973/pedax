@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+import 'package:path/path.dart' as p;
 
 import 'edax_option.dart';
 
@@ -15,10 +16,10 @@ class BookFileOption extends EdaxOption<String> {
   String get prefKey => 'bookFilePath';
 
   @override
-  String get nativeDefaultValue => 'data/$_defaultFileName'; // relative path
+  String get nativeDefaultValue => p.join('data', _defaultFileName); // relative path
 
   @override
-  Future<String> get appDefaultValue async => '${(await docDir).path}/$_defaultFileName';
+  Future<String> get appDefaultValue async => p.join((await docDir).path, _defaultFileName);
 
   String get _defaultFileName => 'book.dat';
 
