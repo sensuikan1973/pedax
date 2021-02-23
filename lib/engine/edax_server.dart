@@ -76,6 +76,7 @@ class EdaxServer {
           _searchWorkerNum++;
           await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
           _searchWorkerNum--;
+          break;
         }
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
