@@ -18,6 +18,8 @@ import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/undo.dart';
 import '../engine/options/book_file_option.dart';
+import '../engine/options/hint_step_by_step_option.dart';
+import '../engine/options/level_option.dart';
 import 'square.dart';
 
 class PedaxBoard extends StatefulWidget {
@@ -48,9 +50,12 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late Move? _lastMove;
   late String _currentMoves;
   final List<Hint> _hints = [];
+  int _hintLevel = 0;
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
   final _logger = Logger();
+  final _hintStepByStepOption = const HintStepByStepOption();
+  final _levelOption = const LevelOption();
 
   int get _boardSize => 8;
   double get _stoneMargin => (widget.length / _boardSize) * 0.1;
@@ -98,12 +103,15 @@ class _PedaxBoardState extends State<PedaxBoard> {
       });
 
   // ignore: avoid_annotating_with_dynamic
-  void _updateStateByEdaxServerMessage(dynamic message) {
+  Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(const HintOneByOneRequest());
+        widget.edaxServerPort.send(HintOneByOneRequest(
+          level: await _levelOption.val,
+          stepByStep: await _hintStepByStepOption.val,
+        ));
       }
       setState(() {
         _board = message.board;
@@ -116,7 +124,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is PlayResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(const HintOneByOneRequest());
+        widget.edaxServerPort.send(HintOneByOneRequest(
+          level: await _levelOption.val,
+          stepByStep: await _hintStepByStepOption.val,
+        ));
       }
       setState(() {
         _board = message.board;
@@ -140,7 +151,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is UndoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(const HintOneByOneRequest());
+        widget.edaxServerPort.send(HintOneByOneRequest(
+          level: await _levelOption.val,
+          stepByStep: await _hintStepByStepOption.val,
+        ));
       }
       setState(() {
         _hints.clear();
@@ -154,7 +168,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is RedoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(const HintOneByOneRequest());
+        widget.edaxServerPort.send(HintOneByOneRequest(
+          level: await _levelOption.val,
+          stepByStep: await _hintStepByStepOption.val,
+        ));
       }
       setState(() {
         _hints.clear();
@@ -169,7 +186,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
       setState(() {
         _logger.d('${message.hint.moveString}: ${message.hint.scoreString}');
         if (message.searchTargetMoves != _currentMoves) return _hints.clear();
-        _hints.add(message.hint);
+        _hintLevel = message.level;
+        _hints
+          ..removeWhere((hint) => hint.move == message.hint.move)
+          ..add(message.hint);
         _bestScore = _hints.map<int>((h) => h.score).reduce(max);
       });
     } else if (message is BookLoadResponse) {

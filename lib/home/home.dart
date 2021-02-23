@@ -11,6 +11,7 @@ import '../board/pedax_board.dart';
 import '../engine/edax_asset.dart' show EdaxAsset;
 import '../engine/edax_server.dart';
 import 'book_file_path_setting_dialog.dart';
+import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
 import 'n_tasks_setting_dialog.dart';
 
@@ -110,6 +111,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
+          _MenuType.hintStepByStep,
+          AppLocalizations.of(context)!.hintStepByStepSetting,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => const HintStepByStepSettingDialog(),
+          ),
+        ),
+        _Menu(
           _MenuType.license,
           AppLocalizations.of(context)!.license,
           () => showLicensePage(context: context),
@@ -129,5 +138,6 @@ enum _MenuType {
   bookFilePath,
   nTasks,
   level,
+  hintStepByStep,
   license,
 }
