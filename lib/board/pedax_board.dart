@@ -50,7 +50,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late Move? _lastMove;
   late String _currentMoves;
   final List<Hint> _hints = [];
-  int _hintLevel = 0;
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
   final _logger = Logger();
@@ -186,7 +185,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
       setState(() {
         _logger.d('${message.hint.moveString}: ${message.hint.scoreString}');
         if (message.searchTargetMoves != _currentMoves) return _hints.clear();
-        _hintLevel = message.level;
         _hints
           ..removeWhere((hint) => hint.move == message.hint.move)
           ..add(message.hint);
