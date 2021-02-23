@@ -143,14 +143,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
         ),
       );
-    } else if (message is SetOptionResponse) {
-      // for now, nothing
-    } else if (message is StopResponse) {
-      // for now, nothing
-    } else {
-      final str = 'response "${message.runtimeType}" is not unexpected';
-      _logger.e(str);
-      throw Exception(str);
     }
   }
 
