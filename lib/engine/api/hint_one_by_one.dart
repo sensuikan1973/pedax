@@ -41,7 +41,7 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
   edax.edaxStop();
   _logger.d('stopped edax serach');
 
-  final levelList = request.stepByStep ? [request.level] : generateLevelList3Steps(request.level);
+  final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   for (final level in levelList) {
     final currentMoves = edax.edaxGetMoves();
     edax
