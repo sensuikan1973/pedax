@@ -101,16 +101,18 @@ class _PedaxBoardState extends State<PedaxBoard> {
         );
       });
 
+  Future<HintOneByOneRequest> get _buildHintRequest async => HintOneByOneRequest(
+        level: await _levelOption.val,
+        stepByStep: await _hintStepByStepOption.val,
+      );
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(HintOneByOneRequest(
-          level: await _levelOption.val,
-          stepByStep: await _hintStepByStepOption.val,
-        ));
+        widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
         _board = message.board;
@@ -123,10 +125,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is PlayResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(HintOneByOneRequest(
-          level: await _levelOption.val,
-          stepByStep: await _hintStepByStepOption.val,
-        ));
+        widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
         _board = message.board;
@@ -150,10 +149,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is UndoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(HintOneByOneRequest(
-          level: await _levelOption.val,
-          stepByStep: await _hintStepByStepOption.val,
-        ));
+        widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
         _board = message.board;
@@ -166,10 +162,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is RedoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        widget.edaxServerPort.send(HintOneByOneRequest(
-          level: await _levelOption.val,
-          stepByStep: await _hintStepByStepOption.val,
-        ));
+        widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
         _board = message.board;
