@@ -90,11 +90,7 @@ class EdaxAsset {
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
-  Future<Directory> get _docDir async {
-    final docDir = await getApplicationDocumentsDirectory();
-    if (docDir == null) throw Exception('Documents Directory is not found');
-    return docDir;
-  }
+  Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
 
   @visibleForTesting
   static String get defaultLibedaxName {
