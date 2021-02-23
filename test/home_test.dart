@@ -113,7 +113,7 @@ Future<void> main() async {
         expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
         await delay400millisec(tester);
       });
-    }, skip: true);
+    });
 
     testWidgets('update book file path with empty path', (tester) async {
       await tester.runAsync(() async {
@@ -134,7 +134,7 @@ Future<void> main() async {
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await delay400millisec(tester);
       });
-    }, skip: true);
+    });
 
     testWidgets('update book file path as it is', (tester) async {
       await tester.runAsync(() async {
