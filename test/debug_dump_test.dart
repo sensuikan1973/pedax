@@ -7,6 +7,7 @@ import 'package:pedax/app.dart';
 import 'package:pedax/engine/edax_asset.dart';
 import 'package:pedax/engine/edax_server.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
+import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
@@ -46,7 +47,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -59,7 +60,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -72,7 +73,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -85,7 +86,16 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
+  });
+
+  testWidgets('HintStepByStepSettingDialog', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: HintStepByStepSettingDialog(),
+      localizationsDelegates: PedaxApp.localizationsDelegates,
+    ));
+    await tester.pumpAndSettle();
+    debugDumpApp();
   });
 }

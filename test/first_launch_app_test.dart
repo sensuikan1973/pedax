@@ -13,16 +13,15 @@ void main() {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await tester.pumpAndSettle();
-
       await waitEdaxSetuped(tester);
 
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.tap(findByCoordinate('f5'));
-      await delay400millisec(tester);
+      await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 }
