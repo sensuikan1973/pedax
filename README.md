@@ -4,7 +4,7 @@
 </h1>
 
 <p>
-<img src="https://user-images.githubusercontent.com/23427957/108631333-d0ba4f80-74ac-11eb-9b89-b266fed88619.png" alt="screenshot_macos" height="350"/>
+<img src="https://user-images.githubusercontent.com/23427957/108859012-22d7ae00-7630-11eb-94d2-8e5748c7c539.png" alt="screenshot_macos" height="350"/>
 </p>
 <br/>
 
