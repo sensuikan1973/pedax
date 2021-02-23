@@ -42,6 +42,8 @@ jobs:
           channel: 'dev'
       - name: install dependencies
         run: flutter pub get
+      - name: debug
+        run: echo "$TEMP" && echo "===" && echo "$TMP"
       - name: run test
         run: flutter test --verbose --coverage --coverage-path=./coverage/lcov.info
       - uses: codecov/codecov-action@v1
