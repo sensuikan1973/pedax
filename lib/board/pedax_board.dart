@@ -156,7 +156,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ));
       }
       setState(() {
-        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
@@ -173,7 +172,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ));
       }
       setState(() {
-        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
