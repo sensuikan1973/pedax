@@ -6,7 +6,6 @@ import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
-import 'package:pedax/home/home.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
