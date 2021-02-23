@@ -68,6 +68,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     const BookFileOption().val.then(
       (path) {
         WidgetsBinding.instance?.addPostFrameCallback((_) {
+          if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),

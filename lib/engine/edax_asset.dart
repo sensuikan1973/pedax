@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 import 'options/book_file_option.dart';
 import 'options/edax_option.dart';
@@ -39,8 +40,8 @@ class EdaxAsset {
     if (Platform.isMacOS) return defaultLibedaxName;
     // FIXME: temporary implement.
     final docDir = await _docDir;
-    if (Platform.isWindows) return '${docDir.path}/$defaultLibedaxName';
-    if (Platform.isLinux) return '${docDir.path}/$defaultLibedaxName';
+    if (Platform.isWindows) return p.join(docDir.path, defaultLibedaxName);
+    if (Platform.isLinux) return p.join(docDir.path, defaultLibedaxName);
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
