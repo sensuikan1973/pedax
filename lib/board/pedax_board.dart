@@ -166,10 +166,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
             children: List.generate(
               _boardSize,
               (yIndex) => TableRow(
-                children: List.generate(
-                  _boardSize,
-                  (xIndex) => _square(yIndex, xIndex),
-                ),
+                children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
               ),
             ),
           ),
