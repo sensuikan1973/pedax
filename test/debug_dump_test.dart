@@ -47,7 +47,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -60,7 +60,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -73,7 +73,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
@@ -86,7 +86,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay400millisec(tester);
+      await delay300millisec(tester);
     });
   });
 
