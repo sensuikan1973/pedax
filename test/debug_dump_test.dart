@@ -91,13 +91,11 @@ void main() {
   });
 
   testWidgets('HintStepByStepSettingDialog', (tester) async {
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const MaterialApp(
-        home: HintStepByStepSettingDialog(),
-        localizationsDelegates: PedaxApp.localizationsDelegates,
-      ));
-      await tester.pumpAndSettle();
-      debugDumpApp();
-    });
+    await tester.pumpWidget(const MaterialApp(
+      home: HintStepByStepSettingDialog(),
+      localizationsDelegates: PedaxApp.localizationsDelegates,
+    ));
+    await tester.pumpAndSettle();
+    debugDumpApp();
   });
 }
