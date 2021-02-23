@@ -15,6 +15,8 @@ class PedaxApp extends StatelessWidget {
         home: const Home(),
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
+        // locale: localeEn,
+        // debugShowCheckedModeBanner: false,
       );
 
   @visibleForTesting

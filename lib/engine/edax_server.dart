@@ -38,7 +38,7 @@ class EdaxServer {
   final _receivePort = ReceivePort();
   final _logger = Logger();
 
-  final _maxSearchWorkerNum = 2;
+  final _maxSearchWorkerNum = 1;
   int _searchWorkerNum = 0;
 
   final _maxBookLoadingWorkerNum = 1;
@@ -67,10 +67,17 @@ class EdaxServer {
       } else if (message is PlayRequest) {
         parentSendPort.send(executePlay(edax, message));
       } else if (message is HintOneByOneRequest) {
-        if (_searchWorkerNum >= _maxSearchWorkerNum) return;
-        _searchWorkerNum++;
-        await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
-        _searchWorkerNum--;
+        // ignore: literal_only_boolean_expressions
+        while (true) {
+          if (_searchWorkerNum >= _maxSearchWorkerNum) {
+            await Future<void>.delayed(const Duration(milliseconds: 10));
+            continue;
+          }
+          _searchWorkerNum++;
+          await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
+          _searchWorkerNum--;
+          break;
+        }
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
       } else if (message is UndoRequest) {
@@ -106,9 +113,9 @@ class CalcHintNextParams {
 }
 
 // NOTE: top level function for `compute`.
-void _calcHintNext(CalcHintNextParams params) {
+Future<void> _calcHintNext(CalcHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
-  executeHintOneByOne(edax, params.request).listen(params.listener.send);
+  await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
 }
 
 @immutable
