@@ -51,7 +51,7 @@ class EdaxAsset {
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = await _libedaxAssetData;
       final file = File(await libedaxPath);
-      if (!file.existsSync()) file.writeAsBytesSync(libedaxData.buffer.asUint8List());
+      if (!file.existsSync()) file.writeAsBytesSync(libedaxData.buffer.asUint8List(), flush: true);
     }
   }
 
@@ -66,7 +66,7 @@ class EdaxAsset {
       await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
-      File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List());
+      File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
 
@@ -81,7 +81,7 @@ class EdaxAsset {
       await option.update(await option.appDefaultValue);
     } else if (!File(evalFilePath).existsSync()) {
       final evalData = await _evalAssetData;
-      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List());
+      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List(), flush: true);
     }
   }
 
@@ -90,11 +90,7 @@ class EdaxAsset {
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
-  Future<Directory> get _docDir async {
-    final docDir = await getApplicationDocumentsDirectory();
-    if (docDir == null) throw Exception('Documents Directory is not found');
-    return docDir;
-  }
+  Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
 
   @visibleForTesting
   static String get defaultLibedaxName {

@@ -24,7 +24,6 @@ Future<void> startEdaxServer(StartEdaxServerParams params) async {
 @immutable
 class StartEdaxServerParams {
   const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters);
-
   final SendPort parentSendPort;
   final String dllPath;
   final List<String> initLibedaxParameters;

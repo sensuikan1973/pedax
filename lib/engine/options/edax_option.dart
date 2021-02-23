@@ -24,11 +24,7 @@ abstract class EdaxOption<T> {
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
   @protected
-  Future<Directory> get docDir async {
-    final docDir = await getApplicationDocumentsDirectory();
-    if (docDir == null) throw Exception('Documents Directory is not found');
-    return docDir;
-  }
+  Future<Directory> get docDir async => getApplicationDocumentsDirectory();
 
   @protected
   Future<SharedPreferences> get preferences async => SharedPreferences.getInstance();
