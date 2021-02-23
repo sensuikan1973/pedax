@@ -23,7 +23,7 @@ void main() {
       await Future<void>.delayed(const Duration(seconds: 1));
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
-      await delay200millisec(tester);
+      await delay400millisec(tester);
     });
   });
 }
