@@ -6,6 +6,7 @@ import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
+import 'package:pedax/home/home.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
@@ -250,11 +251,9 @@ Future<void> main() async {
         expect(find.text(l10nEn.hintStepByStepSetting), findsOneWidget);
         await tester.tap(find.byType(Switch));
         await tester.pumpAndSettle();
-        await tester.tap(find.byType(PedaxApp));
+        await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
-        await delay300millisec(tester);
       });
     });
   });
