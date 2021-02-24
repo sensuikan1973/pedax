@@ -99,7 +99,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Text(_fullNum == 0
-                  ? ' '
+                  ? '📓 -'
                   : AppLocalizations.of(context)!.positionInfo(
                       _fullNum,
                       (_nWins / _fullNum * 100).floor(),
@@ -192,6 +192,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is PlayResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
+        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+        }
         widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
@@ -216,6 +219,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is UndoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
+        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+        }
         widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
@@ -229,6 +235,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is RedoResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
+        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+        }
         widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
