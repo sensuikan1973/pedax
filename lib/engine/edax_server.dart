@@ -6,6 +6,7 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import 'api/book_load.dart';
+import 'api/book_show.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
@@ -84,6 +85,8 @@ class EdaxServer {
         parentSendPort.send(executeUndo(edax, message));
       } else if (message is RedoRequest) {
         parentSendPort.send(executeRedo(edax, message));
+      } else if (message is BookShowRequest) {
+        parentSendPort.send(executeBookShow(edax, message));
       } else if (message is BookLoadRequest) {
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;

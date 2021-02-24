@@ -11,6 +11,7 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import '../engine/api/book_load.dart';
+import '../engine/api/book_show.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -52,6 +53,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   final List<Hint> _hints = [];
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
+  final Completer<bool> _bookLoaded = Completer<bool>();
   final _logger = Logger();
   final _hintStepByStepOption = const HintStepByStepOption();
   final _levelOption = const LevelOption();
@@ -160,6 +162,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     if (message is MoveResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
+        if (_bookLoaded.isCompleted && await _bookLoaded.future) widget.edaxServerPort.send(const BookShowRequest());
         widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
@@ -236,6 +239,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
         ),
       );
+      _bookLoaded.complete(true);
+    } else if (message is BookShowResponse) {
+      // TODO: show book info
+      _logger.i(message.position.nWins);
     }
   }
 
