@@ -11,7 +11,7 @@ import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import '../engine/api/book_load.dart';
-import '../engine/api/book_show.dart';
+import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -162,7 +162,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
     if (message is MoveResponse) {
       if (_currentMoves != message.moves) {
         _hints.clear();
-        if (_bookLoaded.isCompleted && await _bookLoaded.future) widget.edaxServerPort.send(const BookShowRequest());
+        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+        }
         widget.edaxServerPort.send(await _buildHintRequest);
       }
       setState(() {
@@ -240,7 +242,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
       _bookLoaded.complete(true);
-    } else if (message is BookShowResponse) {
+    } else if (message is GetBookMoveWithPositionResponse) {
       // TODO: show book info
       _logger.i(message.position.nWins);
     }
