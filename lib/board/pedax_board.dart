@@ -201,7 +201,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is InitResponse) {
-      _edaxInit.complete(true);
+      if (!_edaxInit.isCompleted) _edaxInit.complete(true);
       await _onMovesUpdated();
       setState(() {
         _board = message.board;
@@ -247,7 +247,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
         ),
       );
-      _bookLoaded.complete(true);
+      if (!_bookLoaded.isCompleted) _bookLoaded.complete(true);
     } else if (message is GetBookMoveWithPositionResponse) {
       setState(() {
         _positionWinsNum = message.position.nWins;
