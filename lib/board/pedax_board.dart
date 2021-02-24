@@ -87,20 +87,67 @@ class _PedaxBoardState extends State<PedaxBoard> {
       future: _edaxInit.future,
       builder: (_, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
-        return SizedBox(
-          height: widget.length,
-          width: widget.length,
-          child: Table(
-            border: TableBorder.all(),
-            children: List.generate(
-              _boardSize,
-              (yIndex) => TableRow(
-                children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
-              ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _xCoordinateLabels,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _yCoordinateLabels,
+                _boardBody,
+                _yCoordinatePadding,
+              ],
             ),
-          ),
+          ],
         );
       });
+
+  Widget get _xCoordinateLabels => SizedBox(
+        width: widget.length / _boardSize * 10,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ' ']
+              .map((e) => Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(e),
+                  ))
+              .toList(),
+        ),
+      );
+
+  Widget get _yCoordinateLabels => SizedBox(
+        height: widget.length,
+        width: widget.length / _boardSize,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(
+            _boardSize,
+            (i) => Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Text((i + 1).toString()),
+            ),
+          ),
+        ),
+      );
+
+  Widget get _yCoordinatePadding => SizedBox(height: widget.length, width: widget.length / _boardSize);
+
+  Widget get _boardBody => Container(
+        color: Colors.green[900],
+        height: widget.length,
+        width: widget.length,
+        child: Table(
+          border: TableBorder.all(),
+          children: List.generate(
+            _boardSize,
+            (yIndex) => TableRow(
+              children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
+            ),
+          ),
+        ),
+      );
 
   Future<HintOneByOneRequest> get _buildHintRequest async => HintOneByOneRequest(
         level: await _levelOption.val,
@@ -243,12 +290,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   Color? _scoreColor(int? score, bool bestMove) {
     if (score == null) return null;
-    if (score == 0) {
-      if (bestMove) return Colors.cyan;
-      return Colors.cyan[900];
-    } else if (score > 0) {
-      if (bestMove) return Colors.blue;
-      return Colors.blue[900];
+    if (score >= 0) {
+      if (bestMove) return Colors.lightBlue[200];
+      return Colors.blue[600];
     } else /* score < 0*/ {
       if (bestMove) return Colors.lime;
       return Colors.lime[900];
