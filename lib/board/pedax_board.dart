@@ -87,20 +87,57 @@ class _PedaxBoardState extends State<PedaxBoard> {
       future: _edaxInit.future,
       builder: (_, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
-        return SizedBox(
-          height: widget.length,
-          width: widget.length,
-          child: Table(
-            border: TableBorder.all(),
-            children: List.generate(
-              _boardSize,
-              (yIndex) => TableRow(
-                children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
-              ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _xCoordinateLabels,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _yCoordinateLabels,
+                _boardBody,
+                _yCoordinatePadding,
+              ],
             ),
-          ),
+          ],
         );
       });
+
+  Widget get _xCoordinateLabels => SizedBox(
+        width: widget.length / _boardSize * 10,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ' '].map((e) => Text(e)).toList(),
+        ),
+      );
+
+  Widget get _yCoordinateLabels => SizedBox(
+        height: widget.length * 9 / _boardSize,
+        width: widget.length / _boardSize,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(_boardSize, (i) => Text((i + 1).toString())),
+        ),
+      );
+
+  SizedBox get _yCoordinatePadding => SizedBox(
+        height: widget.length,
+        width: widget.length / _boardSize,
+      );
+
+  SizedBox get _boardBody => SizedBox(
+        height: widget.length,
+        width: widget.length,
+        child: Table(
+          border: TableBorder.all(),
+          children: List.generate(
+            _boardSize,
+            (yIndex) => TableRow(
+              children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
+            ),
+          ),
+        ),
+      );
 
   Future<HintOneByOneRequest> get _buildHintRequest async => HintOneByOneRequest(
         level: await _levelOption.val,
