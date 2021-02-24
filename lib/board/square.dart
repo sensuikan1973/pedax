@@ -84,7 +84,7 @@ class Square extends StatelessWidget {
         color: Colors.red,
       );
 
-  String _scoreString(int score) => score > 0 ? '+$score' : score.toString();
+  String _scoreString(int score) => score >= 0 ? '+$score' : score.toString();
 
   // See: https://emojipedia.org/notebook/
   String get _noteBookEmojiUnicode => '\u{1F4D3}';
