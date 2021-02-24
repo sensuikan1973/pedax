@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
+import 'api/book_get_move_with_position.dart';
 import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
@@ -84,6 +85,8 @@ class EdaxServer {
         parentSendPort.send(executeUndo(edax, message));
       } else if (message is RedoRequest) {
         parentSendPort.send(executeRedo(edax, message));
+      } else if (message is GetBookMoveWithPositionRequest) {
+        parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
       } else if (message is BookLoadRequest) {
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;

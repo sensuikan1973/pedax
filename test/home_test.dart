@@ -54,7 +54,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await Future<void>.delayed(const Duration(seconds: 4)); // wait hint process
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
@@ -76,6 +76,7 @@ Future<void> main() async {
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+      await delay300millisec(tester);
     });
   });
 
@@ -263,6 +264,7 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
+        await delay300millisec(tester);
       });
     });
   });

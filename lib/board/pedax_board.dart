@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
+import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
@@ -52,9 +53,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
   final List<Hint> _hints = [];
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
+  final Completer<bool> _bookLoaded = Completer<bool>();
   final _logger = Logger();
   final _hintStepByStepOption = const HintStepByStepOption();
   final _levelOption = const LevelOption();
+  int _positionWinsNum = 0;
+  int _positionLossesNum = 0;
+  int _positionDrawsNum = 0;
+  int get _positionFullNum => _positionWinsNum + _positionLossesNum + _positionDrawsNum;
 
   int get _boardSize => 8;
   double get _stoneMargin => (widget.length / _boardSize) * 0.1;
@@ -90,6 +96,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
             _xCoordinateLabels,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,6 +109,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
           ],
         );
       });
+
+  String get _positionInfoText => _positionFullNum == 0
+      ? '📓 -'
+      : AppLocalizations.of(context)!.positionInfo(
+          _positionFullNum,
+          (_positionWinsNum / _positionFullNum * 100).floor(),
+          (_positionDrawsNum / _positionFullNum * 100).floor(),
+        );
 
   Widget get _xCoordinateLabels => SizedBox(
         width: widget.length / _boardSize * 10,
@@ -154,14 +169,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
         stepByStep: await _hintStepByStepOption.val,
       );
 
+  Future<void> _onMovesUpdated() async {
+    _hints.clear();
+    if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+      widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+    }
+    widget.edaxServerPort.send(await _buildHintRequest);
+  }
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -171,10 +191,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is PlayResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -184,9 +201,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is InitResponse) {
-      _edaxInit.complete(true);
+      if (!_edaxInit.isCompleted) _edaxInit.complete(true);
+      await _onMovesUpdated();
       setState(() {
-        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
@@ -195,10 +212,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is UndoResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -208,10 +222,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is RedoResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -236,6 +247,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
         ),
       );
+      if (!_bookLoaded.isCompleted) _bookLoaded.complete(true);
+    } else if (message is GetBookMoveWithPositionResponse) {
+      setState(() {
+        _positionWinsNum = message.position.nWins;
+        _positionDrawsNum = message.position.nDraws;
+        _positionLossesNum = message.position.nLosses;
+      });
     }
   }
 
