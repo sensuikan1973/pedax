@@ -25,8 +25,5 @@ class BookShowResponse extends ResponseSchema<BookShowRequest> {
   final Position position;
 }
 
-BookShowResponse executeBookShow(LibEdax edax, BookShowRequest request) {
-  edax.edaxStop();
-  _logger.d('stopped edax serach');
-  return BookShowResponse(position: edax.edaxBookShow(), request: request);
-}
+BookShowResponse executeBookShow(LibEdax edax, BookShowRequest request) =>
+    BookShowResponse(position: edax.edaxBookShow(), request: request);
