@@ -169,17 +169,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
         stepByStep: await _hintStepByStepOption.val,
       );
 
+  Future<void> _onMovesUpdated() async {
+    _hints.clear();
+    if (_bookLoaded.isCompleted && await _bookLoaded.future) {
+      widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
+    }
+    widget.edaxServerPort.send(await _buildHintRequest);
+  }
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
-          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
-        }
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -189,13 +191,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is PlayResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
-          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
-        }
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -206,8 +202,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
       });
     } else if (message is InitResponse) {
       _edaxInit.complete(true);
+      await _onMovesUpdated();
       setState(() {
-        _hints.clear();
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
         _squaresOfOpponent = _board.squaresOfOpponent;
@@ -216,13 +212,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is UndoResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
-          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
-        }
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -232,13 +222,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is RedoResponse) {
-      if (_currentMoves != message.moves) {
-        _hints.clear();
-        if (_bookLoaded.isCompleted && await _bookLoaded.future) {
-          widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
-        }
-        widget.edaxServerPort.send(await _buildHintRequest);
-      }
+      if (_currentMoves != message.moves) await _onMovesUpdated();
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
