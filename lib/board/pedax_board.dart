@@ -96,16 +96,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Text(_positionFullNum == 0
-                  ? '📓 -'
-                  : AppLocalizations.of(context)!.positionInfo(
-                      _positionFullNum,
-                      (_positionWinsNum / _positionFullNum * 100).floor(),
-                      (_positionDrawsNum / _positionFullNum * 100).floor(),
-                    )),
-            ),
+            Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
             _xCoordinateLabels,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -118,6 +109,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
           ],
         );
       });
+
+  String get _positionInfoText => _positionFullNum == 0
+      ? '📓 -'
+      : AppLocalizations.of(context)!.positionInfo(
+          _positionFullNum,
+          (_positionWinsNum / _positionFullNum * 100).floor(),
+          (_positionDrawsNum / _positionFullNum * 100).floor(),
+        );
 
   Widget get _xCoordinateLabels => SizedBox(
         width: widget.length / _boardSize * 10,
