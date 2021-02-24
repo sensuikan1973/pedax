@@ -57,10 +57,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
   final _logger = Logger();
   final _hintStepByStepOption = const HintStepByStepOption();
   final _levelOption = const LevelOption();
-  int _nWins = 0;
-  int _nLosses = 0;
-  int _nDraws = 0;
-  int get _fullNum => _nWins + _nLosses + _nDraws;
+  int _positionWinsNum = 0;
+  int _positionLossesNum = 0;
+  int _positionDrawsNum = 0;
+  int get _positionFullNum => _positionWinsNum + _positionLossesNum + _positionDrawsNum;
 
   int get _boardSize => 8;
   double get _stoneMargin => (widget.length / _boardSize) * 0.1;
@@ -98,12 +98,12 @@ class _PedaxBoardState extends State<PedaxBoard> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
-              child: Text(_fullNum == 0
+              child: Text(_positionFullNum == 0
                   ? '📓 -'
                   : AppLocalizations.of(context)!.positionInfo(
-                      _fullNum,
-                      (_nWins / _fullNum * 100).floor(),
-                      (_nDraws / _fullNum * 100).floor(),
+                      _positionFullNum,
+                      (_positionWinsNum / _positionFullNum * 100).floor(),
+                      (_positionDrawsNum / _positionFullNum * 100).floor(),
                     )),
             ),
             _xCoordinateLabels,
@@ -267,9 +267,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
       _bookLoaded.complete(true);
     } else if (message is GetBookMoveWithPositionResponse) {
       setState(() {
-        _nWins = message.position.nWins;
-        _nDraws = message.position.nDraws;
-        _nLosses = message.position.nLosses;
+        _positionWinsNum = message.position.nWins;
+        _positionDrawsNum = message.position.nDraws;
+        _positionLossesNum = message.position.nLosses;
       });
     }
   }
