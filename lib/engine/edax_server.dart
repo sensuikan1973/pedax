@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
-import 'api/book_load.dart';
 import 'api/book_get_move_with_position.dart';
+import 'api/book_load.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
