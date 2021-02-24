@@ -21,7 +21,7 @@ void main() {
       await delay500millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
-      await delay500millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 }

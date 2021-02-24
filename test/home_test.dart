@@ -54,7 +54,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await Future<void>.delayed(const Duration(seconds: 4)); // wait hint process
+      await Future<void>.delayed(const Duration(seconds: 4)); // wait isolate process
     });
   });
 
@@ -76,6 +76,7 @@ Future<void> main() async {
       await delay500millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
@@ -91,7 +92,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.license));
         await tester.pumpAndSettle();
         expect(find.byType(LicensePage), findsOneWidget);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -109,7 +110,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -128,7 +129,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -148,7 +149,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -167,7 +168,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -185,7 +186,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -205,7 +206,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -223,7 +224,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -243,7 +244,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await delay500millisec(tester);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
 
@@ -263,6 +264,7 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
+        await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
       });
     });
   });

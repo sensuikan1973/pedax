@@ -11,7 +11,6 @@ import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
@@ -47,7 +46,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay500millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
@@ -60,7 +59,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay500millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
@@ -73,7 +72,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay500millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
@@ -86,7 +85,7 @@ void main() {
       await tester.pumpAndSettle();
       await waitEdaxSetuped(tester);
       debugDumpApp();
-      await delay500millisec(tester);
+      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });
 
