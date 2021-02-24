@@ -11,5 +11,13 @@
   "hintStepByStepSetting": "評価値の段階表示",
   "hintStepByStepDescription": "オンにすると、レベル設定を上限として、評価値を段階的に表示します。\nこれは便利ですが、結果的に解析時間は長くなります。",
   "loadingBookFile": "book を読み込み中...",
-  "finishedLoadingBookFile": "book の読み込みが終わりました ＼(^o^)／"
+  "finishedLoadingBookFile": "book の読み込みが終わりました ＼(^o^)／",
+  "positionInfo": "📓 完全: {fullNum}. (勝ち: {winRate}%, 引分: {drawRate}%)",
+  "@positionInfo": {
+    "placeholders": {
+      "fullNum": { "type": "int", "format": "compact" },
+      "winRate": { "type": "int", "format": "compact" },
+      "drawRate": { "type": "int", "format": "compact" }
+    }
+  }
 }

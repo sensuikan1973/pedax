@@ -14,5 +14,13 @@
   "hintStepByStepSetting": "step-by-step hint",
   "hintStepByStepDescription": "If true, pedax show hints step-by-step.\nAlthough this is useful, total search time is longer.",
   "loadingBookFile": "loading book file ...",
-  "finishedLoadingBookFile": "book file has been loaded ＼(^o^)／"
+  "finishedLoadingBookFile": "book file has been loaded ＼(^o^)／",
+  "positionInfo": "📓 full: {fullNum}. (win: {winRate}%, draw: {drawRate}%)",
+  "@positionInfo": {
+    "placeholders": {
+      "fullNum": { "type": "int", "format": "compact" },
+      "winRate": { "type": "int", "format": "compact" },
+      "drawRate": { "type": "int", "format": "compact" }
+    }
+  }
 }
