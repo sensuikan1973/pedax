@@ -107,16 +107,28 @@ class _PedaxBoardState extends State<PedaxBoard> {
         width: widget.length / _boardSize * 10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ' '].map((e) => Text(e)).toList(),
+          children: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ' ']
+              .map((e) => Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(e),
+                  ))
+              .toList(),
         ),
       );
 
   Widget get _yCoordinateLabels => SizedBox(
-        height: widget.length * 9 / _boardSize,
+        height: widget.length,
         width: widget.length / _boardSize,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(_boardSize, (i) => Text((i + 1).toString())),
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(
+            _boardSize,
+            (i) => Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Text((i + 1).toString()),
+            ),
+          ),
         ),
       );
 
