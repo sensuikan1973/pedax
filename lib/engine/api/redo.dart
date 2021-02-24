@@ -12,7 +12,7 @@ class RedoRequest extends RequestSchema {
   const RedoRequest();
 
   @override
-  String get name => 'undo';
+  String get name => 'redo';
 }
 
 @immutable
