@@ -164,14 +164,15 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Future<HintOneByOneRequest> get _buildHintRequest async => HintOneByOneRequest(
+  Future<HintOneByOneRequest> _buildHintRequest(String movesAtRequest) async => HintOneByOneRequest(
         level: await _levelOption.val,
         stepByStep: await _hintStepByStepOption.val,
+        movesAtRequest: movesAtRequest,
       );
 
-  Future<void> _onMovesUpdated() async {
+  Future<void> _onMovesUpdated(String moves) async {
     _hints.clear();
-    widget.edaxServerPort.send(await _buildHintRequest);
+    widget.edaxServerPort.send(await _buildHintRequest(moves));
     if (_bookLoaded.isCompleted && await _bookLoaded.future) {
       widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
@@ -181,7 +182,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated();
+      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -191,7 +192,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is PlayResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated();
+      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -202,7 +203,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       });
     } else if (message is InitResponse) {
       if (!_edaxInit.isCompleted) _edaxInit.complete(true);
-      await _onMovesUpdated();
+      await _onMovesUpdated(message.moves);
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -212,7 +213,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is UndoResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated();
+      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -222,7 +223,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         _currentMoves = message.moves;
       });
     } else if (message is RedoResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated();
+      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
       setState(() {
         _board = message.board;
         _squaresOfPlayer = _board.squaresOfPlayer;
@@ -234,7 +235,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     } else if (message is HintOneByOneResponse) {
       setState(() {
         _logger.d('${message.hint.moveString}: ${message.hint.scoreString}');
-        if (message.searchTargetMoves != _currentMoves) return _hints.clear();
+        if (message.request.movesAtRequest != _currentMoves) return _hints.clear();
         _hints
           ..removeWhere((hint) => hint.move == message.hint.move)
           ..add(message.hint);
