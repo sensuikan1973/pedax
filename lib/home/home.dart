@@ -67,7 +67,9 @@ class _HomeState extends State<Home> {
           future: _edaxServerSpawned.future,
           builder: (_, snapshot) {
             if (snapshot.hasData && snapshot.data!) {
-              return Center(child: PedaxBoard(_edaxServerPort, _receiveStream, 480));
+              return Center(
+                child: PedaxBoard(_edaxServerPort, _receiveStream, 480),
+              );
             }
             return const Center(child: Text('initializing engine...'));
           },
