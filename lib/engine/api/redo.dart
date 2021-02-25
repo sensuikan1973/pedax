@@ -9,7 +9,9 @@ final _logger = Logger();
 
 @immutable
 class RedoRequest extends RequestSchema {
-  const RedoRequest();
+  const RedoRequest({required this.times});
+
+  final int times;
 
   @override
   String get name => 'redo';
@@ -34,7 +36,9 @@ class RedoResponse extends ResponseSchema<RedoRequest> {
 RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   edax.edaxStop();
   _logger.d('stopped edax serach');
-  edax.edaxRedo();
+  for (var i = 0; i < request.times; i++) {
+    edax.edaxRedo();
+  }
   _logger.d('redo');
   final moves = edax.edaxGetMoves();
   _logger.d('current moves: $moves');
