@@ -51,6 +51,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   late Move? _lastMove;
   late String _currentMoves;
   final List<Hint> _hints = [];
+  bool _showHint = true;
   int _bestScore = 0;
   final Completer<bool> _edaxInit = Completer<bool>();
   final Completer<bool> _bookLoaded = Completer<bool>();
@@ -172,7 +173,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   Future<void> _onMovesUpdated(String moves) async {
     _hints.clear();
-    widget.edaxServerPort.send(await _buildHintRequest(moves));
+    if (_showHint) widget.edaxServerPort.send(await _buildHintRequest(moves));
     if (_bookLoaded.isCompleted && await _bookLoaded.future) {
       widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
@@ -264,6 +265,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
     if (event.isKeyPressed(LogicalKeyboardKey.keyI)) widget.edaxServerPort.send(const InitRequest());
     if (event.isKeyPressed(LogicalKeyboardKey.keyS)) widget.edaxServerPort.send(const UndoRequest(times: 60));
     if (event.isKeyPressed(LogicalKeyboardKey.keyE)) widget.edaxServerPort.send(const RedoRequest(times: 60));
+    if (event.isKeyPressed(LogicalKeyboardKey.keyH)) {
+      setState(() {
+        _hints.clear();
+        _showHint = !_showHint;
+      });
+      if (_showHint) widget.edaxServerPort.send(await _buildHintRequest(_currentMoves));
+    }
     if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyC)) ||
         (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyC))) {
       await Clipboard.setData(ClipboardData(text: _currentMoves));
