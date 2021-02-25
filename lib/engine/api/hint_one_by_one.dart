@@ -9,10 +9,11 @@ final _logger = Logger();
 
 @immutable
 class HintOneByOneRequest extends RequestSchema {
-  const HintOneByOneRequest({required this.level, required this.stepByStep});
+  const HintOneByOneRequest({required this.level, required this.stepByStep, required this.movesAtRequest});
 
   final int level;
   final bool stepByStep;
+  final String movesAtRequest;
 
   @override
   String get name => 'hintOneByOne';
@@ -22,13 +23,11 @@ class HintOneByOneRequest extends RequestSchema {
 class HintOneByOneResponse extends ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
     required this.hint,
-    required this.searchTargetMoves,
     required this.level,
     required HintOneByOneRequest request,
   }) : super(request);
 
   final Hint hint;
-  final String searchTargetMoves;
   final int level;
 }
 
@@ -40,20 +39,24 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
   for (final level in levelList) {
     edax.edaxStop();
     _logger.d('stopped edax serach');
-    final currentMoves = edax.edaxGetMoves();
     edax
       ..edaxSetOption('-level', level.toString())
       ..edaxHintPrepare();
-    _logger.d('prepared getting hint one by one.\nlevel: $level.\ncurrent moves: $currentMoves');
+    _logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
     // ignore: literal_only_boolean_expressions
     while (true) {
-      if (edax.edaxGetMoves() != currentMoves) break;
+      final currentMoves = edax.edaxGetMoves();
+      if (currentMoves != request.movesAtRequest) {
+        _logger.d(
+            'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"');
+        break;
+      }
 
       _logger.d('will call edaxHintNextNoMultiPvDepth');
       final hint = edax.edaxHintNextNoMultiPvDepth();
       _logger.d('${hint.moveString}: ${hint.scoreString}');
       if (hint.isNoMove) break;
-      yield HintOneByOneResponse(hint: hint, searchTargetMoves: currentMoves, level: level, request: request);
+      yield HintOneByOneResponse(hint: hint, level: level, request: request);
     }
   }
 }
