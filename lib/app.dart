@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'home/home.dart';
 
+@immutable
 class PedaxApp extends StatelessWidget {
   const PedaxApp({Key? key}) : super(key: key);
 

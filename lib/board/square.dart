@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class Square extends StatelessWidget {
   const Square({
     required this.type,

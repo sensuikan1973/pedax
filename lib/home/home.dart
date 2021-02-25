@@ -15,6 +15,7 @@ import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
 import 'n_tasks_setting_dialog.dart';
 
+@immutable
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 

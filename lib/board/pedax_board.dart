@@ -23,6 +23,7 @@ import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import 'square.dart';
 
+@immutable
 class PedaxBoard extends StatefulWidget {
   const PedaxBoard(this.edaxServerPort, this.edaxServerParentPort, this.length, {Key? key}) : super(key: key);
 
