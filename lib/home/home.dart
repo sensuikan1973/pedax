@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logger/logger.dart';
 
 import '../board/pedax_board.dart';
-import '../engine/edax_asset.dart' show EdaxAsset;
+import '../engine/edax_asset.dart';
 import '../engine/edax_server.dart';
 import 'book_file_path_setting_dialog.dart';
 import 'hint_step_by_step_setting_dialog.dart';
