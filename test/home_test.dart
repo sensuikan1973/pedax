@@ -54,6 +54,21 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyS);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyI);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+
       await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
   });

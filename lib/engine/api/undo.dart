@@ -9,7 +9,9 @@ final _logger = Logger();
 
 @immutable
 class UndoRequest extends RequestSchema {
-  const UndoRequest();
+  const UndoRequest({required this.times});
+
+  final int times;
 
   @override
   String get name => 'undo';
@@ -34,8 +36,10 @@ class UndoResponse extends ResponseSchema<UndoRequest> {
 UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   edax.edaxStop();
   _logger.d('stopped edax serach');
-  edax.edaxUndo();
-  _logger.d('undo');
+  for (var i = 0; i < request.times; i++) {
+    edax.edaxUndo();
+  }
+  _logger.d('undo ${request.times} times');
   final moves = edax.edaxGetMoves();
   _logger.d('current moves: $moves');
   return UndoResponse(
