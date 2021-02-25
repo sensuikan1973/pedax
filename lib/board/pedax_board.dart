@@ -171,10 +171,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   Future<void> _onMovesUpdated() async {
     _hints.clear();
+    widget.edaxServerPort.send(await _buildHintRequest);
     if (_bookLoaded.isCompleted && await _bookLoaded.future) {
       widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
-    widget.edaxServerPort.send(await _buildHintRequest);
   }
 
   // ignore: avoid_annotating_with_dynamic
