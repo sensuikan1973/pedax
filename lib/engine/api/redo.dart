@@ -39,7 +39,7 @@ RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   for (var i = 0; i < request.times; i++) {
     edax.edaxRedo();
   }
-  _logger.d('redo');
+  _logger.d('redo ${request.times} times');
   final moves = edax.edaxGetMoves();
   _logger.d('current moves: $moves');
   return RedoResponse(

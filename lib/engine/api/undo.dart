@@ -39,7 +39,7 @@ UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   for (var i = 0; i < request.times; i++) {
     edax.edaxUndo();
   }
-  _logger.d('undo');
+  _logger.d('undo ${request.times} times');
   final moves = edax.edaxGetMoves();
   _logger.d('current moves: $moves');
   return UndoResponse(
