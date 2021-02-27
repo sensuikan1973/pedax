@@ -28,7 +28,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   late final SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
-  final _hintstepByStepOption = const HintStepByStepOption();
+  final _hintStepByStepOption = const HintStepByStepOption();
   final _levelOption = const LevelOption();
 
   Future<void> spawnEdaxServer(String libedaxPath, List<String> initLibedaxParams) async {
@@ -66,7 +66,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   Future<HintOneByOneRequest> _buildHintRequest(String movesAtRequest) async => HintOneByOneRequest(
         level: await _levelOption.val,
-        stepByStep: await _hintstepByStepOption.val,
+        stepByStep: await _hintStepByStepOption.val,
         movesAtRequest: movesAtRequest,
       );
 
