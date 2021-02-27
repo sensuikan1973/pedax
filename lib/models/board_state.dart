@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
-// @immutable
 @doNotStore
 class BoardState {
   BoardState();
