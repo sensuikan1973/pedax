@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:meta/meta.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
+// @immutable
+@doNotStore
 class BoardState {
   BoardState();
 
@@ -14,6 +17,8 @@ class BoardState {
   final List<Hint> hints = [];
   final Completer<bool> edaxInit = Completer<bool>();
 
+  late int level;
+  late bool hintStepByStep;
   bool bookLoading = false;
   bool hintIsVisible = true;
   int bestScore = 0;

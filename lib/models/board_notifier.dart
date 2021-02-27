@@ -15,21 +15,21 @@ import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
-import '../engine/options/hint_step_by_step_option.dart';
-import '../engine/options/level_option.dart';
 import 'board_state.dart';
 
 @doNotStore
 class BoardNotifier extends ValueNotifier<BoardState> {
-  BoardNotifier(BoardState value) : super(value);
+  BoardNotifier(BoardState value, {required int level, required bool hintStepByStep}) : super(value) {
+    value
+      ..level = level
+      ..hintStepByStep = hintStepByStep;
+  }
 
   final _logger = Logger();
   final Completer<bool> _edaxServerSpawned = Completer<bool>();
   late final SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
-  final _hintStepByStepOption = const HintStepByStepOption();
-  final _levelOption = const LevelOption();
 
   Future<void> spawnEdaxServer(String libedaxPath, List<String> initLibedaxParams) async {
     await Isolate.spawn(
@@ -65,8 +65,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   Future<HintOneByOneRequest> _buildHintRequest(String movesAtRequest) async => HintOneByOneRequest(
-        level: await _levelOption.val,
-        stepByStep: await _hintStepByStepOption.val,
+        level: value.level,
+        stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
       );
 
