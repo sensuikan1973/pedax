@@ -19,11 +19,7 @@ import 'board_state.dart';
 
 @doNotStore
 class BoardNotifier extends ValueNotifier<BoardState> {
-  BoardNotifier(BoardState value, {required int level, required bool hintStepByStep}) : super(value) {
-    value
-      ..level = level
-      ..hintStepByStep = hintStepByStep;
-  }
+  BoardNotifier() : super(BoardState());
 
   final _logger = Logger();
   final Completer<bool> _edaxServerSpawned = Completer<bool>();
@@ -31,7 +27,12 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
 
-  Future<void> spawnEdaxServer(String libedaxPath, List<String> initLibedaxParams) async {
+  Future<void> spawnEdaxServer({
+    required String libedaxPath,
+    required List<String> initLibedaxParams,
+    required int level,
+    required bool hintStepByStep,
+  }) async {
     await Isolate.spawn(
       startEdaxServer,
       StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams),
@@ -43,6 +44,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
     _receiveStream.listen(_updateStateByEdaxServerResponse);
     _edaxServerPort.send(const InitRequest());
+
+    value
+      ..level = level
+      ..hintStepByStep = hintStepByStep;
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
