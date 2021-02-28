@@ -150,13 +150,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (message.request.movesAtRequest != value.currentMoves) {
         value.hints = UnmodifiableListView([]);
       } else {
-        value.hints = UnmodifiableListView(
-          [...value.hints]
-            ..removeWhere((hint) => hint.move == message.hint.move)
-            ..add(message.hint),
-        );
-        // ignore: cascade_invocations
-        value.bestScore = value.hints.map<int>((h) => h.score).reduce(max);
+        value
+          ..hints = UnmodifiableListView(
+            [...value.hints]
+              ..removeWhere((hint) => hint.move == message.hint.move)
+              ..add(message.hint),
+          )
+          ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
