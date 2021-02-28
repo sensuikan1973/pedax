@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../engine/options/book_file_option.dart';
 import '../models/board_notifier.dart';
 
+@immutable
 class BookFilePathSettingDialog extends StatelessWidget {
   BookFilePathSettingDialog({Key? key}) : super(key: key);
 

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../engine/options/n_tasks_option.dart';
 import '../models/board_notifier.dart';
 
+@immutable
 class NTasksSettingDialog extends StatelessWidget {
   NTasksSettingDialog({Key? key}) : super(key: key);
 

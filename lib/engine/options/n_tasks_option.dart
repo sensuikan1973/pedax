@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 
 import 'edax_option.dart';

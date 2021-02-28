@@ -4,14 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 
-class HintStepByStepSettingDialog extends StatefulWidget {
+class HintStepByStepSettingDialog extends StatelessWidget {
   const HintStepByStepSettingDialog({Key? key}) : super(key: key);
 
-  @override
-  _HintStepByStepSettingDialogState createState() => _HintStepByStepSettingDialogState();
-}
-
-class _HintStepByStepSettingDialogState extends State<HintStepByStepSettingDialog> {
   HintStepByStepOption get _option => const HintStepByStepOption();
 
   @override
@@ -26,9 +21,7 @@ class _HintStepByStepSettingDialogState extends State<HintStepByStepSettingDialo
               Switch(
                 value: snapshot.hasData && snapshot.data!,
                 onChanged: (value) {
-                  setState(() {
-                    _option.update(value);
-                  });
+                  _option.update(value);
                 },
               ),
             ],
