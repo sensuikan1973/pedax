@@ -48,7 +48,12 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort = await _receiveStream.first as SendPort;
     _logger.d('spawned edax server');
 
-    _receiveStream.listen(_updateStateByEdaxServerResponse);
+    // ignore: avoid_annotating_with_dynamic
+    _receiveStream.listen((dynamic message) {
+      _updateStateByEdaxServerResponse(message);
+      notifyListeners();
+    });
+
     _edaxServerPort.send(const InitRequest());
 
     value
@@ -165,7 +170,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..positionWinsNum = message.position.nWins
         ..positionDrawsNum = message.position.nDraws
         ..positionLossesNum = message.position.nLosses;
+    } else if (message is SetOptionResponse) {
+      // do nothing
+    } else {
+      _logger.w('response ${message.runtimeType} is not supported');
     }
-    notifyListeners();
   }
 }
