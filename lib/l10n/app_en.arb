@@ -3,6 +3,7 @@
   "@appTitle": {
     "description": "app title"
   },
+  "initializingEngine": "initializing engine...",
   "analysisMode": "analysis mode",
   "bookFilePathSetting": "edax book file path",
   "license": "LICENSE",

@@ -24,7 +24,6 @@ Future<void> startEdaxServer(StartEdaxServerParams params) async {
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
-@doNotStore
 @immutable
 class StartEdaxServerParams {
   const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters);
@@ -34,6 +33,7 @@ class StartEdaxServerParams {
 }
 
 // TODO: consider to separate as edax_server package
+@doNotStore
 class EdaxServer {
   EdaxServer({required this.dllPath});
 
@@ -49,6 +49,7 @@ class EdaxServer {
 
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
+  Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 10);
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -73,7 +74,7 @@ class EdaxServer {
         // ignore: literal_only_boolean_expressions
         while (true) {
           if (_searchWorkerNum >= _maxSearchWorkerNum) {
-            await Future<void>.delayed(const Duration(milliseconds: 10));
+            await Future<void>.delayed(_searchWorkerSpawningSpan);
             continue;
           }
           _searchWorkerNum++;
@@ -103,7 +104,7 @@ class EdaxServer {
         _receivePort.close();
         _logger.i('shutdowned');
       } else {
-        throw Exception('[EdaxServer] request ${message.runtimeType} is not supported');
+        _logger.w('request ${message.runtimeType} is not supported');
       }
     }); // TODO: error handling
   }

@@ -202,7 +202,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update n-tasks', (tester) async {
+    testWidgets('update n-tasks with valid num', (tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -213,6 +213,25 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
         await tester.enterText(find.byType(EditableText), 1.toString());
+        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 1));
+        expect(find.byType(NTasksSettingDialog), findsNothing);
+        await delay300millisec(tester);
+      });
+    });
+
+    testWidgets('update n-tasks with invalid num', (tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.nTasksSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+        await tester.enterText(find.byType(EditableText), (-1).toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
@@ -238,7 +257,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update level', (tester) async {
+    testWidgets('update level with valid num', (tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -249,6 +268,25 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.levelSetting), findsOneWidget);
         await tester.enterText(find.byType(EditableText), 1.toString());
+        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 1));
+        expect(find.byType(LevelSettingDialog), findsNothing);
+        await delay300millisec(tester);
+      });
+    });
+
+    testWidgets('update level with invalid num', (tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.levelSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.levelSetting), findsOneWidget);
+        await tester.enterText(find.byType(EditableText), (-1).toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
