@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as p;
 

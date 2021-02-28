@@ -2,6 +2,7 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
@@ -23,6 +24,7 @@ Future<void> startEdaxServer(StartEdaxServerParams params) async {
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
+@doNotStore
 @immutable
 class StartEdaxServerParams {
   const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters);

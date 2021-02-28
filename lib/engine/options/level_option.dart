@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import 'edax_option.dart';
 

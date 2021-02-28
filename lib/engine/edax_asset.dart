@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -11,6 +11,7 @@ import 'options/eval_file_option.dart';
 import 'options/level_option.dart';
 import 'options/n_tasks_option.dart';
 
+@doNotStore
 @immutable
 class EdaxAsset {
   const EdaxAsset();

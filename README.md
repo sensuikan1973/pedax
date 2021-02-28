@@ -11,7 +11,7 @@
 _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
 
 - support **Mac/Windows/Linux**.
-- you can see `eval value`(e.g. `+4`, `-10`) **comfortably**.
+- you can see `eval value`(e.g. `+4`, `-10`) **Comfortably**.
 
 ---
 
@@ -48,7 +48,7 @@ flutter test
 ##### integration test
 
 ```sh
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d mac
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 ```
 
 #### analyze

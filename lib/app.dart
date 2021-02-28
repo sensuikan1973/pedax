@@ -2,9 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import 'home/home.dart';
+import 'models/board_notifier.dart';
 
+@immutable
 class PedaxApp extends StatelessWidget {
   const PedaxApp({Key? key}) : super(key: key);
 
@@ -12,7 +15,10 @@ class PedaxApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
         theme: ThemeData(primarySwatch: Colors.brown),
-        home: const Home(),
+        home: ChangeNotifierProvider(
+          create: (_) => BoardNotifier(),
+          child: const Home(),
+        ),
         localizationsDelegates: localizationsDelegates,
         supportedLocales: supportedLocales,
         // locale: localeEn,
