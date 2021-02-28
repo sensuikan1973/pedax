@@ -49,6 +49,7 @@ class EdaxServer {
 
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
+  Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 10);
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -73,7 +74,7 @@ class EdaxServer {
         // ignore: literal_only_boolean_expressions
         while (true) {
           if (_searchWorkerNum >= _maxSearchWorkerNum) {
-            await Future<void>.delayed(const Duration(milliseconds: 10));
+            await Future<void>.delayed(_searchWorkerSpawningSpan);
             continue;
           }
           _searchWorkerNum++;
