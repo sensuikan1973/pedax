@@ -118,7 +118,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
     if (event.isKeyPressed(LogicalKeyboardKey.keyU)) boardNotifier.requestUndo();
     if (event.isKeyPressed(LogicalKeyboardKey.keyR)) boardNotifier.requestRedo();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyI)) boardNotifier.requestInit();
     if (event.isKeyPressed(LogicalKeyboardKey.keyS)) boardNotifier.requestUndoAll();
     if (event.isKeyPressed(LogicalKeyboardKey.keyE)) boardNotifier.requestRedoAll();
     if (event.isKeyPressed(LogicalKeyboardKey.keyH)) await boardNotifier.switchHintVisibility();
