@@ -54,7 +54,6 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
 
       _logger.d('will call edaxHintNextNoMultiPvDepth');
       final hint = edax.edaxHintNextNoMultiPvDepth();
-      _logger.d('${hint.moveString}: ${hint.scoreString}');
       if (hint.isNoMove) break;
       yield HintOneByOneResponse(hint: hint, level: level, request: request);
     }

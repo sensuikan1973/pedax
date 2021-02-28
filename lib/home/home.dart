@@ -1,15 +1,17 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
 import '../engine/edax_asset.dart';
-import '../engine/edax_server.dart';
+import '../engine/options/hint_step_by_step_option.dart';
+import '../engine/options/level_option.dart';
+import '../models/board_notifier.dart';
+import '../models/board_state.dart';
 import 'book_file_path_setting_dialog.dart';
 import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
@@ -25,57 +27,70 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _edaxAsset = const EdaxAsset();
-  final Completer<bool> _edaxServerSpawned = Completer<bool>();
-  late final SendPort _edaxServerPort;
-  final _receivePort = ReceivePort();
-  late final Stream<dynamic> _receiveStream;
-  final _logger = Logger();
 
   @override
   void initState() {
     super.initState();
-    _spawnEdaxServer();
+    _setUpEdaxServer();
   }
 
-  Future<void> _spawnEdaxServer() async {
+  Future<void> _setUpEdaxServer() async {
     await _edaxAsset.setupDllAndData();
-    final initLibedaxParameters = await _edaxAsset.buildInitLibEdaxParams();
-    await Isolate.spawn(
-      startEdaxServer,
-      StartEdaxServerParams(_receivePort.sendPort, await _edaxAsset.libedaxPath, initLibedaxParameters),
+    final boardNotifier = context.read<BoardNotifier>();
+    await boardNotifier.spawnEdaxServer(
+      libedaxPath: await _edaxAsset.libedaxPath,
+      initLibedaxParams: await _edaxAsset.buildInitLibEdaxParams(),
+      level: await const LevelOption().val,
+      hintStepByStep: await const HintStepByStepOption().val,
     );
-    _receiveStream = _receivePort.asBroadcastStream();
-    _edaxServerPort = await _receiveStream.first as SendPort;
-    setState(() {
-      _edaxServerSpawned.complete(true);
-      _logger.d('spawned edax server');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final edaxInitOnce = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce);
+    if (!edaxInitOnce) return const Center(child: CupertinoActivityIndicator());
+    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus>((notifier) => notifier.value.bookLoadStatus);
+    if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLod();
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: _menu(),
+        title: Text(AppLocalizations.of(context)!.analysisMode),
+      ),
+      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
+                const Center(child: PedaxBoard(480)),
+              ],
+            )
+          : const Center(child: Text('initializing engine...')),
+    );
+  }
+
+  void _showSnackBarOfBookLod() {
+    context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
+        ),
+      );
     });
   }
 
-  @override
-  void dispose() {
-    _receivePort.close();
-    super.dispose();
+  String get _positionInfoText {
+    final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
+    return positionFullNum == 0
+        ? '📓 -'
+        : AppLocalizations.of(context)!.positionInfo(
+            positionFullNum,
+            context.select<BoardNotifier, int>((notifier) => notifier.value.positionWinsRate),
+            context.select<BoardNotifier, int>((notifier) => notifier.value.positionDrawsRate),
+          );
   }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: _menu(),
-          title: Text(AppLocalizations.of(context)!.analysisMode),
-        ),
-        body: FutureBuilder<bool>(
-          future: _edaxServerSpawned.future,
-          builder: (_, snapshot) {
-            if (snapshot.hasData && snapshot.data!) {
-              return Center(
-                child: PedaxBoard(_edaxServerPort, _receiveStream, 480),
-              );
-            }
-            return const Center(child: Text('initializing engine...'));
-          },
-        ),
-      );
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
         icon: const Icon(Icons.menu),
@@ -94,7 +109,10 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.bookFilePathSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => BookFilePathSettingDialog(edaxServerPort: _edaxServerPort),
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: BookFilePathSettingDialog(),
+            ),
           ),
         ),
         _Menu(
@@ -102,7 +120,10 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.nTasksSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => NTasksSettingDialog(edaxServerPort: _edaxServerPort),
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: NTasksSettingDialog(),
+            ),
           ),
         ),
         _Menu(
@@ -110,7 +131,10 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.levelSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => LevelSettingDialog(edaxServerPort: _edaxServerPort),
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: LevelSettingDialog(),
+            ),
           ),
         ),
         _Menu(

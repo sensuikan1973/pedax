@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -8,27 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
-import '../engine/api/book_get_move_with_position.dart';
-import '../engine/api/book_load.dart';
-import '../engine/api/hint_one_by_one.dart';
-import '../engine/api/init.dart';
-import '../engine/api/move.dart';
-import '../engine/api/play.dart';
-import '../engine/api/redo.dart';
-import '../engine/api/undo.dart';
 import '../engine/options/book_file_option.dart';
-import '../engine/options/hint_step_by_step_option.dart';
-import '../engine/options/level_option.dart';
+import '../models/board_notifier.dart';
 import 'square.dart';
 
 @immutable
 class PedaxBoard extends StatefulWidget {
-  const PedaxBoard(this.edaxServerPort, this.edaxServerParentPort, this.length, {Key? key}) : super(key: key);
-
-  final SendPort edaxServerPort;
-  final Stream<dynamic> edaxServerParentPort;
+  const PedaxBoard(this.length, {Key? key}) : super(key: key);
   final double length;
 
   @override
@@ -37,33 +23,12 @@ class PedaxBoard extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty<SendPort>('edaxServerPort', edaxServerPort))
-      ..add(DiagnosticsProperty<Stream>('edaxServerParentPort', edaxServerParentPort))
-      ..add(DoubleProperty('length', length));
+    properties.add(DoubleProperty('length', length));
   }
 }
 
 class _PedaxBoardState extends State<PedaxBoard> {
-  late Board _board;
-  late List<int> _squaresOfPlayer;
-  late List<int> _squaresOfOpponent;
-  late int _currentColor;
-  late Move? _lastMove;
-  late String _currentMoves;
-  final List<Hint> _hints = [];
-  bool _showHint = true;
-  int _bestScore = 0;
-  final Completer<bool> _edaxInit = Completer<bool>();
-  final Completer<bool> _bookLoaded = Completer<bool>();
-  final _logger = Logger();
-  final _hintStepByStepOption = const HintStepByStepOption();
-  final _levelOption = const LevelOption();
-  int _positionWinsNum = 0;
-  int _positionLossesNum = 0;
-  int _positionDrawsNum = 0;
-  int get _positionFullNum => _positionWinsNum + _positionLossesNum + _positionDrawsNum;
-
+  late final BoardNotifier boardNotifier;
   int get _boardSize => 8;
   double get _stoneMargin => (widget.length / _boardSize) * 0.1;
   double get _stoneSize => (widget.length / _boardSize) - (_stoneMargin * 2);
@@ -71,54 +36,38 @@ class _PedaxBoardState extends State<PedaxBoard> {
   @override
   void initState() {
     super.initState();
-    widget.edaxServerParentPort.listen(_updateStateByEdaxServerMessage);
-    widget.edaxServerPort.send(const InitRequest());
-    const BookFileOption().val.then(
-      (path) {
-        WidgetsBinding.instance?.addPostFrameCallback((_) {
-          if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
-              duration: const Duration(minutes: 1),
-            ),
-          );
-          widget.edaxServerPort.send(BookLoadRequest(path));
-        });
-      },
-    );
+    boardNotifier = context.read<BoardNotifier>();
+    boardNotifier.requestInit();
+    const BookFileOption().val.then((bookFilePath) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) async {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
+            duration: const Duration(minutes: 1),
+          ),
+        );
+      });
+      boardNotifier.requestBookLoad(bookFilePath);
+    });
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
   }
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<bool>(
-      future: _edaxInit.future,
-      builder: (_, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) return const Center(child: CupertinoActivityIndicator());
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
-            _xCoordinateLabels,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _yCoordinateLabels,
-                _boardBody,
-                _yCoordinatePadding,
-              ],
-            ),
-          ],
-        );
-      });
-
-  String get _positionInfoText => _positionFullNum == 0
-      ? '📓 -'
-      : AppLocalizations.of(context)!.positionInfo(
-          _positionFullNum,
-          (_positionWinsNum / _positionFullNum * 100).floor(),
-          (_positionDrawsNum / _positionFullNum * 100).floor(),
-        );
+  Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _xCoordinateLabels,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _yCoordinateLabels,
+              _boardBody,
+              _yCoordinatePadding,
+            ],
+          ),
+        ],
+      );
 
   Widget get _xCoordinateLabels => SizedBox(
         width: widget.length / _boardSize * 10,
@@ -166,122 +115,22 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Future<HintOneByOneRequest> _buildHintRequest(String movesAtRequest) async => HintOneByOneRequest(
-        level: await _levelOption.val,
-        stepByStep: await _hintStepByStepOption.val,
-        movesAtRequest: movesAtRequest,
-      );
-
-  Future<void> _onMovesUpdated(String moves) async {
-    _hints.clear();
-    if (_showHint) widget.edaxServerPort.send(await _buildHintRequest(moves));
-    if (_bookLoaded.isCompleted && await _bookLoaded.future) {
-      widget.edaxServerPort.send(const GetBookMoveWithPositionRequest());
-    }
-  }
-
-  // ignore: avoid_annotating_with_dynamic
-  Future<void> _updateStateByEdaxServerMessage(dynamic message) async {
-    _logger.i('received response "${message.runtimeType}"');
-    if (message is MoveResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
-      setState(() {
-        _board = message.board;
-        _squaresOfPlayer = _board.squaresOfPlayer;
-        _squaresOfOpponent = _board.squaresOfOpponent;
-        _currentColor = message.currentColor;
-        _lastMove = message.lastMove;
-        _currentMoves = message.moves;
-      });
-    } else if (message is PlayResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
-      setState(() {
-        _board = message.board;
-        _squaresOfPlayer = _board.squaresOfPlayer;
-        _squaresOfOpponent = _board.squaresOfOpponent;
-        _currentColor = message.currentColor;
-        _lastMove = message.lastMove;
-        _currentMoves = message.moves;
-      });
-    } else if (message is InitResponse) {
-      if (!_edaxInit.isCompleted) _edaxInit.complete(true);
-      await _onMovesUpdated(message.moves);
-      setState(() {
-        _board = message.board;
-        _squaresOfPlayer = _board.squaresOfPlayer;
-        _squaresOfOpponent = _board.squaresOfOpponent;
-        _currentColor = message.currentColor;
-        _lastMove = message.lastMove;
-        _currentMoves = message.moves;
-      });
-    } else if (message is UndoResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
-      setState(() {
-        _board = message.board;
-        _squaresOfPlayer = _board.squaresOfPlayer;
-        _squaresOfOpponent = _board.squaresOfOpponent;
-        _currentColor = message.currentColor;
-        _lastMove = message.lastMove;
-        _currentMoves = message.moves;
-      });
-    } else if (message is RedoResponse) {
-      if (_currentMoves != message.moves) await _onMovesUpdated(message.moves);
-      setState(() {
-        _board = message.board;
-        _squaresOfPlayer = _board.squaresOfPlayer;
-        _squaresOfOpponent = _board.squaresOfOpponent;
-        _currentColor = message.currentColor;
-        _lastMove = message.lastMove;
-        _currentMoves = message.moves;
-      });
-    } else if (message is HintOneByOneResponse) {
-      setState(() {
-        _logger.d('${message.hint.moveString}: ${message.hint.scoreString}');
-        if (message.request.movesAtRequest != _currentMoves) return _hints.clear();
-        _hints
-          ..removeWhere((hint) => hint.move == message.hint.move)
-          ..add(message.hint);
-        _bestScore = _hints.map<int>((h) => h.score).reduce(max);
-      });
-    } else if (message is BookLoadResponse) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
-        ),
-      );
-      if (!_bookLoaded.isCompleted) _bookLoaded.complete(true);
-    } else if (message is GetBookMoveWithPositionResponse) {
-      setState(() {
-        _positionWinsNum = message.position.nWins;
-        _positionDrawsNum = message.position.nDraws;
-        _positionLossesNum = message.position.nLosses;
-      });
-    }
-  }
-
   Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
-    if (event.isKeyPressed(LogicalKeyboardKey.keyU)) widget.edaxServerPort.send(const UndoRequest(times: 1));
-    if (event.isKeyPressed(LogicalKeyboardKey.keyR)) widget.edaxServerPort.send(const RedoRequest(times: 1));
-    if (event.isKeyPressed(LogicalKeyboardKey.keyI)) widget.edaxServerPort.send(const InitRequest());
-    if (event.isKeyPressed(LogicalKeyboardKey.keyS)) widget.edaxServerPort.send(const UndoRequest(times: 60));
-    if (event.isKeyPressed(LogicalKeyboardKey.keyE)) widget.edaxServerPort.send(const RedoRequest(times: 60));
-    if (event.isKeyPressed(LogicalKeyboardKey.keyH)) {
-      setState(() {
-        _hints.clear();
-        _showHint = !_showHint;
-      });
-      if (_showHint) widget.edaxServerPort.send(await _buildHintRequest(_currentMoves));
-    }
+    if (event.isKeyPressed(LogicalKeyboardKey.keyU)) boardNotifier.requestUndo();
+    if (event.isKeyPressed(LogicalKeyboardKey.keyR)) boardNotifier.requestRedo();
+    if (event.isKeyPressed(LogicalKeyboardKey.keyI)) boardNotifier.requestInit();
+    if (event.isKeyPressed(LogicalKeyboardKey.keyS)) boardNotifier.requestUndoAll();
+    if (event.isKeyPressed(LogicalKeyboardKey.keyE)) boardNotifier.requestRedoAll();
+    if (event.isKeyPressed(LogicalKeyboardKey.keyH)) await boardNotifier.switchHintVisibility();
     if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyC)) ||
         (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyC))) {
-      await Clipboard.setData(ClipboardData(text: _currentMoves));
+      await Clipboard.setData(ClipboardData(text: boardNotifier.value.currentMoves));
     }
     if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyV)) ||
         (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyV))) {
       final clipboardData = await Clipboard.getData('text/plain');
       if (clipboardData == null || clipboardData.text == null) return;
-      widget.edaxServerPort.send(PlayRequest(clipboardData.text!));
+      boardNotifier.requestPlay(clipboardData.text!);
     }
   }
 
@@ -289,31 +138,37 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final move = y * 8 + x;
     final type = _squareType(move);
     final moveString = move2String(move);
-    final targetHints = _hints.where((h) => h.move == move).toList();
+    final hints = context.select<BoardNotifier, List<Hint>>((notifier) => notifier.value.hints);
+    final targetHints = hints.where((h) => h.move == move).toList();
     final hint = targetHints.isEmpty ? null : targetHints.first;
+    final lastMove = context.select<BoardNotifier, Move?>((notifier) => notifier.value.lastMove);
+    final bestScore = context.select<BoardNotifier, int>((notifier) => notifier.value.bestScore);
     return Square(
       type: type,
       length: _stoneSize,
       margin: _stoneMargin,
       coordinate: moveString,
-      isLastMove: _lastMove?.x == move,
+      isLastMove: lastMove?.x == move,
       isBookMove: hint != null && hint.isBookMove,
       score: hint?.score,
-      scoreColor: _scoreColor(hint?.score, hint?.score == _bestScore),
+      scoreColor: _scoreColor(hint?.score, hint?.score == bestScore),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
   }
 
   void _squareOnTap(String moveString) {
-    widget.edaxServerPort.send(MoveRequest(moveString));
+    boardNotifier.requestMove(moveString);
   }
 
   SquareType _squareType(int move) {
-    final isBlackTurn = _currentColor == TurnColor.black;
-    if (_squaresOfPlayer.contains(move)) {
+    final currentColor = context.select<BoardNotifier, int>((notifier) => notifier.value.currentColor);
+    final squaresOfPlayer = context.select<BoardNotifier, List<int>>((notifier) => notifier.value.squaresOfPlayer);
+    final squaresOfOpponent = context.select<BoardNotifier, List<int>>((notifier) => notifier.value.squaresOfOpponent);
+    final isBlackTurn = currentColor == TurnColor.black;
+    if (squaresOfPlayer.contains(move)) {
       return isBlackTurn ? SquareType.black : SquareType.white;
     }
-    if (_squaresOfOpponent.contains(move)) {
+    if (squaresOfOpponent.contains(move)) {
       return isBlackTurn ? SquareType.white : SquareType.black;
     }
     return SquareType.empty;
@@ -328,5 +183,11 @@ class _PedaxBoardState extends State<PedaxBoard> {
       if (bestMove) return Colors.lime;
       return Colors.lime[900];
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<BoardNotifier>('notifier', boardNotifier));
   }
 }

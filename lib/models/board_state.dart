@@ -1,9 +1,7 @@
-import 'dart:async';
+import 'dart:collection';
 
-import 'package:meta/meta.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 
-@doNotStore
 class BoardState {
   BoardState();
 
@@ -12,14 +10,15 @@ class BoardState {
   late List<int> squaresOfOpponent;
   late int currentColor;
   late Move? lastMove;
-  late String currentMoves;
-  final List<Hint> hints = [];
-  final Completer<bool> edaxInit = Completer<bool>();
 
   late int level;
   late bool hintStepByStep;
-  bool bookLoading = false;
+  UnmodifiableListView<Hint> hints = UnmodifiableListView([]);
+  bool edaxInitOnce = false;
+  String currentMoves = '';
+  BookLoadStatus bookLoadStatus = BookLoadStatus.loading;
   bool hintIsVisible = true;
+  bool edaxServerSpawned = false;
   int bestScore = 0;
   int positionWinsNum = 0;
   int positionLossesNum = 0;
@@ -29,3 +28,5 @@ class BoardState {
   int get positionWinsRate => (positionWinsNum / positionFullNum * 100).floor();
   int get positionDrawsRate => (positionDrawsNum / positionFullNum * 100).floor();
 }
+
+enum BookLoadStatus { loading, loaded, notifiedToUser }
