@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
-                const Center(child: PedaxBoard(480)),
+                const Center(child: PedaxBoard(420)),
                 Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
             )
