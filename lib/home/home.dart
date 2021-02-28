@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                 const Center(child: PedaxBoard(480)),
               ],
             )
-          : const Center(child: Text('initializing engine...')),
+          : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
 
