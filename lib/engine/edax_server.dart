@@ -24,7 +24,6 @@ Future<void> startEdaxServer(StartEdaxServerParams params) async {
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
-@doNotStore
 @immutable
 class StartEdaxServerParams {
   const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters);
@@ -34,6 +33,7 @@ class StartEdaxServerParams {
 }
 
 // TODO: consider to separate as edax_server package
+@doNotStore
 class EdaxServer {
   EdaxServer({required this.dllPath});
 
