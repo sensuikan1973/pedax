@@ -63,11 +63,39 @@ class _HomeState extends State<Home> {
               children: [
                 Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
                 const Center(child: PedaxBoard(480)),
+                Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
             )
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
+
+  Row get _discCount => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/images/black_stone.png', fit: BoxFit.contain, height: 20, width: 20),
+              Text(
+                context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
+                style: const TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset('assets/images/white_stone.png', fit: BoxFit.contain, height: 20, width: 20),
+              Text(
+                context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
+                style: const TextStyle(color: Colors.black),
+              )
+            ],
+          ),
+        ],
+      );
 
   void _showSnackBarOfBookLod() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
