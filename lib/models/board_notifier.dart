@@ -104,8 +104,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = value.board.squaresOfPlayer
-        ..squaresOfOpponent = value.board.squaresOfOpponent
+        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -113,8 +113,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = value.board.squaresOfPlayer
-        ..squaresOfOpponent = value.board.squaresOfOpponent
+        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -123,8 +123,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       _onMovesUpdated(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = value.board.squaresOfPlayer
-        ..squaresOfOpponent = value.board.squaresOfOpponent
+        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -132,8 +132,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = value.board.squaresOfPlayer
-        ..squaresOfOpponent = value.board.squaresOfOpponent
+        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -141,8 +141,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = value.board.squaresOfPlayer
-        ..squaresOfOpponent = value.board.squaresOfOpponent
+        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;

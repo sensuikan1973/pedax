@@ -6,8 +6,8 @@ class BoardState {
   BoardState();
 
   late Board board;
-  late List<int> squaresOfPlayer;
-  late List<int> squaresOfOpponent;
+  late UnmodifiableListView<int> squaresOfPlayer;
+  late UnmodifiableListView<int> squaresOfOpponent;
   late int currentColor;
   late Move? lastMove;
 
