@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
       );
   double get _discCountImageSize => _pedaxBoardBodyLength / 10;
   double get _discCountFontSize => _discCountImageSize * 0.4;
+  double get _positionInfoFontSize => _discCountImageSize * 0.4;
 
   @override
   void initState() {
@@ -68,7 +69,10 @@ class _HomeState extends State<Home> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
+                ),
                 PedaxBoard(bodyLength: _pedaxBoardBodyLength),
                 Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
