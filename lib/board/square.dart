@@ -25,6 +25,8 @@ class Square extends StatelessWidget {
   final Color? scoreColor;
   final bool isLastMove;
   final bool isBookMove;
+  double get _scoreFontSize => length * 0.45;
+  double get _notebookEmojiFontSize => length * 0.25;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -63,7 +65,10 @@ class Square extends StatelessWidget {
   }
 
   SizedBox _scoreText() {
-    final scoreText = Text(_scoreString(score!), style: TextStyle(color: scoreColor));
+    final scoreText = Text(
+      _scoreString(score!),
+      style: TextStyle(color: scoreColor, fontSize: _scoreFontSize),
+    );
     return SizedBox(
       height: length,
       width: length,
@@ -71,7 +76,12 @@ class Square extends StatelessWidget {
           ? Stack(
               children: [
                 Center(child: scoreText),
-                Positioned(top: 0, right: 0, child: Text(_noteBookEmojiUnicode)),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  // REF: https://emojipedia.org/notebook/
+                  child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
+                ),
               ],
             )
           : Center(child: scoreText),
@@ -86,9 +96,6 @@ class Square extends StatelessWidget {
       );
 
   String _scoreString(int score) => score >= 0 ? '+$score' : score.toString();
-
-  // See: https://emojipedia.org/notebook/
-  String get _noteBookEmojiUnicode => '\u{1F4D3}';
 }
 
 enum SquareType { black, white, empty }
