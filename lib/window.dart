@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-const pedaxWindowMinSize = Size(500, 600);
+const pedaxWindowMinSize = Size(600, 700);
