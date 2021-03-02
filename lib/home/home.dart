@@ -28,6 +28,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _edaxAsset = const EdaxAsset();
+  double get _pedaxBoardBodyLength => min(
+        MediaQuery.of(context).size.width * 0.8,
+        MediaQuery.of(context).size.height * 0.7,
+      );
+  double get _discCountImageSize => _pedaxBoardBodyLength / 10;
+  double get _discCountFontSize => _discCountImageSize * 0.4;
 
   @override
   void initState() {
@@ -63,9 +69,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
-                PedaxBoard(
-                  bodyLength: min(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.height * 0.7),
-                ),
+                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
                 Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
             )
@@ -79,10 +83,15 @@ class _HomeState extends State<Home> {
           Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset('assets/images/black_stone.png', fit: BoxFit.contain, height: 20, width: 20),
+              Image.asset(
+                'assets/images/black_stone.png',
+                fit: BoxFit.contain,
+                height: _discCountImageSize,
+                width: _discCountImageSize,
+              ),
               Text(
                 context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
               )
             ],
           ),
@@ -90,10 +99,15 @@ class _HomeState extends State<Home> {
           Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset('assets/images/white_stone.png', fit: BoxFit.contain, height: 20, width: 20),
+              Image.asset(
+                'assets/images/white_stone.png',
+                fit: BoxFit.contain,
+                height: _discCountImageSize,
+                width: _discCountImageSize,
+              ),
               Text(
                 context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
               )
             ],
           ),
