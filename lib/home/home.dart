@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -62,7 +63,9 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
-                const Center(child: PedaxBoard(420)),
+                PedaxBoard(
+                  bodyLength: min(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.height * 0.7),
+                ),
                 Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
             )
