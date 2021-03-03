@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:window_size/window_size.dart';
 
 import 'app.dart';
+import 'window.dart';
 
 Future<void> main() async {
-  if (kReleaseMode) {
-    debugPrint = (message, {wrapWidth}) {};
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  setWindowMinSize(pedaxWindowMinSize);
+
   runApp(const PedaxApp());
 }

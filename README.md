@@ -48,7 +48,7 @@ flutter test
 ##### integration test
 
 ```sh
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos --keep-app-running
 ```
 
 #### analyze
@@ -66,6 +66,7 @@ flutter analyze .
 ### reference
 
 - [Desktop support for Flutter](https://flutter.dev/desktop)
+  - [Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
 - [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 - [macos](https://developer.apple.com/account/#/overview)
   - [App Sandbox](https://developer.apple.com/documentation/security/app_sandbox)

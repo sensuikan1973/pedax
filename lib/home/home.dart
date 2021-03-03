@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +28,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _edaxAsset = const EdaxAsset();
+  double get _pedaxBoardBodyLength => min(
+        MediaQuery.of(context).size.width * 0.8,
+        MediaQuery.of(context).size.height * 0.7,
+      );
+  double get _discCountImageSize => _pedaxBoardBodyLength / 12;
+  double get _discCountFontSize => _discCountImageSize * 0.4;
+  double get _positionInfoFontSize => _discCountImageSize * 0.4;
 
   @override
   void initState() {
@@ -61,13 +69,54 @@ class _HomeState extends State<Home> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(padding: const EdgeInsets.only(bottom: 5), child: Text(_positionInfoText)),
-                const Center(child: PedaxBoard(480)),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
+                ),
+                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
+                Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
               ],
             )
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
+
+  Row get _discCount => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/black_stone.png',
+                fit: BoxFit.contain,
+                height: _discCountImageSize,
+                width: _discCountImageSize,
+              ),
+              Text(
+                context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
+                style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
+              )
+            ],
+          ),
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/white_stone.png',
+                fit: BoxFit.contain,
+                height: _discCountImageSize,
+                width: _discCountImageSize,
+              ),
+              Text(
+                context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
+                style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
+              )
+            ],
+          ),
+        ],
+      );
 
   void _showSnackBarOfBookLod() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
@@ -84,7 +133,7 @@ class _HomeState extends State<Home> {
   String get _positionInfoText {
     final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
     return positionFullNum == 0
-        ? '📓 -'
+        ? '📓 ...'
         : AppLocalizations.of(context)!.positionInfo(
             positionFullNum,
             context.select<BoardNotifier, int>((notifier) => notifier.value.positionWinsRate),

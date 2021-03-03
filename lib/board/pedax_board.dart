@@ -14,8 +14,11 @@ import 'square.dart';
 
 @immutable
 class PedaxBoard extends StatefulWidget {
-  const PedaxBoard(this.length, {Key? key}) : super(key: key);
-  final double length;
+  const PedaxBoard({required this.bodyLength, this.frameWidth = defaultFrameWidth, Key? key}) : super(key: key);
+  final double bodyLength;
+  final double frameWidth;
+
+  static const double defaultFrameWidth = 24;
 
   @override
   _PedaxBoardState createState() => _PedaxBoardState();
@@ -23,15 +26,18 @@ class PedaxBoard extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('length', length));
+    properties..add(DoubleProperty('bodyLength', bodyLength))..add(DoubleProperty('frameWidth', frameWidth));
   }
 }
 
 class _PedaxBoardState extends State<PedaxBoard> {
   late final BoardNotifier boardNotifier;
-  int get _boardSize => 8;
-  double get _stoneMargin => (widget.length / _boardSize) * 0.1;
-  double get _stoneSize => (widget.length / _boardSize) - (_stoneMargin * 2);
+  int get _squareNumPerLine => 8;
+  double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
+  double get _stoneSize => (widget.bodyLength / _squareNumPerLine) - (_stoneMargin * 2);
+  Color get _coordinateLabelColor => Colors.white54;
+  Color get _frameColor => Colors.black;
+  double get _lengthWithFrame => widget.bodyLength + widget.frameWidth * 2;
 
   @override
   void initState() {
@@ -57,59 +63,74 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _xCoordinateLabels,
+          Container(
+            width: _lengthWithFrame,
+            color: _frameColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                _xCoordinateLabels,
+                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+              ],
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _yCoordinateLabels,
               _boardBody,
-              _yCoordinatePadding,
+              _yCoordinateRightPadding,
             ],
           ),
+          _xCoordinateBottomPadding,
         ],
       );
 
-  Widget get _xCoordinateLabels => SizedBox(
-        width: widget.length / _boardSize * 10,
+  Widget get _xCoordinateLabels => Container(
+        color: _frameColor,
+        width: widget.bodyLength,
+        height: widget.frameWidth,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ' ']
-              .map((e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    child: Text(e),
-                  ))
+          children: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+              .map((x) => Text(x, style: TextStyle(color: _coordinateLabelColor)))
               .toList(),
         ),
       );
 
-  Widget get _yCoordinateLabels => SizedBox(
-        height: widget.length,
-        width: widget.length / _boardSize,
+  Widget get _xCoordinateBottomPadding => Container(
+        width: _lengthWithFrame,
+        height: widget.frameWidth,
+        color: _frameColor,
+      );
+
+  Widget get _yCoordinateLabels => Container(
+        color: _frameColor,
+        height: widget.bodyLength,
+        width: widget.frameWidth,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: List.generate(
-            _boardSize,
-            (i) => Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: Text((i + 1).toString()),
-            ),
+            _squareNumPerLine,
+            (i) => Text((i + 1).toString(), style: TextStyle(color: _coordinateLabelColor)),
           ),
         ),
       );
 
-  Widget get _yCoordinatePadding => SizedBox(height: widget.length, width: widget.length / _boardSize);
+  Widget get _yCoordinateRightPadding =>
+      Container(color: _frameColor, height: widget.bodyLength, width: widget.frameWidth);
 
   Widget get _boardBody => Container(
         color: Colors.green[900],
-        height: widget.length,
-        width: widget.length,
+        height: widget.bodyLength,
+        width: widget.bodyLength,
         child: Table(
           border: TableBorder.all(),
           children: List.generate(
-            _boardSize,
+            _squareNumPerLine,
             (yIndex) => TableRow(
-              children: List.generate(_boardSize, (xIndex) => _square(yIndex, xIndex)),
+              children: List.generate(_squareNumPerLine, (xIndex) => _square(yIndex, xIndex)),
             ),
           ),
         ),
@@ -118,7 +139,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
     if (event.isKeyPressed(LogicalKeyboardKey.keyU)) boardNotifier.requestUndo();
     if (event.isKeyPressed(LogicalKeyboardKey.keyR)) boardNotifier.requestRedo();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyI)) boardNotifier.requestInit();
     if (event.isKeyPressed(LogicalKeyboardKey.keyS)) boardNotifier.requestUndoAll();
     if (event.isKeyPressed(LogicalKeyboardKey.keyE)) boardNotifier.requestRedoAll();
     if (event.isKeyPressed(LogicalKeyboardKey.keyH)) await boardNotifier.switchHintVisibility();
@@ -188,6 +208,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BoardNotifier>('notifier', boardNotifier));
+    properties.add(DiagnosticsProperty<BoardNotifier>('boardNotifier', boardNotifier));
   }
 }
