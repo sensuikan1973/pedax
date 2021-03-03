@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
         MediaQuery.of(context).size.width * 0.8,
         MediaQuery.of(context).size.height * 0.7,
       );
-  double get _discCountImageSize => _pedaxBoardBodyLength / 10;
+  double get _discCountImageSize => _pedaxBoardBodyLength / 12;
   double get _discCountFontSize => _discCountImageSize * 0.4;
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
 
