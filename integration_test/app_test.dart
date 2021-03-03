@@ -1,6 +1,5 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
-import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -20,7 +19,6 @@ Future<void> main() async {
 
   setUp(() {
     SharedPreferences.setMockInitialValues({}); // always first launch
-    WidgetsBinding.instance!.renderView.configuration = TestViewConfiguration(size: const Size(1000, 1200));
   });
 
   testWidgets('home', (tester) async {
