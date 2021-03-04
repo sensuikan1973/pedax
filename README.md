@@ -17,7 +17,7 @@ _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which
 
 ## Development
 
-[![flutter-channel](https://img.shields.io/badge/Flutter-dev-64B5F6.svg?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)  
+[![flutter-channel](https://img.shields.io/badge/Flutter-beta-64B5F6.svg?logo=flutter)](https://flutter.dev/docs/development/tools/sdk/releases)  
 ![Flutter CI](https://github.com/sensuikan1973/pedax/workflows/Flutter%20CI/badge.svg)
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 ![Flutter Integration Test](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Integration%20Test/badge.svg)
