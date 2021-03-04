@@ -34,7 +34,9 @@ jobs:
             distribution_path: build/windows/runner/_mode_
           - os: macos-latest
             subcommand: macos
-            setup-script: flutter config --enable-macos-desktop
+            setup-script: |-
+              flutter config --enable-macos-desktop
+              rm -rf ${FLUTTER_HOME}/bin/cache/artifacts/engine/darwin-x64* # See: https://github.com/flutter/flutter/issues/77173#issuecomment-790936689
             distribution_path: build/macos/Build/Products/_mode_
 
     steps:
