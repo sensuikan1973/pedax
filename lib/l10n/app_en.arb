@@ -23,5 +23,13 @@
       "winRate": { "type": "int", "format": "compact" },
       "drawRate": { "type": "int", "format": "compact" }
     }
-  }
+  },
+  "shortcutCheatsheet": "shortcut cheatsheet",
+  "shortcutLabelCopyMoves": "copy moves",
+  "shortcutLabelPasteMoves": "paste moves",
+  "shortcutLabelRedoAll": "redo all",
+  "shortcutLabelRedo": "redo",
+  "shortcutLabelSwitchHintVisiblity": "switch hint visiblity",
+  "shortcutLabelUndoAll": "undo all",
+  "shortcutLabelUndo": "undo"
 }

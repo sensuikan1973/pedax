@@ -16,7 +16,7 @@ class LevelSettingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.levelSetting),
+        title: Text(AppLocalizations.of(context)!.levelSetting, textAlign: TextAlign.center),
         content: FutureBuilder<int>(
           future: _option.val,
           builder: (_, snapshot) => TextFormField(

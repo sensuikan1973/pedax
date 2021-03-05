@@ -16,6 +16,7 @@ abstract class PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   String label(BuildContext context);
+  String get keys;
   bool fired(RawKeyEvent keyEvent);
   Future<void> runEvent();
 }

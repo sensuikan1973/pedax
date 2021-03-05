@@ -18,7 +18,7 @@ class NTasksSettingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.nTasksSetting),
+        title: Text(AppLocalizations.of(context)!.nTasksSetting, textAlign: TextAlign.center),
         content: FutureBuilder<int>(
           future: _option.val,
           builder: (_, snapshot) => TextFormField(
