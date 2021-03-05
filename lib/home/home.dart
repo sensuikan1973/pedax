@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
+import '../board/pedax_shortcuts/pedax_shortcut.dart';
 import '../engine/edax_asset.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
