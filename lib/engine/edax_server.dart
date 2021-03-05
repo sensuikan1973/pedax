@@ -41,15 +41,11 @@ class EdaxServer {
   final _receivePort = ReceivePort();
   final _logger = Logger();
 
-  final _maxSearchWorkerNum = 1;
-  int _searchWorkerNum = 0;
-
-  final _maxBookLoadingWorkerNum = 1;
-  int _bookLoadingWorkerNum = 0;
-
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
-  Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
+
+  Isolate? _searchIsolate;
+  Isolate? _bookLoadIsolate;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -71,17 +67,8 @@ class EdaxServer {
       } else if (message is PlayRequest) {
         parentSendPort.send(executePlay(edax, message));
       } else if (message is HintOneByOneRequest) {
-        // ignore: literal_only_boolean_expressions
-        while (true) {
-          if (_searchWorkerNum >= _maxSearchWorkerNum) {
-            await Future<void>.delayed(_searchWorkerSpawningSpan);
-            continue;
-          }
-          _searchWorkerNum++;
-          await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
-          _searchWorkerNum--;
-          break;
-        }
+        _searchIsolate?.kill();
+        _searchIsolate = await Isolate.spawn(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
       } else if (message is UndoRequest) {
@@ -91,10 +78,8 @@ class EdaxServer {
       } else if (message is GetBookMoveWithPositionRequest) {
         parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
       } else if (message is BookLoadRequest) {
-        if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
-        _bookLoadingWorkerNum++;
-        await compute(_execBookLoad, BookLoadParams(dllPath, message, parentSendPort));
-        _bookLoadingWorkerNum--;
+        _bookLoadIsolate?.kill();
+        _bookLoadIsolate = await Isolate.spawn(_execBookLoad, BookLoadParams(dllPath, message, parentSendPort));
       } else if (message is SetOptionRequest) {
         parentSendPort.send(executeSetOption(edax, message));
       } else if (message is StopRequest) {
