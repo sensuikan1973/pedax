@@ -12,12 +12,15 @@ class UndoAllShorcut extends PedaxShorcut {
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelUndoAll;
-  @override
-  String get keys => 'E';
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(LogicalKeyboardKey.keyS);
+  String get keys => _logicalKey.keyLabel.toUpperCase();
+
+  @override
+  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(_logicalKey);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestUndoAll();
+
+  LogicalKeyboardKey get _logicalKey => LogicalKeyboardKey.keyS;
 }

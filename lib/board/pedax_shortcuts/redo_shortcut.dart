@@ -14,11 +14,13 @@ class RedoShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRedo;
 
   @override
-  String get keys => 'R';
+  String get keys => _logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(LogicalKeyboardKey.keyR);
+  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(_logicalKey);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestRedo();
+
+  LogicalKeyboardKey get _logicalKey => LogicalKeyboardKey.keyR;
 }

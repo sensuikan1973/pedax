@@ -7,11 +7,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class RedoAllShorcut extends PedaxShorcut {
-  const RedoAllShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class VmirrorShorcut extends PedaxShorcut {
+  const VmirrorShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRedoAll;
+  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelVmirror;
 
   @override
   String get keys => _logicalKey.keyLabel.toUpperCase();
@@ -20,7 +20,7 @@ class RedoAllShorcut extends PedaxShorcut {
   bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(_logicalKey);
 
   @override
-  Future<void> runEvent() async => boardNotifier.requestRedoAll();
+  Future<void> runEvent() async => boardNotifier.requestVmirror();
 
-  LogicalKeyboardKey get _logicalKey => LogicalKeyboardKey.keyE;
+  LogicalKeyboardKey get _logicalKey => LogicalKeyboardKey.keyM;
 }
