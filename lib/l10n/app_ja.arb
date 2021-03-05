@@ -20,5 +20,13 @@
       "winRate": { "type": "int", "format": "compact" },
       "drawRate": { "type": "int", "format": "compact" }
     }
-  }
+  },
+  "shortcutCheatsheet": "ショートカットキーの一覧",
+  "shortcutLabelCopyMoves": "棋譜をコピーする",
+  "shortcutLabelPasteMoves": "棋譜を貼り付ける",
+  "shortcutLabelRedoAll": "最終手まで進む",
+  "shortcutLabelRedo": "一手進む",
+  "shortcutLabelSwitchHintVisiblity": "評価値の ON/OFF を切り替える",
+  "shortcutLabelUndoAll": "初手まで戻す",
+  "shortcutLabelUndo": "一手戻す"
 }

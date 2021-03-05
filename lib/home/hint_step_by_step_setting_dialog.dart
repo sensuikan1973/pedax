@@ -11,7 +11,7 @@ class HintStepByStepSettingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.hintStepByStepSetting),
+        title: Text(AppLocalizations.of(context)!.hintStepByStepSetting, textAlign: TextAlign.center),
         content: FutureBuilder<bool>(
           future: _option.val,
           builder: (_, snapshot) => Column(

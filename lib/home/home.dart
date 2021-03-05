@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
+import '../board/pedax_shortcuts/pedax_shortcut.dart';
 import '../engine/edax_asset.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
@@ -17,6 +18,7 @@ import 'book_file_path_setting_dialog.dart';
 import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
 import 'n_tasks_setting_dialog.dart';
+import 'shortcut_cheatsheet_dialog.dart';
 
 @immutable
 class Home extends StatefulWidget {
@@ -195,6 +197,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
+          _MenuType.shortcutCheatsheet,
+          AppLocalizations.of(context)!.shortcutCheatsheet,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+          ),
+        ),
+        _Menu(
           _MenuType.license,
           AppLocalizations.of(context)!.license,
           () => showLicensePage(context: context),
@@ -215,5 +225,6 @@ enum _MenuType {
   nTasks,
   level,
   hintStepByStep,
+  shortcutCheatsheet,
   license,
 }

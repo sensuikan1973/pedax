@@ -19,7 +19,7 @@ class BookFilePathSettingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+        title: Text(AppLocalizations.of(context)!.bookFilePathSetting, textAlign: TextAlign.center),
         content: FutureBuilder<String>(
           future: _option.val,
           builder: (_, snapshot) => Form(

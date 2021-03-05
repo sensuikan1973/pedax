@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../engine/options/book_file_option.dart';
 import '../models/board_notifier.dart';
+import 'pedax_shortcuts/pedax_shortcut.dart';
 import 'square.dart';
 
 @immutable
@@ -31,7 +32,8 @@ class PedaxBoard extends StatefulWidget {
 }
 
 class _PedaxBoardState extends State<PedaxBoard> {
-  late final BoardNotifier boardNotifier;
+  late final BoardNotifier _boardNotifier;
+  late final List<PedaxShorcut> _shortcutList;
   int get _squareNumPerLine => 8;
   double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
   double get _stoneSize => (widget.bodyLength / _squareNumPerLine) - (_stoneMargin * 2);
@@ -42,8 +44,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
   @override
   void initState() {
     super.initState();
-    boardNotifier = context.read<BoardNotifier>();
-    boardNotifier.requestInit();
+    _boardNotifier = context.read<BoardNotifier>();
+    _boardNotifier.requestInit();
     const BookFileOption().val.then((bookFilePath) {
       WidgetsBinding.instance?.addPostFrameCallback((_) async {
         if (!mounted) return;
@@ -54,8 +56,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
           ),
         );
       });
-      boardNotifier.requestBookLoad(bookFilePath);
+      _boardNotifier.requestBookLoad(bookFilePath);
     });
+    _shortcutList = shortcutList(_boardNotifier);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
   }
 
@@ -137,23 +140,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
       );
 
   Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
-    if (event.isKeyPressed(LogicalKeyboardKey.keyU)) boardNotifier.requestUndo();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyR)) boardNotifier.requestRedo();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyS)) boardNotifier.requestUndoAll();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyE)) boardNotifier.requestRedoAll();
-    if (event.isKeyPressed(LogicalKeyboardKey.keyH)) await boardNotifier.switchHintVisibility();
-    if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyC)) ||
-        (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyC))) {
-      await Clipboard.setData(ClipboardData(text: boardNotifier.value.currentMoves));
-    }
-    if ((event.isControlPressed && event.isKeyPressed(LogicalKeyboardKey.keyV)) ||
-        (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyV))) {
-      final clipboardData = await Clipboard.getData('text/plain');
-      if (clipboardData == null || clipboardData.text == null) return;
-      boardNotifier
-        ..requestInit()
-        ..requestPlay(clipboardData.text!);
-    }
+    final targetEvents = _shortcutList.where((el) => el.fired(event));
+    final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
+    await targetEvent?.runEvent();
   }
 
   Square _square(int y, int x) {
@@ -179,7 +168,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   void _squareOnTap(String moveString) {
-    boardNotifier.requestMove(moveString);
+    _boardNotifier.requestMove(moveString);
   }
 
   SquareType _squareType(int move) {
@@ -210,6 +199,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BoardNotifier>('boardNotifier', boardNotifier));
+    properties.add(DiagnosticsProperty<BoardNotifier>('boardNotifier', _boardNotifier));
   }
 }

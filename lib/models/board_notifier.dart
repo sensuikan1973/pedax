@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-import 'package:meta/meta.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
@@ -19,7 +18,6 @@ import '../engine/edax_server.dart';
 import '../engine/options/level_option.dart';
 import 'board_state.dart';
 
-@doNotStore
 class BoardNotifier extends ValueNotifier<BoardState> {
   BoardNotifier() : super(BoardState());
 

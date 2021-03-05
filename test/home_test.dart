@@ -8,6 +8,7 @@ import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
+import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
 
 import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
@@ -104,6 +105,20 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.license));
         await tester.pumpAndSettle();
         expect(find.byType(LicensePage), findsOneWidget);
+        await delay300millisec(tester);
+      });
+    });
+
+    testWidgets('show shortcut cheatsheet', (tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.shortcutCheatsheet));
+        await tester.pumpAndSettle();
+        expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
         await delay300millisec(tester);
       });
     });
