@@ -3,6 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
+import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
+import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/vmirror_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
@@ -44,32 +50,32 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyU);
+      await tester.sendKeyEvent(UndoShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyR);
+      await tester.sendKeyEvent(RedoShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyS);
+      await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyE);
+      await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyH);
+      await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyM);
+      await tester.sendKeyEvent(VmirrorShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5

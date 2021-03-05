@@ -14,13 +14,14 @@ class VmirrorShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelVmirror;
 
   @override
-  String get keys => _logicalKey.keyLabel.toUpperCase();
+  String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(_logicalKey);
+  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestVmirror();
 
-  LogicalKeyboardKey get _logicalKey => LogicalKeyboardKey.keyM;
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyM;
 }
