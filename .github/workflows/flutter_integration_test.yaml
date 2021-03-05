@@ -15,6 +15,7 @@ jobs:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/7
+        flutter_channel: [dev, beta]
         include:
           - os: ubuntu-latest
             device: linux
@@ -27,13 +28,16 @@ jobs:
             setup-script: flutter config --enable-windows-desktop
           - os: macos-latest
             device: macos
-            setup-script: flutter config --enable-macos-desktop
+            setup-script: |-
+              flutter config --enable-macos-desktop
+              rm -rf ${FLUTTER_HOME}/bin/cache/artifacts/engine/darwin-x64* # See: https://github.com/flutter/flutter/issues/77173#issuecomment-790936689
+              flutter precache --force
 
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'dev'
+          channel: ${{ matrix.flutter_channel }}
       - name: setup
         run: ${{ matrix.setup-script }}
       - name: install dependencies

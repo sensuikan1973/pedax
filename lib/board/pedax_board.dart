@@ -150,7 +150,9 @@ class _PedaxBoardState extends State<PedaxBoard> {
         (event.data.isModifierPressed(ModifierKey.metaModifier) && event.isKeyPressed(LogicalKeyboardKey.keyV))) {
       final clipboardData = await Clipboard.getData('text/plain');
       if (clipboardData == null || clipboardData.text == null) return;
-      boardNotifier.requestPlay(clipboardData.text!);
+      boardNotifier
+        ..requestInit()
+        ..requestPlay(clipboardData.text!);
     }
   }
 

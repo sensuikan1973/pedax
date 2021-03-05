@@ -22,7 +22,7 @@ version: 0.0.1+1
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: '>=2.12.0-0 <3.0.0'
-  flutter: ^1.27.0-0
+  flutter: ^2.0.0
 
 dependencies:
   cupertino_icons: ^1.0.2
@@ -36,9 +36,9 @@ dependencies:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
   logger: ^1.0.0-nullsafety.0
-  path_provider: ^2.0.0 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  path_provider: ^2.0.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0-nullsafety.5
-  shared_preferences: ^2.0.1
+  shared_preferences: ^2.0.3
   window_size:
     git:
       url: git://github.com/google/flutter-desktop-embedding
