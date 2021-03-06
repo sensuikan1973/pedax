@@ -78,7 +78,8 @@ Future<void> main() async {
       await tester.sendKeyEvent(VmirrorShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+      expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
+      expect(findByCoordinate('d6'), findsOneWidget);
 
       await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
