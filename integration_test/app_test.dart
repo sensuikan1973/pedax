@@ -24,6 +24,8 @@ Future<void> main() async {
   });
 
   testWidgets('home', (tester) async {
+    tester.binding.window.physicalSizeTestValue = const Size(1200, 1000);
+
     await app.main();
     await tester.runAsync(() async {
       await tester.pumpAndSettle();
