@@ -1,5 +1,6 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
+import 'package:flutter/rendering.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -8,7 +9,9 @@ import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/main.dart' as app;
+import 'package:pedax/window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_size/window_size.dart';
 
 import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
@@ -19,6 +22,7 @@ Future<void> main() async {
 
   setUp(() {
     SharedPreferences.setMockInitialValues({}); // always first launch
+    setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
   });
 
   testWidgets('home', (tester) async {
