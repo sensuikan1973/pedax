@@ -8,6 +8,7 @@ import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/main.dart' as app;
+import 'package:pedax/window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_helper/async_delay.dart';
@@ -22,6 +23,8 @@ Future<void> main() async {
   });
 
   testWidgets('home', (tester) async {
+    tester.binding.window.physicalSizeTestValue = pedaxWindowMinSize;
+
     await tester.runAsync(() async {
       await app.main();
       await tester.pumpAndSettle();
