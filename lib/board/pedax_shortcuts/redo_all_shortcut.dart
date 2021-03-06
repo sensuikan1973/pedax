@@ -14,11 +14,14 @@ class RedoAllShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRedoAll;
 
   @override
-  String get keys => 'E';
+  String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(LogicalKeyboardKey.keyE);
+  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestRedoAll();
+
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyE;
 }

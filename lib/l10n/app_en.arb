@@ -31,5 +31,6 @@
   "shortcutLabelRedo": "redo",
   "shortcutLabelSwitchHintVisiblity": "switch hint visiblity",
   "shortcutLabelUndoAll": "undo all",
-  "shortcutLabelUndo": "undo"
+  "shortcutLabelUndo": "undo",
+  "shortcutLabelVmirror": "vertical mirror"
 }
