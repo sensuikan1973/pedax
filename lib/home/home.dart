@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -37,6 +38,7 @@ class _HomeState extends State<Home> {
   double get _discCountImageSize => _pedaxBoardBodyLength / 12;
   double get _discCountFontSize => _discCountImageSize * 0.4;
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
+  double get _undoOrRedoIconSize => _pedaxBoardBodyLength / 12;
 
   @override
   void initState() {
@@ -76,49 +78,82 @@ class _HomeState extends State<Home> {
                   child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
                 ),
                 PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Padding(padding: const EdgeInsets.only(top: 5), child: _discCount),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _undoAllButton,
+                      _undoButton,
+                      ..._discCountLabels,
+                      _redoButton,
+                      _redoAllButton,
+                    ],
+                  ),
+                ),
               ],
             )
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
 
-  Row get _discCount => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                'assets/images/black_stone.png',
-                fit: BoxFit.contain,
-                height: _discCountImageSize,
-                width: _discCountImageSize,
-              ),
-              Text(
-                context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
-                style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
-              )
-            ],
-          ),
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                'assets/images/white_stone.png',
-                fit: BoxFit.contain,
-                height: _discCountImageSize,
-                width: _discCountImageSize,
-              ),
-              Text(
-                context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
-                style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
-              )
-            ],
-          ),
-        ],
+  Widget get _undoAllButton => IconButton(
+        icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
+        iconSize: _undoOrRedoIconSize,
+        onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
       );
+
+  Widget get _undoButton => IconButton(
+        icon: const Icon(FontAwesomeIcons.angleLeft),
+        iconSize: _undoOrRedoIconSize,
+        onPressed: () => context.read<BoardNotifier>().requestUndo(),
+      );
+
+  Widget get _redoButton => IconButton(
+        icon: const Icon(FontAwesomeIcons.angleRight),
+        iconSize: _undoOrRedoIconSize,
+        onPressed: () => context.read<BoardNotifier>().requestRedo(),
+      );
+
+  Widget get _redoAllButton => IconButton(
+        icon: const Icon(FontAwesomeIcons.angleDoubleRight),
+        iconSize: _undoOrRedoIconSize,
+        onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
+      );
+
+  List<Widget> get _discCountLabels => [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              'assets/images/black_stone.png',
+              fit: BoxFit.contain,
+              height: _discCountImageSize,
+              width: _discCountImageSize,
+            ),
+            Text(
+              context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
+              style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
+            )
+          ],
+        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              'assets/images/white_stone.png',
+              fit: BoxFit.contain,
+              height: _discCountImageSize,
+              width: _discCountImageSize,
+            ),
+            Text(
+              context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
+              style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
+            )
+          ],
+        ),
+      ];
 
   void _showSnackBarOfBookLod() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
