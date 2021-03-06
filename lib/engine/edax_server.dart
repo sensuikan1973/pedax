@@ -48,6 +48,8 @@ class EdaxServer {
   final _maxBookLoadingWorkerNum = 1;
   int _bookLoadingWorkerNum = 0;
 
+  late HintOneByOneRequest _latestHintMessage;
+
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
   Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
@@ -72,14 +74,16 @@ class EdaxServer {
       } else if (message is PlayRequest) {
         parentSendPort.send(executePlay(edax, message));
       } else if (message is HintOneByOneRequest) {
+        _latestHintMessage = message;
         // ignore: literal_only_boolean_expressions
         while (true) {
           if (_searchWorkerNum >= _maxSearchWorkerNum) {
             await Future<void>.delayed(_searchWorkerSpawningSpan);
             continue;
           }
+          if (_latestHintMessage.movesAtRequest != message.movesAtRequest) break;
           _searchWorkerNum++;
-          await compute(_calcHintNext, CalcHintNextParams(dllPath, message, parentSendPort));
+          await compute(_calcHintNext, CalcHintNextParams(dllPath, _latestHintMessage, parentSendPort));
           _searchWorkerNum--;
           break;
         }

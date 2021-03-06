@@ -49,7 +49,7 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
       if (currentMoves != request.movesAtRequest) {
         _logger.d(
             'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"');
-        break;
+        return;
       }
 
       _logger.d('will call edaxHintNextNoMultiPvDepth');
