@@ -81,7 +81,11 @@ class EdaxServer {
             await Future<void>.delayed(_searchWorkerSpawningSpan);
             continue;
           }
-          if (_latestHintMessage.movesAtRequest != message.movesAtRequest) break;
+          if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
+            _logger.i(
+                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has sent after that.');
+            break;
+          }
           _searchWorkerNum++;
           await compute(_calcHintNext, CalcHintNextParams(dllPath, _latestHintMessage, parentSendPort));
           _searchWorkerNum--;
