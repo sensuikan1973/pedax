@@ -79,7 +79,7 @@ Future<void> main() async {
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
-      expect(findByCoordinate('d6'), findsOneWidget);
+      expectStoneCoordinate(tester, 'c4', SquareType.black);
 
       await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
     });
