@@ -85,7 +85,11 @@ class _HomeState extends State<Home> {
                     children: [
                       _undoAllButton,
                       _undoButton,
-                      ..._discCountLabels,
+                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                      _blackDiscCount,
+                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                      _whiteDiscCount,
+                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                       _redoButton,
                       _redoAllButton,
                     ],
@@ -121,39 +125,37 @@ class _HomeState extends State<Home> {
         onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
       );
 
-  List<Widget> get _discCountLabels => [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              'assets/images/black_stone.png',
-              fit: BoxFit.contain,
-              height: _discCountImageSize,
-              width: _discCountImageSize,
-            ),
-            Text(
-              context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
-              style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
-            )
-          ],
-        ),
-        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              'assets/images/white_stone.png',
-              fit: BoxFit.contain,
-              height: _discCountImageSize,
-              width: _discCountImageSize,
-            ),
-            Text(
-              context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
-              style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
-            )
-          ],
-        ),
-      ];
+  Widget get _blackDiscCount => Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            'assets/images/black_stone.png',
+            fit: BoxFit.contain,
+            height: _discCountImageSize,
+            width: _discCountImageSize,
+          ),
+          Text(
+            context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
+            style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
+          )
+        ],
+      );
+
+  Widget get _whiteDiscCount => Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            'assets/images/white_stone.png',
+            fit: BoxFit.contain,
+            height: _discCountImageSize,
+            width: _discCountImageSize,
+          ),
+          Text(
+            context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
+            style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
+          )
+        ],
+      );
 
   void _showSnackBarOfBookLod() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
