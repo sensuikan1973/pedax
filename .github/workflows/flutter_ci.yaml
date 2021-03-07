@@ -49,4 +49,4 @@ jobs:
         run: flutter test --coverage --merge-coverage --tags="debugDumpApp"
       - uses: codecov/codecov-action@v1
         with:
-          file: ./coverage/lcov.base.info
+          file: ./coverage/lcov.info
