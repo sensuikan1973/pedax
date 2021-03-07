@@ -29,5 +29,5 @@
   "shortcutLabelSwitchHintVisiblity": "評価値の ON/OFF を切り替える",
   "shortcutLabelUndoAll": "初手まで戻す",
   "shortcutLabelUndo": "一手戻す",
-  "shortcutLabelVmirror": "上下反転させる"
+  "shortcutLabelRotate180": "180 度回転させる"
 }

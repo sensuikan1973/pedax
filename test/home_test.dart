@@ -8,7 +8,7 @@ import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
-import 'package:pedax/board/pedax_shortcuts/vmirror_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
@@ -75,7 +75,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(VmirrorShorcut.logicalKey);
+      await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6

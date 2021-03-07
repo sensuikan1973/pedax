@@ -12,9 +12,9 @@ import '../engine/api/init.dart';
 import '../engine/api/move.dart';
 import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
+import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
 import '../engine/api/undo.dart';
-import '../engine/api/vmirror.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/level_option.dart';
 import 'board_state.dart';
@@ -63,7 +63,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
-  void requestVmirror() => _edaxServerPort.send(const VmirrorRequest());
+  void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
   void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
   void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
@@ -132,7 +132,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
-    } else if (message is VmirrorResponse) {
+    } else if (message is RotateResponse) {
       _onMovesUpdated(message.moves);
       value
         ..board = message.board
