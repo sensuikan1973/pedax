@@ -10,7 +10,7 @@
 
 _pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
 
-- you can see `evaluation value`(e.g. `+4`, `-10`) **Comfortably**.
+- **comfortably**, you can see `evaluation value`(e.g. `+4`, `-10`).
 - support **Mac/Windows/Linux**.
 - support English/Japanese.
 
