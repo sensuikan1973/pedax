@@ -21,26 +21,27 @@ import 'api/undo.dart';
 
 // NOTE: top level function for `isolate.spawn`.
 Future<void> startEdaxServer(StartEdaxServerParams params) async {
-  final server = EdaxServer(dllPath: params.dllPath);
+  final server = EdaxServer(dllPath: params.dllPath, logger: params.logger);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
 @immutable
 class StartEdaxServerParams {
-  const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters);
+  const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters, this.logger);
   final SendPort parentSendPort;
   final String dllPath;
   final List<String> initLibedaxParameters;
+  final Logger logger;
 }
 
 // TODO: consider to separate as edax_server package
 @doNotStore
 class EdaxServer {
-  EdaxServer({required this.dllPath});
+  EdaxServer({required this.dllPath, required this.logger});
 
   final String dllPath;
+  final Logger logger;
   final _receivePort = ReceivePort();
-  final _logger = Logger();
 
   final _maxSearchWorkerNum = 1;
   int _searchWorkerNum = 0;
@@ -59,16 +60,15 @@ class EdaxServer {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
-    _logger.d('sent my port to parentSendPort');
+    logger.d('sent my port to parentSendPort');
 
     final edax = LibEdax(dllPath)
       ..libedaxInitialize(initLibedaxParameters)
-      ..edaxInit()
-      ..edaxVersion();
+      ..edaxInit();
 
     // ignore: avoid_annotating_with_dynamic
     _receivePort.listen((dynamic message) async {
-      _logger.i('received request "${message.runtimeType}"');
+      logger.i('received request "${message.runtimeType}"');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is PlayRequest) {
@@ -82,7 +82,7 @@ class EdaxServer {
             continue;
           }
           if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
-            _logger.i(
+            logger.i(
                 'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has sent after that.');
             break;
           }
@@ -113,9 +113,9 @@ class EdaxServer {
       } else if (message is ShutdownRequest) {
         parentSendPort.send(executeShutdown(edax, message));
         _receivePort.close();
-        _logger.i('shutdowned');
+        logger.i('shutdowned');
       } else {
-        _logger.w('request ${message.runtimeType} is not supported');
+        logger.w('request ${message.runtimeType} is not supported');
       }
     }); // TODO: error handling
   }

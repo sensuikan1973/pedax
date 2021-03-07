@@ -5,11 +5,9 @@ import 'package:logger/logger.dart';
 import 'request_schema.dart';
 import 'response_schema.dart';
 
-final _logger = Logger();
-
 @immutable
 class MoveRequest extends RequestSchema {
-  const MoveRequest(this.move);
+  const MoveRequest(this.move, {required Logger logger}) : super(logger: logger);
 
   final String move;
 
@@ -35,11 +33,11 @@ class MoveResponse extends ResponseSchema<MoveRequest> {
 
 MoveResponse executeMove(LibEdax edax, MoveRequest request) {
   edax.edaxStop();
-  _logger.d('stopped edax serach');
+  request.logger!.d('stopped edax serach');
   edax.edaxMove(request.move);
-  _logger.d('moved "${request.move}"');
+  request.logger!.d('moved "${request.move}"');
   final moves = edax.edaxGetMoves();
-  _logger.d('current moves: $moves');
+  request.logger!.d('current moves: $moves');
   return MoveResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),

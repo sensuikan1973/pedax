@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
@@ -24,6 +25,7 @@ import 'widget_test_helper/libedax_assets.dart';
 
 Future<void> main() async {
   setUpAll(() async => prepareLibedaxAssets());
+  setUp(() => Logger.level = Level.nothing);
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
   testWidgets('play a game', (tester) async {
@@ -80,8 +82,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
       expectStoneCoordinate(tester, 'c4', SquareType.black);
-
-      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
+      await delay300millisec(tester);
     });
   });
 

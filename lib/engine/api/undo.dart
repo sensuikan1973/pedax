@@ -1,11 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:logger/logger.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
-
-final _logger = Logger();
 
 @immutable
 class UndoRequest extends RequestSchema {
@@ -35,13 +32,10 @@ class UndoResponse extends ResponseSchema<UndoRequest> {
 
 UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   edax.edaxStop();
-  _logger.d('stopped edax serach');
   for (var i = 0; i < request.times; i++) {
     edax.edaxUndo();
   }
-  _logger.d('undo ${request.times} times');
   final moves = edax.edaxGetMoves();
-  _logger.d('current moves: $moves');
   return UndoResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),

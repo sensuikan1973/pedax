@@ -41,7 +41,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }) async {
     await Isolate.spawn(
       startEdaxServer,
-      StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams),
+      StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, _logger),
     );
     _receiveStream = _receivePort.asBroadcastStream();
     _edaxServerPort = await _receiveStream.first as SendPort;
@@ -64,7 +64,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
-  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
+  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move, logger: _logger));
   void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
   void requestUndoAll() => _edaxServerPort.send(const UndoRequest(times: 60));
@@ -93,6 +93,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
+        logger: _logger,
       );
 
   void _onMovesUpdated(String moves) {

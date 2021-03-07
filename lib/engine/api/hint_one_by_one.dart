@@ -5,11 +5,14 @@ import 'package:logger/logger.dart';
 import 'request_schema.dart';
 import 'response_schema.dart';
 
-final _logger = Logger();
-
 @immutable
 class HintOneByOneRequest extends RequestSchema {
-  const HintOneByOneRequest({required this.level, required this.stepByStep, required this.movesAtRequest});
+  const HintOneByOneRequest({
+    required this.level,
+    required this.stepByStep,
+    required this.movesAtRequest,
+    required Logger logger,
+  }) : super(logger: logger);
 
   final int level;
   final bool stepByStep;
@@ -38,21 +41,21 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   for (final level in levelList) {
     edax.edaxStop();
-    _logger.d('stopped edax serach');
+    request.logger!.d('stopped edax serach');
     edax
       ..edaxSetOption('-level', level.toString())
       ..edaxHintPrepare();
-    _logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
+    request.logger!.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
     // ignore: literal_only_boolean_expressions
     while (true) {
       final currentMoves = edax.edaxGetMoves();
       if (currentMoves != request.movesAtRequest) {
-        _logger.d(
+        request.logger!.d(
             'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"');
         return;
       }
 
-      _logger.d('will call edaxHintNextNoMultiPvDepth');
+      request.logger!.d('will call edaxHintNextNoMultiPvDepth');
       final hint = edax.edaxHintNextNoMultiPvDepth();
       if (hint.isNoMove) break;
       yield HintOneByOneResponse(hint: hint, level: level, request: request);

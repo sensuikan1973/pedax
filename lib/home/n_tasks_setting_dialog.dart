@@ -40,7 +40,7 @@ class NTasksSettingDialog extends StatelessWidget {
           TextButton(
             onPressed: () async {
               final n = int.tryParse(_textController.text);
-              if (n != null) {
+              if (n != null && n > 0) {
                 context.read<BoardNotifier>().requestSetOption(_option.nativeName, n.toString());
                 await _option.update(n);
               }
