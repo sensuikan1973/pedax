@@ -10,6 +10,7 @@ import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
+// See: https://github.com/flutter/flutter/issues/62966
 const debugDumpAppTag = 'debugDumpApp';
 
 void main() {
