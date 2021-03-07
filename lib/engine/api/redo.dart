@@ -1,16 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:logger/logger.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
 
-final _logger = Logger();
-
 @immutable
 class RedoRequest extends RequestSchema {
   const RedoRequest({required this.times});
-
   final int times;
 
   @override
@@ -35,13 +31,10 @@ class RedoResponse extends ResponseSchema<RedoRequest> {
 
 RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   edax.edaxStop();
-  _logger.d('stopped edax serach');
   for (var i = 0; i < request.times; i++) {
     edax.edaxRedo();
   }
-  _logger.d('redo ${request.times} times');
   final moves = edax.edaxGetMoves();
-  _logger.d('current moves: $moves');
   return RedoResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
 
@@ -8,7 +9,10 @@ import '../test_helper/edax_server.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
-  setUp(() async => prepareLibedaxAssets(setPref: false)); // when first launch, pref is empty.
+  setUpAll(() async {
+    await prepareLibedaxAssets(setPref: false); // when first launch, pref is empty.
+  });
+  setUp(() => Logger.level = Level.nothing);
   testWidgets('launch app', (tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
@@ -24,6 +26,7 @@ import 'widget_test_helper/libedax_assets.dart';
 
 Future<void> main() async {
   setUpAll(() async => prepareLibedaxAssets());
+  setUp(() => Logger.level = Level.nothing);
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
   testWidgets('play a game', (tester) async {
@@ -60,12 +63,32 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
+      await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+
+      await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
       await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
+      await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+
+      await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
@@ -80,8 +103,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
       expectStoneCoordinate(tester, 'c4', SquareType.black);
-
-      await Future<void>.delayed(const Duration(seconds: 1)); // wait isolate process
+      await delay300millisec(tester);
     });
   });
 

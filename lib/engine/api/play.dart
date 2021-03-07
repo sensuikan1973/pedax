@@ -1,11 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:logger/logger.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
-
-final _logger = Logger();
 
 @immutable
 class PlayRequest extends RequestSchema {
@@ -34,12 +31,10 @@ class PlayResponse extends ResponseSchema<PlayRequest> {
 }
 
 PlayResponse executePlay(LibEdax edax, PlayRequest request) {
-  edax.edaxStop();
-  _logger.d('stopped edax serach');
-  edax.edaxPlay(request.moves);
-  _logger.d('played "${request.moves}"');
+  edax
+    ..edaxStop()
+    ..edaxPlay(request.moves);
   final moves = edax.edaxGetMoves();
-  _logger.d('current moves: $moves');
   return PlayResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),
