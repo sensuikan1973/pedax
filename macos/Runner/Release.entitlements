@@ -5,5 +5,13 @@
 	<!-- See: the comment in DebugProfile.entitlements -->
 	<key>com.apple.security.app-sandbox</key>
 	<false/>
+
+	<!-- See: https://pub.dev/packages/file_selector_macos -->
+	<key>com.apple.security.files.user-selected.read-only</key>
+	<true/>
+
+	<!-- See: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW18 -->
+	<key>com.apple.security.files.bookmarks.app-scope</key>
+	<true/>
 </dict>
 </plist>
