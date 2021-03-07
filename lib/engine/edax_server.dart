@@ -13,11 +13,11 @@ import 'api/init.dart';
 import 'api/move.dart';
 import 'api/play.dart';
 import 'api/redo.dart';
+import 'api/rotate.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
 import 'api/stop.dart';
 import 'api/undo.dart';
-import 'api/vmirror.dart';
 
 // NOTE: top level function for `isolate.spawn`.
 Future<void> startEdaxServer(StartEdaxServerParams params) async {
@@ -93,8 +93,8 @@ class EdaxServer {
         }
       } else if (message is InitRequest) {
         parentSendPort.send(executeInit(edax, message));
-      } else if (message is VmirrorRequest) {
-        parentSendPort.send(executeVmirror(edax, message));
+      } else if (message is RotateRequest) {
+        parentSendPort.send(executeRotate(edax, message));
       } else if (message is UndoRequest) {
         parentSendPort.send(executeUndo(edax, message));
       } else if (message is RedoRequest) {

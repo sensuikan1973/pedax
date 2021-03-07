@@ -6,10 +6,10 @@ import 'copy_moves_shortcut.dart';
 import 'paste_moves_shortcut.dart';
 import 'redo_all_shortcut.dart';
 import 'redo_shortcut.dart';
+import 'rotate180_shortcut.dart';
 import 'switch_hint_visibility.dart';
 import 'undo_all_shortcut.dart';
 import 'undo_shortcut.dart';
-import 'vmirror_shortcut.dart';
 
 @immutable
 abstract class PedaxShorcut {
@@ -30,5 +30,5 @@ List<PedaxShorcut> shortcutList(BoardNotifier boardNotifier) => [
       SwitchHintVisibilityShorcut(boardNotifier),
       UndoAllShorcut(boardNotifier),
       UndoShorcut(boardNotifier),
-      VmirrorShorcut(boardNotifier),
+      Rotate180Shorcut(boardNotifier),
     ];
