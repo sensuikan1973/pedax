@@ -44,9 +44,7 @@ jobs:
       - name: install dependencies
         run: flutter pub get
       - name: run test
-        run: flutter test --coverage --coverage-path=./coverage/lcov.base.info --exclude-tags="debugDumpApp" # exclude noisy test
-      - name: debugDump
-        run: flutter test --coverage --merge-coverage --tags="debugDumpApp"
+        run: flutter test --coverage --coverage-path=./coverage/lcov.info
       - uses: codecov/codecov-action@v1
         with:
           file: ./coverage/lcov.info
