@@ -19,12 +19,15 @@ class LevelSettingDialog extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.levelSetting, textAlign: TextAlign.center),
         content: FutureBuilder<int>(
           future: _option.val,
-          builder: (_, snapshot) => TextFormField(
-            controller: _textController..text = snapshot.hasData ? snapshot.data!.toString() : ' ',
-            autofocus: true,
-            keyboardType: TextInputType.number,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
+          builder: (_, snapshot) {
+            if (snapshot.hasData) _textController.text = snapshot.data!.toString();
+            return TextFormField(
+              controller: _textController,
+              autofocus: true,
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            );
+          },
         ),
         actions: <Widget>[
           TextButton(

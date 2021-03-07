@@ -21,13 +21,16 @@ class NTasksSettingDialog extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.nTasksSetting, textAlign: TextAlign.center),
         content: FutureBuilder<int>(
           future: _option.val,
-          builder: (_, snapshot) => TextFormField(
-            controller: _textController..text = snapshot.hasData ? snapshot.data!.toString() : ' ',
-            autofocus: true,
-            decoration: InputDecoration(hintText: '1 ~ ${Platform.numberOfProcessors}'),
-            keyboardType: TextInputType.number,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-          ),
+          builder: (_, snapshot) {
+            if (snapshot.hasData) _textController.text = snapshot.data!.toString();
+            return TextFormField(
+              controller: _textController,
+              autofocus: true,
+              decoration: InputDecoration(hintText: '1 ~ ${Platform.numberOfProcessors}'),
+              keyboardType: TextInputType.number,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            );
+          },
         ),
         actions: <Widget>[
           TextButton(

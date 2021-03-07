@@ -22,19 +22,22 @@ class BookFilePathSettingDialog extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.bookFilePathSetting, textAlign: TextAlign.center),
         content: FutureBuilder<String>(
           future: _option.val,
-          builder: (_, snapshot) => Form(
-            key: _formKey,
-            child: TextFormField(
-              controller: _textController..text = snapshot.hasData ? snapshot.data! : '',
-              autofocus: true,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (path) {
-                if (path == null) return null;
-                if (path.isEmpty) return null; // use default book
-                if (!File(path).existsSync()) return AppLocalizations.of(context)!.userSpecifiedFileNotFound;
-              },
-            ),
-          ),
+          builder: (_, snapshot) {
+            if (snapshot.hasData) _textController.text = snapshot.data!;
+            return Form(
+              key: _formKey,
+              child: TextFormField(
+                controller: _textController,
+                autofocus: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (path) {
+                  if (path == null) return null;
+                  if (path.isEmpty) return null; // use default book
+                  if (!File(path).existsSync()) return AppLocalizations.of(context)!.userSpecifiedFileNotFound;
+                },
+              ),
+            );
+          },
         ),
         actions: <Widget>[
           TextButton(
