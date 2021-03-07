@@ -64,7 +64,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
-  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move, logger: _logger));
+  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
   void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
   void requestUndoAll() => _edaxServerPort.send(const UndoRequest(times: 60));
