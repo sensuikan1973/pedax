@@ -83,7 +83,7 @@ class EdaxServer {
           }
           if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
             logger.i(
-                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has sent after that.');
+                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
             break;
           }
           _searchWorkerNum++;
