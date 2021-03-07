@@ -9,7 +9,7 @@
 				- REF: https://github.com/flutter/plugins/tree/master/packages/file_selector
 	-->
 	<key>com.apple.security.app-sandbox</key>
-	<false/>
+	<true/>
 
 	<!-- See: https://pub.dev/packages/file_selector_macos -->
 	<key>com.apple.security.files.user-selected.read-only</key>
