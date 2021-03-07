@@ -10,6 +10,8 @@ import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
+const debugDumpAppTag = 'debugDumpApp';
+
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
@@ -24,7 +26,7 @@ void main() {
         debugDumpApp();
         await delay300millisec(tester);
       });
-    }, tags: 'debugDumpApp');
+    }, tags: debugDumpAppTag);
 
     testWidgets('ShortcutCheatsheetDialog', (tester) async {
       final boardNotifier = BoardNotifier();
@@ -40,6 +42,6 @@ void main() {
         debugDumpApp();
         await delay300millisec(tester);
       });
-    }, tags: 'debugDumpApp');
+    }, tags: debugDumpAppTag);
   });
 }
