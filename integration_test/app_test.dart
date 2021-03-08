@@ -16,12 +16,14 @@ import 'package:window_size/window_size.dart';
 import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
+import '../test_helper/secure_bookmark_mock.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
     SharedPreferences.setMockInitialValues({}); // always first launch
+    mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
   });
 

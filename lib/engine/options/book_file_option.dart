@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as p;
@@ -23,10 +26,20 @@ class BookFileOption extends EdaxOption<String> {
 
   String get _defaultFileName => 'book.dat';
 
+  // NOTE: When you don't need this value, you must call stopAccessingSecurityScopedResource.
   @override
   Future<String> get val async {
     final pref = await preferences;
-    return pref.getString(prefKey) ?? await appDefaultValue;
+    if (!Platform.isMacOS) return pref.getString(prefKey) ?? await appDefaultValue;
+
+    final bookmark = pref.getString(bookmarkPrefKey);
+    if (bookmark == null) return pref.getString(prefKey) ?? await appDefaultValue;
+    final secureBookmarks = SecureBookmarks();
+    final resolvedFile = await secureBookmarks.resolveBookmark(bookmark);
+    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(resolvedFile);
+    if (isOutOfSandbox) Logger().i('access ${resolvedFile.path} which is out of sandbox.');
+    return resolvedFile.path;
+    // await secureBookmarks.stopAccessingSecurityScopedResource(resolvedFile);
   }
 
   @override
@@ -36,10 +49,22 @@ class BookFileOption extends EdaxOption<String> {
       final newPath = await appDefaultValue;
       Logger().i('scpecified path is empty. So, pedax sets $newPath.');
       await pref.setString(prefKey, newPath);
-      return appDefaultValue;
+      return newPath;
     } else {
       await pref.setString(prefKey, val);
+      if (Platform.isMacOS) {
+        final bookmark = await SecureBookmarks().bookmark(File(val));
+        await pref.setString(bookmarkPrefKey, bookmark);
+      }
       return val;
     }
   }
+
+  Future<void> stopAccessingSecurityScopedResource() async {
+    if (!Platform.isMacOS) return;
+    await SecureBookmarks().stopAccessingSecurityScopedResource(File(await val));
+  }
+
+  @visibleForTesting
+  String get bookmarkPrefKey => 'BookmarkOfBookFilePath';
 }

@@ -16,6 +16,7 @@ import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
+import '../engine/options/book_file_option.dart';
 import '../engine/options/level_option.dart';
 import 'board_state.dart';
 
@@ -26,6 +27,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   late final SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
+  final _levelOption = const LevelOption();
+  final _bookFileOption = const BookFileOption();
 
   @override
   void dispose() {
@@ -64,7 +67,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
-  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move, logger: _logger));
+  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
   void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
   void requestUndoAll() => _edaxServerPort.send(const UndoRequest(times: 60));
@@ -72,7 +75,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void requestRedoAll() => _edaxServerPort.send(const RedoRequest(times: 60));
   void requestSetOption(String name, String optionValue) {
     _edaxServerPort.send(SetOptionRequest(name, optionValue));
-    if (name == const LevelOption().nativeName) value.level = int.parse(optionValue);
+    if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
   Future<void> switchHintVisibility() async {
@@ -175,6 +178,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
+      await _bookFileOption.stopAccessingSecurityScopedResource();
     } else if (message is GetBookMoveWithPositionResponse) {
       value
         ..positionWinsNum = message.position.nWins

@@ -2,8 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- See: the comment in DebugProfile.entitlements -->
 	<key>com.apple.security.app-sandbox</key>
-	<false/>
+	<true/>
+
+	<!-- See: https://pub.dev/packages/file_selector_macos -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+
+	<!-- See: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW18 -->
+	<key>com.apple.security.files.bookmarks.app-scope</key>
+	<true/>
 </dict>
 </plist>

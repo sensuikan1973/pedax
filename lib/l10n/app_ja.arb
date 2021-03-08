@@ -7,7 +7,7 @@
   "cancelOnDialog": "キャンセル",
   "updateSettingOnDialog": "更新する",
   "userSpecifiedFileNotFound": "指定したファイルが見つかりません",
-  "nTasksSetting": "並列スレッド数 (上級者向け)",
+  "nTasksSetting": "並列スレッド数 [上級者向け]",
   "levelSetting": "レベル (検索の深さ)",
   "hintStepByStepSetting": "評価値の段階表示",
   "hintStepByStepDescription": "オンにすると、レベル設定を上限として、評価値を段階的に表示します。\nこれは便利ですが、結果的に解析時間は長くなります。",
@@ -29,5 +29,6 @@
   "shortcutLabelSwitchHintVisiblity": "評価値の ON/OFF を切り替える",
   "shortcutLabelUndoAll": "初手まで戻す",
   "shortcutLabelUndo": "一手戻す",
-  "shortcutLabelRotate180": "180 度回転させる"
+  "shortcutLabelRotate180": "180 度回転させる",
+  "chooseBookFile": "選ぶ"
 }

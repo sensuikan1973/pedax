@@ -32,5 +32,6 @@
   "shortcutLabelSwitchHintVisiblity": "switch hint visiblity",
   "shortcutLabelUndoAll": "undo all",
   "shortcutLabelUndo": "undo",
-  "shortcutLabelRotate180": "rotate 180"
+  "shortcutLabelRotate180": "rotate 180",
+  "chooseBookFile": "choose"
 }

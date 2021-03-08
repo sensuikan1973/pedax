@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +31,7 @@ class PedaxBoard extends StatefulWidget {
 }
 
 class _PedaxBoardState extends State<PedaxBoard> {
+  final _bookFileOption = const BookFileOption();
   late final BoardNotifier _boardNotifier;
   late final List<PedaxShorcut> _shortcutList;
   int get _squareNumPerLine => 8;
@@ -46,18 +46,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>();
     _boardNotifier.requestInit();
-    const BookFileOption().val.then((bookFilePath) {
-      WidgetsBinding.instance?.addPostFrameCallback((_) async {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
-            duration: const Duration(minutes: 1),
-          ),
-        );
-      });
-      _boardNotifier.requestBookLoad(bookFilePath);
-    });
+    _bookFileOption.val.then(_boardNotifier.requestBookLoad);
     _shortcutList = shortcutList(_boardNotifier);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
   }

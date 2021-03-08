@@ -65,6 +65,7 @@ class EdaxServer {
     final edax = LibEdax(dllPath)
       ..libedaxInitialize(initLibedaxParameters)
       ..edaxInit();
+    logger.i('libedax has initialized with $initLibedaxParameters');
 
     // ignore: avoid_annotating_with_dynamic
     _receivePort.listen((dynamic message) async {
@@ -83,7 +84,7 @@ class EdaxServer {
           }
           if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
             logger.i(
-                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has sent after that.');
+                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
             break;
           }
           _searchWorkerNum++;
@@ -102,6 +103,7 @@ class EdaxServer {
       } else if (message is GetBookMoveWithPositionRequest) {
         parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
       } else if (message is BookLoadRequest) {
+        logger.i('will load book file. path: ${message.file}');
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;
         await compute(_execBookLoad, BookLoadParams(dllPath, message, parentSendPort));

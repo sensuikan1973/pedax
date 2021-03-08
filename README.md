@@ -3,15 +3,20 @@
 <span>pedax</span>
 </h1>
 
-<p>
-<img src="https://user-images.githubusercontent.com/23427957/108859012-22d7ae00-7630-11eb-94d2-8e5748c7c539.png" alt="screenshot_macos" height="350"/>
-</p>
-<br/>
-
-_pedax_ is Board with [edax](https://sensuikan1973.github.io/edax-reversi) which is the strongest othello program.
-
-- support **Mac/Windows/Linux**.
-- you can see `eval value`(e.g. `+4`, `-10`) **Comfortably**.
+<img align="left" src="https://user-images.githubusercontent.com/23427957/110370537-22f39700-808f-11eb-9847-c73666fe17b0.png" alt="screenshot_macos" height="350" hspace="10">
+<div>
+  <br/>
+  <br/>
+  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest othello program.
+  <br/>
+  <br/>
+  <em>pedax</em> has 4 features.
+  <li><b>comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
+  <li>support <b>Mac/Windows/Linux</b>.</li>
+  <li>support important options (e.g. <code>book file path</code>, <code>search level</code>, ...).</li>
+  <li>support English/Japanese.</li>
+</div>
+<br clear="all">
 
 ---
 
@@ -69,9 +74,12 @@ flutter analyze .
   - [Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
 - [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 - [macos](https://developer.apple.com/account/#/overview)
+  - [Flutter macOS-specific support](https://flutter.dev/desktop#macos-specific-support)
   - [App Sandbox](https://developer.apple.com/documentation/security/app_sandbox)
-    - [(archived document) About App Sandbox](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html#//apple_ref/doc/uid/TP40011183-CH1-SW1)
+    - [Enabling App Sandbox](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW1)
+    - [About App Sandbox](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html#//apple_ref/doc/uid/TP40011183-CH1-SW1)
   - [Harded Runtime](https://developer.apple.com/documentation/security/hardened_runtime)
+  - [macOS distribution](https://developer.apple.com/jp/macos/distribution/)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
   - [Notarizing macOS Software Before Distribution](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution)
 - windows

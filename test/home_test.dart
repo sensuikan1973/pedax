@@ -22,10 +22,14 @@ import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/localizations.dart';
+import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 Future<void> main() async {
-  setUpAll(() async => prepareLibedaxAssets());
+  setUpAll(() async {
+    await prepareLibedaxAssets();
+    mockSecureBookmark();
+  });
   setUp(() => Logger.level = Level.nothing);
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
@@ -170,43 +174,6 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay300millisec(tester);
-      });
-    });
-
-    testWidgets('update book file path with wrong path', (tester) async {
-      await tester.runAsync(() async {
-        await tester.pumpWidget(const PedaxApp());
-        await waitEdaxSetuped(tester);
-
-        await tester.tap(find.byIcon(Icons.menu));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.bookFilePathSetting));
-        await tester.pumpAndSettle();
-        expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-        await tester.enterText(find.byType(EditableText), 'not existing path');
-        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-        await tester.pumpAndSettle();
-        expect(find.byType(BookFilePathSettingDialog), findsOneWidget); // nothing happens and dialog isn't closed
-        await delay300millisec(tester);
-      });
-    });
-
-    testWidgets('update book file path with empty path', (tester) async {
-      await tester.runAsync(() async {
-        await tester.pumpWidget(const PedaxApp());
-        await waitEdaxSetuped(tester);
-
-        await tester.tap(find.byIcon(Icons.menu));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.bookFilePathSetting));
-        await tester.pumpAndSettle();
-        expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-        await tester.enterText(find.byType(EditableText), ''); // use default book
-        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-        await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 1));
-        expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await delay300millisec(tester);
       });
     });

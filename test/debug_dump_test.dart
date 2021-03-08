@@ -8,13 +8,16 @@ import 'package:pedax/models/board_notifier.dart';
 import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
 import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
+import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
+// See: https://github.com/flutter/flutter/issues/62966
 const debugDumpAppTag = 'debugDumpApp';
 
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
+    mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
 
