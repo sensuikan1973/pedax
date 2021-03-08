@@ -6,11 +6,13 @@ import 'package:pedax/board/square.dart';
 import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
+import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets(setPref: false); // when first launch, pref is empty.
+    mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
   testWidgets('launch app', (tester) async {
