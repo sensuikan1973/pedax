@@ -88,7 +88,7 @@ class EdaxServer {
             break;
           }
           _searchWorkerNum++;
-          await compute(_calcHintNext, CalcHintNextParams(dllPath, _latestHintMessage, parentSendPort));
+          await compute(_computeHintNext, _ComputeHintNextParams(dllPath, _latestHintMessage, parentSendPort));
           _searchWorkerNum--;
           break;
         }
@@ -106,7 +106,7 @@ class EdaxServer {
         logger.i('will load book file. path: ${message.file}');
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;
-        await compute(_execBookLoad, BookLoadParams(dllPath, message, parentSendPort));
+        await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
         _bookLoadingWorkerNum--;
       } else if (message is SetOptionRequest) {
         parentSendPort.send(executeSetOption(edax, message));
@@ -124,29 +124,29 @@ class EdaxServer {
 }
 
 @immutable
-class CalcHintNextParams {
-  const CalcHintNextParams(this.dllPath, this.request, this.listener);
+class _ComputeHintNextParams {
+  const _ComputeHintNextParams(this.dllPath, this.request, this.listener);
   final String dllPath;
   final HintOneByOneRequest request;
   final SendPort listener;
 }
 
 // NOTE: top level function for `compute`.
-Future<void> _calcHintNext(CalcHintNextParams params) async {
+Future<void> _computeHintNext(_ComputeHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
 }
 
 @immutable
-class BookLoadParams {
-  const BookLoadParams(this.dllPath, this.request, this.listener);
+class _ComputeBookLoadParams {
+  const _ComputeBookLoadParams(this.dllPath, this.request, this.listener);
   final String dllPath;
   final BookLoadRequest request;
   final SendPort listener;
 }
 
 // NOTE: top level function for `compute`.
-void _execBookLoad(BookLoadParams params) {
+void _computeBookLoad(_ComputeBookLoadParams params) {
   final edax = LibEdax(params.dllPath);
   final result = executeBookLoad(edax, params.request);
   params.listener.send(result);

@@ -123,6 +123,7 @@ Future<void> main() async {
 
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await tester.pumpAndSettle();
       await delay300millisec(tester);
