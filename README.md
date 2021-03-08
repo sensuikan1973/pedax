@@ -3,20 +3,20 @@
 <span>pedax</span>
 </h1>
 
-<div style="vertical-align:middle;">
-  <img src="https://user-images.githubusercontent.com/23427957/110370537-22f39700-808f-11eb-9847-c73666fe17b0.png" alt="screenshot_macos" height="350" style="vertical-align:middle;"/>
-	<div style="vertical-align:middle;display: inline-block;">
-    <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest othello program.
-    <br>
-    <em>pedax</em> has 4 features.
-    <ul>
-      <li><b>comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
-      <li>support <b>Mac/Windows/Linux</b>.</li>
-      <li>support important options (e.g. <code>book file path</code>, <code>search level</code>, ...).</li>
-      <li>support English/Japanese.</li>
-    </ul>
-  </div>
+<img align="left" src="https://user-images.githubusercontent.com/23427957/110370537-22f39700-808f-11eb-9847-c73666fe17b0.png" alt="screenshot_macos" height="350" hspace="10">
+<div>
+  <br/>
+  <br/>
+  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest othello program.
+  <br/>
+  <br/>
+  <em>pedax</em> has 4 features.
+  <li><b>comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
+  <li>support <b>Mac/Windows/Linux</b>.</li>
+  <li>support important options (e.g. <code>book file path</code>, <code>search level</code>, ...).</li>
+  <li>support English/Japanese.</li>
 </div>
+<br clear="all">
 
 ---
 
