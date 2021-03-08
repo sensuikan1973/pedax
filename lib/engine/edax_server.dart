@@ -106,7 +106,7 @@ class EdaxServer {
         logger.i('will load book file. path: ${message.file}');
         if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
         _bookLoadingWorkerNum++;
-        await compute(_computeBookLoad, _BookLoadParams(dllPath, message, parentSendPort));
+        await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
         _bookLoadingWorkerNum--;
       } else if (message is SetOptionRequest) {
         parentSendPort.send(executeSetOption(edax, message));
@@ -138,15 +138,15 @@ Future<void> _computeHintNext(_ComputeHintNextParams params) async {
 }
 
 @immutable
-class _BookLoadParams {
-  const _BookLoadParams(this.dllPath, this.request, this.listener);
+class _ComputeBookLoadParams {
+  const _ComputeBookLoadParams(this.dllPath, this.request, this.listener);
   final String dllPath;
   final BookLoadRequest request;
   final SendPort listener;
 }
 
 // NOTE: top level function for `compute`.
-void _computeBookLoad(_BookLoadParams params) {
+void _computeBookLoad(_ComputeBookLoadParams params) {
   final edax = LibEdax(params.dllPath);
   final result = executeBookLoad(edax, params.request);
   params.listener.send(result);
