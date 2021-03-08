@@ -21,7 +21,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 0.0.1+1
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ^2.0.0
 
 dependencies:
@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.0.3
   window_size:
     git:
+      # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
       url: git://github.com/google/flutter-desktop-embedding
       path: plugins/window_size
       ref: 405e6c5476fbdfd3859cf2f8570b21afb692ea3a
