@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-11.0]
         flutter_channel: [dev, beta]
         mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
@@ -32,7 +32,7 @@ jobs:
             subcommand: windows
             setup-script: flutter config --enable-windows-desktop
             distribution_path: build/windows/runner/_mode_
-          - os: macos-latest
+          - os: macos-11.0
             subcommand: macos
             setup-script: |-
               flutter config --enable-macos-desktop
