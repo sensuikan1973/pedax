@@ -58,7 +58,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^0.2.2-nullsafety.0
+  msix: ^0.2.2-nullsafety.0 # See: https://flutter.dev/desktop#windows
   pedantic_sensuikan1973: any
 
 flutter:
