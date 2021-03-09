@@ -46,7 +46,7 @@ jobs:
         run: git fetch origin +refs/tags/*:refs/tags/*
         working-directory: ${{ github.workspace }}/flutter
       - run: echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-      - run: unset SSH_ASKPASS
+      - run: export DISPLAY=:0.0
 
       - name: setup
         run: ${{ matrix.setup-script }}
