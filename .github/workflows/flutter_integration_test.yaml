@@ -46,6 +46,7 @@ jobs:
         run: git fetch origin +refs/tags/*:refs/tags/*
         working-directory: ${{ github.workspace }}/flutter
       - run: echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+      - run: echo $DISPLAY
 
       - name: setup
         run: ${{ matrix.setup-script }}
