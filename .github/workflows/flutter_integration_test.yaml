@@ -15,7 +15,7 @@ jobs:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/7
-        flutter_channel: [dev, beta]
+        flutter_channel: [dev]
         include:
           - os: ubuntu-latest
             device: linux

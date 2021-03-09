@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         flutter_channel: [dev, beta]
-        mode: [debug, release]
+        mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
             subcommand: linux
