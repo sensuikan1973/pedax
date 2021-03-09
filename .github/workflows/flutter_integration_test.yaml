@@ -45,7 +45,4 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: drive
-        run: |-
-          flutter clean
-          flutter upgrade
-          flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }} --verbose
+        run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }} --verbose
