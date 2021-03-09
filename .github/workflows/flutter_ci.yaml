@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-11.0, ubuntu-20.04]
+        os: [windows-latest, macos-latest, ubuntu-20.04]
         flutter_channel: [dev]
     steps:
       - uses: actions/checkout@v2
