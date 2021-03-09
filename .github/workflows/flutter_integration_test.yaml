@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/7
+        os: [ubuntu-latest] # TODO: https://github.com/sensuikan1973/pedax/issues/7
         flutter_channel: [dev, beta]
         include:
           - os: ubuntu-latest
@@ -44,5 +44,6 @@ jobs:
         run: flutter pub get
       - name: doctor
         run: flutter doctor -v
+      - run: flutter run -d linux
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }} --verbose
