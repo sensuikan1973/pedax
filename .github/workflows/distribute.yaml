@@ -1,0 +1,31 @@
+# See: https://flutter.dev/desktop#distribution
+
+name: Distribution
+
+on:
+  pull_request:
+    paths: ['.github/workflows/distribute.yaml']
+  push:
+    branches: [main]
+
+jobs:
+  create_msix:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - name: setup
+        run: flutter config --enable-windows-desktop
+      - name: install dependencies
+        run: flutter pub get
+      - name: doctor
+        run: flutter doctor -v
+      - name: build
+        run: flutter build windows --release --verbose
+      - name: create Msix
+        run: flutter pub run msix:create
+
+      - name: publish
+        run: echo "changeme"
