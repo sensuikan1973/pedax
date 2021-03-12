@@ -27,10 +27,12 @@ jobs:
               flutter config --enable-linux-desktop
               sudo apt-get update
               sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
+            post-build-script: echo "nothing"
             distribution_path: build/linux/x64/_mode_
           - os: windows-latest
             subcommand: windows
             setup-script: flutter config --enable-windows-desktop
+            post-build-script: flutter pub run msix:create
             distribution_path: build/windows/runner/_mode_
           - os: macos-10.15
             subcommand: macos
@@ -38,6 +40,7 @@ jobs:
               flutter config --enable-macos-desktop
               rm -rf ${FLUTTER_HOME}/bin/cache/artifacts/engine/darwin-x64* # See: https://github.com/flutter/flutter/issues/77173#issuecomment-790936689
               flutter precache --force
+            post-build-script: echo "nothing"
             distribution_path: build/macos/Build/Products/_mode_
 
     steps:
@@ -53,6 +56,8 @@ jobs:
         run: flutter doctor -v
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
+      - name: post build
+        run: ${{ matrix.post-build-script }}
 
       - name: set output path
         shell: bash
