@@ -3,10 +3,9 @@
 name: Distribution
 
 on:
+  workflow_dispatch:
   pull_request:
     paths: ['.github/workflows/distribute.yaml']
-  push:
-    branches: [main]
 
 jobs:
   create_msix:
