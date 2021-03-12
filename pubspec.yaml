@@ -70,3 +70,14 @@ flutter:
     - assets/images/
     - assets/libedax/data/
     - assets/libedax/dll/
+
+# See: https://pub.dev/packages/msix#configuration-optional
+msix_config:
+  display_name: pedax
+  publisher_display_name: Naoki Shimizu
+  # publisher: changeme
+  # identity_name: changeme
+  # msix_version: 1.0.0.0
+  architecture: x64
+  # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations
+  # capabilities: "internetClient"
