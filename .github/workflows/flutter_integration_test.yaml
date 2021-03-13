@@ -28,10 +28,7 @@ jobs:
             setup-script: flutter config --enable-windows-desktop
           - os: macos-10.15
             device: macos
-            setup-script: |-
-              flutter config --enable-macos-desktop
-              rm -rf ${FLUTTER_HOME}/bin/cache/artifacts/engine/darwin-x64* # See: https://github.com/flutter/flutter/issues/77173#issuecomment-790936689
-              flutter precache --force
+            setup-script: flutter config --enable-macos-desktop
 
     steps:
       - uses: actions/checkout@v2
