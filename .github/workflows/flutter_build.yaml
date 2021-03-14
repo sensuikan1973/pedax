@@ -69,6 +69,7 @@ jobs:
       #     echo "artifact_target=$path" >> $GITHUB_ENV
 
       - name: output build info
+        shell: bash
         run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
 
       # - name: debug
