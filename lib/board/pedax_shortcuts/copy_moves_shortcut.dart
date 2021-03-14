@@ -16,7 +16,7 @@ class CopyMovesShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelCopyMoves;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃C or ⌘C' : '⌃C';
+  String get keys => Platform.isMacOS ? '^C or ⌘C' : 'Ctrl + C';
 
   @override
   bool fired(RawKeyEvent keyEvent) =>

@@ -16,7 +16,7 @@ class PasteMovesShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelPasteMoves;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃V or ⌘V' : '⌃V';
+  String get keys => Platform.isMacOS ? '⌃V or ⌘V' : 'Ctrl + V';
 
   @override
   bool fired(RawKeyEvent keyEvent) =>
