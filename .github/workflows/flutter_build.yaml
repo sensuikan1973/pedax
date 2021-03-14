@@ -23,26 +23,18 @@ jobs:
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-20.04
             subcommand: linux
-            setup-script: |-
-              flutter config --enable-linux-desktop
-              sudo apt-get update -y
-              sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
-            postbuild-script: echo "do nothing"
+            setup_script: .github/scripts/setup_on_linux.sh
+            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_linux.sh
             distribution_path: build/linux/x64/release
           - os: windows-2019
             subcommand: windows
-            setup-script: flutter config --enable-windows-desktop
-            postbuild-script: |-
-              # See: https://flutter.dev/desktop#windows
-              target_dll_path="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Redist/MSVC/14.28.29325/x64/Microsoft.VC142.CRT"
-              cp "$target_dll_path/vcruntime140.dll" build/windows/runner/Release/
-              cp "$target_dll_path/vcruntime140_1.dll" build/windows/runner/Release/
-              cp "$target_dll_path/msvcp140.dll" build/windows/runner/Release/
+            setup_script: .github/scripts/setup_on_windows.sh
+            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_windows.sh
             distribution_path: build/windows/runner/Release
           - os: macos-10.15
             subcommand: macos
-            setup-script: flutter config --enable-macos-desktop
-            postbuild-script: echo "do nothing"
+            setup_script: .github/scripts/setup_on_macos.sh
+            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_macos.sh
             distribution_path: build/macos/Build/Products/release
 
     steps:
@@ -51,7 +43,7 @@ jobs:
         with:
           channel: ${{ matrix.flutter_channel }}
       - name: setup
-        run: ${{ matrix.setup-script }}
+        run: ${{ matrix.setup_script }}
       - name: install dependencies
         run: flutter pub get
       - name: doctor
@@ -60,7 +52,7 @@ jobs:
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
       - name: postbuid script
         shell: bash
-        run: ${{ matrix.postbuild-script }}
+        run: ${{ matrix.postbuild_script }}
 
       # - name: set output path
       #   shell: bash

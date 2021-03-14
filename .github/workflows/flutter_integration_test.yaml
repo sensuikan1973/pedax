@@ -19,16 +19,13 @@ jobs:
         include:
           - os: ubuntu-20.04
             device: linux
-            setup-script: |-
-              sudo apt-get update -y
-              sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
-              flutter config --enable-linux-desktop
+            setup_script: .github/scripts/setup_on_linux.sh
           - os: windows-2019
             device: windows
-            setup-script: flutter config --enable-windows-desktop
+            setup_script: .github/scripts/setup_on_windows.sh
           - os: macos-10.15
             device: macos
-            setup-script: flutter config --enable-macos-desktop
+            setup_script: .github/scripts/setup_on_macos.sh
 
     steps:
       - uses: actions/checkout@v2
@@ -36,7 +33,7 @@ jobs:
         with:
           channel: ${{ matrix.flutter_channel }}
       - name: setup
-        run: ${{ matrix.setup-script }}
+        run: ${{ matrix.setup_script }}
       - name: install dependencies
         run: flutter pub get
       - name: doctor
