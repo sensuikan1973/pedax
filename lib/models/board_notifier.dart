@@ -99,9 +99,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         logger: _logger,
       );
 
-  void _requestLatestHintList(String moves) {
+  void _requestLatestHintList(String movesAtRequest) {
     value.hints = UnmodifiableListView([]);
-    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(moves));
+    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
