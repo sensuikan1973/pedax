@@ -9,7 +9,7 @@ on:
 
 jobs:
   format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
@@ -18,7 +18,7 @@ jobs:
       - run: flutter format -l 120 --set-exit-if-changed .
 
   analyze:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-latest, macos-10.15, ubuntu-20.04]
+        os: [windows-2019, macos-10.15, ubuntu-20.04]
         flutter_channel: [dev]
     steps:
       - uses: actions/checkout@v2

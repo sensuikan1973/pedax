@@ -1,0 +1,33 @@
+# NOTE: This workflow is Draft.
+# See: https://flutter.dev/desktop#distribution
+
+name: Distribution
+
+on:
+  workflow_dispatch:
+  # pull_request:
+  #   paths: ['.github/workflows/distribute.yaml']
+
+jobs:
+  create_msix:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - name: setup
+        run: flutter config --enable-windows-desktop
+      - name: install dependencies
+        run: flutter pub get
+      - name: doctor
+        run: flutter doctor -v
+      - name: build
+        run: flutter build windows --release
+      - name: create Msix
+        shell: bash
+        run: |-
+          echo -n "${{ secrets.BASE64_ENCODED_PFX }}" | base64 --decode > pedax.pfx
+          flutter pub run msix:create --password "${{ secrets.PFX_PASSWORD }}"
+      - name: publish
+        run: echo "changeme"

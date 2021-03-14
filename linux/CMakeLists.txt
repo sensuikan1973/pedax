@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "pedax")
-set(APPLICATION_ID "com.example.pedax")
+set(APPLICATION_ID "com.done.sensuikan1973.pedax")
 
 cmake_policy(SET CMP0063 NEW)
 

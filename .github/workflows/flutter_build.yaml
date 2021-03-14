@@ -17,28 +17,33 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [ubuntu-20.04, windows-latest, macos-10.15]
-        flutter_channel: [dev, beta]
+        os: [ubuntu-20.04, windows-2019, macos-10.15]
+        flutter_channel: [dev] # TODO: use beta in the future.
         mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-20.04
             subcommand: linux
             setup-script: |-
               flutter config --enable-linux-desktop
-              sudo apt-get update
+              sudo apt-get update -y
               sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
-            distribution_path: build/linux/x64/_mode_
-          - os: windows-latest
+            postbuild-script: echo "do nothing"
+            distribution_path: build/linux/x64/release
+          - os: windows-2019
             subcommand: windows
             setup-script: flutter config --enable-windows-desktop
-            distribution_path: build/windows/runner/_mode_
+            postbuild-script: |-
+              # See: https://flutter.dev/desktop#windows
+              target_dll_path="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Redist/MSVC/14.28.29325/x64/Microsoft.VC142.CRT"
+              cp "$target_dll_path/vcruntime140.dll" build/windows/runner/Release/
+              cp "$target_dll_path/vcruntime140_1.dll" build/windows/runner/Release/
+              cp "$target_dll_path/msvcp140.dll" build/windows/runner/Release/
+            distribution_path: build/windows/runner/Release
           - os: macos-10.15
             subcommand: macos
-            setup-script: |-
-              flutter config --enable-macos-desktop
-              rm -rf ${FLUTTER_HOME}/bin/cache/artifacts/engine/darwin-x64* # See: https://github.com/flutter/flutter/issues/77173#issuecomment-790936689
-              flutter precache --force
-            distribution_path: build/macos/Build/Products/_mode_
+            setup-script: flutter config --enable-macos-desktop
+            postbuild-script: echo "do nothing"
+            distribution_path: build/macos/Build/Products/release
 
     steps:
       - uses: actions/checkout@v2
@@ -52,18 +57,25 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: build
-        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }} --verbose
-
-      - name: set output path
+        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+      - name: postbuid script
         shell: bash
-        run: |-
-          path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
-          echo "artifact_target=$path" >> $GITHUB_ENV
+        run: ${{ matrix.postbuild-script }}
+
+      # - name: set output path
+      #   shell: bash
+      #   run: |-
+      #     path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
+      #     echo "artifact_target=$path" >> $GITHUB_ENV
 
       - name: output build info
-        run: .github/scripts/output_build_info.sh ${{ env.artifact_target }}
+        shell: bash
+        run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
+
+      # - name: debug
+      #   uses: mxschmitt/action-tmate@v3
 
       - uses: actions/upload-artifact@v2
         with:
-          name: pedax-${{ runner.os }}-${{ matrix.mode }}
-          path: ${{ env.artifact_target }}
+          name: pedax-${{ runner.os }}
+          path: ${{ matrix.distribution_path }}

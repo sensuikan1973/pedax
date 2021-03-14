@@ -11,7 +11,7 @@ flutter clean
 flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 
 flutter clean
-flutter build macos
+flutter build macos --release
 
 git diff --exit-code
 
