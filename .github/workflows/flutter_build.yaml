@@ -58,6 +58,8 @@ jobs:
         run: flutter doctor -v
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+      - name: postbuid script
+        run: ${{ matrix.postbuild-script }}
 
       - name: set output path
         shell: bash
@@ -70,9 +72,6 @@ jobs:
 
       # - name: debug
       #   uses: mxschmitt/action-tmate@v3
-
-      - name: postbuid script
-        run: ${{ matrix.postbuild-script }}
 
       - uses: actions/upload-artifact@v2
         with:
