@@ -27,14 +27,19 @@ jobs:
               flutter config --enable-linux-desktop
               sudo apt-get update -y
               sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build libblkid-dev liblzma-dev
+            postbuild-script: echo "do nothing"
             distribution_path: build/linux/x64/_mode_
           - os: windows-2019
             subcommand: windows
             setup-script: flutter config --enable-windows-desktop
+            postbuild-script: |-
+              # See: https://flutter.dev/desktop#windows
+              echo "changeme"
             distribution_path: build/windows/runner/_mode_
           - os: macos-10.15
             subcommand: macos
             setup-script: flutter config --enable-macos-desktop
+            postbuild-script: echo "do nothing"
             distribution_path: build/macos/Build/Products/_mode_
 
     steps:
@@ -59,6 +64,12 @@ jobs:
 
       - name: output build info
         run: .github/scripts/output_build_info.sh ${{ env.artifact_target }}
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
+      - name: postbuid script
+        run: ${{ matrix.postbuild-script }}
 
       - uses: actions/upload-artifact@v2
         with:
