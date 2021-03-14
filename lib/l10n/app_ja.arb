@@ -21,6 +21,7 @@
       "drawRate": { "type": "int", "format": "compact" }
     }
   },
+  "noPositionInfo": "📓 なし",
   "shortcutCheatsheet": "ショートカットキーの一覧",
   "shortcutLabelCopyMoves": "棋譜をコピーする",
   "shortcutLabelPasteMoves": "棋譜を貼り付ける",

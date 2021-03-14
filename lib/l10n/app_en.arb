@@ -24,6 +24,7 @@
       "drawRate": { "type": "int", "format": "compact" }
     }
   },
+  "noPositionInfo": "📓 nothing",
   "shortcutCheatsheet": "shortcut cheatsheet",
   "shortcutLabelCopyMoves": "copy moves",
   "shortcutLabelPasteMoves": "paste moves",
