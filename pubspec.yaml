@@ -67,7 +67,6 @@ flutter:
 
   # See: https://flutter.dev/docs/development/ui/assets-and-images
   assets:
-    - assets/images/
     - assets/libedax/data/
     - assets/libedax/dll/
 
