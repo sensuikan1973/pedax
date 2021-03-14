@@ -62,8 +62,8 @@ class _HomeState extends State<Home> {
     final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
     if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
     final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus>((notifier) => notifier.value.bookLoadStatus);
-    if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
+    if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
       appBar: AppBar(
