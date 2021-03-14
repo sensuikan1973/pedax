@@ -59,6 +59,7 @@ jobs:
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
       - name: postbuid script
+        shell: bash
         run: ${{ matrix.postbuild-script }}
 
       - name: set output path
