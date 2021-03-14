@@ -129,11 +129,10 @@ class _HomeState extends State<Home> {
   Widget get _blackDiscCount => Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/black_stone.png',
-            fit: BoxFit.contain,
-            height: _discCountImageSize,
+          Container(
             width: _discCountImageSize,
+            height: _discCountImageSize,
+            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
           ),
           Text(
             context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
@@ -145,11 +144,10 @@ class _HomeState extends State<Home> {
   Widget get _whiteDiscCount => Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(
-            'assets/images/white_stone.png',
-            fit: BoxFit.contain,
-            height: _discCountImageSize,
+          Container(
             width: _discCountImageSize,
+            height: _discCountImageSize,
+            decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
           ),
           Text(
             context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
