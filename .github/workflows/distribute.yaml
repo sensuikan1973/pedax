@@ -1,11 +1,12 @@
+# NOTE: This workflow is Draft.
 # See: https://flutter.dev/desktop#distribution
 
 name: Distribution
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths: ['.github/workflows/distribute.yaml']
+  # pull_request:
+  #   paths: ['.github/workflows/distribute.yaml']
 
 jobs:
   create_msix:
@@ -22,9 +23,11 @@ jobs:
       - name: doctor
         run: flutter doctor -v
       - name: build
-        run: flutter build windows --release --verbose
+        run: flutter build windows --release
       - name: create Msix
-        run: flutter pub run msix:create
-
+        shell: bash
+        run: |-
+          echo -n "${{ secrets.BASE64_ENCODED_PFX }}" | base64 --decode > pedax.pfx
+          flutter pub run msix:create --password "${{ secrets.PFX_PASSWORD }}"
       - name: publish
         run: echo "changeme"
