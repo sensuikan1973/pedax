@@ -186,7 +186,7 @@ class _HomeState extends State<Home> {
   String get _positionInfoText {
     final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
     return positionFullNum == 0
-        ? '📓 ...'
+        ? AppLocalizations.of(context)!.noPositionInfo
         : AppLocalizations.of(context)!.positionInfo(
             positionFullNum,
             context.select<BoardNotifier, int>((notifier) => notifier.value.positionWinsRate),
