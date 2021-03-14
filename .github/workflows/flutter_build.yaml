@@ -35,9 +35,9 @@ jobs:
             postbuild-script: |-
               # See: https://flutter.dev/desktop#windows
               target_dll_path="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Redist/MSVC/14.28.29325/x64/Microsoft.VC142.CRT"
-              cp $target_dll_path/vcruntime140.dll build/windows/runner/Relelease/vcruntime140.dll
-              cp $target_dll_path/vcruntime140_1.dll build/windows/runner/Relelease/vcruntime140_1.dll
-              cp $target_dll_path/msvcp140.dll build/windows/runner/Relelease/msvcp140.dll
+              cp $target_dll_path/vcruntime140.dll build/windows/runner/Relelease/
+              cp $target_dll_path/vcruntime140_1.dll build/windows/runner/Relelease/
+              cp $target_dll_path/msvcp140.dll build/windows/runner/Relelease/
             distribution_path: build/windows/runner/_mode_
           - os: macos-10.15
             subcommand: macos
