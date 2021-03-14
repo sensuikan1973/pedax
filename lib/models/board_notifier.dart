@@ -56,13 +56,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       notifyListeners();
     });
 
-    _edaxServerPort.send(const InitRequest());
-
     value
       ..edaxServerSpawned = true
       ..level = level
       ..hintStepByStep = hintStepByStep;
     notifyListeners();
+
+    _edaxServerPort.send(const InitRequest());
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
