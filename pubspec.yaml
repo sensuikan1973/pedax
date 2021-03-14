@@ -58,7 +58,6 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^0.2.2-nullsafety.0 # See: https://flutter.dev/desktop#windows
   pedantic_sensuikan1973: any
 
 flutter:
@@ -67,18 +66,5 @@ flutter:
 
   # See: https://flutter.dev/docs/development/ui/assets-and-images
   assets:
-    - assets/images/
     - assets/libedax/data/
     - assets/libedax/dll/
-
-# See: https://pub.dev/packages/msix#configuration-optional
-msix_config:
-  display_name: pedax
-  # publisher_display_name: aaa
-  # publisher: CN=My Company, O=My Company, L=Berlin, S=Berlin, C=DE
-  # identity_name: pedax
-  # msix_version: 1.0.0.0
-  # certificate_path: pedax.pfx
-  architecture: x64
-  # See https://docs.microsoft.com/en-us/windows/uwp/packaging/app-capability-declarations
-  # capabilities: "xxx" # unnecessary
