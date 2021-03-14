@@ -76,5 +76,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: pedax-${{ runner.os }}-${{ matrix.mode }}
+          name: pedax-${{ runner.os }}
           path: ${{ matrix.distribution_path }}
