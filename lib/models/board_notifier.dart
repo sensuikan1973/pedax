@@ -127,8 +127,6 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is InitResponse) {
-      if (!value.edaxInitOnce) value.edaxInitOnce = true;
-      _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -136,6 +134,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
+      if (!value.edaxInitOnce) value.edaxInitOnce = true;
+      _requestLatestHintList(message.moves);
     } else if (message is RotateResponse) {
       _requestLatestHintList(message.moves);
       value
