@@ -9,6 +9,8 @@ on:
 
 jobs:
   publish_artifacts:
+    env:
+      PUBLISH_DIR: publish
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
@@ -55,10 +57,17 @@ jobs:
         shell: bash
         run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
 
+      - name: compress files (Windows)
+        if: runner.os == 'Windows'
+        run: mkdir -p ${{ env.PUBLISH_DIR }} && powershell Compress-Archive -Path ${{ matrix.distribution_path }} -DestinationPath ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
+      - name: compress files (macOS, Linux)
+        if: runner.os == 'macOS' || runner.os == 'Linux'
+        run: mkdir -p ${{ env.PUBLISH_DIR }} && zip -r ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip ${{ matrix.distribution_path }}
+
       - uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           draft: true
           tag_name: ${{ github.event.inputs.tag }}
-          files: ${{ matrix.distribution_path }}
+          files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
