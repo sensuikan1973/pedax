@@ -59,7 +59,10 @@ jobs:
 
       - name: compress files (Windows)
         if: runner.os == 'Windows'
-        run: mkdir -p ${{ env.PUBLISH_DIR }} && powershell Compress-Archive -Path ${{ matrix.distribution_path }} -DestinationPath ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
+        run: |-
+          mkdir -p ${{ env.PUBLISH_DIR }}
+          cd ${{ matrix.distribution_path }}
+          powershell Compress-Archive -Path . -DestinationPath $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
       - name: compress files (macOS, Linux)
         if: runner.os == 'macOS' || runner.os == 'Linux'
         run: |-
