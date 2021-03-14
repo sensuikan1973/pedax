@@ -59,8 +59,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final edaxInitOnce = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce);
-    if (!edaxInitOnce) return const Center(child: CupertinoActivityIndicator());
+    final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
+    if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
     final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus>((notifier) => notifier.value.bookLoadStatus);
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
         leading: _menu(),
         title: Text(AppLocalizations.of(context)!.analysisMode, textAlign: TextAlign.center),
       ),
-      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned)
+      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

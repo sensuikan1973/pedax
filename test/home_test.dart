@@ -127,7 +127,7 @@ Future<void> main() async {
 
       await tester.pumpAndSettle();
       await delay300millisec(tester);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
       await delay300millisec(tester);
     });
