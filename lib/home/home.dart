@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
     if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
-    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus>((notifier) => notifier.value.bookLoadStatus);
+    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>((notifier) => notifier.value.bookLoadStatus);
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
   void _showSnackBarOfBookLoading() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
