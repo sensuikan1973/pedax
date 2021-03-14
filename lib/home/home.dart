@@ -68,7 +68,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         leading: _menu(),
-        title: Text(AppLocalizations.of(context)!.analysisMode, textAlign: TextAlign.center),
+        title: Text(AppLocalizations.of(context)!.analysisMode),
+        centerTitle: true,
       ),
       body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
           ? Column(
