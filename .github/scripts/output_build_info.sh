@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # $1: dst
 
 dst_file="$1/env.txt"
