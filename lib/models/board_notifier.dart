@@ -99,7 +99,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         logger: _logger,
       );
 
-  void _onMovesUpdated(String moves) {
+  void _requestLatestHintList(String moves) {
     value.hints = UnmodifiableListView([]);
     if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(moves));
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
@@ -109,7 +109,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
     _logger.i('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
+      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -118,7 +118,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is PlayResponse) {
-      if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
+      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -128,7 +128,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentMoves = message.moves;
     } else if (message is InitResponse) {
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
-      _onMovesUpdated(message.moves);
+      _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -137,7 +137,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is RotateResponse) {
-      _onMovesUpdated(message.moves);
+      _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -146,7 +146,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is UndoResponse) {
-      if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
+      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -155,7 +155,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is RedoResponse) {
-      if (value.currentMoves != message.moves) _onMovesUpdated(message.moves);
+      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
@@ -178,6 +178,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
+      _requestLatestHintList(value.currentMoves);
       await _bookFileOption.stopAccessingSecurityScopedResource();
     } else if (message is GetBookMoveWithPositionResponse) {
       value
