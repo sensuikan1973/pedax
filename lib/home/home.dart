@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
                 ),
-                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
+                // PedaxBoard(bodyLength: _pedaxBoardBodyLength),
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
                   child: Row(
