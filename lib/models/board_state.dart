@@ -16,7 +16,7 @@ class BoardState {
   UnmodifiableListView<Hint> hints = UnmodifiableListView([]);
   bool edaxInitOnce = false;
   String currentMoves = '';
-  BookLoadStatus bookLoadStatus = BookLoadStatus.loading;
+  BookLoadStatus? bookLoadStatus;
   bool hintIsVisible = true;
   bool edaxServerSpawned = false;
   int bestScore = 0;

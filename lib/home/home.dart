@@ -59,18 +59,19 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final edaxInitOnce = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce);
-    if (!edaxInitOnce) return const Center(child: CupertinoActivityIndicator());
-    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus>((notifier) => notifier.value.bookLoadStatus);
-    if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
+    final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
+    if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
+    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>((notifier) => notifier.value.bookLoadStatus);
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
+    if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
       appBar: AppBar(
         leading: _menu(),
-        title: Text(AppLocalizations.of(context)!.analysisMode, textAlign: TextAlign.center),
+        title: Text(AppLocalizations.of(context)!.analysisMode),
+        centerTitle: true,
       ),
-      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned)
+      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -159,7 +160,7 @@ class _HomeState extends State<Home> {
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
@@ -171,7 +172,7 @@ class _HomeState extends State<Home> {
   void _showSnackBarOfBookLoading() {
     context.read<BoardNotifier>().value.bookLoadStatus = BookLoadStatus.notifiedToUser;
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.loadingBookFile, textAlign: TextAlign.center),
