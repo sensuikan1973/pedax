@@ -159,7 +159,8 @@ class _HomeState extends State<Home> {
 
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().finishedNotifyingBookHasLoadedToUser();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await Future<void>.delayed(const Duration(seconds: 1));
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
