@@ -56,17 +56,19 @@ class Square extends StatelessWidget {
   Widget get _stone {
     switch (type) {
       case SquareType.black:
-        return Container(
-          width: length,
-          height: length,
-          decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
-        );
+        return const Text('●');
+      // return Container(
+      //   width: length,
+      //   height: length,
+      //   decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+      // );
       case SquareType.white:
-        return Container(
-          width: length,
-          height: length,
-          decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
-        );
+        return const Text('◯');
+      // return Container(
+      //   width: length,
+      //   height: length,
+      //   decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
+      // );
       case SquareType.empty:
         return score != null ? _scoreText() : SizedBox(height: length, width: length);
     }
