@@ -69,7 +69,7 @@ class EdaxServer {
 
     // ignore: avoid_annotating_with_dynamic
     _receivePort.listen((dynamic message) async {
-      logger.i('received request "${message.runtimeType}"');
+      logger.d('received request "${message.runtimeType}"');
       if (message is MoveRequest) {
         parentSendPort.send(executeMove(edax, message));
       } else if (message is PlayRequest) {
@@ -83,7 +83,7 @@ class EdaxServer {
             continue;
           }
           if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
-            logger.i(
+            logger.d(
                 'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
             break;
           }

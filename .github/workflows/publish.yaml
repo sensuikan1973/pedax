@@ -77,3 +77,6 @@ jobs:
           draft: true
           tag_name: ${{ github.event.inputs.tag }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
+          # See: https://docs.github.com/ja/actions/reference/environment-variables
+          body: |-
+            This release is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.

@@ -112,7 +112,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
-    _logger.i('received response "${message.runtimeType}"');
+    _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
