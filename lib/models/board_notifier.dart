@@ -112,8 +112,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -121,16 +121,16 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is InitResponse) {
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -140,8 +140,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       _requestLatestHintList(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -149,8 +149,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
@@ -158,8 +158,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
       value
         ..board = message.board
-        ..squaresOfPlayer = UnmodifiableListView(value.board.squaresOfPlayer)
-        ..squaresOfOpponent = UnmodifiableListView(value.board.squaresOfOpponent)
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
