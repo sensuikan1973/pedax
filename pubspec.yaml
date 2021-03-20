@@ -45,7 +45,7 @@ dependencies:
   macos_secure_bookmarks: ^0.2.0
   path_provider: ^2.0.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0
-  shared_preferences: ^2.0.4
+  shared_preferences: ^2.0.5
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
