@@ -7,6 +7,7 @@ msvc_path="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Red
 ls "$msvc_path"
 
 target_vc_path="$msvc_path/14.28.29910/x64/Microsoft.VC142.CRT"
-cp "$target_vc_path/vcruntime140.dll" build/windows/runner/Release/
-cp "$target_vc_path/vcruntime140_1.dll" build/windows/runner/Release/
-cp "$target_vc_path/msvcp140.dll" build/windows/runner/Release/
+dest_path="build/windows/runner/Release/"
+cp "$target_vc_path/vcruntime140.dll" $dest_path
+cp "$target_vc_path/vcruntime140_1.dll" $dest_path
+cp "$target_vc_path/msvcp140.dll" $dest_path
