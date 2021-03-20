@@ -45,9 +45,15 @@ class _PedaxBoardState extends State<PedaxBoard> {
   void initState() {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
-    // _bookFileOption.val.then(_boardNotifier.requestBookLoad);
     _shortcutList = shortcutList(_boardNotifier);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
+    Future<void>.delayed(
+      const Duration(seconds: 1),
+      () async {
+        final bookFilePath = await _bookFileOption.val;
+        _boardNotifier.requestBookLoad(bookFilePath);
+      },
+    );
   }
 
   @override
