@@ -29,7 +29,6 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   late final Stream<dynamic> _receiveStream;
   final _levelOption = const LevelOption();
   final _bookFileOption = const BookFileOption();
-  final _durationForServerLaunched = const Duration(seconds: 1);
 
   @override
   void dispose() {
@@ -63,8 +62,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       ..hintStepByStep = hintStepByStep;
     notifyListeners();
 
-    await Future<void>.delayed(_durationForServerLaunched);
-    _edaxServerPort.send(const InitRequest());
+    requestInit();
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
