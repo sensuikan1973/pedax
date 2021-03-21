@@ -11,6 +11,7 @@ jobs:
   publish_artifacts:
     env:
       PUBLISH_DIR: publish
+      RELEASE_DESCRIPTION_TXT_FILE: release_description.txt
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
@@ -70,6 +71,11 @@ jobs:
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
 
+      - name: generate release description file
+        run: |-
+          # See: https://docs.github.com/ja/actions/reference/environment-variables
+          echo "This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID." > ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
+
       - uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,6 +83,4 @@ jobs:
           draft: true
           tag_name: ${{ github.event.inputs.tag }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
-          # See: https://docs.github.com/ja/actions/reference/environment-variables
-          body: |-
-            This release is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
+          body_path: ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
