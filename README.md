@@ -73,7 +73,7 @@ flutter analyze .
 - [Desktop support for Flutter](https://flutter.dev/desktop)
   - [Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
   - [official experimental desktop app sample](https://github.com/flutter/samples/tree/master/experimental/desktop_photo_search)
-  - [Real World example](https://github.com/authpass/authpass)
+  - [Real World example "authpass"](https://github.com/authpass/authpass)
 - [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
 - [macos](https://developer.apple.com/account/#/overview)
   - [Flutter macOS-specific support](https://flutter.dev/desktop#macos-specific-support)
