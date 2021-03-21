@@ -74,7 +74,7 @@ jobs:
       - name: generate release description file
         run: |-
           # See: https://docs.github.com/ja/actions/reference/environment-variables
-          cat << EOS
+          cat << EOF > ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
             ## Changes
 
             ### All OSes
@@ -87,7 +87,7 @@ jobs:
 
             ---
             This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
-          EOS > ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
+          EOF
 
       - uses: softprops/action-gh-release@v1
         env:
