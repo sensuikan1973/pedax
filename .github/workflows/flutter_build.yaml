@@ -5,10 +5,10 @@ name: Flutter Build
 
 on:
   pull_request:
-    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
   push:
     branches: [main]
-    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    paths: ['**.dart','pubspec.*', '.github/workflows/flutter_build.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:
   build:
