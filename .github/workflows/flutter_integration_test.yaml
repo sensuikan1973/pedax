@@ -2,10 +2,10 @@ name: Flutter Integration Test
 
 on:
   pull_request:
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
   push:
     branches: [main]
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
+    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**']
 
 jobs:
   integration_test:
