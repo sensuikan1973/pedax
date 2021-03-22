@@ -24,5 +24,7 @@ class CopyMovesShorcut extends PedaxShorcut {
       (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyC));
 
   @override
-  Future<void> runEvent() async => Clipboard.setData(ClipboardData(text: boardNotifier.value.currentMoves));
+  Future<void> runEvent() async => Clipboard.setData(
+        ClipboardData(text: boardNotifier.value.currentMovesWithoutPassString),
+      );
 }
