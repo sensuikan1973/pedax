@@ -181,13 +181,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   Color? _scoreColor(int? score, bool bestMove) {
     if (score == null) return null;
-    if (score >= 0) {
-      if (bestMove) return Colors.lightBlue[200];
-      return Colors.blue[600];
-    } else /* score < 0*/ {
-      if (bestMove) return Colors.lime;
-      return Colors.lime[900];
-    }
+    if (bestMove) return Colors.lightBlue[200];
+    return Colors.lime;
   }
 
   @override
