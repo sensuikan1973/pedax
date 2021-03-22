@@ -16,9 +16,9 @@
   "positionInfo": "📓 完全: {fullNum}. (勝ち: {winRate}%, 引分: {drawRate}%)",
   "@positionInfo": {
     "placeholders": {
-      "fullNum": { "type": "int", "format": "compact" },
-      "winRate": { "type": "int", "format": "compact" },
-      "drawRate": { "type": "int", "format": "compact" }
+      "fullNum": { "type": "int", "format": "decimalPattern" },
+      "winRate": { "type": "int", "format": "decimalPattern" },
+      "drawRate": { "type": "int", "format": "decimalPattern" }
     }
   },
   "noPositionInfo": "📓 なし",

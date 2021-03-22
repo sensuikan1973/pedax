@@ -76,7 +76,8 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
+                Text(_positionInfoString,
+                    style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -179,7 +180,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  String get _positionInfoText {
+  String get _positionInfoString {
     final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
     return positionFullNum == 0
         ? AppLocalizations.of(context)!.noPositionInfo
