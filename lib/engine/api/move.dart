@@ -36,7 +36,9 @@ MoveResponse executeMove(LibEdax edax, MoveRequest request) {
     ..edaxMove(request.move);
 
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0) edax.edaxMove('pa');
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+    edax.edaxMove('pa');
+  }
 
   final moves = edax.edaxGetMoves();
   return MoveResponse(
