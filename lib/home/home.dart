@@ -75,27 +75,24 @@ class _HomeState extends State<Home> {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
                 ),
-                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _undoAllButton,
-                      _undoButton,
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      _blackDiscCount,
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      _whiteDiscCount,
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                      _redoButton,
-                      _redoAllButton,
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _undoAllButton,
+                    _undoButton,
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                    _blackDiscCount,
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                    _whiteDiscCount,
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                    _redoButton,
+                    _redoAllButton,
+                  ],
                 ),
               ],
             )
