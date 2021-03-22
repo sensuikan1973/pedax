@@ -111,6 +111,54 @@ Future<void> main() async {
     });
   });
 
+  testWidgets('play a game with pass', (tester) async {
+    // REF: https://www.hasera.net/othello/mame006.html
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const PedaxApp());
+      await waitEdaxSetuped(tester);
+
+      await tester.tap(findByCoordinate('f5'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('f6'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('d3'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('g5'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('h5'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('h4'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('f7'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      await tester.tap(findByCoordinate('h6'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      // black pass internaly in engine.
+
+      await tester.tap(findByCoordinate('e7'));
+      await delay300millisec(tester);
+      await tester.pump();
+
+      expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, f6, e7
+    });
+  });
+
   testWidgets('paste moves', (tester) async {
     const moves = 'f5f6';
     SystemChannels.platform.setMockMethodCallHandler((methodCall) async {
