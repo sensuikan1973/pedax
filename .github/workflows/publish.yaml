@@ -72,6 +72,7 @@ jobs:
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
 
       - name: generate release description file
+        shell: bash
         run: |-
           # See: https://docs.github.com/ja/actions/reference/environment-variables
           cat << EOF > ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
