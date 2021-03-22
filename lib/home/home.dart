@@ -76,10 +76,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
-                ),
+                Text(_positionInfoText, style: TextStyle(fontSize: _positionInfoFontSize)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
