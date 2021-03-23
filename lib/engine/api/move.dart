@@ -35,15 +35,18 @@ MoveResponse executeMove(LibEdax edax, MoveRequest request) {
     ..edaxStop()
     ..edaxMove(request.move);
 
-  final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0) edax.edaxMove('pa');
+  final lastMoveExcludingPass = edax.edaxGetLastMove();
 
-  final moves = edax.edaxGetMoves();
+  final currentColor = edax.edaxGetCurrentPlayer();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+    edax.edaxMove(MoveMark.passString);
+  }
+
   return MoveResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),
-    moves: moves,
-    lastMove: moves.isEmpty ? null : edax.edaxGetLastMove(),
+    moves: edax.edaxGetMoves(),
+    lastMove: lastMoveExcludingPass,
     request: request,
   );
 }
