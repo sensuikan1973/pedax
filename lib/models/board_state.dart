@@ -35,6 +35,7 @@ class BoardState {
         RegExp('(${MoveMark.passString})|(${MoveMark.passString.toUpperCase()})'),
         '',
       );
+  int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
 }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }

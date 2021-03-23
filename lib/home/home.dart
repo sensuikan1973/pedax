@@ -38,6 +38,7 @@ class _HomeState extends State<Home> {
   double get _discCountImageSize => _pedaxBoardBodyLength / 12;
   double get _discCountFontSize => _discCountImageSize * 0.4;
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
+  double get _movesCountFontSize => _discCountImageSize * 0.4;
   double get _undoOrRedoIconSize => _pedaxBoardBodyLength / 12;
 
   @override
@@ -76,9 +77,13 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Text(
-                  _positionInfoString,
-                  style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
+                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -182,15 +187,24 @@ class _HomeState extends State<Home> {
     });
   }
 
-  String get _positionInfoString {
+  Text get _positionInfoText {
     final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
-    return positionFullNum == 0
+    final data = positionFullNum == 0
         ? AppLocalizations.of(context)!.noPositionInfo
-        : AppLocalizations.of(context)!.positionInfo(
-            positionFullNum,
-            context.select<BoardNotifier, int>((notifier) => notifier.value.positionWinsRate),
-            context.select<BoardNotifier, int>((notifier) => notifier.value.positionDrawsRate),
-          );
+        : AppLocalizations.of(context)!.positionInfo(positionFullNum);
+    return Text(
+      data,
+      style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Text get _movesCountText {
+    final movesCount = context.select<BoardNotifier, int>((notifier) => notifier.value.currentMovesCountWithoutPass);
+    return Text(
+      AppLocalizations.of(context)!.movesCount(movesCount),
+      textAlign: TextAlign.end,
+      style: TextStyle(fontSize: _movesCountFontSize, fontWeight: FontWeight.bold),
+    );
   }
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
