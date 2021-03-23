@@ -13,7 +13,7 @@
   <em>pedax</em> has 4 features.
   <li><b>comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
   <li>support <b>Mac/Windows/Linux</b>.</li>
-  <li>support important options (e.g. <code>book file path</code>, <code>search level</code>).</li>
+  <li>support important options (e.g. <b><code>book file path</code></b>, <code>search level</code>).</li>
   <li>support English/Japanese.</li>
 </div>
 <br clear="all">
