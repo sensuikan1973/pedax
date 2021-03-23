@@ -34,12 +34,19 @@ RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   for (var i = 0; i < request.times; i++) {
     edax.edaxRedo();
   }
-  final moves = edax.edaxGetMoves();
+
+  final lastMoveExcludingPass = edax.edaxGetLastMove();
+
+  final currentColor = edax.edaxGetCurrentPlayer();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+    edax.edaxRedo();
+  }
+
   return RedoResponse(
     board: edax.edaxGetBoard(),
     currentColor: edax.edaxGetCurrentPlayer(),
-    moves: moves,
-    lastMove: moves.isEmpty ? null : edax.edaxGetLastMove(),
+    moves: edax.edaxGetMoves(),
+    lastMove: lastMoveExcludingPass,
     request: request,
   );
 }

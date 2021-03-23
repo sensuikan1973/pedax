@@ -31,7 +31,10 @@ class BoardState {
   int get blackDiscCount => currentColor == TurnColor.black ? squaresOfPlayer.length : squaresOfOpponent.length;
   int get whiteDiscCount => currentColor == TurnColor.white ? squaresOfPlayer.length : squaresOfOpponent.length;
 
-  String get currentMovesWithoutPassString => currentMoves.replaceAll(RegExp('(PA)|(pa)'), '');
+  String get currentMovesWithoutPassString => currentMoves.replaceAll(
+        RegExp('(${MoveMark.passString})|(${MoveMark.passString.toUpperCase()})'),
+        '',
+      );
 }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }

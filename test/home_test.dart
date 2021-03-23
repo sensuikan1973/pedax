@@ -154,8 +154,9 @@ Future<void> main() async {
       await tester.tap(findByCoordinate('e7'));
       await delay300millisec(tester);
       await tester.pump();
+      expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
 
-      expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, f6, e7
+      // TODO: add undo/redo test
     });
   });
 
