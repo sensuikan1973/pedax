@@ -3,7 +3,7 @@
 <span>pedax</span>
 </h1>
 
-<img align="left" src="https://user-images.githubusercontent.com/23427957/111070799-ac371d80-8516-11eb-819b-f0d417e1e470.png" alt="screenshot_macos" height="350" hspace="10">
+<img align="left" src="https://user-images.githubusercontent.com/23427957/112101771-90084000-8bea-11eb-9f17-850c1313d37f.png" alt="screenshot_macos" height="350" hspace="10">
 <div>
   <br/>
   <br/>
