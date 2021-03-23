@@ -38,6 +38,7 @@ class _HomeState extends State<Home> {
   double get _discCountImageSize => _pedaxBoardBodyLength / 12;
   double get _discCountFontSize => _discCountImageSize * 0.4;
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
+  double get _movesCountFontSize => _discCountImageSize * 0.4;
   double get _undoOrRedoIconSize => _pedaxBoardBodyLength / 12;
 
   @override
@@ -202,7 +203,7 @@ class _HomeState extends State<Home> {
     return Text(
       AppLocalizations.of(context)!.movesCount(movesCount),
       textAlign: TextAlign.end,
-      style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: _movesCountFontSize, fontWeight: FontWeight.bold),
     );
   }
 
