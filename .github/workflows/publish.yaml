@@ -76,18 +76,18 @@ jobs:
         run: |-
           # See: https://docs.github.com/ja/actions/reference/environment-variables
           cat << EOF > ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
-            ## Changes
+          ## Changes
 
-            ### All OSes
+          ### All OSes
 
-            ### MacOS
+          ### MacOS
 
-            ### Windows
+          ### Windows
 
-            ### Linux
+          ### Linux
 
-            ---
-            This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
+          ---
+          This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
           EOF
 
       - uses: softprops/action-gh-release@v1
