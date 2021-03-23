@@ -11,10 +11,10 @@
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
-  <li><b>comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
-  <li>support <b>Mac/Windows/Linux</b>.</li>
-  <li>support important options (e.g. <b><code>book file path</code></b>, <code>search level</code>).</li>
-  <li>support English/Japanese.</li>
+  <li><b>Comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
+  <li><b>Mac/Windows/Linux</b> are supported.</li>
+  <li>You can customize some important options (e.g. <b><code>book file path</code></b>, <code>search level</code>, ...).</li>
+  <li>2 language (English, Japanese) are supported.</li>
 </div>
 <br clear="all">
 
