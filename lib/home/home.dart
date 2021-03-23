@@ -79,9 +79,9 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _movesCountText,
+                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
-                    _positionInfoText,
+                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
                   ],
                 ),
                 Row(
