@@ -8,7 +8,7 @@ import 'window.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ensureMinWindowSize();
+  await _ensureMinWindowSize();
 
   // If you feel debug log is noisy, you can change log level.
   // Logger.level = Level.info;
@@ -16,7 +16,8 @@ Future<void> main() async {
   runApp(const PedaxApp());
 }
 
-Future<void> ensureMinWindowSize() async {
+// See: https://github.com/flutter/flutter/issues/30736
+Future<void> _ensureMinWindowSize() async {
   setWindowMinSize(pedaxWindowMinSize);
 
   final windowInfo = await getWindowInfo();
