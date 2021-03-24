@@ -23,12 +23,12 @@ abstract class PedaxShorcut {
 }
 
 List<PedaxShorcut> shortcutList(BoardNotifier boardNotifier) => [
+      UndoShorcut(boardNotifier),
+      RedoShorcut(boardNotifier),
+      UndoAllShorcut(boardNotifier),
+      RedoAllShorcut(boardNotifier),
       CopyMovesShorcut(boardNotifier),
       PasteMovesShorcut(boardNotifier),
-      RedoAllShorcut(boardNotifier),
-      RedoShorcut(boardNotifier),
       SwitchHintVisibilityShorcut(boardNotifier),
-      UndoAllShorcut(boardNotifier),
-      UndoShorcut(boardNotifier),
       Rotate180Shorcut(boardNotifier),
     ];
