@@ -119,7 +119,7 @@ class EdaxServer {
       } else {
         logger.w('request ${message.runtimeType} is not supported');
       }
-    }); // TODO: error handling
+    });
   }
 }
 

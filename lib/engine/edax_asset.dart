@@ -39,7 +39,6 @@ class EdaxAsset {
   Future<String> get libedaxPath async {
     // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     if (Platform.isMacOS) return defaultLibedaxName;
-    // FIXME: temporary implement.
     final docDir = await _docDir;
     if (Platform.isWindows) return p.join(docDir.path, defaultLibedaxName);
     if (Platform.isLinux) return p.join(docDir.path, defaultLibedaxName);
@@ -49,7 +48,6 @@ class EdaxAsset {
   Future<void> _setupDll() async {
     // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     if (Platform.isMacOS) return;
-    // TODO: consider to fix this copy handling
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = await _libedaxAssetData;
       final file = File(await libedaxPath);
