@@ -57,12 +57,22 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(UndoShorcut.logicalKey);
+      await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.sendKeyEvent(RedoShorcut.logicalKey);
+      await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+
+      await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
+      await delay300millisec(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+
+      await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
       await delay300millisec(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5

@@ -14,14 +14,17 @@ class UndoShorcut extends PedaxShorcut {
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelUndo;
 
   @override
-  String get keys => logicalKey.keyLabel.toUpperCase();
+  String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ←';
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
+  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKeyU) || keyEvent.isKeyPressed(logicalKeyArrowLeft);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestUndo();
 
   @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyU;
+  static LogicalKeyboardKey get logicalKeyU => LogicalKeyboardKey.keyU;
+
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKeyArrowLeft => LogicalKeyboardKey.arrowLeft;
 }
