@@ -10,8 +10,8 @@ module.exports = {
   organizationName: 'sensuikan1973',
   projectName: 'pedax',
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'ja'],
+    // defaultLocale: 'en',
+    locales: ['ja', 'en'],
   },
   themeConfig: {
     navbar: {

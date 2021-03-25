@@ -1,6 +1,6 @@
 <h1>
 <img src="https://github.com/sensuikan1973/pedax/blob/main/assets/images/pedax_logo.png?raw=true" alt="pedax_logo" height="35"/>
-<span>pedax</span>
+<a href="https://sensuikan1973.github.io/pedax/">pedax</a>
 </h1>
 
 <img align="left" src="https://user-images.githubusercontent.com/23427957/112101771-90084000-8bea-11eb-9f17-850c1313d37f.png" alt="screenshot_macos" height="350" hspace="10">
