@@ -9,7 +9,7 @@
     "message": "img/ja/analysis_mode_board_view.png"
   },
   "analysis_mode_board_description": {
-    "message": "快適に研究できます"
+    "message": "快適な edax ライフ"
   },
   "custome_options_title": {
     "message": "カスタマイズ可能"
@@ -18,6 +18,6 @@
     "message": "img/ja/custom_options_view.png"
   },
   "custome_options_description": {
-    "message": "book ファイルのパスや評価値の段階表示など、重要なオプションを変更できます"
+    "message": "book ファイルや評価値の段階表示などを変更可能"
   }
 }
