@@ -7,7 +7,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'com.done.sensuikan1973',
+  organizationName: 'sensuikan1973',
   projectName: 'pedax',
   i18n: {
     defaultLocale: 'en',
