@@ -40,7 +40,7 @@ export default function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={"install page"} /*`${siteConfig.title}`*/
+      title={""} /*`${siteConfig.title}`*/
       description="Othello Board with edax <head />">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
