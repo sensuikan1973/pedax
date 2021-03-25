@@ -8,6 +8,7 @@
     "activityBar.foreground": "#000000"
   },
   "files.associations": {
-    "*.arb": "json"
+    "*.arb": "json",
+    "*.mdx": "markdown"
   }
 }

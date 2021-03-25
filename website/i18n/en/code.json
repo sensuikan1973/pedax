@@ -1,0 +1,23 @@
+{
+  "pedax_description": {
+    "message": "othello Board GUI with edax"
+  },
+  "analysis_mode_board_title": {
+    "message": "Comfortable View"
+  },
+  "analysis_mode_board_view": {
+    "message": "img/en/analysis_mode_board_view.png"
+  },
+  "analysis_mode_board_description": {
+    "message": "Comfortably, you can see evaluation value (e.g.「+0」,「-4」)."
+  },
+  "custome_options_title": {
+    "message": "customize options"
+  },
+  "custome_options_view": {
+    "message": "img/en/custom_options_view.png"
+  },
+  "custome_options_description": {
+    "message": "e.g. book file path, step-by-step hint view."
+  }
+}
