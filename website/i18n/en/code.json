@@ -1,4 +1,7 @@
 {
+  "installation_page_title": {
+    "message": "installation"
+  },
   "pedax_description": {
     "message": "othello Board GUI with edax"
   },

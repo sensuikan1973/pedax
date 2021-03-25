@@ -1,4 +1,7 @@
 {
+  "installation_page_title": {
+    "message": "インストール"
+  },
   "pedax_description": {
     "message": "edax 用のオセロ盤 GUI"
   },
@@ -9,7 +12,7 @@
     "message": "img/ja/analysis_mode_board_view.png"
   },
   "analysis_mode_board_description": {
-    "message": "快適な edax ライフ"
+    "message": "快適な edax ライフを"
   },
   "custome_options_title": {
     "message": "カスタマイズ可能"

@@ -40,12 +40,12 @@ export default function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={"installation"} /*`${siteConfig.title}`*/
-      description="Othello Board with edax <head />">
+      title={ translate({ id: "installation_page_title" }) } /*`${siteConfig.title}`*/
+      description={`${translate({ id: "pedax_description" })} <head />`}>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <p className="hero__subtitle">{translate({ id: "pedax_description" })}</p>
           {/* <div className={styles.buttons}>
             <Link
               className={clsx(
