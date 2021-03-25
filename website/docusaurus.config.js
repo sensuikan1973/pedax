@@ -33,17 +33,6 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Author',
-          items: [
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/sensuikan1973',
-            },
-          ],
-        },
-      ],
       copyright: `Copyright © ${new Date().getFullYear()} Naoki Shimizu. Built with Docusaurus.`,
     },
   },
