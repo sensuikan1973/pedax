@@ -14,7 +14,7 @@ module.exports = {
     locales: ['ja', 'en'],
   },
   themeConfig: {
-    image: 'img/pedax_logo.png',
+    image: 'img/pedax_og.png',
     navbar: {
       title: 'pedax',
       logo: { alt: 'pedax Logo', src: 'img/logo.svg' },
