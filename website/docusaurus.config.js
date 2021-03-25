@@ -2,7 +2,7 @@
 module.exports = {
   title: 'pedax',
   tagline: 'othello Board with edax',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://sensuikan1973.github.io/pedax/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
