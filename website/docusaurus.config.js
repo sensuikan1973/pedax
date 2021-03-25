@@ -10,7 +10,7 @@ module.exports = {
   organizationName: 'sensuikan1973',
   projectName: 'pedax',
   i18n: {
-    // defaultLocale: 'en',
+    defaultLocale: 'ja',
     locales: ['ja', 'en'],
   },
   themeConfig: {
