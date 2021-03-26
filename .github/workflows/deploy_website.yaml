@@ -24,6 +24,25 @@ jobs:
         git config --global user.email "actions@github.com"
         git config --global user.name "gh-actions"
     - run: yarn install --frozen-lockfile
+
+    - name: start deployment
+      uses: bobheadxi/deployments@master
+      id: deployment
+      with:
+        step: start
+        token: ${{ secrets.GITHUB_TOKEN }}
+        env: website
+
     - run: npm run deploy
       env:
         GIT_USER: ${{ github.actor }}:${{ github.token }}
+
+    - name: update deployment status
+      uses: bobheadxi/deployments@master
+      if: always()
+      with:
+        step: finish
+        token: ${{ secrets.GITHUB_TOKEN }}
+        status: ${{ job.status }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        env_url: https://sensuikan1973.github.io/pedax/
