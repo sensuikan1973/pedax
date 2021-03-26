@@ -71,6 +71,7 @@ class _HomeState extends State<Home> {
         leading: _menu(),
         title: Text(AppLocalizations.of(context)!.analysisMode),
         centerTitle: true,
+        actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
       ),
       body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
           ? Column(
