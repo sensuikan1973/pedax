@@ -3,7 +3,7 @@
     "message": "インストール"
   },
   "pedax_description": {
-    "message": "edax 用のオセロ盤 GUI"
+    "message": "edax 用のオセロ盤"
   },
   "analysis_mode_board_title": {
     "message": "評価値や book の閲覧"
