@@ -46,16 +46,10 @@ export default function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{translate({ id: "pedax_description" })}</p>
-          {/* <div className={styles.buttons}>
-            <Link
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('docs/')}>
-              Get Started
-            </Link>
-          </div> */}
+          <section className="storeImages">
+            <a href="TODO: changeme"><img className={styles.storeImage} src={ translate({ id: "mac_app_store_badge" }) }/></a>
+            <a href="TODO: changeme"><img className={styles.storeImage} src={ translate({ id: "microsoft_store_badge" }) }/></a>
+          </section>
         </div>
       </header>
       <main>

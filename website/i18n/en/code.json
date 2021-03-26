@@ -22,5 +22,11 @@
   },
   "custome_options_description": {
     "message": "e.g. book file path, step-by-step hint view."
+  },
+  "mac_app_store_badge": {
+    "message": "img/en/mac_app_store.svg"
+  },
+  "microsoft_store_badge": {
+    "message": "img/en/microsoft_store.svg"
   }
 }

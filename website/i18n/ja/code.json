@@ -22,5 +22,11 @@
   },
   "custome_options_description": {
     "message": "book ファイルや評価値の段階表示などを変更可能"
+  },
+  "mac_app_store_badge": {
+    "message": "img/ja/mac_app_store.svg"
+  },
+  "microsoft_store_badge": {
+    "message": "img/ja/microsoft_store.svg"
   }
 }
