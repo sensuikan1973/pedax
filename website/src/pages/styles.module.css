@@ -34,3 +34,16 @@
 .featureImage {
   height: 400px;
 }
+
+.storeImage {
+  height: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.storeImages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
