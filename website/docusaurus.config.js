@@ -2,7 +2,7 @@
 module.exports = {
   title: 'pedax',
   titleDelimiter: '🍵',
-  tagline: 'othello Board with edax',
+  tagline: 'Othello Board with edax',
   url: 'https://sensuikan1973.github.io',
   baseUrl: '/pedax/',
   onBrokenLinks: 'throw',
