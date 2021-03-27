@@ -90,7 +90,7 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.done.sensuikan1973" "\0"
-            VALUE "FileDescription", "othello Board GUI with edax." "\0"
+            VALUE "FileDescription", "Reversi Board GUI with edax." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "pedax" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2021 com.done.sensuikan1973. All rights reserved." "\0"

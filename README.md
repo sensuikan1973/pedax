@@ -7,7 +7,7 @@
 <div>
   <br/>
   <br/>
-  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest othello program.
+  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
