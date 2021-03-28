@@ -258,7 +258,10 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.hintStepByStepSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => const HintStepByStepSettingDialog(),
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: HintStepByStepSettingDialog(),
+            ),
           ),
         ),
         _Menu(
