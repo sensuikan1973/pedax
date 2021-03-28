@@ -47,8 +47,8 @@ export default function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{translate({ id: "pedax_description" })}</p>
           <section className="storeImages">
-            <a href="TODO: changeme"><img className={styles.storeImage} src={ translate({ id: "mac_app_store_badge" }) }/></a>
-            <a href="TODO: changeme"><img className={styles.storeImage} src={ translate({ id: "microsoft_store_badge" }) }/></a>
+            <a href={ translate({ id: "mac_app_store_link" }) } rel="noreferrer" target="_blank"><img className={styles.storeImage} src={ translate({ id: "mac_app_store_badge" }) }/></a>
+            <a href={ translate({ id: "microsoft_store_link" }) } rel="noreferrer" target="_blank"><img className={styles.storeImage} src={ translate({ id: "microsoft_store_badge" }) }/></a>
           </section>
         </div>
       </header>
