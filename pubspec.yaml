@@ -70,3 +70,17 @@ flutter:
     - assets/images/
     - assets/libedax/data/
     - assets/libedax/dll/
+
+msix_config:
+  display_name: pedax
+  publisher_display_name: Naoki Shimizu
+  identity_name: 1781NaokiShimizu.pedax
+  msix_version: 0.4.2.0
+  publisher: CN=4CCE9711-39B6-4ECC-AA74-A350014A69B0
+  # logo_path: C:\<PathToIcon>\<Logo.png>
+  # start_menu_icon_path: C:\<PathToIcon>\<Icon.png>
+  # tile_icon_path: C:\<PathToIcon>\<Icon.png>
+  # vs_generated_images_folder_path: C:\<PathToFolder>\Images
+  # icons_background_color: transparent (or some color like: '#ffffff')
+  architecture: x64
+  # capabilities: 'internetClient,location,microphone,webcam'
