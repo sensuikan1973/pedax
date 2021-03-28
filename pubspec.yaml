@@ -61,7 +61,7 @@ dev_dependencies:
   msix:
     git:
       # See: https://github.com/YehudaKremer/msix/issues/35
-      url: git@github.com:sensuikan1973/msix
+      url: git://github.com/sensuikan1973/msix
       ref: support_ja_jp_temporary_branch
   pedantic_sensuikan1973: any
 
