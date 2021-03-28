@@ -277,9 +277,11 @@ packages:
   msix:
     dependency: "direct dev"
     description:
-      name: msix
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: support_ja_jp_temporary_branch
+      resolved-ref: "6f4f3183815d5f9f72d545609fc13888ee670b83"
+      url: "git@github.com:sensuikan1973/msix"
+    source: git
     version: "1.0.3"
   nested:
     dependency: transitive

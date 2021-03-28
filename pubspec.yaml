@@ -58,7 +58,11 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^1.0.3
+  msix:
+    git:
+      # See: https://github.com/YehudaKremer/msix/issues/35
+      url: git@github.com:sensuikan1973/msix
+      ref: support_ja_jp_temporary_branch
   pedantic_sensuikan1973: any
 
 flutter:
