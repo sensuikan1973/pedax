@@ -28,5 +28,11 @@
   },
   "microsoft_store_badge": {
     "message": "img/ja/microsoft_store.svg"
+  },
+  "mac_app_store_link": {
+    "message": "https://apps.apple.com/jp/app/pedax/id1557500142"
+  },
+  "microsoft_store_link": {
+    "message": "changeme"
   }
 }
