@@ -91,6 +91,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(value.currentMoves));
   }
 
+  void switchHintStepByStep(bool enabled) => value.hintStepByStep = enabled;
+
   void requestBookLoad(String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();
