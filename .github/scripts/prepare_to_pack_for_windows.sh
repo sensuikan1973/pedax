@@ -10,3 +10,5 @@ dest_path="build/windows/runner/Release/"
 cp "$system32_path/vcruntime140.dll" $dest_path
 cp "$system32_path/vcruntime140_1.dll" $dest_path
 cp "$system32_path/msvcp140.dll" $dest_path
+
+flutter pub run msix:create
