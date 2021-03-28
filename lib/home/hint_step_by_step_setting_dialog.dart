@@ -31,7 +31,7 @@ class HintStepByStepSettingDialog extends StatelessWidget {
                     Switch(
                       value: _enabled.value!,
                       onChanged: (value) {
-                        context.read<BoardNotifier>().switchHintStepByStep(value);
+                        context.read<BoardNotifier>().switchHintStepByStep(enabled: value);
                         _option.update(value);
                         _enabled.value = value;
                       },
