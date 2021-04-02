@@ -1,6 +1,7 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'pedax',
+  titleDelimiter: '🐧',
   tagline: 'Reversi Board with edax',
   url: 'https://sensuikan1973.github.io',
   baseUrl: '/pedax/',
