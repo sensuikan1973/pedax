@@ -1,4 +1,4 @@
-# NOTE: Experimental Job. See: https://flutter.dev/desktop#distribution
+# See: https://flutter.dev/desktop#distribution
 # REF: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
 
 name: Flutter Build

@@ -81,7 +81,5 @@ msix_config:
   logo_path: assets/images/pedax_logo.png
   start_menu_icon_path: assets/images/pedax_logo.png
   tile_icon_path: assets/images/pedax_logo.png
-  # vs_generated_images_folder_path: C:\<PathToFolder>\Images
-  # icons_background_color: transparent (or some color like: '#ffffff')
   architecture: x64
   capabilities: ''

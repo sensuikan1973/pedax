@@ -34,7 +34,7 @@ class StartEdaxServerParams {
   final Logger logger;
 }
 
-// TODO: consider to separate as edax_server package
+// TODO: consider to separate as a package
 @doNotStore
 class EdaxServer {
   EdaxServer({required this.dllPath, required this.logger});
