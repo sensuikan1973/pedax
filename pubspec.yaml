@@ -4,7 +4,7 @@
 name: pedax
 description: Board with edax.
 publish_to: 'none'
-homepage: https://github.com/sensuikan1973/pedax # TODO: change to blanding site
+homepage: https://sensuikan1973.github.io/pedax/
 repository: https://github.com/sensuikan1973/pedax
 issue_tracker: https://github.com/sensuikan1973/pedax/issues
 
@@ -18,7 +18,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.4.5-beta+3
+version: 0.4.6-beta+4
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: '>=2.12.0 <3.0.0'
@@ -75,7 +75,7 @@ msix_config:
   display_name: pedax
   publisher_display_name: Naoki Shimizu
   identity_name: 1781NaokiShimizu.pedax
-  msix_version: 0.4.5.0
+  msix_version: 0.4.6.0
   publisher: CN=4CCE9711-39B6-4ECC-AA74-A350014A69B0
   languages: en, ja
   logo_path: assets/images/pedax_logo.png
