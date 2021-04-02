@@ -1,3 +1,6 @@
+# See: https://flutter.dev/desktop#distribution
+# REF: https://github.com/flutter/gallery/blob/master/.github/workflows/release.yml
+
 name: Publish pedax app
 
 on:
