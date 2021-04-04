@@ -14,7 +14,6 @@ class BookFilePathSettingDialog extends StatelessWidget {
 
   final _option = const BookFileOption();
   final _selectedFilePath = ValueNotifier<String?>(null);
-  final _pathTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) => AlertDialog(
@@ -33,14 +32,12 @@ class BookFilePathSettingDialog extends StatelessWidget {
                   },
                   child: Text(AppLocalizations.of(context)!.chooseBookFile),
                 ),
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 ValueListenableBuilder<String?>(
                   valueListenable: _selectedFilePath,
                   builder: (_, value, __) {
                     if (value == null) return const Text(' ');
-                    _pathTextController.text = value;
-                    return Expanded(
-                      child: TextField(controller: _pathTextController, readOnly: true),
-                    );
+                    return Expanded(child: SelectableText(value));
                   },
                 ),
               ],
