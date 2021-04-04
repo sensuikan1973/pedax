@@ -9,9 +9,6 @@ class BookLoadRequest extends RequestSchema {
   const BookLoadRequest(this.file);
 
   final String file;
-
-  @override
-  String get name => 'bookLoad';
 }
 
 @immutable

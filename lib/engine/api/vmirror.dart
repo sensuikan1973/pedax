@@ -7,9 +7,6 @@ import 'response_schema.dart';
 @immutable
 class VmirrorRequest extends RequestSchema {
   const VmirrorRequest();
-
-  @override
-  String get name => 'vmirror';
 }
 
 @immutable

@@ -7,9 +7,6 @@ import 'response_schema.dart';
 @immutable
 class StopRequest extends RequestSchema {
   const StopRequest();
-
-  @override
-  String get name => 'stop';
 }
 
 @immutable

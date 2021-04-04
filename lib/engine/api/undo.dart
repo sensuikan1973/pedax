@@ -9,9 +9,6 @@ class UndoRequest extends RequestSchema {
   const UndoRequest({required this.times});
 
   final int times;
-
-  @override
-  String get name => 'undo';
 }
 
 @immutable

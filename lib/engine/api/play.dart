@@ -9,9 +9,6 @@ class PlayRequest extends RequestSchema {
   const PlayRequest(this.moves);
 
   final String moves;
-
-  @override
-  String get name => 'play';
 }
 
 @immutable

@@ -7,9 +7,6 @@ import 'response_schema.dart';
 @immutable
 class ShutdownRequest extends RequestSchema {
   const ShutdownRequest();
-
-  @override
-  String get name => 'shutdown';
 }
 
 @immutable

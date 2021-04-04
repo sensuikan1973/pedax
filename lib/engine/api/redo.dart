@@ -8,9 +8,6 @@ import 'response_schema.dart';
 class RedoRequest extends RequestSchema {
   const RedoRequest({required this.times});
   final int times;
-
-  @override
-  String get name => 'redo';
 }
 
 @immutable

@@ -9,9 +9,6 @@ class MoveRequest extends RequestSchema {
   const MoveRequest(this.move);
 
   final String move;
-
-  @override
-  String get name => 'move';
 }
 
 @immutable
