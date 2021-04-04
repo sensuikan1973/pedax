@@ -7,8 +7,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class RedoAllShorcut extends PedaxShorcut {
-  const RedoAllShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class RedoAllShorcut implements PedaxShorcut {
+  const RedoAllShorcut(this.boardNotifier);
+
+  @override
+  final BoardNotifier boardNotifier;
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRedoAll;

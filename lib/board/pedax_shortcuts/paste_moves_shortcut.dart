@@ -9,8 +9,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class PasteMovesShorcut extends PedaxShorcut {
-  const PasteMovesShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class PasteMovesShorcut implements PedaxShorcut {
+  const PasteMovesShorcut(this.boardNotifier);
+
+  @override
+  final BoardNotifier boardNotifier;
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelPasteMoves;

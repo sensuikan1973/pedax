@@ -13,9 +13,7 @@ import 'undo_shortcut.dart';
 
 @immutable
 abstract class PedaxShorcut {
-  const PedaxShorcut(this.boardNotifier);
-  final BoardNotifier boardNotifier;
-
+  BoardNotifier get boardNotifier;
   String label(BuildContext context);
   String get keys;
   bool fired(RawKeyEvent keyEvent);

@@ -7,8 +7,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class SwitchHintVisibilityShorcut extends PedaxShorcut {
-  const SwitchHintVisibilityShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class SwitchHintVisibilityShorcut implements PedaxShorcut {
+  const SwitchHintVisibilityShorcut(this.boardNotifier);
+
+  @override
+  final BoardNotifier boardNotifier;
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelSwitchHintVisiblity;
