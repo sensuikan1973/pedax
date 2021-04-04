@@ -17,9 +17,8 @@ class NTasksOption extends EdaxOption<int> {
   @visibleForTesting
   String get prefKey => 'nTasks';
 
-  @override
-  int get nativeDefaultValue => 1;
-
+  // REF: native default value is 1.
+  //      https://github.com/abulmo/edax-reversi/blob/01899aecce8bc780517149c80f178fb478a17a0b/src/options.c#L27
   @override
   Future<int> get appDefaultValue async => max(Platform.numberOfProcessors / 4, 1).floor();
 

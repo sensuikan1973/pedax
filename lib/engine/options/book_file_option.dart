@@ -18,9 +18,8 @@ class BookFileOption extends EdaxOption<String> {
   @visibleForTesting
   String get prefKey => 'bookFilePath';
 
-  @override
-  String get nativeDefaultValue => p.join('data', _defaultFileName); // relative path
-
+  // REF: native default value is `./data/book.dat`
+  //      https://github.com/abulmo/edax-reversi/blob/01899aecce8bc780517149c80f178fb478a17a0b/src/options.c#L323
   @override
   Future<String> get appDefaultValue async => p.join((await docDir).path, _defaultFileName);
 

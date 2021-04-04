@@ -14,8 +14,6 @@ abstract class EdaxOption<T> {
 
   String get prefKey;
 
-  T get nativeDefaultValue;
-
   Future<T> get appDefaultValue;
 
   Future<T> get val;
