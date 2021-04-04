@@ -2,7 +2,7 @@
 # REF: https://dart.dev/null-safety/unsound-null-safety
 
 name: pedax
-description: Board with edax.
+description: Reversi Board with edax.
 publish_to: 'none'
 homepage: https://sensuikan1973.github.io/pedax/
 repository: https://github.com/sensuikan1973/pedax
