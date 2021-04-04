@@ -29,7 +29,7 @@ void main() {
         debugDumpApp();
         await delay300millisec(tester);
       });
-    }, tags: debugDumpAppTag);
+    });
 
     testWidgets('ShortcutCheatsheetDialog', (tester) async {
       final boardNotifier = BoardNotifier();
@@ -45,6 +45,6 @@ void main() {
         debugDumpApp();
         await delay300millisec(tester);
       });
-    }, tags: debugDumpAppTag);
+    });
   });
 }

@@ -7,9 +7,6 @@ import 'response_schema.dart';
 @immutable
 class GetBookMoveWithPositionRequest extends RequestSchema {
   const GetBookMoveWithPositionRequest();
-
-  @override
-  String get name => 'getBookMoveWithPosition';
 }
 
 @immutable

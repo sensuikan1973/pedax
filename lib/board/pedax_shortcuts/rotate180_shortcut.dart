@@ -7,8 +7,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class Rotate180Shorcut extends PedaxShorcut {
-  const Rotate180Shorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class Rotate180Shorcut implements PedaxShorcut {
+  const Rotate180Shorcut(this.boardNotifier);
+
+  @override
+  final BoardNotifier boardNotifier;
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRotate180;

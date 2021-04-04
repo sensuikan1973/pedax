@@ -7,9 +7,6 @@ import 'response_schema.dart';
 @immutable
 class InitRequest extends RequestSchema {
   const InitRequest();
-
-  @override
-  String get name => 'init';
 }
 
 @immutable

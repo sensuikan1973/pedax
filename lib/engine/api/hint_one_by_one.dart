@@ -17,9 +17,6 @@ class HintOneByOneRequest extends RequestSchema {
   final int level;
   final bool stepByStep;
   final String movesAtRequest;
-
-  @override
-  String get name => 'hintOneByOne';
 }
 
 @immutable

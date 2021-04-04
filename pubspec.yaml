@@ -58,7 +58,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^1.0.4
+  msix: ^1.0.5
   pedantic_sensuikan1973: any
 
 flutter:

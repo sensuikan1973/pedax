@@ -11,6 +11,4 @@ abstract class RequestSchema {
   const RequestSchema({this.logger});
 
   final Logger? logger;
-
-  String get name;
 }

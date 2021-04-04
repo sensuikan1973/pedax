@@ -7,8 +7,11 @@ import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class UndoShorcut extends PedaxShorcut {
-  const UndoShorcut(BoardNotifier boardNotifier) : super(boardNotifier);
+class UndoShorcut implements PedaxShorcut {
+  const UndoShorcut(this.boardNotifier);
+
+  @override
+  final BoardNotifier boardNotifier;
 
   @override
   String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelUndo;

@@ -14,9 +14,8 @@ class LevelOption extends EdaxOption<int> {
   @visibleForTesting
   String get prefKey => 'level';
 
-  @override
-  int get nativeDefaultValue => 21;
-
+  // REF: native default value is 21.
+  //      https://github.com/abulmo/edax-reversi/blob/01899aecce8bc780517149c80f178fb478a17a0b/src/options.c#L38
   @override
   Future<int> get appDefaultValue async => 10;
 

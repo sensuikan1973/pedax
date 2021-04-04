@@ -10,9 +10,6 @@ class SetOptionRequest<T extends Object> extends RequestSchema {
 
   final String optionName;
   final T val;
-
-  @override
-  String get name => 'setOption';
 }
 
 @immutable

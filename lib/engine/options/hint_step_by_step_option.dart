@@ -13,9 +13,6 @@ class HintStepByStepOption extends EdaxOption<bool> {
   String get prefKey => 'hintStepByStep';
 
   @override
-  bool get nativeDefaultValue => false;
-
-  @override
   Future<bool> get appDefaultValue async => true;
 
   @override

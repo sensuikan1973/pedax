@@ -9,9 +9,6 @@ class RotateRequest extends RequestSchema {
   const RotateRequest({required this.angle});
 
   final int angle;
-
-  @override
-  String get name => 'rotate';
 }
 
 @immutable

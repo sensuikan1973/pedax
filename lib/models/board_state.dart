@@ -25,8 +25,6 @@ class BoardState {
   int positionDrawsNum = 0;
 
   int get positionFullNum => positionWinsNum + positionLossesNum + positionDrawsNum;
-  int get positionWinsRate => (positionWinsNum / positionFullNum * 100).floor();
-  int get positionDrawsRate => (positionDrawsNum / positionFullNum * 100).floor();
 
   int get blackDiscCount => currentColor == TurnColor.black ? squaresOfPlayer.length : squaresOfOpponent.length;
   int get whiteDiscCount => currentColor == TurnColor.white ? squaresOfPlayer.length : squaresOfOpponent.length;
