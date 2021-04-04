@@ -20,6 +20,7 @@ import 'api/stop.dart';
 import 'api/undo.dart';
 
 // NOTE: top level function for `isolate.spawn`.
+@doNotStore
 Future<void> startEdaxServer(StartEdaxServerParams params) async {
   final server = EdaxServer(dllPath: params.dllPath, logger: params.logger);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
@@ -134,6 +135,7 @@ class _ComputeHintNextParams {
 }
 
 // NOTE: top level function for `compute`.
+@doNotStore
 Future<void> _computeHintNext(_ComputeHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
@@ -148,6 +150,7 @@ class _ComputeBookLoadParams {
 }
 
 // NOTE: top level function for `compute`.
+@doNotStore
 void _computeBookLoad(_ComputeBookLoadParams params) {
   final edax = LibEdax(params.dllPath);
   final result = executeBookLoad(edax, params.request);
