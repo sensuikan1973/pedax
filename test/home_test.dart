@@ -33,140 +33,149 @@ Future<void> main() async {
   setUp(() => Logger.level = Level.nothing);
   final l10nEn = await loadLocalizations(PedaxApp.localeEn);
 
-  testWidgets('play a game', (tester) async {
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const PedaxApp());
-      await waitEdaxSetuped(tester);
-      expect(find.text(l10nEn.analysisMode), findsOneWidget);
+  group('play a game', () {
+    testWidgets('a game without pass', (tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+        expect(find.text(l10nEn.analysisMode), findsOneWidget);
 
-      expect(find.byType(PedaxBoard), findsOneWidget);
-      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        expect(find.byType(PedaxBoard), findsOneWidget);
+        expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-      await tester.tap(findByCoordinate('f5'));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+        await tester.tap(findByCoordinate('f5'));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
 
-      await tester.tap(findByCoordinate('f4'));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        await tester.tap(findByCoordinate('f4'));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.tap(findByCoordinate('e3'));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.tap(findByCoordinate('e3'));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-      await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
-      await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
-      expectStoneCoordinate(tester, 'c4', SquareType.black);
-      await delay300millisec(tester);
+        await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
+        expectStoneCoordinate(tester, 'c4', SquareType.black);
+        await delay300millisec(tester);
+      });
     });
-  });
 
-  testWidgets('play a game with pass', (tester) async {
-    // REF: https://www.hasera.net/othello/mame006.html
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const PedaxApp());
-      await waitEdaxSetuped(tester);
+    testWidgets('a game with pass', (tester) async {
+      // REF: https://www.hasera.net/othello/mame006.html
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
 
-      await tester.tap(findByCoordinate('f5'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('f5'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('f6'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('f6'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('d3'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('d3'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('g5'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('g5'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('h5'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('h5'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('h4'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('h4'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('f7'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('f7'));
+        await delay300millisec(tester);
+        await tester.pump();
 
-      await tester.tap(findByCoordinate('h6'));
-      await delay300millisec(tester);
-      await tester.pump();
+        await tester.tap(findByCoordinate('h6')); // black pass internaly in engine.
+        await delay300millisec(tester);
+        await tester.pump();
 
-      // black pass internaly in engine.
+        await tester.tap(findByCoordinate('e7'));
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
 
-      await tester.tap(findByCoordinate('e7'));
-      await delay300millisec(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internaly in engine.
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.white, 4); // h4, h5, h6, g5
 
-      // TODO: add undo/redo test
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internaly in engine.
+        await delay300millisec(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
+        await delay300millisec(tester);
+      });
     });
   });
 
