@@ -38,7 +38,7 @@ class EvalFileOption extends EdaxOption<String> {
       final newPath = await appDefaultValue;
       Logger().i('scpecified path is empty. So, pedax sets $newPath.');
       await pref.setString(prefKey, newPath);
-      return appDefaultValue;
+      return newPath;
     } else {
       await pref.setString(prefKey, val);
       return val;
