@@ -67,60 +67,62 @@ class EdaxServer {
       ..edaxInit();
     logger.i('libedax has initialized with $initLibedaxParameters');
 
-    // ignore: avoid_annotating_with_dynamic
-    _receivePort.listen((dynamic message) async {
-      logger.d('received request "${message.runtimeType}"');
-      if (message is MoveRequest) {
-        parentSendPort.send(executeMove(edax, message));
-      } else if (message is PlayRequest) {
-        parentSendPort.send(executePlay(edax, message));
-      } else if (message is HintOneByOneRequest) {
-        _latestHintMessage = message;
-        // ignore: literal_only_boolean_expressions
-        while (true) {
-          if (_searchWorkerNum >= _maxSearchWorkerNum) {
-            await Future<void>.delayed(_searchWorkerSpawningSpan);
-            continue;
-          }
-          if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
-            logger.d(
-                'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
+    _registerApiHandler(parentSendPort, edax);
+  }
+
+  // ignore: avoid_annotating_with_dynamic
+  void _registerApiHandler(SendPort parentSendPort, LibEdax edax) => _receivePort.listen((dynamic message) async {
+        logger.d('received request "${message.runtimeType}"');
+        if (message is MoveRequest) {
+          parentSendPort.send(executeMove(edax, message));
+        } else if (message is PlayRequest) {
+          parentSendPort.send(executePlay(edax, message));
+        } else if (message is HintOneByOneRequest) {
+          _latestHintMessage = message;
+          // ignore: literal_only_boolean_expressions
+          while (true) {
+            if (_searchWorkerNum >= _maxSearchWorkerNum) {
+              await Future<void>.delayed(_searchWorkerSpawningSpan);
+              continue;
+            }
+            if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
+              logger.d(
+                  'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
+              break;
+            }
+            _searchWorkerNum++;
+            await compute(_computeHintNext, _ComputeHintNextParams(dllPath, _latestHintMessage, parentSendPort));
+            _searchWorkerNum--;
             break;
           }
-          _searchWorkerNum++;
-          await compute(_computeHintNext, _ComputeHintNextParams(dllPath, _latestHintMessage, parentSendPort));
-          _searchWorkerNum--;
-          break;
+        } else if (message is InitRequest) {
+          parentSendPort.send(executeInit(edax, message));
+        } else if (message is RotateRequest) {
+          parentSendPort.send(executeRotate(edax, message));
+        } else if (message is UndoRequest) {
+          parentSendPort.send(executeUndo(edax, message));
+        } else if (message is RedoRequest) {
+          parentSendPort.send(executeRedo(edax, message));
+        } else if (message is GetBookMoveWithPositionRequest) {
+          parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
+        } else if (message is BookLoadRequest) {
+          logger.i('will load book file. path: ${message.file}');
+          if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
+          _bookLoadingWorkerNum++;
+          await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
+          _bookLoadingWorkerNum--;
+        } else if (message is SetOptionRequest) {
+          parentSendPort.send(executeSetOption(edax, message));
+        } else if (message is StopRequest) {
+          parentSendPort.send(executeStop(edax, message));
+        } else if (message is ShutdownRequest) {
+          parentSendPort.send(executeShutdown(edax, message));
+          _receivePort.close();
+          logger.i('shutdowned');
+        } else {
+          logger.w('request ${message.runtimeType} is not supported');
         }
-      } else if (message is InitRequest) {
-        parentSendPort.send(executeInit(edax, message));
-      } else if (message is RotateRequest) {
-        parentSendPort.send(executeRotate(edax, message));
-      } else if (message is UndoRequest) {
-        parentSendPort.send(executeUndo(edax, message));
-      } else if (message is RedoRequest) {
-        parentSendPort.send(executeRedo(edax, message));
-      } else if (message is GetBookMoveWithPositionRequest) {
-        parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
-      } else if (message is BookLoadRequest) {
-        logger.i('will load book file. path: ${message.file}');
-        if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
-        _bookLoadingWorkerNum++;
-        await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
-        _bookLoadingWorkerNum--;
-      } else if (message is SetOptionRequest) {
-        parentSendPort.send(executeSetOption(edax, message));
-      } else if (message is StopRequest) {
-        parentSendPort.send(executeStop(edax, message));
-      } else if (message is ShutdownRequest) {
-        parentSendPort.send(executeShutdown(edax, message));
-        _receivePort.close();
-        logger.i('shutdowned');
-      } else {
-        logger.w('request ${message.runtimeType} is not supported');
-      }
-    });
-  }
+      });
 }
 
 @immutable
