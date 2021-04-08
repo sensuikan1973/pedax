@@ -53,7 +53,7 @@ flutter test
 ##### integration test
 
 ```sh
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos --keep-app-running
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 ```
 
 #### analyze
