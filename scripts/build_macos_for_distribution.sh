@@ -2,6 +2,14 @@
 
 set -e
 
+tag=$1
+if [ -z "$tag" ]
+then
+  echo "tag is required"
+  exit
+fi
+git checkout $tag
+
 flutter channel dev
 flutter upgrade
 
