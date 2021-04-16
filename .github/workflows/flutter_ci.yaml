@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'dev'
+          channel: beta
       - run: flutter format -l 120 --set-exit-if-changed .
 
   analyze:
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'dev'
+          channel: beta
       - name: install dependencies
         run: flutter pub get
       - run: flutter analyze --fatal-infos --fatal-warnings .
@@ -37,7 +37,7 @@ jobs:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
         os: [windows-2019, macos-10.15, ubuntu-20.04]
-        flutter_channel: [dev]
+        flutter_channel: [beta]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
