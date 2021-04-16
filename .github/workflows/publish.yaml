@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-20.04, windows-2019, macos-10.15]
-        flutter_channel: [dev]
+        flutter_channel: [beta]
         mode: [release]
         include:
           - os: ubuntu-20.04

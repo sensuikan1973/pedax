@@ -10,7 +10,7 @@ then
 fi
 git checkout $tag
 
-flutter channel dev
+flutter channel beta
 flutter upgrade
 
 flutter test
