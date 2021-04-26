@@ -44,12 +44,11 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _setUpEdaxServer();
+    _setUpEdaxServer(context.read<BoardNotifier>());
   }
 
-  Future<void> _setUpEdaxServer() async {
+  Future<void> _setUpEdaxServer(BoardNotifier boardNotifier) async {
     await _edaxAsset.setupDllAndData();
-    final boardNotifier = context.read<BoardNotifier>();
     await boardNotifier.spawnEdaxServer(
       libedaxPath: await _edaxAsset.libedaxPath,
       initLibedaxParams: await _edaxAsset.buildInitLibEdaxParams(),
