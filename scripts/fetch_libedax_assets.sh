@@ -1,6 +1,5 @@
 mkdir -p assets/libedax
 data_dst=assets/libedax/data
-mkdir -p $dll_dst
 mkdir -p $data_dst
 
 tmp_dst=libedax_assets_tmp
