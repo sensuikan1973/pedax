@@ -35,13 +35,13 @@ class LevelSettingDialog extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.cancelOnDialog),
           ),
           TextButton(
-            onPressed: () async {
+            onPressed: () {
               final n = int.tryParse(_textController.text);
               if (n != null && n > 0) {
                 context.read<BoardNotifier>().requestSetOption(_option.nativeName, n.toString());
-                await _option.update(n);
+                _option.update(n);
               }
-              Navigator.pop(context); // ignore: use_build_context_synchronously
+              Navigator.pop(context);
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
           ),
