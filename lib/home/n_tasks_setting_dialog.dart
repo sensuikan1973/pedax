@@ -38,13 +38,13 @@ class NTasksSettingDialog extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.cancelOnDialog),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               final n = int.tryParse(_textController.text);
               if (n != null && n > 0) {
                 context.read<BoardNotifier>().requestSetOption(_option.nativeName, n.toString());
-                _option.update(n);
+                await _option.update(n);
               }
-              Navigator.pop(context);
+              Navigator.pop(context); // ignore: use_build_context_synchronously
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
           ),
