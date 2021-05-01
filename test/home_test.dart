@@ -44,81 +44,81 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
         await tester.tap(findByCoordinate('f5'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
 
         await tester.tap(findByCoordinate('f4'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
         await tester.tap(findByCoordinate('e3'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
         await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
         await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
         await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
 
         await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
         expectStoneCoordinate(tester, 'c4', SquareType.black);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -130,52 +130,52 @@ Future<void> main() async {
         await waitEdaxSetuped(tester);
 
         await tester.tap(findByCoordinate('f5'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('f6'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('d3'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('g5'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('h5'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('h4'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('f7'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('h6')); // black pass internaly in engine.
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
 
         await tester.tap(findByCoordinate('e7'));
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internaly in engine.
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.white, 4); // h4, h5, h6, g5
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internaly in engine.
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -196,10 +196,10 @@ Future<void> main() async {
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await tester.pumpAndSettle();
-      await delay300millisec(tester);
+      await waitEdaxServerResponsed(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
-      await delay300millisec(tester);
+      await waitEdaxServerResponsed(tester);
       await tester.pumpAndSettle();
     });
   });
@@ -215,7 +215,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.license));
         await tester.pumpAndSettle();
         expect(find.byType(LicensePage), findsOneWidget);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -230,7 +230,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.shortcutCheatsheet));
         await tester.pumpAndSettle();
         expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -248,7 +248,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -267,7 +267,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -285,7 +285,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -305,7 +305,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -325,7 +325,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -343,7 +343,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -363,7 +363,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -383,7 +383,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
@@ -403,7 +403,7 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });
     });
