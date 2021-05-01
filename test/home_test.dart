@@ -205,16 +205,16 @@ Future<void> main() async {
   });
 
   group('menu events', () {
-    testWidgets('show LICENSE page', (tester) async {
+    testWidgets('show AboutDialog', (tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
 
         await tester.tap(find.byIcon(Icons.menu));
         await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.license));
+        await tester.tap(find.text(l10nEn.about));
         await tester.pumpAndSettle();
-        expect(find.byType(LicensePage), findsOneWidget);
+        expect(find.byType(AboutDialog), findsOneWidget);
         await waitEdaxServerResponsed(tester);
         await tester.pumpAndSettle();
       });

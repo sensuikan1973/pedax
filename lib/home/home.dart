@@ -272,9 +272,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.license,
-          AppLocalizations.of(context)!.license,
-          () => showLicensePage(context: context),
+          _MenuType.about,
+          AppLocalizations.of(context)!.about,
+          () => showAboutDialog(
+            context: context,
+            // applicationVersion: pacakgeInfo.version // See: https://github.com/flutter/flutter/issues/41728
+          ),
         ),
       ];
 }
@@ -293,5 +296,5 @@ enum _MenuType {
   level,
   hintStepByStep,
   shortcutCheatsheet,
-  license,
+  about,
 }

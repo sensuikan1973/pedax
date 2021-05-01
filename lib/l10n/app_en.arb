@@ -6,7 +6,7 @@
   "initializingEngine": "initializing engine...",
   "analysisMode": "analysis mode",
   "bookFilePathSetting": "edax book file path",
-  "license": "LICENSE",
+  "about": "About pedax",
   "cancelOnDialog": "Cancel",
   "updateSettingOnDialog": "Update",
   "userSpecifiedFileNotFound": "the file is not found",
