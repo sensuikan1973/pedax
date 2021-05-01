@@ -5,6 +5,6 @@ import 'package:meta/meta.dart';
 Future<void> waitEdaxSetuped(WidgetTester tester) async {
   await Future<void>.delayed(const Duration(seconds: 2));
   await tester.pump(); // after spwaning EdaxServer has completed, render UI.
-  await Future<void>.delayed(const Duration(seconds: 1)); // awit EdaxServer execute edax_init.
+  await Future<void>.delayed(const Duration(seconds: 1)); // wait EdaxServer execute edax_init.
   await tester.pump(); // after edax init has completed, render UI.
 }
