@@ -30,7 +30,7 @@ class BoardState {
   int get whiteDiscCount => currentColor == TurnColor.white ? squaresOfPlayer.length : squaresOfOpponent.length;
 
   String get currentMovesWithoutPassString => currentMoves.replaceAll(
-        RegExp('(${MoveMark.passString})|(${MoveMark.passString.toUpperCase()})'),
+        RegExp('(${MoveMark.passStringOfBlack})|(${MoveMark.passStringOfWhite})'),
         '',
       );
   int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
