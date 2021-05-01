@@ -207,7 +207,9 @@ Future<void> main() async {
   group('menu events', () {
     testWidgets('show LICENSE page', (tester) async {
       await tester.runAsync(() async {
+        print('start LICENSE page test'); // ignore: avoid_print
         await tester.pumpWidget(const PedaxApp());
+        print('will  waitEdaxSetuped'); // ignore: avoid_print
         await waitEdaxSetuped(tester);
 
         print('before tap'); // ignore: avoid_print
