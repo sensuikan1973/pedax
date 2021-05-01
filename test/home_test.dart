@@ -210,7 +210,9 @@ Future<void> main() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
 
+        print('before tap'); // ignore: avoid_print
         await tester.tap(find.byIcon(Icons.menu));
+        print('after tap'); // ignore: avoid_print
         await tester.pumpAndSettle();
         await tester.tap(find.text(l10nEn.license));
         await tester.pumpAndSettle();
