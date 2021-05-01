@@ -119,6 +119,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
         expectStoneCoordinate(tester, 'c4', SquareType.black);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -175,6 +176,7 @@ Future<void> main() async {
         await tester.pump();
         expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
   });
@@ -198,6 +200,7 @@ Future<void> main() async {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
       await delay300millisec(tester);
+      await tester.pumpAndSettle();
     });
   });
 
@@ -213,6 +216,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.byType(LicensePage), findsOneWidget);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -227,6 +231,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -244,6 +249,7 @@ Future<void> main() async {
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -262,6 +268,7 @@ Future<void> main() async {
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -279,6 +286,7 @@ Future<void> main() async {
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -298,6 +306,7 @@ Future<void> main() async {
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -317,6 +326,7 @@ Future<void> main() async {
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -334,6 +344,7 @@ Future<void> main() async {
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -353,6 +364,7 @@ Future<void> main() async {
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -372,6 +384,7 @@ Future<void> main() async {
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
 
@@ -391,6 +404,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
         await delay300millisec(tester);
+        await tester.pumpAndSettle();
       });
     });
   });

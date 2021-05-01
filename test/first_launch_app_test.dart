@@ -27,6 +27,7 @@ void main() {
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
       await delay300millisec(tester);
+      await tester.pumpAndSettle();
     });
   });
 }
