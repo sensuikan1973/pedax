@@ -3,7 +3,7 @@
   "initializingEngine": "エンジンの立ち上げ中...",
   "analysisMode": "解析モード",
   "bookFilePathSetting": "book ファイルのパス",
-  "license": "ライセンス",
+  "about": "このアプリについて",
   "cancelOnDialog": "キャンセル",
   "updateSettingOnDialog": "更新する",
   "userSpecifiedFileNotFound": "指定したファイルが見つかりません",

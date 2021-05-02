@@ -27,7 +27,7 @@ void main() {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
         debugDumpApp();
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
       });
     });
 
@@ -43,7 +43,7 @@ void main() {
         );
         await waitEdaxSetuped(tester);
         debugDumpApp();
-        await delay300millisec(tester);
+        await waitEdaxServerResponsed(tester);
       });
     });
   });
