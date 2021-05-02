@@ -28,7 +28,6 @@ void main() {
         await waitEdaxSetuped(tester);
         debugDumpApp();
         await waitEdaxServerResponsed(tester);
-        await tester.pumpAndSettle();
       });
     });
 
@@ -45,7 +44,6 @@ void main() {
         await waitEdaxSetuped(tester);
         debugDumpApp();
         await waitEdaxServerResponsed(tester);
-        await tester.pumpAndSettle();
       });
     });
   });
