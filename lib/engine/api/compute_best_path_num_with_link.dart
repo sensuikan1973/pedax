@@ -16,11 +16,11 @@ class ComputeBestPathNumWithLinkRequest extends RequestSchema {
 @immutable
 class ComputeBestPathNumWithLinkResponse extends ResponseSchema<ComputeBestPathNumWithLinkRequest> {
   const ComputeBestPathNumWithLinkResponse({
-    required this.listOfBestPathNumWithLink,
+    required this.bestPathNumWithLinkList,
     required ComputeBestPathNumWithLinkRequest request,
   }) : super(request);
 
-  final List<BestPathNumWithLink> listOfBestPathNumWithLink;
+  final List<BestPathNumWithLink> bestPathNumWithLinkList;
 }
 
 ComputeBestPathNumWithLinkResponse executeComputeBestPathNumWithLink(
@@ -28,5 +28,5 @@ ComputeBestPathNumWithLinkResponse executeComputeBestPathNumWithLink(
   ComputeBestPathNumWithLinkRequest request,
 ) {
   final result = edax.computeBestPathNumWithLink();
-  return ComputeBestPathNumWithLinkResponse(listOfBestPathNumWithLink: result, request: request);
+  return ComputeBestPathNumWithLinkResponse(bestPathNumWithLinkList: result, request: request);
 }
