@@ -192,6 +192,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gviz:
+    dependency: transitive
+    description:
+      name: gviz
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   http:
     dependency: transitive
     description:
@@ -238,7 +245,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0-beta"
+    version: "0.11.1-beta"
   logger:
     dependency: "direct main"
     description:
