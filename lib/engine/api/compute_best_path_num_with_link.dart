@@ -27,6 +27,6 @@ ComputeBestPathNumWithLinkResponse executeComputeBestPathNumWithLink(
   LibEdax edax,
   ComputeBestPathNumWithLinkRequest request,
 ) {
-  final result = edax.computeBestPathNumWithLink();
+  final result = edax.computeBestPathNumWithLink(level: 8); // TODO: move level param to method argument
   return ComputeBestPathNumWithLinkResponse(bestPathNumWithLinkList: result, request: request);
 }
