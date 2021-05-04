@@ -65,6 +65,7 @@ flutter analyze .
 #### fetch libedax assets as pedax assets
 
 ```sh
+# After you edit .libedax_assets_tag, run this.
 ./scripts/fetch_libedax_assets.sh
 ```
 
