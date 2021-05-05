@@ -12,6 +12,7 @@ import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
 import 'package:pedax/board/square.dart';
+import 'package:pedax/home/best_path_num_availability_setting_dialog.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
@@ -390,6 +391,25 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
+        await waitEdaxServerResponsed(tester);
+      });
+    });
+
+    testWidgets('on best path num availability', (tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.bestPathNumAvailabilitySetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.bestPathNumAvailabilitySetting), findsOneWidget);
+        await tester.tap(find.byType(Switch));
+        await tester.pumpAndSettle();
+        await tester.tapAt(const Offset(1, 1));
+        await tester.pumpAndSettle();
+        expect(find.byType(BestPathNumAvailabilitySettingDialog), findsNothing);
         await waitEdaxServerResponsed(tester);
       });
     });
