@@ -16,7 +16,7 @@ class PasteMovesShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelPasteMoves;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelPasteMoves;
 
   @override
   String get keys => Platform.isMacOS ? '⌃V or ⌘V' : 'Ctrl + V';

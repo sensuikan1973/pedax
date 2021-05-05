@@ -14,7 +14,7 @@ class UndoShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelUndo;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelUndo;
 
   @override
   String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ←';

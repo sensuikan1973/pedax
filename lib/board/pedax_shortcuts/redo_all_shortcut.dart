@@ -14,7 +14,7 @@ class RedoAllShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRedoAll;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelRedoAll;
 
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();

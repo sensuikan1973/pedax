@@ -14,7 +14,7 @@ class Rotate180Shorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelRotate180;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelRotate180;
 
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();

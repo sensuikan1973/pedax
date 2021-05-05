@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/board_notifier.dart';
 import 'copy_moves_shortcut.dart';
@@ -14,7 +15,7 @@ import 'undo_shortcut.dart';
 @immutable
 abstract class PedaxShorcut {
   BoardNotifier get boardNotifier;
-  String label(BuildContext context);
+  String label(AppLocalizations localizations);
   String get keys;
   bool fired(RawKeyEvent keyEvent);
   Future<void> runEvent();
