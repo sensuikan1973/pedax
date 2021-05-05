@@ -2,15 +2,15 @@ import 'package:meta/meta.dart';
 import 'edax_option.dart';
 
 @immutable
-class BestPathNumSwitchOption extends EdaxOption<bool> {
-  const BestPathNumSwitchOption();
+class BestPathNumAvailabilityOption extends EdaxOption<bool> {
+  const BestPathNumAvailabilityOption();
 
   @override
   String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
 
   @override
   @visibleForTesting
-  String get prefKey => 'BestPathNumSwitch';
+  String get prefKey => 'BestPathNumAvailability';
 
   @override
   Future<bool> get appDefaultValue async => false;
