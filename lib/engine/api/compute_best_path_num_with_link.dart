@@ -8,9 +8,11 @@ import 'response_schema.dart';
 class ComputeBestPathNumWithLinkRequest extends RequestSchema {
   const ComputeBestPathNumWithLinkRequest({
     required this.movesAtRequest,
+    this.level = 10, // TODO: consider default value
   });
 
   final String movesAtRequest;
+  final int level;
 }
 
 @immutable
@@ -27,6 +29,6 @@ ComputeBestPathNumWithLinkResponse executeComputeBestPathNumWithLink(
   LibEdax edax,
   ComputeBestPathNumWithLinkRequest request,
 ) {
-  final result = edax.computeBestPathNumWithLink(level: 8); // TODO: move level param to method argument
+  final result = edax.computeBestPathNumWithLink(level: request.level);
   return ComputeBestPathNumWithLinkResponse(bestPathNumWithLinkList: result, request: request);
 }
