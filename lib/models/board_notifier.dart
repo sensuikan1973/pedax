@@ -100,9 +100,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void switchHintStepByStep({required bool enabled}) => value.hintStepByStep = enabled;
 
   void switchBestPathNumAvailability({required bool enabled}) {
-    value
-      ..bestPathNumAvailability = enabled
-      ..bestPathNumList = UnmodifiableListView([]);
+    value.bestPathNumAvailability = enabled;
+    if (!enabled) value.bestPathNumList = UnmodifiableListView([]);
   }
 
   void requestBookLoad(String path) {
