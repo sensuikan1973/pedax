@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pedax/home/best_path_num_availability_setting_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -264,6 +265,17 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
+          _MenuType.bestPathNumAvailability,
+          AppLocalizations.of(context)!.bestPathNumAvailabilitySetting,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: BestPathNumAvailabilitySettingDialog(),
+            ),
+          ),
+        ),
+        _Menu(
           _MenuType.shortcutCheatsheet,
           AppLocalizations.of(context)!.shortcutCheatsheet,
           () => showDialog<void>(
@@ -296,6 +308,7 @@ enum _MenuType {
   nTasks,
   level,
   hintStepByStep,
+  bestPathNumAvailability,
   shortcutCheatsheet,
   about,
 }

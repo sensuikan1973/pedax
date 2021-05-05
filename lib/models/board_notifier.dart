@@ -94,6 +94,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   // ignore: use_setters_to_change_properties
   void switchHintStepByStep({required bool enabled}) => value.hintStepByStep = enabled;
 
+  // ignore: use_setters_to_change_properties
+  void switchBestPathNumAvailability({required bool enabled}) => value.bestPathNumAvailability = enabled;
+
   void requestBookLoad(String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();
