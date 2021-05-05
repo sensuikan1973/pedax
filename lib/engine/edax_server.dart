@@ -121,7 +121,7 @@ class EdaxServer {
             }
             if (_latestComputeBestPathNumWithLinkMessage.movesAtRequest != message.movesAtRequest) {
               logger.d(
-                  'The ComputeBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new ComputeBestPathNumWithLinkRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
+                  'The ComputeBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new ComputeBestPathNumWithLinkRequest (moves: ${_latestComputeBestPathNumWithLinkMessage.movesAtRequest}) has been received after that.');
               break;
             }
             _computingBestPathNumWithLinkWorkerNum++;
