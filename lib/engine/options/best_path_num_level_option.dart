@@ -13,7 +13,7 @@ class BestPathNumLevelOption extends EdaxOption<int> {
   String get prefKey => 'BestPathNumLevel';
 
   @override
-  Future<int> get appDefaultValue async => 8; // TODO: editable
+  Future<int> get appDefaultValue async => 10;
 
   @override
   Future<int> get val async {
@@ -22,9 +22,11 @@ class BestPathNumLevelOption extends EdaxOption<int> {
   }
 
   @override
+  // ignore: prefer_expression_function_bodies
   Future<int> update(int val) async {
-    final pref = await preferences;
-    await pref.setInt(prefKey, val);
-    return val;
+    return appDefaultValue; // TODO: editable
+    // final pref = await preferences;
+    // await pref.setInt(prefKey, val);
+    // return val;
   }
 }
