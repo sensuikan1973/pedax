@@ -32,7 +32,7 @@ Future<void> prepareLibedaxAssets({bool setPref = true}) async {
       : <String, Object>{
           bestPathNumLevelOption.prefKey: 2, // for test
         };
-  SharedPreferences.setMockInitialValues(pref);
+  SharedPreferences.setMockInitialValues(pref); // TODO: get out from this method...
 }
 
 @isTest
