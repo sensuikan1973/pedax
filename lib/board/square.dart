@@ -97,23 +97,31 @@ class Square extends StatelessWidget {
                   // REF: https://emojipedia.org/notebook/
                   child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
                 ),
-                if (bestPathNumOfBlack != null)
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    child: Text(bestPathNumOfBlack.toString(), style: TextStyle(fontSize: _bestPathNumFontSize)),
-                  ),
-                if (bestPathNumOfWhite != null)
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Text(bestPathNumOfWhite.toString(), style: TextStyle(fontSize: _bestPathNumFontSize)),
-                  ),
+                if (bestPathNumOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestPathNumOfBlackText),
+                if (bestPathNumOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestPathNumOfWhiteText)
               ],
             )
           : Center(child: scoreText),
     );
   }
+
+  Text get _bestPathNumOfBlackText => Text(
+        bestPathNumOfBlack.toString(),
+        style: TextStyle(
+          fontSize: _bestPathNumFontSize,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+  Text get _bestPathNumOfWhiteText => Text(
+        bestPathNumOfWhite.toString(),
+        style: TextStyle(
+          fontSize: _bestPathNumFontSize,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      );
 
   Container _lastMoveMark() => Container(
         height: length / 3,
