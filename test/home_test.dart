@@ -19,7 +19,6 @@ import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/localizations.dart';

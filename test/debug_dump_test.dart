@@ -6,7 +6,6 @@ import 'package:pedax/app.dart';
 import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/models/board_notifier.dart';
 import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
-import '../test_helper/async_delay.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';

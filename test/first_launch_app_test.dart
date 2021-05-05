@@ -3,7 +3,6 @@ import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
