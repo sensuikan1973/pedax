@@ -24,12 +24,14 @@ Future<void> prepareLibedaxAssets({bool setPref = true}) async {
   const bookFileOption = BookFileOption();
   const bestPathNumLevelOption = BestPathNumLevelOption();
   final pref = setPref
-      ? <String, String>{
+      ? <String, Object>{
           evalFileOption.prefKey: await evalFileOption.appDefaultValue,
           bookFileOption.prefKey: await bookFileOption.appDefaultValue,
-          bestPathNumLevelOption.prefKey: 2.toString(), // for test
+          bestPathNumLevelOption.prefKey: 2, // for test
         }
-      : <String, String>{};
+      : <String, Object>{
+          bestPathNumLevelOption.prefKey: 2, // for test
+        };
   SharedPreferences.setMockInitialValues(pref);
 }
 
