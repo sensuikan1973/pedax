@@ -44,6 +44,8 @@ class EdaxServer {
   final String dllPath;
   final Logger logger;
   final _receivePort = ReceivePort();
+  SendPort get sendPort => _receivePort.sendPort;
+  String get serverName => 'EdaxServer';
 
   final _maxSearchWorkerNum = 1;
   int _searchWorkerNum = 0;
@@ -57,9 +59,6 @@ class EdaxServer {
   int _computingBestPathNumWithLinkWorkerNum = 0;
   late ComputeBestPathNumWithLinkRequest _latestComputeBestPathNumWithLinkMessage;
   Duration get _computingBestPathNumWithLinkWorkerSpawningSpan => const Duration(milliseconds: 5);
-
-  SendPort get sendPort => _receivePort.sendPort;
-  String get serverName => 'EdaxServer';
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {

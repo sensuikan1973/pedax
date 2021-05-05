@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
+import '../engine/api/compute_best_path_num_with_link.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -41,6 +42,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     required List<String> initLibedaxParams,
     required int level,
     required bool hintStepByStep,
+    required bool bestPathNumAvailability,
+    required int bestPathNumLevel,
   }) async {
     await Isolate.spawn(
       startEdaxServer,
@@ -59,7 +62,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     value
       ..edaxServerSpawned = true
       ..level = level
-      ..hintStepByStep = hintStepByStep;
+      ..hintStepByStep = hintStepByStep
+      ..bestPathNumAvailability = bestPathNumAvailability
+      ..bestPathNumLevel = bestPathNumLevel;
     notifyListeners();
 
     requestInit();
@@ -94,6 +99,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   // ignore: use_setters_to_change_properties
   void switchHintStepByStep({required bool enabled}) => value.hintStepByStep = enabled;
 
+  void switchBestPathNumAvailability({required bool enabled}) {
+    value.bestPathNumAvailability = enabled;
+    if (!enabled) value.bestPathNumList = UnmodifiableListView([]);
+  }
+
   void requestBookLoad(String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();
@@ -113,11 +123,24 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
+  ComputeBestPathNumWithLinkRequest _buildComputeBestPathNumWithLinkRequest(String movesAtRequest) =>
+      ComputeBestPathNumWithLinkRequest(level: value.bestPathNumLevel, movesAtRequest: movesAtRequest);
+
+  void _requestBestPathNumList(String movesAtRequest) {
+    value.bestPathNumList = UnmodifiableListView([]);
+    if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
+      _edaxServerPort.send(_buildComputeBestPathNumWithLinkRequest(movesAtRequest));
+    }
+  }
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
+      if (value.currentMoves != message.moves) {
+        _requestLatestHintList(message.moves);
+        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      }
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -126,7 +149,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is PlayResponse) {
-      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
+      if (value.currentMoves != message.moves) {
+        _requestLatestHintList(message.moves);
+        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      }
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -144,8 +170,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentMoves = message.moves;
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
       _requestLatestHintList(message.moves);
+      if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
     } else if (message is RotateResponse) {
       _requestLatestHintList(message.moves);
+      if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -154,7 +182,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is UndoResponse) {
-      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
+      if (value.currentMoves != message.moves) {
+        _requestLatestHintList(message.moves);
+        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      }
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -163,7 +194,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is RedoResponse) {
-      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
+      if (value.currentMoves != message.moves) {
+        _requestLatestHintList(message.moves);
+        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      }
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -184,9 +218,12 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           )
           ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
       }
+    } else if (message is ComputeBestPathNumWithLinkResponse) {
+      value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
       _requestLatestHintList(value.currentMoves);
+      if (value.bestPathNumAvailability) _requestBestPathNumList(value.currentMoves);
       await _bookFileOption.stopAccessingSecurityScopedResource();
     } else if (message is GetBookMoveWithPositionResponse) {
       value

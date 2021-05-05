@@ -10,6 +10,8 @@ class Square extends StatelessWidget {
     required this.coordinate,
     this.onTap,
     this.score,
+    this.bestPathNumOfBlack,
+    this.bestPathNumOfWhite,
     this.scoreColor,
     this.isLastMove = false,
     this.isBookMove = false,
@@ -22,10 +24,13 @@ class Square extends StatelessWidget {
   final String coordinate;
   final Function()? onTap;
   final int? score;
+  final int? bestPathNumOfBlack;
+  final int? bestPathNumOfWhite;
   final Color? scoreColor;
   final bool isLastMove;
   final bool isBookMove;
   double get _scoreFontSize => length * 0.45;
+  double get _bestPathNumFontSize => length * 0.25;
   double get _notebookEmojiFontSize => length * 0.25;
 
   @override
@@ -48,6 +53,8 @@ class Square extends StatelessWidget {
       ..add(StringProperty('coordinate', coordinate))
       ..add(DiagnosticsProperty<Function()>('onTap', onTap))
       ..add(IntProperty('score', score))
+      ..add(IntProperty('bestPathNumOfBlack', bestPathNumOfBlack))
+      ..add(IntProperty('bestPathNumOfWhite', bestPathNumOfWhite))
       ..add(DiagnosticsProperty<bool>('isLastMove', isLastMove))
       ..add(DiagnosticsProperty<bool>('isBookMove', isBookMove))
       ..add(ColorProperty('scoreColor', scoreColor));
@@ -68,11 +75,11 @@ class Square extends StatelessWidget {
           decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
         );
       case SquareType.empty:
-        return score != null ? _scoreText() : SizedBox(height: length, width: length);
+        return score != null ? _evaluationText() : SizedBox(height: length, width: length);
     }
   }
 
-  SizedBox _scoreText() {
+  SizedBox _evaluationText() {
     final scoreText = Text(
       _scoreString(score!),
       style: TextStyle(color: scoreColor, fontSize: _scoreFontSize),
@@ -90,11 +97,31 @@ class Square extends StatelessWidget {
                   // REF: https://emojipedia.org/notebook/
                   child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
                 ),
+                if (bestPathNumOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestPathNumOfBlackText),
+                if (bestPathNumOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestPathNumOfWhiteText)
               ],
             )
           : Center(child: scoreText),
     );
   }
+
+  Text get _bestPathNumOfBlackText => Text(
+        bestPathNumOfBlack.toString(),
+        style: TextStyle(
+          fontSize: _bestPathNumFontSize,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+  Text get _bestPathNumOfWhiteText => Text(
+        bestPathNumOfWhite.toString(),
+        style: TextStyle(
+          fontSize: _bestPathNumFontSize,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      );
 
   Container _lastMoveMark() => Container(
         height: length / 3,

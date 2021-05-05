@@ -11,10 +11,13 @@ import 'package:provider/provider.dart';
 import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
 import '../engine/edax_asset.dart';
+import '../engine/options/best_path_num_availability_option.dart';
+import '../engine/options/best_path_num_level_option.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
+import 'best_path_num_availability_setting_dialog.dart';
 import 'book_file_path_setting_dialog.dart';
 import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
@@ -54,6 +57,8 @@ class _HomeState extends State<Home> {
       initLibedaxParams: await _edaxAsset.buildInitLibEdaxParams(),
       level: await const LevelOption().val,
       hintStepByStep: await const HintStepByStepOption().val,
+      bestPathNumAvailability: await const BestPathNumAvailabilityOption().val,
+      bestPathNumLevel: await const BestPathNumLevelOption().val,
     );
   }
 
@@ -231,17 +236,6 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.nTasks,
-          AppLocalizations.of(context)!.nTasksSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (_) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: NTasksSettingDialog(),
-            ),
-          ),
-        ),
-        _Menu(
           _MenuType.level,
           AppLocalizations.of(context)!.levelSetting,
           () => showDialog<void>(
@@ -272,6 +266,28 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
+          _MenuType.nTasks,
+          AppLocalizations.of(context)!.nTasksSetting,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: NTasksSettingDialog(),
+            ),
+          ),
+        ),
+        _Menu(
+          _MenuType.bestPathNumAvailability,
+          AppLocalizations.of(context)!.bestPathNumAvailabilitySetting,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: BestPathNumAvailabilitySettingDialog(),
+            ),
+          ),
+        ),
+        _Menu(
           _MenuType.about,
           AppLocalizations.of(context)!.about,
           () => showAboutDialog(
@@ -296,6 +312,7 @@ enum _MenuType {
   nTasks,
   level,
   hintStepByStep,
+  bestPathNumAvailability,
   shortcutCheatsheet,
   about,
 }

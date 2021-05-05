@@ -146,6 +146,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final hints = context.select<BoardNotifier, List<Hint>>((notifier) => notifier.value.hints);
     final targetHints = hints.where((h) => h.move == move).toList();
     final hint = targetHints.isEmpty ? null : targetHints.first;
+    final bestPathNumList =
+        context.select<BoardNotifier, List<BestPathNumWithLink>>((notifier) => notifier.value.bestPathNumList);
+    final targetBestPathNum = bestPathNumList.where((b) => b.move == move).toList();
+    final bestPathNum = targetBestPathNum.isEmpty ? null : targetBestPathNum.first;
     final lastMove = context.select<BoardNotifier, Move?>((notifier) => notifier.value.lastMove);
     final bestScore = context.select<BoardNotifier, int>((notifier) => notifier.value.bestScore);
     return Square(
@@ -156,6 +160,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
       isLastMove: lastMove?.x == move,
       isBookMove: hint != null && hint.isBookMove,
       score: hint?.score,
+      bestPathNumOfBlack: bestPathNum?.bestPathNumOfBlack,
+      bestPathNumOfWhite: bestPathNum?.bestPathNumOfWhite,
       scoreColor: _scoreColor(hint?.score, hint?.score == bestScore),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
