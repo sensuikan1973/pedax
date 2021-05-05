@@ -133,14 +133,16 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     }
   }
 
+  void _onMovesChanged(String moves) {
+    _requestLatestHintList(moves);
+    if (value.bestPathNumAvailability) _requestBestPathNumList(moves);
+  }
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (value.currentMoves != message.moves) {
-        _requestLatestHintList(message.moves);
-        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
-      }
+      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -149,10 +151,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is PlayResponse) {
-      if (value.currentMoves != message.moves) {
-        _requestLatestHintList(message.moves);
-        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
-      }
+      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -169,11 +168,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
-      _requestLatestHintList(message.moves);
-      if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      _onMovesChanged(message.moves);
     } else if (message is RotateResponse) {
-      _requestLatestHintList(message.moves);
-      if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
+      _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -182,10 +179,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is UndoResponse) {
-      if (value.currentMoves != message.moves) {
-        _requestLatestHintList(message.moves);
-        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
-      }
+      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -194,10 +188,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is RedoResponse) {
-      if (value.currentMoves != message.moves) {
-        _requestLatestHintList(message.moves);
-        if (value.bestPathNumAvailability) _requestBestPathNumList(message.moves);
-      }
+      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -222,8 +213,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
-      _requestLatestHintList(value.currentMoves);
-      if (value.bestPathNumAvailability) _requestBestPathNumList(value.currentMoves);
+      _onMovesChanged(value.currentMoves);
       await _bookFileOption.stopAccessingSecurityScopedResource();
     } else if (message is GetBookMoveWithPositionResponse) {
       value
