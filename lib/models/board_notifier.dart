@@ -41,6 +41,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     required List<String> initLibedaxParams,
     required int level,
     required bool hintStepByStep,
+    required bool bestPathNumAvailability,
   }) async {
     await Isolate.spawn(
       startEdaxServer,
@@ -59,7 +60,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     value
       ..edaxServerSpawned = true
       ..level = level
-      ..hintStepByStep = hintStepByStep;
+      ..hintStepByStep = hintStepByStep
+      ..bestPathNumAvailability = bestPathNumAvailability;
     notifyListeners();
 
     requestInit();
