@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pedax/home/best_path_num_availability_setting_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -16,6 +15,7 @@ import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
+import 'best_path_num_availability_setting_dialog.dart';
 import 'book_file_path_setting_dialog.dart';
 import 'hint_step_by_step_setting_dialog.dart';
 import 'level_setting_dialog.dart';
