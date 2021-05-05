@@ -21,13 +21,15 @@ class HintOneByOneRequest implements RequestSchema {
 }
 
 @immutable
-class HintOneByOneResponse extends ResponseSchema<HintOneByOneRequest> {
+class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
     required this.hint,
     required this.level,
-    required HintOneByOneRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final HintOneByOneRequest request;
   final Hint hint;
   final int level;
 }

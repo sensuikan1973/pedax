@@ -16,12 +16,14 @@ class ComputeBestPathNumWithLinkRequest implements RequestSchema {
 }
 
 @immutable
-class ComputeBestPathNumWithLinkResponse extends ResponseSchema<ComputeBestPathNumWithLinkRequest> {
+class ComputeBestPathNumWithLinkResponse implements ResponseSchema<ComputeBestPathNumWithLinkRequest> {
   const ComputeBestPathNumWithLinkResponse({
     required this.bestPathNumWithLinkList,
-    required ComputeBestPathNumWithLinkRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final ComputeBestPathNumWithLinkRequest request;
   final List<BestPathNumWithLink> bestPathNumWithLinkList;
 }
 

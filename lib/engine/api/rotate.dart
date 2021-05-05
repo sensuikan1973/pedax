@@ -12,15 +12,17 @@ class RotateRequest implements RequestSchema {
 }
 
 @immutable
-class RotateResponse extends ResponseSchema<RotateRequest> {
+class RotateResponse implements ResponseSchema<RotateRequest> {
   const RotateResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required RotateRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final RotateRequest request;
   final Board board;
   final int currentColor;
   final String moves;

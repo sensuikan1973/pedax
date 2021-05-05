@@ -12,15 +12,17 @@ class UndoRequest implements RequestSchema {
 }
 
 @immutable
-class UndoResponse extends ResponseSchema<UndoRequest> {
+class UndoResponse implements ResponseSchema<UndoRequest> {
   const UndoResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required UndoRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final UndoRequest request;
   final Board board;
   final int currentColor;
   final String moves;

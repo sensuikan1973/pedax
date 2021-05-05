@@ -12,15 +12,17 @@ class RedoRequest implements RequestSchema {
 }
 
 @immutable
-class RedoResponse extends ResponseSchema<RedoRequest> {
+class RedoResponse implements ResponseSchema<RedoRequest> {
   const RedoResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required RedoRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final RedoRequest request;
   final Board board;
   final int currentColor;
   final String moves;
