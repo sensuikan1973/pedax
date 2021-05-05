@@ -27,10 +27,10 @@ Future<void> prepareLibedaxAssets({bool setPref = true}) async {
       ? <String, Object>{
           evalFileOption.prefKey: await evalFileOption.appDefaultValue,
           bookFileOption.prefKey: await bookFileOption.appDefaultValue,
-          bestPathNumLevelOption.prefKey: 2, // for test
+          bestPathNumLevelOption.prefKey: 1, // for test
         }
       : <String, Object>{
-          bestPathNumLevelOption.prefKey: 2, // for test
+          bestPathNumLevelOption.prefKey: 1, // for test
         };
   SharedPreferences.setMockInitialValues(pref); // TODO: get out from this method...
 }
