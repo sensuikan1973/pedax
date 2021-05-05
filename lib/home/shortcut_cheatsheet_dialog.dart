@@ -22,7 +22,11 @@ class ShortcutCheatsheetDialog extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10),
-                  child: Text(shortcutList[k].label(context), textAlign: TextAlign.center, maxLines: 1),
+                  child: Text(
+                    shortcutList[k].label(AppLocalizations.of(context)!),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),

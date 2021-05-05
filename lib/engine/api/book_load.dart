@@ -5,17 +5,20 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class BookLoadRequest extends RequestSchema {
+class BookLoadRequest implements RequestSchema {
   const BookLoadRequest(this.file);
 
   final String file;
 }
 
 @immutable
-class BookLoadResponse extends ResponseSchema<BookLoadRequest> {
+class BookLoadResponse implements ResponseSchema<BookLoadRequest> {
   const BookLoadResponse({
-    required BookLoadRequest request,
-  }) : super(request);
+    required this.request,
+  });
+
+  @override
+  final BookLoadRequest request;
 }
 
 BookLoadResponse executeBookLoad(LibEdax edax, BookLoadRequest request) {

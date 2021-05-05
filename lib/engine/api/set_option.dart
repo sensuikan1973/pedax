@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class SetOptionRequest<T extends Object> extends RequestSchema {
+class SetOptionRequest<T extends Object> implements RequestSchema {
   const SetOptionRequest(this.optionName, this.val);
 
   final String optionName;
@@ -13,10 +13,13 @@ class SetOptionRequest<T extends Object> extends RequestSchema {
 }
 
 @immutable
-class SetOptionResponse extends ResponseSchema<SetOptionRequest> {
+class SetOptionResponse implements ResponseSchema<SetOptionRequest> {
   const SetOptionResponse({
-    required SetOptionRequest request,
-  }) : super(request);
+    required this.request,
+  });
+
+  @override
+  final SetOptionRequest request;
 }
 
 SetOptionResponse executeSetOption<T extends Object>(LibEdax edax, SetOptionRequest<T> request) {

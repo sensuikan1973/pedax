@@ -13,7 +13,6 @@ import 'package:pedax/window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';

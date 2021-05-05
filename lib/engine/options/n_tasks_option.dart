@@ -3,11 +3,12 @@ import 'dart:math';
 
 import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
 
 @immutable
-class NTasksOption extends EdaxOption<int> {
+class NTasksOption implements EdaxOption<int> {
   const NTasksOption();
 
   @override
@@ -24,13 +25,13 @@ class NTasksOption extends EdaxOption<int> {
 
   @override
   Future<int> get val async {
-    final pref = await preferences;
+    final pref = await _preferences;
     return pref.getInt(prefKey) ?? await appDefaultValue;
   }
 
   @override
   Future<int> update(int val) async {
-    final pref = await preferences;
+    final pref = await _preferences;
     if (val < 1 || Platform.numberOfProcessors < val) {
       final newN = await appDefaultValue;
       Logger().i('$val is out of range acceptable for edax. So, pedax sets $newN.');
@@ -41,4 +42,6 @@ class NTasksOption extends EdaxOption<int> {
       return val;
     }
   }
+
+  Future<SharedPreferences> get _preferences async => SharedPreferences.getInstance();
 }

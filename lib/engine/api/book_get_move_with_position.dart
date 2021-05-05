@@ -5,18 +5,20 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class GetBookMoveWithPositionRequest extends RequestSchema {
+class GetBookMoveWithPositionRequest implements RequestSchema {
   const GetBookMoveWithPositionRequest();
 }
 
 @immutable
-class GetBookMoveWithPositionResponse extends ResponseSchema<GetBookMoveWithPositionRequest> {
+class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithPositionRequest> {
   const GetBookMoveWithPositionResponse({
     required this.position,
     required this.moveList,
-    required GetBookMoveWithPositionRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final GetBookMoveWithPositionRequest request;
   final Position position;
   final List<Move> moveList;
 }

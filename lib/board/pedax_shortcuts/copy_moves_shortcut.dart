@@ -16,7 +16,7 @@ class CopyMovesShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(BuildContext context) => AppLocalizations.of(context)!.shortcutLabelCopyMoves;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelCopyMoves;
 
   @override
   String get keys => Platform.isMacOS ? '^C or ⌘C' : 'Ctrl + C';

@@ -5,22 +5,24 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class MoveRequest extends RequestSchema {
+class MoveRequest implements RequestSchema {
   const MoveRequest(this.move);
 
   final String move;
 }
 
 @immutable
-class MoveResponse extends ResponseSchema<MoveRequest> {
+class MoveResponse implements ResponseSchema<MoveRequest> {
   const MoveResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required MoveRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final MoveRequest request;
   final Board board;
   final int currentColor;
   final String moves;

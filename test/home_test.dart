@@ -18,21 +18,22 @@ import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../test_helper/async_delay.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
-import '../test_helper/localizations.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
+import 'widget_test_helper/shared_preferences_mock.dart';
 
 Future<void> main() async {
   setUpAll(() async {
     await prepareLibedaxAssets();
+    await mockSharedPreferences();
     mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
-  final l10nEn = await loadLocalizations(PedaxApp.localeEn);
+  final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   group('play a game', () {
     testWidgets('a game without pass', (tester) async {

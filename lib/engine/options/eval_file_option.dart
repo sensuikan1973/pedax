@@ -4,11 +4,12 @@ import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
 
 @immutable
-class EvalFileOption extends EdaxOption<String> {
+class EvalFileOption implements EdaxOption<String> {
   const EvalFileOption();
 
   @override
@@ -27,13 +28,13 @@ class EvalFileOption extends EdaxOption<String> {
 
   @override
   Future<String> get val async {
-    final pref = await preferences;
+    final pref = await _preferences;
     return pref.getString(prefKey) ?? await appDefaultValue;
   }
 
   @override
   Future<String> update(String val) async {
-    final pref = await preferences;
+    final pref = await _preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;
       Logger().i('scpecified path is empty. So, pedax sets $newPath.');
@@ -45,7 +46,8 @@ class EvalFileOption extends EdaxOption<String> {
     }
   }
 
+  Future<SharedPreferences> get _preferences async => SharedPreferences.getInstance();
+
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
-  @protected
   Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
 }

@@ -1,8 +1,9 @@
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'edax_option.dart';
 
 @immutable
-class BestPathNumLevelOption extends EdaxOption<int> {
+class BestPathNumLevelOption implements EdaxOption<int> {
   const BestPathNumLevelOption();
 
   @override
@@ -17,7 +18,7 @@ class BestPathNumLevelOption extends EdaxOption<int> {
 
   @override
   Future<int> get val async {
-    final pref = await preferences;
+    final pref = await _preferences;
     return pref.getInt(prefKey) ?? await appDefaultValue;
   }
 
@@ -29,4 +30,6 @@ class BestPathNumLevelOption extends EdaxOption<int> {
     // await pref.setInt(prefKey, val);
     // return val;
   }
+
+  Future<SharedPreferences> get _preferences async => SharedPreferences.getInstance();
 }

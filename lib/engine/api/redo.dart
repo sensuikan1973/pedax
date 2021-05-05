@@ -5,21 +5,24 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class RedoRequest extends RequestSchema {
+class RedoRequest implements RequestSchema {
   const RedoRequest({required this.times});
+
   final int times;
 }
 
 @immutable
-class RedoResponse extends ResponseSchema<RedoRequest> {
+class RedoResponse implements ResponseSchema<RedoRequest> {
   const RedoResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required RedoRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final RedoRequest request;
   final Board board;
   final int currentColor;
   final String moves;

@@ -5,20 +5,22 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class InitRequest extends RequestSchema {
+class InitRequest implements RequestSchema {
   const InitRequest();
 }
 
 @immutable
-class InitResponse extends ResponseSchema<InitRequest> {
+class InitResponse implements ResponseSchema<InitRequest> {
   const InitResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required InitRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final InitRequest request;
   final Board board;
   final int currentColor;
   final String moves;

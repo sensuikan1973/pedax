@@ -5,15 +5,18 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class ShutdownRequest extends RequestSchema {
+class ShutdownRequest implements RequestSchema {
   const ShutdownRequest();
 }
 
 @immutable
-class ShutdownResponse extends ResponseSchema<ShutdownRequest> {
+class ShutdownResponse implements ResponseSchema<ShutdownRequest> {
   const ShutdownResponse({
-    required ShutdownRequest request,
-  }) : super(request);
+    required this.request,
+  });
+
+  @override
+  final ShutdownRequest request;
 }
 
 ShutdownResponse executeShutdown(LibEdax edax, ShutdownRequest request) {

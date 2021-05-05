@@ -5,15 +5,18 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class StopRequest extends RequestSchema {
+class StopRequest implements RequestSchema {
   const StopRequest();
 }
 
 @immutable
-class StopResponse extends ResponseSchema<StopRequest> {
+class StopResponse implements ResponseSchema<StopRequest> {
   const StopResponse({
-    required StopRequest request,
-  }) : super(request);
+    required this.request,
+  });
+
+  @override
+  final StopRequest request;
 }
 
 StopResponse executeStop(LibEdax edax, StopRequest request) {

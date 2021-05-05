@@ -5,22 +5,24 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class PlayRequest extends RequestSchema {
+class PlayRequest implements RequestSchema {
   const PlayRequest(this.moves);
 
   final String moves;
 }
 
 @immutable
-class PlayResponse extends ResponseSchema<PlayRequest> {
+class PlayResponse implements ResponseSchema<PlayRequest> {
   const PlayResponse({
     required this.board,
     required this.currentColor,
     required this.moves,
     required this.lastMove,
-    required PlayRequest request,
-  }) : super(request);
+    required this.request,
+  });
 
+  @override
+  final PlayRequest request;
   final Board board;
   final int currentColor;
   final String moves;
