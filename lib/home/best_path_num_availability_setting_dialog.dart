@@ -3,9 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../engine/options/best_path_num_availability_option.dart';
 import '../models/board_notifier.dart';
+
+const _documentationLinkOfBestPathNum =
+    'https://sensuikan1973.github.io/libedax4dart/libedax4dart/LibEdax/computeBestPathNumWithLink.html';
 
 class BestPathNumAvailabilitySettingDialog extends StatelessWidget {
   BestPathNumAvailabilitySettingDialog({Key? key}) : super(key: key);
@@ -28,6 +32,19 @@ class BestPathNumAvailabilitySettingDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(AppLocalizations.of(context)!.bestPathNumAvailabilityDescription),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (await canLaunch(_documentationLinkOfBestPathNum)) {
+                          await launch(_documentationLinkOfBestPathNum);
+                        }
+                      },
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
+                      child: Text(
+                        AppLocalizations.of(context)!.bestPathNumAvailabilityDocumentationLink,
+                        style: const TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Switch(
                       value: _enabled.value!,
                       onChanged: (value) {
