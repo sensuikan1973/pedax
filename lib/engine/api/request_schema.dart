@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
 
 // We can pass `Object` instance to `EdaxServer port`.
 // It's because `EdaxServer` isolate and Flutter root isolate share the same code.
@@ -8,7 +7,5 @@ import 'package:logger/logger.dart';
 
 @immutable
 abstract class RequestSchema {
-  const RequestSchema({this.logger});
-
-  final Logger? logger;
+  const RequestSchema();
 }

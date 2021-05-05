@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class MoveRequest extends RequestSchema {
+class MoveRequest implements RequestSchema {
   const MoveRequest(this.move);
 
   final String move;

@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class UndoRequest extends RequestSchema {
+class UndoRequest implements RequestSchema {
   const UndoRequest({required this.times});
 
   final int times;

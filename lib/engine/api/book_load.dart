@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class BookLoadRequest extends RequestSchema {
+class BookLoadRequest implements RequestSchema {
   const BookLoadRequest(this.file);
 
   final String file;

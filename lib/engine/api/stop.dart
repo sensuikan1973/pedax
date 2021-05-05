@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class StopRequest extends RequestSchema {
+class StopRequest implements RequestSchema {
   const StopRequest();
 }
 

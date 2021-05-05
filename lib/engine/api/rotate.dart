@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class RotateRequest extends RequestSchema {
+class RotateRequest implements RequestSchema {
   const RotateRequest({required this.angle});
 
   final int angle;

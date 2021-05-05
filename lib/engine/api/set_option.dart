@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class SetOptionRequest<T extends Object> extends RequestSchema {
+class SetOptionRequest<T extends Object> implements RequestSchema {
   const SetOptionRequest(this.optionName, this.val);
 
   final String optionName;

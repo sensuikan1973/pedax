@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class ShutdownRequest extends RequestSchema {
+class ShutdownRequest implements RequestSchema {
   const ShutdownRequest();
 }
 

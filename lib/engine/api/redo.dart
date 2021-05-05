@@ -5,8 +5,9 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class RedoRequest extends RequestSchema {
+class RedoRequest implements RequestSchema {
   const RedoRequest({required this.times});
+
   final int times;
 }
 

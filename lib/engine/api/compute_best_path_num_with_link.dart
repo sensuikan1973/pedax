@@ -5,7 +5,7 @@ import 'request_schema.dart';
 import 'response_schema.dart';
 
 @immutable
-class ComputeBestPathNumWithLinkRequest extends RequestSchema {
+class ComputeBestPathNumWithLinkRequest implements RequestSchema {
   const ComputeBestPathNumWithLinkRequest({
     required this.movesAtRequest,
     this.level = 10, // TODO: consider default value
