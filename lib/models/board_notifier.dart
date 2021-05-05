@@ -1,12 +1,15 @@
 import 'dart:collection';
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
+import '../engine/api/compute_best_path_num_with_link.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -113,11 +116,24 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
+  ComputeBestPathNumWithLinkRequest _buildComputeBestPathNumWithLinkRequest(String movesAtRequest) =>
+      ComputeBestPathNumWithLinkRequest(movesAtRequest: movesAtRequest);
+
+  void _requestLatestBestPathNumWithLinkRequest(String movesAtRequest) {
+    value.bestPathNumWithLinkList = UnmodifiableListView([]);
+    if (value.bookLoadStatus != BookLoadStatus.loading) {
+      _edaxServerPort.send(_buildComputeBestPathNumWithLinkRequest(movesAtRequest));
+    }
+  }
+
   // ignore: avoid_annotating_with_dynamic
   Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (value.currentMoves != message.moves) _requestLatestHintList(message.moves);
+      if (value.currentMoves != message.moves) {
+        _requestLatestHintList(message.moves);
+        _requestLatestBestPathNumWithLinkRequest(message.moves); // NOTE: experiment
+      }
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -183,6 +199,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
               ..add(message.hint),
           )
           ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
+      }
+    } else if (message is ComputeBestPathNumWithLinkResponse) {
+      for (final tmp in message.bestPathNumWithLinkList) {
+        _logger.i('${tmp.moveString}. B: ${tmp.bestPathNumOfBlack}, W: ${tmp.bestPathNumOfWhite}.');
+
+        final directory = await getApplicationDocumentsDirectory();
+        await File('${directory.path}/gviz.dot').writeAsString(tmp.root.exportGraphvizDotFile());
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;

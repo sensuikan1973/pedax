@@ -14,6 +14,7 @@ class BoardState {
   late int level;
   late bool hintStepByStep;
   UnmodifiableListView<Hint> hints = UnmodifiableListView([]);
+  UnmodifiableListView<BestPathNumWithLink> bestPathNumWithLinkList = UnmodifiableListView([]);
   bool edaxInitOnce = false;
   String currentMoves = '';
   BookLoadStatus? bookLoadStatus;
