@@ -1,0 +1,24 @@
+import 'package:meta/meta.dart';
+import 'package:pedax/engine/options/best_path_num_level_option.dart';
+import 'package:pedax/engine/options/book_file_option.dart';
+import 'package:pedax/engine/options/eval_file_option.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const _evalFileOption = EvalFileOption();
+const _bookFileOption = BookFileOption();
+const _bestPathNumLevelOption = BestPathNumLevelOption();
+
+@isTest
+// See: https://pub.dev/packages/shared_preferences#testing
+Future<void> mockSharedPreferences({
+  String? evalFilePath,
+  String? bookFilePath,
+  int? bestPathNumLevel,
+}) async {
+  final pref = {
+    _evalFileOption.prefKey: evalFilePath ?? await _evalFileOption.appDefaultValue,
+    _bookFileOption.prefKey: bookFilePath ?? await _bookFileOption.appDefaultValue,
+    _bestPathNumLevelOption.prefKey: bestPathNumLevel ?? 1, // for quick test, default is 1.
+  };
+  SharedPreferences.setMockInitialValues(pref);
+}
