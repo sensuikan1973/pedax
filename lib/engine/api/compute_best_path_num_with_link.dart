@@ -8,7 +8,7 @@ import 'response_schema.dart';
 class ComputeBestPathNumWithLinkRequest extends RequestSchema {
   const ComputeBestPathNumWithLinkRequest({
     required this.movesAtRequest,
-    this.level = 8, // TODO: consider default value
+    this.level = 10, // TODO: consider default value
   });
 
   final String movesAtRequest;
