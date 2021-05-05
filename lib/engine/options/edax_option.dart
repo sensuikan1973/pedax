@@ -2,7 +2,6 @@
 // See: https://github.com/lavox/edax-reversi/blob/libedax/src/edax.c
 
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @immutable
 abstract class EdaxOption<T> {
@@ -17,7 +16,4 @@ abstract class EdaxOption<T> {
   Future<T> get val;
 
   Future<T> update(T val);
-
-  @protected
-  Future<SharedPreferences> get preferences async => SharedPreferences.getInstance();
 }

@@ -5,11 +5,12 @@ import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
 
 @immutable
-class BookFileOption extends EdaxOption<String> {
+class BookFileOption implements EdaxOption<String> {
   const BookFileOption();
 
   @override
@@ -29,10 +30,10 @@ class BookFileOption extends EdaxOption<String> {
   // NOTE: When you don't need this value, you must call stopAccessingSecurityScopedResource.
   @override
   Future<String> get val async {
-    final pref = await preferences;
+    final pref = await _preferences;
     if (!Platform.isMacOS) return pref.getString(prefKey) ?? await appDefaultValue;
 
-    final bookmark = pref.getString(bookmarkPrefKey);
+    final bookmark = pref.getString(_bookmarkPrefKey);
     if (bookmark == null) return pref.getString(prefKey) ?? await appDefaultValue;
     final secureBookmarks = SecureBookmarks();
     final resolvedFile = await secureBookmarks.resolveBookmark(bookmark);
@@ -44,7 +45,7 @@ class BookFileOption extends EdaxOption<String> {
 
   @override
   Future<String> update(String val) async {
-    final pref = await preferences;
+    final pref = await _preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;
       Logger().i('scpecified path is empty. So, pedax sets $newPath.');
@@ -54,21 +55,21 @@ class BookFileOption extends EdaxOption<String> {
       await pref.setString(prefKey, val);
       if (Platform.isMacOS) {
         final bookmark = await SecureBookmarks().bookmark(File(val));
-        await pref.setString(bookmarkPrefKey, bookmark);
+        await pref.setString(_bookmarkPrefKey, bookmark);
       }
       return val;
     }
   }
+
+  Future<SharedPreferences> get _preferences async => SharedPreferences.getInstance();
 
   Future<void> stopAccessingSecurityScopedResource() async {
     if (!Platform.isMacOS) return;
     await SecureBookmarks().stopAccessingSecurityScopedResource(File(await val));
   }
 
-  @visibleForTesting
-  String get bookmarkPrefKey => 'BookmarkOfBookFilePath';
+  String get _bookmarkPrefKey => 'BookmarkOfBookFilePath';
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
-  @protected
   Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
 }
