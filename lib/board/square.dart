@@ -30,7 +30,7 @@ class Square extends StatelessWidget {
   final bool isLastMove;
   final bool isBookMove;
   double get _scoreFontSize => length * 0.45;
-  double get _bestPathNumFontSize => length * 0.2;
+  double get _bestPathNumFontSize => length * 0.25;
   double get _notebookEmojiFontSize => length * 0.25;
 
   @override

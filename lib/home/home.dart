@@ -12,6 +12,7 @@ import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
 import '../engine/edax_asset.dart';
 import '../engine/options/best_path_num_availability_option.dart';
+import '../engine/options/best_path_num_level_option.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
@@ -57,6 +58,7 @@ class _HomeState extends State<Home> {
       level: await const LevelOption().val,
       hintStepByStep: await const HintStepByStepOption().val,
       bestPathNumAvailability: await const BestPathNumAvailabilityOption().val,
+      bestPathNumLevel: await const BestPathNumLevelOption().val,
     );
   }
 
