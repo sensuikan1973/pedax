@@ -232,17 +232,6 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.nTasks,
-          AppLocalizations.of(context)!.nTasksSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (_) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: NTasksSettingDialog(),
-            ),
-          ),
-        ),
-        _Menu(
           _MenuType.level,
           AppLocalizations.of(context)!.levelSetting,
           () => showDialog<void>(
@@ -265,6 +254,25 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
+          _MenuType.shortcutCheatsheet,
+          AppLocalizations.of(context)!.shortcutCheatsheet,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+          ),
+        ),
+        _Menu(
+          _MenuType.nTasks,
+          AppLocalizations.of(context)!.nTasksSetting,
+          () => showDialog<void>(
+            context: context,
+            builder: (_) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: NTasksSettingDialog(),
+            ),
+          ),
+        ),
+        _Menu(
           _MenuType.bestPathNumAvailability,
           AppLocalizations.of(context)!.bestPathNumAvailabilitySetting,
           () => showDialog<void>(
@@ -273,14 +281,6 @@ class _HomeState extends State<Home> {
               value: context.read<BoardNotifier>(),
               child: BestPathNumAvailabilitySettingDialog(),
             ),
-          ),
-        ),
-        _Menu(
-          _MenuType.shortcutCheatsheet,
-          AppLocalizations.of(context)!.shortcutCheatsheet,
-          () => showDialog<void>(
-            context: context,
-            builder: (_) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
           ),
         ),
         _Menu(
