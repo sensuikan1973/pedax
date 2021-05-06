@@ -64,13 +64,11 @@ class EdaxServer {
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
+    final edax = LibEdax(dllPath)..libedaxInitialize(initLibedaxParameters);
+    logger.i('libedax has initialized with $initLibedaxParameters');
+
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
     logger.d('sent my port to parentSendPort');
-
-    final edax = LibEdax(dllPath)
-      ..libedaxInitialize(initLibedaxParameters)
-      ..edaxInit();
-    logger.i('libedax has initialized with $initLibedaxParameters');
 
     _registerApiHandler(parentSendPort, edax);
   }
