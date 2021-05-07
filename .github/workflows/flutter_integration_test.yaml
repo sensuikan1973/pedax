@@ -14,12 +14,13 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-2019, macos-10.15, ubuntu-20.04] # TODO: https://github.com/sensuikan1973/pedax/issues/7
+        os: [windows-2019, macos-10.15]
         flutter_channel: [beta]
         include:
-          - os: ubuntu-20.04
-            device: linux
-            setup_script: .github/scripts/setup_on_linux.sh
+          # TODO: https://github.com/sensuikan1973/pedax/issues/7
+          # - os: ubuntu-20.04
+          #   device: linux
+          #   setup_script: .github/scripts/setup_on_linux.sh
           - os: windows-2019
             device: windows
             setup_script: .github/scripts/setup_on_windows.sh
