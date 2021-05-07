@@ -197,11 +197,11 @@ Future<void> main() async {
 
       await tester.pumpAndSettle();
       await waitEdaxServerResponsed(tester);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
       await waitEdaxServerResponsed(tester);
     });
-  }, skip: true); // FIXME: これでどうなるん?
+  });
 
   group('menu events', () {
     testWidgets('show AboutDialog', (tester) async {
