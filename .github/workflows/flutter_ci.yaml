@@ -32,7 +32,7 @@ jobs:
 
   widget_test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 10
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
