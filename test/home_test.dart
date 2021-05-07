@@ -32,7 +32,10 @@ Future<void> main() async {
     await mockSharedPreferences();
     mockSecureBookmark();
   });
-  setUp(() => Logger.level = Level.nothing);
+  setUp(() async {
+    Logger.level = Level.nothing;
+    await Future<void>.delayed(const Duration(seconds: 1));
+  });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   group('play a game', () {
