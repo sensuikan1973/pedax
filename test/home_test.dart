@@ -243,11 +243,11 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
         await tester.tap(find.text(l10nEn.cancelOnDialog));
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byType(PedaxApp), findsOneWidget);
         await waitEdaxServerResponsed(tester);
       });
-    }, skip: true); // FIXME: これでどうなるん?
+    });
 
     testWidgets('update book file path as it is', (tester) async {
       await tester.runAsync(() async {
