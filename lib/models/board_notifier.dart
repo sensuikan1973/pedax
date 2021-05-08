@@ -197,7 +197,6 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is HintOneByOneResponse) {
-      _logger.d('${message.hint.moveString}: ${message.hint.scoreString} (level: ${message.level})');
       if (message.request.movesAtRequest != value.currentMoves) {
         value.hints = UnmodifiableListView([]);
       } else {
