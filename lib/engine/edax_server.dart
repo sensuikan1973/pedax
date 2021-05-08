@@ -47,14 +47,8 @@ class EdaxServer {
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
 
-  final _maxSearchWorkerNum = 1;
-  int _searchWorkerNum = 0;
-
   bool _bookLoading = false;
-
-  late HintOneByOneRequest _latestHintMessage;
-  Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
-
+  Isolate? _isolateOfHintOneByOne;
   Isolate? _isolateOfComputeBestPathNumWithLink;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
@@ -80,23 +74,11 @@ class EdaxServer {
         } else if (message is PlayRequest) {
           parentSendPort.send(executePlay(edax, message));
         } else if (message is HintOneByOneRequest) {
-          _latestHintMessage = message;
-          // ignore: literal_only_boolean_expressions
-          while (true) {
-            if (_searchWorkerNum >= _maxSearchWorkerNum) {
-              await Future<void>.delayed(_searchWorkerSpawningSpan);
-              continue;
-            }
-            if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
-              logger.d(
-                  'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
-              break;
-            }
-            _searchWorkerNum++;
-            await compute(_computeHintNext, _ComputeHintNextParams(dllPath, _latestHintMessage, parentSendPort));
-            _searchWorkerNum--;
-            break;
-          }
+          _isolateOfHintOneByOne?.kill(priority: Isolate.immediate);
+          _isolateOfHintOneByOne = await Isolate.spawn(
+            _computeHintNext,
+            _ComputeHintNextParams(dllPath, message, parentSendPort),
+          );
         } else if (message is InitRequest) {
           parentSendPort.send(executeInit(edax, message));
         } else if (message is RotateRequest) {
