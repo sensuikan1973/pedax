@@ -70,7 +70,6 @@ flutter:
   assets:
     - assets/images/
     - assets/libedax/data/
-    - assets/libedax/dll/
 
 msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   store: true # See: https://pub.dev/packages/msix#label-windows-store

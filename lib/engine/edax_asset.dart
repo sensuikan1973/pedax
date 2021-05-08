@@ -45,15 +45,12 @@ class EdaxAsset {
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
+  // ignore: prefer_expression_function_bodies
   Future<void> _setupDll() async {
-    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    if (Platform.isMacOS) return;
-    if (Platform.isWindows || Platform.isLinux) {
-      final libedaxData = await _libedaxAssetData;
-      final data = File(await libedaxPath).readAsStringSync();
-      print(data.length);
-      File(await libedaxPath).writeAsBytesSync(libedaxData.buffer.asUint8List(), flush: true);
-    }
+    return; // do nothing. I have already bundled directly on each platform.
+    // For MacOS, See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+    // For Windows, See: windows/CMakeLists.txt
+    // For Linux, See: linux/CMakeLists.txt
   }
 
   Future<void> _setupBookData() async {
