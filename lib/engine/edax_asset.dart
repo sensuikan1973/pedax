@@ -39,8 +39,11 @@ class EdaxAsset {
   Future<String> get libedaxPath async {
     // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     if (Platform.isMacOS) return defaultLibedaxName;
+
+    if (Platform.isWindows) return defaultLibedaxName;
+
     final docDir = await _docDir;
-    if (Platform.isWindows) return p.join(docDir.path, defaultLibedaxName);
+    // if (Platform.isWindows) return p.join(docDir.path, defaultLibedaxName);
     if (Platform.isLinux) return p.join(docDir.path, defaultLibedaxName);
     throw Exception('${Platform.operatingSystem} is not supported');
   }

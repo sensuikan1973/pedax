@@ -76,7 +76,7 @@ install(FILES "${FLUTTER_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
 
 # See: https://medium.com/flutter-community/build-and-deploy-native-c-libraries-with-flutter-cc7531d590b5
 # See: https://gist.github.com/jpnurmi/f1fa3a58dfcdc173fc75167bd7b01579#gistcomment-3503708
-list(APPEND PLUGIN_BUNDLED_LIBRARIES $<TARGET_FILE:edax>)
+# list(APPEND PLUGIN_BUNDLED_LIBRARIES $<TARGET_FILE:edax>)
 
 if(PLUGIN_BUNDLED_LIBRARIES)
   install(FILES "${PLUGIN_BUNDLED_LIBRARIES}"
