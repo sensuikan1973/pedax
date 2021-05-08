@@ -86,7 +86,7 @@ flutter analyze .
   - [macOS distribution](https://developer.apple.com/jp/macos/distribution/)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
   - [Notarizing macOS Software Before Distribution](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution)
-- windows
+- [windows](https://partner.microsoft.com/ja-jp/dashboard/windows/overview)
   - [windows sandbox](https://docs.microsoft.com/ja-jp/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview)
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
 - linux
