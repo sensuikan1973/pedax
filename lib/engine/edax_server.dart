@@ -56,7 +56,7 @@ class EdaxServer {
   late HintOneByOneRequest _latestHintMessage;
   Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
 
-  Isolate? isolateOfComputeBestPathNumWithLink;
+  Isolate? _isolateOfComputeBestPathNumWithLink;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -109,8 +109,8 @@ class EdaxServer {
         } else if (message is GetBookMoveWithPositionRequest) {
           parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
         } else if (message is ComputeBestPathNumWithLinkRequest) {
-          isolateOfComputeBestPathNumWithLink?.kill(priority: Isolate.immediate);
-          isolateOfComputeBestPathNumWithLink = await Isolate.spawn(
+          _isolateOfComputeBestPathNumWithLink?.kill(priority: Isolate.immediate);
+          _isolateOfComputeBestPathNumWithLink = await Isolate.spawn(
             _computeComputeBestPathNumWithLink,
             _ComputeComputeBestPathNumWithLink(dllPath, message, parentSendPort),
           );
