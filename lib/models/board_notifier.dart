@@ -210,7 +210,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
       }
     } else if (message is ComputeBestPathNumWithLinkResponse) {
-      value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
+      if (message.request.movesAtRequest != value.currentMoves) {
+        value.bestPathNumList = UnmodifiableListView([]);
+      } else {
+        value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
+      }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
       _onMovesChanged(value.currentMoves);
