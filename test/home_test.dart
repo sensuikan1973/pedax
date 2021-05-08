@@ -32,7 +32,11 @@ Future<void> main() async {
     await mockSharedPreferences();
     mockSecureBookmark();
   });
-  setUp(() => Logger.level = Level.nothing);
+  setUp(() async {
+    Logger.level = Level.nothing;
+    // For `runAsync`, ensure asynchronous events have completed.
+    await Future<void>.delayed(const Duration(seconds: 1));
+  });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   group('play a game', () {
@@ -197,7 +201,7 @@ Future<void> main() async {
 
       await tester.pumpAndSettle();
       await waitEdaxServerResponsed(tester);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
       await waitEdaxServerResponsed(tester);
     });
@@ -243,7 +247,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
         await tester.tap(find.text(l10nEn.cancelOnDialog));
-        await tester.pump();
+        await tester.pumpAndSettle();
         expect(find.byType(PedaxApp), findsOneWidget);
         await waitEdaxServerResponsed(tester);
       });

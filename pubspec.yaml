@@ -52,14 +52,14 @@ dependencies:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
       url: git://github.com/google/flutter-desktop-embedding
       path: plugins/window_size
-      ref: 57a2cd88486105d3d813583339eb0e23c9bfd6d2
+      ref: f2d8aa3820fb87316516670bf4d51a74de8ac0dd
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^2.0.0
+  msix: ^2.1.0
   pedantic_sensuikan1973: any
 
 flutter:

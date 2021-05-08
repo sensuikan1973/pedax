@@ -294,7 +294,7 @@ packages:
       name: msix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   nested:
     dependency: transitive
     description:
@@ -570,8 +570,8 @@ packages:
     dependency: "direct main"
     description:
       path: "plugins/window_size"
-      ref: "57a2cd88486105d3d813583339eb0e23c9bfd6d2"
-      resolved-ref: "57a2cd88486105d3d813583339eb0e23c9bfd6d2"
+      ref: f2d8aa3820fb87316516670bf4d51a74de8ac0dd
+      resolved-ref: f2d8aa3820fb87316516670bf4d51a74de8ac0dd
       url: "git://github.com/google/flutter-desktop-embedding"
     source: git
     version: "0.1.0"
