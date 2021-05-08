@@ -50,8 +50,7 @@ class EdaxServer {
   final _maxSearchWorkerNum = 1;
   int _searchWorkerNum = 0;
 
-  final _maxBookLoadingWorkerNum = 1;
-  int _bookLoadingWorkerNum = 0;
+  bool _bookLoading = false;
 
   late HintOneByOneRequest _latestHintMessage;
   Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
@@ -115,11 +114,11 @@ class EdaxServer {
             _ComputeComputeBestPathNumWithLink(dllPath, message, parentSendPort),
           );
         } else if (message is BookLoadRequest) {
+          if (_bookLoading) return;
+          _bookLoading = true;
           logger.i('will load book file. path: ${message.file}');
-          if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
-          _bookLoadingWorkerNum++;
           await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
-          _bookLoadingWorkerNum--;
+          _bookLoading = false;
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
         } else if (message is StopRequest) {
