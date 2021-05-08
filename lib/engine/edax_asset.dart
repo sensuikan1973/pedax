@@ -51,7 +51,7 @@ class EdaxAsset {
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = await _libedaxAssetData;
       final file = File(await libedaxPath);
-      if (!file.existsSync()) file.writeAsBytesSync(libedaxData.buffer.asUint8List(), flush: true);
+      file.writeAsBytesSync(libedaxData.buffer.asUint8List(), flush: true);
     }
   }
 
