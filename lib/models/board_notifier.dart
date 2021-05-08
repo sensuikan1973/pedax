@@ -197,7 +197,6 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is HintOneByOneResponse) {
-      _logger.d('${message.hint.moveString}: ${message.hint.scoreString} (level: ${message.level})');
       if (message.request.movesAtRequest != value.currentMoves) {
         value.hints = UnmodifiableListView([]);
       } else {
@@ -210,7 +209,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
       }
     } else if (message is ComputeBestPathNumWithLinkResponse) {
-      value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
+      if (message.request.movesAtRequest != value.currentMoves) {
+        value.bestPathNumList = UnmodifiableListView([]);
+      } else {
+        value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
+      }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
       _onMovesChanged(value.currentMoves);

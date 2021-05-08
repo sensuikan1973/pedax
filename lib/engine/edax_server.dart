@@ -47,18 +47,11 @@ class EdaxServer {
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
 
-  final _maxSearchWorkerNum = 1;
-  int _searchWorkerNum = 0;
-
-  final _maxBookLoadingWorkerNum = 1;
-  int _bookLoadingWorkerNum = 0;
-  late HintOneByOneRequest _latestHintMessage;
-  Duration get _searchWorkerSpawningSpan => const Duration(milliseconds: 5);
-
-  final _maxComputingBestPathNumWithLinkWorkerNum = 1;
-  int _computingBestPathNumWithLinkWorkerNum = 0;
-  late ComputeBestPathNumWithLinkRequest _latestComputeBestPathNumWithLinkMessage;
-  Duration get _computingBestPathNumWithLinkWorkerSpawningSpan => const Duration(milliseconds: 5);
+  bool _computingBookLoading = false;
+  bool _computingHintOneByOne = false;
+  late HintOneByOneRequest _latestHintntOneByOneRequest;
+  bool _computingComputeBestPathNumWithLink = false;
+  late ComputeBestPathNumWithLinkRequest _latestComputeBestPathNumWithLinkRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -83,21 +76,26 @@ class EdaxServer {
         } else if (message is PlayRequest) {
           parentSendPort.send(executePlay(edax, message));
         } else if (message is HintOneByOneRequest) {
-          _latestHintMessage = message;
+          _latestHintntOneByOneRequest = message;
           // ignore: literal_only_boolean_expressions
           while (true) {
-            if (_searchWorkerNum >= _maxSearchWorkerNum) {
-              await Future<void>.delayed(_computingBestPathNumWithLinkWorkerSpawningSpan);
+            if (_computingHintOneByOne) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
               continue;
             }
-            if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
-              logger.d(
-                  'The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new HintOneByOneRequest (moves: ${_latestHintMessage.movesAtRequest}) has been received after that.');
+            if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
+              logger.d('''
+              The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
+              ''');
               break;
             }
-            _searchWorkerNum++;
-            await compute(_computeHintNext, _ComputeHintNextParams(dllPath, _latestHintMessage, parentSendPort));
-            _searchWorkerNum--;
+            _computingHintOneByOne = true;
+            await compute(
+              _computeHintNext,
+              _ComputeHintNextParams(dllPath, _latestHintntOneByOneRequest, parentSendPort),
+            );
+            _computingHintOneByOne = false;
             break;
           }
         } else if (message is InitRequest) {
@@ -111,32 +109,34 @@ class EdaxServer {
         } else if (message is GetBookMoveWithPositionRequest) {
           parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
         } else if (message is ComputeBestPathNumWithLinkRequest) {
-          _latestComputeBestPathNumWithLinkMessage = message;
+          _latestComputeBestPathNumWithLinkRequest = message;
           // ignore: literal_only_boolean_expressions
           while (true) {
-            if (_computingBestPathNumWithLinkWorkerNum >= _maxComputingBestPathNumWithLinkWorkerNum) {
-              await Future<void>.delayed(_searchWorkerSpawningSpan);
+            if (_computingComputeBestPathNumWithLink) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
               continue;
             }
-            if (_latestComputeBestPathNumWithLinkMessage.movesAtRequest != message.movesAtRequest) {
-              logger.d(
-                  'The ComputeBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.\nIt is because a new ComputeBestPathNumWithLinkRequest (moves: ${_latestComputeBestPathNumWithLinkMessage.movesAtRequest}) has been received after that.');
+            if (_latestComputeBestPathNumWithLinkRequest.movesAtRequest != message.movesAtRequest) {
+              logger.d('''
+              The ComputeBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new ComputeBestPathNumWithLinkRequest (moves: ${_latestComputeBestPathNumWithLinkRequest.movesAtRequest}) has been received after that.
+              ''');
               break;
             }
-            _computingBestPathNumWithLinkWorkerNum++;
+            _computingComputeBestPathNumWithLink = true;
             await compute(
               _computeComputeBestPathNumWithLink,
-              _ComputeComputeBestPathNumWithLink(dllPath, _latestComputeBestPathNumWithLinkMessage, parentSendPort),
+              _ComputeComputeBestPathNumWithLink(dllPath, _latestComputeBestPathNumWithLinkRequest, parentSendPort),
             );
-            _computingBestPathNumWithLinkWorkerNum--;
+            _computingComputeBestPathNumWithLink = false;
             break;
           }
         } else if (message is BookLoadRequest) {
+          if (_computingBookLoading) return;
+          _computingBookLoading = true;
           logger.i('will load book file. path: ${message.file}');
-          if (_bookLoadingWorkerNum >= _maxBookLoadingWorkerNum) return;
-          _bookLoadingWorkerNum++;
           await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
-          _bookLoadingWorkerNum--;
+          _computingBookLoading = false;
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
         } else if (message is StopRequest) {

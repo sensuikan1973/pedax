@@ -15,7 +15,7 @@
   "hintStepByStepSetting": "step-by-step hint",
   "hintStepByStepDescription": "If on, pedax show hints step-by-step.\nAlthough this is useful, total search time is longer.",
   "bestPathNumAvailabilitySetting": "best path num indicator [advanced option]",
-  "bestPathNumAvailabilityDescription": "[This feature is preview]\nIf on, pedax show the indicator \"best path num\".\nYou have to read technical document. \nIn preview, level is fixed 10.",
+  "bestPathNumAvailabilityDescription": "[This feature is preview]\nIf on, pedax show the indicator \"best path num\".\nYou have to read technical document. \nIn preview, level is fixed 8.",
   "bestPathNumAvailabilityDocumentationLink": "open documentation link",
   "loadingBookFile": "loading book file ...",
   "finishedLoadingBookFile": "book file has been loaded ＼(^o^)／",
