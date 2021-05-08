@@ -87,7 +87,7 @@ class EdaxServer {
           // ignore: literal_only_boolean_expressions
           while (true) {
             if (_searchWorkerNum >= _maxSearchWorkerNum) {
-              await Future<void>.delayed(_computingBestPathNumWithLinkWorkerSpawningSpan);
+              await Future<void>.delayed(_searchWorkerSpawningSpan);
               continue;
             }
             if (_latestHintMessage.movesAtRequest != message.movesAtRequest) {
