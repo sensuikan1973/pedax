@@ -14,7 +14,7 @@ class BestPathNumLevelOption implements EdaxOption<int> {
   String get prefKey => 'BestPathNumLevel';
 
   @override
-  Future<int> get appDefaultValue async => 10;
+  Future<int> get appDefaultValue async => 8;
 
   @override
   Future<int> get val async {
