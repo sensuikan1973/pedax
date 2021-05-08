@@ -47,9 +47,11 @@ class EdaxServer {
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
 
-  bool _bookLoading = false;
-  Isolate? _isolateOfHintOneByOne;
-  Isolate? _isolateOfComputeBestPathNumWithLink;
+  bool _computingBookLoading = false;
+  bool _computingHintOneByOne = false;
+  late HintOneByOneRequest _latestHintntOneByOneRequest;
+  bool _computingComputeBestPathNumWithLink = false;
+  late ComputeBestPathNumWithLinkRequest _latestComputeBestPathNumWithLinkRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
@@ -74,11 +76,28 @@ class EdaxServer {
         } else if (message is PlayRequest) {
           parentSendPort.send(executePlay(edax, message));
         } else if (message is HintOneByOneRequest) {
-          _isolateOfHintOneByOne?.kill(priority: Isolate.immediate);
-          _isolateOfHintOneByOne = await Isolate.spawn(
-            _computeHintNext,
-            _ComputeHintNextParams(dllPath, message, parentSendPort),
-          );
+          _latestHintntOneByOneRequest = message;
+          // ignore: literal_only_boolean_expressions
+          while (true) {
+            if (_computingHintOneByOne) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
+              continue;
+            }
+            if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
+              logger.d('''
+              The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
+              ''');
+              break;
+            }
+            _computingHintOneByOne = true;
+            await compute(
+              _computeHintNext,
+              _ComputeHintNextParams(dllPath, _latestHintntOneByOneRequest, parentSendPort),
+            );
+            _computingHintOneByOne = false;
+            break;
+          }
         } else if (message is InitRequest) {
           parentSendPort.send(executeInit(edax, message));
         } else if (message is RotateRequest) {
@@ -90,17 +109,34 @@ class EdaxServer {
         } else if (message is GetBookMoveWithPositionRequest) {
           parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
         } else if (message is ComputeBestPathNumWithLinkRequest) {
-          _isolateOfComputeBestPathNumWithLink?.kill(priority: Isolate.immediate);
-          _isolateOfComputeBestPathNumWithLink = await Isolate.spawn(
-            _computeComputeBestPathNumWithLink,
-            _ComputeComputeBestPathNumWithLink(dllPath, message, parentSendPort),
-          );
+          _latestComputeBestPathNumWithLinkRequest = message;
+          // ignore: literal_only_boolean_expressions
+          while (true) {
+            if (_computingComputeBestPathNumWithLink) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
+              continue;
+            }
+            if (_latestComputeBestPathNumWithLinkRequest.movesAtRequest != message.movesAtRequest) {
+              logger.d('''
+              The ComputeBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new ComputeBestPathNumWithLinkRequest (moves: ${_latestComputeBestPathNumWithLinkRequest.movesAtRequest}) has been received after that.
+              ''');
+              break;
+            }
+            _computingComputeBestPathNumWithLink = true;
+            await compute(
+              _computeComputeBestPathNumWithLink,
+              _ComputeComputeBestPathNumWithLink(dllPath, _latestComputeBestPathNumWithLinkRequest, parentSendPort),
+            );
+            _computingComputeBestPathNumWithLink = false;
+            break;
+          }
         } else if (message is BookLoadRequest) {
-          if (_bookLoading) return;
-          _bookLoading = true;
+          if (_computingBookLoading) return;
+          _computingBookLoading = true;
           logger.i('will load book file. path: ${message.file}');
           await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
-          _bookLoading = false;
+          _computingBookLoading = false;
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
         } else if (message is StopRequest) {
