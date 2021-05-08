@@ -34,6 +34,7 @@ Future<void> main() async {
   });
   setUp(() async {
     Logger.level = Level.nothing;
+    // For `runAsync`, ensure asynchronous events have completed.
     await Future<void>.delayed(const Duration(seconds: 1));
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
