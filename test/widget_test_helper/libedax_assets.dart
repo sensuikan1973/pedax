@@ -13,8 +13,12 @@ Future<void> prepareLibedaxAssets() async {
     return null;
   });
 
-  _copyDylibForTest();
+  _copyDylibForTestOnMacOS();
 }
 
-void _copyDylibForTest() =>
-    File('${Platform.operatingSystem}/${EdaxAsset.libedaxName}').copySync(EdaxAsset.libedaxName);
+// See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+// See: lib/engine/edax_asset.dart #_setupDll
+void _copyDylibForTestOnMacOS() {
+  if (!Platform.isMacOS) return;
+  File('macos/${EdaxAsset.libedaxName}').copySync(EdaxAsset.libedaxName);
+}
