@@ -89,11 +89,9 @@ class EdaxAsset {
     }
   }
 
+  // REF: https://github.com/flutter/flutter/issues/17160
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$libedaxName');
-
-  // REF: https://github.com/flutter/flutter/issues/17160
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
-  // REF: https://github.com/flutter/flutter/issues/17160
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
