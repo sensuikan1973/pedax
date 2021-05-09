@@ -15,7 +15,6 @@ class EdaxAsset {
   const EdaxAsset();
 
   Future<void> setupDllAndData() async {
-    await _setupDll();
     await _setupBookData();
     await _setupEvalData();
   }
@@ -36,8 +35,8 @@ class EdaxAsset {
 
   String get libedaxPath => libedaxName;
 
-  // ignore: prefer_expression_function_bodies
-  Future<void> _setupDll() async {
+  // ignore: unused_element, prefer_expression_function_bodies
+  void _setupDll() {
     return; // do nothing. I have already bundled directly on each platform.
     // For MacOS, See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     // For Windows, copy windows/libedax-x64.dll to build directory.
