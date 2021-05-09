@@ -17,6 +17,7 @@ import 'options/n_tasks_option.dart';
 class EdaxAsset {
   const EdaxAsset();
 
+  // See: https://github.com/flutter/flutter/issues/28162
   Future<void> setupDllAndData() async {
     await _setupDll();
     await _setupBookData();
@@ -57,7 +58,6 @@ class EdaxAsset {
     }
   }
 
-  // See: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
@@ -71,7 +71,6 @@ class EdaxAsset {
     }
   }
 
-  // See: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
     final evalFilePath = await option.val;
