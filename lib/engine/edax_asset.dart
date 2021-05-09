@@ -56,8 +56,8 @@ class EdaxAsset {
       final currentLibedaxDataSha256 = pref.getString('libedax_dylib_sha256');
       if (libedaxDataSha256 == currentLibedaxDataSha256) return;
 
-      await pref.setString('libedax_dylib_sha256', libedaxDataSha256);
       File(await libedaxPath).writeAsBytesSync(libedaxData, flush: true);
+      await pref.setString('libedax_dylib_sha256', libedaxDataSha256);
     }
   }
 
