@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 
 import 'options/book_file_option.dart';
 import 'options/edax_option.dart';
@@ -36,24 +34,14 @@ class EdaxAsset {
     return result;
   }
 
-  Future<String> get libedaxPath async {
-    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    if (Platform.isMacOS) return defaultLibedaxName;
-
-    if (Platform.isWindows) return defaultLibedaxName;
-
-    final docDir = await _docDir;
-    // if (Platform.isWindows) return p.join(docDir.path, defaultLibedaxName);
-    if (Platform.isLinux) return p.join(docDir.path, defaultLibedaxName);
-    throw Exception('${Platform.operatingSystem} is not supported');
-  }
+  String get libedaxPath => libedaxName;
 
   // ignore: prefer_expression_function_bodies
   Future<void> _setupDll() async {
     return; // do nothing. I have already bundled directly on each platform.
     // For MacOS, See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    // For Windows, See: windows/CMakeLists.txt
-    // For Linux, See: linux/CMakeLists.txt
+    // For Windows, copy windows/libedax-x64.dll to build directory.
+    // For Linux, copy linux/libedax.so to build directory.
   }
 
   Future<void> _setupBookData() async {
@@ -86,15 +74,11 @@ class EdaxAsset {
     }
   }
 
-  Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$defaultLibedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
-  // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
-  Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
-
   @visibleForTesting
-  static String get defaultLibedaxName {
+  static String get libedaxName {
     if (Platform.isMacOS) return 'libedax.dylib';
     if (Platform.isWindows) return 'libedax-x64.dll';
     if (Platform.isLinux) return 'libedax.so';

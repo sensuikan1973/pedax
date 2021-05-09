@@ -1,9 +1,13 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:logger/logger.dart';
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
+import 'engine/edax_asset.dart';
 import 'window.dart';
 
 Future<void> main() async {
@@ -12,6 +16,17 @@ Future<void> main() async {
 
   // If you feel debug log is noisy, you can change log level.
   // Logger.level = Level.info;
+
+  if (kDebugMode) {
+    if (Platform.isWindows) {
+      File('windows/${EdaxAsset.libedaxName}')
+          .copySync('build/windows/runner/Debug/${Platform.operatingSystem}/${EdaxAsset.libedaxName}');
+    }
+    if (Platform.isLinux) {
+      File('linux/${EdaxAsset.libedaxName}')
+          .copySync('build/linux/x64/debug/${Platform.operatingSystem}/${EdaxAsset.libedaxName}');
+    }
+  }
 
   runApp(const PedaxApp());
 }

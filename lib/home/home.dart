@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
   Future<void> _setUpEdaxServer(BoardNotifier boardNotifier) async {
     await _edaxAsset.setupDllAndData();
     await boardNotifier.spawnEdaxServer(
-      libedaxPath: await _edaxAsset.libedaxPath,
+      libedaxPath: _edaxAsset.libedaxPath,
       initLibedaxParams: await _edaxAsset.buildInitLibEdaxParams(),
       level: await const LevelOption().val,
       hintStepByStep: await const HintStepByStepOption().val,
