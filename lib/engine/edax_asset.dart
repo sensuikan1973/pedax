@@ -65,11 +65,12 @@ class EdaxAsset {
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
-    final bookData = await _bookAssetData;
     if (bookFilePath.isEmpty) {
+      final bookData = await _bookAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
+      final bookData = await _bookAssetData;
       File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
@@ -78,11 +79,12 @@ class EdaxAsset {
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
     final evalFilePath = await option.val;
-    final evalData = await _evalAssetData;
     if (evalFilePath.isEmpty) {
+      final evalData = await _evalAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(evalData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
     } else if (!File(evalFilePath).existsSync()) {
+      final evalData = await _evalAssetData;
       File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List(), flush: true);
     }
   }
