@@ -61,38 +61,37 @@ class EdaxAsset {
     }
   }
 
+  // REF: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
-    // REF: https://github.com/flutter/flutter/issues/17160
-    // REF: https://github.com/flutter/flutter/issues/28162
+    final bookData = await _bookAssetData;
     if (bookFilePath.isEmpty) {
-      final bookData = await _bookAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
-      final bookData = await _bookAssetData;
       File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
 
+  // REF: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
     final evalFilePath = await option.val;
-    // REF: https://github.com/flutter/flutter/issues/17160
-    // REF: https://github.com/flutter/flutter/issues/28162
+    final evalData = await _evalAssetData;
     if (evalFilePath.isEmpty) {
-      final evalData = await _evalAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(evalData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
     } else if (!File(evalFilePath).existsSync()) {
-      final evalData = await _evalAssetData;
       File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List(), flush: true);
     }
   }
 
   Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$libedaxName');
+
+  // REF: https://github.com/flutter/flutter/issues/17160
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
+  // REF: https://github.com/flutter/flutter/issues/17160
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
