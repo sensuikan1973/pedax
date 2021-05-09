@@ -47,7 +47,7 @@ Future<void> main() async {
 
       await tester.tap(findByCoordinate('f5'));
       await waitEdaxServerResponsed(tester);
-      await tester.pump();
+      await tester.pump(const Duration(seconds: 1));
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
     });
   });
