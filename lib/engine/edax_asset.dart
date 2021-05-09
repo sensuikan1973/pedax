@@ -24,12 +24,8 @@ class EdaxAsset {
   }
 
   Future<List<String>> buildInitLibEdaxParams() async {
-    const options = <EdaxOption>[
-      NTasksOption(),
-      EvalFileOption(),
-      // BookFileOption(), // NOTE: when book is large, initialize is very slow. So, loading book should be processed on background.
-      LevelOption(),
-    ];
+    // don't pass BookFileOption(). It's because initialization is very slow when book is large. So, loading book should be processed on background.
+    const options = <EdaxOption>[NTasksOption(), EvalFileOption(), LevelOption()];
     final result = [''];
     for (final option in options) {
       result..add(option.nativeName)..add((await option.val).toString());
