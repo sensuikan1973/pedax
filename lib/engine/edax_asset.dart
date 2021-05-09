@@ -46,7 +46,6 @@ class EdaxAsset {
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
-  // ignore: unused_element, prefer_expression_function_bodies
   Future<void> _setupDll() async {
     // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
     if (Platform.isMacOS) return;
