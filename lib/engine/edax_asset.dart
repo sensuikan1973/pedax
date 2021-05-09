@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 import 'package:flutter/services.dart';
-
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:crypto/crypto.dart';
 import 'options/book_file_option.dart';
 import 'options/edax_option.dart';
 import 'options/eval_file_option.dart';
@@ -15,6 +18,7 @@ class EdaxAsset {
   const EdaxAsset();
 
   Future<void> setupDllAndData() async {
+    await _setupDll();
     await _setupBookData();
     await _setupEvalData();
   }
@@ -33,14 +37,29 @@ class EdaxAsset {
     return result;
   }
 
-  String get libedaxPath => libedaxName;
+  Future<String> get libedaxPath async {
+    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+    if (Platform.isMacOS) return libedaxName;
+    final docDir = await _docDir;
+    if (Platform.isWindows) return p.join(docDir.path, libedaxName);
+    if (Platform.isLinux) return p.join(docDir.path, libedaxName);
+    throw Exception('${Platform.operatingSystem} is not supported');
+  }
 
   // ignore: unused_element, prefer_expression_function_bodies
-  void _setupDll() {
-    return; // do nothing. I have already bundled directly on each platform.
-    // For MacOS, See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    // For Windows, copy windows/libedax-x64.dll to build directory.
-    // For Linux, copy linux/libedax.so to build directory.
+  Future<void> _setupDll() async {
+    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+    if (Platform.isMacOS) return;
+    if (Platform.isWindows || Platform.isLinux) {
+      final libedaxData = (await _libedaxAssetData).buffer.asUint8List();
+      final libedaxDataSha256 = sha256.convert(libedaxData).toString();
+      final pref = await _preferences;
+      final currentLibedaxDataSha256 = pref.getString('libedax_dylib_sha256');
+      if (libedaxDataSha256 == currentLibedaxDataSha256) return;
+
+      await pref.setString('libedax_dylib_sha256', libedaxDataSha256);
+      File(await libedaxPath).writeAsBytesSync(libedaxData, flush: true);
+    }
   }
 
   Future<void> _setupBookData() async {
@@ -73,8 +92,14 @@ class EdaxAsset {
     }
   }
 
+  Future<ByteData> get _libedaxAssetData async => rootBundle.load('assets/libedax/dll/$libedaxName');
   Future<ByteData> get _evalAssetData async => rootBundle.load('assets/libedax/data/eval.dat');
   Future<ByteData> get _bookAssetData async => rootBundle.load('assets/libedax/data/book.dat');
+
+  // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
+  Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
+
+  Future<SharedPreferences> get _preferences async => SharedPreferences.getInstance();
 
   @visibleForTesting
   static String get libedaxName {
