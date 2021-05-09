@@ -18,7 +18,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.8.0-beta+9
+version: 0.8.1-beta+9
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: '>=2.12.0 <3.0.0'
@@ -38,7 +38,7 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.0.0
   intl: any # Use the pinned version from flutter_localizations
-  libedax4dart: ^0.12.3-beta
+  libedax4dart: ^0.12.4-beta
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
@@ -78,7 +78,7 @@ msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   display_name: pedax
   publisher_display_name: Naoki Shimizu
   identity_name: 1781NaokiShimizu.pedax
-  msix_version: 0.8.0.0
+  msix_version: 0.8.1.0
   publisher: CN=4CCE9711-39B6-4ECC-AA74-A350014A69B0
   languages: en, ja
   logo_path: assets/images/pedax_logo.png
