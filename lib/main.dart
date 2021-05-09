@@ -19,11 +19,11 @@ Future<void> main() async {
 
   if (kDebugMode) {
     if (Platform.isWindows) {
-      File('windows/${EdaxAsset.libedaxName}')
+      File('../windows/${EdaxAsset.libedaxName}')
           .copySync('build/windows/runner/Debug/${Platform.operatingSystem}/${EdaxAsset.libedaxName}');
     }
     if (Platform.isLinux) {
-      File('linux/${EdaxAsset.libedaxName}')
+      File('../linux/${EdaxAsset.libedaxName}')
           .copySync('build/linux/x64/debug/${Platform.operatingSystem}/${EdaxAsset.libedaxName}');
     }
   }
