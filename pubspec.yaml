@@ -1,5 +1,4 @@
 # See: https://dart.dev/tools/pub/pubspec
-# REF: https://dart.dev/null-safety/unsound-null-safety
 
 name: pedax
 description: Reversi Board with edax.
