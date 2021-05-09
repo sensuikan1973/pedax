@@ -61,7 +61,7 @@ class EdaxAsset {
     }
   }
 
-  // REF: https://github.com/flutter/flutter/issues/28162
+  // See: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
@@ -74,7 +74,7 @@ class EdaxAsset {
     }
   }
 
-  // REF: https://github.com/flutter/flutter/issues/28162
+  // See: https://github.com/flutter/flutter/issues/28162
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
     final evalFilePath = await option.val;
