@@ -17,7 +17,10 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.8.1-beta+9
+#
+# NOTE: you can't specify duplicated build number.
+# See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
+version: 0.8.2-beta+10
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: '>=2.12.0 <3.0.0'

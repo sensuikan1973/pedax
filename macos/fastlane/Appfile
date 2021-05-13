@@ -1,0 +1,8 @@
+app_identifier("com.done.sensuikan1973.pedax")
+apple_id(ENV["APPLE_ID"]) # Email Address
+
+itc_team_id(ENV["ITC_TEAM_ID"]) # App Store Connect Team ID
+team_id("Z2P4D5D6K2") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

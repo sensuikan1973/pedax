@@ -6,8 +6,8 @@ name: Publish pedax app
 on:
   workflow_dispatch:
     inputs:
-      tag: # TODO: consider to use https://pub.dev/packages/cider
-        description: 'semver'
+      tag:
+        description: 'tag'
         required: true
 
 jobs:

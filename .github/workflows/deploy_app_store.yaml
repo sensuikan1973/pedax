@@ -8,16 +8,19 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'semver'
+        description: 'tag'
         required: true
   pull_request: # for debug
-    paths: ['.github/workflows/deploy_app_store.yaml']
+    paths: ['.github/workflows/deploy_app_store.yaml', '.github/scripts/**', 'macos/**']
 
 jobs:
-  publish_artifacts:
+  deploy_app_store:
     env:
-      PUBLISH_DIR: publish
-      RELEASE_DESCRIPTION_TXT_FILE: release_description.txt
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
@@ -52,3 +55,15 @@ jobs:
       - name: output build info
         shell: bash
         run: .github/scripts/output_build_info.sh . && cat env.txt
+
+      - name: setup fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 'head'
+          bundler-cache: true
+          working-directory: macos
+
+      - name: build
+        run: fastlane build_for_app_store
+      - name: deploy
+        run: fastlane deploy_app_store

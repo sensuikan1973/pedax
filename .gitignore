@@ -50,3 +50,9 @@ libedax.dylib
 
 # test
 coverage/
+
+# fastlane
+macos/fastlane/report.xml
+macos/vendor
+macos/*.app*
+macos/*.pkg
