@@ -15,12 +15,13 @@ on:
 
 jobs:
   deploy_app_store:
-    env:
+    env: # See: https://docs.fastlane.tools/best-practices/continuous-integration/#environment-variables-to-set
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
       APPLE_ID: ${{ secrets.APPLE_ID }}
       ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
