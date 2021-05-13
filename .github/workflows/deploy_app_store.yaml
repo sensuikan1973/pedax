@@ -66,4 +66,5 @@ jobs:
       - name: build
         run: fastlane build_for_app_store
       - name: deploy
+        if: ${{ GITHUB_EVENT_NAME }} == "workflow_dispatch"
         run: fastlane deploy_app_store
