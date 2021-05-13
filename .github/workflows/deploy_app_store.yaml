@@ -36,10 +36,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.2'
+          bundler-cache: true
+          working-directory: macos
+
       - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.flutter_channel }}
-      - name: setup
+      - name: setup flutter
         shell: bash
         run: ${{ matrix.setup_script }}
       - name: install dependencies
@@ -55,13 +62,6 @@ jobs:
       - name: output build info
         shell: bash
         run: .github/scripts/output_build_info.sh . && cat env.txt
-
-      - name: setup ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7.2'
-          bundler-cache: true
-          working-directory: macos
 
       - name: build
         with:
