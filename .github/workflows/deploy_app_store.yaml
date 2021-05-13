@@ -22,6 +22,7 @@ jobs:
       APPLE_ID: ${{ secrets.APPLE_ID }}
       ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
       # See: https://docs.fastlane.tools/actions/match/#git-storage-on-github
+      # REF: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
       MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
