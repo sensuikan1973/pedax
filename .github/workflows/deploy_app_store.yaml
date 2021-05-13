@@ -21,7 +21,8 @@ jobs:
       ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
       APPLE_ID: ${{ secrets.APPLE_ID }}
       ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
-      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      # See: https://docs.fastlane.tools/actions/match/#git-storage-on-github
+      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
