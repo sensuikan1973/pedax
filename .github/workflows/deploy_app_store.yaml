@@ -64,12 +64,10 @@ jobs:
         run: .github/scripts/output_build_info.sh . && cat env.txt
 
       - name: build
-        with:
-          working-directory: macos
         run: fastlane build_for_app_store
+        working-directory: macos
       - name: deploy
-        with:
-          working-directory: macos
         # See: https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables
         if: ${{ env.GITHUB_EVENT_NAME }} == "workflow_dispatch"
         run: fastlane deploy_app_store
+        working-directory: macos
