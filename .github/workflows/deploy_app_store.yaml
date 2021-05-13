@@ -67,5 +67,5 @@ jobs:
         run: fastlane build_for_app_store
       - name: deploy
         # See: https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables
-        if: ${{ GITHUB_EVENT_NAME }} == "workflow_dispatch"
+        if: ${{ env.GITHUB_EVENT_NAME }} == "workflow_dispatch"
         run: fastlane deploy_app_store
