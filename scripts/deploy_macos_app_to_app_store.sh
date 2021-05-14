@@ -33,5 +33,4 @@ git diff --exit-code
 
 cd macos
 export ASC_KEY_CONTENT=$(cat $asc_key_p8_file_path | base64)
-bundle exec fastlane build_for_app_store # require ENV variables
-bundle exec fastlane deploy_app_store
+bundle exec fastlane deploy_app_store # require ENV variables

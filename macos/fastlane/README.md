@@ -16,11 +16,6 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Mac
-### mac build_for_app_store
-```
-fastlane mac build_for_app_store
-```
-build for app store
 ### mac deploy_app_store
 ```
 fastlane mac deploy_app_store

@@ -55,6 +55,8 @@ platform :mac do
       pkg: "pedax.pkg",
       automatic_release: true,
       skip_screenshots: true,
+      precheck_include_in_app_purchases: false,
+      force: true, # skip verification of HTML preview
       skip_binary_upload: true, # for debug
     )
   end
