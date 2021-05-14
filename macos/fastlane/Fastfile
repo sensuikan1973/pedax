@@ -52,6 +52,7 @@ platform :mac do
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
     # See: https://docs.fastlane.tools/actions/upload_to_app_store/
     upload_to_app_store(
+      api_key: api_key,
       pkg: "pedax.pkg",
       automatic_release: true,
       skip_screenshots: true,
