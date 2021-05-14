@@ -16,7 +16,7 @@ platform :mac do
   desc "build for app store"
   lane :build_for_app_store do
     # See: https://docs.fastlane.tools/actions/setup_ci/
-    setup_ci(provider: "travis") # for keychain
+    setup_ci() # for keychain
 
     # See: https://appstoreconnect.apple.com/access/api
     # REF: https://developer.apple.com/videos/play/wwdc2018/303/
