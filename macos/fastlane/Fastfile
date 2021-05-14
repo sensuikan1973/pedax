@@ -13,8 +13,8 @@
 default_platform(:mac)
 
 platform :mac do
-  desc "build for app store"
-  lane :build_for_app_store do
+  desc "deploy app store"
+  lane :deploy_app_store do
     # See: https://docs.fastlane.tools/actions/setup_ci/
     # setup_ci() if is_ci # for keychain
 
@@ -48,10 +48,7 @@ platform :mac do
       export_team_id: "Z2P4D5D6K2",
       export_method: "app-store",
     )
-  end
 
-  desc "deploy app store"
-  lane :deploy_app_store do
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
     # See: https://docs.fastlane.tools/actions/upload_to_app_store/
     upload_to_app_store(
