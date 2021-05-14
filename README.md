@@ -69,6 +69,14 @@ flutter analyze .
 ./scripts/fetch_libedax_assets.sh
 ```
 
+#### deploy macos app to app store
+
+```sh
+ASC_KEY_ID=xxx \
+ASC_ISSUER_ID=xxx \
+./scripts/deploy_macos_app_to_app_store.sh TAG P8_PATH
+```
+
 ### reference
 
 - [Desktop support for Flutter](https://flutter.dev/desktop)

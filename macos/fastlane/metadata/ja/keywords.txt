@@ -1,0 +1,1 @@
+edax,pedax,reversi,othello,リバーシ,オセロ

@@ -6,8 +6,8 @@ name: Publish pedax app
 on:
   workflow_dispatch:
     inputs:
-      tag: # TODO: consider to use https://pub.dev/packages/cider
-        description: 'semver'
+      tag:
+        description: 'tag'
         required: true
 
 jobs:
@@ -44,7 +44,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: ${{ matrix.flutter_channel }}
-      - name: setup
+      - name: setup flutter
         shell: bash
         run: ${{ matrix.setup_script }}
       - name: install dependencies

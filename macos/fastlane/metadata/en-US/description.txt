@@ -1,0 +1,2 @@
+■ Comfortably, you can see evaluation value (e.g. +4, -10).
+■ You can customize some important options (e.g. book file path, search level, ...)

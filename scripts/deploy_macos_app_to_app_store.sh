@@ -8,6 +8,14 @@ then
   echo "tag is required"
   exit
 fi
+
+asc_key_p8_file_path=$2
+if [ -z "$asc_key_p8_file_path" ]
+then
+  echo "asc_key_p8_file_path is required"
+  exit
+fi
+
 git checkout $tag
 
 flutter channel beta
@@ -23,10 +31,6 @@ flutter build macos --release
 
 git diff --exit-code
 
-open macos/Runner.xcworkspace
-
-# See: https://help.apple.com/xcode/mac/current/#/devac02c5ab8
-# Archive
-# Validate
-# Upload
-# Publish
+cd macos
+export ASC_KEY_CONTENT=$(cat $asc_key_p8_file_path | base64)
+bundle exec fastlane deploy_app_store # require ENV variables
