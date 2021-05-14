@@ -32,6 +32,7 @@ platform :mac do
     # See: Matchfile
     # See: https://docs.fastlane.tools/actions/match
     match(
+      platform: "macos",
       api_key: api_key,
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
@@ -52,7 +53,7 @@ platform :mac do
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
     # See: https://docs.fastlane.tools/actions/upload_to_app_store/
     upload_to_app_store(
-      platform: "mac",
+      platform: "osx",
       api_key: api_key,
       pkg: "pedax.pkg",
       automatic_release: true,
