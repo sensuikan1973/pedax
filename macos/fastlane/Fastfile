@@ -15,6 +15,9 @@ default_platform(:mac)
 platform :mac do
   desc "build for app store"
   lane :build_for_app_store do
+    # See: https://docs.fastlane.tools/actions/setup_ci/
+    setup_ci(provider: "travis") # for keychain
+
     # See: https://appstoreconnect.apple.com/access/api
     # REF: https://developer.apple.com/videos/play/wwdc2018/303/
     # See: https://docs.fastlane.tools/best-practices/continuous-integration/#method-1-app-store-connect-api-key-recommended
@@ -31,7 +34,7 @@ platform :mac do
       api_key: api_key,
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
-      readonly: true,
+      readonly: is_ci,
     )
 
     # See: Appfile
