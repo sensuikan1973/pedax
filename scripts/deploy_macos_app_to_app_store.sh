@@ -21,15 +21,15 @@ git checkout $tag
 flutter channel beta
 flutter upgrade
 
-# flutter test
+flutter test
 
-# flutter clean
-# flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
+flutter clean
+flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 
-# flutter clean
-# flutter build macos --release
+flutter clean
+flutter build macos --release
 
-# git diff --exit-code
+git diff --exit-code
 
 cd macos
 export ASC_KEY_CONTENT=$(cat $asc_key_p8_file_path | base64)
