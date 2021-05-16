@@ -7,7 +7,6 @@ import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
-import '../engine/api/compute_best_path_num_with_link.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -15,6 +14,7 @@ import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
+import '../engine/api/stream_of_best_path_num_with_link.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/book_file_option.dart';
@@ -123,13 +123,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
-  ComputeBestPathNumWithLinkRequest _buildComputeBestPathNumWithLinkRequest(String movesAtRequest) =>
-      ComputeBestPathNumWithLinkRequest(level: value.bestPathNumLevel, movesAtRequest: movesAtRequest);
+  StreamOfBestPathNumWithLinkRequest _buildStreamOfBestPathNumWithLinkRequest(String movesAtRequest) =>
+      StreamOfBestPathNumWithLinkRequest(level: value.bestPathNumLevel, movesAtRequest: movesAtRequest);
 
   void _requestBestPathNumList(String movesAtRequest) {
     value.bestPathNumList = UnmodifiableListView([]);
     if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
-      _edaxServerPort.send(_buildComputeBestPathNumWithLinkRequest(movesAtRequest));
+      _edaxServerPort.send(_buildStreamOfBestPathNumWithLinkRequest(movesAtRequest));
     }
   }
 
@@ -208,11 +208,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           )
           ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
       }
-    } else if (message is ComputeBestPathNumWithLinkResponse) {
+    } else if (message is StreamOfBestPathNumWithLinkResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {
         value.bestPathNumList = UnmodifiableListView([]);
       } else {
-        value.bestPathNumList = UnmodifiableListView(message.bestPathNumWithLinkList);
+        value.bestPathNumList = UnmodifiableListView([...value.bestPathNumList, message.bestPathNumWithLink]);
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
