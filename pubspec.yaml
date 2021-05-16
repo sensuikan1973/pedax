@@ -40,10 +40,10 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.0.0
   intl: any # Use the pinned version from flutter_localizations
-  libedax4dart: #^0.12.4-beta
-    git:
-      url: https://github.com/sensuikan1973/libedax4dart.git
-      ref: add_computeBestPathNumWithLinkAsStream
+  libedax4dart: ^0.13.0-beta
+    # git:
+    #   url: https://github.com/sensuikan1973/libedax4dart.git
+    #   ref: xxx
   logger: ^1.0.0
   macos_secure_bookmarks: ^0.2.0
   path_provider: ^2.0.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
