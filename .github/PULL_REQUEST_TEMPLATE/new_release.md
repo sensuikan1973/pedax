@@ -4,7 +4,7 @@
 
 ### All OSes
 
-- [ ] update `version` on `README`
+- [ ] update `version` on `pubspec.yaml`
 
 ### macos
 
@@ -13,4 +13,4 @@
 
 ### windows
 
-- [ ] update `msix_version` on `README`
+- [ ] update `msix_version` on `pubspec.yaml`
