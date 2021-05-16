@@ -1,1 +1,1 @@
-minor improvement
+show the value with opacity, if search hasn't completed.
