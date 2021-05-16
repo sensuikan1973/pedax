@@ -1,3 +1,5 @@
+<!-- See: https://docs.github.com/ja/github/managing-your-work-on-github/about-automation-for-issues-and-pull-requests-with-query-parameters -->
+
 ## New Release PR
 
 ### All OSes

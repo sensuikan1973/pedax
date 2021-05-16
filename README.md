@@ -69,7 +69,12 @@ flutter analyze .
 ./scripts/fetch_libedax_assets.sh
 ```
 
-#### deploy macos app to app store
+#### release
+
+1. create `new_release` branch.
+2. create PR by https://github.com/sensuikan1973/pedax/compare/new_release?expand=1&template=new_release.md
+
+##### deloy apple store
 
 ```sh
 TAG=XXX
@@ -77,10 +82,16 @@ P8_PATH=XXX
 ASC_KEY_ID=XXX
 ASC_ISSUER_ID=XXX
 
-ASC_KEY_ID=$ASC_KEY_ID \
-ASC_ISSUER_ID=$ASC_ISSUER_ID \
+ASC_KEY_ID=$ASC_KEY_ID ASC_ISSUER_ID=$ASC_ISSUER_ID \
 ./scripts/deploy_macos_app_to_app_store.sh $TAG $P8_PATH
 ```
+
+After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
+
+##### deploy microsoft store
+
+1. download `pedax.msix` from the release.
+2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/windows/overview).
 
 ### reference
 
