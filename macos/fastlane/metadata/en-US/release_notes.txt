@@ -1,1 +1,1 @@
-show the value with opacity, if search hasn't completed.
+show best path num list one by one.
