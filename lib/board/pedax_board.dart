@@ -152,17 +152,24 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final bestPathNum = targetBestPathNum.isEmpty ? null : targetBestPathNum.first;
     final lastMove = context.select<BoardNotifier, Move?>((notifier) => notifier.value.lastMove);
     final bestScore = context.select<BoardNotifier, int>((notifier) => notifier.value.bestScore);
+    final isBookMove = hint != null && hint.isBookMove;
+    final level = context.select<BoardNotifier, int>((notifier) => notifier.value.level);
     return Square(
       type: type,
       length: _stoneSize,
       margin: _stoneMargin,
       coordinate: moveString,
       isLastMove: lastMove?.x == move,
-      isBookMove: hint != null && hint.isBookMove,
+      isBookMove: isBookMove,
       score: hint?.score,
       bestPathNumOfBlack: bestPathNum?.bestPathNumOfBlack,
       bestPathNumOfWhite: bestPathNum?.bestPathNumOfWhite,
-      scoreColor: _scoreColor(hint?.score, hint?.score == bestScore),
+      scoreColor: _scoreColor(
+        score: hint?.score,
+        isBookMove: isBookMove,
+        isBestMove: hint?.score == bestScore,
+        searchHasCompleted: hint != null && hint.depth == level,
+      ),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
   }
@@ -185,10 +192,16 @@ class _PedaxBoardState extends State<PedaxBoard> {
     return SquareType.empty;
   }
 
-  Color? _scoreColor(int? score, bool bestMove) {
+  Color? _scoreColor({
+    required int? score,
+    required bool isBookMove,
+    required bool isBestMove,
+    required bool searchHasCompleted,
+  }) {
     if (score == null) return null;
-    if (bestMove) return Colors.lightBlue[200];
-    return Colors.lime;
+    final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
+    if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
+    return color;
   }
 
   @override
