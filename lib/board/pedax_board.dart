@@ -154,6 +154,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final bestScore = context.select<BoardNotifier, int>((notifier) => notifier.value.bestScore);
     final isBookMove = hint != null && hint.isBookMove;
     final level = context.select<BoardNotifier, int>((notifier) => notifier.value.level);
+    final emptyNum = context.select<BoardNotifier, int>((notifier) => notifier.value.emptyNum);
     return Square(
       type: type,
       length: _stoneSize,
@@ -168,7 +169,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         score: hint?.score,
         isBookMove: isBookMove,
         isBestMove: hint?.score == bestScore,
-        searchHasCompleted: hint != null && hint.depth == level,
+        searchHasCompleted: hint != null && (hint.depth == level || hint.depth == emptyNum),
       ),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
