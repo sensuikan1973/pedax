@@ -50,7 +50,7 @@ class EdaxServer {
   bool _computingBookLoading = false;
   bool _computingHintOneByOne = false;
   late HintOneByOneRequest _latestHintntOneByOneRequest;
-  bool _computingComputeBestPathNumWithLink = false;
+  bool _computingStreamOfBestPathNumWithLink = false;
   late StreamOfBestPathNumWithLinkRequest _latestStreamOfBestPathNumWithLinkRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
@@ -112,7 +112,7 @@ class EdaxServer {
           _latestStreamOfBestPathNumWithLinkRequest = message;
           // ignore: literal_only_boolean_expressions
           while (true) {
-            if (_computingComputeBestPathNumWithLink) {
+            if (_computingStreamOfBestPathNumWithLink) {
               await Future<void>.delayed(const Duration(milliseconds: 5));
               continue;
             }
@@ -123,13 +123,13 @@ class EdaxServer {
               ''');
               break;
             }
-            _computingComputeBestPathNumWithLink = true;
+            _computingStreamOfBestPathNumWithLink = true;
             await compute(
               _computeStreamOfBestPathNumWithLink,
               _ComputeStreamOfBestPathNumWithLinkParams(
                   dllPath, _latestStreamOfBestPathNumWithLinkRequest, parentSendPort),
             );
-            _computingComputeBestPathNumWithLink = false;
+            _computingStreamOfBestPathNumWithLink = false;
             break;
           }
         } else if (message is BookLoadRequest) {
