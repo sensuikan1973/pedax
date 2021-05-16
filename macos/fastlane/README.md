@@ -20,6 +20,7 @@ or alternatively using `brew install fastlane`
 ```
 fastlane mac deploy_app_store
 ```
+deploy app store
 
 ----
 
