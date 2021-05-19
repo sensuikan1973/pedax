@@ -23,8 +23,8 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 0.10.0-beta+13
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: ^2.2.0-0 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  sdk: '>=2.13.0 <3.0.0'
+  flutter: ^2.2.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.1
@@ -49,7 +49,7 @@ dependencies:
   path_provider: ^2.0.1 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0
   shared_preferences: ^2.0.5
-  url_launcher: ^6.0.3
+  url_launcher: ^6.0.4
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
