@@ -36,9 +36,9 @@ jobs:
       - name: setup flutter
         shell: bash
         run: ${{ matrix.setup_script }}
-      - name: install dependencies
-        run: flutter pub get
       - name: doctor
         run: flutter doctor -v
+      - name: install dependencies
+        run: flutter pub get
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
