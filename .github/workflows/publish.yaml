@@ -47,10 +47,10 @@ jobs:
       - name: setup flutter
         shell: bash
         run: ${{ matrix.setup_script }}
-      - name: install dependencies
-        run: flutter pub get
       - name: doctor
         run: flutter doctor -v
+      - name: install dependencies
+        run: flutter pub get
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
       - name: prepare to pack
