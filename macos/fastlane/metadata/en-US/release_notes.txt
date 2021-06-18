@@ -1,1 +1,1 @@
-show best path num list one by one.
+minor improvement of performance.
