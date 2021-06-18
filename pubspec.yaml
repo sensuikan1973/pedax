@@ -2,7 +2,7 @@
 
 name: pedax
 description: Reversi Board with edax.
-publish_to: 'none'
+publish_to: "none"
 homepage: https://sensuikan1973.github.io/pedax/
 repository: https://github.com/sensuikan1973/pedax
 issue_tracker: https://github.com/sensuikan1973/pedax/issues
@@ -23,7 +23,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 0.10.0-beta+13
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: '>=2.13.0 <3.0.0'
+  sdk: ">=2.13.0 <3.0.0"
   flutter: ^2.2.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
@@ -40,7 +40,8 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.0.1
   intl: any # Use the pinned version from flutter_localizations
-  libedax4dart: ^0.13.0-beta
+  libedax4dart:
+    ^0.13.0-beta
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
@@ -62,7 +63,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^2.1.2
+  msix: ^2.1.3
   pedantic_sensuikan1973: any
 
 flutter:
@@ -87,4 +88,4 @@ msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   start_menu_icon_path: assets/images/pedax_logo.png
   tile_icon_path: assets/images/pedax_logo.png
   architecture: x64
-  capabilities: ''
+  capabilities: ""
