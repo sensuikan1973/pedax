@@ -47,6 +47,7 @@ dependencies:
     #   ref: xxx
   logger: ^1.0.0
   macos_secure_bookmarks: ^0.2.0
+  meta: ^1.4.0
   path_provider: ^2.0.2 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0
   shared_preferences: ^2.0.5
