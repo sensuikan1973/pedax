@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 import '../../models/board_notifier.dart';
@@ -16,13 +16,13 @@ class PasteMovesShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(AppLocalizations localizations) => localizations.shortcutLabelPasteMoves;
+  String label(final AppLocalizations localizations) => localizations.shortcutLabelPasteMoves;
 
   @override
   String get keys => Platform.isMacOS ? '⌃V or ⌘V' : 'Ctrl + V';
 
   @override
-  bool fired(RawKeyEvent keyEvent) =>
+  bool fired(final RawKeyEvent keyEvent) =>
       (keyEvent.isControlPressed && keyEvent.isKeyPressed(LogicalKeyboardKey.keyV)) ||
       (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyV));
 

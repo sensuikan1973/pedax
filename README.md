@@ -56,10 +56,12 @@ flutter test
 flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 ```
 
-#### analyze
+#### linter
 
 ```sh
 flutter analyze .
+
+dart fix --apply # auto fix
 ```
 
 #### fetch libedax assets as pedax assets

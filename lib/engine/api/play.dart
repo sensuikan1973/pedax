@@ -14,11 +14,11 @@ class PlayRequest implements RequestSchema {
 @immutable
 class PlayResponse implements ResponseSchema<PlayRequest> {
   const PlayResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -29,7 +29,7 @@ class PlayResponse implements ResponseSchema<PlayRequest> {
   final Move? lastMove;
 }
 
-PlayResponse executePlay(LibEdax edax, PlayRequest request) {
+PlayResponse executePlay(final LibEdax edax, final PlayRequest request) {
   edax
     ..edaxStop()
     ..edaxPlay(request.moves);

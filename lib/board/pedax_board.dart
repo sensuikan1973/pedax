@@ -14,7 +14,11 @@ import 'square.dart';
 
 @immutable
 class PedaxBoard extends StatefulWidget {
-  const PedaxBoard({required this.bodyLength, this.frameWidth = defaultFrameWidth, Key? key}) : super(key: key);
+  const PedaxBoard({
+    required final this.bodyLength,
+    final this.frameWidth = defaultFrameWidth,
+    final Key? key,
+  }) : super(key: key);
   final double bodyLength;
   final double frameWidth;
 
@@ -24,7 +28,7 @@ class PedaxBoard extends StatefulWidget {
   _PedaxBoardState createState() => _PedaxBoardState();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties..add(DoubleProperty('bodyLength', bodyLength))..add(DoubleProperty('frameWidth', frameWidth));
   }
@@ -57,7 +61,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(final BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
@@ -91,7 +95,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-              .map((x) => Text(x, style: TextStyle(color: _coordinateLabelColor)))
+              .map((final x) => Text(x, style: TextStyle(color: _coordinateLabelColor)))
               .toList(),
         ),
       );
@@ -110,7 +114,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(
             _squareNumPerLine,
-            (i) => Text((i + 1).toString(), style: TextStyle(color: _coordinateLabelColor)),
+            (final i) => Text((i + 1).toString(), style: TextStyle(color: _coordinateLabelColor)),
           ),
         ),
       );
@@ -126,35 +130,35 @@ class _PedaxBoardState extends State<PedaxBoard> {
           border: TableBorder.all(),
           children: List.generate(
             _squareNumPerLine,
-            (yIndex) => TableRow(
-              children: List.generate(_squareNumPerLine, (xIndex) => _square(yIndex, xIndex)),
+            (final yIndex) => TableRow(
+              children: List.generate(_squareNumPerLine, (final xIndex) => _square(yIndex, xIndex)),
             ),
           ),
         ),
       );
 
-  Future<void> _handleRawKeyEvent(RawKeyEvent event) async {
-    final targetEvents = _shortcutList.where((el) => el.fired(event));
+  Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
+    final targetEvents = _shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
     await targetEvent?.runEvent();
   }
 
-  Square _square(int y, int x) {
+  Square _square(final int y, final int x) {
     final move = y * 8 + x;
     final type = _squareType(move);
     final moveString = move2String(move);
-    final hints = context.select<BoardNotifier, List<Hint>>((notifier) => notifier.value.hints);
-    final targetHints = hints.where((h) => h.move == move).toList();
+    final hints = context.select<BoardNotifier, List<Hint>>((final notifier) => notifier.value.hints);
+    final targetHints = hints.where((final h) => h.move == move).toList();
     final hint = targetHints.isEmpty ? null : targetHints.first;
     final bestPathNumList =
-        context.select<BoardNotifier, List<BestPathNumWithLink>>((notifier) => notifier.value.bestPathNumList);
-    final targetBestPathNum = bestPathNumList.where((b) => b.move == move).toList();
+        context.select<BoardNotifier, List<BestPathNumWithLink>>((final notifier) => notifier.value.bestPathNumList);
+    final targetBestPathNum = bestPathNumList.where((final b) => b.move == move).toList();
     final bestPathNum = targetBestPathNum.isEmpty ? null : targetBestPathNum.first;
-    final lastMove = context.select<BoardNotifier, Move?>((notifier) => notifier.value.lastMove);
-    final bestScore = context.select<BoardNotifier, int>((notifier) => notifier.value.bestScore);
+    final lastMove = context.select<BoardNotifier, Move?>((final notifier) => notifier.value.lastMove);
+    final bestScore = context.select<BoardNotifier, int>((final notifier) => notifier.value.bestScore);
     final isBookMove = hint != null && hint.isBookMove;
-    final level = context.select<BoardNotifier, int>((notifier) => notifier.value.level);
-    final emptyNum = context.select<BoardNotifier, int>((notifier) => notifier.value.emptyNum);
+    final level = context.select<BoardNotifier, int>((final notifier) => notifier.value.level);
+    final emptyNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.emptyNum);
     return Square(
       type: type,
       length: _stoneSize,
@@ -175,14 +179,16 @@ class _PedaxBoardState extends State<PedaxBoard> {
     );
   }
 
-  void _squareOnTap(String moveString) {
+  void _squareOnTap(final String moveString) {
     _boardNotifier.requestMove(moveString);
   }
 
-  SquareType _squareType(int move) {
-    final currentColor = context.select<BoardNotifier, int>((notifier) => notifier.value.currentColor);
-    final squaresOfPlayer = context.select<BoardNotifier, List<int>>((notifier) => notifier.value.squaresOfPlayer);
-    final squaresOfOpponent = context.select<BoardNotifier, List<int>>((notifier) => notifier.value.squaresOfOpponent);
+  SquareType _squareType(final int move) {
+    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    final squaresOfPlayer =
+        context.select<BoardNotifier, List<int>>((final notifier) => notifier.value.squaresOfPlayer);
+    final squaresOfOpponent =
+        context.select<BoardNotifier, List<int>>((final notifier) => notifier.value.squaresOfOpponent);
     final isBlackTurn = currentColor == TurnColor.black;
     if (squaresOfPlayer.contains(move)) {
       return isBlackTurn ? SquareType.black : SquareType.white;
@@ -194,10 +200,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   Color? _scoreColor({
-    required int? score,
-    required bool isBookMove,
-    required bool isBestMove,
-    required bool searchHasCompleted,
+    required final int? score,
+    required final bool isBookMove,
+    required final bool isBestMove,
+    required final bool searchHasCompleted,
   }) {
     if (score == null) return null;
     final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
@@ -206,7 +212,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<BoardNotifier>('boardNotifier', _boardNotifier));
   }

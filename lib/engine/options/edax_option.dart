@@ -15,5 +15,5 @@ abstract class EdaxOption<T> {
 
   Future<T> get val;
 
-  Future<T> update(T val);
+  Future<T> update(final T val);
 }

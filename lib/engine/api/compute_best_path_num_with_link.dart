@@ -7,8 +7,8 @@ import 'response_schema.dart';
 @immutable
 class ComputeBestPathNumWithLinkRequest implements RequestSchema {
   const ComputeBestPathNumWithLinkRequest({
-    required this.movesAtRequest,
-    this.level = 10, // TODO: consider default value
+    required final this.movesAtRequest,
+    final this.level = 10, // TODO: consider default value
   });
 
   final String movesAtRequest;
@@ -18,8 +18,8 @@ class ComputeBestPathNumWithLinkRequest implements RequestSchema {
 @immutable
 class ComputeBestPathNumWithLinkResponse implements ResponseSchema<ComputeBestPathNumWithLinkRequest> {
   const ComputeBestPathNumWithLinkResponse({
-    required this.bestPathNumWithLinkList,
-    required this.request,
+    required final this.bestPathNumWithLinkList,
+    required final this.request,
   });
 
   @override
@@ -28,8 +28,8 @@ class ComputeBestPathNumWithLinkResponse implements ResponseSchema<ComputeBestPa
 }
 
 ComputeBestPathNumWithLinkResponse executeComputeBestPathNumWithLink(
-  LibEdax edax,
-  ComputeBestPathNumWithLinkRequest request,
+  final LibEdax edax,
+  final ComputeBestPathNumWithLinkRequest request,
 ) {
   final result = edax.computeBestPathNumWithLink(level: request.level);
   return ComputeBestPathNumWithLinkResponse(bestPathNumWithLinkList: result, request: request);

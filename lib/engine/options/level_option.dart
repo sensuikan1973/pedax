@@ -27,7 +27,7 @@ class LevelOption implements EdaxOption<int> {
   }
 
   @override
-  Future<int> update(int val) async {
+  Future<int> update(final int val) async {
     final pref = await _preferences;
     if (val < 0) {
       final newLevel = await appDefaultValue;

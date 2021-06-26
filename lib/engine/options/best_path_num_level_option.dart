@@ -24,7 +24,7 @@ class BestPathNumLevelOption implements EdaxOption<int> {
 
   @override
   // ignore: prefer_expression_function_bodies
-  Future<int> update(int val) async {
+  Future<int> update(final int val) async {
     return appDefaultValue; // TODO: editable
     // final pref = await preferences;
     // await pref.setInt(prefKey, val);

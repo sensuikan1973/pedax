@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'edax_option.dart';
@@ -30,7 +30,7 @@ class NTasksOption implements EdaxOption<int> {
   }
 
   @override
-  Future<int> update(int val) async {
+  Future<int> update(final int val) async {
     final pref = await _preferences;
     if (val < 1 || Platform.numberOfProcessors < val) {
       final newN = await appDefaultValue;

@@ -38,12 +38,12 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   Future<void> spawnEdaxServer({
-    required String libedaxPath,
-    required List<String> initLibedaxParams,
-    required int level,
-    required bool hintStepByStep,
-    required bool bestPathNumAvailability,
-    required int bestPathNumLevel,
+    required final String libedaxPath,
+    required final List<String> initLibedaxParams,
+    required final int level,
+    required final bool hintStepByStep,
+    required final bool bestPathNumAvailability,
+    required final int bestPathNumLevel,
   }) async {
     await Isolate.spawn(
       startEdaxServer,
@@ -54,7 +54,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _logger.d('spawned edax server');
 
     // ignore: avoid_annotating_with_dynamic
-    _receiveStream.listen((dynamic message) {
+    _receiveStream.listen((final dynamic message) {
       _updateStateByEdaxServerResponse(message);
       notifyListeners();
     });
@@ -72,13 +72,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
-  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
-  void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
+  void requestMove(final String move) => _edaxServerPort.send(MoveRequest(move));
+  void requestPlay(final String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
   void requestUndoAll() => _edaxServerPort.send(const UndoRequest(times: 60));
   void requestRedo() => _edaxServerPort.send(const RedoRequest(times: 1));
   void requestRedoAll() => _edaxServerPort.send(const RedoRequest(times: 60));
-  void requestSetOption(String name, String optionValue) {
+  void requestSetOption(final String name, final String optionValue) {
     _edaxServerPort.send(SetOptionRequest(name, optionValue));
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
@@ -97,49 +97,49 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   // ignore: use_setters_to_change_properties
-  void switchHintStepByStep({required bool enabled}) => value.hintStepByStep = enabled;
+  void switchHintStepByStep({required final bool enabled}) => value.hintStepByStep = enabled;
 
-  void switchBestPathNumAvailability({required bool enabled}) {
+  void switchBestPathNumAvailability({required final bool enabled}) {
     value.bestPathNumAvailability = enabled;
     if (!enabled) value.bestPathNumList = UnmodifiableListView([]);
   }
 
-  void requestBookLoad(String path) {
+  void requestBookLoad(final String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();
     _edaxServerPort.send(BookLoadRequest(path));
   }
 
-  HintOneByOneRequest _buildHintRequest(String movesAtRequest) => HintOneByOneRequest(
+  HintOneByOneRequest _buildHintRequest(final String movesAtRequest) => HintOneByOneRequest(
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
         logger: _logger,
       );
 
-  void _requestLatestHintList(String movesAtRequest) {
+  void _requestLatestHintList(final String movesAtRequest) {
     value.hints = UnmodifiableListView([]);
     if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
-  StreamOfBestPathNumWithLinkRequest _buildStreamOfBestPathNumWithLinkRequest(String movesAtRequest) =>
+  StreamOfBestPathNumWithLinkRequest _buildStreamOfBestPathNumWithLinkRequest(final String movesAtRequest) =>
       StreamOfBestPathNumWithLinkRequest(level: value.bestPathNumLevel, movesAtRequest: movesAtRequest);
 
-  void _requestBestPathNumList(String movesAtRequest) {
+  void _requestBestPathNumList(final String movesAtRequest) {
     value.bestPathNumList = UnmodifiableListView([]);
     if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
       _edaxServerPort.send(_buildStreamOfBestPathNumWithLinkRequest(movesAtRequest));
     }
   }
 
-  void _onMovesChanged(String moves) {
+  void _onMovesChanged(final String moves) {
     _requestLatestHintList(moves);
     if (value.bestPathNumAvailability) _requestBestPathNumList(moves);
   }
 
   // ignore: avoid_annotating_with_dynamic
-  Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
+  Future<void> _updateStateByEdaxServerResponse(final dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
@@ -203,10 +203,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         value
           ..hints = UnmodifiableListView(
             [...value.hints]
-              ..removeWhere((hint) => hint.move == message.hint.move)
+              ..removeWhere((final hint) => hint.move == message.hint.move)
               ..add(message.hint),
           )
-          ..bestScore = value.hints.map<int>((h) => h.score).reduce(max);
+          ..bestScore = value.hints.map<int>((final h) => h.score).reduce(max);
       }
     } else if (message is StreamOfBestPathNumWithLinkResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {

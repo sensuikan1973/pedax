@@ -9,7 +9,7 @@ import 'package:pedax/engine/edax_asset.dart';
 Future<void> prepareLibedaxAssets() async {
   // See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files#testing
   final dir = await Directory.systemTemp.createTemp();
-  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((methodCall) async {
+  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((final methodCall) async {
     if (methodCall.method == 'getApplicationDocumentsDirectory') return dir.path;
     return null;
   });

@@ -3,9 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
+import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
 import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/models/board_notifier.dart';
-import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
+
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
@@ -23,7 +24,7 @@ void main() {
   setUp(() => Logger.level = Level.nothing);
 
   group('debugDumpApp for test coverage', () {
-    testWidgets('PedaxApp', (tester) async {
+    testWidgets('PedaxApp', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -32,7 +33,7 @@ void main() {
       });
     });
 
-    testWidgets('ShortcutCheatsheetDialog', (tester) async {
+    testWidgets('ShortcutCheatsheetDialog', (final tester) async {
       final boardNotifier = BoardNotifier();
       await tester.runAsync(() async {
         await tester.pumpWidget(

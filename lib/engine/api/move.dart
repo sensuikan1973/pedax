@@ -14,11 +14,11 @@ class MoveRequest implements RequestSchema {
 @immutable
 class MoveResponse implements ResponseSchema<MoveRequest> {
   const MoveResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -29,7 +29,7 @@ class MoveResponse implements ResponseSchema<MoveRequest> {
   final Move? lastMove;
 }
 
-MoveResponse executeMove(LibEdax edax, MoveRequest request) {
+MoveResponse executeMove(final LibEdax edax, final MoveRequest request) {
   edax
     ..edaxStop()
     ..edaxMove(request.move);

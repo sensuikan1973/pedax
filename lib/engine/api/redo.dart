@@ -6,7 +6,7 @@ import 'response_schema.dart';
 
 @immutable
 class RedoRequest implements RequestSchema {
-  const RedoRequest({required this.times});
+  const RedoRequest({required final this.times});
 
   final int times;
 }
@@ -14,11 +14,11 @@ class RedoRequest implements RequestSchema {
 @immutable
 class RedoResponse implements ResponseSchema<RedoRequest> {
   const RedoResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -29,7 +29,7 @@ class RedoResponse implements ResponseSchema<RedoRequest> {
   final Move? lastMove;
 }
 
-RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
+RedoResponse executeRedo(final LibEdax edax, final RedoRequest request) {
   edax.edaxStop();
   for (var i = 0; i < request.times; i++) {
     edax.edaxRedo();

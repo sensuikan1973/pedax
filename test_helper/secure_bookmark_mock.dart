@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 @isTest
 void mockSecureBookmark() {
   if (!Platform.isMacOS) return;
-  const MethodChannel('codeux.design/macos_secure_bookmarks').setMockMethodCallHandler((methodCall) async {
+  const MethodChannel('codeux.design/macos_secure_bookmarks').setMockMethodCallHandler((final methodCall) async {
     if (methodCall.method == 'startAccessingSecurityScopedResource') return false;
     if (methodCall.method == 'stopAccessingSecurityScopedResource') return false;
     return null;

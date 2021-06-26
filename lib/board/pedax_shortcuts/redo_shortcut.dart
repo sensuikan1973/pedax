@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 import '../../models/board_notifier.dart';
@@ -14,13 +14,14 @@ class RedoShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(AppLocalizations localizations) => localizations.shortcutLabelRedo;
+  String label(final AppLocalizations localizations) => localizations.shortcutLabelRedo;
 
   @override
   String get keys => '${logicalKeyR.keyLabel.toUpperCase()} or →';
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKeyR) || keyEvent.isKeyPressed(logicalKeyArrowRight);
+  bool fired(final RawKeyEvent keyEvent) =>
+      keyEvent.isKeyPressed(logicalKeyR) || keyEvent.isKeyPressed(logicalKeyArrowRight);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestRedo();

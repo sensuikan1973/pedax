@@ -23,7 +23,7 @@ class HintStepByStepOption implements EdaxOption<bool> {
   }
 
   @override
-  Future<bool> update(bool val) async {
+  Future<bool> update(final bool val) async {
     final pref = await _preferences;
     await pref.setBool(prefKey, val);
     return val;

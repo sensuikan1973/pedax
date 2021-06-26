@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 
 @isTest
-Finder findByAssetKey(String key) => find.byWidgetPredicate((widget) {
+Finder findByAssetKey(final String key) => find.byWidgetPredicate((final widget) {
       if (widget is! Image) return false;
       if (widget.image is AssetImage) return (widget.image as AssetImage).keyName == key;
       if (widget.image is ResizeImage) {

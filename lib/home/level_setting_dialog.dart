@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
 import '../engine/options/level_option.dart';
@@ -9,17 +9,17 @@ import '../models/board_notifier.dart';
 
 @immutable
 class LevelSettingDialog extends StatelessWidget {
-  LevelSettingDialog({Key? key}) : super(key: key);
+  LevelSettingDialog({final Key? key}) : super(key: key);
 
   final _option = const LevelOption();
   final _textController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
+  Widget build(final BuildContext context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.levelSetting, textAlign: TextAlign.center),
         content: FutureBuilder<int>(
           future: _option.val,
-          builder: (_, snapshot) {
+          builder: (final _, final snapshot) {
             if (snapshot.hasData) _textController.text = snapshot.data!.toString();
             return TextFormField(
               controller: _textController,
