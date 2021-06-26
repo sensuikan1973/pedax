@@ -8,10 +8,10 @@ import 'response_schema.dart';
 @immutable
 class HintOneByOneRequest implements RequestSchema {
   const HintOneByOneRequest({
-    required this.level,
-    required this.stepByStep,
-    required this.movesAtRequest,
-    required this.logger,
+    required final this.level,
+    required final this.stepByStep,
+    required final this.movesAtRequest,
+    required final this.logger,
   });
 
   final int level;
@@ -23,9 +23,9 @@ class HintOneByOneRequest implements RequestSchema {
 @immutable
 class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
-    required this.hint,
-    required this.level,
-    required this.request,
+    required final this.hint,
+    required final this.level,
+    required final this.request,
   });
 
   @override
@@ -35,9 +35,13 @@ class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
 }
 
 @visibleForTesting
-List<int> generateLevelList3Steps(int maxLevel) => [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
+List<int> generateLevelList3Steps(final int maxLevel) =>
+    [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
 
-Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneRequest request) async* {
+Stream<HintOneByOneResponse> executeHintOneByOne(
+  final LibEdax edax,
+  final HintOneByOneRequest request,
+) async* {
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   for (final level in levelList) {
     edax.edaxStop();
@@ -51,7 +55,8 @@ Stream<HintOneByOneResponse> executeHintOneByOne(LibEdax edax, HintOneByOneReque
       final currentMoves = edax.edaxGetMoves();
       if (currentMoves != request.movesAtRequest) {
         request.logger.d(
-            'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"');
+          'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"',
+        );
         return;
       }
 

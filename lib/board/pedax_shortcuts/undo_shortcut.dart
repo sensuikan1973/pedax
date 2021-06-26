@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 import '../../models/board_notifier.dart';
@@ -14,13 +14,14 @@ class UndoShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(AppLocalizations localizations) => localizations.shortcutLabelUndo;
+  String label(final AppLocalizations localizations) => localizations.shortcutLabelUndo;
 
   @override
   String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ←';
 
   @override
-  bool fired(RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKeyU) || keyEvent.isKeyPressed(logicalKeyArrowLeft);
+  bool fired(final RawKeyEvent keyEvent) =>
+      keyEvent.isKeyPressed(logicalKeyU) || keyEvent.isKeyPressed(logicalKeyArrowLeft);
 
   @override
   Future<void> runEvent() async => boardNotifier.requestUndo();

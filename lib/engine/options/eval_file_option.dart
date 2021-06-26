@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:meta/meta.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +33,7 @@ class EvalFileOption implements EdaxOption<String> {
   }
 
   @override
-  Future<String> update(String val) async {
+  Future<String> update(final String val) async {
     final pref = await _preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;

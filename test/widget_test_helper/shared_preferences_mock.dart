@@ -11,9 +11,9 @@ const _bestPathNumLevelOption = BestPathNumLevelOption();
 @isTest
 // See: https://pub.dev/packages/shared_preferences#testing
 Future<void> mockSharedPreferences({
-  String? evalFilePath,
-  String? bookFilePath,
-  int? bestPathNumLevel,
+  final String? evalFilePath,
+  final String? bookFilePath,
+  final int? bestPathNumLevel,
 }) async {
   final pref = {
     _evalFileOption.prefKey: evalFilePath ?? await _evalFileOption.appDefaultValue,

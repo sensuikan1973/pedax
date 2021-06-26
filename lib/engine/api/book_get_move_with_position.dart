@@ -12,9 +12,9 @@ class GetBookMoveWithPositionRequest implements RequestSchema {
 @immutable
 class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithPositionRequest> {
   const GetBookMoveWithPositionResponse({
-    required this.position,
-    required this.moveList,
-    required this.request,
+    required final this.position,
+    required final this.moveList,
+    required final this.request,
   });
 
   @override
@@ -23,7 +23,10 @@ class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithP
   final List<Move> moveList;
 }
 
-GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(LibEdax edax, GetBookMoveWithPositionRequest request) {
+GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(
+  final LibEdax edax,
+  final GetBookMoveWithPositionRequest request,
+) {
   final result = edax.edaxGetBookMoveWithPosition();
   return GetBookMoveWithPositionResponse(
     position: result.position,

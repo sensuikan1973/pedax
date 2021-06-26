@@ -11,15 +11,13 @@ class StopRequest implements RequestSchema {
 
 @immutable
 class StopResponse implements ResponseSchema<StopRequest> {
-  const StopResponse({
-    required this.request,
-  });
+  const StopResponse({required final this.request});
 
   @override
   final StopRequest request;
 }
 
-StopResponse executeStop(LibEdax edax, StopRequest request) {
+StopResponse executeStop(final LibEdax edax, final StopRequest request) {
   edax.edaxStop();
   return StopResponse(request: request);
 }

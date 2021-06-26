@@ -1,7 +1,7 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
 import 'package:flutter/rendering.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -26,12 +26,12 @@ Future<void> main() async {
     setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
   });
 
-  testWidgets('home', (tester) async {
+  testWidgets('home', (final tester) async {
     await tester.runAsync(() async {
       await app.main();
       await tester.pumpAndSettle();
 
-      final context = tester.element(find.byWidgetPredicate((widget) => widget is Home));
+      final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
       final localizations = AppLocalizations.of(context)!;
 
       expect(find.text(localizations.analysisMode), findsOneWidget);

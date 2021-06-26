@@ -14,15 +14,13 @@ class SetOptionRequest<T extends Object> implements RequestSchema {
 
 @immutable
 class SetOptionResponse implements ResponseSchema<SetOptionRequest> {
-  const SetOptionResponse({
-    required this.request,
-  });
+  const SetOptionResponse({required final this.request});
 
   @override
   final SetOptionRequest request;
 }
 
-SetOptionResponse executeSetOption<T extends Object>(LibEdax edax, SetOptionRequest<T> request) {
+SetOptionResponse executeSetOption<T extends Object>(final LibEdax edax, final SetOptionRequest<T> request) {
   edax
     ..edaxStop()
     ..edaxSetOption(request.optionName, request.val.toString());

@@ -16,7 +16,7 @@ void main() {
     mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
-  testWidgets('launch app', (tester) async {
+  testWidgets('launch app', (final tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);

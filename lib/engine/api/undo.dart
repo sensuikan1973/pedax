@@ -6,7 +6,7 @@ import 'response_schema.dart';
 
 @immutable
 class UndoRequest implements RequestSchema {
-  const UndoRequest({required this.times});
+  const UndoRequest({required final this.times});
 
   final int times;
 }
@@ -14,11 +14,11 @@ class UndoRequest implements RequestSchema {
 @immutable
 class UndoResponse implements ResponseSchema<UndoRequest> {
   const UndoResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -29,7 +29,7 @@ class UndoResponse implements ResponseSchema<UndoRequest> {
   final Move? lastMove;
 }
 
-UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
+UndoResponse executeUndo(final LibEdax edax, final UndoRequest request) {
   edax.edaxStop();
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();
   for (var i = 0; i < request.times; i++) {

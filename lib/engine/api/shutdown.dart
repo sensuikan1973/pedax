@@ -11,15 +11,13 @@ class ShutdownRequest implements RequestSchema {
 
 @immutable
 class ShutdownResponse implements ResponseSchema<ShutdownRequest> {
-  const ShutdownResponse({
-    required this.request,
-  });
+  const ShutdownResponse({required final this.request});
 
   @override
   final ShutdownRequest request;
 }
 
-ShutdownResponse executeShutdown(LibEdax edax, ShutdownRequest request) {
+ShutdownResponse executeShutdown(final LibEdax edax, final ShutdownRequest request) {
   edax
     ..edaxStop()
     ..libedaxTerminate()

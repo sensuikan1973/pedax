@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
@@ -7,10 +8,10 @@ import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
-import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/best_path_num_availability_setting_dialog.dart';
 import 'package:pedax/home/book_file_path_setting_dialog.dart';
@@ -18,7 +19,6 @@ import 'package:pedax/home/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/level_setting_dialog.dart';
 import 'package:pedax/home/n_tasks_setting_dialog.dart';
 import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
@@ -40,7 +40,7 @@ Future<void> main() async {
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   group('play a game', () {
-    testWidgets('a game without pass', (tester) async {
+    testWidgets('a game without pass', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -128,7 +128,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('a game with pass', (tester) async {
+    testWidgets('a game with pass', (final tester) async {
       // REF: https://www.hasera.net/othello/mame006.html
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
@@ -185,9 +185,9 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('paste moves', (tester) async {
+  testWidgets('paste moves', (final tester) async {
     const moves = 'f5f6';
-    SystemChannels.platform.setMockMethodCallHandler((methodCall) async {
+    SystemChannels.platform.setMockMethodCallHandler((final methodCall) async {
       if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
       return null;
     });
@@ -208,7 +208,7 @@ Future<void> main() async {
   });
 
   group('menu events', () {
-    testWidgets('show AboutDialog', (tester) async {
+    testWidgets('show AboutDialog', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -222,7 +222,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('show shortcut cheatsheet', (tester) async {
+    testWidgets('show shortcut cheatsheet', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -236,7 +236,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('read book file path', (tester) async {
+    testWidgets('read book file path', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -253,7 +253,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update book file path as it is', (tester) async {
+    testWidgets('update book file path as it is', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -271,7 +271,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('read n-tasks', (tester) async {
+    testWidgets('read n-tasks', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -288,7 +288,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update n-tasks with valid num', (tester) async {
+    testWidgets('update n-tasks with valid num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -307,7 +307,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update n-tasks with invalid num', (tester) async {
+    testWidgets('update n-tasks with invalid num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -326,7 +326,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('read level', (tester) async {
+    testWidgets('read level', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -343,7 +343,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update level with valid num', (tester) async {
+    testWidgets('update level with valid num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -362,7 +362,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update level with invalid num', (tester) async {
+    testWidgets('update level with invalid num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -381,7 +381,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('off hint step-by-step', (tester) async {
+    testWidgets('off hint step-by-step', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -400,7 +400,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('on best path num availability', (tester) async {
+    testWidgets('on best path num availability', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);

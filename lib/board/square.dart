@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 @immutable
 class Square extends StatelessWidget {
   const Square({
-    required this.type,
-    required this.length,
-    required this.margin,
-    required this.coordinate,
-    this.onTap,
-    this.score,
-    this.bestPathNumOfBlack,
-    this.bestPathNumOfWhite,
-    this.scoreColor,
-    this.isLastMove = false,
-    this.isBookMove = false,
-    Key? key,
+    required final this.type,
+    required final this.length,
+    required final this.margin,
+    required final this.coordinate,
+    final this.onTap,
+    final this.score,
+    final this.bestPathNumOfBlack,
+    final this.bestPathNumOfWhite,
+    final this.scoreColor,
+    final this.isLastMove = false,
+    final this.isBookMove = false,
+    final Key? key,
   }) : super(key: key);
 
   final SquareType type;
@@ -34,7 +34,7 @@ class Square extends StatelessWidget {
   double get _notebookEmojiFontSize => length * 0.25;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
+  Widget build(final BuildContext context) => GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Container(
@@ -44,7 +44,7 @@ class Square extends StatelessWidget {
       );
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DoubleProperty('margin', margin))
@@ -130,7 +130,7 @@ class Square extends StatelessWidget {
         color: Colors.red,
       );
 
-  String _scoreString(int score) => score >= 0 ? '+$score' : score.toString();
+  String _scoreString(final int score) => score >= 0 ? '+$score' : score.toString();
 }
 
 enum SquareType { black, white, empty }

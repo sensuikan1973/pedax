@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ import 'shortcut_cheatsheet_dialog.dart';
 
 @immutable
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({final Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
     _setUpEdaxServer(context.read<BoardNotifier>());
   }
 
-  Future<void> _setUpEdaxServer(BoardNotifier boardNotifier) async {
+  Future<void> _setUpEdaxServer(final BoardNotifier boardNotifier) async {
     await _edaxAsset.setupDllAndData();
     await boardNotifier.spawnEdaxServer(
       libedaxPath: await _edaxAsset.libedaxPath,
@@ -63,10 +63,11 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
+  Widget build(final BuildContext context) {
+    final edaxServerSpawned = context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxServerSpawned);
     if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
-    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>((notifier) => notifier.value.bookLoadStatus);
+    final bookLoadStatus =
+        context.select<BoardNotifier, BookLoadStatus?>((final notifier) => notifier.value.bookLoadStatus);
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
@@ -77,7 +78,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
       ),
-      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
+      body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -143,7 +144,7 @@ class _HomeState extends State<Home> {
             decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
           ),
           Text(
-            context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
+            context.select<BoardNotifier, int>((final notifier) => notifier.value.blackDiscCount).toString(),
             style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
           )
         ],
@@ -158,7 +159,7 @@ class _HomeState extends State<Home> {
             decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
           ),
           Text(
-            context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
+            context.select<BoardNotifier, int>((final notifier) => notifier.value.whiteDiscCount).toString(),
             style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
           )
         ],
@@ -166,7 +167,7 @@ class _HomeState extends State<Home> {
 
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().finishedNotifyingBookHasLoadedToUser();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance?.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
       if (!mounted) return;
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -180,7 +181,7 @@ class _HomeState extends State<Home> {
 
   void _showSnackBarOfBookLoading() {
     context.read<BoardNotifier>().finishedNotifyingBookHasLoadedToUser();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((final _) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -193,7 +194,7 @@ class _HomeState extends State<Home> {
   }
 
   Text get _positionInfoText {
-    final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
+    final positionFullNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.positionFullNum);
     final data = positionFullNum == 0
         ? AppLocalizations.of(context)!.noPositionInfo
         : AppLocalizations.of(context)!.positionInfo(positionFullNum);
@@ -204,7 +205,8 @@ class _HomeState extends State<Home> {
   }
 
   Text get _movesCountText {
-    final movesCount = context.select<BoardNotifier, int>((notifier) => notifier.value.currentMovesCountWithoutPass);
+    final movesCount =
+        context.select<BoardNotifier, int>((final notifier) => notifier.value.currentMovesCountWithoutPass);
     return Text(
       AppLocalizations.of(context)!.movesCount(movesCount),
       textAlign: TextAlign.end,
@@ -214,12 +216,14 @@ class _HomeState extends State<Home> {
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
         icon: const Icon(Icons.menu),
-        onSelected: (menu) => menu.onSelected(),
-        itemBuilder: (context) => _sortedMenuList
-            .map<PopupMenuItem<_Menu>>((menu) => PopupMenuItem<_Menu>(
-                  value: menu,
-                  child: Text(menu.label),
-                ))
+        onSelected: (final menu) => menu.onSelected(),
+        itemBuilder: (final context) => _sortedMenuList
+            .map<PopupMenuItem<_Menu>>(
+              (final menu) => PopupMenuItem<_Menu>(
+                value: menu,
+                child: Text(menu.label),
+              ),
+            )
             .toList(),
       );
 
@@ -229,7 +233,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.bookFilePathSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ChangeNotifierProvider.value(
+            builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
               child: BookFilePathSettingDialog(),
             ),
@@ -240,7 +244,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.levelSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ChangeNotifierProvider.value(
+            builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
               child: LevelSettingDialog(),
             ),
@@ -251,7 +255,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.hintStepByStepSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ChangeNotifierProvider.value(
+            builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
               child: HintStepByStepSettingDialog(),
             ),
@@ -262,7 +266,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.shortcutCheatsheet,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
           ),
         ),
         _Menu(
@@ -270,7 +274,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.nTasksSetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ChangeNotifierProvider.value(
+            builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
               child: NTasksSettingDialog(),
             ),
@@ -281,7 +285,7 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.bestPathNumAvailabilitySetting,
           () => showDialog<void>(
             context: context,
-            builder: (_) => ChangeNotifierProvider.value(
+            builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
               child: BestPathNumAvailabilitySettingDialog(),
             ),

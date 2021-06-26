@@ -2,7 +2,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
 import '../engine/options/book_file_option.dart';
@@ -10,17 +10,17 @@ import '../models/board_notifier.dart';
 
 @immutable
 class BookFilePathSettingDialog extends StatelessWidget {
-  BookFilePathSettingDialog({Key? key}) : super(key: key);
+  BookFilePathSettingDialog({final Key? key}) : super(key: key);
 
   final _option = const BookFileOption();
   final _selectedFilePath = ValueNotifier<String?>(null);
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
+  Widget build(final BuildContext context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.bookFilePathSetting, textAlign: TextAlign.center),
         content: FutureBuilder<String>(
           future: _option.val,
-          builder: (_, snapshot) {
+          builder: (final _, final snapshot) {
             if (snapshot.hasData) _selectedFilePath.value = snapshot.data;
             return Row(
               children: [
@@ -35,7 +35,7 @@ class BookFilePathSettingDialog extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 ValueListenableBuilder<String?>(
                   valueListenable: _selectedFilePath,
-                  builder: (_, value, __) {
+                  builder: (final _, final value, final __) {
                     if (value == null) return const Text(' ');
                     return Expanded(child: SelectableText(value));
                   },

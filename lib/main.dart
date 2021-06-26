@@ -25,9 +25,11 @@ Future<void> _ensureMinWindowSize() async {
     return;
   }
 
-  setWindowFrame(Rect.fromCenter(
-    center: windowInfo.frame.center,
-    width: pedaxWindowMinSize.width,
-    height: pedaxWindowMinSize.height,
-  ));
+  setWindowFrame(
+    Rect.fromCenter(
+      center: windowInfo.frame.center,
+      width: pedaxWindowMinSize.width,
+      height: pedaxWindowMinSize.height,
+    ),
+  );
 }

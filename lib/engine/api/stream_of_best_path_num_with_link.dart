@@ -7,8 +7,8 @@ import 'response_schema.dart';
 @immutable
 class StreamOfBestPathNumWithLinkRequest implements RequestSchema {
   const StreamOfBestPathNumWithLinkRequest({
-    required this.movesAtRequest,
-    this.level = 10, // TODO: consider default value
+    required final this.movesAtRequest,
+    final this.level = 10, // TODO: consider default value
   });
 
   final String movesAtRequest;
@@ -18,8 +18,8 @@ class StreamOfBestPathNumWithLinkRequest implements RequestSchema {
 @immutable
 class StreamOfBestPathNumWithLinkResponse implements ResponseSchema<StreamOfBestPathNumWithLinkRequest> {
   const StreamOfBestPathNumWithLinkResponse({
-    required this.bestPathNumWithLink,
-    required this.request,
+    required final this.bestPathNumWithLink,
+    required final this.request,
   });
 
   @override
@@ -28,9 +28,10 @@ class StreamOfBestPathNumWithLinkResponse implements ResponseSchema<StreamOfBest
 }
 
 Stream<StreamOfBestPathNumWithLinkResponse> executeStreamOfBestPathNumWithLink(
-  LibEdax edax,
-  StreamOfBestPathNumWithLinkRequest request,
+  final LibEdax edax,
+  final StreamOfBestPathNumWithLinkRequest request,
 ) {
   final stream = edax.streamOfBestPathNumWithLink(level: request.level);
-  return stream.asyncMap((event) => StreamOfBestPathNumWithLinkResponse(bestPathNumWithLink: event, request: request));
+  return stream
+      .asyncMap((final event) => StreamOfBestPathNumWithLinkResponse(bestPathNumWithLink: event, request: request));
 }

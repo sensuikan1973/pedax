@@ -2,9 +2,9 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import 'api/book_get_move_with_position.dart';
 import 'api/book_load.dart';
@@ -22,7 +22,7 @@ import 'api/undo.dart';
 
 // NOTE: top level function for `isolate.spawn`.
 @doNotStore
-Future<void> startEdaxServer(StartEdaxServerParams params) async {
+Future<void> startEdaxServer(final StartEdaxServerParams params) async {
   final server = EdaxServer(dllPath: params.dllPath, logger: params.logger);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
@@ -39,7 +39,7 @@ class StartEdaxServerParams {
 // TODO: consider to separate as a package
 @doNotStore
 class EdaxServer {
-  EdaxServer({required this.dllPath, required this.logger});
+  EdaxServer({required final this.dllPath, required final this.logger});
 
   final String dllPath;
   final Logger logger;
@@ -54,7 +54,7 @@ class EdaxServer {
   late StreamOfBestPathNumWithLinkRequest _latestStreamOfBestPathNumWithLinkRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
-  Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
+  Future<void> start(final SendPort parentSendPort, final List<String> initLibedaxParameters) async {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
@@ -68,8 +68,9 @@ class EdaxServer {
     _registerApiHandler(parentSendPort, edax);
   }
 
-  // ignore: avoid_annotating_with_dynamic
-  void _registerApiHandler(SendPort parentSendPort, LibEdax edax) => _receivePort.listen((dynamic message) async {
+  void _registerApiHandler(final SendPort parentSendPort, final LibEdax edax) =>
+      // ignore: avoid_annotating_with_dynamic
+      _receivePort.listen((final dynamic message) async {
         logger.d('received request "${message.runtimeType}"');
         if (message is MoveRequest) {
           parentSendPort.send(executeMove(edax, message));
@@ -84,10 +85,12 @@ class EdaxServer {
               continue;
             }
             if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
-              logger.d('''
+              logger.d(
+                '''
               The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
-              ''');
+              ''',
+              );
               break;
             }
             _computingHintOneByOne = true;
@@ -117,17 +120,22 @@ class EdaxServer {
               continue;
             }
             if (_latestStreamOfBestPathNumWithLinkRequest.movesAtRequest != message.movesAtRequest) {
-              logger.d('''
+              logger.d(
+                '''
               The StreamOfBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new StreamOfBestPathNumWithLinkRequest (moves: ${_latestStreamOfBestPathNumWithLinkRequest.movesAtRequest}) has been received after that.
-              ''');
+              ''',
+              );
               break;
             }
             _computingStreamOfBestPathNumWithLink = true;
             await compute(
               _computeStreamOfBestPathNumWithLink,
               _ComputeStreamOfBestPathNumWithLinkParams(
-                  dllPath, _latestStreamOfBestPathNumWithLinkRequest, parentSendPort),
+                dllPath,
+                _latestStreamOfBestPathNumWithLinkRequest,
+                parentSendPort,
+              ),
             );
             _computingStreamOfBestPathNumWithLink = false;
             break;
@@ -162,7 +170,7 @@ class _ComputeHintNextParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-Future<void> _computeHintNext(_ComputeHintNextParams params) async {
+Future<void> _computeHintNext(final _ComputeHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
 }
@@ -177,7 +185,7 @@ class _ComputeBookLoadParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-void _computeBookLoad(_ComputeBookLoadParams params) {
+void _computeBookLoad(final _ComputeBookLoadParams params) {
   final edax = LibEdax(params.dllPath);
   final result = executeBookLoad(edax, params.request);
   params.listener.send(result);
@@ -193,7 +201,7 @@ class _ComputeStreamOfBestPathNumWithLinkParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-Future<void> _computeStreamOfBestPathNumWithLink(_ComputeStreamOfBestPathNumWithLinkParams params) async {
+Future<void> _computeStreamOfBestPathNumWithLink(final _ComputeStreamOfBestPathNumWithLinkParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeStreamOfBestPathNumWithLink(edax, params.request).listen(params.listener.send).asFuture<void>();
 }

@@ -12,11 +12,11 @@ class InitRequest implements RequestSchema {
 @immutable
 class InitResponse implements ResponseSchema<InitRequest> {
   const InitResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -27,7 +27,7 @@ class InitResponse implements ResponseSchema<InitRequest> {
   final Move? lastMove;
 }
 
-InitResponse executeInit(LibEdax edax, InitRequest request) {
+InitResponse executeInit(final LibEdax edax, final InitRequest request) {
   edax
     ..edaxStop()
     ..edaxInit();

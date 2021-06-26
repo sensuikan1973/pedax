@@ -6,7 +6,7 @@ import 'response_schema.dart';
 
 @immutable
 class RotateRequest implements RequestSchema {
-  const RotateRequest({required this.angle});
+  const RotateRequest({required final this.angle});
 
   final int angle;
 }
@@ -14,11 +14,11 @@ class RotateRequest implements RequestSchema {
 @immutable
 class RotateResponse implements ResponseSchema<RotateRequest> {
   const RotateResponse({
-    required this.board,
-    required this.currentColor,
-    required this.moves,
-    required this.lastMove,
-    required this.request,
+    required final this.board,
+    required final this.currentColor,
+    required final this.moves,
+    required final this.lastMove,
+    required final this.request,
   });
 
   @override
@@ -29,7 +29,7 @@ class RotateResponse implements ResponseSchema<RotateRequest> {
   final Move? lastMove;
 }
 
-RotateResponse executeRotate(LibEdax edax, RotateRequest request) {
+RotateResponse executeRotate(final LibEdax edax, final RotateRequest request) {
   edax.edaxRotate(request.angle);
   final moves = edax.edaxGetMoves();
   return RotateResponse(
