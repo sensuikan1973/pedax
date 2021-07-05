@@ -52,7 +52,7 @@ dependencies:
   path_provider: ^2.0.2 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0
   shared_preferences: ^2.0.5
-  url_launcher: ^6.0.8
+  url_launcher: ^6.0.9
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
