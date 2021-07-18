@@ -52,8 +52,8 @@ jobs:
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
 
-      - name: debug
-        uses: mxschmitt/action-tmate@v3
+      # - name: debug
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: create app release
         if: runner.os == 'Windows'
