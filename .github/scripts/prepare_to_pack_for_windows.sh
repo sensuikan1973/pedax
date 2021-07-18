@@ -1,7 +1,10 @@
 #!/bin/bash
 set -eu
 
+# workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
+rm -rf $PUB_CACHE
 flutter pub get
+
 flutter pub run msix:create
 
 # For developers which want to run `.exe` directory, repack ***.dll.
