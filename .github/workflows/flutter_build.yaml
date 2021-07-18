@@ -55,6 +55,10 @@ jobs:
       - name: debug
         uses: mxschmitt/action-tmate@v3
 
+      - name: create app release
+        if: runner.os == 'Windows'
+        run: flutter pub run msix:create
+
       - name: prepare to pack
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}

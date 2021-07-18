@@ -1,16 +1,16 @@
 #!/bin/bash
 set -eu
 
-# >> workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
-flutter clean
-echo $PUB_CACHE/git
-ls $PUB_CACHE/git
-rm -rf $PUB_CACHE/git
-flutter pub get
-flutter build windows --release
-# << workaround
+# # >> workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
+# flutter clean
+# echo $PUB_CACHE/git
+# ls $PUB_CACHE/git
+# rm -rf $PUB_CACHE/git
+# flutter pub get
+# flutter build windows --release
+# # << workaround
 
-flutter pub run msix:create
+# flutter pub run msix:create
 
 # For developers which want to run `.exe` directory, repack ***.dll.
 # See: https://flutter.dev/desktop#building-your-own-zip-file-for-windows
