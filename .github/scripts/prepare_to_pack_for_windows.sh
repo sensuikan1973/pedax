@@ -5,8 +5,7 @@ set -eu
 flutter clean
 ls $PUB_CACHE
 rm -rf $PUB_CACHE
-flutter clean
-flutter pub get
+flutter build windpws --release
 # << workaround
 
 flutter pub run msix:create
