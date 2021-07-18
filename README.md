@@ -80,14 +80,13 @@ dart fix --apply # auto fix
 ##### deloy apple store
 
 ```sh
-TAG=XXX
-APPLE_ID=XXX
-ITC_TEAM_ID=XXX
-P8_PATH=XXX
-ASC_KEY_ID=XXX
-ASC_ISSUER_ID=XXX
+TAG=xxx
+P8_PATH=xxx
 
-ASC_KEY_ID=$ASC_KEY_ID ASC_ISSUER_ID=$ASC_ISSUER_ID APPLE_ID=$APPLE_ID ITC_TEAM_ID=$ITC_TEAM_ID \
+ASC_KEY_ID=xxx \
+ASC_ISSUER_ID=xxx \
+APPLE_ID=xxx \
+ITC_TEAM_ID=xxx \
 ./scripts/deploy_macos_app_to_app_store.sh $TAG $P8_PATH
 ```
 
