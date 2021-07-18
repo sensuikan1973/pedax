@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eu
 
-# FIXME: https://github.com/google/flutter-desktop-embedding/issues/864
-# FIXME: https://github.com/dart-lang/build/issues/3137
+# Workaround for https://github.com/dart-lang/pub/issues/3012
+git checkout pubspec.lock
 
 flutter pub run msix:create
 
