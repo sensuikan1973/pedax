@@ -13,7 +13,7 @@ set -eu
 ls $PUB_CACHE/git
 flutter pub pub cache repair
 flutter pub get
-ls $PUB_CACHE/git/flutter-desktop-embedding-e48abe7c3e9ebfe0b81622167c5201d4e783bb81/plugins
+ls $PUB_CACHE/git/flutter-desktop-embedding-e48abe7c3e9ebfe0b81622167c5201d4e783bb81/plugins/windows_size
 
 flutter pub run msix:create
 
