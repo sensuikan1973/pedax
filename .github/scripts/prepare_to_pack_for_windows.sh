@@ -1,6 +1,7 @@
 #!/bin/bash
 
 flutter pub run msix:create
+flutter pub get
 
 # For developers which want to run `.exe` directory, repack ***.dll.
 # See: https://flutter.dev/desktop#building-your-own-zip-file-for-windows
