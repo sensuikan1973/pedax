@@ -1,19 +1,8 @@
 #!/bin/bash
 set -eu
 
-# # >> workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
-# flutter clean
-# echo $PUB_CACHE/git
-# ls $PUB_CACHE/git
-# rm -rf $PUB_CACHE/git
-# flutter pub get
-# flutter build windows --release
-# # << workaround
-
-ls $PUB_CACHE/git
-flutter pub pub cache repair
-flutter pub get
-ls $PUB_CACHE/git/flutter-desktop-embedding-e48abe7c3e9ebfe0b81622167c5201d4e783bb81/plugins/window_size
+# FIXME: https://github.com/google/flutter-desktop-embedding/issues/864
+# FIXME: https://github.com/dart-lang/build/issues/3137
 
 flutter pub run msix:create
 
