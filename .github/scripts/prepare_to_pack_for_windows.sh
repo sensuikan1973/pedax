@@ -1,4 +1,8 @@
 #!/bin/bash
+set -eu
+
+# Workaround for https://github.com/dart-lang/pub/issues/3012
+git checkout pubspec.lock
 
 flutter pub run msix:create
 
@@ -7,7 +11,7 @@ flutter pub run msix:create
 # REF: https://github.com/sensuikan1973/pedax/pull/71#issuecomment-798849250
 # REF: https://github.com/sensuikan1973/pedax/pull/83#issuecomment-803240876
 system32_path="/c/Windows/System32"
-ls "$system32_path"
+# ls "$system32_path" # debug print
 
 dest_path="build/windows/runner/Release/"
 cp "$system32_path/vcruntime140.dll" $dest_path
