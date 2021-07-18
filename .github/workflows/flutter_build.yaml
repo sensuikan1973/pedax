@@ -49,11 +49,12 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
+
+      - name: debug
+        uses: mxschmitt/action-tmate@v3
+
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
-
-      # - name: debug
-      #   uses: mxschmitt/action-tmate@v3
 
       - name: prepare to pack
         shell: bash
