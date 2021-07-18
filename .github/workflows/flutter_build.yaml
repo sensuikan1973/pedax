@@ -50,6 +50,9 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
+      - name: build
+        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+
       - name: create app release
         if: runner.os == 'Windows'
         run: flutter pub run msix:create
@@ -57,9 +60,6 @@ jobs:
       - name: debug
         if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
-
-      - name: build
-        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
 
       - name: prepare to pack
         shell: bash
