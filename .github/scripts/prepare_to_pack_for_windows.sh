@@ -3,9 +3,10 @@ set -eu
 
 # >> workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
 flutter clean
-echo $PUB_CACHE
-ls $PUB_CACHE
-rm -rf $PUB_CACHE
+echo $PUB_CACHE/git
+ls $PUB_CACHE/git
+rm -rf $PUB_CACHE/git
+flutter pub get
 flutter build windows --release
 # << workaround
 
