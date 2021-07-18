@@ -5,7 +5,7 @@ set -eu
 flutter clean
 ls $PUB_CACHE
 rm -rf $PUB_CACHE
-ls $PUB_CACHE
+flutter clean
 flutter pub get
 # << workaround
 
