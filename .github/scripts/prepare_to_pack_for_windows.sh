@@ -10,6 +10,9 @@ set -eu
 # flutter build windows --release
 # # << workaround
 
+flutter pub pub cache repair
+flutter pub get
+
 flutter pub run msix:create
 
 # For developers which want to run `.exe` directory, repack ***.dll.
