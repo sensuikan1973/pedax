@@ -52,13 +52,13 @@ jobs:
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
 
-      - name: debug
-        # if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-
       - name: prepare to pack
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}
+
+      - name: debug
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
 
       # - name: set output path
       #   shell: bash
