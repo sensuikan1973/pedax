@@ -2,6 +2,7 @@
 set -eu
 
 # workaround for https://github.com/sensuikan1973/pedax/pull/155#issuecomment-882051791
+flutter clean
 rm -rf $PUB_CACHE
 flutter pub get
 
