@@ -53,7 +53,7 @@ jobs:
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
 
       - name: debug
-        if: ${{ failure() }}
+        # if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
 
       - name: prepare to pack
