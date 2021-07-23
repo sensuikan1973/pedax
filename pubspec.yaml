@@ -24,7 +24,7 @@ version: 1.0.0+15
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.14.0-0 <3.0.0"
-  flutter: ^2.3.0-0 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  flutter: ^2.4.0-0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.1
@@ -40,13 +40,13 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.0.1
   intl: any # Use the pinned version from flutter_localizations
-  libedax4dart: ^0.13.1-beta
+  libedax4dart: ^1.0.0
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   ref: xxx
   logger: ^1.0.0
   macos_secure_bookmarks: ^0.2.0
-  meta: ^1.4.0
+  meta: ^1.7.0
   path: ^1.8.0
   path_provider: ^2.0.2 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^5.0.0
