@@ -30,7 +30,9 @@ class PedaxBoard extends StatefulWidget {
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DoubleProperty('bodyLength', bodyLength))..add(DoubleProperty('frameWidth', frameWidth));
+    properties
+      ..add(DoubleProperty('bodyLength', bodyLength))
+      ..add(DoubleProperty('frameWidth', frameWidth));
   }
 }
 

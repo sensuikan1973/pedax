@@ -30,7 +30,9 @@ class EdaxAsset {
     const options = <EdaxOption>[NTasksOption(), EvalFileOption(), LevelOption()];
     final result = [''];
     for (final option in options) {
-      result..add(option.nativeName)..add((await option.val).toString());
+      result
+        ..add(option.nativeName)
+        ..add((await option.val).toString());
     }
     return result;
   }
