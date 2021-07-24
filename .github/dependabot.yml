@@ -22,3 +22,12 @@ updates:
       time: "10:00"
     labels: ["mac"]
     open-pull-requests-limit: 1
+
+  # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/keeping-your-actions-up-to-date-with-dependabot
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      timezone: "Asia/Tokyo"
+      time: "10:00"
+    labels: ["GitHub Actions"]
