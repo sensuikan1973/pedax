@@ -6,7 +6,7 @@ version: 2
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
 updates:
   - package-ecosystem: "npm"
-    directory: "website"
+    directory: "/website"
     schedule:
       interval: "monthly"
       timezone: "Asia/Tokyo"
@@ -15,7 +15,7 @@ updates:
     open-pull-requests-limit: 1
 
   - package-ecosystem: "bundler"
-    directory: "macos"
+    directory: "/macos"
     schedule:
       interval: "monthly"
       timezone: "Asia/Tokyo"
