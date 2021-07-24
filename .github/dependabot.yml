@@ -1,5 +1,6 @@
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/about-dependabot-version-updates
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-version-updates
+# REF: https://dependabot.com/docs/config-file/validator/
 version: 2
 
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
@@ -8,8 +9,16 @@ updates:
     directory: "website"
     schedule:
       interval: "monthly"
-      day: "saturday"
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["website"]
+    open-pull-requests-limit: 1
+
+  - package-ecosystem: "bundler"
+    directory: "macos"
+    schedule:
+      interval: "monthly"
+      timezone: "Asia/Tokyo"
+      time: "10:00"
+    labels: ["mac"]
     open-pull-requests-limit: 1
