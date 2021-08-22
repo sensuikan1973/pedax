@@ -24,7 +24,7 @@ jobs:
           - os: windows-2019
             device: windows
             setup_script: .github/scripts/setup_on_windows.sh
-          - os: macos-10.15
+          - os: macos-11
             device: macos
             setup_script: .github/scripts/setup_on_macos.sh
 
