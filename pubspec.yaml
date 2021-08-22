@@ -20,7 +20,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 #
 # NOTE: you can't specify duplicated build number.
 # See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
-version: 1.1.0+16
+version: 1.1.1+16
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.14.0-0 <3.0.0"
@@ -82,7 +82,7 @@ msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   display_name: pedax
   publisher_display_name: Naoki Shimizu
   identity_name: 1781NaokiShimizu.pedax
-  msix_version: 1.1.0.0
+  msix_version: 1.1.1.0
   publisher: CN=4CCE9711-39B6-4ECC-AA74-A350014A69B0
   languages: en, ja
   logo_path: assets/images/pedax_logo.png
