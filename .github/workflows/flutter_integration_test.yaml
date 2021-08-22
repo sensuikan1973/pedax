@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-2019, macos-10.15]
+        os: [windows-2019, macos-11]
         flutter_channel: [beta]
         include:
           # TODO: https://github.com/sensuikan1973/pedax/issues/7
