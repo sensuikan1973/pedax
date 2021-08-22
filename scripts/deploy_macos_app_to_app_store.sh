@@ -1,6 +1,6 @@
 # See: https://flutter.dev/desktop#macos
 
-set -e
+set -eux
 
 tag=$1
 if [ -z "$tag" ]
@@ -20,6 +20,9 @@ git checkout $tag
 
 flutter channel beta
 flutter upgrade
+
+rm -rf build
+flutter clean
 
 flutter test
 
