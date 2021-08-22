@@ -6,11 +6,11 @@
 
 - [ ] update `version` on `pubspec.yaml`
 
+### windows
+
+- [ ] update `msix_version` on `pubspec.yaml`
+
 ### macos
 
 - [ ] update `macos/fastlane/metadata/ja/release_notes.txt`
 - [ ] update `macos/fastlane/metadata/en-US/release_notes.txt`
-
-### windows
-
-- [ ] update `msix_version` on `pubspec.yaml`
