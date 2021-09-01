@@ -49,6 +49,6 @@ jobs:
         run: flutter pub get
       - name: run test
         run: flutter test --coverage --coverage-path=./coverage/lcov.info
-      - uses: codecov/codecov-action@v2.0.2
+      - uses: codecov/codecov-action@v2.0.3
         with:
           file: ./coverage/lcov.info
