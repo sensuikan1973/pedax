@@ -12,7 +12,6 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["website"]
-    open-pull-requests-limit: 1
 
   - package-ecosystem: "bundler"
     directory: "/macos"
@@ -21,7 +20,6 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["mac"]
-    open-pull-requests-limit: 1
 
   # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/keeping-your-actions-up-to-date-with-dependabot
   - package-ecosystem: "github-actions"
@@ -31,4 +29,3 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["GitHub Actions"]
-    open-pull-requests-limit: 1
