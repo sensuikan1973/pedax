@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../engine/options/book_file_option.dart';
 import '../models/board_notifier.dart';
+import '../models/board_state.dart';
 import 'pedax_shortcuts/pedax_shortcut.dart';
 import 'square.dart';
 
@@ -152,10 +153,11 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final hints = context.select<BoardNotifier, List<Hint>>((final notifier) => notifier.value.hints);
     final targetHints = hints.where((final h) => h.move == move).toList();
     final hint = targetHints.isEmpty ? null : targetHints.first;
-    final bestPathNumList =
-        context.select<BoardNotifier, List<BestPathNumWithLink>>((final notifier) => notifier.value.bestPathNumList);
-    final targetBestPathNum = bestPathNumList.where((final b) => b.move == move).toList();
-    final bestPathNum = targetBestPathNum.isEmpty ? null : targetBestPathNum.first;
+    final countBestpathList = context
+        .select<BoardNotifier, List<CountBestpathResultWithMove>>((final notifier) => notifier.value.countBestpathList);
+    final targetCountBestpathResultWithMove = countBestpathList.where((final el) => el.rootMove == moveString).toList();
+    final countBestpathResultWithMove =
+        targetCountBestpathResultWithMove.isEmpty ? null : targetCountBestpathResultWithMove.first;
     final lastMove = context.select<BoardNotifier, Move?>((final notifier) => notifier.value.lastMove);
     final bestScore = context.select<BoardNotifier, int>((final notifier) => notifier.value.bestScore);
     final isBookMove = hint != null && hint.isBookMove;
@@ -169,8 +171,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
       isLastMove: lastMove?.x == move,
       isBookMove: isBookMove,
       score: hint?.score,
-      bestPathNumOfBlack: bestPathNum?.bestPathNumOfBlack,
-      bestPathNumOfWhite: bestPathNum?.bestPathNumOfWhite,
+      bestpathCountOfBlack: _bestpathCount(TurnColor.black, countBestpathResultWithMove),
+      bestpathCountOfWhite: _bestpathCount(TurnColor.white, countBestpathResultWithMove),
       scoreColor: _scoreColor(
         score: hint?.score,
         isBookMove: isBookMove,
@@ -199,6 +201,19 @@ class _PedaxBoardState extends State<PedaxBoard> {
       return isBlackTurn ? SquareType.white : SquareType.black;
     }
     return SquareType.empty;
+  }
+
+  int? _bestpathCount(final int color, final CountBestpathResultWithMove? countBestpathResultWithMove) {
+    if (countBestpathResultWithMove == null) return null;
+    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    final isYourTurn = currentColor == color;
+
+    /// NOTE:
+    /// Why "when isYourTurn == ture, show opponent value" ?
+    /// -> See: [CountBestpathResponse] class in lib/engine/api/count_bestpath.dart.
+    return isYourTurn
+        ? countBestpathResultWithMove.countBestpathList.position.nOpponentBestpaths
+        : countBestpathResultWithMove.countBestpathList.position.nPlayerBestpaths;
   }
 
   Color? _scoreColor({

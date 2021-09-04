@@ -407,14 +407,14 @@ Future<void> main() async {
 
         await tester.tap(find.byIcon(Icons.menu));
         await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.bestPathNumAvailabilitySetting));
+        await tester.tap(find.text(l10nEn.bestpathCountAvailabilitySetting));
         await tester.pumpAndSettle();
-        expect(find.text(l10nEn.bestPathNumAvailabilitySetting), findsOneWidget);
+        expect(find.text(l10nEn.bestpathCountAvailabilitySetting), findsOneWidget);
         await tester.tap(find.byType(Switch));
         await tester.pumpAndSettle();
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
-        expect(find.byType(BestPathNumAvailabilitySettingDialog), findsNothing);
+        expect(find.byType(BestpathCountAvailabilitySettingDialog), findsNothing);
         await waitEdaxServerResponsed(tester);
       });
     });

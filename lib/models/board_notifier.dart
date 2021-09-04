@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
 import '../engine/api/book_load.dart';
+import '../engine/api/count_bestpath.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
@@ -14,7 +15,6 @@ import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
-import '../engine/api/stream_of_best_path_num_with_link.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/book_file_option.dart';
@@ -42,8 +42,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     required final List<String> initLibedaxParams,
     required final int level,
     required final bool hintStepByStep,
-    required final bool bestPathNumAvailability,
-    required final int bestPathNumLevel,
+    required final bool bestpathCountAvailability,
   }) async {
     await Isolate.spawn(
       startEdaxServer,
@@ -63,8 +62,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       ..edaxServerSpawned = true
       ..level = level
       ..hintStepByStep = hintStepByStep
-      ..bestPathNumAvailability = bestPathNumAvailability
-      ..bestPathNumLevel = bestPathNumLevel;
+      ..countBestpathAvailability = bestpathCountAvailability;
     notifyListeners();
 
     requestInit();
@@ -99,9 +97,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   // ignore: use_setters_to_change_properties
   void switchHintStepByStep({required final bool enabled}) => value.hintStepByStep = enabled;
 
-  void switchBestPathNumAvailability({required final bool enabled}) {
-    value.bestPathNumAvailability = enabled;
-    if (!enabled) value.bestPathNumList = UnmodifiableListView([]);
+  void switchCountBestpathAvailability({required final bool enabled}) {
+    value.countBestpathAvailability = enabled;
+    if (!enabled) value.countBestpathList = UnmodifiableListView([]);
   }
 
   void requestBookLoad(final String path) {
@@ -123,19 +121,19 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
-  StreamOfBestPathNumWithLinkRequest _buildStreamOfBestPathNumWithLinkRequest(final String movesAtRequest) =>
-      StreamOfBestPathNumWithLinkRequest(level: value.bestPathNumLevel, movesAtRequest: movesAtRequest);
+  CountBestpathRequest _buildCountBestpathRequest(final String movesAtRequest) =>
+      CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger);
 
-  void _requestBestPathNumList(final String movesAtRequest) {
-    value.bestPathNumList = UnmodifiableListView([]);
+  void _requestCountBestpath(final String movesAtRequest) {
+    value.countBestpathList = UnmodifiableListView([]);
     if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
-      _edaxServerPort.send(_buildStreamOfBestPathNumWithLinkRequest(movesAtRequest));
+      _edaxServerPort.send(_buildCountBestpathRequest(movesAtRequest));
     }
   }
 
   void _onMovesChanged(final String moves) {
     _requestLatestHintList(moves);
-    if (value.bestPathNumAvailability) _requestBestPathNumList(moves);
+    if (value.countBestpathAvailability) _requestCountBestpath(moves);
   }
 
   // ignore: avoid_annotating_with_dynamic
@@ -208,11 +206,17 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           )
           ..bestScore = value.hints.map<int>((final h) => h.score).reduce(max);
       }
-    } else if (message is StreamOfBestPathNumWithLinkResponse) {
+    } else if (message is CountBestpathResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {
-        value.bestPathNumList = UnmodifiableListView([]);
+        value.countBestpathList = UnmodifiableListView([]);
       } else {
-        value.bestPathNumList = UnmodifiableListView([...value.bestPathNumList, message.bestPathNumWithLink]);
+        value.countBestpathList = UnmodifiableListView([
+          ...value.countBestpathList,
+          CountBestpathResultWithMove(
+            countBestpathList: message.countBestpathResult,
+            rootMove: message.rootMove,
+          )
+        ]);
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;

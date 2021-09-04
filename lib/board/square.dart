@@ -10,8 +10,8 @@ class Square extends StatelessWidget {
     required final this.coordinate,
     final this.onTap,
     final this.score,
-    final this.bestPathNumOfBlack,
-    final this.bestPathNumOfWhite,
+    final this.bestpathCountOfBlack,
+    final this.bestpathCountOfWhite,
     final this.scoreColor,
     final this.isLastMove = false,
     final this.isBookMove = false,
@@ -24,13 +24,13 @@ class Square extends StatelessWidget {
   final String coordinate;
   final Function()? onTap;
   final int? score;
-  final int? bestPathNumOfBlack;
-  final int? bestPathNumOfWhite;
+  final int? bestpathCountOfBlack;
+  final int? bestpathCountOfWhite;
   final Color? scoreColor;
   final bool isLastMove;
   final bool isBookMove;
   double get _scoreFontSize => length * 0.45;
-  double get _bestPathNumFontSize => length * 0.25;
+  double get _bestpathCountFontSize => length * 0.25;
   double get _notebookEmojiFontSize => length * 0.25;
 
   @override
@@ -53,8 +53,8 @@ class Square extends StatelessWidget {
       ..add(StringProperty('coordinate', coordinate))
       ..add(DiagnosticsProperty<Function()>('onTap', onTap))
       ..add(IntProperty('score', score))
-      ..add(IntProperty('bestPathNumOfBlack', bestPathNumOfBlack))
-      ..add(IntProperty('bestPathNumOfWhite', bestPathNumOfWhite))
+      ..add(IntProperty('bestpathCountOfBlack', bestpathCountOfBlack))
+      ..add(IntProperty('bestpathCountOfWhite', bestpathCountOfWhite))
       ..add(DiagnosticsProperty<bool>('isLastMove', isLastMove))
       ..add(DiagnosticsProperty<bool>('isBookMove', isBookMove))
       ..add(ColorProperty('scoreColor', scoreColor));
@@ -97,27 +97,27 @@ class Square extends StatelessWidget {
                   // REF: https://emojipedia.org/notebook/
                   child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
                 ),
-                if (bestPathNumOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestPathNumOfBlackText),
-                if (bestPathNumOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestPathNumOfWhiteText)
+                if (bestpathCountOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestpathCountOfBlackText),
+                if (bestpathCountOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestpathCountOfWhiteText)
               ],
             )
           : Center(child: scoreText),
     );
   }
 
-  Text get _bestPathNumOfBlackText => Text(
-        bestPathNumOfBlack.toString(),
+  Text get _bestpathCountOfBlackText => Text(
+        bestpathCountOfBlack.toString(),
         style: TextStyle(
-          fontSize: _bestPathNumFontSize,
+          fontSize: _bestpathCountFontSize,
           color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
       );
 
-  Text get _bestPathNumOfWhiteText => Text(
-        bestPathNumOfWhite.toString(),
+  Text get _bestpathCountOfWhiteText => Text(
+        bestpathCountOfWhite.toString(),
         style: TextStyle(
-          fontSize: _bestPathNumFontSize,
+          fontSize: _bestpathCountFontSize,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

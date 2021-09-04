@@ -12,7 +12,6 @@ import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
 import '../engine/edax_asset.dart';
 import '../engine/options/best_path_num_availability_option.dart';
-import '../engine/options/best_path_num_level_option.dart';
 import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
@@ -57,8 +56,7 @@ class _HomeState extends State<Home> {
       initLibedaxParams: await _edaxAsset.buildInitLibEdaxParams(),
       level: await const LevelOption().val,
       hintStepByStep: await const HintStepByStepOption().val,
-      bestPathNumAvailability: await const BestPathNumAvailabilityOption().val,
-      bestPathNumLevel: await const BestPathNumLevelOption().val,
+      bestpathCountAvailability: await const BestpathCountAvailabilityOption().val,
     );
   }
 
@@ -281,13 +279,13 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.bestPathNumAvailability,
-          AppLocalizations.of(context)!.bestPathNumAvailabilitySetting,
+          _MenuType.bestpathCountAvailability,
+          AppLocalizations.of(context)!.bestpathCountAvailabilitySetting,
           () => showDialog<void>(
             context: context,
             builder: (final _) => ChangeNotifierProvider.value(
               value: context.read<BoardNotifier>(),
-              child: BestPathNumAvailabilitySettingDialog(),
+              child: BestpathCountAvailabilitySettingDialog(),
             ),
           ),
         ),
@@ -316,7 +314,7 @@ enum _MenuType {
   nTasks,
   level,
   hintStepByStep,
-  bestPathNumAvailability,
+  bestpathCountAvailability,
   shortcutCheatsheet,
   about,
 }

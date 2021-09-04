@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'api/book_get_move_with_position.dart';
 import 'api/book_load.dart';
+import 'api/count_bestpath.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
@@ -17,7 +18,6 @@ import 'api/rotate.dart';
 import 'api/set_option.dart';
 import 'api/shutdown.dart';
 import 'api/stop.dart';
-import 'api/stream_of_best_path_num_with_link.dart';
 import 'api/undo.dart';
 
 // NOTE: top level function for `isolate.spawn`.
@@ -50,8 +50,8 @@ class EdaxServer {
   bool _computingBookLoading = false;
   bool _computingHintOneByOne = false;
   late HintOneByOneRequest _latestHintntOneByOneRequest;
-  bool _computingStreamOfBestPathNumWithLink = false;
-  late StreamOfBestPathNumWithLinkRequest _latestStreamOfBestPathNumWithLinkRequest;
+  bool _computingCountBestpath = false;
+  late CountBestpathRequest _latestCountBestpathRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
   Future<void> start(final SendPort parentSendPort, final List<String> initLibedaxParameters) async {
@@ -111,33 +111,33 @@ class EdaxServer {
           parentSendPort.send(executeRedo(edax, message));
         } else if (message is GetBookMoveWithPositionRequest) {
           parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
-        } else if (message is StreamOfBestPathNumWithLinkRequest) {
-          _latestStreamOfBestPathNumWithLinkRequest = message;
+        } else if (message is CountBestpathRequest) {
+          _latestCountBestpathRequest = message;
           // ignore: literal_only_boolean_expressions
           while (true) {
-            if (_computingStreamOfBestPathNumWithLink) {
+            if (_computingCountBestpath) {
               await Future<void>.delayed(const Duration(milliseconds: 5));
               continue;
             }
-            if (_latestStreamOfBestPathNumWithLinkRequest.movesAtRequest != message.movesAtRequest) {
+            if (_latestCountBestpathRequest.movesAtRequest != message.movesAtRequest) {
               logger.d(
                 '''
-              The StreamOfBestPathNumWithLinkRequest (moves: ${message.movesAtRequest}) has dropped.
-              It is because a new StreamOfBestPathNumWithLinkRequest (moves: ${_latestStreamOfBestPathNumWithLinkRequest.movesAtRequest}) has been received after that.
+              The CountBestpathRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new CountBestpathRequest (moves: ${_latestCountBestpathRequest.movesAtRequest}) has been received after that.
               ''',
               );
               break;
             }
-            _computingStreamOfBestPathNumWithLink = true;
+            _computingCountBestpath = true;
             await compute(
-              _computeStreamOfBestPathNumWithLink,
-              _ComputeStreamOfBestPathNumWithLinkParams(
+              _computeCountBestpath,
+              _ComputeCountBestpathParams(
                 dllPath,
-                _latestStreamOfBestPathNumWithLinkRequest,
+                _latestCountBestpathRequest,
                 parentSendPort,
               ),
             );
-            _computingStreamOfBestPathNumWithLink = false;
+            _computingCountBestpath = false;
             break;
           }
         } else if (message is BookLoadRequest) {
@@ -192,16 +192,16 @@ void _computeBookLoad(final _ComputeBookLoadParams params) {
 }
 
 @immutable
-class _ComputeStreamOfBestPathNumWithLinkParams {
-  const _ComputeStreamOfBestPathNumWithLinkParams(this.dllPath, this.request, this.listener);
+class _ComputeCountBestpathParams {
+  const _ComputeCountBestpathParams(this.dllPath, this.request, this.listener);
   final String dllPath;
-  final StreamOfBestPathNumWithLinkRequest request;
+  final CountBestpathRequest request;
   final SendPort listener;
 }
 
 // NOTE: top level function for `compute`.
 @doNotStore
-Future<void> _computeStreamOfBestPathNumWithLink(final _ComputeStreamOfBestPathNumWithLinkParams params) async {
+Future<void> _computeCountBestpath(final _ComputeCountBestpathParams params) async {
   final edax = LibEdax(params.dllPath);
-  await executeStreamOfBestPathNumWithLink(edax, params.request).listen(params.listener.send).asFuture<void>();
+  await executeCountBestpath(edax, params.request).listen(params.listener.send).asFuture<void>();
 }
