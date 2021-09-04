@@ -1,1 +1,1 @@
-minor improvement of performance.
+[new feature] add new indicator which show bestpath count.
