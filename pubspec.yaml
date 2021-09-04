@@ -43,7 +43,7 @@ dependencies:
   libedax4dart: ^1.4.0
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
-    #   ref: e25eb6a3b137b70c4f55a233a3f264130cc253bf #follow_bestpath_native
+    #   ref: xxx
   logger: ^1.1.0
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
