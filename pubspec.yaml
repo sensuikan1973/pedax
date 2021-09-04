@@ -40,10 +40,10 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.1.0
   intl: any # Use the pinned version from flutter_localizations
-  libedax4dart: ^1.2.0
-    # git:
-    #   url: https://github.com/sensuikan1973/libedax4dart.git
-    #   ref: xxx
+  libedax4dart: # ^1.2.0
+    git:
+      url: https://github.com/sensuikan1973/libedax4dart.git
+      ref: e25eb6a3b137b70c4f55a233a3f264130cc253bf #follow_bestpath_native
   logger: ^1.1.0
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
