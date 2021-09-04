@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../engine/options/best_path_num_availability_option.dart';
+import '../engine/options/bestpath_count_availability_option.dart';
 import '../models/board_notifier.dart';
 
 const _documentationLinkOfBestpathCount =
