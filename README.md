@@ -3,7 +3,7 @@
 <a href="https://sensuikan1973.github.io/pedax/">pedax</a>
 </h1>
 
-<img align="left" src="https://raw.githubusercontent.com/sensuikan1973/pedax/main/website/static/img/en/analysis_mode_board_view.png" alt="screenshot_macos" height="400" hspace="10">
+<img align="left" src="https://raw.githubusercontent.com/sensuikan1973/pedax/main/website/static/img/en/analysis_mode_board_view.png" alt="screenshot_macos" height="380" hspace="10">
 <div>
   <br/>
   <br/>
