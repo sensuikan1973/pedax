@@ -19,10 +19,10 @@
       <b>Mac/Windows</b> are supported. Linux is still not verified.
     </li>
     <li>
-      You can customize some important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
+      <b>Customize</b> some important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
     </li>
     <li>
-      2 languages (English, Japanese) are supported.
+      <b>2 languages (English, Japanese)</b> are supported.
     </li>
   </ul>
 </div>
