@@ -19,7 +19,7 @@
       <b>Mac/Windows</b> are supported. Linux is still not verified.
     </li>
     <li>
-      <b>Customize</b> some important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
+      <b>Customizable</b> important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
     </li>
     <li>
       <b>2 languages (English, Japanese)</b> are supported.
