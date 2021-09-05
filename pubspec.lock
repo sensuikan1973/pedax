@@ -242,10 +242,12 @@ packages:
   libedax4dart:
     dependency: "direct main"
     description:
-      name: libedax4dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.4.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: bdf492ecb2e8cc7e50c4a4c4a940bd12c5335ffc
+      url: "https://github.com/sensuikan1973/libedax4dart.git"
+    source: git
+    version: "1.5.0"
   logger:
     dependency: "direct main"
     description:
