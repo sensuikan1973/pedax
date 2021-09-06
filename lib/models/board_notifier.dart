@@ -81,7 +81,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
-  void finishedNotifyingBookHasLoadedToUser() {
+  void notifyBookHasBeenLoadedToUser() {
     value.bookLoadStatus = BookLoadStatus.notifiedToUser;
     // notifyListeners();
   }
@@ -121,7 +121,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void _requestBookPosition() {
-    if (value.bookHasLoaded) {
+    if (value.bookHasBeenLoaded) {
       _edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
   }
@@ -129,7 +129,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void _requestCountBestpath(final String movesAtRequest) {
     value.countBestpathList = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
-    if (value.bookHasLoaded) {
+    if (value.bookHasBeenLoaded) {
       _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
     }
   }
