@@ -39,10 +39,15 @@ class StartEdaxServerParams {
 // TODO: consider to separate as a package
 @doNotStore
 class EdaxServer {
-  EdaxServer({required final this.dllPath, required final this.logger});
+  EdaxServer({
+    required final String dllPath,
+    required final Logger logger,
+  })  : _dllPath = dllPath,
+        _logger = logger;
 
-  final String dllPath;
-  final Logger logger;
+  final String _dllPath;
+  final Logger _logger;
+
   final _receivePort = ReceivePort();
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
@@ -58,12 +63,12 @@ class EdaxServer {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
-    logger.d('sent my port to parentSendPort');
+    _logger.d('sent my port to parentSendPort');
 
-    final edax = LibEdax(dllPath)
+    final edax = LibEdax(_dllPath)
       ..libedaxInitialize(initLibedaxParameters)
       ..edaxInit();
-    logger.i('libedax has initialized with $initLibedaxParameters');
+    _logger.i('libedax has initialized with $initLibedaxParameters');
 
     _registerApiHandler(parentSendPort, edax);
   }
@@ -71,7 +76,7 @@ class EdaxServer {
   void _registerApiHandler(final SendPort parentSendPort, final LibEdax edax) =>
       // ignore: avoid_annotating_with_dynamic
       _receivePort.listen((final dynamic message) async {
-        logger.d('received request "${message.runtimeType}"');
+        _logger.d('received request "${message.runtimeType}"');
         if (message is MoveRequest) {
           parentSendPort.send(executeMove(edax, message));
         } else if (message is PlayRequest) {
@@ -85,7 +90,7 @@ class EdaxServer {
               continue;
             }
             if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
-              logger.d(
+              _logger.d(
                 '''
               The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
@@ -96,7 +101,7 @@ class EdaxServer {
             _computingHintOneByOne = true;
             await compute(
               _computeHintNext,
-              _ComputeHintNextParams(dllPath, _latestHintntOneByOneRequest, parentSendPort),
+              _ComputeHintNextParams(_dllPath, _latestHintntOneByOneRequest, parentSendPort),
             );
             _computingHintOneByOne = false;
             break;
@@ -120,7 +125,7 @@ class EdaxServer {
               continue;
             }
             if (_latestCountBestpathRequest.movesAtRequest != message.movesAtRequest) {
-              logger.d(
+              _logger.d(
                 '''
               The CountBestpathRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new CountBestpathRequest (moves: ${_latestCountBestpathRequest.movesAtRequest}) has been received after that.
@@ -132,7 +137,7 @@ class EdaxServer {
             await compute(
               _computeCountBestpath,
               _ComputeCountBestpathParams(
-                dllPath,
+                _dllPath,
                 _latestCountBestpathRequest,
                 parentSendPort,
               ),
@@ -143,8 +148,8 @@ class EdaxServer {
         } else if (message is BookLoadRequest) {
           if (_computingBookLoading) return;
           _computingBookLoading = true;
-          logger.i('will load book file. path: ${message.file}');
-          await compute(_computeBookLoad, _ComputeBookLoadParams(dllPath, message, parentSendPort));
+          _logger.i('will load book file. path: ${message.file}');
+          await compute(_computeBookLoad, _ComputeBookLoadParams(_dllPath, message, parentSendPort));
           _computingBookLoading = false;
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
@@ -153,9 +158,9 @@ class EdaxServer {
         } else if (message is ShutdownRequest) {
           parentSendPort.send(executeShutdown(edax, message));
           _receivePort.close();
-          logger.i('shutdowned');
+          _logger.i('shutdowned');
         } else {
-          logger.w('request ${message.runtimeType} is not supported');
+          _logger.w('request ${message.runtimeType} is not supported');
         }
       });
 }
