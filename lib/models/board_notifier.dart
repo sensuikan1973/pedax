@@ -118,21 +118,25 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void _requestLatestHintList(final String movesAtRequest) {
     value.hints = UnmodifiableListView([]);
     if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
-    if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
-  CountBestpathRequest _buildCountBestpathRequest(final String movesAtRequest) =>
-      CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger);
+  void _requestBookPosition() {
+    if (value.bookLoadStatus == BookLoadStatus.loaded || value.bookLoadStatus == BookLoadStatus.notifiedToUser) {
+      _edaxServerPort.send(const GetBookMoveWithPositionRequest());
+    }
+  }
 
   void _requestCountBestpath(final String movesAtRequest) {
     value.countBestpathList = UnmodifiableListView([]);
-    if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
-      _edaxServerPort.send(_buildCountBestpathRequest(movesAtRequest));
+    if (!value.hintIsVisible) return;
+    if (value.bookLoadStatus == BookLoadStatus.loaded || value.bookLoadStatus == BookLoadStatus.notifiedToUser) {
+      _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
     }
   }
 
   void _onMovesChanged(final String moves) {
     _requestLatestHintList(moves);
+    _requestBookPosition();
     if (value.countBestpathAvailability) _requestCountBestpath(moves);
   }
 
