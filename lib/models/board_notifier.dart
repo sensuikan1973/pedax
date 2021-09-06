@@ -118,6 +118,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void _requestLatestHintList(final String movesAtRequest) {
     value.hints = UnmodifiableListView([]);
     if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
+  }
+
+  void _requestBookPosition() {
     if (value.bookLoadStatus == BookLoadStatus.loaded || value.bookLoadStatus == BookLoadStatus.notifiedToUser) {
       _edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
@@ -133,6 +136,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void _onMovesChanged(final String moves) {
     _requestLatestHintList(moves);
+    _requestBookPosition();
     if (value.countBestpathAvailability) _requestCountBestpath(moves);
   }
 
