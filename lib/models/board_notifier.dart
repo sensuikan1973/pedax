@@ -88,7 +88,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       ..hints = UnmodifiableListView([])
       ..hintIsVisible = !value.hintIsVisible;
     notifyListeners();
-    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(value.currentMoves));
+    if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
   // ignore: use_setters_to_change_properties
@@ -105,16 +105,17 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort.send(BookLoadRequest(path));
   }
 
-  HintOneByOneRequest _buildHintRequest(final String movesAtRequest) => HintOneByOneRequest(
+  void _requestLatestHintList(final String movesAtRequest) {
+    value.hints = UnmodifiableListView([]);
+    if (!value.hintIsVisible) return;
+    _edaxServerPort.send(
+      HintOneByOneRequest(
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
         logger: _logger,
-      );
-
-  void _requestLatestHintList(final String movesAtRequest) {
-    value.hints = UnmodifiableListView([]);
-    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
+      ),
+    );
   }
 
   void _requestBookPosition() {
