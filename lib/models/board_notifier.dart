@@ -81,10 +81,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
-  void notifyBookHasBeenLoadedToUser() {
-    value.bookLoadStatus = BookLoadStatus.notifiedToUser;
-    // notifyListeners();
-  }
+  void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
 
   Future<void> switchHintVisibility() async {
     value

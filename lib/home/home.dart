@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
       );
 
   void _showSnackBarOfBookLoaded() {
-    context.read<BoardNotifier>().notifyBookHasBeenLoadedToUser();
+    context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance?.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
       if (!mounted) return;
