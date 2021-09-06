@@ -121,13 +121,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.bookLoadStatus != BookLoadStatus.loading) _edaxServerPort.send(const GetBookMoveWithPositionRequest());
   }
 
-  CountBestpathRequest _buildCountBestpathRequest(final String movesAtRequest) =>
-      CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger);
-
   void _requestCountBestpath(final String movesAtRequest) {
     value.countBestpathList = UnmodifiableListView([]);
     if (value.hintIsVisible && value.bookLoadStatus != BookLoadStatus.loading) {
-      _edaxServerPort.send(_buildCountBestpathRequest(movesAtRequest));
+      _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
     }
   }
 
