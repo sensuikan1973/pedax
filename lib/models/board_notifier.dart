@@ -81,17 +81,14 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
-  void finishedNotifyingBookHasLoadedToUser() {
-    value.bookLoadStatus = BookLoadStatus.notifiedToUser;
-    // notifyListeners();
-  }
+  void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
 
   Future<void> switchHintVisibility() async {
     value
       ..hints = UnmodifiableListView([])
       ..hintIsVisible = !value.hintIsVisible;
     notifyListeners();
-    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(value.currentMoves));
+    if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
   // ignore: use_setters_to_change_properties
@@ -108,20 +105,21 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort.send(BookLoadRequest(path));
   }
 
-  HintOneByOneRequest _buildHintRequest(final String movesAtRequest) => HintOneByOneRequest(
+  void _requestLatestHintList(final String movesAtRequest) {
+    value.hints = UnmodifiableListView([]);
+    if (!value.hintIsVisible) return;
+    _edaxServerPort.send(
+      HintOneByOneRequest(
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
         logger: _logger,
-      );
-
-  void _requestLatestHintList(final String movesAtRequest) {
-    value.hints = UnmodifiableListView([]);
-    if (value.hintIsVisible) _edaxServerPort.send(_buildHintRequest(movesAtRequest));
+      ),
+    );
   }
 
   void _requestBookPosition() {
-    if (value.bookLoadStatus == BookLoadStatus.loaded || value.bookLoadStatus == BookLoadStatus.notifiedToUser) {
+    if (value.bookHasBeenLoaded) {
       _edaxServerPort.send(const GetBookMoveWithPositionRequest());
     }
   }
@@ -129,7 +127,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void _requestCountBestpath(final String movesAtRequest) {
     value.countBestpathList = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
-    if (value.bookLoadStatus == BookLoadStatus.loaded || value.bookLoadStatus == BookLoadStatus.notifiedToUser) {
+    if (value.bookHasBeenLoaded) {
       _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
     }
   }

@@ -27,6 +27,9 @@ class BoardState {
   int positionLossesNum = 0;
   int positionDrawsNum = 0;
 
+  bool get bookHasBeenLoaded =>
+      bookLoadStatus == BookLoadStatus.loaded || bookLoadStatus == BookLoadStatus.notifiedToUser;
+
   int get positionFullNum => positionWinsNum + positionLossesNum + positionDrawsNum;
 
   int get blackDiscCount => currentColor == TurnColor.black ? squaresOfPlayer.length : squaresOfOpponent.length;
