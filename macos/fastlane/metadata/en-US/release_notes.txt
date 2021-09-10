@@ -1,1 +1,1 @@
-minor improvement of performance.
+Fixed a bug in which the minimum memorized number indicator could display incorrect values when the book was loading.

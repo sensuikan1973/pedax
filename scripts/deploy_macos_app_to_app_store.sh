@@ -21,7 +21,6 @@ git checkout $tag
 flutter channel beta
 flutter upgrade
 
-rm -rf build
 flutter clean
 
 flutter test
@@ -35,5 +34,6 @@ flutter build macos --release
 git diff --exit-code
 
 cd macos
+bundle install
 export ASC_KEY_CONTENT=$(cat $asc_key_p8_file_path | base64)
 bundle exec fastlane deploy_app_store # require ENV variables

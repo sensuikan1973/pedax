@@ -3,15 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'edax_option.dart';
 
 @immutable
-class BestPathNumAvailabilityOption implements EdaxOption<bool> {
-  const BestPathNumAvailabilityOption();
+class BestpathCountAvailabilityOption implements EdaxOption<bool> {
+  const BestpathCountAvailabilityOption();
 
   @override
   String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
 
   @override
   @visibleForTesting
-  String get prefKey => 'BestPathNumAvailability';
+  String get prefKey => 'BestpathCountAvailability';
 
   @override
   Future<bool> get appDefaultValue async => false;

@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 class BoardState {
   BoardState();
@@ -13,10 +14,9 @@ class BoardState {
 
   late int level;
   late bool hintStepByStep;
-  late bool bestPathNumAvailability;
-  late int bestPathNumLevel;
+  late bool countBestpathAvailability;
   UnmodifiableListView<Hint> hints = UnmodifiableListView([]);
-  UnmodifiableListView<BestPathNumWithLink> bestPathNumList = UnmodifiableListView([]);
+  UnmodifiableListView<CountBestpathResultWithMove> countBestpathList = UnmodifiableListView([]);
   bool edaxInitOnce = false;
   String currentMoves = '';
   BookLoadStatus? bookLoadStatus;
@@ -26,6 +26,9 @@ class BoardState {
   int positionWinsNum = 0;
   int positionLossesNum = 0;
   int positionDrawsNum = 0;
+
+  bool get bookHasBeenLoaded =>
+      bookLoadStatus == BookLoadStatus.loaded || bookLoadStatus == BookLoadStatus.notifiedToUser;
 
   int get positionFullNum => positionWinsNum + positionLossesNum + positionDrawsNum;
 
@@ -41,3 +44,13 @@ class BoardState {
 }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }
+
+@immutable
+class CountBestpathResultWithMove {
+  const CountBestpathResultWithMove({
+    required final this.countBestpathList,
+    required final this.rootMove,
+  });
+  final CountBestpathResult countBestpathList;
+  final String rootMove;
+}

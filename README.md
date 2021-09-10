@@ -3,7 +3,7 @@
 <a href="https://sensuikan1973.github.io/pedax/">pedax</a>
 </h1>
 
-<img align="left" src="https://raw.githubusercontent.com/sensuikan1973/pedax/main/website/static/img/en/analysis_mode_board_view.png" alt="screenshot_macos" height="350" hspace="10">
+<img align="left" src="https://raw.githubusercontent.com/sensuikan1973/pedax/main/website/static/img/en/analysis_mode_board_view.png" alt="screenshot_macos" height="380" hspace="10">
 <div>
   <br/>
   <br/>
@@ -11,10 +11,20 @@
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
-  <li><b>Comfortably</b>, you can see <code>evaluation value</code> (e.g. <code>+4</code>, <code>-10</code>).</li>
-  <li><b>Mac/Windows</b> are supported. Linux is still not verified</li>
-  <li>You can customize some important options (e.g. <b><code>book file path</code></b>, <code>search level</code>, <code>optional indicator</code>, ...).</li>
-  <li>2 language (English, Japanese) are supported.</li>
+  <ul>
+    <li>
+      <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
+    </li>
+    <li>
+      <b>Mac/Windows</b> are supported. Linux is still not verified.
+    </li>
+    <li>
+      <b>Customizable</b> important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
+    </li>
+    <li>
+      <b>2 languages (English, Japanese)</b> are supported.
+    </li>
+  </ul>
 </div>
 <br clear="all">
 
