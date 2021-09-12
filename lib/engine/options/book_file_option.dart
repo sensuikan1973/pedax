@@ -33,8 +33,8 @@ class BookFileOption implements EdaxOption<String> {
     final pref = await _preferences;
     if (!Platform.isMacOS) return pref.getString(prefKey) ?? await appDefaultValue;
 
-    final bookmark = pref.getString(_bookmarkPrefKey);
-    if (bookmark == null) return pref.getString(prefKey) ?? await appDefaultValue;
+    final bookmark = pref.getString(bookmarkPrefKey);
+    if (bookmark == null || bookmark.isEmpty) return pref.getString(prefKey) ?? await appDefaultValue;
     final secureBookmarks = SecureBookmarks();
     final resolvedFile = await secureBookmarks.resolveBookmark(bookmark);
     final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(resolvedFile);
@@ -55,7 +55,7 @@ class BookFileOption implements EdaxOption<String> {
       await pref.setString(prefKey, val);
       if (Platform.isMacOS) {
         final bookmark = await SecureBookmarks().bookmark(File(val));
-        await pref.setString(_bookmarkPrefKey, bookmark);
+        await pref.setString(bookmarkPrefKey, bookmark);
       }
       return val;
     }
@@ -68,7 +68,8 @@ class BookFileOption implements EdaxOption<String> {
     await SecureBookmarks().stopAccessingSecurityScopedResource(File(await val));
   }
 
-  String get _bookmarkPrefKey => 'BookmarkOfBookFilePath';
+  @visibleForTesting
+  String get bookmarkPrefKey => 'BookmarkOfBookFilePath';
 
   // e.g. Mac Sandbox App: ~/Library/Containers/com.example.pedax/Data/Documents
   Future<Directory> get _docDir async => getApplicationDocumentsDirectory();
