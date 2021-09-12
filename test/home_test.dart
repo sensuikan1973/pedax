@@ -185,7 +185,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('paste moves', (final tester) async {
+  testWidgets('paste moves, and copy moves', (final tester) async {
     const moves = 'f5f6';
     SystemChannels.platform.setMockMethodCallHandler((final methodCall) async {
       if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
@@ -195,6 +195,7 @@ Future<void> main() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
 
+      // paste
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
@@ -203,6 +204,12 @@ Future<void> main() async {
       await waitEdaxServerResponsed(tester);
       await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+
+      // copy
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+
       await waitEdaxServerResponsed(tester);
     });
   });
