@@ -17,10 +17,9 @@ jobs:
         os: [windows-2019, macos-11]
         flutter_channel: [beta]
         include:
-          # TODO: https://github.com/sensuikan1973/pedax/issues/7
-          # - os: ubuntu-20.04
-          #   device: linux
-          #   setup_script: .github/scripts/setup_on_linux.sh
+          - os: ubuntu-20.04
+            device: linux
+            setup_script: .github/scripts/setup_on_linux.sh
           - os: windows-2019
             device: windows
             setup_script: .github/scripts/setup_on_windows.sh
