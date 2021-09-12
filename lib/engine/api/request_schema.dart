@@ -6,6 +6,4 @@ import 'package:flutter/foundation.dart';
 // See: https://api.dart.dev/dev/dart-isolate/SendPort/send.html
 
 @immutable
-abstract class RequestSchema {
-  const RequestSchema();
-}
+abstract class RequestSchema {}
