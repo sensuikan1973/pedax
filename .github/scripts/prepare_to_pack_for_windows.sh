@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 
 # Workaround for https://github.com/dart-lang/pub/issues/3012
 git checkout pubspec.lock
