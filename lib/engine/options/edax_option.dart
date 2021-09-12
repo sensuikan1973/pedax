@@ -5,8 +5,6 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class EdaxOption<T> {
-  const EdaxOption();
-
   String get nativeName;
 
   String get prefKey;
