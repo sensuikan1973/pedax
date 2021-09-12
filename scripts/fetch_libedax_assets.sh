@@ -1,3 +1,5 @@
+set -eux
+
 mkdir -p assets/libedax
 data_dst=assets/libedax/data
 mkdir -p $data_dst
