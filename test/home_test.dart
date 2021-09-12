@@ -307,7 +307,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update n-tasks with invalid num', (final tester) async {
+    testWidgets('update n-tasks with invalid small num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -318,6 +318,25 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
         await tester.enterText(find.byType(EditableText), (-1).toString());
+        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 1));
+        expect(find.byType(NTasksSettingDialog), findsNothing);
+        await waitEdaxServerResponsed(tester);
+      });
+    });
+
+    testWidgets('update n-tasks with invalid large num', (final tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.nTasksSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+        await tester.enterText(find.byType(EditableText), 99999.toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
