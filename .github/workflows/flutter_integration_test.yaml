@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-2019, macos-11]
+        os: [windows-2019, macos-11, ubuntu-20.04]
         flutter_channel: [beta]
         include:
           - os: ubuntu-20.04
