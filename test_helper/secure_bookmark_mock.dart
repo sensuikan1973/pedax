@@ -11,6 +11,7 @@ void mockSecureBookmark() {
   const MethodChannel('codeux.design/macos_secure_bookmarks').setMockMethodCallHandler((final methodCall) async {
     if (methodCall.method == 'startAccessingSecurityScopedResource') return false;
     if (methodCall.method == 'stopAccessingSecurityScopedResource') return false;
+    if (methodCall.method == 'bookmarkData') return '';
     return null;
   });
 }

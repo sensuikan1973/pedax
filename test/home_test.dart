@@ -185,7 +185,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('paste moves', (final tester) async {
+  testWidgets('paste moves, and copy moves', (final tester) async {
     const moves = 'f5f6';
     SystemChannels.platform.setMockMethodCallHandler((final methodCall) async {
       if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
@@ -195,6 +195,7 @@ Future<void> main() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
 
+      // paste
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
@@ -203,6 +204,12 @@ Future<void> main() async {
       await waitEdaxServerResponsed(tester);
       await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+
+      // copy
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+
       await waitEdaxServerResponsed(tester);
     });
   });
@@ -307,7 +314,7 @@ Future<void> main() async {
       });
     });
 
-    testWidgets('update n-tasks with invalid num', (final tester) async {
+    testWidgets('update n-tasks with invalid small num', (final tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
@@ -318,6 +325,25 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
         await tester.enterText(find.byType(EditableText), (-1).toString());
+        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 1));
+        expect(find.byType(NTasksSettingDialog), findsNothing);
+        await waitEdaxServerResponsed(tester);
+      });
+    });
+
+    testWidgets('update n-tasks with invalid large num', (final tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.nTasksSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.nTasksSetting), findsOneWidget);
+        await tester.enterText(find.byType(EditableText), 99999.toString());
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));

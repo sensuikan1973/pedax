@@ -14,11 +14,13 @@ Future<void> mockSharedPreferences({
   final String? evalFilePath,
   final String? bookFilePath,
   final bool enableBestpathCount = true,
+  final String? bookmarkPrefKey,
 }) async {
   final pref = {
     _evalFileOption.prefKey: evalFilePath ?? await _evalFileOption.appDefaultValue,
     _bookFileOption.prefKey: bookFilePath ?? await _bookFileOption.appDefaultValue,
     _bestpathCountAvailabilityOption.prefKey: enableBestpathCount,
+    _bookFileOption.bookmarkPrefKey: bookmarkPrefKey ?? '',
   };
   SharedPreferences.setMockInitialValues(pref);
 }
