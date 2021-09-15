@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -eux
 
 flutter config --enable-linux-desktop
 sudo apt-get update -y

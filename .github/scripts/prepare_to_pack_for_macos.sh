@@ -1,4 +1,4 @@
 #!/bin/bash
-set -eu
+set -eux
 
 echo "do nothing"

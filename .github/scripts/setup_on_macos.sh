@@ -1,4 +1,4 @@
 #!/bin/bash
-set -eu
+set -eux
 
 flutter config --enable-macos-desktop
