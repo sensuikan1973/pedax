@@ -16,6 +16,7 @@ then
   exit
 fi
 
+git fetch --all --prune
 git checkout $tag
 
 flutter channel beta
