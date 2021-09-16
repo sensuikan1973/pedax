@@ -1,9 +1,6 @@
 #!/bin/bash
 set -eux
 
-# Workaround for https://github.com/dart-lang/pub/issues/3012
-git checkout pubspec.lock
-
 flutter pub run msix:create
 
 # For developers which want to run `.exe` directory, repack ***.dll.
