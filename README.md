@@ -79,7 +79,7 @@ dart fix --apply
 #### fetch libedax assets as pedax assets
 
 ```sh
-# After you edit .libedax_assets_tag, run this.
+# Before runinning this, you should edit .libedax_assets_tag.
 ./scripts/fetch_libedax_assets.sh
 ```
 
