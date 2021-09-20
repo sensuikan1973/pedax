@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:logger/logger.dart';
+import 'package:logger/logger.dart'; // ignore: unused_import
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
