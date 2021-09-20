@@ -71,7 +71,9 @@ flutter drive --driver integration_test/driver.dart --target integration_test/ap
 ```sh
 flutter analyze .
 
-dart fix --apply # auto fix
+# auto fix
+# See: https://flutter.dev/docs/development/tools/flutter-fix#applying-project-wide-fixes
+dart fix --apply
 ```
 
 #### fetch libedax assets as pedax assets
