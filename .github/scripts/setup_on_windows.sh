@@ -1,4 +1,4 @@
 #!/bin/bash
-set -eux
+set -euxo pipefail
 
 flutter config --enable-windows-desktop
