@@ -91,8 +91,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
-  // ignore: use_setters_to_change_properties
-  void switchHintStepByStep({required final bool enabled}) => value.hintStepByStep = enabled;
+  void switchHintStepByStep({required final bool enabled}) {
+    value.hintStepByStep = enabled;
+    notifyListeners();
+  }
 
   void switchCountBestpathAvailability({required final bool enabled}) {
     value.countBestpathAvailability = enabled;

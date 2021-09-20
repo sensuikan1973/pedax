@@ -4,11 +4,11 @@
 
 ### All OSes
 
-- [ ] update `version` on `pubspec.yaml`
+- [ ] bump `version` on `pubspec.yaml`
 
 ### windows
 
-- [ ] update `msix_version` on `pubspec.yaml`
+- [ ] bump `msix_version` on `pubspec.yaml`
 
 ### macos
 

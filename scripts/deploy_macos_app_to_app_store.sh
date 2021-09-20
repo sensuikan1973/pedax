@@ -1,6 +1,6 @@
 # See: https://flutter.dev/desktop#macos
 
-set -eux
+set -euxo pipefail
 
 tag=$1
 if [ -z "$tag" ]

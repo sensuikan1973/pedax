@@ -25,9 +25,13 @@ class EdaxAsset {
     await _setupEvalData();
   }
 
-  Future<List<String>> buildInitLibEdaxParams() async {
-    // don't pass BookFileOption(). It's because initialization is very slow when book is large. So, loading book should be processed on background.
-    const options = <EdaxOption>[NTasksOption(), EvalFileOption(), LevelOption()];
+  /// NOTE:
+  /// If you pass BookFileOption(), be careful to the size.
+  /// When book is large, initialization process becomes slow.
+  /// In most cases, loading book should be processed on background
+  Future<List<String>> buildInitLibEdaxParams({
+    final List<EdaxOption> options = const [NTasksOption(), EvalFileOption(), LevelOption()],
+  }) async {
     final result = [''];
     for (final option in options) {
       result
@@ -38,17 +42,19 @@ class EdaxAsset {
   }
 
   Future<String> get libedaxPath async {
-    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    if (Platform.isMacOS) return libedaxName;
-    final docDir = await _docDir;
-    if (Platform.isWindows) return p.join(docDir.path, libedaxName);
-    if (Platform.isLinux) return p.join(docDir.path, libedaxName);
+    if (Platform.isMacOS) {
+      // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+      return libedaxName;
+    }
+    if (Platform.isWindows || Platform.isLinux) return p.join((await _docDir).path, libedaxName);
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
   Future<void> _setupDll() async {
-    // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-    if (Platform.isMacOS) return;
+    if (Platform.isMacOS) {
+      // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
+      return;
+    }
     if (Platform.isWindows || Platform.isLinux) {
       final libedaxData = (await _libedaxAssetData).buffer.asUint8List();
       final libedaxDataSha256 = sha256.convert(libedaxData).toString();
