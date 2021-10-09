@@ -56,9 +56,9 @@ jobs:
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}
 
-      - name: debug
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
+      # - name: debug
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
 
       # - name: set output path
       #   shell: bash
