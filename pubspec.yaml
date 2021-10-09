@@ -89,4 +89,3 @@ msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   start_menu_icon_path: assets/images/pedax_logo.png
   tile_icon_path: assets/images/pedax_logo.png
   architecture: x64
-  # capabilities: ""
