@@ -1,4 +1,4 @@
-set -euxo pipefail
+set -uxo pipefail
 
 mkdir -p assets/libedax
 data_dst=assets/libedax/data
