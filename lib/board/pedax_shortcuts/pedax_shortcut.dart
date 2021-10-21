@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
-import 'package:meta/meta.dart';
 
 import '../../models/board_notifier.dart';
 import 'copy_moves_shortcut.dart';
