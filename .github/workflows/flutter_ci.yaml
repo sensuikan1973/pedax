@@ -2,10 +2,10 @@ name: Flutter CI
 
 on:
   pull_request:
-    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml', '.libedax_assets_tag']
+    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml', '.libedax_assets_tag', '.codecov.yml']
   push:
     branches: [main]
-    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml', '.libedax_assets_tag']
+    paths: ['**.dart', 'pubspec.*', 'analysis_options.yaml', 'assets/libedax/**', '.github/workflows/flutter_ci.yaml', '.libedax_assets_tag', '.codecov.yml']
 
 jobs:
   format:
