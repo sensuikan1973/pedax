@@ -2,10 +2,28 @@ name: Flutter Integration Test
 
 on:
   pull_request:
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**', '.libedax_assets_tag']
+    paths:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_integration_test.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+      - '.libedax_assets_tag'
   push:
     branches: [main]
-    paths: ['**.dart', 'pubspec.*', '.github/workflows/flutter_integration_test.yaml', '.github/scripts/**', 'macos/**', 'linux/**', 'windows/**', 'assets/**', '.libedax_assets_tag']
+    paths:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_integration_test.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+      - '.libedax_assets_tag'
 
 jobs:
   integration_test:

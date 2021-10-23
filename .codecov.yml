@@ -14,8 +14,10 @@ coverage:
     project:
       default:
         target: 80%
-    patch: no # See: https://docs.codecov.io/docs/commit-status#section-patch-status
-    changes: no
+    # See: https://docs.codecov.io/docs/commit-status#section-patch-status
+    # See: https://json.schemastore.org/codecov.json
+    patch: false
+    changes: false
 
 parsers:
   gcov:

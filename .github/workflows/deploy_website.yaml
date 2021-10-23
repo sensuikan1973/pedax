@@ -4,10 +4,13 @@ name: Deploy Website
 
 on:
   pull_request:
-    paths: ['.github/workflows/deploy_website.yaml']
+    paths:
+      - '.github/workflows/deploy_website.yaml'
   push:
     branches: [main]
-    paths: ['.github/workflows/deploy_website.yaml', 'website/**']
+    paths:
+      - '.github/workflows/deploy_website.yaml'
+      - 'website/**'
 
 jobs:
   deploy:
