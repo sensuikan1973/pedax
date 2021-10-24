@@ -176,7 +176,8 @@ class _PedaxBoardState extends State<PedaxBoard> {
         score: hint?.score,
         isBookMove: isBookMove,
         isBestMove: hint?.score == bestScore,
-        searchHasCompleted: hint != null && (hint.depth == level || hint.depth == emptyNum),
+        // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
+        searchHasCompleted: hint != null && (hint.depth >= level || hint.depth == emptyNum),
       ),
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
