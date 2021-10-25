@@ -35,7 +35,6 @@ jobs:
             See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
           branch: cron_upgrade_flutter_dependencies
           delete-branch: true
-          base: main
           labels: 'dependencies'
           assignees: sensuikan1973
           reviewers: sensuikan1973
