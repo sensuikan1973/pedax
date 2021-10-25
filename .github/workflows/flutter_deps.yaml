@@ -22,6 +22,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.PAT }}
+          committer: GitHub <noreply@github.com>
           commit-message: '[Scheduled] `flutter pub upgrade --null-safety`'
           title: '[Scheduled] `flutter pub upgrade --null-safety`'
           body: |
