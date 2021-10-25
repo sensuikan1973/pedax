@@ -24,6 +24,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.PAT }} # See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
+          # See: https://github.com/peter-evans/create-pull-request/issues/593
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit-message: '[Scheduled] `flutter pub upgrade --null-safety`'
@@ -35,6 +36,6 @@ jobs:
             See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
           branch: cron_upgrade_flutter_dependencies
           delete-branch: true
-          labels: 'dependencies'
+          labels: dependencies
           assignees: sensuikan1973
           reviewers: sensuikan1973
