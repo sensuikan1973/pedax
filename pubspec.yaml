@@ -48,7 +48,7 @@ dependencies:
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
   path: ^1.8.0
-  path_provider: ^2.0.5 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  path_provider: ^2.0.6 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.1
   shared_preferences: ^2.0.8
   url_launcher: ^6.0.12
@@ -64,8 +64,8 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^2.5.3
-  pedantic_sensuikan1973: ^2.4.0
+  msix: ^2.6.2
+  pedantic_sensuikan1973: ^2.5.0
 
 flutter:
   uses-material-design: true
