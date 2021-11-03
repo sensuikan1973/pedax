@@ -57,5 +57,10 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
+      - name: debug build and run
+        if: runner.os == 'Linux'
+        run: |
+          flutter build linux --debug
+          flutter run -d linux
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
