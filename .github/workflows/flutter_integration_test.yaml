@@ -59,8 +59,6 @@ jobs:
         run: flutter pub get
       - name: debug build and run
         if: runner.os == 'Linux'
-        run: |
-          export DISPLAY="${DISPLAY:-:0}"
-          flutter run -d linux --debug
+        run: 'timeout 60 xvfb-run -a flutter drive -v -d ${{ matrix.device }} --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
