@@ -38,12 +38,16 @@ jobs:
           - os: windows-2019
             device: windows
             setup_script: .github/scripts/setup_on_windows.sh
+            # See: http://manpages.ubuntu.com/manpages/trusty/man1/xvfb-run.1.html
+            driver_test_command: 'timeout 180 xvfb-run -a flutter drive -d ${{ matrix.device }} --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
           - os: macos-11
             device: macos
             setup_script: .github/scripts/setup_on_macos.sh
+            driver_test_command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
           - os: ubuntu-20.04
             device: linux
             setup_script: .github/scripts/setup_on_linux.sh
+            driver_test_command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
 
     steps:
       - uses: actions/checkout@v2
@@ -57,8 +61,5 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-      - name: debug build and run
-        if: runner.os == 'Linux'
-        run: 'timeout 60 xvfb-run -a flutter drive -v -d ${{ matrix.device }} --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
       - name: drive
-        run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
+        run: ${{ matrix.driver_test_command }}
