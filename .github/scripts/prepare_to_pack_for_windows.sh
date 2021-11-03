@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euxo pipefail
 
+echo "See: https://flutter.dev/desktop#windows"
+
 flutter pub run msix:create
 
 # For developers which want to run `.exe` directory, repack ***.dll.
