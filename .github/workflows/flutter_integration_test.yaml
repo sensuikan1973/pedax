@@ -61,7 +61,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           flutter build linux --debug
-          export DISPLAY=:0.0
+          export DISPLAY="${DISPLAY:-:0}"
           flutter run -d linux
       - name: drive
         run: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d ${{ matrix.device }}
