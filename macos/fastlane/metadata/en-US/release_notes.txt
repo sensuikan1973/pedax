@@ -1,1 +1,1 @@
-Fixed a bug that caused the evaluation value display to become transparent when the level was changed, even if the search was complete.
+mild improvement of performance.
