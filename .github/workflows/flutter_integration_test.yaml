@@ -55,8 +55,6 @@ jobs:
         run: ${{ matrix.setup_script }}
       - name: doctor
         run: flutter doctor -v
-      - name: devices
-        run: flutter devices
       - name: install dependencies
         run: flutter pub get
       - name: drive
