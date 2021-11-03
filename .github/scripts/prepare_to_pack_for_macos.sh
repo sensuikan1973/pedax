@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euxo pipefail
 
-echo "do nothing"
+echo "do nothing. See: https://flutter.dev/desktop#macos"
