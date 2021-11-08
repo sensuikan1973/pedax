@@ -76,37 +76,39 @@ class _HomeState extends State<Home> {
         actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
       ),
       body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
-                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _undoAllButton,
-                    _undoButton,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _blackDiscCount,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _whiteDiscCount,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _redoButton,
-                    _redoAllButton,
-                  ],
-                ),
-              ],
-            )
+          ? _body
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
+
+  Widget get _body => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PedaxBoard(bodyLength: _pedaxBoardBodyLength),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
+              SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _undoAllButton,
+              _undoButton,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _blackDiscCount,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _whiteDiscCount,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _redoButton,
+              _redoAllButton,
+            ],
+          ),
+        ],
+      );
 
   Widget get _undoAllButton => IconButton(
         icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
