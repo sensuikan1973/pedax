@@ -9,7 +9,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
-import 'package:pedax/home/level_setting_dialog.dart';
+import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/main.dart' as app;
 import 'package:pedax/window.dart';
 import 'package:shared_preferences/shared_preferences.dart';

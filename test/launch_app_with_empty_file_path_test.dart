@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
-import 'package:pedax/home/book_file_path_setting_dialog.dart';
+import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';

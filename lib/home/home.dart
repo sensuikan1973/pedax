@@ -15,12 +15,12 @@ import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
-import 'bestpath_count_availability_setting_dialog.dart';
-import 'book_file_path_setting_dialog.dart';
-import 'hint_step_by_step_setting_dialog.dart';
-import 'level_setting_dialog.dart';
-import 'n_tasks_setting_dialog.dart';
-import 'shortcut_cheatsheet_dialog.dart';
+import 'setting_dialogs/bestpath_count_availability_setting_dialog.dart';
+import 'setting_dialogs/book_file_path_setting_dialog.dart';
+import 'setting_dialogs/hint_step_by_step_setting_dialog.dart';
+import 'setting_dialogs/level_setting_dialog.dart';
+import 'setting_dialogs/n_tasks_setting_dialog.dart';
+import 'setting_dialogs/shortcut_cheatsheet_dialog.dart';
 
 @immutable
 class Home extends StatefulWidget {
@@ -76,37 +76,39 @@ class _HomeState extends State<Home> {
         actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
       ),
       body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PedaxBoard(bodyLength: _pedaxBoardBodyLength),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
-                    SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _undoAllButton,
-                    _undoButton,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _blackDiscCount,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _whiteDiscCount,
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    _redoButton,
-                    _redoAllButton,
-                  ],
-                ),
-              ],
-            )
+          ? _body
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
+
+  Widget get _body => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PedaxBoard(bodyLength: _pedaxBoardBodyLength),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
+              SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _undoAllButton,
+              _undoButton,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _blackDiscCount,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _whiteDiscCount,
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              _redoButton,
+              _redoAllButton,
+            ],
+          ),
+        ],
+      );
 
   Widget get _undoAllButton => IconButton(
         icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
