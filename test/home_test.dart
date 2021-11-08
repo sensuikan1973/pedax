@@ -23,6 +23,7 @@ import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
+import '../test_helper/url_launcher_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/shared_preferences_mock.dart';
 
@@ -31,6 +32,7 @@ Future<void> main() async {
     await prepareLibedaxAssets();
     await mockSharedPreferences();
     mockSecureBookmark();
+    mockUrlLauncher();
   });
   setUp(() async {
     Logger.level = Level.nothing;
@@ -436,6 +438,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.bestpathCountAvailabilitySetting));
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bestpathCountAvailabilitySetting), findsOneWidget);
+        await tester.tap(find.byType(ElevatedButton));
         await tester.tap(find.byType(Switch));
         await tester.pumpAndSettle();
         await tester.tapAt(const Offset(1, 1));
