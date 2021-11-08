@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../engine/options/bestpath_count_availability_option.dart';
-import '../models/board_notifier.dart';
+import '../../engine/options/bestpath_count_availability_option.dart';
+import '../../models/board_notifier.dart';
 
 const _documentationLinkOfBestpathCount =
     'https://sensuikan1973.github.io/libedax4dart/libedax4dart/LibEdax/edaxBookCountBestpath.html';

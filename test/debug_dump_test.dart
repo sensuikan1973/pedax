@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
-import 'package:pedax/home/shortcut_cheatsheet_dialog.dart';
+import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/models/board_notifier.dart';
 
 import '../test_helper/edax_server.dart';

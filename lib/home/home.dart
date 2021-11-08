@@ -15,12 +15,12 @@ import '../engine/options/hint_step_by_step_option.dart';
 import '../engine/options/level_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
-import 'bestpath_count_availability_setting_dialog.dart';
-import 'book_file_path_setting_dialog.dart';
-import 'hint_step_by_step_setting_dialog.dart';
-import 'level_setting_dialog.dart';
-import 'n_tasks_setting_dialog.dart';
-import 'shortcut_cheatsheet_dialog.dart';
+import 'setting_dialogs/bestpath_count_availability_setting_dialog.dart';
+import 'setting_dialogs/book_file_path_setting_dialog.dart';
+import 'setting_dialogs/hint_step_by_step_setting_dialog.dart';
+import 'setting_dialogs/level_setting_dialog.dart';
+import 'setting_dialogs/n_tasks_setting_dialog.dart';
+import 'setting_dialogs/shortcut_cheatsheet_dialog.dart';
 
 @immutable
 class Home extends StatefulWidget {
