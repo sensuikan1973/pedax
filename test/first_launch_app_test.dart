@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
-import 'package:pedax/board/square.dart';
+import 'package:pedax/models/board_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_helper/board_finder.dart';

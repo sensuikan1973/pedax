@@ -7,10 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:pedax/board/pedax_board.dart';
-import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/main.dart' as app;
+import 'package:pedax/models/board_state.dart';
 import 'package:pedax/window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';

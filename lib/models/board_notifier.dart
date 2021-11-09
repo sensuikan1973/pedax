@@ -3,7 +3,6 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
@@ -88,8 +87,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void requestSetboard(final int move) {
     _edaxServerPort.send(
       SetboardRequest(
-        currentColor: TurnColor.black, // TODO: implement logic. now, black only.
-        replacementTargets: [SquareReplacement(move, TurnColor.black)], // TODO: implement logic. now, black only.
+        currentColor: value.currentColor, // TODO: it is desirable to pass as argument.
+        replacementTargets: [SquareReplacement(move, value.arrangeTargetSquareChar)],
         logger: _logger,
       ),
     );
@@ -105,6 +104,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
+  void switchArrangeTarget(final SquareType squareType) {
+    value.arrangeTargetSquareType = squareType;
+    notifyListeners();
+  }
+
   void switchHintStepByStep({required final bool enabled}) {
     value.hintStepByStep = enabled;
     notifyListeners();
@@ -115,7 +119,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (!enabled) value.countBestpathList = UnmodifiableListView([]);
   }
 
-  void changeBoardMode(final BoardMode boardMode) {
+  void switchBoardMode(final BoardMode boardMode) {
     value
       ..mode = boardMode
       ..hints = UnmodifiableListView([]);

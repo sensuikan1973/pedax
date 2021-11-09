@@ -14,13 +14,13 @@ import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
-import 'package:pedax/board/square.dart';
 import 'package:pedax/home/setting_dialogs/bestpath_count_availability_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/n_tasks_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
+import 'package:pedax/models/board_state.dart';
 
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
