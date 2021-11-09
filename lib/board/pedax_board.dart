@@ -196,11 +196,11 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final isBlackTurn = currentColor == TurnColor.black;
     if (squaresOfPlayer.contains(move)) {
       return isBlackTurn ? SquareType.black : SquareType.white;
-    }
-    if (squaresOfOpponent.contains(move)) {
+    } else if (squaresOfOpponent.contains(move)) {
       return isBlackTurn ? SquareType.white : SquareType.black;
+    } else {
+      return SquareType.empty;
     }
-    return SquareType.empty;
   }
 
   int? _bestpathCount(final int color, final CountBestpathResultWithMove? countBestpathResultWithMove) {
