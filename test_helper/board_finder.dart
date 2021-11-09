@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
 import 'package:pedax/board/square.dart';
-import 'package:pedax/models/board_state.dart';
 
 @isTest
 void expectLastMove(final WidgetTester tester, final String coordinate) {
