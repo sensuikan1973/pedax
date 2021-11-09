@@ -11,9 +11,6 @@ import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/shared_preferences_mock.dart';
 
-// See: https://github.com/flutter/flutter/issues/62966
-const debugDumpAppTag = 'debugDumpApp';
-
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
