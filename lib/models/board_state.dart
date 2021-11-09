@@ -44,10 +44,7 @@ class BoardState {
   int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
 }
 
-enum BoardMode {
-  freePlay,
-  arrangeDiscs,
-}
+enum BoardMode { freePlay, arrangeDiscs }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }
 
