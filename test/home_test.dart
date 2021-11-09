@@ -220,24 +220,30 @@ Future<void> main() async {
 
       // arrange black disc
       await tester.tap(find.byKey(switchArrangeTargetToBlackKey));
+      await tester.pump();
       await tester.tap(findByCoordinate('h8'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
+      expectStoneNum(tester, SquareType.white, 2); // d4, e5
 
       // arrange white disc
       await tester.tap(find.byKey(switchArrangeTargetToWhiteKey));
+      await tester.pump();
       await tester.tap(findByCoordinate('a8'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
+      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
+      expectStoneNum(tester, SquareType.white, 3); // d4, e5, a8
 
       // arrange empty disc
       await tester.tap(find.byKey(switchArrangeTargetToEmptyKey));
+      await tester.pump();
       await tester.tap(findByCoordinate('d4'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-
-      expectStoneNum(tester, SquareType.white, 2); // e5, a8
       expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
+      expectStoneNum(tester, SquareType.white, 2); // e5, a8
 
       // switch board mode to freePlay
       await tester.tap(find.byType(AppBar));
