@@ -83,10 +83,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
             children: [
               _yCoordinateLabels,
               _boardBody,
-              _yCoordinateRightPadding,
+              _yCoordinateRightFrame,
             ],
           ),
-          _xCoordinateBottomPadding,
+          _xCoordinateBottomFrame,
         ],
       );
 
@@ -102,7 +102,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Widget get _xCoordinateBottomPadding => Container(
+  Widget get _xCoordinateBottomFrame => Container(
         width: _lengthWithFrame,
         height: widget.frameWidth,
         color: _frameColor,
@@ -121,7 +121,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Widget get _yCoordinateRightPadding =>
+  Widget get _yCoordinateRightFrame =>
       Container(color: _frameColor, height: widget.bodyLength, width: widget.frameWidth);
 
   Widget get _boardBody => Container(
