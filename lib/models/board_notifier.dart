@@ -89,7 +89,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort.send(
       SetboardRequest(
         currentColor: TurnColor.black, // TODO: implement logic. now, black only.
-        replacementTargets: [SquareReplacement(move, '*')], // TODO: implement logic. now, black only.
+        replacementTargets: [SquareReplacement(move, TurnColor.black)], // TODO: implement logic. now, black only.
         logger: _logger,
       ),
     );

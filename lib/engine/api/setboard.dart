@@ -7,10 +7,10 @@ import 'response_schema.dart';
 
 @immutable
 class SquareReplacement {
-  const SquareReplacement(this.offset, this.char);
+  const SquareReplacement(this.offset, this.color);
 
   final int offset; // a.k.a move(int)
-  final String char;
+  final int color;
 }
 
 @immutable
@@ -50,10 +50,11 @@ SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest reque
   final board = edax.edaxGetBoard();
   var boardStr = board.stringApplicableToSetboard(edax.edaxGetCurrentPlayer());
   for (final replacementTarget in request.replacementTargets) {
-    boardStr = boardStr.replaceFirst(RegExp('.'), replacementTarget.char, replacementTarget.offset);
+    final colorChar = replacementTarget.color == TurnColor.black ? '*' : 'O';
+    boardStr = boardStr.replaceFirst(RegExp('.'), colorChar, replacementTarget.offset);
   }
-  final color = request.currentColor == TurnColor.black ? '*' : 'O';
-  boardStr = boardStr.replaceFirst(RegExp('.'), color, 64);
+  final currentColorChar = request.currentColor == TurnColor.black ? '*' : 'O';
+  boardStr = boardStr.replaceFirst(RegExp('.'), currentColorChar, 64);
 
   request.logger.d('setboard $boardStr');
   edax.edaxSetboard(boardStr);
