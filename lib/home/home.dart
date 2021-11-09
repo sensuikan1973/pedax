@@ -259,14 +259,11 @@ class _HomeState extends State<Home> {
 
   List<_Menu> get _sortedMenuList => [
         _Menu(
-          _MenuType.bookFilePath,
-          AppLocalizations.of(context)!.bookFilePathSetting,
+          _MenuType.shortcutCheatsheet,
+          AppLocalizations.of(context)!.shortcutCheatsheet,
           () => showDialog<void>(
             context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: BookFilePathSettingDialog(),
-            ),
+            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
           ),
         ),
         _Menu(
@@ -292,11 +289,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.shortcutCheatsheet,
-          AppLocalizations.of(context)!.shortcutCheatsheet,
+          _MenuType.bookFilePath,
+          AppLocalizations.of(context)!.bookFilePathSetting,
           () => showDialog<void>(
             context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+            builder: (final _) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: BookFilePathSettingDialog(),
+            ),
           ),
         ),
         _Menu(
