@@ -171,6 +171,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
             // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
             searchHasCompleted: hint.depth >= level || hint.depth == emptyNum,
           );
+    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return Square(
       type: type,
       length: _stoneSize,
@@ -182,12 +183,16 @@ class _PedaxBoardState extends State<PedaxBoard> {
       bestpathCountOfBlack: _bestpathCount(TurnColor.black, countBestpathResultWithMove),
       bestpathCountOfWhite: _bestpathCount(TurnColor.white, countBestpathResultWithMove),
       scoreColor: scoreColor,
-      onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
+      onTap: () => _squareOnTap(boardMode, type, move),
     );
   }
 
-  void _squareOnTap(final String moveString) {
-    _boardNotifier.requestMove(moveString);
+  void _squareOnTap(final BoardMode boardMode, final SquareType type, final int move) {
+    if (boardMode == BoardMode.freePlay && type == SquareType.empty) {
+      _boardNotifier.requestMove(move2String(move));
+    } else if (boardMode == BoardMode.arrangeDiscs) {
+      _boardNotifier.requestSetboard(move);
+    }
   }
 
   SquareType _squareType(final int move) {

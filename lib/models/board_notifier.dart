@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
@@ -82,6 +83,16 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void requestSetOption(final String name, final String optionValue) {
     _edaxServerPort.send(SetOptionRequest(name, optionValue));
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
+  }
+
+  void requestSetboard(final int move) {
+    _edaxServerPort.send(
+      SetboardRequest(
+        currentColor: TurnColor.black, // TODO: implement logic. now, black only.
+        replacementTargets: [SquareReplacement(move, '*')], // TODO: implement logic. now, black only.
+        logger: _logger,
+      ),
+    );
   }
 
   void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
