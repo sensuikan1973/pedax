@@ -141,9 +141,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void _onMovesChanged(final String moves) {
-    _requestLatestHintList(moves);
     _requestBookPosition();
-    if (value.countBestpathAvailability) _requestCountBestpath(moves);
+    if (value.mode == BoardMode.analysis) {
+      _requestLatestHintList(moves);
+      if (value.countBestpathAvailability) _requestCountBestpath(moves);
+    }
   }
 
   // ignore: avoid_annotating_with_dynamic
@@ -238,7 +240,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..positionDrawsNum = message.position.nDraws
         ..positionLossesNum = message.position.nLosses;
     } else if (message is SetboardResponse) {
-      // TODO: implement
+      value
+        ..board = message.board
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
+        ..currentColor = message.currentColor
+        ..lastMove = message.lastMove
+        ..currentMoves = message.moves;
     } else if (message is SetOptionResponse) {
       // do nothing
     } else {
