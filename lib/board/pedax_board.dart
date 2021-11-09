@@ -162,6 +162,15 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final isBookMove = hint != null && hint.isBookMove;
     final level = context.select<BoardNotifier, int>((final notifier) => notifier.value.level);
     final emptyNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.emptyNum);
+    final scoreColor = hint == null
+        ? null
+        : _scoreColor(
+            score: hint.score,
+            isBookMove: isBookMove,
+            isBestMove: hint.score == bestScore,
+            // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
+            searchHasCompleted: hint.depth >= level || hint.depth == emptyNum,
+          );
     return Square(
       type: type,
       length: _stoneSize,
@@ -172,13 +181,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       score: hint?.score,
       bestpathCountOfBlack: _bestpathCount(TurnColor.black, countBestpathResultWithMove),
       bestpathCountOfWhite: _bestpathCount(TurnColor.white, countBestpathResultWithMove),
-      scoreColor: _scoreColor(
-        score: hint?.score,
-        isBookMove: isBookMove,
-        isBestMove: hint?.score == bestScore,
-        // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
-        searchHasCompleted: hint != null && (hint.depth >= level || hint.depth == emptyNum),
-      ),
+      scoreColor: scoreColor,
       onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
     );
   }
@@ -216,15 +219,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
         : countBestpathResultWithMove.countBestpathList.position.nPlayerBestpaths;
   }
 
-  Color? _scoreColor({
+  Color _scoreColor({
     required final int? score,
     required final bool isBookMove,
     required final bool isBestMove,
     required final bool searchHasCompleted,
   }) {
-    if (score == null) return null;
-    final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
-    if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
+    final color = isBestMove ? Colors.lightBlue[200]! : Colors.lime;
+    if (!searchHasCompleted && !isBookMove) return color.withOpacity(0.3);
     return color;
   }
 
