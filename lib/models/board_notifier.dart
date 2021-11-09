@@ -88,7 +88,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort.send(
       SetboardRequest(
         currentColor: value.currentColor, // TODO: it is desirable to pass as argument.
-        replacementTargets: [SquareReplacement(move, value.arrangeTargetSquareChar)],
+        replacementTargets: [SquareReplacement(move, value.arrangeTargetChar)],
         logger: _logger,
       ),
     );

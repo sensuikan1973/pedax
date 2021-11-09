@@ -43,7 +43,7 @@ class BoardState {
         '',
       );
   int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
-  String get arrangeTargetSquareChar {
+  String get arrangeTargetChar {
     if (arrangeTargetSquareType == ArrangeTargetType.black) return '*';
     if (arrangeTargetSquareType == ArrangeTargetType.white) return 'O';
     return '-';
