@@ -105,7 +105,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void changeBoardMode(final BoardMode boardMode) {
-    value.mode = boardMode;
+    value
+      ..mode = boardMode
+      ..hints = UnmodifiableListView([]);
     notifyListeners();
   }
 
