@@ -25,7 +25,7 @@ void main() {
 
       await tester.tap(findByCoordinate('f5'));
       await waitEdaxServerResponsed(tester);
-      await tester.pump();
+      await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
       await waitEdaxServerResponsed(tester);
     });
