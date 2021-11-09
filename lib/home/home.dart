@@ -109,7 +109,10 @@ class _HomeState extends State<Home> {
     final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return AppBar(
       leading: _menu(),
-      title: Text(_title(boardMode)),
+      title: TextButton(
+        onPressed: () {}, // TODO: implement
+        child: Text(_title(boardMode)),
+      ),
       centerTitle: true,
       actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
     );
