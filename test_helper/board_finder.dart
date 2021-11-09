@@ -22,8 +22,9 @@ void expectStoneNum(final WidgetTester tester, final SquareType type, final int 
 void expectStoneCoordinate(final WidgetTester tester, final String coordinate, final SquareType type) {
   final finder = find.byWidgetPredicate((final widget) {
     if (widget is! Square) return false;
-    return widget.coordinate == coordinate.toLowerCase() ||
-        widget.coordinate == coordinate.toUpperCase() && widget.type == type;
+    final coordinateMatched =
+        widget.coordinate == coordinate.toLowerCase() || widget.coordinate == coordinate.toUpperCase();
+    return coordinateMatched && widget.type == type;
   });
   expect(finder, findsOneWidget);
 }
