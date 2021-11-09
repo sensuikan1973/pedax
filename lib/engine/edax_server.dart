@@ -16,6 +16,7 @@ import 'api/play.dart';
 import 'api/redo.dart';
 import 'api/rotate.dart';
 import 'api/set_option.dart';
+import 'api/setboard.dart';
 import 'api/shutdown.dart';
 import 'api/stop.dart';
 import 'api/undo.dart';
@@ -153,6 +154,8 @@ class EdaxServer {
           _computingBookLoading = false;
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
+        } else if (message is SetboardRequest) {
+          parentSendPort.send(executeSetboard(edax, message));
         } else if (message is StopRequest) {
           parentSendPort.send(executeStop(edax, message));
         } else if (message is ShutdownRequest) {
