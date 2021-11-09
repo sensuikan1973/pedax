@@ -45,8 +45,8 @@ class BoardState {
 }
 
 enum BoardMode {
-  freeplay, // not show eval
   analysis, // show eval
+  freeplay, // not show eval
   arrange, // arrange discs
 }
 

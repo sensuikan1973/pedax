@@ -1,6 +1,7 @@
 {
   "appTitle": "pedax",
   "initializingEngine": "エンジンの立ち上げ中...",
+  "modeSelectionTooltip": "モードの選択肢を表示",
   "freeplayMode": "自由打ちモード",
   "analysisMode": "解析モード",
   "arrangeMode": "盤面配置モード",

@@ -4,6 +4,7 @@
     "description": "app title"
   },
   "initializingEngine": "initializing engine...",
+  "modeSelectionTooltip": "show mode selection",
   "freeplayMode": "freeplay mode",
   "analysisMode": "analysis mode",
   "arrangeMode": "disc arrange mode",

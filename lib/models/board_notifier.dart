@@ -102,6 +102,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (!enabled) value.countBestpathList = UnmodifiableListView([]);
   }
 
+  void changeBoardMode(final BoardMode boardMode) {
+    value.mode = boardMode;
+    notifyListeners();
+  }
+
   void requestBookLoad(final String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();

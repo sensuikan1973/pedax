@@ -109,16 +109,30 @@ class _HomeState extends State<Home> {
     final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return AppBar(
       leading: _menu(),
-      title: TextButton(
-        onPressed: () {}, // TODO: implement
-        child: Text(_title(boardMode)),
+      title: PopupMenuButton<BoardMode>(
+        initialValue: boardMode,
+        tooltip: AppLocalizations.of(context)!.modeSelectionTooltip,
+        child: Container(
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10)),
+          child: Text(_modeString(boardMode)),
+        ),
+        onSelected: (final boardMode) => context.read<BoardNotifier>().changeBoardMode(boardMode),
+        itemBuilder: (final context) => BoardMode.values
+            .map(
+              (final mode) => PopupMenuItem<BoardMode>(
+                value: mode,
+                child: Text(_modeString(mode)),
+              ),
+            )
+            .toList(),
       ),
       centerTitle: true,
       actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
     );
   }
 
-  String _title(final BoardMode boardMode) {
+  String _modeString(final BoardMode boardMode) {
     switch (boardMode) {
       case BoardMode.freeplay:
         return AppLocalizations.of(context)!.freeplayMode;
