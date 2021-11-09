@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../models/board_state.dart';
 
 @immutable
 class Square extends StatelessWidget {
@@ -130,3 +129,5 @@ class Square extends StatelessWidget {
 
   String _scoreString(final int score) => score >= 0 ? '+$score' : score.toString();
 }
+
+enum SquareType { black, white, empty }

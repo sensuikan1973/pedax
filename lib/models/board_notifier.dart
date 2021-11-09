@@ -104,7 +104,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
-  void switchArrangeTarget(final SquareType squareType) {
+  void switchArrangeTarget(final ArrangeTargetType squareType) {
     value.arrangeTargetSquareType = squareType;
     notifyListeners();
   }

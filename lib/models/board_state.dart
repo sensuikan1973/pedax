@@ -27,7 +27,7 @@ class BoardState {
   int positionLossesNum = 0;
   int positionDrawsNum = 0;
   BoardMode mode = BoardMode.freePlay;
-  SquareType arrangeTargetSquareType = SquareType.black;
+  ArrangeTargetType arrangeTargetSquareType = ArrangeTargetType.black;
 
   bool get bookHasBeenLoaded =>
       bookLoadStatus == BookLoadStatus.loaded || bookLoadStatus == BookLoadStatus.notifiedToUser;
@@ -44,8 +44,8 @@ class BoardState {
       );
   int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
   String get arrangeTargetSquareChar {
-    if (arrangeTargetSquareType == SquareType.black) return '*';
-    if (arrangeTargetSquareType == SquareType.white) return 'O';
+    if (arrangeTargetSquareType == ArrangeTargetType.black) return '*';
+    if (arrangeTargetSquareType == ArrangeTargetType.white) return 'O';
     return '-';
   }
 }
@@ -54,7 +54,7 @@ enum BoardMode { freePlay, arrangeDiscs }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }
 
-enum SquareType { black, white, empty }
+enum ArrangeTargetType { black, white, empty }
 
 @immutable
 class CountBestpathResultWithMove {

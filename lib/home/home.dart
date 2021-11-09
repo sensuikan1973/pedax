@@ -119,45 +119,45 @@ class _HomeState extends State<Home> {
 
   Widget get _arrangeTargetSelection {
     final currentArrangeTargetSquareType =
-        context.select<BoardNotifier, SquareType>((final notifier) => notifier.value.arrangeTargetSquareType);
+        context.select<BoardNotifier, ArrangeTargetType>((final notifier) => notifier.value.arrangeTargetSquareType);
     final selectedMark = Border.all(color: Colors.red);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(SquareType.black),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.black),
           child: Container(
             width: _arrangeTargetStoneSize,
             height: _arrangeTargetStoneSize,
             decoration: BoxDecoration(
               color: Colors.black,
               shape: BoxShape.circle,
-              border: currentArrangeTargetSquareType == SquareType.black ? selectedMark : null,
+              border: currentArrangeTargetSquareType == ArrangeTargetType.black ? selectedMark : null,
             ),
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
         GestureDetector(
-          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(SquareType.white),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.white),
           child: Container(
             width: _arrangeTargetStoneSize,
             height: _arrangeTargetStoneSize,
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
-              border: currentArrangeTargetSquareType == SquareType.white ? selectedMark : Border.all(),
+              border: currentArrangeTargetSquareType == ArrangeTargetType.white ? selectedMark : Border.all(),
             ),
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
         GestureDetector(
-          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(SquareType.empty),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.empty),
           child: Container(
             width: _arrangeTargetStoneSize,
             height: _arrangeTargetStoneSize,
             decoration: BoxDecoration(
               color: Colors.green[900],
-              border: currentArrangeTargetSquareType == SquareType.empty ? selectedMark : null,
+              border: currentArrangeTargetSquareType == ArrangeTargetType.empty ? selectedMark : null,
             ),
           ),
         ),
