@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
+import 'package:pedax/board/pedax_shortcuts/init_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
@@ -128,6 +129,14 @@ Future<void> main() async {
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
         expectStoneCoordinate(tester, 'c4', SquareType.black);
+        await waitEdaxServerResponsed(tester);
+
+        await tester.sendKeyEvent(InitShorcut.logicalKey);
+        await waitEdaxServerResponsed(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2); // d5, e4
+        expectStoneCoordinate(tester, 'd5', SquareType.black);
+        expectStoneCoordinate(tester, 'd4', SquareType.white);
         await waitEdaxServerResponsed(tester);
       });
     });

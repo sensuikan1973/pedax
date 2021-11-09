@@ -44,5 +44,6 @@
   "shortcutLabelUndoAll": "undo all",
   "shortcutLabelUndo": "undo",
   "shortcutLabelRotate180": "rotate 180",
+  "shortcutLabelInit": "init board",
   "chooseBookFile": "choose"
 }
