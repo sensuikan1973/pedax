@@ -26,6 +26,7 @@ class BoardState {
   int positionWinsNum = 0;
   int positionLossesNum = 0;
   int positionDrawsNum = 0;
+  BoardMode mode = BoardMode.analysis;
 
   bool get bookHasBeenLoaded =>
       bookLoadStatus == BookLoadStatus.loaded || bookLoadStatus == BookLoadStatus.notifiedToUser;

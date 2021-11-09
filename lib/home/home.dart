@@ -69,12 +69,7 @@ class _HomeState extends State<Home> {
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: _menu(),
-        title: Text(AppLocalizations.of(context)!.analysisMode),
-        centerTitle: true,
-        actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
-      ),
+      appBar: _appBar,
       body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
           ? _body
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
@@ -109,6 +104,27 @@ class _HomeState extends State<Home> {
           ),
         ],
       );
+
+  AppBar get _appBar {
+    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
+    return AppBar(
+      leading: _menu(),
+      title: Text(_title(boardMode)),
+      centerTitle: true,
+      actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
+    );
+  }
+
+  String _title(final BoardMode boardMode) {
+    switch (boardMode) {
+      case BoardMode.freeplay:
+        return AppLocalizations.of(context)!.freeplayMode;
+      case BoardMode.analysis:
+        return AppLocalizations.of(context)!.analysisMode;
+      case BoardMode.arrange:
+        return AppLocalizations.of(context)!.arrangeMode;
+    }
+  }
 
   Widget get _undoAllButton => IconButton(
         icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
