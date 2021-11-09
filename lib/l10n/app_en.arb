@@ -5,6 +5,7 @@
   },
   "initializingEngine": "initializing engine...",
   "analysisMode": "analysis mode",
+  "arrangeMode": "disc arrange mode",
   "bookFilePathSetting": "edax book file path",
   "about": "About pedax",
   "cancelOnDialog": "Cancel",
