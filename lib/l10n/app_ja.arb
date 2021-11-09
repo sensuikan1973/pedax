@@ -41,6 +41,7 @@
   "shortcutLabelUndoAll": "初手まで戻す",
   "shortcutLabelUndo": "一手戻す",
   "shortcutLabelRotate180": "180 度回転させる",
-  "shortcutLabelInit": "新規局面にする",
+  "shortcutLabelInit": "完全な新規局面にする",
+  "shortcutLabelNew": "盤面配置の情報をもとに、新規局面にする",
   "chooseBookFile": "選ぶ"
 }

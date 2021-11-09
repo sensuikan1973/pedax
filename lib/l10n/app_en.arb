@@ -45,5 +45,6 @@
   "shortcutLabelUndo": "undo",
   "shortcutLabelRotate180": "rotate 180",
   "shortcutLabelInit": "init board",
+  "shortcutLabelNew": "new board based on disc arranges",
   "chooseBookFile": "choose"
 }

@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/init_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/new_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
@@ -132,6 +133,14 @@ Future<void> main() async {
         await waitEdaxServerResponsed(tester);
 
         await tester.sendKeyEvent(InitShorcut.logicalKey);
+        await waitEdaxServerResponsed(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2); // d5, e4
+        expectStoneCoordinate(tester, 'd5', SquareType.black);
+        expectStoneCoordinate(tester, 'd4', SquareType.white);
+        await waitEdaxServerResponsed(tester);
+
+        await tester.sendKeyEvent(NewShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2); // d5, e4

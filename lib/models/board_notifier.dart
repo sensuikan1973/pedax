@@ -11,6 +11,7 @@ import '../engine/api/count_bestpath.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/new.dart';
 import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
@@ -70,6 +71,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
+  void requestNew() => _edaxServerPort.send(const NewRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
   void requestMove(final String move) => _edaxServerPort.send(MoveRequest(move));
   void requestPlay(final String moves) => _edaxServerPort.send(PlayRequest(moves));
@@ -178,6 +180,15 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
+      _onMovesChanged(message.moves);
+    } else if (message is NewResponse) {
+      value
+        ..board = message.board
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
+        ..currentColor = message.currentColor
+        ..lastMove = message.lastMove
+        ..currentMoves = message.moves;
       _onMovesChanged(message.moves);
     } else if (message is RotateResponse) {
       _onMovesChanged(message.moves);
