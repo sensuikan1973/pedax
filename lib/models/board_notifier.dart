@@ -124,6 +124,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       ..mode = boardMode
       ..hints = UnmodifiableListView([]);
     notifyListeners();
+    if (boardMode == BoardMode.freePlay && value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
   void requestBookLoad(final String path) {
