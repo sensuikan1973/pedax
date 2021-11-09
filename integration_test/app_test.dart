@@ -36,7 +36,7 @@ Future<void> main() async {
       final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
       final l10n = AppLocalizations.of(context)!;
 
-      expect(find.text(l10n.analysisMode), findsOneWidget);
+      expect(find.text(l10n.freePlayMode), findsOneWidget);
 
       await waitEdaxSetuped(tester);
       await tester.pump();

@@ -50,7 +50,7 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
-        expect(find.text(l10nEn.analysisMode), findsOneWidget);
+        expect(find.text(l10nEn.freePlayMode), findsOneWidget);
 
         expect(find.byType(PedaxBoard), findsOneWidget);
         expectStoneNum(tester, SquareType.black, 2); // e4, d5

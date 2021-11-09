@@ -146,7 +146,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   void _onMovesChanged(final String moves) {
     _requestBookPosition();
-    if (value.mode == BoardMode.analysis) {
+    if (value.mode == BoardMode.freePlay) {
       _requestLatestHintList(moves);
       if (value.countBestpathAvailability) _requestCountBestpath(moves);
     }

@@ -26,7 +26,7 @@ class BoardState {
   int positionWinsNum = 0;
   int positionLossesNum = 0;
   int positionDrawsNum = 0;
-  BoardMode mode = BoardMode.analysis;
+  BoardMode mode = BoardMode.freePlay;
 
   bool get bookHasBeenLoaded =>
       bookLoadStatus == BookLoadStatus.loaded || bookLoadStatus == BookLoadStatus.notifiedToUser;
@@ -45,9 +45,8 @@ class BoardState {
 }
 
 enum BoardMode {
-  analysis, // show eval
-  freeplay, // not show eval
-  arrange, // arrange discs
+  freePlay,
+  arrangeDiscs,
 }
 
 enum BookLoadStatus { loading, loaded, notifiedToUser }

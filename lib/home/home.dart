@@ -134,12 +134,10 @@ class _HomeState extends State<Home> {
 
   String _boardModeString(final BoardMode boardMode) {
     switch (boardMode) {
-      case BoardMode.freeplay:
-        return AppLocalizations.of(context)!.freeplayMode;
-      case BoardMode.analysis:
-        return AppLocalizations.of(context)!.analysisMode;
-      case BoardMode.arrange:
-        return AppLocalizations.of(context)!.arrangeMode;
+      case BoardMode.freePlay:
+        return AppLocalizations.of(context)!.freePlayMode;
+      case BoardMode.arrangeDiscs:
+        return AppLocalizations.of(context)!.arrangeDiscsMode;
     }
   }
 
