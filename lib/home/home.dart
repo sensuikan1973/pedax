@@ -115,14 +115,14 @@ class _HomeState extends State<Home> {
         child: Container(
           padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10)),
-          child: Text(_modeString(boardMode)),
+          child: Text(_boardModeString(boardMode)),
         ),
         onSelected: (final boardMode) => context.read<BoardNotifier>().changeBoardMode(boardMode),
         itemBuilder: (final context) => BoardMode.values
             .map(
               (final mode) => PopupMenuItem<BoardMode>(
                 value: mode,
-                child: Text(_modeString(mode)),
+                child: Text(_boardModeString(mode)),
               ),
             )
             .toList(),
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  String _modeString(final BoardMode boardMode) {
+  String _boardModeString(final BoardMode boardMode) {
     switch (boardMode) {
       case BoardMode.freeplay:
         return AppLocalizations.of(context)!.freeplayMode;
