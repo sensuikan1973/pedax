@@ -15,6 +15,7 @@ import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
+import '../engine/api/setboard.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/book_file_option.dart';
@@ -231,6 +232,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..positionWinsNum = message.position.nWins
         ..positionDrawsNum = message.position.nDraws
         ..positionLossesNum = message.position.nLosses;
+    } else if (message is SetboardResponse) {
+      // TODO: implement
     } else if (message is SetOptionResponse) {
       // do nothing
     } else {
