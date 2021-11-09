@@ -1,3 +1,6 @@
+# See: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
+# See: https://docs.google.com/document/d/10e0saTfAv32OZLRmONy866vnaw0I2jwL8zukykpgWBc
+
 arb-dir: lib/l10n
 template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
