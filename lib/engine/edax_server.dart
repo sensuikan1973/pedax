@@ -37,7 +37,6 @@ class StartEdaxServerParams {
   final Logger logger;
 }
 
-// TODO: consider to separate as a package
 @doNotStore
 class EdaxServer {
   EdaxServer({
