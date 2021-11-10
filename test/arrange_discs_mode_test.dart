@@ -25,8 +25,6 @@ Future<void> main() async {
   });
   setUp(() async {
     Logger.level = Level.nothing;
-    // For `runAsync`, ensure asynchronous events have completed.
-    await Future<void>.delayed(const Duration(seconds: 1));
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
@@ -46,8 +44,10 @@ Future<void> main() async {
       await tester.tap(findByCoordinate('h8'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 2); // d4, e5
+      expectStoneNum(tester, SquareType.black, 3);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
       // arrange white disc
       await tester.tap(find.byKey(const Key('switchArrangeTargetToWhite')));
@@ -55,8 +55,10 @@ Future<void> main() async {
       await tester.tap(findByCoordinate('a8'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 3); // d4, e5, a8
+      expectStoneNum(tester, SquareType.black, 3);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 3);
+      expectStoneCoordinates(tester, ['d4', 'e5', 'a8'], SquareType.white);
 
       // arrange empty disc
       await tester.tap(find.byKey(const Key('switchArrangeTargetToEmpty')));
@@ -64,8 +66,10 @@ Future<void> main() async {
       await tester.tap(findByCoordinate('d4'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 2); // e5, a8
+      expectStoneNum(tester, SquareType.black, 3);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['e5', 'a8'], SquareType.white);
 
       // switch board mode to freePlay
       await tester.tap(find.byType(AppBar));
@@ -77,24 +81,28 @@ Future<void> main() async {
       await tester.tap(findByCoordinate('f5'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.white, 1); // a8
-      expectStoneNum(tester, SquareType.black, 5); // d5, e4, h8, e5, f5
+      expectStoneNum(tester, SquareType.black, 5);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5', 'h8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 1);
+      expectStoneCoordinates(tester, ['a8'], SquareType.white);
 
       // edaxNew
       await tester.sendKeyEvent(NewShorcut.logicalKey);
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.white, 2); // e5, a8
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      await waitEdaxServerResponsed(tester);
+      expectStoneNum(tester, SquareType.black, 3);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['e5', 'a8'], SquareType.white);
 
       // edaxInit
       await tester.sendKeyEvent(InitShorcut.logicalKey);
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.white, 2); // d4, e5
-      expectStoneNum(tester, SquareType.black, 2); // d5, e4
-      await waitEdaxServerResponsed(tester);
+      expectStoneNum(tester, SquareType.black, 2);
+      expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
     });
   });
 }
