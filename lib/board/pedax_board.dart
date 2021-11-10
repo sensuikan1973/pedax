@@ -224,14 +224,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
         : countBestpathResultWithMove.countBestpathList.position.nPlayerBestpaths;
   }
 
-  Color _scoreColor({
+  Color? _scoreColor({
     required final int? score,
     required final bool isBookMove,
     required final bool isBestMove,
     required final bool searchHasCompleted,
   }) {
-    final color = isBestMove ? Colors.lightBlue[200]! : Colors.lime;
-    if (!searchHasCompleted && !isBookMove) return color.withOpacity(0.3);
+    final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
+    if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
     return color;
   }
 
