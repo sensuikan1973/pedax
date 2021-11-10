@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
   Widget get _arrangeTargetSelection {
     final currentArrangeTargetSquareType =
         context.select<BoardNotifier, ArrangeTargetType>((final notifier) => notifier.value.arrangeTargetSquareType);
-    final selectedMark = Border.all(color: Colors.red);
+    final selectedMark = Border.all(color: Colors.red, width: 2);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
