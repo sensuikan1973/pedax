@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
+import 'package:pedax/board/pedax_shortcuts/init_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/new_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
@@ -38,8 +40,6 @@ Future<void> main() async {
   });
   setUp(() async {
     Logger.level = Level.nothing;
-    // For `runAsync`, ensure asynchronous events have completed.
-    await Future<void>.delayed(const Duration(seconds: 1));
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
@@ -48,143 +48,245 @@ Future<void> main() async {
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
-        expect(find.text(l10nEn.analysisMode), findsOneWidget);
+        expect(find.text(l10nEn.freePlayMode), findsOneWidget);
 
         expect(find.byType(PedaxBoard), findsOneWidget);
-        expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        expectStoneNum(tester, SquareType.black, 2);
+        expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.tap(findByCoordinate('f5'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 4);
+        expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 1);
+        expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f4'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 3);
+        expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.tap(findByCoordinate('e3'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 3);
+        expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 3);
+        expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 3); // d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 3);
+        expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        expectStoneNum(tester, SquareType.black, 2);
+        expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 2); // e4, d5
+        expectStoneNum(tester, SquareType.black, 2);
+        expectStoneCoordinates(tester, ['e4', 'd5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // e3, e4, d5, e5, f5
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.black, 5); // c3, d3, e3, d5, d6
-        expectStoneCoordinate(tester, 'c4', SquareType.black);
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'd6', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['c5', 'e5'], SquareType.white);
+
+        await tester.sendKeyEvent(InitShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2);
+        expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
+
+        await tester.sendKeyEvent(NewShorcut.logicalKey);
+        await waitEdaxServerResponsed(tester);
+        await tester.pump();
+        expectStoneNum(tester, SquareType.black, 2);
+        expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
       });
     });
 
     testWidgets('a game with pass', (final tester) async {
-      // REF: https://www.hasera.net/othello/mame006.html
       await tester.runAsync(() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
 
+        // REF: https://www.hasera.net/othello/mame006.html
         await tester.tap(findByCoordinate('f5'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 4);
+        expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 1);
+        expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f6'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 3);
+        expectStoneCoordinates(tester, ['d5', 'e4', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['d4', 'e5', 'f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('d3'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 5);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'f5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['e5', 'f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('g5'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 4);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 4);
+        expectStoneCoordinates(tester, ['e5', 'f5', 'f6', 'g5'], SquareType.white);
 
         await tester.tap(findByCoordinate('h5'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 8);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'g5', 'h5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 1);
+        expectStoneCoordinates(tester, ['f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('h4'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 7);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'h5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 3);
+        expectStoneCoordinates(tester, ['f6', 'g5', 'h4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f7'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 9);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7', 'h5'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 2);
+        expectStoneCoordinates(tester, ['g5', 'h4'], SquareType.white);
 
         await tester.tap(findByCoordinate('h6')); // black pass internaly in engine.
         await waitEdaxServerResponsed(tester);
         await tester.pump();
+        expectStoneNum(tester, SquareType.black, 8);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 4);
+        expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
         await tester.tap(findByCoordinate('e7'));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
+        expectStoneNum(tester, SquareType.black, 7);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f7'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 6);
+        expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internaly in engine.
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.white, 4); // h4, h5, h6, g5
+        expectStoneNum(tester, SquareType.black, 8);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 4);
+        expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internaly in engine.
         await waitEdaxServerResponsed(tester);
         await tester.pump();
-        expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
-        await waitEdaxServerResponsed(tester);
+        expectStoneNum(tester, SquareType.black, 7);
+        expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f7'], SquareType.black);
+        expectStoneNum(tester, SquareType.white, 6);
+        expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
       });
     });
   });

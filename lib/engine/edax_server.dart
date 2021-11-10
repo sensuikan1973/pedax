@@ -12,6 +12,7 @@ import 'api/count_bestpath.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
+import 'api/new.dart';
 import 'api/play.dart';
 import 'api/redo.dart';
 import 'api/rotate.dart';
@@ -37,7 +38,6 @@ class StartEdaxServerParams {
   final Logger logger;
 }
 
-// TODO: consider to separate as a package
 @doNotStore
 class EdaxServer {
   EdaxServer({
@@ -109,6 +109,8 @@ class EdaxServer {
           }
         } else if (message is InitRequest) {
           parentSendPort.send(executeInit(edax, message));
+        } else if (message is NewRequest) {
+          parentSendPort.send(executeNew(edax, message));
         } else if (message is RotateRequest) {
           parentSendPort.send(executeRotate(edax, message));
         } else if (message is UndoRequest) {

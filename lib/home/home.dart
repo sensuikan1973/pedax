@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -41,6 +42,9 @@ class _HomeState extends State<Home> {
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
   double get _movesCountFontSize => _discCountImageSize * 0.4;
   double get _undoOrRedoIconSize => _pedaxBoardBodyLength / 12;
+  double get _arrangeTargetStoneSize => _discCountImageSize;
+  Color get _currentColorBorderColor => Colors.pink;
+  double get _currentColorBoardWidth => 2;
 
   @override
   void initState() {
@@ -69,12 +73,7 @@ class _HomeState extends State<Home> {
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: _menu(),
-        title: Text(AppLocalizations.of(context)!.analysisMode),
-        centerTitle: true,
-        actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
-      ),
+      appBar: _appBar,
       body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
           ? _body
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
@@ -93,22 +92,117 @@ class _HomeState extends State<Home> {
               SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _undoAllButton,
-              _undoButton,
-              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              _blackDiscCount,
-              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              _whiteDiscCount,
-              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              _redoButton,
-              _redoAllButton,
-            ],
-          ),
+          _bottomItems,
         ],
       );
+
+  Widget get _bottomItems {
+    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
+    if (boardMode == BoardMode.arrangeDiscs) return _arrangeTargetSelection;
+    return _freePlayOperationItems;
+  }
+
+  Widget get _freePlayOperationItems => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _undoAllButton,
+          _undoButton,
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          _blackDiscCount,
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          _whiteDiscCount,
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+          _redoButton,
+          _redoAllButton,
+        ],
+      );
+
+  Widget get _arrangeTargetSelection {
+    final currentArrangeTargetSquareType =
+        context.select<BoardNotifier, ArrangeTargetType>((final notifier) => notifier.value.arrangeTargetSquareType);
+    final selectedMark = Border.all(color: Colors.red, width: 2);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          key: const Key('switchArrangeTargetToBlack'),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.black),
+          child: Container(
+            width: _arrangeTargetStoneSize,
+            height: _arrangeTargetStoneSize,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+              border: currentArrangeTargetSquareType == ArrangeTargetType.black ? selectedMark : null,
+            ),
+          ),
+        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+        GestureDetector(
+          key: const Key('switchArrangeTargetToWhite'),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.white),
+          child: Container(
+            width: _arrangeTargetStoneSize,
+            height: _arrangeTargetStoneSize,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              border: currentArrangeTargetSquareType == ArrangeTargetType.white ? selectedMark : Border.all(),
+            ),
+          ),
+        ),
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+        GestureDetector(
+          key: const Key('switchArrangeTargetToEmpty'),
+          onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.empty),
+          child: Container(
+            width: _arrangeTargetStoneSize,
+            height: _arrangeTargetStoneSize,
+            decoration: BoxDecoration(
+              color: Colors.green[900],
+              border: currentArrangeTargetSquareType == ArrangeTargetType.empty ? selectedMark : null,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  AppBar get _appBar {
+    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
+    return AppBar(
+      leading: _menu(),
+      title: PopupMenuButton<BoardMode>(
+        initialValue: boardMode,
+        tooltip: AppLocalizations.of(context)!.modeSelectionTooltip,
+        child: Container(
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10)),
+          child: Text(_boardModeString(boardMode)),
+        ),
+        onSelected: (final boardMode) => context.read<BoardNotifier>().switchBoardMode(boardMode),
+        itemBuilder: (final context) => BoardMode.values
+            .map(
+              (final mode) => PopupMenuItem<BoardMode>(
+                value: mode,
+                child: Text(_boardModeString(mode)),
+              ),
+            )
+            .toList(),
+      ),
+      centerTitle: true,
+      actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
+    );
+  }
+
+  String _boardModeString(final BoardMode boardMode) {
+    switch (boardMode) {
+      case BoardMode.freePlay:
+        return AppLocalizations.of(context)!.freePlayMode;
+      case BoardMode.arrangeDiscs:
+        return AppLocalizations.of(context)!.arrangeDiscsMode;
+    }
+  }
 
   Widget get _undoAllButton => IconButton(
         icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
@@ -134,35 +228,53 @@ class _HomeState extends State<Home> {
         onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
       );
 
-  Widget get _blackDiscCount => Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: _discCountImageSize,
-            height: _discCountImageSize,
-            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+  Widget get _blackDiscCount {
+    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: _discCountImageSize,
+          height: _discCountImageSize,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            shape: BoxShape.circle,
+            border: currentColor == TurnColor.black
+                ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
+                : null,
           ),
-          Text(
-            context.select<BoardNotifier, int>((final notifier) => notifier.value.blackDiscCount).toString(),
-            style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
-          )
-        ],
-      );
+        ),
+        Text(
+          context.select<BoardNotifier, int>((final notifier) => notifier.value.blackDiscCount).toString(),
+          style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
+        )
+      ],
+    );
+  }
 
-  Widget get _whiteDiscCount => Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: _discCountImageSize,
-            height: _discCountImageSize,
-            decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, border: Border.all()),
+  Widget get _whiteDiscCount {
+    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: _discCountImageSize,
+          height: _discCountImageSize,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: currentColor == TurnColor.white
+                ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
+                : Border.all(),
           ),
-          Text(
-            context.select<BoardNotifier, int>((final notifier) => notifier.value.whiteDiscCount).toString(),
-            style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
-          )
-        ],
-      );
+        ),
+        Text(
+          context.select<BoardNotifier, int>((final notifier) => notifier.value.whiteDiscCount).toString(),
+          style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
+        )
+      ],
+    );
+  }
 
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
@@ -226,14 +338,11 @@ class _HomeState extends State<Home> {
 
   List<_Menu> get _sortedMenuList => [
         _Menu(
-          _MenuType.bookFilePath,
-          AppLocalizations.of(context)!.bookFilePathSetting,
+          _MenuType.shortcutCheatsheet,
+          AppLocalizations.of(context)!.shortcutCheatsheet,
           () => showDialog<void>(
             context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: BookFilePathSettingDialog(),
-            ),
+            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
           ),
         ),
         _Menu(
@@ -259,11 +368,14 @@ class _HomeState extends State<Home> {
           ),
         ),
         _Menu(
-          _MenuType.shortcutCheatsheet,
-          AppLocalizations.of(context)!.shortcutCheatsheet,
+          _MenuType.bookFilePath,
+          AppLocalizations.of(context)!.bookFilePathSetting,
           () => showDialog<void>(
             context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+            builder: (final _) => ChangeNotifierProvider.value(
+              value: context.read<BoardNotifier>(),
+              child: BookFilePathSettingDialog(),
+            ),
           ),
         ),
         _Menu(

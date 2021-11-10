@@ -11,6 +11,7 @@ import '../engine/api/count_bestpath.dart';
 import '../engine/api/hint_one_by_one.dart';
 import '../engine/api/init.dart';
 import '../engine/api/move.dart';
+import '../engine/api/new.dart';
 import '../engine/api/play.dart';
 import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
@@ -70,6 +71,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void requestInit() => _edaxServerPort.send(const InitRequest());
+  void requestNew() => _edaxServerPort.send(const NewRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
   void requestMove(final String move) => _edaxServerPort.send(MoveRequest(move));
   void requestPlay(final String moves) => _edaxServerPort.send(PlayRequest(moves));
@@ -82,6 +84,16 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
+  void requestSetboard(final int move) {
+    _edaxServerPort.send(
+      SetboardRequest(
+        currentColor: value.currentColor, // TODO: it is desirable to pass as argument.
+        replacementTargets: [SquareReplacement(move, value.arrangeTargetChar)],
+        logger: _logger,
+      ),
+    );
+  }
+
   void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
 
   Future<void> switchHintVisibility() async {
@@ -92,6 +104,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
+  void switchArrangeTarget(final ArrangeTargetType arrangeTargetType) {
+    value.arrangeTargetSquareType = arrangeTargetType;
+    notifyListeners();
+  }
+
   void switchHintStepByStep({required final bool enabled}) {
     value.hintStepByStep = enabled;
     notifyListeners();
@@ -100,6 +117,14 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void switchCountBestpathAvailability({required final bool enabled}) {
     value.countBestpathAvailability = enabled;
     if (!enabled) value.countBestpathList = UnmodifiableListView([]);
+  }
+
+  void switchBoardMode(final BoardMode boardMode) {
+    value
+      ..mode = boardMode
+      ..hints = UnmodifiableListView([]);
+    notifyListeners();
+    if (boardMode == BoardMode.freePlay && value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
   void requestBookLoad(final String path) {
@@ -136,9 +161,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void _onMovesChanged(final String moves) {
-    _requestLatestHintList(moves);
     _requestBookPosition();
-    if (value.countBestpathAvailability) _requestCountBestpath(moves);
+    if (value.mode == BoardMode.freePlay) {
+      _requestLatestHintList(moves);
+      if (value.countBestpathAvailability) _requestCountBestpath(moves);
+    }
   }
 
   // ignore: avoid_annotating_with_dynamic
@@ -171,6 +198,15 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
+      _onMovesChanged(message.moves);
+    } else if (message is NewResponse) {
+      value
+        ..board = message.board
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
+        ..currentColor = message.currentColor
+        ..lastMove = message.lastMove
+        ..currentMoves = message.moves;
       _onMovesChanged(message.moves);
     } else if (message is RotateResponse) {
       _onMovesChanged(message.moves);
@@ -233,7 +269,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..positionDrawsNum = message.position.nDraws
         ..positionLossesNum = message.position.nLosses;
     } else if (message is SetboardResponse) {
-      // TODO: implement
+      value
+        ..board = message.board
+        ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
+        ..squaresOfOpponent = UnmodifiableListView(message.board.squaresOfOpponent)
+        ..currentColor = message.currentColor
+        ..lastMove = message.lastMove
+        ..currentMoves = message.moves;
     } else if (message is SetOptionResponse) {
       // do nothing
     } else {

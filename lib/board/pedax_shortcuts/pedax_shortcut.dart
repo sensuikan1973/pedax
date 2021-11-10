@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 
 import '../../models/board_notifier.dart';
 import 'copy_moves_shortcut.dart';
+import 'init_shortcut.dart';
+import 'new_shortcut.dart';
 import 'paste_moves_shortcut.dart';
 import 'redo_all_shortcut.dart';
 import 'redo_shortcut.dart';
@@ -21,6 +23,8 @@ abstract class PedaxShorcut {
 }
 
 List<PedaxShorcut> shortcutList(final BoardNotifier boardNotifier) => [
+      InitShorcut(boardNotifier),
+      NewShorcut(boardNotifier),
       UndoShorcut(boardNotifier),
       RedoShorcut(boardNotifier),
       UndoAllShorcut(boardNotifier),

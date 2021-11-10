@@ -83,10 +83,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
             children: [
               _yCoordinateLabels,
               _boardBody,
-              _yCoordinateRightPadding,
+              _yCoordinateRightFrame,
             ],
           ),
-          _xCoordinateBottomPadding,
+          _xCoordinateBottomFrame,
         ],
       );
 
@@ -102,7 +102,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Widget get _xCoordinateBottomPadding => Container(
+  Widget get _xCoordinateBottomFrame => Container(
         width: _lengthWithFrame,
         height: widget.frameWidth,
         color: _frameColor,
@@ -121,7 +121,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Widget get _yCoordinateRightPadding =>
+  Widget get _yCoordinateRightFrame =>
       Container(color: _frameColor, height: widget.bodyLength, width: widget.frameWidth);
 
   Widget get _boardBody => Container(
@@ -162,6 +162,16 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final isBookMove = hint != null && hint.isBookMove;
     final level = context.select<BoardNotifier, int>((final notifier) => notifier.value.level);
     final emptyNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.emptyNum);
+    final scoreColor = hint == null
+        ? null
+        : _scoreColor(
+            score: hint.score,
+            isBookMove: isBookMove,
+            isBestMove: hint.score == bestScore,
+            // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
+            searchHasCompleted: hint.depth >= level || hint.depth == emptyNum,
+          );
+    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return Square(
       type: type,
       length: _stoneSize,
@@ -172,19 +182,17 @@ class _PedaxBoardState extends State<PedaxBoard> {
       score: hint?.score,
       bestpathCountOfBlack: _bestpathCount(TurnColor.black, countBestpathResultWithMove),
       bestpathCountOfWhite: _bestpathCount(TurnColor.white, countBestpathResultWithMove),
-      scoreColor: _scoreColor(
-        score: hint?.score,
-        isBookMove: isBookMove,
-        isBestMove: hint?.score == bestScore,
-        // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
-        searchHasCompleted: hint != null && (hint.depth >= level || hint.depth == emptyNum),
-      ),
-      onTap: type != SquareType.empty ? null : () => _squareOnTap(moveString),
+      scoreColor: scoreColor,
+      onTap: () => _squareOnTap(boardMode, type, move),
     );
   }
 
-  void _squareOnTap(final String moveString) {
-    _boardNotifier.requestMove(moveString);
+  void _squareOnTap(final BoardMode boardMode, final SquareType type, final int move) {
+    if (boardMode == BoardMode.freePlay && type == SquareType.empty) {
+      _boardNotifier.requestMove(move2String(move));
+    } else if (boardMode == BoardMode.arrangeDiscs) {
+      _boardNotifier.requestSetboard(move);
+    }
   }
 
   SquareType _squareType(final int move) {
@@ -196,11 +204,11 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final isBlackTurn = currentColor == TurnColor.black;
     if (squaresOfPlayer.contains(move)) {
       return isBlackTurn ? SquareType.black : SquareType.white;
-    }
-    if (squaresOfOpponent.contains(move)) {
+    } else if (squaresOfOpponent.contains(move)) {
       return isBlackTurn ? SquareType.white : SquareType.black;
+    } else {
+      return SquareType.empty;
     }
-    return SquareType.empty;
   }
 
   int? _bestpathCount(final int color, final CountBestpathResultWithMove? countBestpathResultWithMove) {
@@ -222,7 +230,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
     required final bool isBestMove,
     required final bool searchHasCompleted,
   }) {
-    if (score == null) return null;
     final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
     if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
     return color;

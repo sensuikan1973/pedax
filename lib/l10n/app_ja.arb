@@ -1,7 +1,9 @@
 {
   "appTitle": "pedax",
   "initializingEngine": "エンジンの立ち上げ中...",
-  "analysisMode": "解析モード",
+  "modeSelectionTooltip": "モードの選択肢を表示",
+  "freePlayMode": "自由打ちモード",
+  "arrangeDiscsMode": "盤面配置モード",
   "bookFilePathSetting": "book ファイルのパス",
   "about": "このアプリについて",
   "cancelOnDialog": "キャンセル",
@@ -38,5 +40,7 @@
   "shortcutLabelUndoAll": "初手まで戻す",
   "shortcutLabelUndo": "一手戻す",
   "shortcutLabelRotate180": "180 度回転させる",
+  "shortcutLabelInit": "完全な新規局面にする",
+  "shortcutLabelNew": "盤面配置の情報をもとに、新規局面にする",
   "chooseBookFile": "選ぶ"
 }
