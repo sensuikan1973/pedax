@@ -15,7 +15,6 @@ import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
 import 'package:pedax/board/square.dart';
-import 'package:pedax/home/home.dart';
 import 'package:pedax/home/setting_dialogs/bestpath_count_availability_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/hint_step_by_step_setting_dialog.dart';
@@ -205,74 +204,6 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 6); // h4, h5, h6, g5, f6, e7
         await waitEdaxServerResponsed(tester);
       });
-    });
-  });
-
-  testWidgets('arrange discs, and play', (final tester) async {
-    await tester.runAsync(() async {
-      await tester.pumpWidget(const PedaxApp());
-      await waitEdaxSetuped(tester);
-
-      await tester.tap(find.byType(AppBar));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10nEn.arrangeDiscsMode));
-      await tester.pumpAndSettle();
-
-      // arrange black disc
-      await tester.tap(find.byKey(switchArrangeTargetToBlackKey));
-      await tester.pump();
-      await tester.tap(findByCoordinate('h8'));
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 2); // d4, e5
-
-      // arrange white disc
-      await tester.tap(find.byKey(switchArrangeTargetToWhiteKey));
-      await tester.pump();
-      await tester.tap(findByCoordinate('a8'));
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 3); // d4, e5, a8
-
-      // arrange empty disc
-      await tester.tap(find.byKey(switchArrangeTargetToEmptyKey));
-      await tester.pump();
-      await tester.tap(findByCoordinate('d4'));
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      expectStoneNum(tester, SquareType.white, 2); // e5, a8
-
-      // switch board mode to freePlay
-      await tester.tap(find.byType(AppBar));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10nEn.freePlayMode));
-      await tester.pumpAndSettle();
-
-      // move f5
-      await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.white, 1); // a8
-      expectStoneNum(tester, SquareType.black, 5); // d5, e4, h8, e5, f5
-
-      // edaxNew
-      await tester.sendKeyEvent(NewShorcut.logicalKey);
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.white, 2); // e5, a8
-      expectStoneNum(tester, SquareType.black, 3); // d5, e4, h8
-      await waitEdaxServerResponsed(tester);
-
-      // edaxInit
-      await tester.sendKeyEvent(InitShorcut.logicalKey);
-      await waitEdaxServerResponsed(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.white, 2); // d4, e5
-      expectStoneNum(tester, SquareType.black, 2); // d5, e4
-      await waitEdaxServerResponsed(tester);
     });
   });
 

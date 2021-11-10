@@ -57,7 +57,7 @@ flutter run -d macos
 ##### widget test
 
 ```sh
-flutter test
+flutter test --concurrency 1
 ```
 
 ##### integration test

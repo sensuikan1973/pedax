@@ -63,7 +63,7 @@ jobs:
       - name: install dependencies
         run: flutter pub get
       - name: run test
-        run: flutter test --coverage --coverage-path=./coverage/lcov.info
+        run: flutter test --concurrency 1 --coverage --coverage-path=./coverage/lcov.info
       - uses: codecov/codecov-action@v2.1.0
         with:
           file: ./coverage/lcov.info

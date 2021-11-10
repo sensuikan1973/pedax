@@ -23,10 +23,6 @@ import 'setting_dialogs/level_setting_dialog.dart';
 import 'setting_dialogs/n_tasks_setting_dialog.dart';
 import 'setting_dialogs/shortcut_cheatsheet_dialog.dart';
 
-const switchArrangeTargetToBlackKey = Key('switchArrangeTargetToBlack');
-const switchArrangeTargetToWhiteKey = Key('switchArrangeTargetToWhite');
-const switchArrangeTargetToEmptyKey = Key('switchArrangeTargetToEmpty');
-
 @immutable
 class Home extends StatefulWidget {
   const Home({final Key? key}) : super(key: key);
@@ -129,7 +125,7 @@ class _HomeState extends State<Home> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          key: switchArrangeTargetToBlackKey,
+          key: const Key('switchArrangeTargetToBlack'),
           onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.black),
           child: Container(
             width: _arrangeTargetStoneSize,
@@ -143,7 +139,7 @@ class _HomeState extends State<Home> {
         ),
         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
         GestureDetector(
-          key: switchArrangeTargetToWhiteKey,
+          key: const Key('switchArrangeTargetToWhite'),
           onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.white),
           child: Container(
             width: _arrangeTargetStoneSize,
@@ -157,7 +153,7 @@ class _HomeState extends State<Home> {
         ),
         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
         GestureDetector(
-          key: switchArrangeTargetToEmptyKey,
+          key: const Key('switchArrangeTargetToEmpty'),
           onTap: () => context.read<BoardNotifier>().switchArrangeTarget(ArrangeTargetType.empty),
           child: Container(
             width: _arrangeTargetStoneSize,
