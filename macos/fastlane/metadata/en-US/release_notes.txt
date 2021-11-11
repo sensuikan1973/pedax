@@ -1,1 +1,6 @@
-mild improvement of performance.
+[New Feature].
+- Added board arrange discs mode.
+- Added a shortcut key for board initialization.
+
+[Feature Improvement]
+- The outline of the stones at the bottom of the board is now red to make it easier to see the current turn.
