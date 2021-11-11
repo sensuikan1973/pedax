@@ -14,13 +14,16 @@ import 'square.dart';
 
 @immutable
 class PedaxBoard extends StatefulWidget {
-  const PedaxBoard({
+  PedaxBoard({
     required final this.bodyLength,
     final this.frameWidth = defaultFrameWidth,
+    final Color? bodyColor,
     final Key? key,
-  }) : super(key: key);
+  })  : bodyColor = bodyColor ?? Colors.green[900],
+        super(key: key);
   final double bodyLength;
   final double frameWidth;
+  final Color? bodyColor;
 
   static const double defaultFrameWidth = 24;
 
@@ -31,6 +34,7 @@ class PedaxBoard extends StatefulWidget {
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(ColorProperty('bodyColor', bodyColor))
       ..add(DoubleProperty('bodyLength', bodyLength))
       ..add(DoubleProperty('frameWidth', frameWidth));
   }
@@ -125,7 +129,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       Container(color: _frameColor, height: widget.bodyLength, width: widget.frameWidth);
 
   Widget get _boardBody => Container(
-        color: Colors.green[900],
+        color: widget.bodyColor,
         height: widget.bodyLength,
         width: widget.bodyLength,
         child: Table(

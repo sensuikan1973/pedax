@@ -49,9 +49,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
     strategy:
-      fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [windows-2019, macos-11, ubuntu-20.04]
+        os: [windows-2019, macos-11, ubuntu-20.04] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         flutter_channel: [beta]
     steps:
       - uses: actions/checkout@v2
