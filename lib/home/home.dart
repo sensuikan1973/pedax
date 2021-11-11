@@ -45,6 +45,7 @@ class _HomeState extends State<Home> {
   double get _arrangeTargetStoneSize => _discCountImageSize;
   Color get _currentColorBorderColor => Colors.pink;
   double get _currentColorBoardWidth => 2;
+  Color? get _boardBodyColor => Colors.green[900];
 
   @override
   void initState() {
@@ -83,7 +84,7 @@ class _HomeState extends State<Home> {
   Widget get _body => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PedaxBoard(bodyLength: _pedaxBoardBodyLength),
+          PedaxBoard(bodyLength: _pedaxBoardBodyLength, bodyColor: _boardBodyColor),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -159,7 +160,7 @@ class _HomeState extends State<Home> {
             width: _arrangeTargetStoneSize,
             height: _arrangeTargetStoneSize,
             decoration: BoxDecoration(
-              color: Colors.green[900],
+              color: _boardBodyColor,
               border: currentArrangeTargetSquareType == ArrangeTargetType.empty ? selectedMark : null,
             ),
           ),
