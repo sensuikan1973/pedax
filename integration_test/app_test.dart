@@ -84,7 +84,7 @@ Future<void> main() async {
       await tester.tap(find.text(l10n.arrangeDiscsMode));
       await tester.pumpAndSettle();
 
-      // arrange white disc;
+      // arrange black disc;
       await tester.tap(findByCoordinate('a8'));
       await waitEdaxServerResponsed(tester);
       await tester.pump();
