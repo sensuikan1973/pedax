@@ -45,12 +45,18 @@ Future<void> main() async {
 
       await waitEdaxServerResponsed(tester);
       await tester.pump();
-      expectStoneNum(tester, SquareType.black, 2); // e4, d5
+      expectStoneNum(tester, SquareType.black, 2);
+      expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
       await tester.tap(findByCoordinate('f5'));
       await waitEdaxServerResponsed(tester);
       await tester.pump(const Duration(seconds: 1));
-      expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
+      expectStoneNum(tester, SquareType.black, 4);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 1);
+      expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
       // update level setting
       await tester.tap(find.byIcon(Icons.menu));
@@ -71,6 +77,21 @@ Future<void> main() async {
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       final clipboardData = await Clipboard.getData('text/plain');
       expect(clipboardData?.text, 'F5');
+
+      // arrange discs mode
+      await tester.tap(find.byType(AppBar));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10n.arrangeDiscsMode));
+      await tester.pumpAndSettle();
+
+      // arrange white disc;
+      await tester.tap(findByCoordinate('a8'));
+      await waitEdaxServerResponsed(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 5);
+      expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5', 'a8'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 1);
+      expectStoneCoordinates(tester, ['d4'], SquareType.white);
     });
   });
 }
