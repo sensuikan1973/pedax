@@ -14,7 +14,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.5"
+    version: "3.1.6"
   args:
     dependency: transitive
     description:
@@ -238,7 +238,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.0"
+    version: "2.4.0"
   logger:
     dependency: "direct main"
     description:
@@ -371,7 +371,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   provider:
     dependency: "direct main"
     description:
@@ -551,7 +551,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.10"
+    version: "2.3.0"
   window_size:
     dependency: "direct main"
     description:
@@ -577,4 +577,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.15.0-0 <3.0.0"
-  flutter: ">=2.7.0-0"
+  flutter: ">=2.8.0-0"
