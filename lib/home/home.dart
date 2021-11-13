@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
@@ -343,7 +344,12 @@ class _HomeState extends State<Home> {
           AppLocalizations.of(context)!.shortcutCheatsheet,
           () => showDialog<void>(
             context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+            builder: (final _) => ShortcutCheatsheetDialog(
+              shortcutList: shortcutList(
+                context.read<BoardNotifier>(),
+                ScreenshotController(), // FIXME: dummmy
+              ),
+            ),
           ),
         ),
         _Menu(

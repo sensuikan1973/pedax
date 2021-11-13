@@ -9,7 +9,6 @@ import 'pedax_shortcut.dart';
 class NewShorcut implements PedaxShorcut {
   const NewShorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override

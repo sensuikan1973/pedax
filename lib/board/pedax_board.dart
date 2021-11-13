@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../engine/options/book_file_option.dart';
 import '../models/board_notifier.dart';
@@ -50,12 +51,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Color get _coordinateLabelColor => Colors.white54;
   Color get _frameColor => Colors.black;
   double get _lengthWithFrame => widget.bodyLength + widget.frameWidth * 2;
+  ScreenshotController _screenshotController = ScreenshotController();
 
   @override
   void initState() {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
-    _shortcutList = shortcutList(_boardNotifier);
+    _shortcutList = shortcutList(_boardNotifier, _screenshotController);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -67,31 +69,34 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: _lengthWithFrame,
-            color: _frameColor,
-            child: Row(
+  Widget build(final BuildContext context) => Screenshot<Column>(
+        controller: _screenshotController,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: _lengthWithFrame,
+              color: _frameColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                  _xCoordinateLabels,
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                ],
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
-                _xCoordinateLabels,
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                _yCoordinateLabels,
+                _boardBody,
+                _yCoordinateRightFrame,
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _yCoordinateLabels,
-              _boardBody,
-              _yCoordinateRightFrame,
-            ],
-          ),
-          _xCoordinateBottomFrame,
-        ],
+            _xCoordinateBottomFrame,
+          ],
+        ),
       );
 
   Widget get _xCoordinateLabels => Container(

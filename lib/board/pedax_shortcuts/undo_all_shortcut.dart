@@ -9,7 +9,6 @@ import 'pedax_shortcut.dart';
 class UndoAllShorcut implements PedaxShorcut {
   const UndoAllShorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override

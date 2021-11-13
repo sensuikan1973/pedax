@@ -5,6 +5,7 @@ import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_shortcuts/pedax_shortcut.dart';
 import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/models/board_notifier.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
@@ -34,7 +35,12 @@ void main() {
       await tester.runAsync(() async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ShortcutCheatsheetDialog(shortcutList: shortcutList(boardNotifier)),
+            home: ShortcutCheatsheetDialog(
+              shortcutList: shortcutList(
+                boardNotifier,
+                ScreenshotController(), // FIXME: dummy
+              ),
+            ),
             localizationsDelegates: PedaxApp.localizationsDelegates,
             supportedLocales: PedaxApp.supportedLocales,
           ),

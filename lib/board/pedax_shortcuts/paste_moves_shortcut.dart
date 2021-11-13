@@ -11,7 +11,6 @@ import 'pedax_shortcut.dart';
 class PasteMovesShorcut implements PedaxShorcut {
   const PasteMovesShorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override

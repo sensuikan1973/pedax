@@ -9,7 +9,6 @@ import 'pedax_shortcut.dart';
 class Rotate180Shorcut implements PedaxShorcut {
   const Rotate180Shorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override

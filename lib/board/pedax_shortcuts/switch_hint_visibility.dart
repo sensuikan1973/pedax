@@ -9,7 +9,6 @@ import 'pedax_shortcut.dart';
 class SwitchHintVisibilityShorcut implements PedaxShorcut {
   const SwitchHintVisibilityShorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override

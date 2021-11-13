@@ -11,7 +11,6 @@ import 'pedax_shortcut.dart';
 class CopyMovesShorcut implements PedaxShorcut {
   const CopyMovesShorcut(this.boardNotifier);
 
-  @override
   final BoardNotifier boardNotifier;
 
   @override
