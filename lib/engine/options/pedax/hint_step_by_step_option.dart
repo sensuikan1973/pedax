@@ -1,13 +1,10 @@
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'edax_option.dart';
+import 'engine_pedax_option.dart';
 
 @immutable
-class HintStepByStepOption implements EdaxOption<bool> {
+class HintStepByStepOption implements EnginePedaxOption<bool> {
   const HintStepByStepOption();
-
-  @override
-  String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
 
   @override
   @visibleForTesting

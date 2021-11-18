@@ -2,10 +2,10 @@ import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'edax_option.dart';
+import 'engine_native_option.dart';
 
 @immutable
-class LevelOption implements EdaxOption<int> {
+class LevelOption implements EngineNativeOption<int> {
   const LevelOption();
 
   @override

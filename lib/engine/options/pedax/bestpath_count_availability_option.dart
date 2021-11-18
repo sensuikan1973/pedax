@@ -1,13 +1,10 @@
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'edax_option.dart';
+import 'engine_pedax_option.dart';
 
 @immutable
-class BestpathCountAvailabilityOption implements EdaxOption<bool> {
+class BestpathCountAvailabilityOption implements EnginePedaxOption<bool> {
   const BestpathCountAvailabilityOption();
-
-  @override
-  String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
 
   @override
   @visibleForTesting

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
-import '../../engine/options/book_file_option.dart';
+import '../../engine/options/native/book_file_option.dart';
 import '../../models/board_notifier.dart';
 
 @immutable

@@ -3,15 +3,9 @@
 
 import 'package:meta/meta.dart';
 
+import '../engine_option.dart';
+
 @immutable
-abstract class EdaxOption<T> {
+abstract class EngineNativeOption<T> implements EngineOption<T> {
   String get nativeName;
-
-  String get prefKey;
-
-  Future<T> get appDefaultValue;
-
-  Future<T> get val;
-
-  Future<T> update(final T val);
 }

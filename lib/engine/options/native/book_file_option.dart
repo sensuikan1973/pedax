@@ -7,10 +7,10 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'edax_option.dart';
+import 'engine_native_option.dart';
 
 @immutable
-class BookFileOption implements EdaxOption<String> {
+class BookFileOption implements EngineNativeOption<String> {
   const BookFileOption();
 
   @override
