@@ -18,7 +18,7 @@ class NewShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelNew;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃N or ⌘N' : 'Ctrl + N';
+  String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>

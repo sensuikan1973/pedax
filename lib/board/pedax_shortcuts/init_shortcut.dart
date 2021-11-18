@@ -18,7 +18,7 @@ class InitShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelInit;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃I or ⌘I' : 'Ctrl + I';
+  String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
@@ -30,4 +30,6 @@ class InitShorcut implements PedaxShorcut {
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyI;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }
