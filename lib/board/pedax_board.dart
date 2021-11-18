@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
 
-import '../engine/options/book_file_option.dart';
+import '../engine/options/native/book_file_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
 import 'pedax_shortcuts/pedax_shortcut.dart';

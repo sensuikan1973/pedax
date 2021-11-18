@@ -7,11 +7,11 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'options/book_file_option.dart';
-import 'options/edax_option.dart';
-import 'options/eval_file_option.dart';
-import 'options/level_option.dart';
-import 'options/n_tasks_option.dart';
+import 'options/native/book_file_option.dart';
+import 'options/native/engine_native_option.dart';
+import 'options/native/eval_file_option.dart';
+import 'options/native/level_option.dart';
+import 'options/native/n_tasks_option.dart';
 
 @doNotStore
 @immutable
@@ -30,7 +30,7 @@ class EdaxAsset {
   /// When book is large, initialization process becomes slow.
   /// In most cases, loading book should be processed on background
   Future<List<String>> buildInitLibEdaxParams({
-    final List<EdaxOption> options = const [NTasksOption(), EvalFileOption(), LevelOption()],
+    final List<EngineNativeOption> options = const [NTasksOption(), EvalFileOption(), LevelOption()],
   }) async {
     final result = [''];
     for (final option in options) {

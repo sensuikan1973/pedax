@@ -1,20 +1,20 @@
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'edax_option.dart';
+import 'engine_pedax_option.dart';
 
 @immutable
-class HintStepByStepOption implements EdaxOption<bool> {
-  const HintStepByStepOption();
+class BestpathCountAvailabilityOption implements EnginePedaxOption<bool> {
+  const BestpathCountAvailabilityOption();
 
   @override
   String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
 
   @override
   @visibleForTesting
-  String get prefKey => 'hintStepByStep';
+  String get prefKey => 'BestpathCountAvailability';
 
   @override
-  Future<bool> get appDefaultValue async => true;
+  Future<bool> get appDefaultValue async => false;
 
   @override
   Future<bool> get val async {

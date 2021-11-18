@@ -19,8 +19,8 @@ import '../engine/api/set_option.dart';
 import '../engine/api/setboard.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
-import '../engine/options/book_file_option.dart';
-import '../engine/options/level_option.dart';
+import '../engine/options/native/book_file_option.dart';
+import '../engine/options/native/level_option.dart';
 import 'board_state.dart';
 
 class BoardNotifier extends ValueNotifier<BoardState> {

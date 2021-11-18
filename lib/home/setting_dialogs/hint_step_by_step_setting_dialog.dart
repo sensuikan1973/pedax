@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:provider/provider.dart';
 
-import '../../engine/options/hint_step_by_step_option.dart';
+import '../../engine/options/pedax/hint_step_by_step_option.dart';
 import '../../models/board_notifier.dart';
 
 class HintStepByStepSettingDialog extends StatelessWidget {

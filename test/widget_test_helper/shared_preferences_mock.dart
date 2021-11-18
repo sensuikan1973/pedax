@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
-import 'package:pedax/engine/options/bestpath_count_availability_option.dart';
-import 'package:pedax/engine/options/book_file_option.dart';
-import 'package:pedax/engine/options/eval_file_option.dart';
+import 'package:pedax/engine/options/native/book_file_option.dart';
+import 'package:pedax/engine/options/native/eval_file_option.dart';
+import 'package:pedax/engine/options/pedax/bestpath_count_availability_option.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _evalFileOption = EvalFileOption();
