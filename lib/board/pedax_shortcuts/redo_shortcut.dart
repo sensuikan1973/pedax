@@ -16,7 +16,7 @@ class RedoShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelRedo;
 
   @override
-  String get keys => '${logicalKey.keyLabel.toUpperCase()} or ${logicalKeyArrowRight.keyLabel.toUpperCase()}';
+  String get keys => '${logicalKey.keyLabel.toUpperCase()} or →';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>

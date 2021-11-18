@@ -16,7 +16,7 @@ class UndoShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelUndo;
 
   @override
-  String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ${logicalKeyArrowLeft.keyLabel.toUpperCase()}';
+  String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ←';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
