@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
@@ -87,7 +88,9 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['a8'], SquareType.white);
 
       // edaxNew
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(NewShorcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await waitEdaxServerResponsed(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
@@ -95,8 +98,9 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['e5', 'a8'], SquareType.white);
 
-      // edaxInit
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(InitShorcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await waitEdaxServerResponsed(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2);

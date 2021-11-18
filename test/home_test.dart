@@ -6,8 +6,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
+import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/init_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/new_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
@@ -88,7 +90,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 3);
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
-        await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
+        await tester.sendKeyEvent(RedoShorcut.logicalKey);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
@@ -176,7 +178,9 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['c5', 'e5'], SquareType.white);
 
-        await tester.sendKeyEvent(InitShorcut.logicalKey);
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+        await tester.sendKeyEvent(NewShorcut.logicalKey);
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
@@ -184,7 +188,9 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
-        await tester.sendKeyEvent(NewShorcut.logicalKey);
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+        await tester.sendKeyEvent(InitShorcut.logicalKey);
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
@@ -303,7 +309,7 @@ Future<void> main() async {
 
       // paste
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+      await tester.sendKeyEvent(PasteMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await tester.pumpAndSettle();
@@ -313,7 +319,7 @@ Future<void> main() async {
 
       // copy
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+      await tester.sendKeyEvent(CopyMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await waitEdaxServerResponsed(tester);

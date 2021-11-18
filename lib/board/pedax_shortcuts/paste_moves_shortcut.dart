@@ -18,12 +18,12 @@ class PasteMovesShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelPasteMoves;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃V or ⌘V' : 'Ctrl + V';
+  String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
-      (keyEvent.isControlPressed && keyEvent.isKeyPressed(LogicalKeyboardKey.keyV)) ||
-      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyV));
+      (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
+      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
 
   @override
   Future<void> runEvent() async {
@@ -33,4 +33,9 @@ class PasteMovesShorcut implements PedaxShorcut {
       ..requestInit()
       ..requestPlay(clipboardData.text!);
   }
+
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyV;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }
