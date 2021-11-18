@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
@@ -16,10 +18,12 @@ class InitShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelInit;
 
   @override
-  String get keys => logicalKey.keyLabel.toUpperCase();
+  String get keys => Platform.isMacOS ? '⌃I or ⌘I' : 'Ctrl + I';
 
   @override
-  bool fired(final RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
+  bool fired(final RawKeyEvent keyEvent) =>
+      (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
+      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
 
   @override
   Future<void> runEvent() async => boardNotifier.requestInit();
