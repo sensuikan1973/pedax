@@ -7,9 +7,6 @@ class BestpathCountAvailabilityOption implements EnginePedaxOption<bool> {
   const BestpathCountAvailabilityOption();
 
   @override
-  String get nativeName => ''; // NOTE: nothing. this option is provided pedax.
-
-  @override
   @visibleForTesting
   String get prefKey => 'BestpathCountAvailability';
 
