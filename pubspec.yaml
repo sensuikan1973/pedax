@@ -50,7 +50,7 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.7 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.1
-  shared_preferences: ^2.0.8
+  shared_preferences: ^2.0.9
   url_launcher: ^6.0.13
   window_size:
     git:
