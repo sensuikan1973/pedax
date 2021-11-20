@@ -50,7 +50,6 @@ Stream<HintOneByOneResponse> executeHintOneByOne(
       ..edaxSetOption('-level', level.toString())
       ..edaxHintPrepare();
     request.logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
-    // ignore: literal_only_boolean_expressions
     while (true) {
       final currentMoves = edax.edaxGetMoves();
       if (currentMoves != request.movesAtRequest) {

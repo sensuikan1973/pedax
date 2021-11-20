@@ -84,7 +84,6 @@ class EdaxServer {
           parentSendPort.send(executePlay(edax, message));
         } else if (message is HintOneByOneRequest) {
           _latestHintntOneByOneRequest = message;
-          // ignore: literal_only_boolean_expressions
           while (true) {
             if (_computingHintOneByOne) {
               await Future<void>.delayed(const Duration(milliseconds: 5));
@@ -121,7 +120,6 @@ class EdaxServer {
           parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
         } else if (message is CountBestpathRequest) {
           _latestCountBestpathRequest = message;
-          // ignore: literal_only_boolean_expressions
           while (true) {
             if (_computingCountBestpath) {
               await Future<void>.delayed(const Duration(milliseconds: 5));
