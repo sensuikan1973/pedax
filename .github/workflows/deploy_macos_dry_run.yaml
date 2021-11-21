@@ -29,12 +29,9 @@ jobs:
 
       - name: dry-run deployment script
         uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 20
-          max_attempts: 3
-          shell: zsh {0}
-          command: |
-             REVISION=$GITHUB_SHA
-             P8_PATH="README.md" # dummy for dry-run
-             ./scripts/deploy_macos_app_to_app_store.sh -revision $REVISION -p8-file-path $P8_PATH --dry-run
+        shell: zsh {0}
+        run: |
+          REVISION=$GITHUB_SHA
+          P8_PATH="README.md" # dummy for dry-run
+          ./scripts/deploy_macos_app_to_app_store.sh -revision $REVISION -p8-file-path $P8_PATH --dry-run
          
