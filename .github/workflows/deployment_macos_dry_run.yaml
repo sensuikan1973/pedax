@@ -19,7 +19,8 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: beta
-      - run: |
+      - shell: zsh {0}
+        run: |
           TAG=$GITHUB_SHA
           P8_PATH="dummy for dry-run"
 
