@@ -28,7 +28,6 @@ jobs:
         run: echo $ZSH_NAME $ZSH_VERSION
 
       - name: dry-run deployment script
-        uses: nick-invision/retry@v2
         shell: zsh {0}
         run: |
           REVISION=$GITHUB_SHA
