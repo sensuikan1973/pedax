@@ -31,5 +31,5 @@ jobs:
         shell: zsh {0}
         run: |
           REVISION=$GITHUB_SHA
-          P8_PATH="dummy for dry-run"
+          P8_PATH="README.md" # dummy for dry-run
           ./scripts/deploy_macos_app_to_app_store.sh -revision $REVISION -p8-file-path $P8_PATH --dry-run
