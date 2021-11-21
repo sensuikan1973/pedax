@@ -1,0 +1,30 @@
+name: Flutter Deployment MacOS dry-run
+
+on:
+  pull_request:
+    paths:
+      - 'pubspec.*'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - '.github/workflows/deployment_macos_dry_run.yaml'
+  push:
+    branches: [main]
+
+jobs:
+  dry-run-deployment-script:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: beta
+      - run: |
+          TAG=$GITHUB_SHA
+          P8_PATH="dummy for dry-run"
+
+          ASC_KEY_ID="dummy for dry-run" \
+          ASC_ISSUER_ID="dummy for dry-run" \
+          APPLE_ID="dummy for dry-run" \
+          ITC_TEAM_ID="dummy for dry-run" \
+          ./scripts/deploy_macos_app_to_app_store.sh -tag $TAG -p8-file-path $P8_PATH --dry-run
