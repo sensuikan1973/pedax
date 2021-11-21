@@ -1,0 +1,35 @@
+name: Flutter Deployment MacOS dry-run
+
+on:
+  pull_request:
+    paths:
+      - 'macos/**'
+      - 'scripts/deploy_macos_app_to_app_store.sh'
+      - '.github/workflows/deploy_macos_dry_run.yaml'
+  push:
+    branches: [main]
+
+jobs:
+  deployment:
+    runs-on: macos-11
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: beta
+
+      - name: setup
+        shell: bash
+        run: .github/scripts/setup_on_macos.sh
+
+      - name: display shell info
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
+        run: echo $ZSH_NAME $ZSH_VERSION
+
+      - name: dry-run deployment script
+        shell: zsh {0}
+        run: |
+          REVISION=$GITHUB_SHA
+          P8_PATH="README.md" # dummy for dry-run
+          ./scripts/deploy_macos_app_to_app_store.sh -revision $REVISION -p8-file-path $P8_PATH --dry-run
