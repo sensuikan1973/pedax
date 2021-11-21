@@ -5,7 +5,7 @@ on:
     paths:
       - 'macos/**'
       - 'scripts/deploy_macos_app_to_app_store.sh'
-      - '.github/workflows/deployment_macos_dry_run.yaml'
+      - '.github/workflows/deploy_macos_dry_run.yaml'
   push:
     branches: [main]
 
