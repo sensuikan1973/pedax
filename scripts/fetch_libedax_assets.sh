@@ -1,3 +1,4 @@
+#!/bin/zsh
 set -uxo pipefail
 
 mkdir -p assets/libedax
