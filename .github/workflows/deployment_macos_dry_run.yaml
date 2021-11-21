@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  dry-run-deployment-script:
+  deployment:
     runs-on: macos-11
     timeout-minutes: 20
     steps:
