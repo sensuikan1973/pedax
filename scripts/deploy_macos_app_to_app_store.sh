@@ -23,7 +23,7 @@ flutter upgrade
 
 flutter clean
 
-flutter test
+flutter test --concurrency=1
 
 flutter clean
 flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
