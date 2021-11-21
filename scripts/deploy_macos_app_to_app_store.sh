@@ -33,7 +33,7 @@ flutter clean
 flutter build macos --release
 
 cd macos
-bundle install
+bundle install --deployment
 
 export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
 
