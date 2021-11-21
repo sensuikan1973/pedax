@@ -3,10 +3,10 @@ set -euxo pipefail
 
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
-zparseopts -D -F -A opthash -- -dry-run tag: p8-file-path:
+zparseopts -D -F -A opthash -- -dry-run revision: p8-file-path:
 
-if [[ -z "${opthash[(i)-tag]}" ]]; then
-  echo "tag is required"
+if [[ -z "${opthash[(i)-revision]}" ]]; then
+  echo "revision is required"
   exit
 fi
 
@@ -16,7 +16,7 @@ if [ -z "${opthash[(i)-p8-file-path]}" ]; then
 fi
 
 git fetch --all --prune
-git checkout ${opthash[-tag]}
+git checkout ${opthash[-revision]}
 
 flutter channel beta
 flutter upgrade

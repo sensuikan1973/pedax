@@ -99,7 +99,7 @@ ASC_KEY_ID=xxx \
 ASC_ISSUER_ID=xxx \
 APPLE_ID=xxx \
 ITC_TEAM_ID=xxx \
-./scripts/deploy_macos_app_to_app_store.sh $TAG $P8_PATH
+./scripts/deploy_macos_app_to_app_store.sh -tag $TAG -p8-file-path $P8_PATH --dry-run
 ```
 
 After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
