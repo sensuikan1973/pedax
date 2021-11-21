@@ -19,6 +19,10 @@ jobs:
         with:
           channel: beta
 
+      - name: setup
+        shell: bash
+        run: .github/scripts/setup_on_macos.sh
+
       - name: display shell info
         shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
         run: echo $ZSH_NAME $ZSH_VERSION
