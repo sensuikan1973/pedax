@@ -12,14 +12,20 @@ on:
 
 jobs:
   dry-run-deployment-script:
-    runs-on: ubuntu-20.04
+    runs-on: macos-11
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
           channel: beta
-      - shell: zsh {0}
+
+      - name: display shell info
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
+        run: echo $ZSH_NAME $ZSH_VERSION
+
+      - name: dry-run deployment script
+        shell: zsh {0}
         run: |
           TAG=$GITHUB_SHA
           P8_PATH="dummy for dry-run"
