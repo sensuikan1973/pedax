@@ -13,10 +13,10 @@
   <em>pedax</em> has 4 features.
   <ul>
     <li>
-      <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
+      <b>Mac/Windows/Linux</b> are supported. <a href="https://sensuikan1973.github.io/pedax/">I distribute on Mac App Store and Microsoft Store</a>.
     </li>
     <li>
-      <b>Mac/Windows</b> are supported. Linux is still not verified.
+      <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
     </li>
     <li>
       <b>Customizable</b> important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
