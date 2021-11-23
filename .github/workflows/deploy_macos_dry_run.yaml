@@ -8,6 +8,10 @@ on:
       - '.github/workflows/deploy_macos_dry_run.yaml'
   push:
     branches: [main]
+    paths:
+      - 'macos/**'
+      - 'scripts/deploy_macos_app_to_app_store.sh'
+      - '.github/workflows/deploy_macos_dry_run.yaml'
 
 jobs:
   deployment:
