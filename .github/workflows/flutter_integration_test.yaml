@@ -28,7 +28,7 @@ on:
 jobs:
   integration_test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 25
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
