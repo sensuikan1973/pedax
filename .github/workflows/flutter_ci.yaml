@@ -62,11 +62,13 @@ jobs:
         include:
           - os: windows-2019
             setup_desktop_script: .github/scripts/setup_on_windows.sh
+            integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.info
           - os: macos-11
             setup_desktop_script: .github/scripts/setup_on_macos.sh
+            integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.info
           - os: ubuntu-20.04
             setup_desktop_script: .github/scripts/setup_on_linux.sh
-
+            integration_test_command: 'timeout 180 xvfb-run -a flutter drive -d linux --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
@@ -90,7 +92,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 3
-          command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.info
+          command: ${{ matrix.integration_test_command }}
       - uses: codecov/codecov-action@v2.1.0
         with:
           file: ./coverage/lcov.info
