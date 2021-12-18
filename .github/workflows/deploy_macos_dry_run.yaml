@@ -20,10 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
-        with:
-          channel: beta
-
-      - name: setup
+      - name: setup flutter channel
+        run: .github/scripts/setup_flutter_channel.sh
+      - name: setup flutter desktop
         shell: bash
         run: .github/scripts/setup_on_macos.sh
 
