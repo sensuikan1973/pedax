@@ -6,8 +6,12 @@ on:
       - '**.dart'
       - 'pubspec.*'
       - 'analysis_options.yaml'
-      - 'assets/libedax/**'
       - '.github/workflows/flutter_ci.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
       - '.libedax_assets_tag'
       - '.codecov.yml'
   push:
@@ -16,8 +20,12 @@ on:
       - '**.dart'
       - 'pubspec.*'
       - 'analysis_options.yaml'
-      - 'assets/libedax/**'
       - '.github/workflows/flutter_ci.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
       - '.libedax_assets_tag'
       - '.codecov.yml'
 
@@ -47,7 +55,7 @@ jobs:
   widget_test:
     needs: [format, analyze]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 20
     strategy:
       matrix:
         os: [windows-2019, macos-11, ubuntu-20.04] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
@@ -71,12 +79,18 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-      - name: run test with retry
+      - name: run widget test with retry
         uses: nick-invision/retry@v2
         with:
-          timeout_minutes: 10
+          timeout_minutes: 5
           max_attempts: 3
-          command: flutter test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.info
+          command: flutter test test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.info
+      - name: run integration test with retry
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          command: flutter test intergration_test --verbose --coverage --coverage-path=./coverage/lcov.info
       - uses: codecov/codecov-action@v2.1.0
         with:
           file: ./coverage/lcov.info
