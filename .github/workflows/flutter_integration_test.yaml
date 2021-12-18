@@ -57,5 +57,9 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-      - name: drive
-        run: ${{ matrix.driver_test_command }}
+      - name: run driver test with retry
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: ${{ matrix.driver_test_command }}
