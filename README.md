@@ -53,13 +53,13 @@ flutter run -d macos
 #### [widget test](https://docs.flutter.dev/testing#widget-tests)
 
 ```sh
-flutter test --concurrency=1
+flutter test test --concurrency=1
 ```
 
 #### [integration test](https://docs.flutter.dev/testing#integration-tests)
 
 ```sh
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
+flutter test integration_test
 ```
 
 #### [linter](https://dart-lang.github.io/linter/lints/)
