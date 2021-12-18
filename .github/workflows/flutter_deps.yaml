@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
       - name: setup flutter channel
-        run: .github/scripts/setup_flutter_channel.sh
+        run: ./scripts/setup_flutter_channel.sh
       - run: flutter doctor -v
       - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
 

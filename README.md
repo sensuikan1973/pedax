@@ -34,9 +34,7 @@
 
 ![Flutter CI](https://github.com/sensuikan1973/pedax/workflows/Flutter%20CI/badge.svg)
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
-![Flutter Integration Test](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Integration%20Test/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
-
 
 ### [format](https://docs.flutter.dev/development/tools/formatting)
 
@@ -55,13 +53,13 @@ flutter run -d macos
 #### [widget test](https://docs.flutter.dev/testing#widget-tests)
 
 ```sh
-flutter test --concurrency=1
+flutter test test --concurrency=1
 ```
 
 #### [integration test](https://docs.flutter.dev/testing#integration-tests)
 
 ```sh
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
+flutter test integration_test
 ```
 
 #### [linter](https://dart-lang.github.io/linter/lints/)

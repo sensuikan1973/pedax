@@ -18,7 +18,7 @@ fi
 git fetch --all --prune
 git checkout ${opthash[-revision]}
 
-source .github/scripts/setup_flutter_channel.sh
+source ./scripts/setup_flutter_channel.sh
 
 flutter test --concurrency=1
 
