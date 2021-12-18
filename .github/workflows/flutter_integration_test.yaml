@@ -33,27 +33,26 @@ jobs:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
         os: [windows-2019, macos-11, ubuntu-20.04]
-        flutter_channel: [beta]
         include:
           - os: windows-2019
-            setup_script: .github/scripts/setup_on_windows.sh
+            setup_desktop_script: .github/scripts/setup_on_windows.sh
             driver_test_command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d windows
           - os: macos-11
-            setup_script: .github/scripts/setup_on_macos.sh
+            setup_desktop_script: .github/scripts/setup_on_macos.sh
             driver_test_command: flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
           - os: ubuntu-20.04
-            setup_script: .github/scripts/setup_on_linux.sh
+            setup_desktop_script: .github/scripts/setup_on_linux.sh
             # See: http://manpages.ubuntu.com/manpages/trusty/man1/xvfb-run.1.html
             driver_test_command: 'timeout 180 xvfb-run -a flutter drive -d linux --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
 
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
-        with:
-          channel: ${{ matrix.flutter_channel }}
-      - name: setup flutter
+      - name: setup flutter channel
+        run: .github/scripts/setup_flutter_channel.sh
+      - name: setup flutter desktop
         shell: bash
-        run: ${{ matrix.setup_script }}
+        run: ${{ matrix.setup_desktop_script }}
       - name: doctor
         run: flutter doctor -v
       - name: install dependencies

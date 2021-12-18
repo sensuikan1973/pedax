@@ -18,10 +18,7 @@ fi
 git fetch --all --prune
 git checkout ${opthash[-revision]}
 
-flutter channel beta
-flutter upgrade
-
-flutter clean
+source .github/scripts/setup_flutter_channel.sh
 
 flutter test --concurrency=1
 
