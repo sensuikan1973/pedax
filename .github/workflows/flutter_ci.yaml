@@ -52,7 +52,7 @@ jobs:
         run: flutter pub get
       - run: flutter analyze --fatal-infos --fatal-warnings .
 
-  widget_test:
+  test:
     needs: [format, analyze]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
