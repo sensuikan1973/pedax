@@ -37,35 +37,34 @@
 ![Flutter Integration Test](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Integration%20Test/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
-### commands
 
-#### format
+### [format](https://docs.flutter.dev/development/tools/formatting)
 
 ```sh
 flutter format -l 120 .
 ```
 
-#### run
+### [run](https://docs.flutter.dev/desktop#create-and-run)
 
 ```sh
 flutter run -d macos
 ```
 
-#### test
+### [test](https://docs.flutter.dev/testing)
 
-##### widget test
+#### [widget test](https://docs.flutter.dev/testing#widget-tests)
 
 ```sh
 flutter test --concurrency=1
 ```
 
-##### integration test
+#### [integration test](https://docs.flutter.dev/testing#integration-tests)
 
 ```sh
 flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
 ```
 
-#### linter
+#### [linter](https://dart-lang.github.io/linter/lints/)
 
 ```sh
 flutter analyze .
