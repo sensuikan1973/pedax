@@ -5,7 +5,7 @@ echo "See: https://flutter.dev/desktop#windows"
 
 flutter pub run msix:create
 
-# For developers which want to run `.exe` directory, repack ***.dll.
+# For developers which want to run `.exe` directoly, I repack ***.dll.
 # See: https://flutter.dev/desktop#building-your-own-zip-file-for-windows
 # REF: https://github.com/sensuikan1973/pedax/pull/71#issuecomment-798849250
 # REF: https://github.com/sensuikan1973/pedax/pull/83#issuecomment-803240876
