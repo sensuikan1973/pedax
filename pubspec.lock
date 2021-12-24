@@ -287,7 +287,7 @@ packages:
       name: msix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.6"
+    version: "2.6.7"
   nested:
     dependency: transitive
     description:
@@ -322,7 +322,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.10"
+    version: "2.0.11"
   path_provider_ios:
     dependency: transitive
     description:
@@ -593,7 +593,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   window_size:
     dependency: "direct main"
     description:
