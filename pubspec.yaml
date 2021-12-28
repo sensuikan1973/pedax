@@ -87,6 +87,4 @@ msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
   publisher: CN=4CCE9711-39B6-4ECC-AA74-A350014A69B0
   languages: en, ja
   logo_path: assets/images/pedax_logo.png
-  start_menu_icon_path: assets/images/pedax_logo.png
-  tile_icon_path: assets/images/pedax_logo.png
   architecture: x64
