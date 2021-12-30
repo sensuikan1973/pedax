@@ -50,7 +50,7 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.8 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   path_provider_macos: ^2.0.4 # for test/widget_test_helper/libedax_assets.dart
-  provider: ^6.0.1
+  provider: ^6.0.2
   shared_preferences: ^2.0.11
   url_launcher: ^6.0.17
   window_size:
