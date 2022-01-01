@@ -34,9 +34,7 @@ Future<void> main() async {
     });
 
     testWidgets('window size is smaller than min', (final tester) async {
-      setUp(() {
-        setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width - 1, pedaxWindowMinSize.height - 1));
-      });
+      setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width - 1, pedaxWindowMinSize.height - 1));
       await tester.runAsync(() async {
         await app.main();
         await tester.pumpAndSettle();
@@ -61,9 +59,7 @@ Future<void> main() async {
     });
 
     testWidgets('window size is larger than min', (final tester) async {
-      setUp(() {
-        setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
-      });
+      setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
       await tester.runAsync(() async {
         await app.main();
         await tester.pumpAndSettle();
