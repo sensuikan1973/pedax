@@ -23,11 +23,14 @@ import '../test_helper/secure_bookmark_mock.dart';
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  setUpAll(() {
+    mockSecureBookmark();
+    Logger.level = Level.nothing;
+  });
+
   group('first launch', () {
     setUp(() {
       SharedPreferences.setMockInitialValues({}); // always first launch
-      mockSecureBookmark();
-      Logger.level = Level.nothing;
     });
 
     group('window size is smaller than min', () {
