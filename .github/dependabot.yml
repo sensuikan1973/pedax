@@ -12,6 +12,7 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["website", "dependencies"]
+    versioning-strategy: increase
 
   - package-ecosystem: "bundler"
     directory: "/macos"
@@ -20,6 +21,7 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["mac", "dependencies"]
+    versioning-strategy: increase
 
   # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/keeping-your-actions-up-to-date-with-dependabot
   - package-ecosystem: "github-actions"
