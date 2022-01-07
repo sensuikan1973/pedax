@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2.0.3
       - name: setup flutter channel
         run: ./scripts/setup_flutter_channel.sh
       - name: setup flutter desktop
