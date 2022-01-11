@@ -49,10 +49,10 @@ dependencies:
   meta: ^1.7.0
   path: ^1.8.0
   path_provider: ^2.0.8 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  path_provider_macos: ^2.0.4 # for test/widget_test_helper/libedax_assets.dart
+  path_provider_macos: ^2.0.5 # for test/widget_test_helper/libedax_assets.dart
   provider: ^6.0.2
-  shared_preferences: ^2.0.11
-  url_launcher: ^6.0.17
+  shared_preferences: ^2.0.12
+  url_launcher: ^6.0.18
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
