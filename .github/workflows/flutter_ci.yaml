@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.1.0
+      - uses: subosito/flutter-action@v2.2.0
       - name: setup flutter channel
         run: ./scripts/setup_flutter_channel.sh
       - run: flutter format -l 120 --set-exit-if-changed .
@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.1.0
+      - uses: subosito/flutter-action@v2.2.0
       - name: setup flutter channel
         run: ./scripts/setup_flutter_channel.sh
       - name: install dependencies
@@ -71,7 +71,7 @@ jobs:
             integration_test_command: 'timeout 180 xvfb-run -a flutter drive -d linux --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.1.0
+      - uses: subosito/flutter-action@v2.2.0
       - name: setup flutter channel
         run: ./scripts/setup_flutter_channel.sh
       - name: setup flutter desktop
