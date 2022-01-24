@@ -217,4 +217,4 @@ DEPENDENCIES
   fastlane (~> 2.201.1)
 
 BUNDLED WITH
-   2.2.31
+   2.3.5
