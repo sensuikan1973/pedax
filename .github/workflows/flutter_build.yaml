@@ -29,7 +29,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 20
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
