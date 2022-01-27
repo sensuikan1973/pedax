@@ -8,7 +8,7 @@ mkdir -p $data_dst
 tmp_dst=libedax_assets_tmp
 mkdir -p $tmp_dst
 
-tag=$(cat .libedax_assets_tag)
+tag=$(cat pubspec.yaml | grep 'libedax4dart:' | awk -F '^' '{print $2}')
 asset_url_prefix=https://github.com/sensuikan1973/libedax4dart/releases/download/$tag
 # See: https://github.com/sensuikan1973/libedax4dart/releases/latest
 
