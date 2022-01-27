@@ -1,6 +1,6 @@
 # See: https://docusaurus.io/docs/deployment#deploying-to-github-pages
 
-name: Deploy Website
+name: Build Website
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
       - 'website/**'
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
