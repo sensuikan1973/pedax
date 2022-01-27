@@ -213,13 +213,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
-  injector:
-    dependency: transitive
-    description:
-      name: injector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   integration_test:
     dependency: "direct dev"
     description: flutter
@@ -294,7 +287,7 @@ packages:
       name: msix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.2"
+    version: "2.8.3"
   nested:
     dependency: transitive
     description:
