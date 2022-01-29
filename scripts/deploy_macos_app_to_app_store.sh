@@ -23,7 +23,7 @@ source ./scripts/setup_flutter_channel.sh
 flutter test --concurrency=1
 
 flutter clean
-flutter drive --driver integration_test/driver.dart --target integration_test/app_test.dart -d macos
+flutter test integration_test
 
 # See: https://flutter.dev/desktop#macos
 flutter clean
