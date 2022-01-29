@@ -88,7 +88,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 3
-          command: flutter test test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.info
+          command: flutter test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.info
       - name: run integration test with retry
         uses: nick-invision/retry@v2
         with:
