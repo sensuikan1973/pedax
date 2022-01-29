@@ -46,7 +46,7 @@ class BoardState {
   String get arrangeTargetChar {
     if (arrangeTargetSquareType == ArrangeTargetType.black) return ColorChar.black;
     if (arrangeTargetSquareType == ArrangeTargetType.white) return ColorChar.white;
-    return '-';
+    return ColorChar.empty;
   }
 }
 
