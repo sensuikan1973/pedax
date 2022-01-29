@@ -1,9 +1,6 @@
 #!/bin/zsh
 set -euxo pipefail
 
-bundle --version
-ruby --version
-
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
 zparseopts -D -F -A opthash -- -dry-run revision: p8-file-path:
@@ -33,16 +30,20 @@ flutter clean
 flutter build macos --release
 
 cd macos
+
+bundle --version
+ruby --version
+
 bundle config set --local deployment 'true'
 bundle install
-
+bundle exec fastlane list
 export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
 
 git diff --exit-code
 
 if [[ -n "${opthash[(i)--dry-run]}" ]]; then
-  echo "exit withoud running fastlane deploy based on dry-run option."
+  echo "exit without running fastlane deploy_app_store, because dry-run option is specified"
   exit
 fi
 
-bundle exec fastlane deploy_app_store # require ENV variables
+bundle exec fastlane deploy_app_store # require ENV variables. See: macos/fastlane/Fastfile
