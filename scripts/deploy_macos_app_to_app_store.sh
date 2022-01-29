@@ -41,7 +41,7 @@ bundle exec fastlane list
 git diff --exit-code
 
 if [[ -n "${opthash[(i)--dry-run]}" ]]; then
-  echo "exit withoud running fastlane deploy based on dry-run option."
+  echo "exit without running fastlane deploy based on dry-run option."
   exit
 fi
 
