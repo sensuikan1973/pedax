@@ -52,7 +52,7 @@ SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest reque
   for (final replacementTarget in request.replacementTargets) {
     boardStr = boardStr.replaceFirst(RegExp('.'), replacementTarget.char, replacementTarget.offset);
   }
-  final currentColorChar = request.currentColor == TurnColor.black ? '*' : 'O';
+  final currentColorChar = request.currentColor == TurnColor.black ? ColorChar.black : ColorChar.white;
   boardStr = boardStr.replaceFirst(RegExp('.'), currentColorChar, 64);
 
   request.logger.d('setboard $boardStr');
