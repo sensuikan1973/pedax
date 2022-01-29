@@ -36,8 +36,7 @@ ruby --version
 
 bundle config set --local deployment 'true'
 bundle install
-
-export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
+bundle exec fastlane list
 
 git diff --exit-code
 
@@ -46,4 +45,5 @@ if [[ -n "${opthash[(i)--dry-run]}" ]]; then
   exit
 fi
 
-bundle exec fastlane deploy_app_store # require ENV variables
+export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
+bundle exec fastlane deploy_app_store # require ENV variables. See: macos/fastlane/Fastfile
