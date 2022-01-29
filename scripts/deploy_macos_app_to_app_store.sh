@@ -1,9 +1,6 @@
 #!/bin/zsh
 set -euxo pipefail
 
-bundle --version
-ruby --version
-
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
 zparseopts -D -F -A opthash -- -dry-run revision: p8-file-path:
@@ -33,6 +30,10 @@ flutter clean
 flutter build macos --release
 
 cd macos
+
+bundle --version
+ruby --version
+
 bundle config set --local deployment 'true'
 bundle install
 
