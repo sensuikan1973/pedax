@@ -17,6 +17,7 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
+        shell: bash
         run: ./scripts/setup_flutter_channel.sh
       - run: flutter doctor -v
       - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
