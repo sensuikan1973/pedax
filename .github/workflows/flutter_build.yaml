@@ -58,6 +58,7 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
+        shell: bash
         run: ./scripts/setup_flutter_channel.sh
       - name: setup flutter desktop
         shell: bash
