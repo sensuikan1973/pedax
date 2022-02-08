@@ -33,7 +33,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.2.1
+      - uses: subosito/flutter-action@v2.3.0
         with:
           cache: true
       - name: setup flutter channel
@@ -46,7 +46,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.2.1
+      - uses: subosito/flutter-action@v2.3.0
         with:
           cache: true
       - name: setup flutter channel
@@ -75,7 +75,7 @@ jobs:
             integration_test_command: 'timeout 180 xvfb-run -a flutter drive -d linux --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2.2.1
+      - uses: subosito/flutter-action@v2.3.0
       - name: setup flutter channel
         shell: bash
         run: ./scripts/setup_flutter_channel.sh
