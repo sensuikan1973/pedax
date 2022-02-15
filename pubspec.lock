@@ -308,7 +308,7 @@ packages:
       name: msix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   nested:
     dependency: transitive
     description:
@@ -628,7 +628,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.11"
+    version: "2.4.0"
   window_size:
     dependency: "direct main"
     description:
