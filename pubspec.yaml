@@ -23,7 +23,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 2.3.0+29
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
   flutter: ^2.8.1 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
@@ -40,7 +40,7 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.2.0
   intl: ^0.17.0 # Use the pinned version from flutter_localizations
-  libedax4dart: ^2.8.0
+  libedax4dart: ^2.9.1
     # git:
     #   url: https://github.com/sensuikan1973/libedax4dart.git
     #   branch: xxx
@@ -65,7 +65,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^3.0.1
+  msix: ^3.1.0
   pedantic_sensuikan1973: ^3.1.0
 
 flutter:
