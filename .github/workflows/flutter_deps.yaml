@@ -25,7 +25,7 @@ jobs:
         working-directory: macos
         run: pod install
       - name: upgrade external binary
-        shell: bash
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
         run: ./scripts/fetch_libedax_assets.sh
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
