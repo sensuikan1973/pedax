@@ -9,7 +9,7 @@ on:
 
 jobs:
   upgrade_flutter_dependencies:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
