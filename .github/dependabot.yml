@@ -12,7 +12,6 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["website", "dependencies"]
-    versioning-strategy: increase
 
   - package-ecosystem: "bundler"
     directory: "/macos"
