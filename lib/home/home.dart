@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -404,10 +405,13 @@ class _HomeState extends State<Home> {
         _Menu(
           _MenuType.about,
           AppLocalizations.of(context)!.about,
-          () => showAboutDialog(
+          () async => showAboutDialog(
             context: context,
-            applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
-            // applicationVersion: pacakgeInfo.version // See: https://github.com/flutter/flutter/issues/41728
+            applicationIcon: Image.asset(
+              'assets/images/pedax_logo.png',
+              height: kToolbarHeight,
+            ),
+            applicationVersion: (await PackageInfo.fromPlatform()).version,
           ),
         ),
       ];
