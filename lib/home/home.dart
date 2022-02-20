@@ -407,7 +407,6 @@ class _HomeState extends State<Home> {
           () => showAboutDialog(
             context: context,
             applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
-            // applicationVersion: pacakgeInfo.version // See: https://github.com/flutter/flutter/issues/41728
           ),
         ),
       ];
