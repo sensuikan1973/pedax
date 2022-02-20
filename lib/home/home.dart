@@ -404,7 +404,7 @@ class _HomeState extends State<Home> {
         _Menu(
           _MenuType.about,
           AppLocalizations.of(context)!.about,
-          () async => showAboutDialog(
+          () => showAboutDialog(
             context: context,
             applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
           ),
