@@ -336,7 +336,6 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await tester.tap(find.text(l10nEn.about));
         await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(milliseconds: 500));
         expect(find.byType(AboutDialog), findsOneWidget);
         await waitEdaxServerResponsed(tester);
       });
