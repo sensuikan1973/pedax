@@ -6,10 +6,6 @@
 
 - [ ] bump `version` on `pubspec.yaml`
 
-### windows
-
-- [ ] bump `msix_version` on `pubspec.yaml`
-
 ### macos
 
 - [ ] update `macos/fastlane/metadata/ja/release_notes.txt`
