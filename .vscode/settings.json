@@ -11,5 +11,4 @@
     "*.arb": "json",
     "*.mdx": "markdown"
   }
-  // "dart.sdkPaths": ["~/development/flutter/bin/dart"]
 }
