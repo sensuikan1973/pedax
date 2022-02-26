@@ -90,7 +90,7 @@ dart fix --apply
 2. create PR by https://github.com/sensuikan1973/pedax/compare/new_release?expand=1&template=new_release.md&title=prepare+for+release+%60X%2EY%2EZ%60.
 3. create release by https://github.com/sensuikan1973/pedax/actions/workflows/publish.yaml.
 
-##### deloy apple store
+##### deploy to apple store
 
 ```sh
 REVISION=xxx
@@ -105,7 +105,7 @@ ITC_TEAM_ID=xxx \
 
 After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
 
-##### deploy microsoft store
+##### deploy to microsoft store
 
 1. download `pedax.msix` from the release.
 2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/windows/overview).
