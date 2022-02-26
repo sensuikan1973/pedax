@@ -72,7 +72,7 @@ jobs:
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.info
           - os: ubuntu-20.04
             setup_desktop_script: .github/scripts/setup_on_linux.sh
-            integration_test_command: 'timeout 180 xvfb-run -a flutter drive -d linux --driver=integration_test/driver.dart --target=integration_test/app_test.dart || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
+            integration_test_command: 'timeout 180 xvfb-run -a flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.info || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2.3.0
