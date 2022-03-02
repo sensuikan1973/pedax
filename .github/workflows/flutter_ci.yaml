@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.3.0
         with:
           cache: true
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.3.0
         with:
           cache: true
@@ -74,7 +74,7 @@ jobs:
             setup_desktop_script: .github/scripts/setup_on_linux.sh
             integration_test_command: 'timeout 180 xvfb-run -a flutter test integration_test --verbose || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.3.0
       - name: setup flutter channel
         shell: bash
