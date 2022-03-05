@@ -7,6 +7,8 @@ const _methodChannels = [
   MethodChannel('plugins.flutter.io/file_selector'),
   // See: https://github.com/flutter/plugins/blob/master/packages/file_selector/file_selector_windows/lib/file_selector_windows.dart
   MethodChannel('plugins.flutter.io/file_selector_windows'),
+  // See: https://github.com/flutter/plugins/blob/master/packages/file_selector/file_selector_macos/lib/file_selector_macos.dart
+  MethodChannel('plugins.flutter.io/file_selector_macos'),
 ];
 
 @isTest
