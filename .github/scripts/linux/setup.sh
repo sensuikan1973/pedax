@@ -7,5 +7,3 @@ sudo apt-get install -y libgtk-3-dev libx11-dev pkg-config cmake ninja-build lib
 
 # See: https://flutter.dev/desktop#set-up
 flutter config --enable-linux-desktop
-
-cmake --version

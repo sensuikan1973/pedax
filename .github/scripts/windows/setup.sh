@@ -5,5 +5,3 @@ set -euxo pipefail
 
 # See: https://flutter.dev/desktop#set-up
 flutter config --enable-windows-desktop
-
-cmake --version
