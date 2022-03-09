@@ -26,10 +26,10 @@ jobs:
           cache: true
       - name: setup flutter channel
         shell: bash
-        run: ./scripts/setup_flutter_channel.sh
+        run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: bash
-        run: .github/scripts/setup_on_macos.sh
+        run: .github/scripts/macos/setup.sh
 
       - uses: ruby/setup-ruby@v1
       - name: dry-run deployment script with retry

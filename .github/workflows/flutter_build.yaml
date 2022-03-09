@@ -38,18 +38,21 @@ jobs:
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-20.04
             subcommand: linux
-            setup_desktop_script: .github/scripts/setup_on_linux.sh
-            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_linux.sh
+            setup_desktop_script: .github/scripts/linux/setup.sh
+            diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
           - os: windows-2019
             subcommand: windows
-            setup_desktop_script: .github/scripts/setup_on_windows.sh
-            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_windows.sh
+            setup_desktop_script: .github/scripts/windows/setup.sh
+            diff_check_native_deps_script: .github/scripts/windows/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
           - os: macos-11
             subcommand: macos
-            setup_desktop_script: .github/scripts/setup_on_macos.sh
-            prepare_to_pack_script: .github/scripts/prepare_to_pack_for_macos.sh
+            setup_desktop_script: .github/scripts/macos/setup.sh
+            diff_check_native_deps_script: .github/scripts/macos/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
             distribution_path: build/macos/Build/Products/release
 
     steps:
@@ -59,7 +62,7 @@ jobs:
           cache: true
       - name: setup flutter channel
         shell: bash
-        run: ./scripts/setup_flutter_channel.sh
+        run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: bash
         run: ${{ matrix.setup_desktop_script }}
@@ -67,6 +70,11 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
+
+      - name: diff check native deps
+        shell: bash
+        run: ${{ matrix.diff_check_native_deps_script }}
+
       - name: build
         run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
 
