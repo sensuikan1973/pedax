@@ -39,7 +39,7 @@
 ### setup
 
 ```sh
-./scripts/setup_flutter_channel.sh
+./scripts/setup_flutter.sh
 ```
 
 ### [format](https://docs.flutter.dev/development/tools/formatting)
