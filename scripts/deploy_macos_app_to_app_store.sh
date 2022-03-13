@@ -3,7 +3,7 @@ set -euxo pipefail
 
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
-zparseopts -D -F -A opthash -- -dry-run revision: p8-file-path:
+zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path:
 
 if [[ -z "${opthash[(i)-revision]}" ]]; then
   echo "revision is required"
@@ -20,13 +20,12 @@ git checkout ${opthash[-revision]}
 
 source ./scripts/setup_flutter.sh
 
-flutter test --concurrency=1
-
-flutter clean
-flutter test integration_test
+if [[ -z "${opthash[(i)--skip-test]}" ]]; then
+  flutter test --concurrency=1
+  flutter test integration_test
+fi
 
 # See: https://flutter.dev/desktop#macos
-flutter clean
 flutter build macos --release
 
 cd macos
