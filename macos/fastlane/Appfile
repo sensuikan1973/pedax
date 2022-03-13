@@ -1,5 +1,5 @@
 app_identifier("com.done.sensuikan1973.pedax")
-apple_id(ENV["APPLE_ID"]) # Email Address
+apple_id(ENV["APPLE_ID"]) # Email Address. See: https://appleid.apple.com/
 
 itc_team_id(ENV["ITC_TEAM_ID"]) # App Store Connect Team ID
 team_id("Z2P4D5D6K2") # Developer Portal Team ID

@@ -33,6 +33,9 @@ platform :mac do
     # See: https://docs.fastlane.tools/actions/match
     match(
       platform: "macos",
+      # See: https://developer.apple.com/jp/support/certificates/
+      # See: https://help.apple.com/xcode/mac/current/#/dev80c6204ec
+      additional_cert_types: ["mac_installer_distribution"],
       api_key: api_key,
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
