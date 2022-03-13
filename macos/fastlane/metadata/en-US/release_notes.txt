@@ -1,1 +1,1 @@
-minor update of bestpath count a vailability description.
+minor improvement of performance.
