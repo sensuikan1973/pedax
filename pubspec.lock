@@ -252,7 +252,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.10.0"
+    version: "2.11.0"
   logger:
     dependency: "direct main"
     description:
