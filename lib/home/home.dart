@@ -224,7 +224,7 @@ class _HomeState extends State<Home> {
       );
 
   Widget get _redoAllButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.anglesLeft),
+        icon: const Icon(FontAwesomeIcons.anglesRight),
         iconSize: _undoOrRedoIconSize,
         onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
       );
