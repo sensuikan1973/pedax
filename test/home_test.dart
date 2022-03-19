@@ -146,7 +146,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleLeft));
+        await tester.tap(find.byIcon(FontAwesomeIcons.anglesLeft));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
@@ -154,7 +154,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleDoubleRight));
+        await tester.tap(find.byIcon(FontAwesomeIcons.anglesRight));
         await waitEdaxServerResponsed(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
