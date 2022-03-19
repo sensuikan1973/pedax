@@ -206,7 +206,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget get _undoAllButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.angleDoubleLeft),
+        icon: const Icon(FontAwesomeIcons.anglesLeft),
         iconSize: _undoOrRedoIconSize,
         onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
       );
@@ -224,7 +224,7 @@ class _HomeState extends State<Home> {
       );
 
   Widget get _redoAllButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.angleDoubleRight),
+        icon: const Icon(FontAwesomeIcons.anglesRight),
         iconSize: _undoOrRedoIconSize,
         onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
       );
