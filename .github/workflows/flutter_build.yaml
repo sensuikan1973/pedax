@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [ubuntu-latest, windows-2019, macos-11]
+        os: [ubuntu-latest, windows-latest, macos-11]
         mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
             diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
-          - os: windows-2019
+          - os: windows-latest
             subcommand: windows
             setup_desktop_script: .github/scripts/windows/setup.sh
             diff_check_native_deps_script: .github/scripts/windows/diff_check_native_deps.sh
