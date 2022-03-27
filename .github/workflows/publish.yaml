@@ -19,20 +19,20 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-11]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         mode: [release]
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-latest
             subcommand: linux
             setup_desktop_script: .github/scripts/linux/setup.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
-          - os: windows-2019
+          - os: windows-latest
             subcommand: windows
             setup_desktop_script: .github/scripts/windows/setup.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
-          - os: macos-11
+          - os: macos-latest
             subcommand: macos
             setup_desktop_script: .github/scripts/macos/setup.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
