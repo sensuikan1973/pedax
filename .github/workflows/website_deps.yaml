@@ -10,10 +10,15 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.0.0
+        with:
+          node-version: '16.x'
       - name: upgrade website deps
         working-directory: website
         run: |
           yarn upgrade
+          yarn upgrade --latest --scope=@docusaurus
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
