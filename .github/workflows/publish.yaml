@@ -97,7 +97,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          draft: true
           tag_name: ${{ github.event.inputs.tag }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
           body_path: ${{ env.RELEASE_DESCRIPTION_TXT_FILE }}
