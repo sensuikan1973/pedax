@@ -62,12 +62,12 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        os: [windows-latest, macos-11, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
           - os: windows-latest
             setup_desktop_script: .github/scripts/windows/setup.sh
             integration_test_command: flutter test integration_test --verbose
-          - os: macos-11
+          - os: macos-latest
             setup_desktop_script: .github/scripts/macos/setup.sh
             integration_test_command: flutter test integration_test --verbose
           - os: ubuntu-latest
