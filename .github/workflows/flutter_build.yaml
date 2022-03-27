@@ -33,10 +33,10 @@ jobs:
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-11]
+        os: [ubuntu-latest, windows-2019, macos-11]
         mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
-          - os: ubuntu-20.04
+          - os: ubuntu-latest
             subcommand: linux
             setup_desktop_script: .github/scripts/linux/setup.sh
             diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh

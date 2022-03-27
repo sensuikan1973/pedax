@@ -29,7 +29,7 @@ on:
 
 jobs:
   format:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
       - run: flutter format -l 120 --set-exit-if-changed .
 
   analyze:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
@@ -62,7 +62,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        os: [windows-2019, macos-11, ubuntu-20.04] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows-2019, macos-11, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
           - os: windows-2019
             setup_desktop_script: .github/scripts/windows/setup.sh
@@ -70,7 +70,7 @@ jobs:
           - os: macos-11
             setup_desktop_script: .github/scripts/macos/setup.sh
             integration_test_command: flutter test integration_test --verbose
-          - os: ubuntu-20.04
+          - os: ubuntu-latest
             setup_desktop_script: .github/scripts/linux/setup.sh
             integration_test_command: 'timeout 180 xvfb-run -a flutter test integration_test --verbose || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
     steps:
