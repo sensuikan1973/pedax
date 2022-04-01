@@ -2637,9 +2637,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001317:
-  version "1.0.30001322"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001322.tgz#2e4c09d11e1e8f852767dab287069a8d0c29d623"
-  integrity sha512-neRmrmIrCGuMnxGSoh+x7zYtQFFgnSY2jaomjU56sCkTA6JINqQrxutF459JpWcWRajvoyn95sOXq4Pqrnyjew==
+  version "1.0.30001323"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001323.tgz#a451ff80dec7033016843f532efda18f02eec011"
+  integrity sha512-e4BF2RlCVELKx8+RmklSEIVub1TWrmdhvA5kEUueummz1XyySW0DVk+3x9HyhU9MuWTa2BhqLgEuEmUwASAdCA==
 
 ccount@^1.0.0, ccount@^1.0.3:
   version "1.1.0"
@@ -2750,9 +2750,9 @@ ci-info@^2.0.0:
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
 
 clean-css@^5.2.2, clean-css@^5.2.4:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-5.2.4.tgz#982b058f8581adb2ae062520808fb2429bd487a4"
-  integrity sha512-nKseG8wCzEuji/4yrgM/5cthL9oTDc5UOQyFMvW/Q53oP6gLH690o1NbuTh6Y18nujr7BxlsFuS7gXLnLzKJGg==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-5.3.0.tgz#ad3d8238d5f3549e83d5f87205189494bc7cbb59"
+  integrity sha512-YYuuxv4H/iNb1Z/5IbMRoxgrzjWGhOEFfd+groZ5dMCVkpENiMZmwspdrzBo9286JjM1gZJPAyL7ZIdzuvu2AQ==
   dependencies:
     source-map "~0.6.0"
 
@@ -3110,9 +3110,9 @@ css-what@2.1:
   integrity sha512-a+EPoD+uZiNfh+5fxw2nO9QwFa6nJe2Or35fGY6Ipw1R3R4AGz1d1TEZrCegvw2YTmZ0jXirGYlzxxpYSHwpEg==
 
 css-what@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/css-what/-/css-what-6.0.1.tgz#3be33be55b9f302f710ba3a9c3abc1e2a63fc7eb"
-  integrity sha512-z93ZGFLNc6yaoXAmVhqoSIb+BduplteCt1fepvwhBUQK6MNE4g6fgjpuZKJKp0esUe+vXWlIkwZZjNWoOKw0ZA==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/css-what/-/css-what-6.1.0.tgz#fb5effcf76f1ddea2c81bdfaa4de44e79bac70f4"
+  integrity sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==
 
 cssesc@^3.0.0:
   version "3.0.0"
@@ -3462,9 +3462,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.84:
-  version "1.4.102"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.102.tgz#fec312f753bcd9b89396136147efdb8bbd55cc82"
-  integrity sha512-MuWg3/gLTk6PSjC7ZrTgT8aAYZmUYd+gRtD95vN77KMBwZXiGdHHa8Y7ppMc/zwNumZtoIBLS0rzZyjEHd7sNw==
+  version "1.4.103"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.103.tgz#abfe376a4d70fa1e1b4b353b95df5d6dfd05da3a"
+  integrity sha512-c/uKWR1Z/W30Wy/sx3dkZoj4BijbXX85QKWu9jJfjho3LBAXNEGAEW3oWiGb+dotA6C6BzCTxL2/aLes7jlUeg==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -7105,9 +7105,9 @@ type-fest@^0.20.2:
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
 
 type-fest@^2.5.0:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.1.tgz#d2be8f50bf5f8f0a5fd916d29bf3e98c17e960be"
-  integrity sha512-AiknQSEqKVGDDjtZqeKrUoTlcj7FKhupmnVUgz6KoOKtvMwRGE6hUNJ/nVear+h7fnUPO1q/htSkYKb1pyntkQ==
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.2.tgz#80a53614e6b9b475eb9077472fb7498dc7aa51d0"
+  integrity sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==
 
 type-is@~1.6.18:
   version "1.6.18"
