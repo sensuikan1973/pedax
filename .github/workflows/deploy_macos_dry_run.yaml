@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'macos/**'
+      - '.ruby-version'
       - 'scripts/deploy_macos_app_to_app_store.sh'
       - '.github/workflows/deploy_macos_dry_run.yaml'
       - 'pubspec.*'
@@ -11,6 +12,7 @@ on:
     branches: [main]
     paths:
       - 'macos/**'
+      - '.ruby-version'
       - 'scripts/deploy_macos_app_to_app_store.sh'
       - '.github/workflows/deploy_macos_dry_run.yaml'
       - 'pubspec.*'
