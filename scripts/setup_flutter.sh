@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 
 # See: https://github.com/koalaman/shellcheck/issues/809
 # shellcheck shell=bash
