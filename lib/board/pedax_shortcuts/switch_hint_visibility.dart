@@ -13,7 +13,7 @@ class SwitchHintVisibilityShorcut implements PedaxShorcut {
   final BoardNotifier boardNotifier;
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelSwitchHintVisiblity;
+  String label(final AppLocalizations localizations) => localizations.shortcutLabelSwitchHintVisibility;
 
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();
