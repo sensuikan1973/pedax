@@ -59,7 +59,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.tap(findByCoordinate('f5'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 4);
         expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
@@ -67,7 +67,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f4'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
         expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
@@ -75,7 +75,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.tap(findByCoordinate('e3'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -83,7 +83,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
         expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
@@ -91,7 +91,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(RedoShorcut.logicalKey);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -99,7 +99,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoShorcut.logicalKeyArrowLeft);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
         expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
@@ -107,7 +107,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(RedoShorcut.logicalKeyArrowRight);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -115,7 +115,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
         expectStoneCoordinates(tester, ['d5', 'e5', 'f5'], SquareType.black);
@@ -123,7 +123,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -131,7 +131,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(UndoAllShorcut.logicalKey);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
@@ -139,7 +139,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -147,7 +147,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.anglesLeft));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['e4', 'd5'], SquareType.black);
@@ -155,7 +155,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
         await tester.tap(find.byIcon(FontAwesomeIcons.anglesRight));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -163,7 +163,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
@@ -171,7 +171,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
         await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'd6', 'e4'], SquareType.black);
@@ -181,7 +181,7 @@ Future<void> main() async {
         await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
         await tester.sendKeyEvent(NewShorcut.logicalKey);
         await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
@@ -191,7 +191,7 @@ Future<void> main() async {
         await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
         await tester.sendKeyEvent(InitShorcut.logicalKey);
         await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
@@ -207,7 +207,7 @@ Future<void> main() async {
 
         // REF: https://www.hasera.net/othello/mame006.html
         await tester.tap(findByCoordinate('f5'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 4);
         expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
@@ -215,7 +215,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f6'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
         expectStoneCoordinates(tester, ['d5', 'e4', 'f5'], SquareType.black);
@@ -223,7 +223,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d4', 'e5', 'f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('d3'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'f5'], SquareType.black);
@@ -231,7 +231,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['e5', 'f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('g5'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 4);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4'], SquareType.black);
@@ -239,7 +239,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['e5', 'f5', 'f6', 'g5'], SquareType.white);
 
         await tester.tap(findByCoordinate('h5'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 8);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'g5', 'h5'], SquareType.black);
@@ -247,7 +247,7 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['f6'], SquareType.white);
 
         await tester.tap(findByCoordinate('h4'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 7);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'h5'], SquareType.black);
@@ -255,15 +255,15 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['f6', 'g5', 'h4'], SquareType.white);
 
         await tester.tap(findByCoordinate('f7'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 9);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7', 'h5'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['g5', 'h4'], SquareType.white);
 
-        await tester.tap(findByCoordinate('h6')); // black pass internaly in engine.
-        await waitEdaxServerResponsed(tester);
+        await tester.tap(findByCoordinate('h6')); // black pass internally in engine.
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 8);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7'], SquareType.black);
@@ -271,23 +271,23 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
         await tester.tap(findByCoordinate('e7'));
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 7);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f7'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 6);
         expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internaly in engine.
-        await waitEdaxServerResponsed(tester);
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internally in engine.
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 8);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f6', 'f7'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 4);
         expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internaly in engine.
-        await waitEdaxServerResponsed(tester);
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internally in engine.
+        await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 7);
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f7'], SquareType.black);
@@ -313,7 +313,7 @@ Future<void> main() async {
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await tester.pumpAndSettle();
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pumpAndSettle();
       expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
 
@@ -322,7 +322,7 @@ Future<void> main() async {
       await tester.sendKeyEvent(CopyMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
     });
   });
 
@@ -337,7 +337,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.about));
         await tester.pumpAndSettle();
         expect(find.byType(AboutDialog), findsOneWidget);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -351,7 +351,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.shortcutCheatsheet));
         await tester.pumpAndSettle();
         expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -368,7 +368,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pumpAndSettle();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -388,7 +388,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -405,7 +405,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -424,7 +424,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -443,7 +443,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -462,7 +462,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(NTasksSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -479,7 +479,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.cancelOnDialog));
         await tester.pump();
         expect(find.byType(PedaxApp), findsOneWidget);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -498,7 +498,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -517,7 +517,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         await Future<void>.delayed(const Duration(seconds: 1));
         expect(find.byType(LevelSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -536,7 +536,7 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -557,7 +557,7 @@ Future<void> main() async {
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
         expect(find.byType(BestpathCountAvailabilitySettingDialog), findsNothing);
-        await waitEdaxServerResponsed(tester);
+        await waitEdaxServerResponse(tester);
       });
     });
   });

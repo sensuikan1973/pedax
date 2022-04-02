@@ -14,13 +14,13 @@
   "analysis_mode_board_description": {
     "message": "Comfortably, you can see evaluation value (e.g.「+0」,「-4」)."
   },
-  "custome_options_title": {
+  "custom_options_title": {
     "message": "customize options"
   },
-  "custome_options_view": {
+  "custom_options_view": {
     "message": "img/en/custom_options_view.png"
   },
-  "custome_options_description": {
+  "custom_options_description": {
     "message": "e.g. book file path, step-by-step hint view."
   },
   "mac_app_store_badge": {

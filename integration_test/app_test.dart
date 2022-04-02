@@ -43,7 +43,7 @@ Future<void> main() async {
       expect(find.byType(Home), findsOneWidget);
       expect(find.byType(PedaxBoard), findsOneWidget);
 
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2);
       expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
@@ -51,7 +51,7 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
       await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump(const Duration(seconds: 1));
       expectStoneNum(tester, SquareType.black, 4);
       expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
@@ -69,7 +69,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(LevelSettingDialog), findsNothing);
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
@@ -86,7 +86,7 @@ Future<void> main() async {
 
       // arrange black disc;
       await tester.tap(findByCoordinate('a8'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5);
       expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5', 'a8'], SquareType.black);

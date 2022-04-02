@@ -221,7 +221,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final isYourTurn = currentColor == color;
 
     /// NOTE:
-    /// Why "when isYourTurn == ture, show opponent value" ?
+    /// Why "when isYourTurn == true, show opponent value" ?
     /// -> See: [CountBestpathResponse] class in lib/engine/api/count_bestpath.dart.
     return isYourTurn
         ? countBestpathResultWithMove.countBestpathList.position.nOpponentBestpaths

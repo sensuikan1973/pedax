@@ -1,0 +1,4 @@
+# See: https://github.com/crate-ci/typos#false-positives
+
+[files]
+extend-exclude = ["assets/**/*", "macos/**/*.pbxproj", "macos/**/*.xib", "website/static/**/*"]

@@ -36,7 +36,7 @@
   "shortcutLabelPasteMoves": "棋譜を貼り付ける",
   "shortcutLabelRedoAll": "最終手まで進む",
   "shortcutLabelRedo": "一手進む",
-  "shortcutLabelSwitchHintVisiblity": "評価値の ON/OFF を切り替える",
+  "shortcutLabelSwitchHintVisibility": "評価値の ON/OFF を切り替える",
   "shortcutLabelUndoAll": "初手まで戻す",
   "shortcutLabelUndo": "一手戻す",
   "shortcutLabelRotate180": "180 度回転させる",

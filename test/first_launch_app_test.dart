@@ -24,10 +24,10 @@ void main() {
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
     });
   });
 }
