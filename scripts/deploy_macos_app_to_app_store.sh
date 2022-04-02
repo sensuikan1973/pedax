@@ -23,7 +23,7 @@ fi
 git fetch --all --prune
 git checkout "${opthash[-revision]}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1091
 source ./scripts/setup_flutter.sh
 
 if [[ -z "${opthash[(i)--skip-test]}" ]]; then
