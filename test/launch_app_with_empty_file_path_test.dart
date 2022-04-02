@@ -28,10 +28,10 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.black, 2); // e4, d5
 
       await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 4); // e4, d5, e5, f5
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
     });
   });
 
@@ -49,7 +49,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(BookFilePathSettingDialog), findsNothing);
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
     });
   });
 }

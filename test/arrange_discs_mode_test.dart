@@ -43,7 +43,7 @@ Future<void> main() async {
       await tester.tap(find.byKey(const Key('switchArrangeTargetToBlack')));
       await tester.pumpAndSettle();
       await tester.tap(findByCoordinate('h8'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
       expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
@@ -54,7 +54,7 @@ Future<void> main() async {
       await tester.tap(find.byKey(const Key('switchArrangeTargetToWhite')));
       await tester.pumpAndSettle();
       await tester.tap(findByCoordinate('a8'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
       expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
@@ -65,7 +65,7 @@ Future<void> main() async {
       await tester.tap(find.byKey(const Key('switchArrangeTargetToEmpty')));
       await tester.pumpAndSettle();
       await tester.tap(findByCoordinate('d4'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
       expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
@@ -80,7 +80,7 @@ Future<void> main() async {
 
       // move f5
       await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5);
       expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5', 'h8'], SquareType.black);
@@ -91,7 +91,7 @@ Future<void> main() async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(NewShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
       expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
@@ -101,7 +101,7 @@ Future<void> main() async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(InitShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await waitEdaxServerResponsed(tester);
+      await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 2);
       expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
