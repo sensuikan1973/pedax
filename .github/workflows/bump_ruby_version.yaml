@@ -7,7 +7,7 @@ on:
 
 jobs:
   bump_ruby_version:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
