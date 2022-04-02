@@ -1,3 +1,8 @@
+#!/usr/bin/env zsh
+
+# See: https://github.com/koalaman/shellcheck/issues/809
+# shellcheck shell=bash
+
 set -euxo pipefail
 
 flutter channel "$(cat .flutter_channel)"
