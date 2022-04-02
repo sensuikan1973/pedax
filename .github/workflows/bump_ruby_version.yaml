@@ -14,7 +14,7 @@ jobs:
       - name: setup rbenv
         run: |
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          ~/.rbenv/bin/rbenv init
+          ~/.rbenv/bin/rbenv init || true
           rbenv --version
       - name: upgrade ruby version
         run: |
