@@ -12,6 +12,7 @@ touch "$dst_file"
   echo "$GITHUB_SHA"
 
   echo "=== os image ==="
+  # shellcheck disable=SC2154
   echo "$ImageOS"
 
   echo "=== flutter doctor ==="
