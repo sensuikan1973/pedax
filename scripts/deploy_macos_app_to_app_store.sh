@@ -20,7 +20,7 @@ if [ -z "${opthash[(i)-p8-file-path]}" ]; then
 fi
 
 git fetch --all --prune
-git checkout ${opthash[-revision]}
+git checkout "${opthash[-revision]}"
 
 source .github/scripts/setup_flutter.sh
 
@@ -40,7 +40,7 @@ ruby --version
 bundle config set --local deployment 'true'
 bundle install
 bundle exec fastlane list
-export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
+export ASC_KEY_CONTENT="$(cat ${opthash[-p8-file-path]} | base64)"
 
 git diff --exit-code
 
