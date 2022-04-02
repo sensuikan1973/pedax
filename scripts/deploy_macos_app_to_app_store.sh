@@ -5,6 +5,7 @@
 
 set -euxo pipefail
 
+# shellcheck disable=SC2168
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
 zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path:
