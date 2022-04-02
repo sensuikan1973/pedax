@@ -262,7 +262,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['g5', 'h4'], SquareType.white);
 
-        await tester.tap(findByCoordinate('h6')); // black pass internaly in engine.
+        await tester.tap(findByCoordinate('h6')); // black pass internally in engine.
         await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 8);
@@ -278,7 +278,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 6);
         expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internaly in engine.
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internally in engine.
         await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 8);
@@ -286,7 +286,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 4);
         expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internaly in engine.
+        await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internally in engine.
         await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 7);
