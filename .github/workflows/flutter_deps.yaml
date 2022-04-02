@@ -19,7 +19,7 @@ jobs:
       - run: flutter doctor -v
       - name: setup flutter channel
         shell: bash
-        run: ./scripts/setup_flutter.sh
+        run: .github/scripts/setup_flutter.sh
 
       - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
       - name: upgrade external binary
