@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  dependabot:
+  enbale_auto_merge_on_dependabot_PR:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: ${{ github.actor == 'dependabot[bot]' }}

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  upgrade_flutter_dependencies:
+  bump_ruby_version:
     runs-on: macos-latest
     timeout-minutes: 20
     steps:
