@@ -15,7 +15,7 @@ const features = [
   },
   {
     title: translate({ id: 'custom_options_title' }),
-    imageUrl: translate({ id: 'custome_options_view' }),
+    imageUrl: translate({ id: 'custom_options_view' }),
     description: translate({ id: 'custome_options_description' }),
   },
 ]
