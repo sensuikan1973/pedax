@@ -15,12 +15,12 @@ jobs:
         run: |
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
           ~/.rbenv/bin/rbenv init || true
-          rbenv --version
+          ~/.rbenv/bin/rbenv --version
       - name: upgrade ruby version
         run: |
           latest_version=$(rbenv install -l | grep -v - | tail -1)
-          rbenv install $latest_version
-          rbenv local $latest_version
+          ~/.rbenv/bin/rbenv install $latest_version
+          ~/.rbenv/bin/rbenv local $latest_version
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
