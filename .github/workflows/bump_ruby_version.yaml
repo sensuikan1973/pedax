@@ -16,9 +16,9 @@ jobs:
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
           ~/.rbenv/bin/rbenv init || true
           ~/.rbenv/bin/rbenv --version
+          git clone https://github.com/rbenv/ruby-build.git "$(~/.rbenv/bin/rbenv root)"/plugins/ruby-build
       - name: upgrade ruby version
         run: |
-          ~/.rbenv/bin/rbenv init || true
           latest_version=$(~/.rbenv/bin/rbenv install -l | grep -v - | tail -1)
           ~/.rbenv/bin/rbenv install $latest_version
           ~/.rbenv/bin/rbenv local $latest_version
