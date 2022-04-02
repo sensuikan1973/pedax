@@ -45,7 +45,7 @@ Stream<HintOneByOneResponse> executeHintOneByOne(
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   for (final level in levelList) {
     edax.edaxStop();
-    request.logger.d('stopped edax serach');
+    request.logger.d('stopped edax search');
     edax
       ..edaxSetOption('-level', level.toString())
       ..edaxHintPrepare();
