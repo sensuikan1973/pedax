@@ -17,3 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ludeeus/action-shellcheck@master
+        with:
+          # See: https://github.com/koalaman/shellcheck/issues/809
+          ignore_paths: scripts
