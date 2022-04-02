@@ -27,10 +27,10 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
-        shell: bash
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
-        shell: bash
+        shell: zsh {0}
         run: .github/scripts/macos/setup.sh
 
       - uses: ruby/setup-ruby@v1
@@ -40,7 +40,7 @@ jobs:
           timeout_minutes: 20
           max_attempts: 3
           command: |
-            zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
+            zsh {0}
             echo $ZSH_NAME $ZSH_VERSION
             REVISION=$GITHUB_SHA
             P8_PATH="../README.md" # dummy for dry-run
