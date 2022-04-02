@@ -10,6 +10,7 @@ on:
     paths:
       - '**/*.sh'
       - '.github/workflows/shell_ci.yaml'
+  workflow_dispatch:
 
 jobs:
   shellcheck:
