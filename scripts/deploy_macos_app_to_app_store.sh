@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
+
+# See: https://github.com/koalaman/shellcheck/issues/809
+# shellcheck shell=bash
+
 set -euxo pipefail
 
+# shellcheck disable=SC2168
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
 zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path:
@@ -16,8 +21,9 @@ if [ -z "${opthash[(i)-p8-file-path]}" ]; then
 fi
 
 git fetch --all --prune
-git checkout ${opthash[-revision]}
+git checkout "${opthash[-revision]}"
 
+# shellcheck disable=SC1091
 source ./scripts/setup_flutter.sh
 
 if [[ -z "${opthash[(i)--skip-test]}" ]]; then
@@ -36,7 +42,9 @@ ruby --version
 bundle config set --local deployment 'true'
 bundle install
 bundle exec fastlane list
-export ASC_KEY_CONTENT=$(cat ${opthash[-p8-file-path]} | base64)
+
+ASC_KEY_CONTENT=$(base64 "${opthash[-p8-file-path]}")
+export ASC_KEY_CONTENT
 
 git diff --exit-code
 

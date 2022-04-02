@@ -1,5 +1,5 @@
 #!/bin/bash
-cd macos
+cd macos || exit
 pod install
 
 git diff --exit-code
