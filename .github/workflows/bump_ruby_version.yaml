@@ -11,9 +11,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
-      - uses: masa-iwasaki/setup-rbenv@v1
-      - name: initialize rbenv
-        run: eval "$(rbenv init -)"
+      - uses: ruby/setup-ruby@v1
       - name: upgrade ruby version
         run: |
           latest_version=$(rbenv install -l | grep -v - | tail -1)
