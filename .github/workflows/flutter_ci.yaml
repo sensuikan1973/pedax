@@ -37,7 +37,7 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
-        shell: zsh {0}
+        shell: bash
         run: ./scripts/setup_flutter.sh
       - run: flutter format -l 120 --set-exit-if-changed .
 
@@ -50,7 +50,7 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
-        shell: zsh {0}
+        shell: bash
         run: ./scripts/setup_flutter.sh
       - name: install dependencies
         run: flutter pub get
@@ -77,7 +77,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.3.0
       - name: setup flutter channel
-        shell: zsh {0}
+        shell: bash
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: bash
