@@ -22,6 +22,7 @@ jobs:
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
+        id: create_pull_request
         uses: peter-evans/create-pull-request@v4
         with:
           # See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
@@ -44,3 +45,12 @@ jobs:
             website
           assignees: sensuikan1973
           reviewers: sensuikan1973
+
+      # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
+      - name: enable auto-merge
+        if: steps.create_pull_request.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
+          merge-method: squash
