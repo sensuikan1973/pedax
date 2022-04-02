@@ -11,7 +11,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - name: setup rbenv
+        run: |
+          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+          ~/.rbenv/bin/rbenv init
+          rbenv --version
       - name: upgrade ruby version
         run: |
           latest_version=$(rbenv install -l | grep -v - | tail -1)
