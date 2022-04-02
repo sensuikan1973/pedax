@@ -18,7 +18,7 @@ jobs:
           ~/.rbenv/bin/rbenv --version
       - name: upgrade ruby version
         run: |
-          latest_version=$(rbenv install -l | grep -v - | tail -1)
+          latest_version=$(~/.rbenv/bin/rbenv install -l | grep -v - | tail -1)
           ~/.rbenv/bin/rbenv install $latest_version
           ~/.rbenv/bin/rbenv local $latest_version
 
