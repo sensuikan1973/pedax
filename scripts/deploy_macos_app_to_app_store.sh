@@ -41,7 +41,9 @@ ruby --version
 bundle config set --local deployment 'true'
 bundle install
 bundle exec fastlane list
-export ASC_KEY_CONTENT=$(base64 "${opthash[-p8-file-path]}")
+
+ASC_KEY_CONTENT=$(base64 "${opthash[-p8-file-path]}")
+export ASC_KEY_CONTENT
 
 git diff --exit-code
 
