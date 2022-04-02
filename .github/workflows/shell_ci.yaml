@@ -19,4 +19,5 @@ jobs:
       - uses: ludeeus/action-shellcheck@master
         with:
           # See: https://github.com/koalaman/shellcheck/issues/809
-          ignore_paths: scripts
+          # zsh is not supported.
+          ignore_names: deploy_macos_app_to_app_store.sh fetch_libedax_assets.sh
