@@ -46,8 +46,6 @@ jobs:
           labels: |
             dependencies
             mac
-          assignees: sensuikan1973
-          reviewers: sensuikan1973
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge

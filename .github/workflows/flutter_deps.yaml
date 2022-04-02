@@ -47,8 +47,6 @@ jobs:
           branch: cron_upgrade_flutter_dependencies
           delete-branch: true
           labels: dependencies
-          assignees: sensuikan1973
-          reviewers: sensuikan1973
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge
