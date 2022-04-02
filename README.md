@@ -36,6 +36,12 @@
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
+### setup
+
+```sh
+./scripts/setup_flutter.sh
+```
+
 ### [format](https://docs.flutter.dev/development/tools/formatting)
 
 ```sh

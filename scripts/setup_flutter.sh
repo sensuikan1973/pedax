@@ -1,4 +1,3 @@
-#!/bin/bash
 set -euxo pipefail
 
 flutter channel "$(cat .flutter_channel)"

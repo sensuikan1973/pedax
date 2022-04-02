@@ -22,7 +22,7 @@ fi
 git fetch --all --prune
 git checkout "${opthash[-revision]}"
 
-source .github/scripts/setup_flutter.sh
+source ./scripts/setup_flutter.sh
 
 if [[ -z "${opthash[(i)--skip-test]}" ]]; then
   flutter test --concurrency=1
