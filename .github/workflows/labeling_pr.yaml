@@ -1,8 +1,11 @@
 # See: https://github.com/actions/labeler#create-workflow
+
 name: Labeling PR
 
 # See: https://github.blog/2020-08-03-github-actions-improvements-for-fork-and-pull-request-workflows/
-on: pull_request_target # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request_target
+# https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request_target
+# https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/
+on: pull_request
 
 jobs:
   labeling_pr:
