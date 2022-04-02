@@ -41,7 +41,7 @@ jobs:
           delete-branch: true
           labels: |
             dependencies
-            macos
+            mac
           assignees: sensuikan1973
           reviewers: sensuikan1973
 
