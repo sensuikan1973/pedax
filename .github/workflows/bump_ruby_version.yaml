@@ -7,15 +7,21 @@ on:
 
 jobs:
   bump_ruby_version:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v3
+      - name: setup rbenv
+        run: |
+          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+          ~/.rbenv/bin/rbenv init || true
+          ~/.rbenv/bin/rbenv --version
+          git clone https://github.com/rbenv/ruby-build.git "$(~/.rbenv/bin/rbenv root)"/plugins/ruby-build
       - name: upgrade ruby version
         run: |
-          latest_version=$(rbenv install -l | grep -v - | tail -1)
-          rbenv install $latest_version
-          rbenv local $latest_version
+          latest_version=$(~/.rbenv/bin/rbenv install -l | grep -v - | tail -1)
+          ~/.rbenv/bin/rbenv install $latest_version
+          ~/.rbenv/bin/rbenv local $latest_version
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
@@ -40,8 +46,6 @@ jobs:
           labels: |
             dependencies
             mac
-          assignees: sensuikan1973
-          reviewers: sensuikan1973
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge
