@@ -1,0 +1,14 @@
+# See: https://github.com/crate-ci/typos/blob/master/docs/github-action.md
+
+name: Prevent typos
+
+on: pull_request
+
+jobs:
+  check:
+    name: Spell Check with Typos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: crate-ci/typos@v1
