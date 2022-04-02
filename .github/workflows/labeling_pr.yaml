@@ -11,9 +11,6 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    defaults:
-      run:
-        working-directory: website
 
     steps:
       - uses: actions/labeler@v4
