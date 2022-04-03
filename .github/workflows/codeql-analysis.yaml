@@ -9,6 +9,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 1 * * *' # everyday, 01:00 (UTC)
+  workflow_dispatch:
 
 jobs:
   analyze:

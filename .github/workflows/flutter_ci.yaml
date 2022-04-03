@@ -26,6 +26,7 @@ on:
       - 'windows/**'
       - 'assets/**'
       - '.codecov.yml'
+  workflow_dispatch:
 
 jobs:
   format:

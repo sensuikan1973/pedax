@@ -25,6 +25,7 @@ on:
       - 'linux/**'
       - 'windows/**'
       - 'assets/**'
+  workflow_dispatch:
 
 jobs:
   build:
