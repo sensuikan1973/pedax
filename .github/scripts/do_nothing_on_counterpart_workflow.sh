@@ -19,6 +19,6 @@ A. No.
   https://docs.github.com/ja/actions/using-workflows/reusing-workflows#limitations at 2022/04/05 says
   "The strategy property is not supported in any job that calls a reusable workflow."
 
-Q. What is the origin of `cointerpart` ?
+Q. What is the origin of "cointerpart" ?
 A. See: https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
 MSG
