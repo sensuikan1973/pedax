@@ -5,7 +5,7 @@ cat <<MSG
 do nothing on counterpart workflow for protected branch.
 
 [FAQ]
-Q. What the purpose of this script ?
+Q. What is the purpose of this script ?
 A. I want to enable auto-merge with keeping code quality.
   See:
   - https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
