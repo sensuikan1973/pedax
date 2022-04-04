@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_docusaurus:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
