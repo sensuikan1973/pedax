@@ -35,7 +35,6 @@ jobs:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        mode: [release]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
             subcommand: linux
@@ -77,7 +76,7 @@ jobs:
         run: ${{ matrix.diff_check_native_deps_script }}
 
       - name: build
-        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+        run: flutter build ${{ matrix.subcommand }} --release
 
       - name: prepare to pack
         shell: bash

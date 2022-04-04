@@ -20,7 +20,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        mode: [release]
         include:
           - os: ubuntu-latest
             subcommand: linux
@@ -52,7 +51,7 @@ jobs:
       - name: install dependencies
         run: flutter pub get
       - name: build
-        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+        run: flutter build ${{ matrix.subcommand }} --release
       - name: prepare to pack
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}
