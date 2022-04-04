@@ -23,4 +23,4 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - run: 'echo "required nothing. See: .github/workflows/README.md" '
+      - run: 'echo "passed See: .github/workflows/README.md" '
