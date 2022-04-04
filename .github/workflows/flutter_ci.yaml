@@ -58,7 +58,7 @@ jobs:
       - run: flutter analyze --fatal-infos --fatal-warnings .
 
   flutter_tests:
-    needs: [format, analyze]
+    needs: [flutter_format, flutter_analyze]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
