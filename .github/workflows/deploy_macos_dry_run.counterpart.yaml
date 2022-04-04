@@ -22,4 +22,4 @@ jobs:
   dry_run_macos_deployment_script:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/always_success.yaml
+      - uses: ./.github/workflows/always_success

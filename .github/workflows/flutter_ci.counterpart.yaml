@@ -45,4 +45,4 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
-      - uses: ./.github/workflows/always_success.yaml
+      - uses: ./.github/workflows/always_success
