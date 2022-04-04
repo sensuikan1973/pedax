@@ -2,7 +2,7 @@
 set -euxo pipefail
 
 cat <<MSG
-do nothing.
+do nothing for protected branch.
 
 See:
 - https://github.com/sensuikan1973/pedax/issues/415

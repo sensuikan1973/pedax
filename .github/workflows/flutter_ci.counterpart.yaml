@@ -32,12 +32,14 @@ jobs:
   flutter_format:
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo "passed See: .github/workflows/README.md" '
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
 
   flutter_analyze:
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo "passed See: .github/workflows/README.md" '
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
 
   flutter_tests:
     runs-on: ${{ matrix.os }}
@@ -46,4 +48,4 @@ jobs:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      - run: .github/scripts/do_nothing.sh
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
