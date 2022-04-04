@@ -13,7 +13,6 @@ A. I want to enable auto-merge with keeping code quality and path trigger logic.
   - https://github.com/sensuikan1973/pedax/settings/branch_protection_rules/19119198
   - https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request
 
-
 Q. Can I use reusable workflow ?
 A. No.
   https://docs.github.com/ja/actions/using-workflows/reusing-workflows#limitations at 2022/04/05 says
