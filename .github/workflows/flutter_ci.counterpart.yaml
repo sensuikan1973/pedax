@@ -46,4 +46,4 @@ jobs:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/workflows/always_success.yaml
+      - run: .github/scripts/do_nothing.sh
