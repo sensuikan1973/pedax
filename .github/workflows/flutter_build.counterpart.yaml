@@ -1,0 +1,103 @@
+# See: https://flutter.dev/desktop#distribution
+# REF: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
+
+name: Flutter Build
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_build.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_build.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+  workflow_dispatch:
+
+jobs:
+  flutter_build_desktop_app:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false # I want results from all OSes even if one fails.
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        mode: [release]
+        include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
+          - os: ubuntu-latest
+            subcommand: linux
+            setup_desktop_script: .github/scripts/linux/setup.sh
+            diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
+            distribution_path: build/linux/x64/release
+          - os: windows-latest
+            subcommand: windows
+            setup_desktop_script: .github/scripts/windows/setup.sh
+            diff_check_native_deps_script: .github/scripts/windows/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
+            distribution_path: build/windows/runner/Release
+          - os: macos-latest
+            subcommand: macos
+            setup_desktop_script: .github/scripts/macos/setup.sh
+            diff_check_native_deps_script: .github/scripts/macos/diff_check_native_deps.sh
+            prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
+            distribution_path: build/macos/Build/Products/release
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.3.0
+        with:
+          cache: true
+      - name: setup flutter channel
+        shell: bash
+        run: ./scripts/setup_flutter.sh
+      - name: setup flutter desktop
+        shell: bash
+        run: ${{ matrix.setup_desktop_script }}
+      - name: doctor
+        run: flutter doctor -v
+      - name: install dependencies
+        run: flutter pub get
+
+      - name: diff check native deps
+        shell: bash
+        run: ${{ matrix.diff_check_native_deps_script }}
+
+      - name: build
+        run: flutter build ${{ matrix.subcommand }} --${{ matrix.mode }}
+
+      - name: prepare to pack
+        shell: bash
+        run: ${{ matrix.prepare_to_pack_script }}
+
+      # - name: debug
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
+
+      # - name: set output path
+      #   shell: bash
+      #   run: |-
+      #     path=$(echo ${{ matrix.distribution_path }} | sed -e 's/_mode_/${{ matrix.mode }}/g')
+      #     echo "artifact_target=$path" >> $GITHUB_ENV
+
+      - name: output build info
+        shell: bash
+        run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pedax-${{ runner.os }}
+          path: ${{ matrix.distribution_path }}
