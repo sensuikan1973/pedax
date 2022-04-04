@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check_typos:
+  experiment_check_typos:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
