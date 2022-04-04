@@ -22,4 +22,5 @@ jobs:
   dry_run_macos_deployment_script:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/always_success
