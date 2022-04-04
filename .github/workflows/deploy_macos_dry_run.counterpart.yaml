@@ -22,4 +22,4 @@ jobs:
   dry_run_macos_deployment_script:
     runs-on: ubuntu-latest
     steps:
-      - run: 'echo "passed See: .github/workflows/README.md" '
+      - uses: ./.github/workflows/always_success.yaml

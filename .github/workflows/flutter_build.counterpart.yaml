@@ -34,4 +34,4 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - run: 'echo "passed See: .github/workflows/README.md" '
+      - uses: ./.github/workflows/always_success.yaml
