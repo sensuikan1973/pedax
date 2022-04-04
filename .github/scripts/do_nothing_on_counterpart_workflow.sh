@@ -6,7 +6,7 @@ do nothing on counterpart workflow for protected branch.
 
 [FAQ]
 Q. What is the purpose of this script ?
-A. I want to enable auto-merge with keeping code quality.
+A. I want to enable auto-merge with keeping code quality and path trigger logic.
   See:
   - https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/troubleshooting-required-status-checks#handling-skipped-but-required-checks
   - https://github.com/sensuikan1973/pedax/issues/415
