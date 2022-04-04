@@ -29,7 +29,9 @@ on:
 
 jobs:
   flutter_build_desktop_app:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - run: 'echo "passed See: .github/workflows/README.md" '

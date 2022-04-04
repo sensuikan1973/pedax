@@ -17,6 +17,5 @@ on:
 jobs:
   build_docusaurus:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
       - run: 'echo "passed See: .github/workflows/README.md" '

@@ -31,6 +31,18 @@ on:
 jobs:
   flutter_format:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    steps:
+      - run: 'echo "passed See: .github/workflows/README.md" '
+
+  flutter_analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "passed See: .github/workflows/README.md" '
+
+  flutter_tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - run: 'echo "passed See: .github/workflows/README.md" '
