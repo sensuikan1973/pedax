@@ -29,7 +29,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  format:
+  flutter_format:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -42,7 +42,7 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - run: flutter format -l 120 --set-exit-if-changed .
 
-  analyze:
+  flutter_analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -57,7 +57,7 @@ jobs:
         run: flutter pub get
       - run: flutter analyze --fatal-infos --fatal-warnings .
 
-  test:
+  flutter_tests:
     needs: [format, analyze]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
