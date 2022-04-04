@@ -1,0 +1,26 @@
+name: Flutter Deployment MacOS dry-run
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'macos/**'
+      - '.ruby-version'
+      - 'scripts/deploy_macos_app_to_app_store.sh'
+      - '.github/workflows/deploy_macos_dry_run.yaml'
+      - 'pubspec.*'
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'macos/**'
+      - '.ruby-version'
+      - 'scripts/deploy_macos_app_to_app_store.sh'
+      - '.github/workflows/deploy_macos_dry_run.yaml'
+      - 'pubspec.*'
+  workflow_dispatch:
+
+jobs:
+  dry_run_macos_deployment_script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh

@@ -1,0 +1,38 @@
+# See: https://flutter.dev/desktop#distribution
+# REF: https://github.com/google/flutter-desktop-embedding/blob/master/.github/workflows/ci.yml
+
+name: Flutter Build
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_build.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - '.github/workflows/flutter_build.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+  workflow_dispatch:
+
+jobs:
+  flutter_build_desktop_app:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh

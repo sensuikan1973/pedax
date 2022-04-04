@@ -1,0 +1,51 @@
+name: Flutter CI
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - 'analysis_options.yaml'
+      - '.github/workflows/flutter_ci.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+      - '.codecov.yml'
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.dart'
+      - 'pubspec.*'
+      - 'analysis_options.yaml'
+      - '.github/workflows/flutter_ci.yaml'
+      - '.github/scripts/**'
+      - 'macos/**'
+      - 'linux/**'
+      - 'windows/**'
+      - 'assets/**'
+      - '.codecov.yml'
+  workflow_dispatch:
+
+jobs:
+  flutter_format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
+
+  flutter_analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
+
+  flutter_tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - run: .github/scripts/do_nothing_on_counterpart_workflow.sh
