@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-echo <<MSG
+cat <<MSG
 do nothing.
 
 See:
