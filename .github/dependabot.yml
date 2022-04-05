@@ -42,3 +42,4 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["dependencies"]
+    versioning-strategy: increase
