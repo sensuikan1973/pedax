@@ -3,6 +3,9 @@
 # REF: https://dependabot.com/docs/config-file/validator/
 version: 2
 
+# See: https://github.blog/changelog/2022-04-05-pub-beta-support-for-dependabot-version-updates/
+enable-beta-ecosystems: true
+
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
 updates:
   - package-ecosystem: "npm"
@@ -30,3 +33,13 @@ updates:
       timezone: "Asia/Tokyo"
       time: "10:00"
     labels: ["GitHub Actions", "dependencies"]
+
+  # See: https://github.blog/changelog/2022-04-05-pub-beta-support-for-dependabot-version-updates/
+  - package-ecosystem: "pub"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      timezone: "Asia/Tokyo"
+      time: "10:00"
+    labels: ["dependencies"]
+    versioning-strategy: increase
