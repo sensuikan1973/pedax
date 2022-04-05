@@ -78,8 +78,8 @@ flutter:
     - assets/libedax/data/
     - assets/libedax/dll/
 
-msix_config: # See: https://pub.dev/packages/msix#mag-configuration-optional
-  store: true # See: https://pub.dev/packages/msix#label-windows-store
+msix_config: # See: https://pub.dev/packages/msix#github-settings-icon-configuring-your-installer
+  store: true
   display_name: pedax
   publisher_display_name: Naoki Shimizu
   identity_name: 1781NaokiShimizu.pedax
