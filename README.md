@@ -108,7 +108,7 @@ After that, submit [Apple developer console](https://developer.apple.com/account
 ##### deploy to microsoft store
 
 1. download `pedax.msix` from the release.
-2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/windows/overview).
+2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
 
 ### reference
 
