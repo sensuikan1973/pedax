@@ -20,6 +20,7 @@ jobs:
       - uses: ludeeus/action-shellcheck@master
       - name: shell format
         run: |
+          # See: https://webinstall.dev/shfmt/
           curl -sS https://webinstall.dev/shfmt | bash
           shfmt -version
           shfmt -d .
