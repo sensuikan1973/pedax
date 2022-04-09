@@ -4,9 +4,11 @@ mac:
 
 linux:
   - linux/**/*
+  - assets/libedax/dll/libedax.so
 
 windows:
   - windows/**/*
+  - assets/libedax/dll/libedax-x64.dll
 
 website:
   - website/**/*
