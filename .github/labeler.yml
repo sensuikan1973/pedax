@@ -1,12 +1,17 @@
 mac:
   - macos/**/*
   - .ruby-version
+  - .github/scripts/macos/**/*
 
 linux:
   - linux/**/*
+  - assets/libedax/dll/libedax.so
+  - .github/scripts/linux/**/*
 
 windows:
   - windows/**/*
+  - assets/libedax/dll/libedax-x64.dll
+  - .github/scripts/windows/**/*
 
 website:
   - website/**/*
