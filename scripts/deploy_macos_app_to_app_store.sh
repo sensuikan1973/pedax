@@ -26,7 +26,7 @@ git checkout "${opthash[-revision]}"
 # shellcheck disable=SC1091
 source ./scripts/setup_flutter.sh
 
-if [[ -z "${opthash[(i)skip-test]}" ]]; then
+if [[ -z "${opthash[(i) skip-test]}" ]]; then
   flutter test --concurrency=1
   flutter test integration_test
 fi
@@ -48,7 +48,7 @@ export ASC_KEY_CONTENT
 
 git diff --exit-code
 
-if [[ -n "${opthash[(i)dry-run]}" ]]; then
+if [[ -n "${opthash[(i) dry-run]}" ]]; then
   echo "exit without running fastlane deploy_app_store, because dry-run option is specified"
   exit
 fi
