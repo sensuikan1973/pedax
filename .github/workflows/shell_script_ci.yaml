@@ -23,4 +23,5 @@ jobs:
           # See: https://webinstall.dev/shfmt/
           curl -sS https://webinstall.dev/shfmt | bash
           shfmt -version
-          shfmt -d .
+          # See: https://github.com/mvdan/sh/issues/288#issuecomment-577323200
+          shfmt -f . | grep -v -e node_modules/ -e vendor/ -e build/ | xargs shfmt -d

@@ -17,13 +17,13 @@ asset_url_prefix=https://github.com/sensuikan1973/libedax4dart/releases/download
 # See: https://github.com/sensuikan1973/libedax4dart/releases/latest
 
 function unpack_dyamic_library() {
-  platform=$1
-  asset_url=$2
-  lib_name=$3
-  dll_dst=$4
-  curl -L "$asset_url" -o "$tmp_dst/${platform}_asset.zip"
-  unzip "$tmp_dst/${platform}_asset.zip" -d "$tmp_dst/${platform}"
-  mv "$tmp_dst/${platform}/libedax_output/bin/${lib_name}" "$dll_dst"
+	platform=$1
+	asset_url=$2
+	lib_name=$3
+	dll_dst=$4
+	curl -L "$asset_url" -o "$tmp_dst/${platform}_asset.zip"
+	unzip "$tmp_dst/${platform}_asset.zip" -d "$tmp_dst/${platform}"
+	mv "$tmp_dst/${platform}/libedax_output/bin/${lib_name}" "$dll_dst"
 }
 
 # Linux dynamic library
