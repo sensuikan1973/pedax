@@ -2,6 +2,7 @@ mac:
   - macos/**/*
   - .ruby-version
   - .github/scripts/macos/**/*
+  - scripts/deploy_macos_app_to_app_store.sh
 
 linux:
   - linux/**/*
@@ -15,6 +16,12 @@ windows:
 
 website:
   - website/**/*
+
+libedax :
+  - scripts/fetch_libedax_assets.sh
+  - assets/libedax/dll/libedax.so
+  - assets/libedax/dll/libedax-x64.dll
+  - macos/libedax.dylib
 
 GitHub Actions:
   - .github/workflows/**/*
