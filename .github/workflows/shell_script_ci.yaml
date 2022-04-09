@@ -18,3 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ludeeus/action-shellcheck@master
+      - name: shell format
+        run: |
+          curl -sS https://webinstall.dev/shfmt | bash
+          shfmt -version
+          shfmt -d .
