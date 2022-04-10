@@ -8,6 +8,7 @@ on:
       - 'scripts/deploy_macos_app_to_app_store.sh'
       - '.github/workflows/deploy_macos_dry_run.yaml'
       - 'pubspec.*'
+      - 'scripts/setup_flutter.sh'
   push:
     branches: [main]
     paths-ignore:
@@ -16,6 +17,7 @@ on:
       - 'scripts/deploy_macos_app_to_app_store.sh'
       - '.github/workflows/deploy_macos_dry_run.yaml'
       - 'pubspec.*'
+      - 'scripts/setup_flutter.sh'
   workflow_dispatch:
 
 jobs:

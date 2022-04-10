@@ -28,3 +28,4 @@ GitHub Actions:
   - .github/scripts/**/*
   - .github/dependabot.yml
   - .github/labeler.yml
+  - .github/.typos_config.toml
