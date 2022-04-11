@@ -98,7 +98,7 @@ jobs:
         shell: bash
         run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: pedax-${{ runner.os }}
           path: ${{ matrix.distribution_path }}
