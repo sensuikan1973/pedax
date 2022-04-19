@@ -24,7 +24,7 @@ version: 2.5.1+32
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.16.2 <3.0.0"
-  flutter: ^2.10.4 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  flutter: ^2.10.5 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.1
