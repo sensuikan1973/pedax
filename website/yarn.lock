@@ -1909,9 +1909,9 @@
   integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
 
 "@types/node@*", "@types/node@^17.0.5":
-  version "17.0.24"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.24.tgz#20ba1bf69c1b4ab405c7a01e950c4f446b05029f"
-  integrity sha512-aveCYRQbgTH9Pssp1voEP7HiuWlD2jW2BO56w+bVrJn04i61yh6mRfoKO6hEYQD9vF+W8Chkwc6j1M36uPkx4g==
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.25.tgz#527051f3c2f77aa52e5dc74e45a3da5fb2301448"
+  integrity sha512-wANk6fBrUwdpY4isjWrKTufkrXdu1D2YHCot2fD/DfWxF5sMrVSA+KN7ydckvaTCh0HiqX9IVl0L5/ZoXg5M7w==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3433,9 +3433,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.84:
-  version "1.4.111"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.111.tgz#897613f6504f3f17c9381c7499a635b413e4df4e"
-  integrity sha512-/s3+fwhKf1YK4k7btOImOzCQLpUjS6MaPf0ODTNuT4eTM1Bg4itBpLkydhOzJmpmH6Z9eXFyuuK5czsmzRzwtw==
+  version "1.4.112"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.112.tgz#ae3a46231d4b2cdc223d6c4d227c06a9a96da7c2"
+  integrity sha512-BN5xdtPMlqUHo74daNNp/PwAGs4homs2RFxTB668wwkv7HAMvOY4L16Y5QrFxh69T2H2f1xWg8zQfrCDnpkvrA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -5143,9 +5143,9 @@ multicast-dns@^7.2.4:
     thunky "^1.0.2"
 
 nanoid@^3.3.1:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.2.tgz#c89622fafb4381cd221421c69ec58547a1eec557"
-  integrity sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA==
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.3.tgz#fd8e8b7aa761fe807dba2d1b98fb7241bb724a25"
+  integrity sha512-p1sjXuopFs0xg+fPASzQ28agW1oHD7xDsd9Xkf3T15H3c/cifrFHVwrh74PdoklAPi+i7MdRsE47vm2r6JoB+w==
 
 negotiator@0.6.3:
   version "0.6.3"
