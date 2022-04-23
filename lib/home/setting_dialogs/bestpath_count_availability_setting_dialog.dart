@@ -7,8 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../engine/options/pedax/bestpath_count_availability_option.dart';
 import '../../models/board_notifier.dart';
 
-const _documentationLinkOfBestpathCount =
-    'https://sensuikan1973.github.io/libedax4dart/libedax4dart/LibEdax/edaxBookCountBestpath.html';
+final _documentationUrlOfBestpathCount = Uri.https(
+  'sensuikan1973.github.io',
+  'libedax4dart/libedax4dart/LibEdax/edaxBookCountBestpath.html',
+);
 
 class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
   BestpathCountAvailabilitySettingDialog({final Key? key}) : super(key: key);
@@ -33,8 +35,8 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                     Text(AppLocalizations.of(context)!.bestpathCountAvailabilityDescription),
                     ElevatedButton(
                       onPressed: () async {
-                        if (await canLaunch(_documentationLinkOfBestpathCount)) {
-                          await launch(_documentationLinkOfBestpathCount);
+                        if (await canLaunchUrl(_documentationUrlOfBestpathCount)) {
+                          await launchUrl(_documentationUrlOfBestpathCount);
                         }
                       },
                       style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
