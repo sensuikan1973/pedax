@@ -52,7 +52,7 @@ dependencies:
   path_provider_macos: ^2.0.5 # for test/widget_test_helper/libedax_assets.dart
   provider: ^6.0.2
   shared_preferences: ^2.0.13
-  url_launcher: ^6.0.20
+  url_launcher: ^6.1.0
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
