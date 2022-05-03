@@ -1,7 +1,7 @@
 # See: https://flutter.dev/desktop#distribution
 # REF: https://github.com/flutter/gallery/blob/master/.github/workflows/release.yml
 
-name: Publish pedax app
+name: Create release
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  publish_artifacts:
+  create_release:
     env:
       PUBLISH_DIR: publish
     runs-on: ${{ matrix.os }}
