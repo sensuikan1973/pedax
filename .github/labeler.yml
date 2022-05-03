@@ -1,3 +1,4 @@
+---
 mac:
   - macos/**/*
   - .ruby-version
@@ -17,7 +18,7 @@ windows:
 website:
   - website/**/*
 
-libedax :
+libedax:
   - scripts/fetch_libedax_assets.sh
   - assets/libedax/dll/libedax.so
   - assets/libedax/dll/libedax-x64.dll

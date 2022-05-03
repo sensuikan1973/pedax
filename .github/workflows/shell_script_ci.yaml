@@ -1,15 +1,11 @@
+---
 name: Shell Script CI
 
 on:
   pull_request:
-    paths:
-      - '**/*.sh'
-      - '.github/workflows/shell_script_ci.yaml'
   push:
-    branches: [main]
-    paths:
-      - '**/*.sh'
-      - '.github/workflows/shell_script_ci.yaml'
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:

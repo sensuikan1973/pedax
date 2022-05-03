@@ -1,10 +1,12 @@
+---
 # See: https://github.com/crate-ci/typos/blob/master/docs/github-action.md
 
 name: Prevent typos
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
