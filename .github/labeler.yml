@@ -1,3 +1,4 @@
+---
 mac:
   - macos/**/*
   - .ruby-version

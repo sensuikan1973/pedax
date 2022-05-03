@@ -1,4 +1,11 @@
 ---
+# See: https://yamllint.readthedocs.io/en/stable/configuration.html#ignoring-paths
+# See: https://github.com/adrienverge/yamllint/issues/360
+ignore: |
+  .dart_tool
+  vendor
+  node_modules
+
 extends: default
 
 # See: https://yamllint.readthedocs.io/en/stable/rules.html
