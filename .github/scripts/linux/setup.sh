@@ -5,5 +5,5 @@ set -euxo pipefail
 sudo apt-get update -y
 sudo snap install flutter --classic
 
-# See: https://flutter.dev/desktop#set-up
+# See: https://docs.flutter.dev/desktop#set-up
 flutter config --enable-linux-desktop
