@@ -192,7 +192,15 @@ class _HomeState extends State<Home> {
             .toList(),
       ),
       centerTitle: true,
-      actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
+      actions: [
+        GestureDetector(
+          onTap: () => showAboutDialog(
+            context: context,
+            applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+          ),
+          child: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+        ),
+      ],
     );
   }
 
@@ -399,14 +407,6 @@ class _HomeState extends State<Home> {
               value: context.read<BoardNotifier>(),
               child: BestpathCountAvailabilitySettingDialog(),
             ),
-          ),
-        ),
-        _Menu(
-          _MenuType.about,
-          AppLocalizations.of(context)!.about,
-          () => showAboutDialog(
-            context: context,
-            applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
           ),
         ),
       ];
