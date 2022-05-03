@@ -13,7 +13,7 @@
   <em>pedax</em> has 4 features.
   <ul>
     <li>
-      <b>Mac/Windows/Linux</b> are supported. <a href="https://sensuikan1973.github.io/pedax/">I distribute on Mac App Store and Microsoft Store</a>.
+      <b>Mac/Windows/Linux</b> are supported. <a href="https://sensuikan1973.github.io/pedax/">You can install from Mac App Store or Microsoft Store</a>.
     </li>
     <li>
       <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
