@@ -11,7 +11,7 @@ on:
         required: true
 
 jobs:
-  publish_artifacts:
+  create_release:
     env:
       PUBLISH_DIR: publish
     runs-on: ${{ matrix.os }}
