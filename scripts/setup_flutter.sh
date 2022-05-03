@@ -14,5 +14,5 @@ flutter config --no-enable-ios
 flutter config --no-enable-android
 flutter config --no-enable-web # See: https://github.com/sensuikan1973/pedax/issues/481
 
-flutter upgrade
 flutter clean
+flutter upgrade
