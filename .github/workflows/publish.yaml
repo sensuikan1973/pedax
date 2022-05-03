@@ -25,7 +25,7 @@ jobs:
             subcommand: linux
             setup_desktop_script: .github/scripts/linux/setup.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
-            distribution_path: build/linux/x64/release
+            distribution_path: build/linux/x64/release/bundle # https://docs.flutter.dev/desktop#linux
           - os: windows-latest
             subcommand: windows
             setup_desktop_script: .github/scripts/windows/setup.sh
