@@ -20,7 +20,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 #
 # NOTE: you can't specify duplicated build number.
 # See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
-version: 2.6.0+34
+version: 2.7.0+35
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.16.2 <3.0.0"
@@ -78,7 +78,7 @@ flutter:
     - assets/libedax/data/
     - assets/libedax/dll/
 
-msix_config: # See: https://pub.dev/packages/msix#github-settings-icon-configuring-your-installer
+msix_config: # See: https://pub.dev/packages/msix#-configuring-your-installer
   store: true
   display_name: pedax
   publisher_display_name: Naoki Shimizu
