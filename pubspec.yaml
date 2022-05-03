@@ -78,7 +78,7 @@ flutter:
     - assets/libedax/data/
     - assets/libedax/dll/
 
-msix_config: # See: https://pub.dev/packages/msix#github-settings-icon-configuring-your-installer
+msix_config: # See: https://pub.dev/packages/msix#-configuring-your-installer
   store: true
   display_name: pedax
   publisher_display_name: Naoki Shimizu
