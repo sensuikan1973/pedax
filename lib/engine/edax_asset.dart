@@ -106,7 +106,7 @@ class EdaxAsset {
 
   @visibleForTesting
   static String get libedaxName {
-    if (Platform.isMacOS) return 'libedax.dylib';
+    if (Platform.isMacOS) return 'libedax.universal.dylib';
     if (Platform.isWindows) return 'libedax-x64.dll';
     if (Platform.isLinux) return 'libedax.so';
     throw Exception('${Platform.operatingSystem} is not supported');
