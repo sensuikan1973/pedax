@@ -32,7 +32,7 @@ unpack_dyamic_library linux "$asset_url_prefix/Linux.zip" libedax.so assets/libe
 unpack_dyamic_library windows "$asset_url_prefix/Windows.zip" libedax-x64.dll assets/libedax/dll
 # MacOS dynamic library
 # See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
-unpack_dyamic_library macos "$asset_url_prefix/macOS.zip" libedax.dylib macos
+unpack_dyamic_library macos "$asset_url_prefix/macOS.zip" libedax.universal.dylib macos
 
 # data
 mv "$tmp_dst/linux/libedax_output/data/eval.dat" "$data_dst"

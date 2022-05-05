@@ -22,7 +22,7 @@ libedax:
   - scripts/fetch_libedax_assets.sh
   - assets/libedax/dll/libedax.so
   - assets/libedax/dll/libedax-x64.dll
-  - macos/libedax.dylib
+  - macos/libedax.universal.dylib
 
 GitHub Actions:
   - .github/workflows/**/*
