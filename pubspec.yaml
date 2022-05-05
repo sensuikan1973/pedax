@@ -21,7 +21,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 #
 # NOTE: you can't specify duplicated build number.
 # See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
-version: 2.7.0+35
+version: 2.8.0+36
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.16.2 <3.0.0"
