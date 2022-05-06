@@ -74,9 +74,6 @@ jobs:
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release
 
-      - name: diff check
-        run: git diff --exit-code
-
       - name: prepare to pack
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}
@@ -94,6 +91,9 @@ jobs:
       - name: output build info
         shell: bash
         run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
+
+      - name: diff check
+        run: git diff --exit-code
 
       - uses: actions/upload-artifact@v3
         with:
