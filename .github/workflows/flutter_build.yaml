@@ -71,11 +71,11 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
-      - name: diff check
-        run: git diff --exit-code
-
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release
+
+      - name: diff check
+        run: git diff --exit-code
 
       - name: prepare to pack
         shell: bash
