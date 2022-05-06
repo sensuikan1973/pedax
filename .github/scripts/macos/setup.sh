@@ -5,3 +5,6 @@ set -euxo pipefail
 
 # See: https://docs.flutter.dev/desktop#set-up
 flutter config --enable-macos-desktop
+
+cd macos || exit
+pod install

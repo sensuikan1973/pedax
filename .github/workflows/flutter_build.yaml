@@ -42,19 +42,16 @@ jobs:
           - os: ubuntu-latest
             subcommand: linux
             setup_desktop_script: .github/scripts/linux/setup.sh
-            diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
           - os: windows-latest
             subcommand: windows
             setup_desktop_script: .github/scripts/windows/setup.sh
-            diff_check_native_deps_script: .github/scripts/windows/diff_check_native_deps.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
           - os: macos-latest
             subcommand: macos
             setup_desktop_script: .github/scripts/macos/setup.sh
-            diff_check_native_deps_script: .github/scripts/macos/diff_check_native_deps.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
             distribution_path: build/macos/Build/Products/release
 
@@ -74,9 +71,8 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
-      - name: diff check native deps
-        shell: bash
-        run: ${{ matrix.diff_check_native_deps_script }}
+      - name: diff check
+        run: git diff --exit-code
 
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release
