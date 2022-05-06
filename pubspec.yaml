@@ -45,7 +45,7 @@ dependencies:
   logger: ^1.1.0
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
-  path: ^1.8.0
+  path: ^1.8.1
   path_provider: ^2.0.9 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   path_provider_macos: ^2.0.5 # for test/widget_test_helper/libedax_assets.dart
   provider: ^6.0.2
