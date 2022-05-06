@@ -23,17 +23,17 @@ jobs:
         include:
           - os: ubuntu-latest
             subcommand: linux
-            setup_desktop_script: .github/scripts/linux/setup.sh
+            setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release/bundle # https://docs.flutter.dev/desktop#linux
           - os: windows-latest
             subcommand: windows
-            setup_desktop_script: .github/scripts/windows/setup.sh
+            setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
           - os: macos-latest
             subcommand: macos
-            setup_desktop_script: .github/scripts/macos/setup.sh
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
             distribution_path: build/macos/Build/Products/release
 
@@ -45,7 +45,7 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: bash
-        run: ${{ matrix.setup_desktop_script }}
+        run: ${{ matrix.setup_for_flutter_desktop_script }}
       - name: doctor
         run: flutter doctor -v
       - name: install dependencies
