@@ -41,20 +41,17 @@ jobs:
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
           - os: ubuntu-latest
             subcommand: linux
-            setup_desktop_script: .github/scripts/linux/setup.sh
-            diff_check_native_deps_script: .github/scripts/linux/diff_check_native_deps.sh
+            setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
           - os: windows-latest
             subcommand: windows
-            setup_desktop_script: .github/scripts/windows/setup.sh
-            diff_check_native_deps_script: .github/scripts/windows/diff_check_native_deps.sh
+            setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
           - os: macos-latest
             subcommand: macos
-            setup_desktop_script: .github/scripts/macos/setup.sh
-            diff_check_native_deps_script: .github/scripts/macos/diff_check_native_deps.sh
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
             distribution_path: build/macos/Build/Products/release
 
@@ -68,15 +65,11 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: bash
-        run: ${{ matrix.setup_desktop_script }}
+        run: ${{ matrix.setup_for_flutter_desktop_script }}
       - name: doctor
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-
-      - name: diff check native deps
-        shell: bash
-        run: ${{ matrix.diff_check_native_deps_script }}
 
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release
@@ -98,6 +91,9 @@ jobs:
       - name: output build info
         shell: bash
         run: .github/scripts/output_build_info.sh ${{ matrix.distribution_path }}
+
+      - name: diff check
+        run: git diff --exit-code
 
       - uses: actions/upload-artifact@v3
         with:

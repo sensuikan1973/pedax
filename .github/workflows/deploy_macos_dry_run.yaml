@@ -35,7 +35,7 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
         shell: zsh {0}
-        run: .github/scripts/macos/setup.sh
+        run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - uses: ruby/setup-ruby@v1
       - name: dry-run deployment script with retry
