@@ -77,7 +77,7 @@ jobs:
           - os: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
-              timeout 300 xvfb-run -a \
+              timeout 240 xvfb-run -a \
               touch ./coverage/lcov.integration_test.info && \
               flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
               || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
