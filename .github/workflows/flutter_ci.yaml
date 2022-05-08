@@ -70,13 +70,17 @@ jobs:
         include:
           - os: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
-            integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.info
+            integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: macos-latest
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-            integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.info
+            integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
-            integration_test_command: 'timeout 180 xvfb-run -a flutter test integration_test --coverage --coverage-path=./coverage/lcov.info || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )'
+            integration_test_command: |
+              touch ./coverage/lcov.integration_test.info
+              timeout 240 xvfb-run -a \
+              flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info \
+              || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.4.0
@@ -96,10 +100,10 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 3
-          command: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.info
+          command: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
-          files: ./coverage/lcov.info
+          files: ./coverage/lcov.widget_test.info
           flags: widget_test,${{ matrix.os }}
           fail_ci_if_error: true
 
@@ -111,6 +115,6 @@ jobs:
           command: ${{ matrix.integration_test_command }}
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
-          files: ./coverage/lcov.info
+          files: ./coverage/lcov.integration_test.info
           flags: integration_test,${{ matrix.os }}
           fail_ci_if_error: true
