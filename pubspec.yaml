@@ -63,7 +63,6 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   msix: ^3.6.1
-  path_provider_macos: ^2.0.5 # See: test/widget_test_helper/libedax_assets.dart
   pedantic_sensuikan1973: ^3.1.0
 
 flutter:
