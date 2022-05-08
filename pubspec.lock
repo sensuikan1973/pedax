@@ -142,7 +142,7 @@ packages:
     source: hosted
     version: "0.0.2+1"
   file_selector_macos:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: file_selector_macos
       url: "https://pub.dartlang.org"
@@ -163,7 +163,7 @@ packages:
     source: hosted
     version: "0.8.1+3"
   file_selector_windows:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: file_selector_windows
       url: "https://pub.dartlang.org"
@@ -366,7 +366,7 @@ packages:
     source: hosted
     version: "2.1.5"
   path_provider_macos:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider_macos
       url: "https://pub.dartlang.org"
