@@ -95,13 +95,27 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 3
-          command: flutter test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.info
+          command: flutter test --concurrency=1 --verbose --coverage --coverage-path=./coverage/lcov.${{ matrix.os }}.info
       - name: run integration test with retry
         uses: nick-invision/retry@v2
         with:
           timeout_minutes: 5
           max_attempts: 3
           command: ${{ matrix.integration_test_command }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./coverage/lcov.${{ matrix.os }}.info
+
+  # See: https://about.codecov.io/blog/uploading-code-coverage-in-a-separate-job-on-github-actions/
+  upload_coverage_report_to_codecov:
+    needs: [flutter_tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: ./coverage
       - uses: codecov/codecov-action@v3
         with:
-          file: ./coverage/lcov.info
+          files: ./coverage/lcov.windows-latest.info,./coverage/lcov.macos-latest.info,./coverage/lcov.ubuntu-latest.info
