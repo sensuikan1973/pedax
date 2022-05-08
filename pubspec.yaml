@@ -47,7 +47,6 @@ dependencies:
   meta: ^1.7.0
   path: ^1.8.1
   path_provider: ^2.0.9 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  path_provider_macos: ^2.0.5 # for test/widget_test_helper/libedax_assets.dart
   provider: ^6.0.2
   shared_preferences: ^2.0.13
   url_launcher: ^6.1.0
@@ -64,6 +63,7 @@ dev_dependencies:
   integration_test:
     sdk: flutter
   msix: ^3.6.1
+  path_provider_macos: ^2.0.5 # See: test/widget_test_helper/libedax_assets.dart
   pedantic_sensuikan1973: ^3.1.0
 
 flutter:
