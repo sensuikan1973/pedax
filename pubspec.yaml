@@ -33,8 +33,6 @@ dependencies:
   # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
   file_selector: ^0.8.4+1
   file_selector_linux: ^0.0.2+1
-  file_selector_macos: ^0.8.2
-  file_selector_windows: ^0.8.2
   flutter:
     sdk: flutter
   flutter_localizations:
