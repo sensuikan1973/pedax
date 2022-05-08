@@ -327,96 +327,108 @@ class _HomeState extends State<Home> {
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
         icon: const Icon(Icons.menu),
         onSelected: (final menu) => menu.onSelected(),
-        itemBuilder: (final context) => _sortedMenuList
-            .map<PopupMenuItem<_Menu>>(
-              (final menu) => PopupMenuItem<_Menu>(
-                value: menu,
-                child: Text(menu.label),
-              ),
-            )
-            .toList(),
+        itemBuilder: (final context) => _popupMenuEntries,
       );
 
-  List<_Menu> get _sortedMenuList => [
-        _Menu(
-          _MenuType.shortcutCheatsheet,
-          AppLocalizations.of(context)!.shortcutCheatsheet,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
-          ),
-        ),
-        _Menu(
-          _MenuType.level,
-          AppLocalizations.of(context)!.levelSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: LevelSettingDialog(),
+  List<PopupMenuEntry<_Menu>> get _popupMenuEntries => [
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.shortcutCheatsheet,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.shortcutCheatsheet),
         ),
-        _Menu(
-          _MenuType.hintStepByStep,
-          AppLocalizations.of(context)!.hintStepByStepSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: HintStepByStepSettingDialog(),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.level,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ChangeNotifierProvider.value(
+                value: context.read<BoardNotifier>(),
+                child: LevelSettingDialog(),
+              ),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.levelSetting),
         ),
-        _Menu(
-          _MenuType.bookFilePath,
-          AppLocalizations.of(context)!.bookFilePathSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: BookFilePathSettingDialog(),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.hintStepByStep,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ChangeNotifierProvider.value(
+                value: context.read<BoardNotifier>(),
+                child: HintStepByStepSettingDialog(),
+              ),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.hintStepByStepSetting),
         ),
-        _Menu(
-          _MenuType.nTasks,
-          AppLocalizations.of(context)!.nTasksSetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: NTasksSettingDialog(),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.bookFilePath,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ChangeNotifierProvider.value(
+                value: context.read<BoardNotifier>(),
+                child: BookFilePathSettingDialog(),
+              ),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
         ),
-        _Menu(
-          _MenuType.bestpathCountAvailability,
-          AppLocalizations.of(context)!.bestpathCountAvailabilitySetting,
-          () => showDialog<void>(
-            context: context,
-            builder: (final _) => ChangeNotifierProvider.value(
-              value: context.read<BoardNotifier>(),
-              child: BestpathCountAvailabilitySettingDialog(),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.nTasks,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ChangeNotifierProvider.value(
+                value: context.read<BoardNotifier>(),
+                child: NTasksSettingDialog(),
+              ),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.nTasksSetting),
         ),
-        _Menu(
-          _MenuType.about,
-          AppLocalizations.of(context)!.about,
-          () => showAboutDialog(
-            context: context,
-            applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.bestpathCountAvailability,
+            () => showDialog<void>(
+              context: context,
+              builder: (final _) => ChangeNotifierProvider.value(
+                value: context.read<BoardNotifier>(),
+                child: BestpathCountAvailabilitySettingDialog(),
+              ),
+            ),
           ),
+          child: Text(AppLocalizations.of(context)!.bestpathCountAvailabilitySetting),
+        ),
+        const PopupMenuDivider(),
+        PopupMenuItem<_Menu>(
+          value: _Menu(
+            _MenuType.about,
+            () => showAboutDialog(
+              context: context,
+              applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+            ),
+          ),
+          child: Text(AppLocalizations.of(context)!.about),
         ),
       ];
 }
 
 @immutable
 class _Menu {
-  const _Menu(this.type, this.label, this.onSelected);
+  const _Menu(this.type, this.onSelected);
   final _MenuType type;
-  final String label;
   final Function() onSelected;
 }
 
