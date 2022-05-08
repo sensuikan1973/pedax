@@ -55,7 +55,6 @@ dependencies:
       branch: master
 
 dev_dependencies:
-  # meta: ^1.7.0
   flutter_test:
     sdk: flutter
   integration_test:
