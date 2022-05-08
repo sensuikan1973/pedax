@@ -77,7 +77,9 @@ jobs:
           - os: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
-              timeout 180 xvfb-run -a ls -la && mkdir -p coverage && flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
+              timeout 180 xvfb-run -a \
+              ls -la && mkdir -p coverage && flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info \
+              || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.4.0
