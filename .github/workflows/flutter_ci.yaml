@@ -114,8 +114,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/download-artifact@v3
-        with:
-          path: ./coverage
+      - run: ls -la
       - uses: codecov/codecov-action@v3
         with:
           files: ./coverage/lcov.windows-latest.info,./coverage/lcov.macos-latest.info,./coverage/lcov.ubuntu-latest.info
+          fail_ci_if_error: true
