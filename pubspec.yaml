@@ -42,7 +42,6 @@ dependencies:
   libedax4dart: ^3.5.0
   logger: ^1.1.0
   macos_secure_bookmarks: ^0.2.0
-  meta: ^1.7.0
   path: ^1.8.1
   path_provider: ^2.0.9 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.2
@@ -56,6 +55,7 @@ dependencies:
       branch: master
 
 dev_dependencies:
+  # meta: ^1.7.0
   flutter_test:
     sdk: flutter
   integration_test:
