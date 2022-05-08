@@ -20,3 +20,5 @@ jobs:
       - uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          # TODO: remove this option as workaround, if https://github.com/actions/labeler/pull/113 has been resolved.
+          sync-labels: "" # See: https://github.com/actions/labeler/pull/113#issuecomment-1033963931
