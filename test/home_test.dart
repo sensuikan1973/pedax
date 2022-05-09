@@ -346,9 +346,7 @@ Future<void> main() async {
         await tester.pumpWidget(const PedaxApp());
         await waitEdaxSetuped(tester);
 
-        await tester.tap(find.byIcon(Icons.menu));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.shortcutCheatsheet));
+        await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
         await tester.pumpAndSettle();
         expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
         await waitEdaxServerResponse(tester);
