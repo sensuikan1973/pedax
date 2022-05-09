@@ -1,1 +1,1 @@
-minor improvement of performance.
+A list of shortcut keys can be displayed from the keyboard icon in the upper right corner.
