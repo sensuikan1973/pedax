@@ -192,7 +192,17 @@ class _HomeState extends State<Home> {
             .toList(),
       ),
       centerTitle: true,
-      actions: [Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight)],
+      actions: [
+        IconButton(
+          icon: const Icon(FontAwesomeIcons.keyboard),
+          padding: const EdgeInsets.all(12),
+          onPressed: () => showDialog<void>(
+            context: context,
+            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+          ),
+        ),
+        Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+      ],
     );
   }
 
@@ -333,17 +343,6 @@ class _HomeState extends State<Home> {
   List<PopupMenuEntry<_Menu>> get _popupMenuEntries => [
         PopupMenuItem<_Menu>(
           value: _Menu(
-            _MenuType.shortcutCheatsheet,
-            () => showDialog<void>(
-              context: context,
-              builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.shortcutCheatsheet),
-        ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
             _MenuType.level,
             () => showDialog<void>(
               context: context,
@@ -438,6 +437,5 @@ enum _MenuType {
   level,
   hintStepByStep,
   bestpathCountAvailability,
-  shortcutCheatsheet,
   about,
 }
