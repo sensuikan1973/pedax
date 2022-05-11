@@ -31,7 +31,7 @@ dependencies:
   crypto: ^3.0.1
   cupertino_icons: ^1.0.4
   # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
-  file_selector: ^0.8.4+1
+  file_selector: ^0.8.4+2
   file_selector_linux: ^0.0.2+1
   flutter:
     sdk: flutter
@@ -44,10 +44,10 @@ dependencies:
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
   path: ^1.8.1
-  path_provider: ^2.0.9 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  path_provider: ^2.0.10 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.2
-  shared_preferences: ^2.0.13
-  url_launcher: ^6.1.0
+  shared_preferences: ^2.0.14
+  url_launcher: ^6.1.1
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
