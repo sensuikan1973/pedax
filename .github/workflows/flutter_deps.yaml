@@ -22,6 +22,7 @@ jobs:
         shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
         run: ./scripts/setup_flutter.sh
 
+      - run: flutter pub get
       - name: install native deps on macs
         if: runner.os == 'macOS'
         working-directory: macos
