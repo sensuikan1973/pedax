@@ -13,7 +13,7 @@ final _documentationUrlOfBestpathCount = Uri.https(
 );
 
 class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
-  BestpathCountAvailabilitySettingDialog({final Key? key}) : super(key: key);
+  BestpathCountAvailabilitySettingDialog({super.key});
 
   BestpathCountAvailabilityOption get _option => const BestpathCountAvailabilityOption();
   final _enabled = ValueNotifier<bool?>(null);

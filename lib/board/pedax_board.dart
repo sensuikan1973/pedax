@@ -18,9 +18,8 @@ class PedaxBoard extends StatefulWidget {
     required final this.bodyLength,
     final this.frameWidth = defaultFrameWidth,
     final Color? bodyColor,
-    final Key? key,
-  })  : bodyColor = bodyColor ?? Colors.green[900],
-        super(key: key);
+    super.key,
+  }) : bodyColor = bodyColor ?? Colors.green[900];
   final double bodyLength;
   final double frameWidth;
   final Color? bodyColor;

@@ -6,7 +6,7 @@ import '../../board/pedax_shortcuts/pedax_shortcut.dart';
 
 @immutable
 class ShortcutCheatsheetDialog extends StatelessWidget {
-  const ShortcutCheatsheetDialog({required final this.shortcutList, final Key? key}) : super(key: key);
+  const ShortcutCheatsheetDialog({required final this.shortcutList, super.key});
 
   final List<PedaxShorcut> shortcutList;
 

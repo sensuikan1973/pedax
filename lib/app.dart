@@ -8,7 +8,7 @@ import 'models/board_notifier.dart';
 
 @immutable
 class PedaxApp extends StatelessWidget {
-  const PedaxApp({final Key? key}) : super(key: key);
+  const PedaxApp({super.key});
 
   @override
   Widget build(final BuildContext context) => MaterialApp(

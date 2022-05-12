@@ -7,7 +7,7 @@ import '../../models/board_notifier.dart';
 
 @immutable
 class LevelSettingDialog extends StatelessWidget {
-  LevelSettingDialog({final Key? key}) : super(key: key);
+  LevelSettingDialog({super.key});
 
   final _option = const LevelOption();
   final _textController = TextEditingController();

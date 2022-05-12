@@ -25,7 +25,7 @@ import 'setting_dialogs/shortcut_cheatsheet_dialog.dart';
 
 @immutable
 class Home extends StatefulWidget {
-  const Home({final Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();

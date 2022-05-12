@@ -8,7 +8,7 @@ import '../../models/board_notifier.dart';
 
 @immutable
 class BookFilePathSettingDialog extends StatelessWidget {
-  BookFilePathSettingDialog({final Key? key}) : super(key: key);
+  BookFilePathSettingDialog({super.key});
 
   final _option = const BookFileOption();
   final _selectedFilePath = ValueNotifier<String?>(null);
