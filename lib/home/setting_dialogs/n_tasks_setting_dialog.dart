@@ -9,7 +9,7 @@ import '../../models/board_notifier.dart';
 
 @immutable
 class NTasksSettingDialog extends StatelessWidget {
-  NTasksSettingDialog({final Key? key}) : super(key: key);
+  NTasksSettingDialog({super.key});
 
   final _option = const NTasksOption();
   final _textController = TextEditingController();

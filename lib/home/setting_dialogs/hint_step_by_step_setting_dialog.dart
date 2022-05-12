@@ -7,7 +7,7 @@ import '../../engine/options/pedax/hint_step_by_step_option.dart';
 import '../../models/board_notifier.dart';
 
 class HintStepByStepSettingDialog extends StatelessWidget {
-  HintStepByStepSettingDialog({final Key? key}) : super(key: key);
+  HintStepByStepSettingDialog({super.key});
 
   HintStepByStepOption get _option => const HintStepByStepOption();
   final _enabled = ValueNotifier<bool?>(null);

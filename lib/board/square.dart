@@ -15,8 +15,8 @@ class Square extends StatelessWidget {
     final this.scoreColor,
     final this.isLastMove = false,
     final this.isBookMove = false,
-    final Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final SquareType type;
   final double length;
