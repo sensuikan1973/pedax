@@ -2,8 +2,7 @@
 
 set -euxo pipefail
 
-# TODO: if flutter stable channel resolve https://github.com/sensuikan1973/pedax/issues/457, change channel to stable.
-flutter channel beta
+flutter channel stable
 
 flutter config --enable-macos-desktop
 flutter config --enable-windows-desktop
