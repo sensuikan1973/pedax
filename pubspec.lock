@@ -588,7 +588,7 @@ packages:
     source: hosted
     version: "3.0.1"
   url_launcher_platform_interface:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: url_launcher_platform_interface
       url: "https://pub.dartlang.org"
