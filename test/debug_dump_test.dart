@@ -14,7 +14,7 @@ import 'widget_test_helper/shared_preferences_mock.dart';
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
-    await mockSharedPreferences();
+    await fakeSharedPreferences();
     mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
