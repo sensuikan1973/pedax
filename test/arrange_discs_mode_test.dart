@@ -21,8 +21,8 @@ Future<void> main() async {
     await prepareLibedaxAssets();
     await mockSharedPreferences();
     mockSecureBookmark();
-    mockUrlLauncher();
-    mockFileSelector();
+    fakeUrlLauncher();
+    fakeFileSelector();
   });
   setUp(() async {
     Logger.level = Level.nothing;

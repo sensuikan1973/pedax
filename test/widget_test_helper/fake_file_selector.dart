@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 @isTest
-void mockFileSelector() {
+void fakeFileSelector() {
   FileSelectorPlatform.instance = FakeFileSelector();
 }
 
