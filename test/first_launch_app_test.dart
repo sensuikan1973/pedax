@@ -2,17 +2,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/square.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
+import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/libedax_assets.dart';
 
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
-    SharedPreferences.setMockInitialValues({}); // first launch
+    await fakeSharedPreferences();
     mockSecureBookmark();
   });
   setUp(() => Logger.level = Level.nothing);
