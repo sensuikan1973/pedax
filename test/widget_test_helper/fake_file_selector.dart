@@ -8,8 +8,12 @@ void mockFileSelector() {
   FileSelectorPlatform.instance = FakeFileSelector();
 }
 
-// ignore: prefer_mixin
-class FakeFileSelector extends Fake with MockPlatformInterfaceMixin implements FileSelectorPlatform {
+@isTest
+class FakeFileSelector extends Fake
+    with
+        MockPlatformInterfaceMixin // ignore: prefer_mixin
+    implements
+        FileSelectorPlatform {
   @override
   Future<XFile?> openFile({
     List<XTypeGroup>? acceptedTypeGroups,
