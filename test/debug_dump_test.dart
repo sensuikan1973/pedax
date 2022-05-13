@@ -8,8 +8,8 @@ import 'package:pedax/models/board_notifier.dart';
 
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
+import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/libedax_assets.dart';
-import 'widget_test_helper/shared_preferences_mock.dart';
 
 void main() {
   setUpAll(() async {
