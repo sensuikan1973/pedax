@@ -11,9 +11,9 @@ import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/main.dart' as pedax;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 
+import '../test/widget_test_helper/fake_shared_preferences.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
@@ -22,7 +22,7 @@ Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() {
-    SharedPreferences.setMockInitialValues({}); // always first launch
+    fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
