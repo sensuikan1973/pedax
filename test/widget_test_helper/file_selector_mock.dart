@@ -1,22 +1,20 @@
-import 'package:flutter/services.dart';
+import 'package:file_selector_platform_interface/file_selector_platform_interface.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meta/meta.dart';
-
-const _methodChannels = [
-  // See: https://github.com/flutter/plugins/blob/master/packages/file_selector/file_selector_platform_interface/lib/src/method_channel/method_channel_file_selector.dart
-  MethodChannel('plugins.flutter.io/file_selector'),
-  // See: https://github.com/flutter/plugins/blob/master/packages/file_selector/file_selector_windows/lib/file_selector_windows.dart
-  MethodChannel('plugins.flutter.io/file_selector_windows'),
-  // See: https://github.com/flutter/plugins/blob/master/packages/file_selector/file_selector_macos/lib/file_selector_macos.dart
-  MethodChannel('plugins.flutter.io/file_selector_macos'),
-];
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 @isTest
 void mockFileSelector() {
-  for (final channel in _methodChannels) {
-    channel.setMockMethodCallHandler((final methodCall) async {
-      if (methodCall.method == 'openFile') return null;
-      return null;
-    });
-  }
+  FileSelectorPlatform.instance = FakeFileSelector();
+}
+
+// ignore: prefer_mixin
+class FakeFileSelector extends Fake with MockPlatformInterfaceMixin implements FileSelectorPlatform {
+  @override
+  Future<XFile?> openFile({
+    List<XTypeGroup>? acceptedTypeGroups,
+    String? initialDirectory,
+    String? confirmButtonText,
+  }) async =>
+      null;
 }
