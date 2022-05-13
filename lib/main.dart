@@ -3,7 +3,9 @@ import 'package:logger/logger.dart'; // ignore: unused_import
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
-import 'window.dart';
+
+@visibleForTesting
+const pedaxWindowMinSize = Size(550, 680);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

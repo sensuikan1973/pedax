@@ -10,8 +10,7 @@ import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
-import 'package:pedax/main.dart' as app;
-import 'package:pedax/window.dart';
+import 'package:pedax/main.dart' as pedax;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 
@@ -25,12 +24,12 @@ Future<void> main() async {
   setUp(() {
     SharedPreferences.setMockInitialValues({}); // always first launch
     mockSecureBookmark();
-    setWindowFrame(Rect.fromLTRB(0, 0, pedaxWindowMinSize.width, pedaxWindowMinSize.height));
+    setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
 
   testWidgets('home', (final tester) async {
     await tester.runAsync(() async {
-      await app.main();
+      await pedax.main();
       await tester.pumpAndSettle();
 
       final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
