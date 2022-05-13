@@ -11,7 +11,7 @@ import 'package:pedax/board/square.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
-import 'widget_test_helper/file_selector_mock.dart';
+import 'widget_test_helper/fake_file_selector.dart';
 import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/shared_preferences_mock.dart';
 import 'widget_test_helper/url_launcher_mock.dart';
