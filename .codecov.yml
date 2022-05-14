@@ -13,9 +13,9 @@ coverage:
   status:
     project:
       default:
-        target: 80% # overall coverage
+        target: 90% # overall coverage
       widget_test:
-        target: 80%
+        target: 90%
         flags:
           - widget_test
       integration_test:
