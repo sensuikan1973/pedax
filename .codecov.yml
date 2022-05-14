@@ -13,7 +13,15 @@ coverage:
   status:
     project:
       default:
+        target: 80% # overall coverage
+      widget_test:
         target: 80%
+        flags:
+          - widget_test
+      integration_test:
+        target: 60%
+        flags:
+          - integration_test
     # See: https://docs.codecov.io/docs/commit-status#section-patch-status
     # See: https://json.schemastore.org/codecov.json
     patch: false
