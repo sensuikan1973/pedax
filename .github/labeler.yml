@@ -30,3 +30,6 @@ GitHub Actions:
   - .github/dependabot.yml
   - .github/labeler.yml
   - .github/.typos_config.toml
+
+codecov:
+  - .codecov.yml
