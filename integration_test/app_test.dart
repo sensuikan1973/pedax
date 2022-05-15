@@ -59,6 +59,14 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 1);
       expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
+      // about pedax
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10n.about));
+      await tester.pumpAndSettle();
+      await tester.tapAt(const Offset(1, 1));
+      await tester.pumpAndSettle();
+
       // read book file path
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
