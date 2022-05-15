@@ -86,6 +86,13 @@ Future<void> main() async {
       final clipboardData = await Clipboard.getData('text/plain');
       expect(clipboardData?.text, 'F5');
 
+      // paste moves
+      await Clipboard.setData(const ClipboardData(text: 'c4'));
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      await tester.pumpAndSettle();
+
       // arrange discs mode
       await tester.tap(find.byType(AppBar));
       await tester.pumpAndSettle();
@@ -97,9 +104,9 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5);
-      expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5', 'a8'], SquareType.black);
+      expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'e4', 'a8'], SquareType.black);
       expectStoneNum(tester, SquareType.white, 1);
-      expectStoneCoordinates(tester, ['d4'], SquareType.white);
+      expectStoneCoordinates(tester, ['e5'], SquareType.white);
     });
   });
 }
