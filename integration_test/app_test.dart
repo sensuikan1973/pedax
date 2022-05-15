@@ -6,12 +6,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:logger/logger.dart';
 
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
-import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
-import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/main.dart' as pedax;
 import 'package:window_size/window_size.dart';
 
@@ -27,6 +26,7 @@ Future<void> main() async {
     fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
+    Logger.level = Level.nothing;
   });
 
   testWidgets('home', (final tester) async {
@@ -59,6 +59,15 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 1);
       expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
+      // read book file path
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10n.bookFilePathSetting));
+      await tester.pumpAndSettle();
+      expect(find.text(l10n.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.text(l10n.cancelOnDialog));
+      await tester.pumpAndSettle();
+
       // update level setting
       await tester.tap(find.byIcon(Icons.menu));
       await tester.pumpAndSettle();
@@ -69,13 +78,12 @@ Future<void> main() async {
       await tester.tap(find.text(l10n.updateSettingOnDialog));
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
-      expect(find.byType(LevelSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
 
       // shortcut cheatsheet
       await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
       await tester.pumpAndSettle();
-      expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
+      expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
       await tester.tapAt(const Offset(1, 1));
       await tester.pumpAndSettle();
 
