@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
+import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/main.dart' as pedax;
 import 'package:window_size/window_size.dart';
 
@@ -69,6 +71,13 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(LevelSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+
+      // shortcut cheatsheet
+      await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
+      await tester.pumpAndSettle();
+      expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
+      await tester.tapAt(const Offset(1, 1));
+      await tester.pumpAndSettle();
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
