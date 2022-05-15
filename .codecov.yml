@@ -19,7 +19,7 @@ coverage:
         flags:
           - widget_test
       integration_test:
-        target: 60%
+        target: 70%
         flags:
           - integration_test
     # See: https://docs.codecov.io/docs/commit-status#section-patch-status
