@@ -45,7 +45,7 @@ dependencies:
   meta: ^1.7.0
   path: ^1.8.1
   path_provider: ^2.0.10 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
-  provider: ^6.0.2
+  provider: ^6.0.3
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.2
   window_size:
