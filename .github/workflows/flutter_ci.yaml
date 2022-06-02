@@ -97,17 +97,17 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
-      - name: run widget test with retry
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          command: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
-      - uses: codecov/codecov-action@v3
-        with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
-          files: ./coverage/lcov.widget_test.info
-          flags: widget_test,${{ matrix.os }}
-          fail_ci_if_error: true
+      # - name: run widget test with retry
+      #   uses: nick-invision/retry@v2
+      #   with:
+      #     timeout_minutes: 5
+      #     max_attempts: 3
+      #     command: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
+      # - uses: codecov/codecov-action@v3
+      #   with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
+      #     files: ./coverage/lcov.widget_test.info
+      #     flags: widget_test,${{ matrix.os }}
+      #     fail_ci_if_error: true
 
       - name: run integration test with retry
         uses: nick-invision/retry@v2
