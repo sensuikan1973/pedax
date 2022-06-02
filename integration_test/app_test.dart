@@ -26,7 +26,6 @@ Future<void> main() async {
     fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
-    Logger.level = Level.nothing;
   });
 
   testWidgets('home', (final tester) async {
