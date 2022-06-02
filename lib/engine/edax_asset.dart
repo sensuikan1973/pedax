@@ -76,6 +76,7 @@ class EdaxAsset {
       await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
+      Directory('$_docDir/カタカナ').createSync();
       File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
