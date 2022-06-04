@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -70,6 +71,7 @@ class EdaxAsset {
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
+    Logger().i(bookFilePath);
     if (bookFilePath.isEmpty) {
       final bookData = await _bookAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
