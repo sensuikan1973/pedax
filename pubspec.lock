@@ -147,7 +147,7 @@ packages:
       name: file_selector_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.2+1"
+    version: "0.8.2+2"
   file_selector_platform_interface:
     dependency: "direct dev"
     description:
@@ -168,7 +168,7 @@ packages:
       name: file_selector_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.2+1"
+    version: "0.8.2+2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -343,7 +343,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.10"
+    version: "2.0.11"
   path_provider_android:
     dependency: transitive
     description:
