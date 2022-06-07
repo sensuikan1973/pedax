@@ -44,7 +44,7 @@ dependencies:
   macos_secure_bookmarks: ^0.2.0
   meta: ^1.7.0
   path: ^1.8.1
-  path_provider: ^2.0.10 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
+  path_provider: ^2.0.11 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.3
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.2
