@@ -31,7 +31,7 @@ dependencies:
   crypto: ^3.0.1
   cupertino_icons: ^1.0.5
   # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
-  file_selector: ^0.8.4+2
+  file_selector: ^0.8.4+3
   file_selector_linux: ^0.0.2+1
   flutter:
     sdk: flutter
