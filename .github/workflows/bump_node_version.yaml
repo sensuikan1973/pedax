@@ -39,7 +39,7 @@ jobs:
 
             ---
             See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
-          branch: cron_upgrad_nodejs_version
+          branch: cron_upgrade_nodejs_version
           delete-branch: true
           labels: |
             dependencies
