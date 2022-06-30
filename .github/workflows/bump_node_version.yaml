@@ -43,7 +43,7 @@ jobs:
           delete-branch: true
           labels: |
             dependencies
-            mac
+            website
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge
