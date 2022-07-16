@@ -37,7 +37,6 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(AppLocalizations.of(context)!.bestpathCountAvailabilityDescription),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Switch(
                       value: _enabled.value!,
                       onChanged: (final value) {
@@ -46,7 +45,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                         _enabled.value = value;
                       },
                     ),
-                    const Spacer(),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text(AppLocalizations.of(context)!.bestpathCountPlayerLowerLimitDescription),
                     FutureBuilder<int>(
                       future: _playerLowerLimitOption.val,
