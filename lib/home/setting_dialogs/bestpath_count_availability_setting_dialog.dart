@@ -54,7 +54,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           final currentPlayerLowerLimit = snapshot.data!.first.toString();
                           final playerLowerLimitAppDefault = snapshot.data![1].toString();
                           if (currentPlayerLowerLimit == playerLowerLimitAppDefault) {
-                            _playerLowerLimitOptionTextController.text = 'default (only best move)';
+                            _playerLowerLimitOptionTextController.text = '128 (this is default, only best move.)';
                           } else {
                             _playerLowerLimitOptionTextController.text = currentPlayerLowerLimit;
                           }
@@ -81,7 +81,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           final currentOpponentLowerLimit = snapshot.data!.first.toString();
                           final opponentLowerLimitAppDefault = snapshot.data![1].toString();
                           if (currentOpponentLowerLimit == opponentLowerLimitAppDefault) {
-                            _opponentLowerLimitOptionTextController.text = 'default (only best move)';
+                            _opponentLowerLimitOptionTextController.text = '128 (this is default, only best move.)';
                           } else {
                             _opponentLowerLimitOptionTextController.text = currentOpponentLowerLimit;
                           }
