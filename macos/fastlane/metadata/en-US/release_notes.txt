@@ -1,1 +1,1 @@
-minor improvement of performance.
+Options have been added regarding the best path count, a feature for advanced users.
