@@ -548,8 +548,7 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.bestpathCountAvailabilitySetting));
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bestpathCountAvailabilitySetting), findsOneWidget);
-        await tester.tap(find.byType(ElevatedButton));
-        await tester.pumpAndSettle();
+        expect(find.byType(TextFormField), findsNWidgets(2));
         await tester.tap(find.byType(Switch));
         await tester.pumpAndSettle();
         await tester.tapAt(const Offset(1, 1));
