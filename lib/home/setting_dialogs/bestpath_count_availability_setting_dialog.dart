@@ -9,7 +9,7 @@ import '../../models/board_notifier.dart';
 
 final _documentationUrlOfBestpathCount = Uri.https(
   'sensuikan1973.github.io',
-  'libedax4dart/libedax4dart/LibEdax/edaxBookCountBestpath.html',
+  'libedax4dart/libedax4dart/LibEdax/edaxBookCountBoardBestpath.html',
 );
 
 class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
