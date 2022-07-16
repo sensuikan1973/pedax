@@ -24,7 +24,7 @@ coverage:
           - integration_test
     # See: https://docs.codecov.io/docs/commit-status#section-patch-status
     # See: https://json.schemastore.org/codecov.json
-    patch: false
+    patch: off
     changes: false
 
 parsers:
