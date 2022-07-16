@@ -47,10 +47,18 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text(AppLocalizations.of(context)!.bestpathCountPlayerLowerLimitDescription),
-                    FutureBuilder<int>(
-                      future: _playerLowerLimitOption.val,
+                    FutureBuilder<List<int>>(
+                      future: Future.wait([_playerLowerLimitOption.val, _playerLowerLimitOption.appDefaultValue]),
                       builder: (final _, final snapshot) {
-                        if (snapshot.hasData) _playerLowerLimitOptionTextController.text = snapshot.data!.toString();
+                        if (snapshot.hasData) {
+                          final currentPlayerLowerLimit = snapshot.data!.first.toString();
+                          final playerLowerLimitAppDefault = snapshot.data![1].toString();
+                          if (currentPlayerLowerLimit == playerLowerLimitAppDefault) {
+                            _playerLowerLimitOptionTextController.text = 'default (only best move)';
+                          } else {
+                            _playerLowerLimitOptionTextController.text = currentPlayerLowerLimit;
+                          }
+                        }
                         return TextFormField(
                           textAlign: TextAlign.center,
                           controller: _playerLowerLimitOptionTextController,
@@ -58,18 +66,26 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           keyboardType: TextInputType.number,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (str) async {
-                            final playerLowerLimit = int.tryParse(str);
+                            final newPlayerLowerLimit = int.tryParse(str);
                             await _playerLowerLimitOption
-                                .update(playerLowerLimit ?? await _playerLowerLimitOption.appDefaultValue);
+                                .update(newPlayerLowerLimit ?? await _playerLowerLimitOption.appDefaultValue);
                           },
                         );
                       },
                     ),
                     Text(AppLocalizations.of(context)!.bestpathCountOpponentLowerLimitDescription),
-                    FutureBuilder<int>(
-                      future: _opponentLowerLimitOption.val,
+                    FutureBuilder<List<int>>(
+                      future: Future.wait([_opponentLowerLimitOption.val, _opponentLowerLimitOption.appDefaultValue]),
                       builder: (final _, final snapshot) {
-                        if (snapshot.hasData) _opponentLowerLimitOptionTextController.text = snapshot.data!.toString();
+                        if (snapshot.hasData) {
+                          final currentOpponentLowerLimit = snapshot.data!.first.toString();
+                          final opponentLowerLimitAppDefault = snapshot.data![1].toString();
+                          if (currentOpponentLowerLimit == opponentLowerLimitAppDefault) {
+                            _opponentLowerLimitOptionTextController.text = 'default (only best move)';
+                          } else {
+                            _opponentLowerLimitOptionTextController.text = currentOpponentLowerLimit;
+                          }
+                        }
                         return TextFormField(
                           textAlign: TextAlign.center,
                           controller: _opponentLowerLimitOptionTextController,
@@ -77,9 +93,9 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           keyboardType: TextInputType.number,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (str) async {
-                            final opponentLowerLimit = int.tryParse(str);
+                            final newOpponentLowerLimit = int.tryParse(str);
                             await _opponentLowerLimitOption
-                                .update(opponentLowerLimit ?? await _opponentLowerLimitOption.appDefaultValue);
+                                .update(newOpponentLowerLimit ?? await _opponentLowerLimitOption.appDefaultValue);
                           },
                         );
                       },
