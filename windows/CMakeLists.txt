@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23.2)
+cmake_minimum_required(VERSION 3.22.0)
 project(pedax LANGUAGES CXX)
 
 set(BINARY_NAME "pedax")
