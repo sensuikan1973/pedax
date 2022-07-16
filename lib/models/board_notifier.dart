@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
 import '../engine/api/book_get_move_with_position.dart';
@@ -21,6 +22,7 @@ import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/native/book_file_option.dart';
 import '../engine/options/native/level_option.dart';
+import '../engine/options/pedax/bestpath_count_availability_option.dart';
 import 'board_state.dart';
 
 class BoardNotifier extends ValueNotifier<BoardState> {
@@ -156,7 +158,14 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     value.countBestpathList = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
     if (value.bookHasBeenLoaded) {
-      _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
+      _edaxServerPort.send(
+        CountBestpathRequest(
+          movesAtRequest: movesAtRequest,
+          playerLowerLimit: BookCountBoardBestPathLowerLimit.best,
+          opponentLowerLimit: BookCountBoardBestPathLowerLimit.best,
+          logger: _logger,
+        ),
+      );
     }
   }
 
