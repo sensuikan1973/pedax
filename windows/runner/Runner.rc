@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Reversi Board GUI with edax." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "pedax" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 com.done.sensuikan1973. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.done.sensuikan1973. All rights reserved." "\0"
             VALUE "OriginalFilename", "pedax.exe" "\0"
             VALUE "ProductName", "pedax" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
