@@ -15,6 +15,7 @@ jobs:
       - name: setup nodenv
         run: |
           brew install nodenv
+          # See: https://github.com/nodenv/node-build#upgrading
           brew update && brew upgrade node-build
 
       - name: install latest nodejs version
