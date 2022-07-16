@@ -60,7 +60,8 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (str) async {
                             final playerLowerLimit = int.tryParse(str);
-                            if (playerLowerLimit != null) await _playerLowerLimitOption.update(playerLowerLimit);
+                            await _playerLowerLimitOption
+                                .update(playerLowerLimit ?? await _playerLowerLimitOption.appDefaultValue);
                           },
                         );
                       },
@@ -78,7 +79,8 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (str) async {
                             final opponentLowerLimit = int.tryParse(str);
-                            if (opponentLowerLimit != null) await _opponentLowerLimitOption.update(opponentLowerLimit);
+                            await _opponentLowerLimitOption
+                                .update(opponentLowerLimit ?? await _opponentLowerLimitOption.appDefaultValue);
                           },
                         );
                       },
