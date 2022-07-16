@@ -22,7 +22,6 @@ import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/native/book_file_option.dart';
 import '../engine/options/native/level_option.dart';
-import '../engine/options/pedax/bestpath_count_availability_option.dart';
 import 'board_state.dart';
 
 class BoardNotifier extends ValueNotifier<BoardState> {
