@@ -13,7 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: setup nodenv
-        run: brew install nodenv && brew upgrade node-build
+        run: |
+          brew install nodenv
+          brew update && brew upgrade node-build
 
       - name: install latest nodejs version
         run: |
