@@ -46,7 +46,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                         _enabled.value = value;
                       },
                     ),
-                    const Divider(),
+                    const Spacer(),
                     Text(AppLocalizations.of(context)!.bestpathCountPlayerLowerLimitDescription),
                     FutureBuilder<int>(
                       future: _playerLowerLimitOption.val,
@@ -55,10 +55,13 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                         return TextFormField(
                           textAlign: TextAlign.center,
                           controller: _playerLowerLimitOptionTextController,
-                          autofocus: true,
                           decoration: InputDecoration(hintText: _hintTextOfLowerLimit),
                           keyboardType: TextInputType.number,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (str) async {
+                            final playerLowerLimit = int.tryParse(str);
+                            if (playerLowerLimit != null) await _playerLowerLimitOption.update(playerLowerLimit);
+                          },
                         );
                       },
                     ),
@@ -70,25 +73,15 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                         return TextFormField(
                           textAlign: TextAlign.center,
                           controller: _opponentLowerLimitOptionTextController,
-                          autofocus: true,
                           decoration: InputDecoration(hintText: _hintTextOfLowerLimit),
                           keyboardType: TextInputType.number,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (str) async {
+                            final opponentLowerLimit = int.tryParse(str);
+                            if (opponentLowerLimit != null) await _opponentLowerLimitOption.update(opponentLowerLimit);
+                          },
                         );
                       },
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        final playerLowerLimit = int.tryParse(_playerLowerLimitOptionTextController.text);
-                        if (playerLowerLimit != null) {
-                          await _playerLowerLimitOption.update(playerLowerLimit);
-                        }
-                        final opponentLowerLimit = int.tryParse(_opponentLowerLimitOptionTextController.text);
-                        if (opponentLowerLimit != null) {
-                          await _opponentLowerLimitOption.update(opponentLowerLimit);
-                        }
-                      },
-                      child: Text(AppLocalizations.of(context)!.bestpathCountLowerLimitSaveButton),
                     ),
                   ],
                 );
