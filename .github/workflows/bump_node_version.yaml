@@ -13,13 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: setup nodenv
-        run: brew install nodenv
+        run: brew install nodenv && brew upgrade node-build
 
       - name: install latest nodejs version
         run: |
           latest_version=$(nodenv install --list | sort -n -r | head -1)
           nodenv install $latest_version
           nodenv local $latest_version
+
+      - name: install website dependencies, and build
+        working-directory: website
+        run: yarn install && yarn build
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
