@@ -36,10 +36,11 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
     final boundary = captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
     // See: https://api.flutter.dev/flutter/rendering/RenderRepaintBoundary/toImage.html
     final image = await boundary.toImage(pixelRatio: 3);
-    final pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngByteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngBytes = pngByteData!.buffer.asUint8List();
 
     final file = File('${(await _tmpDir).path}/board_for_clipboard.png');
-    await file.writeAsBytes(pngBytes!.buffer.asUint8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes));
+    await file.writeAsBytes(pngBytes);
     await Pasteboard.writeFiles([file.path]);
   }
 
