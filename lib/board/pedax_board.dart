@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../engine/options/native/book_file_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
-import 'pedax_shortcuts/capture_board_image_shortcut.dart';
 import 'pedax_shortcuts/pedax_shortcut.dart';
 import 'square.dart';
 
@@ -43,7 +42,7 @@ class PedaxBoard extends StatefulWidget {
 class _PedaxBoardState extends State<PedaxBoard> {
   final _bookFileOption = const BookFileOption();
   late final BoardNotifier _boardNotifier;
-  late final List<PedaxShorcut> _shortcutList;
+  final List<PedaxShorcut> _shortcutList = shortcutList;
   int get _squareNumPerLine => 8;
   double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
   double get _stoneSize => (widget.bodyLength / _squareNumPerLine) - (_stoneMargin * 2);
@@ -56,7 +55,6 @@ class _PedaxBoardState extends State<PedaxBoard> {
   void initState() {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
-    _shortcutList = shortcutList(_boardNotifier);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -150,13 +148,12 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
     final targetEvents = _shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
-
-    // TODO: separate UI and logic expressly.
-    if (targetEvent.runtimeType == CaptureBoardImageShorcut) {
-      await (targetEvent! as CaptureBoardImageShorcut).runEventWithWidget(_captureKey);
-    } else {
-      await targetEvent?.runEvent();
-    }
+    await targetEvent?.runEvent(
+      PedaxShortcutEventArguments(
+        context.read<BoardNotifier>(),
+        _captureKey,
+      ),
+    );
   }
 
   Square _square(final int y, final int x) {

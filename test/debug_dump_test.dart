@@ -30,11 +30,10 @@ void main() {
     });
 
     testWidgets('ShortcutCheatsheetDialog', (final tester) async {
-      final boardNotifier = BoardNotifier();
       await tester.runAsync(() async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ShortcutCheatsheetDialog(shortcutList: shortcutList(boardNotifier)),
+            home: ShortcutCheatsheetDialog(shortcutList: shortcutList),
             localizationsDelegates: PedaxApp.localizationsDelegates,
             supportedLocales: PedaxApp.supportedLocales,
           ),

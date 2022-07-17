@@ -8,15 +8,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
 class CaptureBoardImageShorcut implements PedaxShorcut {
-  const CaptureBoardImageShorcut(this.boardNotifier);
-
-  @override
-  final BoardNotifier boardNotifier;
+  const CaptureBoardImageShorcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShorcut;
@@ -30,10 +26,8 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
       (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyP));
 
   @override
-  Future<void> runEvent() async {}
-
-  Future<void> runEventWithWidget(final GlobalKey captureKey) async {
-    final boundary = captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+  Future<void> runEvent(final PedaxShortcutEventArguments argus) async {
+    final boundary = argus.captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
     // See: https://api.flutter.dev/flutter/rendering/RenderRepaintBoundary/toImage.html
     final image = await boundary.toImage(pixelRatio: 3);
     final pngByteData = await image.toByteData(format: ui.ImageByteFormat.png);

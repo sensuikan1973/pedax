@@ -4,15 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 
-import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
 class CopyMovesShorcut implements PedaxShorcut {
-  const CopyMovesShorcut(this.boardNotifier);
-
-  @override
-  final BoardNotifier boardNotifier;
+  const CopyMovesShorcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyMoves;
@@ -26,8 +22,8 @@ class CopyMovesShorcut implements PedaxShorcut {
       (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyC));
 
   @override
-  Future<void> runEvent() async => Clipboard.setData(
-        ClipboardData(text: boardNotifier.value.currentMovesWithoutPassString),
+  Future<void> runEvent(final PedaxShortcutEventArguments args) async => Clipboard.setData(
+        ClipboardData(text: args.boardNotifier.value.currentMovesWithoutPassString),
       );
 
   @visibleForTesting
