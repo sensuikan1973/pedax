@@ -35,12 +35,10 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
   Future<void> runEventWithWidget(final GlobalKey captureKey) async {
     final boundary = captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
     final image = await boundary.toImage(pixelRatio: 3);
-    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
 
     final file = File('${(await _tmpDir).path}/board_for_clipboard.png');
-    await file.writeAsBytes(
-      byteData!.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes),
-    );
+    await file.writeAsBytes(pngBytes!.buffer.asUint8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes));
     await Pasteboard.writeFiles([file.path]);
   }
 
