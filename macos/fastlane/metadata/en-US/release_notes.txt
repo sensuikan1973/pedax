@@ -1,1 +1,1 @@
-minor improvement of performance.
+The board can be copied to the clipboard as an image.

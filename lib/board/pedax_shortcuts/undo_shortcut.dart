@@ -2,15 +2,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 
-import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
 class UndoShorcut implements PedaxShorcut {
-  const UndoShorcut(this.boardNotifier);
-
-  @override
-  final BoardNotifier boardNotifier;
+  const UndoShorcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelUndo;
@@ -23,7 +19,7 @@ class UndoShorcut implements PedaxShorcut {
       keyEvent.isKeyPressed(logicalKeyU) || keyEvent.isKeyPressed(logicalKeyArrowLeft);
 
   @override
-  Future<void> runEvent() async => boardNotifier.requestUndo();
+  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndo();
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKeyU => LogicalKeyboardKey.keyU;

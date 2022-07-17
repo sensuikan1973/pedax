@@ -9,10 +9,14 @@ import 'response_schema.dart';
 class CountBestpathRequest implements RequestSchema {
   const CountBestpathRequest({
     required final this.movesAtRequest,
+    required final this.playerLowerLimit,
+    required final this.opponentLowerLimit,
     required final this.logger,
   });
 
   final String movesAtRequest;
+  final int playerLowerLimit;
+  final int opponentLowerLimit;
   final Logger logger;
 }
 
@@ -52,7 +56,12 @@ Stream<CountBestpathResponse> executeCountBestpath(
     edax.edaxBookStopCountBestpath();
     final moves = request.movesAtRequest + move.moveString;
     final bookMoveListWithPosition = edax.edaxGetBookMoveWithPositionByMoves(moves);
-    final result = edax.edaxBookCountBestpath(bookMoveListWithPosition.position.board);
+    final result = edax.edaxBookCountBoardBestpath(
+      bookMoveListWithPosition.position.board,
+      playerColor: edax.edaxGetCurrentPlayer(),
+      playerLowerLimit: request.playerLowerLimit,
+      opponentLowerLimit: request.opponentLowerLimit,
+    );
     yield CountBestpathResponse(
       rootMove: move.moveString,
       countBestpathResult: result,

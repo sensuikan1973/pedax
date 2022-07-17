@@ -21,6 +21,8 @@ import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/native/book_file_option.dart';
 import '../engine/options/native/level_option.dart';
+import '../engine/options/pedax/bestpath_count_opponent_lower_limit.dart';
+import '../engine/options/pedax/bestpath_count_player_lower_limit.dart';
 import 'board_state.dart';
 
 class BoardNotifier extends ValueNotifier<BoardState> {
@@ -32,6 +34,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   late final Stream<dynamic> _receiveStream;
   final _levelOption = const LevelOption();
   final _bookFileOption = const BookFileOption();
+  final _bestpathCountPlayerLowerLimitOption = const BestpathCountPlayerLowerLimitOption();
+  final _bestpathCountOpponentLowerLimitOption = const BestpathCountOpponentLowerLimitOption();
 
   @override
   void dispose() {
@@ -152,19 +156,26 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     }
   }
 
-  void _requestCountBestpath(final String movesAtRequest) {
+  Future<void> _requestCountBestpath(final String movesAtRequest) async {
     value.countBestpathList = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
     if (value.bookHasBeenLoaded) {
-      _edaxServerPort.send(CountBestpathRequest(movesAtRequest: movesAtRequest, logger: _logger));
+      _edaxServerPort.send(
+        CountBestpathRequest(
+          movesAtRequest: movesAtRequest,
+          playerLowerLimit: await _bestpathCountPlayerLowerLimitOption.val,
+          opponentLowerLimit: await _bestpathCountOpponentLowerLimitOption.val,
+          logger: _logger,
+        ),
+      );
     }
   }
 
-  void _onMovesChanged(final String moves) {
+  Future<void> _onMovesChanged(final String moves) async {
     _requestBookPosition();
     if (value.mode == BoardMode.freePlay) {
       _requestLatestHintList(moves);
-      if (value.countBestpathAvailability) _requestCountBestpath(moves);
+      if (value.countBestpathAvailability) await _requestCountBestpath(moves);
     }
   }
 
@@ -172,7 +183,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   Future<void> _updateStateByEdaxServerResponse(final dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
-      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
+      if (value.currentMoves != message.moves) await _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -181,7 +192,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is PlayResponse) {
-      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
+      if (value.currentMoves != message.moves) await _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -198,7 +209,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
       if (!value.edaxInitOnce) value.edaxInitOnce = true;
-      _onMovesChanged(message.moves);
+      await _onMovesChanged(message.moves);
     } else if (message is NewResponse) {
       value
         ..board = message.board
@@ -207,9 +218,9 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
-      _onMovesChanged(message.moves);
+      await _onMovesChanged(message.moves);
     } else if (message is RotateResponse) {
-      _onMovesChanged(message.moves);
+      await _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -218,7 +229,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is UndoResponse) {
-      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
+      if (value.currentMoves != message.moves) await _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -227,7 +238,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is RedoResponse) {
-      if (value.currentMoves != message.moves) _onMovesChanged(message.moves);
+      if (value.currentMoves != message.moves) await _onMovesChanged(message.moves);
       value
         ..board = message.board
         ..squaresOfPlayer = UnmodifiableListView(message.board.squaresOfPlayer)
@@ -261,7 +272,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       }
     } else if (message is BookLoadResponse) {
       value.bookLoadStatus = BookLoadStatus.loaded;
-      _onMovesChanged(value.currentMoves);
+      await _onMovesChanged(value.currentMoves);
       await _bookFileOption.stopAccessingSecurityScopedResource();
     } else if (message is GetBookMoveWithPositionResponse) {
       value

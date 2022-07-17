@@ -2,9 +2,6 @@
   "name": "pedax",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -18,12 +15,12 @@
   },
   "dependencies": {
     "//": "See: https://github.com/facebook/docusaurus/pull/6561 , https://github.com/facebook/docusaurus/issues/6520",
-    "@docusaurus/core": "2.0.0-beta.21",
-    "@docusaurus/preset-classic": "2.0.0-beta.21",
+    "@docusaurus/core": "2.0.0-rc.1",
+    "@docusaurus/preset-classic": "2.0.0-rc.1",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.2.0"
   },
   "browserslist": {
     "production": [

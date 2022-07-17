@@ -14,8 +14,9 @@
   "hintStepByStepSetting": "評価値の段階表示",
   "hintStepByStepDescription": "レベル設定を上限として、評価値を段階的に表示します。\n途中段階の評価値は半透明で表示されます。\n\nこれは便利ですが、結果的に解析時間は長くなります。",
   "bestpathCountAvailabilitySetting": "最小暗記数指標 [上級者向け]",
-  "bestpathCountAvailabilityDescription": "オンにすると、評価値の左下に「黒に必要な最小暗記数」、右下に「白に必要な最小暗記数」の指標が表示されます。\nこの指標は、お互いに book 内包の最善手しか打たないと仮定した時に、どれだけの進行数を覚えていれば絶対に負けないかを算出したものです。\nただし、book の深さや精度によって指標の信頼度は異なります。\nこの機能を適切に理解するには、下記の技術ドキュメントを読む必要があります。",
-  "bestpathCountAvailabilityDocumentationLink": "ドキュメントを読む",
+  "bestpathCountAvailabilityDescription": "オンにすると、評価値の左下に「黒に必要な最小暗記数」、右下に「白に必要な最小暗記数」の指標が表示されます。\nこの指標は、お互いに book 内包の手のうち、下部設定の範囲内の手しか打たないと仮定した時に、どれだけの進行数を覚えていれば絶対に負けないかを算出したものです。\nただし、book の深さや精度によって指標の信頼度は異なります。",
+  "bestpathCountPlayerLowerLimitDescription": "手番側の選ぶ手の最小評価値",
+  "bestpathCountOpponentLowerLimitDescription": "相手番側の選ぶ手の最小評価値",
   "loadingBookFile": "book を読み込み中...",
   "finishedLoadingBookFile": "book の読み込みが終わりました ＼(^o^)／",
   "positionInfo": "📓 完全: {fullNum}",
@@ -42,5 +43,6 @@
   "shortcutLabelRotate180": "180 度回転させる",
   "shortcutLabelInit": "完全な新規局面にする",
   "shortcutLabelNew": "盤面配置に基づいた新規局面にする",
+  "shortcutLabelCaptureBoardImageShorcut": "盤面画像をクリップボードにコピー",
   "chooseBookFile": "選ぶ"
 }

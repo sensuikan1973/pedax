@@ -198,7 +198,7 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(12),
           onPressed: () => showDialog<void>(
             context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList(context.read<BoardNotifier>())),
+            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
           ),
         ),
         Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
