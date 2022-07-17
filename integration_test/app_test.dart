@@ -30,6 +30,30 @@ Future<void> main() async {
     Logger.level = Level.info;
   });
 
+  testWidgets('home_debug', (final tester) async {
+    await tester.runAsync(() async {
+      await pedax.main();
+      await tester.pumpAndSettle();
+
+      final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
+      final l10n = AppLocalizations.of(context)!;
+
+      expect(find.text(l10n.freePlayMode), findsOneWidget);
+
+      await waitEdaxSetuped(tester);
+      await tester.pump();
+      expect(find.byType(Home), findsOneWidget);
+      expect(find.byType(PedaxBoard), findsOneWidget);
+
+      await waitEdaxServerResponse(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2);
+      expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 2);
+      expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
+    });
+  });
+
   testWidgets('home', (final tester) async {
     await tester.runAsync(() async {
       await pedax.main();
@@ -52,13 +76,13 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
-      await tester.tap(findByCoordinate('f5'));
-      await waitEdaxServerResponse(tester);
-      await tester.pump(const Duration(seconds: 1));
-      expectStoneNum(tester, SquareType.black, 4);
-      expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
-      expectStoneNum(tester, SquareType.white, 1);
-      expectStoneCoordinates(tester, ['d4'], SquareType.white);
+      // await tester.tap(findByCoordinate('f5'));
+      // await waitEdaxServerResponse(tester);
+      // await tester.pump(const Duration(seconds: 1));
+      // expectStoneNum(tester, SquareType.black, 4);
+      // expectStoneCoordinates(tester, ['d5', 'e4', 'e5', 'f5'], SquareType.black);
+      // expectStoneNum(tester, SquareType.white, 1);
+      // expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
       // // about pedax
       // await tester.tap(find.byIcon(Icons.menu));
