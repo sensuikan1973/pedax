@@ -146,6 +146,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       );
 
   Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
+    if (!mounted) return;
     final targetEvents = _shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
     await targetEvent?.runEvent(
