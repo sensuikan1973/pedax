@@ -42,7 +42,6 @@ class PedaxBoard extends StatefulWidget {
 class _PedaxBoardState extends State<PedaxBoard> {
   final _bookFileOption = const BookFileOption();
   late final BoardNotifier _boardNotifier;
-  final List<PedaxShorcut> _shortcutList = shortcutList;
   int get _squareNumPerLine => 8;
   double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
   double get _stoneSize => (widget.bodyLength / _squareNumPerLine) - (_stoneMargin * 2);
@@ -147,7 +146,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
 
   Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
     if (!mounted) return;
-    final targetEvents = _shortcutList.where((final el) => el.fired(event));
+    final targetEvents = shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
     await targetEvent?.runEvent(
       PedaxShortcutEventArguments(
