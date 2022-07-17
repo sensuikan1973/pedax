@@ -31,7 +31,9 @@ class BookFileOption implements EngineNativeOption<String> {
   @override
   Future<String> get val async {
     final pref = await _preferences;
-    Logger().i(pref.getString(prefKey));
+
+    final path = pref.getString(prefKey);
+    Logger().i('path is $path. exsit? is ${File(path!).existsSync()}');
     if (!Platform.isMacOS) return pref.getString(prefKey) ?? await appDefaultValue;
 
     final bookmark = pref.getString(bookmarkPrefKey);
