@@ -43,5 +43,6 @@
   "shortcutLabelRotate180": "180 度回転させる",
   "shortcutLabelInit": "完全な新規局面にする",
   "shortcutLabelNew": "盤面配置に基づいた新規局面にする",
+  "shortcutLabelCaptureBoardImageShorcut": "盤面画像をクリップボードにコピー",
   "chooseBookFile": "選ぶ"
 }
