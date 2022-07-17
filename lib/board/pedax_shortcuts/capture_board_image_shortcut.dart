@@ -22,7 +22,7 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShorcut;
 
   @override
-  String get keys => Platform.isMacOS ? '⌃P or ⌘P' : 'Ctrl + CP';
+  String get keys => Platform.isMacOS ? '⌃P or ⌘P' : 'Ctrl + P';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
