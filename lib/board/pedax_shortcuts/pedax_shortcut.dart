@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 
 import '../../models/board_notifier.dart';
+import 'capture_board_image_shortcut.dart';
 import 'copy_moves_shortcut.dart';
 import 'init_shortcut.dart';
 import 'new_shortcut.dart';
@@ -33,4 +34,5 @@ List<PedaxShorcut> shortcutList(final BoardNotifier boardNotifier) => [
       PasteMovesShorcut(boardNotifier),
       SwitchHintVisibilityShorcut(boardNotifier),
       Rotate180Shorcut(boardNotifier),
+      CaptureBoardImageShorcut(boardNotifier),
     ];

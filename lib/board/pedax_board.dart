@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../engine/options/native/book_file_option.dart';
 import '../models/board_notifier.dart';
 import '../models/board_state.dart';
+import 'pedax_shortcuts/capture_board_image_shortcut.dart';
 import 'pedax_shortcuts/pedax_shortcut.dart';
 import 'square.dart';
 
@@ -49,6 +50,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Color get _coordinateLabelColor => Colors.white54;
   Color get _frameColor => Colors.black;
   double get _lengthWithFrame => widget.bodyLength + widget.frameWidth * 2;
+  final GlobalKey _captureKey = GlobalKey();
 
   @override
   void initState() {
@@ -66,31 +68,34 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: _lengthWithFrame,
-            color: _frameColor,
-            child: Row(
+  Widget build(final BuildContext context) => RepaintBoundary(
+        key: _captureKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: _lengthWithFrame,
+              color: _frameColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                  _xCoordinateLabels,
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                ],
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
-                _xCoordinateLabels,
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                _yCoordinateLabels,
+                _boardBody,
+                _yCoordinateRightFrame,
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _yCoordinateLabels,
-              _boardBody,
-              _yCoordinateRightFrame,
-            ],
-          ),
-          _xCoordinateBottomFrame,
-        ],
+            _xCoordinateBottomFrame,
+          ],
+        ),
       );
 
   Widget get _xCoordinateLabels => Container(
@@ -145,7 +150,13 @@ class _PedaxBoardState extends State<PedaxBoard> {
   Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
     final targetEvents = _shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
-    await targetEvent?.runEvent();
+
+    // TODO: separate UI and logic expressly.
+    if (targetEvent.runtimeType == CaptureBoardImageShorcut) {
+      await (targetEvent! as CaptureBoardImageShorcut).runEventWithWidget(_captureKey);
+    } else {
+      await targetEvent?.runEvent();
+    }
   }
 
   Square _square(final int y, final int x) {
