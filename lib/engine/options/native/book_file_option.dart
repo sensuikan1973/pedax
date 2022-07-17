@@ -23,7 +23,7 @@ class BookFileOption implements EngineNativeOption<String> {
   // REF: native default value is `./data/book.dat`
   //      https://github.com/abulmo/edax-reversi/blob/01899aecce8bc780517149c80f178fb478a17a0b/src/options.c#L323
   @override
-  Future<String> get appDefaultValue async => p.join('${(await _docDir).path}\\カタカナ\\カタカナ', _defaultFileName);
+  Future<String> get appDefaultValue async => p.join('${(await _docDir).path}\\カタカナ', _defaultFileName);
 
   String get _defaultFileName => 'book.dat';
 
