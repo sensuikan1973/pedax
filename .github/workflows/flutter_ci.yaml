@@ -71,16 +71,16 @@ jobs:
           - os: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: macos-latest
-            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-            integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: ubuntu-latest
-            setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
-            integration_test_command: |
-              touch ./coverage/lcov.integration_test.info
-              timeout 240 xvfb-run -a \
-              flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info \
-              || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
+          # - os: macos-latest
+          #   setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+          #   integration_test_command: flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info
+          # - os: ubuntu-latest
+          #   setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
+          #   integration_test_command: |
+          #     touch ./coverage/lcov.integration_test.info
+          #     timeout 240 xvfb-run -a \
+          #     flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info \
+          #     || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.4.0
