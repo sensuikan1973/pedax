@@ -34,6 +34,7 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
 
   Future<void> runEventWithWidget(final GlobalKey captureKey) async {
     final boundary = captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+    // See: https://api.flutter.dev/flutter/rendering/RenderRepaintBoundary/toImage.html
     final image = await boundary.toImage(pixelRatio: 3);
     final pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
 
