@@ -1,1 +1,1 @@
-Options have been added regarding the best path count, a feature for advanced users.
+The board can be copied to the clipboard as an image.
