@@ -2,15 +2,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 
-import '../../models/board_notifier.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
 class RedoShorcut implements PedaxShorcut {
-  const RedoShorcut(this.boardNotifier);
-
-  @override
-  final BoardNotifier boardNotifier;
+  const RedoShorcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelRedo;
@@ -23,7 +19,7 @@ class RedoShorcut implements PedaxShorcut {
       keyEvent.isKeyPressed(logicalKey) || keyEvent.isKeyPressed(logicalKeyArrowRight);
 
   @override
-  Future<void> runEvent() async => boardNotifier.requestRedo();
+  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyR;

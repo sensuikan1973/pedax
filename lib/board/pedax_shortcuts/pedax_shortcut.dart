@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 
 import '../../models/board_notifier.dart';
+import 'capture_board_image_shortcut.dart';
 import 'copy_moves_shortcut.dart';
 import 'init_shortcut.dart';
 import 'new_shortcut.dart';
@@ -15,22 +16,29 @@ import 'undo_shortcut.dart';
 
 @immutable
 abstract class PedaxShorcut {
-  BoardNotifier get boardNotifier;
   String label(final AppLocalizations localizations);
   String get keys;
   bool fired(final RawKeyEvent keyEvent);
-  Future<void> runEvent();
+  Future<void> runEvent(final PedaxShortcutEventArguments argus);
 }
 
-List<PedaxShorcut> shortcutList(final BoardNotifier boardNotifier) => [
-      InitShorcut(boardNotifier),
-      NewShorcut(boardNotifier),
-      UndoShorcut(boardNotifier),
-      RedoShorcut(boardNotifier),
-      UndoAllShorcut(boardNotifier),
-      RedoAllShorcut(boardNotifier),
-      CopyMovesShorcut(boardNotifier),
-      PasteMovesShorcut(boardNotifier),
-      SwitchHintVisibilityShorcut(boardNotifier),
-      Rotate180Shorcut(boardNotifier),
+class PedaxShortcutEventArguments {
+  const PedaxShortcutEventArguments(this.boardNotifier, this.captureKey);
+
+  final BoardNotifier boardNotifier;
+  final GlobalKey captureKey;
+}
+
+List<PedaxShorcut> get shortcutList => const [
+      InitShorcut(),
+      NewShorcut(),
+      UndoShorcut(),
+      RedoShorcut(),
+      UndoAllShorcut(),
+      RedoAllShorcut(),
+      CopyMovesShorcut(),
+      PasteMovesShorcut(),
+      SwitchHintVisibilityShorcut(),
+      Rotate180Shorcut(),
+      CaptureBoardImageShorcut(),
     ];

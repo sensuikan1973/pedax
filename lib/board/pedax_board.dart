@@ -42,19 +42,18 @@ class PedaxBoard extends StatefulWidget {
 class _PedaxBoardState extends State<PedaxBoard> {
   final _bookFileOption = const BookFileOption();
   late final BoardNotifier _boardNotifier;
-  late final List<PedaxShorcut> _shortcutList;
   int get _squareNumPerLine => 8;
   double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
   double get _stoneSize => (widget.bodyLength / _squareNumPerLine) - (_stoneMargin * 2);
   Color get _coordinateLabelColor => Colors.white54;
   Color get _frameColor => Colors.black;
   double get _lengthWithFrame => widget.bodyLength + widget.frameWidth * 2;
+  final GlobalKey _captureKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
-    _shortcutList = shortcutList(_boardNotifier);
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -66,31 +65,34 @@ class _PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  Widget build(final BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: _lengthWithFrame,
-            color: _frameColor,
-            child: Row(
+  Widget build(final BuildContext context) => RepaintBoundary(
+        key: _captureKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: _lengthWithFrame,
+              color: _frameColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                  _xCoordinateLabels,
+                  SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                ],
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
-                _xCoordinateLabels,
-                SizedBox(height: widget.frameWidth, width: widget.frameWidth),
+                _yCoordinateLabels,
+                _boardBody,
+                _yCoordinateRightFrame,
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _yCoordinateLabels,
-              _boardBody,
-              _yCoordinateRightFrame,
-            ],
-          ),
-          _xCoordinateBottomFrame,
-        ],
+            _xCoordinateBottomFrame,
+          ],
+        ),
       );
 
   Widget get _xCoordinateLabels => Container(
@@ -143,9 +145,15 @@ class _PedaxBoardState extends State<PedaxBoard> {
       );
 
   Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
-    final targetEvents = _shortcutList.where((final el) => el.fired(event));
+    if (!mounted) return;
+    final targetEvents = shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
-    await targetEvent?.runEvent();
+    await targetEvent?.runEvent(
+      PedaxShortcutEventArguments(
+        context.read<BoardNotifier>(),
+        _captureKey,
+      ),
+    );
   }
 
   Square _square(final int y, final int x) {

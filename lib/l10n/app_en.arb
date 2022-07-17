@@ -46,5 +46,6 @@
   "shortcutLabelRotate180": "rotate 180",
   "shortcutLabelInit": "init board",
   "shortcutLabelNew": "new board based on disc arranges",
+  "shortcutLabelCaptureBoardImageShorcut": "capture board image to clipboard",
   "chooseBookFile": "choose"
 }
