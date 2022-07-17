@@ -60,70 +60,70 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 1);
       expectStoneCoordinates(tester, ['d4'], SquareType.white);
 
-      // about pedax
-      await tester.tap(find.byIcon(Icons.menu));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10n.about));
-      await tester.pumpAndSettle();
-      await tester.tapAt(const Offset(1, 1));
-      await tester.pumpAndSettle();
+      // // about pedax
+      // await tester.tap(find.byIcon(Icons.menu));
+      // await tester.pumpAndSettle();
+      // await tester.tap(find.text(l10n.about));
+      // await tester.pumpAndSettle();
+      // await tester.tapAt(const Offset(1, 1));
+      // await tester.pumpAndSettle();
 
-      // read book file path
-      await tester.tap(find.byIcon(Icons.menu));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10n.bookFilePathSetting));
-      await tester.pumpAndSettle();
-      expect(find.text(l10n.bookFilePathSetting), findsOneWidget);
-      await tester.tap(find.text(l10n.cancelOnDialog));
-      await tester.pumpAndSettle();
+      // // read book file path
+      // await tester.tap(find.byIcon(Icons.menu));
+      // await tester.pumpAndSettle();
+      // await tester.tap(find.text(l10n.bookFilePathSetting));
+      // await tester.pumpAndSettle();
+      // expect(find.text(l10n.bookFilePathSetting), findsOneWidget);
+      // await tester.tap(find.text(l10n.cancelOnDialog));
+      // await tester.pumpAndSettle();
 
-      // update level setting
-      await tester.tap(find.byIcon(Icons.menu));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10n.levelSetting));
-      await tester.pumpAndSettle();
-      expect(find.text(l10n.levelSetting), findsOneWidget);
-      await tester.enterText(find.byType(EditableText), 1.toString());
-      await tester.tap(find.text(l10n.updateSettingOnDialog));
-      await tester.pumpAndSettle();
-      await Future<void>.delayed(const Duration(seconds: 1));
-      await waitEdaxServerResponse(tester);
+      // // update level setting
+      // await tester.tap(find.byIcon(Icons.menu));
+      // await tester.pumpAndSettle();
+      // await tester.tap(find.text(l10n.levelSetting));
+      // await tester.pumpAndSettle();
+      // expect(find.text(l10n.levelSetting), findsOneWidget);
+      // await tester.enterText(find.byType(EditableText), 1.toString());
+      // await tester.tap(find.text(l10n.updateSettingOnDialog));
+      // await tester.pumpAndSettle();
+      // await Future<void>.delayed(const Duration(seconds: 1));
+      // await waitEdaxServerResponse(tester);
 
-      // shortcut cheatsheet
-      await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
-      await tester.pumpAndSettle();
-      expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
-      await tester.tapAt(const Offset(1, 1));
-      await tester.pumpAndSettle();
+      // // shortcut cheatsheet
+      // await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
+      // await tester.pumpAndSettle();
+      // expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
+      // await tester.tapAt(const Offset(1, 1));
+      // await tester.pumpAndSettle();
 
-      // copy moves
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      final clipboardData = await Clipboard.getData('text/plain');
-      expect(clipboardData?.text, 'F5');
+      // // copy moves
+      // await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      // await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+      // await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      // final clipboardData = await Clipboard.getData('text/plain');
+      // expect(clipboardData?.text, 'F5');
 
-      // paste moves
-      await Clipboard.setData(const ClipboardData(text: 'c4'));
-      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.pumpAndSettle();
+      // // paste moves
+      // await Clipboard.setData(const ClipboardData(text: 'c4'));
+      // await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      // await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+      // await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      // await tester.pumpAndSettle();
 
-      // arrange discs mode
-      await tester.tap(find.byType(AppBar));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(l10n.arrangeDiscsMode));
-      await tester.pumpAndSettle();
+      // // arrange discs mode
+      // await tester.tap(find.byType(AppBar));
+      // await tester.pumpAndSettle();
+      // await tester.tap(find.text(l10n.arrangeDiscsMode));
+      // await tester.pumpAndSettle();
 
-      // arrange black disc;
-      await tester.tap(findByCoordinate('a8'));
-      await waitEdaxServerResponse(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 5);
-      expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'e4', 'a8'], SquareType.black);
-      expectStoneNum(tester, SquareType.white, 1);
-      expectStoneCoordinates(tester, ['e5'], SquareType.white);
+      // // arrange black disc;
+      // await tester.tap(findByCoordinate('a8'));
+      // await waitEdaxServerResponse(tester);
+      // await tester.pump();
+      // expectStoneNum(tester, SquareType.black, 5);
+      // expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'e4', 'a8'], SquareType.black);
+      // expectStoneNum(tester, SquareType.white, 1);
+      // expectStoneCoordinates(tester, ['e5'], SquareType.white);
     });
   });
 }

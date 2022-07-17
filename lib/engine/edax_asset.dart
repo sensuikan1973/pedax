@@ -76,9 +76,9 @@ class EdaxAsset {
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
     } else if (!File(bookFilePath).existsSync()) {
-      Logger().i(bookFilePath);
+      Logger().i('$bookFilePath does not exist');
       final bookData = await _bookAssetData;
-      Directory('${(await _docDir).path}/カタカナ').createSync();
+      Directory('${(await _docDir).path}\\カタカナ\\カタカナ').createSync();
       File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
