@@ -51,7 +51,7 @@ flutter format -l 120 .
 ### [run](https://docs.flutter.dev/desktop#create-and-run)
 
 ```sh
-flutter run -d macos
+flutter run --dart-define "SENTRY_DSN=xxx" # env is optional.
 ```
 
 ### [test](https://docs.flutter.dev/testing)
@@ -95,12 +95,14 @@ dart fix --apply
 ```sh
 REVISION=xxx
 P8_PATH=xxx
+SENTRY_DSN=xxx
 
 ASC_KEY_ID=xxx \
 ASC_ISSUER_ID=xxx \
 APPLE_ID=xxx \
 ITC_TEAM_ID=xxx \
-./scripts/deploy_macos_app_to_app_store.sh -revision $REVISION -p8-file-path $P8_PATH
+./scripts/deploy_macos_app_to_app_store.sh \
+-revision "$REVISION" -p8-file-path "$P8_PATH" -sentry-dsn "$SENTRY_DSN"
 ```
 
 After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
@@ -135,3 +137,4 @@ After that, submit [Apple developer console](https://developer.apple.com/account
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
 - linux
   - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
+- [Sentry](https://sentry.io/settings/naoki-shimizu/projects/pedax/)

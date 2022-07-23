@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
@@ -291,6 +293,17 @@ class _HomeState extends State<Home> {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
+      try {
+        throw ('fooo');
+      } catch (exception, stackTrace) {
+        Logger().d('foo erro');
+        await Sentry.captureMessage('foo');
+        final sentryId = await Sentry.captureException(
+          exception,
+          stackTrace: stackTrace,
+        );
+        Logger().d(sentryId);
+      }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(

@@ -51,7 +51,7 @@ jobs:
       - name: install dependencies
         run: flutter pub get
       - name: build
-        run: flutter build ${{ matrix.subcommand }} --release
+        run: flutter build ${{ matrix.subcommand }} --release --dart-defin =SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: prepare to pack
         shell: bash
         run: ${{ matrix.prepare_to_pack_script }}
