@@ -290,21 +290,23 @@ class _HomeState extends State<Home> {
   }
 
   void _showSnackBarOfBookLoaded() {
+    Sentry.captureMessage('foo');
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
-      throw Exception('dummy exception error');
-      // try {
-      //   throw Exception('dummy exception error');
-      // } on Exception catch (exception, stackTrace) {
-      //   Logger().d('foo error');
-      //   await Sentry.captureMessage('foo');
-      //   final sentryId = await Sentry.captureException(
-      //     exception,
-      //     stackTrace: stackTrace,
-      //   );
-      //   Logger().d(sentryId);
-      // }
+      await Sentry.captureMessage('will throw dummy error');
+      Logger().d('will throw dummy error');
+      try {
+        throw Exception('dummy error');
+      } on Exception catch (exception, stackTrace) {
+        Logger().d('catched error');
+        final sentryId = await Sentry.captureException(
+          exception,
+          stackTrace: stackTrace,
+        );
+        Logger().d(Sentry.isEnabled);
+        Logger().d(sentryId);
+      }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
