@@ -293,17 +293,18 @@ class _HomeState extends State<Home> {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
-      try {
-        throw Exception('dummy argument error');
-      } on Exception catch (exception, stackTrace) {
-        Logger().d('foo error');
-        await Sentry.captureMessage('foo');
-        final sentryId = await Sentry.captureException(
-          exception,
-          stackTrace: stackTrace,
-        );
-        Logger().d(sentryId);
-      }
+      throw Exception('dummy exception error')
+      // try {
+      //   throw Exception('dummy exception error');
+      // } on Exception catch (exception, stackTrace) {
+      //   Logger().d('foo error');
+      //   await Sentry.captureMessage('foo');
+      //   final sentryId = await Sentry.captureException(
+      //     exception,
+      //     stackTrace: stackTrace,
+      //   );
+      //   Logger().d(sentryId);
+      // }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
