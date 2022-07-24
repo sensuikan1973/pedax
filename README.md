@@ -137,4 +137,4 @@ After that, submit [Apple developer console](https://developer.apple.com/account
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
 - linux
   - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
-- [Sentry](https://sentry.io/settings/naoki-shimizu/projects/pedax/)
+- [Sentry](https://sentry.io/organizations/naoki-shimizu/issues/?project=6595416)
