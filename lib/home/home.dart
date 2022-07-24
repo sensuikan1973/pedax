@@ -296,7 +296,7 @@ class _HomeState extends State<Home> {
       try {
         throw ('fooo');
       } catch (exception, stackTrace) {
-        Logger().d('foo erro');
+        Logger().d('foo error');
         await Sentry.captureMessage('foo');
         final sentryId = await Sentry.captureException(
           exception,
