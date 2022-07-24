@@ -293,7 +293,7 @@ class _HomeState extends State<Home> {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
-      throw Exception('dummy exception error')
+      throw Exception('dummy exception error');
       // try {
       //   throw Exception('dummy exception error');
       // } on Exception catch (exception, stackTrace) {
