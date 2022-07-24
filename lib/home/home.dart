@@ -294,8 +294,8 @@ class _HomeState extends State<Home> {
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
       try {
-        throw ('fooo');
-      } catch (exception, stackTrace) {
+        throw ArgumentError('dummy argument error');
+      } on Exception catch (exception, stackTrace) {
         Logger().d('foo error');
         await Sentry.captureMessage('foo');
         final sentryId = await Sentry.captureException(
