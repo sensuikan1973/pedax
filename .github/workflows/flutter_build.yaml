@@ -57,7 +57,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.5.0
+      - uses: subosito/flutter-action@v2.6.1
         with:
           cache: true
       - name: setup flutter channel
