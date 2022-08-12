@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -290,21 +289,13 @@ class _HomeState extends State<Home> {
   }
 
   void _showSnackBarOfBookLoaded() {
-    Sentry.captureMessage('foo');
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
-      final sentryId = await Sentry.captureMessage('will throw dummy exception');
-      Logger().d('captureMessage result sentryId: $sentryId');
-      Logger().d('will throw dummy exception');
       try {
         throw Exception('dummy exception');
       } on Exception catch (exception, stackTrace) {
-        final sentryId = await Sentry.captureException(
-          exception,
-          stackTrace: stackTrace,
-        );
-        Logger().d('captureException result sentryId: $sentryId');
+        await Sentry.captureException(exception,stackTrace: stackTrace);
       }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
