@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart'; // ignore: unused_import
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -34,8 +35,7 @@ Future<void> main() async {
           options
             ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
             ..tracesSampleRate = 1.0
-            ..debug = const bool.fromEnvironment('SENTRY_DEBUG') || false; // ignore: do_not_use_environment
-          // ..attachThreads= true;
+            ..debug = kDebugMode;
         },
         appRunner: () => runApp(const PedaxApp()),
       );
