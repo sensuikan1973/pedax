@@ -8,7 +8,7 @@ set -euxo pipefail
 # shellcheck disable=SC2168
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
-zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path:
+zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path: sentry-dsn:
 
 if [[ -z "${opthash[(i)-revision]}" ]]; then
   echo "revision is required"
@@ -17,6 +17,11 @@ fi
 
 if [ -z "${opthash[(i)-p8-file-path]}" ]; then
   echo "p8-file-path is required"
+  exit
+fi
+
+if [ -z "${opthash[(i)-sentry-dsn]}" ]; then
+  echo "sentry-dsn is required"
   exit
 fi
 
@@ -32,7 +37,7 @@ if [[ -z "${opthash[(i)--skip-test]}" ]]; then
 fi
 
 # See: https://flutter.dev/desktop#macos
-flutter build macos --release
+flutter build macos --release --dart-define SENTRY_DSN="${opthash[-sentry-dsn]}"
 
 cd macos
 

@@ -72,7 +72,7 @@ jobs:
         run: flutter pub get
 
       - name: build
-        run: flutter build ${{ matrix.subcommand }} --release
+        run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
 
       - name: prepare to pack
         shell: bash

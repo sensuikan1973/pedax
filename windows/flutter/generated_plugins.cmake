@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   pasteboard
+  sentry_flutter
   window_size
 )
 
