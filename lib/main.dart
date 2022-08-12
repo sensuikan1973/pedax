@@ -23,20 +23,18 @@ Future<void> main() async {
     await Sentry.captureException(errorDetails.exception, stackTrace: errorDetails.stack);
   };
 
-  // https://docs.sentry.io/platforms/flutter/#configure
-  const sentryDsn = String.fromEnvironment('SENTRY_DSN'); // ignore: do_not_use_environment
-  Logger().d(sentryDsn);
-
-  // See: https://github.com/getsentry/sentry-dart/tree/6.7.0/flutter#usage
+  // See: https://github.com/getsentry/sentry-dart/tree/6.9.0/flutter#usage
   // See: https://docs.flutter.dev/testing/errors#errors-not-caught-by-flutter
   await runZonedGuarded(
     () async {
       await SentryFlutter.init(
         (options) {
+          // https://docs.sentry.io/platforms/flutter/#configure
           // https://pub.dev/documentation/sentry/latest/sentry_io/SentryOptions-class.html
           options
-            ..dsn = sentryDsn
-            ..tracesSampleRate = 1.0;
+            ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
+            ..tracesSampleRate = 1.0
+            ..debug = const bool.fromEnvironment('SENTRY_DEBUG') || false; // ignore: do_not_use_environment
           // ..attachThreads= true;
         },
         appRunner: () => runApp(const PedaxApp()),
