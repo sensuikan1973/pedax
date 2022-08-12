@@ -13,6 +13,10 @@
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
 
+	<!-- See: https://github.com/sensuikan1973/pedax/pull/705#issuecomment-1213459442 -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+
 	<key>com.apple.security.cs.allow-jit</key>
 	<true/>
 	<key>com.apple.security.network.server</key>

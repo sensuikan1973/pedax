@@ -12,5 +12,9 @@
 	<!-- See: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW18 -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
+
+	<!-- See: https://github.com/sensuikan1973/pedax/pull/705#issuecomment-1213459442 -->
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>
