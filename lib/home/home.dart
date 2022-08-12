@@ -295,7 +295,7 @@ class _HomeState extends State<Home> {
       try {
         throw Exception('dummy exception');
       } on Exception catch (exception, stackTrace) {
-        await Sentry.captureException(exception,stackTrace: stackTrace);
+        await Sentry.captureException(exception, stackTrace: stackTrace);
       }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
