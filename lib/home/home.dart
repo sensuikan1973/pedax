@@ -292,11 +292,6 @@ class _HomeState extends State<Home> {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
     WidgetsBinding.instance.addPostFrameCallback((final _) async {
       await Future<void>.delayed(const Duration(seconds: 1));
-      try {
-        throw Exception('dummy exception');
-      } on Exception catch (exception, stackTrace) {
-        await Sentry.captureException(exception, stackTrace: stackTrace);
-      }
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
