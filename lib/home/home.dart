@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../board/pedax_board.dart';
 import '../board/pedax_shortcuts/pedax_shortcut.dart';
