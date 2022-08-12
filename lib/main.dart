@@ -7,6 +7,12 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
+import 'engine/options/native/level_option.dart';
+import 'engine/options/native/n_tasks_option.dart';
+import 'engine/options/pedax/bestpath_count_availability_option.dart';
+import 'engine/options/pedax/bestpath_count_opponent_lower_limit.dart';
+import 'engine/options/pedax/bestpath_count_player_lower_limit.dart';
+import 'engine/options/pedax/hint_step_by_step_option.dart';
 
 @visibleForTesting
 const pedaxWindowMinSize = Size(550, 680);
@@ -35,14 +41,13 @@ Future<void> main() async {
           options
             ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
             ..tracesSampleRate = 1.0
-            ..debug = kDebugMode;
+            ..debug = kDebugMode
+            ..beforeSend = sentryBeforeSend;
         },
         appRunner: () => runApp(const PedaxApp()),
       );
     },
-    (exception, stackTrace) async {
-      await Sentry.captureException(exception, stackTrace: stackTrace);
-    },
+    (exception, stackTrace) async => Sentry.captureException(exception, stackTrace: stackTrace),
   );
 }
 
@@ -62,4 +67,29 @@ Future<void> _ensureMinWindowSize() async {
       height: pedaxWindowMinSize.height,
     ),
   );
+}
+
+// ignore: avoid_annotating_with_dynamic
+FutureOr<SentryEvent?> sentryBeforeSend(SentryEvent event, {dynamic hint}) async {
+  // https://docs.sentry.io/platforms/flutter/enriching-events/context/
+  Sentry.configureScope((scope) async {
+    await scope.setContexts(
+      'edax engine options',
+      {
+        'LevelOption': await const LevelOption().val,
+        'NTasksOption': await const NTasksOption().val,
+        'BestpathCountAvailabilityOption': await const BestpathCountAvailabilityOption().val,
+        'BestpathCountOpponentLowerLimitOption': await const BestpathCountOpponentLowerLimitOption().val,
+        'BestpathCountPlayerLowerLimitOption': await const BestpathCountPlayerLowerLimitOption().val,
+        'HintStepByStepOption': await const HintStepByStepOption().val,
+      },
+    );
+  });
+  final character = {
+    'name': 'Mighty Fighter',
+    'age': 19,
+    'attack_type': 'melee',
+  };
+  Sentry.configureScope((scope) => scope.setContexts('character', character));
+  return event;
 }
