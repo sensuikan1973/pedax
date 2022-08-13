@@ -102,7 +102,7 @@ ASC_ISSUER_ID=xxx \
 APPLE_ID=xxx \
 ITC_TEAM_ID=xxx \
 ./scripts/deploy_macos_app_to_app_store.sh \
--revision "$REVISION" -p8-file-path "$P8_PATH" -sentry-dsn "$SENTRY_DSN"
+-revision "$REVISION" -p8-file-path "$P8_PATH" -sentry-dsn "$SENTRY_DSN" --skip-test
 ```
 
 After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
