@@ -22,7 +22,7 @@ class Square extends StatelessWidget {
   final double length;
   final double margin; // margin to image
   final String coordinate;
-  final Function()? onTap;
+  final void Function()? onTap;
   final int? score;
   final int? bestpathCountOfBlack;
   final int? bestpathCountOfWhite;
@@ -51,7 +51,7 @@ class Square extends StatelessWidget {
       ..add(DoubleProperty('length', length))
       ..add(EnumProperty<SquareType>('type', type))
       ..add(StringProperty('coordinate', coordinate))
-      ..add(DiagnosticsProperty<Function()>('onTap', onTap))
+      ..add(DiagnosticsProperty<void Function()>('onTap', onTap))
       ..add(IntProperty('score', score))
       ..add(IntProperty('bestpathCountOfBlack', bestpathCountOfBlack))
       ..add(IntProperty('bestpathCountOfWhite', bestpathCountOfWhite))

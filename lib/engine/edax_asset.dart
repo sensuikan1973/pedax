@@ -30,7 +30,7 @@ class EdaxAsset {
   /// When book is large, initialization process becomes slow.
   /// In most cases, loading book should be processed on background
   Future<List<String>> buildInitLibEdaxParams({
-    final List<EngineNativeOption> options = const [NTasksOption(), EvalFileOption(), LevelOption()],
+    final List<EngineNativeOption<dynamic>> options = const [NTasksOption(), EvalFileOption(), LevelOption()],
   }) async {
     final result = [''];
     for (final option in options) {

@@ -428,7 +428,7 @@ class _HomeState extends State<Home> {
 class _Menu {
   const _Menu(this.type, this.onSelected);
   final _MenuType type;
-  final Function() onSelected;
+  final void Function() onSelected;
 }
 
 enum _MenuType {
