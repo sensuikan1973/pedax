@@ -29,7 +29,7 @@ jobs:
       - run: flutter pub get
 
       - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
-      
+
       - name: update native deps on macs
         if: runner.os == 'macOS'
         working-directory: macos
