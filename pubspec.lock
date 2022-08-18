@@ -140,7 +140,7 @@ packages:
       name: file_selector_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2+1"
+    version: "0.0.3"
   file_selector_macos:
     dependency: transitive
     description:
@@ -490,14 +490,14 @@ packages:
       name: sentry
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.9.0"
+    version: "6.9.1"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.9.0"
+    version: "6.9.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -662,7 +662,7 @@ packages:
     description:
       path: "plugins/window_size"
       ref: HEAD
-      resolved-ref: "4bc2c310e8acf3740ea0c2b326b3ef71280391f8"
+      resolved-ref: f899e00edebf205deee20b1e9788b00a31f8783d
       url: "https://github.com/google/flutter-desktop-embedding.git"
     source: git
     version: "0.1.0"
