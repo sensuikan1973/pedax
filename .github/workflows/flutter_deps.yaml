@@ -27,12 +27,14 @@ jobs:
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - run: flutter pub get
+
+      - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
+      
       - name: update native deps on macs
         if: runner.os == 'macOS'
         working-directory: macos
-        run: which pod && pod --version && rm Podfile.lock && pod install
+        run: which pod && pod --version && pod update
 
-      - run: flutter pub upgrade --null-safety # See: https://dart.dev/tools/pub/cmd/pub-upgrade#--null-safety
       - name: upgrade external binary
         shell: zsh {0}
         run: ./scripts/fetch_libedax_assets.sh
