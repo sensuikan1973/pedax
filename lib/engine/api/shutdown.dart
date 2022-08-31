@@ -11,7 +11,7 @@ class ShutdownRequest implements RequestSchema {
 
 @immutable
 class ShutdownResponse implements ResponseSchema<ShutdownRequest> {
-  const ShutdownResponse({required final this.request});
+  const ShutdownResponse({required this.request});
 
   @override
   final ShutdownRequest request;

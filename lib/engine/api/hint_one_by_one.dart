@@ -8,10 +8,10 @@ import 'response_schema.dart';
 @immutable
 class HintOneByOneRequest implements RequestSchema {
   const HintOneByOneRequest({
-    required final this.level,
-    required final this.stepByStep,
-    required final this.movesAtRequest,
-    required final this.logger,
+    required this.level,
+    required this.stepByStep,
+    required this.movesAtRequest,
+    required this.logger,
   });
 
   final int level;
@@ -23,9 +23,9 @@ class HintOneByOneRequest implements RequestSchema {
 @immutable
 class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
-    required final this.hint,
-    required final this.level,
-    required final this.request,
+    required this.hint,
+    required this.level,
+    required this.request,
   });
 
   @override

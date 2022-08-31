@@ -8,10 +8,10 @@ import 'response_schema.dart';
 @immutable
 class CountBestpathRequest implements RequestSchema {
   const CountBestpathRequest({
-    required final this.movesAtRequest,
-    required final this.playerLowerLimit,
-    required final this.opponentLowerLimit,
-    required final this.logger,
+    required this.movesAtRequest,
+    required this.playerLowerLimit,
+    required this.opponentLowerLimit,
+    required this.logger,
   });
 
   final String movesAtRequest;
@@ -23,9 +23,9 @@ class CountBestpathRequest implements RequestSchema {
 @immutable
 class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
   const CountBestpathResponse({
-    required final this.rootMove,
-    required final this.countBestpathResult,
-    required final this.request,
+    required this.rootMove,
+    required this.countBestpathResult,
+    required this.request,
   });
 
   @override

@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 @immutable
 class Square extends StatelessWidget {
   const Square({
-    required final this.type,
-    required final this.length,
-    required final this.margin,
-    required final this.coordinate,
-    final this.onTap,
-    final this.score,
-    final this.bestpathCountOfBlack,
-    final this.bestpathCountOfWhite,
-    final this.scoreColor,
-    final this.isLastMove = false,
-    final this.isBookMove = false,
+    required this.type,
+    required this.length,
+    required this.margin,
+    required this.coordinate,
+    this.onTap,
+    this.score,
+    this.bestpathCountOfBlack,
+    this.bestpathCountOfWhite,
+    this.scoreColor,
+    this.isLastMove = false,
+    this.isBookMove = false,
     super.key,
   });
 

@@ -59,8 +59,8 @@ enum ArrangeTargetType { black, white, empty }
 @immutable
 class CountBestpathResultWithMove {
   const CountBestpathResultWithMove({
-    required final this.countBestpathList,
-    required final this.rootMove,
+    required this.countBestpathList,
+    required this.rootMove,
   });
   final CountBestpathResult countBestpathList;
   final String rootMove;

@@ -13,7 +13,7 @@ class BookLoadRequest implements RequestSchema {
 
 @immutable
 class BookLoadResponse implements ResponseSchema<BookLoadRequest> {
-  const BookLoadResponse({required final this.request});
+  const BookLoadResponse({required this.request});
 
   @override
   final BookLoadRequest request;
