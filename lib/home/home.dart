@@ -50,7 +50,9 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _setUpEdaxServer(context.read<BoardNotifier>());
+    Future(() async {
+      await _setUpEdaxServer(context.read<BoardNotifier>());
+    });
   }
 
   Future<void> _setUpEdaxServer(final BoardNotifier boardNotifier) async {
@@ -196,7 +198,7 @@ class _HomeState extends State<Home> {
         IconButton(
           icon: const Icon(FontAwesomeIcons.keyboard),
           padding: const EdgeInsets.all(12),
-          onPressed: () => showDialog<void>(
+          onPressed: () async => showDialog<void>(
             context: context,
             builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
           ),
@@ -344,7 +346,7 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.level,
-            () => showDialog<void>(
+            () async => showDialog<void>(
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
@@ -358,7 +360,7 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.hintStepByStep,
-            () => showDialog<void>(
+            () async => showDialog<void>(
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
@@ -372,7 +374,7 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.bookFilePath,
-            () => showDialog<void>(
+            () async => showDialog<void>(
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
@@ -386,7 +388,7 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.nTasks,
-            () => showDialog<void>(
+            () async => showDialog<void>(
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
@@ -400,7 +402,7 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.bestpathCountAvailability,
-            () => showDialog<void>(
+            () async => showDialog<void>(
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),

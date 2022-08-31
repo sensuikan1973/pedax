@@ -39,16 +39,18 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                     Text(AppLocalizations.of(context)!.bestpathCountAvailabilityDescription),
                     Switch(
                       value: _enabled.value!,
-                      onChanged: (final value) {
+                      onChanged: (final value) async {
                         context.read<BoardNotifier>().switchCountBestpathAvailability(enabled: value);
-                        _availabilityOption.update(value);
+                        await _availabilityOption.update(value);
                         _enabled.value = value;
                       },
                     ),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text(AppLocalizations.of(context)!.bestpathCountPlayerLowerLimitDescription),
                     FutureBuilder<List<int>>(
-                      future: Future.wait([_playerLowerLimitOption.val, _playerLowerLimitOption.appDefaultValue]),
+                      future: Future(
+                        () async => Future.wait([_playerLowerLimitOption.val, _playerLowerLimitOption.appDefaultValue]),
+                      ),
                       builder: (final _, final snapshot) {
                         if (snapshot.hasData) {
                           final currentPlayerLowerLimit = snapshot.data!.first.toString();
@@ -75,7 +77,10 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                     ),
                     Text(AppLocalizations.of(context)!.bestpathCountOpponentLowerLimitDescription),
                     FutureBuilder<List<int>>(
-                      future: Future.wait([_opponentLowerLimitOption.val, _opponentLowerLimitOption.appDefaultValue]),
+                      future: Future(
+                        () async =>
+                            Future.wait([_opponentLowerLimitOption.val, _opponentLowerLimitOption.appDefaultValue]),
+                      ),
                       builder: (final _, final snapshot) {
                         if (snapshot.hasData) {
                           final currentOpponentLowerLimit = snapshot.data!.first.toString();
