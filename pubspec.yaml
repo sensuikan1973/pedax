@@ -28,7 +28,7 @@ environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   flutter: ^3.0.5 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
-  crypto: ^3.0.1
+  crypto: ^3.0.2
   cupertino_icons: ^1.0.5
   # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
   file_selector: ^0.9.2
@@ -42,9 +42,9 @@ dependencies:
   libedax4dart: ^5.4.1
   logger: ^1.1.0
   macos_secure_bookmarks: ^0.2.0
-  meta: ^1.7.0
+  meta: ^1.8.0
   pasteboard: ^0.2.0
-  path: ^1.8.1
+  path: ^1.8.2
   path_provider: ^2.0.11 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.3
   sentry_flutter: ^6.9.1
