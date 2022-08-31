@@ -37,7 +37,7 @@ class LevelSettingDialog extends StatelessWidget {
               final n = int.tryParse(_textController.text);
               if (n != null && n > 0) {
                 context.read<BoardNotifier>().requestSetOption(_option.nativeName, n.toString());
-                _option.update(n);
+                Future(() async => _option.update(n));
               }
               Navigator.pop(context);
             },
