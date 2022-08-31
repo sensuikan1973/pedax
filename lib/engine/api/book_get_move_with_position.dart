@@ -12,9 +12,9 @@ class GetBookMoveWithPositionRequest implements RequestSchema {
 @immutable
 class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithPositionRequest> {
   const GetBookMoveWithPositionResponse({
-    required final this.position,
-    required final this.moveList,
-    required final this.request,
+    required this.position,
+    required this.moveList,
+    required this.request,
   });
 
   @override

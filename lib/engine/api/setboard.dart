@@ -18,7 +18,7 @@ class SetboardRequest implements RequestSchema {
   const SetboardRequest({
     required this.currentColor,
     required this.replacementTargets,
-    required final this.logger,
+    required this.logger,
   });
 
   final int currentColor;
@@ -29,11 +29,11 @@ class SetboardRequest implements RequestSchema {
 @immutable
 class SetboardResponse implements ResponseSchema<SetboardRequest> {
   const SetboardResponse({
-    required final this.board,
-    required final this.currentColor,
-    required final this.moves,
-    required final this.lastMove,
-    required final this.request,
+    required this.board,
+    required this.currentColor,
+    required this.moves,
+    required this.lastMove,
+    required this.request,
   });
 
   @override

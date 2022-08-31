@@ -12,11 +12,11 @@ class NewRequest implements RequestSchema {
 @immutable
 class NewResponse implements ResponseSchema<NewRequest> {
   const NewResponse({
-    required final this.board,
-    required final this.currentColor,
-    required final this.moves,
-    required final this.lastMove,
-    required final this.request,
+    required this.board,
+    required this.currentColor,
+    required this.moves,
+    required this.lastMove,
+    required this.request,
   });
 
   @override

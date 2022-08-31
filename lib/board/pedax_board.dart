@@ -15,8 +15,8 @@ import 'square.dart';
 @immutable
 class PedaxBoard extends StatefulWidget {
   PedaxBoard({
-    required final this.bodyLength,
-    final this.frameWidth = defaultFrameWidth,
+    required this.bodyLength,
+    this.frameWidth = defaultFrameWidth,
     final Color? bodyColor,
     super.key,
   }) : bodyColor = bodyColor ?? Colors.green[900];

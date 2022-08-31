@@ -11,7 +11,7 @@ class StopRequest implements RequestSchema {
 
 @immutable
 class StopResponse implements ResponseSchema<StopRequest> {
-  const StopResponse({required final this.request});
+  const StopResponse({required this.request});
 
   @override
   final StopRequest request;

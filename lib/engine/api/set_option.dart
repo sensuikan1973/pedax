@@ -14,7 +14,7 @@ class SetOptionRequest<T extends Object> implements RequestSchema {
 
 @immutable
 class SetOptionResponse implements ResponseSchema<SetOptionRequest> {
-  const SetOptionResponse({required final this.request});
+  const SetOptionResponse({required this.request});
 
   @override
   final SetOptionRequest request;
