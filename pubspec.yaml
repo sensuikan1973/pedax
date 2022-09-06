@@ -47,7 +47,7 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.11 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.3
-  sentry_flutter: ^6.9.1
+  sentry_flutter: ^4.1.0-nullsafety.1
   shared_preferences: ^2.0.15
   window_size:
     git:
@@ -62,7 +62,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^3.6.3
+  msix: ^2.8.18
   path_provider_platform_interface: ^2.0.4
   pedantic_sensuikan1973: ^3.5.0
   plugin_platform_interface: ^2.1.2
