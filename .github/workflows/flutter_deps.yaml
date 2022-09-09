@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.6.2
+      - uses: subosito/flutter-action@v2.7.0
         with:
           cache: true
       - run: flutter doctor -v
