@@ -13,16 +13,14 @@ updates:
     directory: "/website"
     schedule:
       interval: "daily"
-      timezone: "Asia/Tokyo"
-      time: "08:00"
+      time: "18:00"
     labels: ["website", "dependencies"]
 
   - package-ecosystem: "bundler"
     directory: "/macos"
     schedule:
       interval: "daily"
-      timezone: "Asia/Tokyo"
-      time: "08:00"
+      time: "18:00"
     labels: ["mac", "dependencies"]
     versioning-strategy: increase
 
@@ -31,8 +29,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      timezone: "Asia/Tokyo"
-      time: "08:00"
+      time: "18:00"
     labels: ["GitHub Actions", "dependencies"]
 
   # See: https://github.blog/changelog/2022-04-05-pub-beta-support-for-dependabot-version-updates/
@@ -40,7 +37,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      timezone: "Asia/Tokyo"
-      time: "08:00"
+      time: "18:00"
     labels: ["dependencies"]
     versioning-strategy: increase
