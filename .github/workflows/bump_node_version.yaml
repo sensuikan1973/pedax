@@ -3,7 +3,7 @@ name: Upgrade Node.js Version
 
 on:
   schedule:
-    - cron: '0 1 * * *' # everyday, 01:00 (UTC)
+    - cron: '0 21 * * *' # everyday, 21:00 (UTC)
   workflow_dispatch:
 
 jobs:
