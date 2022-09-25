@@ -1,1 +1,1 @@
-add crash reporting system to investigate bug.
+minor improvement of performance.
