@@ -20,7 +20,7 @@ jobs:
           git clone https://github.com/rbenv/ruby-build.git "$(~/.rbenv/bin/rbenv root)"/plugins/ruby-build
       - name: install latest ruby version
         run: |
-          latest_version=$(~/.rbenv/bin/rbenv install -l | grep -v - | tail -1)
+          latest_version=$(~/.rbenv/bin/rbenv install --list | grep -E "^([0-9]+\.){1}[0-9]+(\.[0-9]+)?$" | sort --version-sort --reverse | head -1)
           ~/.rbenv/bin/rbenv install $latest_version
           ~/.rbenv/bin/rbenv local $latest_version
 
