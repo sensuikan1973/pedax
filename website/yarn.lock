@@ -3067,21 +3067,21 @@ copy-webpack-plugin@^11.0.0:
     serialize-javascript "^6.0.0"
 
 core-js-compat@^3.25.1:
-  version "3.25.4"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.25.4.tgz#730a255d4a47a937513abf1672bf278dc24dcebf"
-  integrity sha512-gCEcIEEqCR6230WroNunK/653CWKhqyCKJ9b+uESqOt/WFJA8B4lTnnQFdpYY5vmBcwJAA90Bo5vXs+CVsf6iA==
+  version "3.25.5"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.25.5.tgz#0016e8158c904f7b059486639e6e82116eafa7d9"
+  integrity sha512-ovcyhs2DEBUIE0MGEKHP4olCUW/XYte3Vroyxuh38rD1wAO4dHohsovUC4eAOuzFxE6b+RXvBU3UZ9o0YhUTkA==
   dependencies:
     browserslist "^4.21.4"
 
 core-js-pure@^3.25.1:
-  version "3.25.4"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.25.4.tgz#e8642cef4f4246a4e7c15280f5e3926118fff84b"
-  integrity sha512-qRbgm0ADrsNTU66UcW47YMJjXm+ShhUP2gkoEoAShT2BHO3cb5gGqLtmWpjnM6Wx9h5hMSF4uZ+jEV/8+4KCsw==
+  version "3.25.5"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.25.5.tgz#79716ba54240c6aa9ceba6eee08cf79471ba184d"
+  integrity sha512-oml3M22pHM+igfWHDfdLVq2ShWmjM2V4L+dQEBs0DWVIqEm9WHCwGAlZ6BmyBQGy5sFrJmcx+856D9lVKyGWYg==
 
 core-js@^3.23.3:
-  version "3.25.4"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.4.tgz#76f6bc330a79aafbaf77e9645293351ea5d09b5b"
-  integrity sha512-JDLxg61lFPFYQ7U0HKoyKwVUV63VbbVTb/K73Yf+k4Mf4ZBZxCjfyrWZjTk1ZM7ZrgFSqhSIOmuzYAxG2f/reQ==
+  version "3.25.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.5.tgz#e86f651a2ca8a0237a5f064c2fe56cef89646e27"
+  integrity sha512-nbm6eZSjm+ZuBQxCUPQKQCoUEfFOXjUZ8dTTyikyKaWrTYmAVbykQfwsKE5dBK88u3QCkCrzsx/PPlKfhsvgpw==
 
 core-util-is@~1.0.0:
   version "1.0.3"
