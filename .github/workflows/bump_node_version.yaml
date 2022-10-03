@@ -20,7 +20,7 @@ jobs:
 
       - name: install latest nodejs version
         run: |
-          latest_version=$(nodenv install --list | sort -n -r | head -1)
+          latest_version=$(nodenv install --list | grep -E "^([0-9]+\.){1}[0-9]+(\.[0-9]+)?$" | sort --version-sort --reverse | head -1)
           nodenv install $latest_version
           nodenv local $latest_version
 
