@@ -57,7 +57,7 @@ dependencies:
       branch: master
 
 dev_dependencies:
-  file_selector_platform_interface: ^2.1.1
+  file_selector_platform_interface: ^2.2.0
   flutter_test:
     sdk: flutter
   integration_test:
