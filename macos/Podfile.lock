@@ -10,9 +10,9 @@ PODS:
     - FlutterMacOS
   - path_provider_macos (0.0.1):
     - FlutterMacOS
-  - Sentry (7.27.0):
-    - Sentry/Core (= 7.27.0)
-  - Sentry/Core (7.27.0)
+  - Sentry (7.27.1):
+    - Sentry/Core (= 7.27.1)
+  - Sentry/Core (7.27.1)
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -64,7 +64,7 @@ SPEC CHECKSUMS:
   package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
   pasteboard: 9b69dba6fedbb04866be632205d532fe2f6b1d99
   path_provider_macos: 3c0c3b4b0d4a76d2bf989a913c2de869c5641a19
-  Sentry: 026b36fdc09531604db9279e55f047fe652e3f4a
+  Sentry: bc644307e2eb6a4c9c55cf117a80b895bb2a25a7
   sentry_flutter: a8616c994ac18c371aabee21a953cc727c166421
   shared_preferences_macos: a64dc611287ed6cbe28fd1297898db1336975727
   window_size: 339dafa0b27a95a62a843042038fa6c3c48de195
