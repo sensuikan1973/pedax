@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.7.1
+      - uses: subosito/flutter-action@v2.8.0
       - name: setup flutter channel
         shell: bash
         run: ./scripts/setup_flutter.sh
