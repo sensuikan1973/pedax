@@ -7,7 +7,7 @@ import Foundation
 
 import file_selector_macos
 import macos_secure_bookmarks
-import package_info_plus_macos
+import package_info_plus
 import pasteboard
 import path_provider_macos
 import sentry_flutter
