@@ -54,7 +54,7 @@ dependencies:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
-      branch: master
+      branch: main
 
 dev_dependencies:
   file_selector_platform_interface: ^2.3.0
