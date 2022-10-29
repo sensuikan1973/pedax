@@ -114,7 +114,7 @@ After that, submit [Apple developer console](https://developer.apple.com/account
 
 ### reference
 
-- [`important` issues](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
+- [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
 - [Desktop support for Flutter](https://flutter.dev/desktop)
   - [Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
   - [official experimental desktop app sample](https://github.com/flutter/samples/tree/master/experimental/desktop_photo_search)
