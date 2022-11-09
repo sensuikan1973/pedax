@@ -16,7 +16,7 @@ PODS:
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
-    - Sentry (~> 7.30.0)
+    - Sentry (~> 7.30.1)
   - shared_preferences_macos (0.0.1):
     - FlutterMacOS
   - window_size (0.0.2):
@@ -65,7 +65,7 @@ SPEC CHECKSUMS:
   pasteboard: 9b69dba6fedbb04866be632205d532fe2f6b1d99
   path_provider_macos: 3c0c3b4b0d4a76d2bf989a913c2de869c5641a19
   Sentry: 76e08c89f10705f91e347ae91790ca310b256d04
-  sentry_flutter: d6f51618010b194d871b063903b1bb8170d396fb
+  sentry_flutter: 159997c3f05896d7f526053e52aec919658ccb42
   shared_preferences_macos: a64dc611287ed6cbe28fd1297898db1336975727
   window_size: 339dafa0b27a95a62a843042038fa6c3c48de195
 
