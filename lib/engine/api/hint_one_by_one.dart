@@ -23,15 +23,17 @@ class HintOneByOneRequest implements RequestSchema {
 @immutable
 class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
   const HintOneByOneResponse({
+    required this.request,
     required this.hint,
     required this.level,
-    required this.request,
+    required this.isLastStep,
   });
 
   @override
   final HintOneByOneRequest request;
   final Hint hint;
   final int level;
+  final bool isLastStep;
 }
 
 @visibleForTesting
@@ -62,7 +64,7 @@ Stream<HintOneByOneResponse> executeHintOneByOne(
       request.logger.d('will call edaxHintNextNoMultiPvDepth');
       final hint = edax.edaxHintNextNoMultiPvDepth();
       if (hint.isNoMove) break;
-      yield HintOneByOneResponse(hint: hint, level: level, request: request);
+      yield HintOneByOneResponse(request: request, hint: hint, level: level, isLastStep: level == levelList.last);
     }
   }
 }

@@ -160,9 +160,10 @@ class _PedaxBoardState extends State<PedaxBoard> {
     final move = y * 8 + x;
     final type = _squareType(move);
     final moveString = move2String(move);
-    final hints = context.select<BoardNotifier, List<Hint>>((final notifier) => notifier.value.hints);
-    final targetHints = hints.where((final h) => h.move == move).toList();
-    final hint = targetHints.isEmpty ? null : targetHints.first;
+    final hintsWithStepByStep =
+        context.select<BoardNotifier, List<HintWithStepByStep>>((final notifier) => notifier.value.hintsWithStepByStep);
+    final targetHints = hintsWithStepByStep.where((final el) => el.hint.move == move).toList();
+    final hintWithStepByStep = targetHints.isEmpty ? null : targetHints.first;
     final countBestpathList = context
         .select<BoardNotifier, List<CountBestpathResultWithMove>>((final notifier) => notifier.value.countBestpathList);
     final targetCountBestpathResultWithMove = countBestpathList.where((final el) => el.rootMove == moveString).toList();
@@ -170,17 +171,14 @@ class _PedaxBoardState extends State<PedaxBoard> {
         targetCountBestpathResultWithMove.isEmpty ? null : targetCountBestpathResultWithMove.first;
     final lastMove = context.select<BoardNotifier, Move?>((final notifier) => notifier.value.lastMove);
     final bestScore = context.select<BoardNotifier, int>((final notifier) => notifier.value.bestScore);
-    final isBookMove = hint != null && hint.isBookMove;
-    final level = context.select<BoardNotifier, int>((final notifier) => notifier.value.level);
-    final emptyNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.emptyNum);
-    final scoreColor = hint == null
+    final isBookMove = hintWithStepByStep != null && hintWithStepByStep.hint.isBookMove;
+    final scoreColor = hintWithStepByStep == null
         ? null
         : _scoreColor(
-            score: hint.score,
+            score: hintWithStepByStep.hint.score,
             isBookMove: isBookMove,
-            isBestMove: hint.score == bestScore,
-            // NOTE: with considering edax cache, although depth is not equal to level, if depth is larger than level, regard as completed.
-            searchHasCompleted: hint.depth >= level || hint.depth == emptyNum,
+            isBestMove: hintWithStepByStep.hint.score == bestScore,
+            searchHasCompleted: hintWithStepByStep.isLastStep,
           );
     final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return Square(
@@ -190,7 +188,7 @@ class _PedaxBoardState extends State<PedaxBoard> {
       coordinate: moveString,
       isLastMove: lastMove?.x == move,
       isBookMove: isBookMove,
-      score: hint?.score,
+      score: hintWithStepByStep?.hint.score,
       bestpathCountOfBlack: _bestpathCount(TurnColor.black, countBestpathResultWithMove),
       bestpathCountOfWhite: _bestpathCount(TurnColor.white, countBestpathResultWithMove),
       scoreColor: scoreColor,
