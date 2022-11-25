@@ -32,11 +32,6 @@ jobs:
 
       - run: dart fix --apply
 
-      - name: update native deps on macs
-        if: runner.os == 'macOS'
-        working-directory: macos
-        run: which pod && pod --version && pod update
-
       - name: upgrade external binary
         shell: zsh {0}
         run: ./scripts/fetch_libedax_assets.sh
