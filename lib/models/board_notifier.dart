@@ -102,7 +102,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   Future<void> switchHintVisibility() async {
     value
-      ..hints = UnmodifiableListView([])
+      ..hintsWithStepByStep = UnmodifiableListView([])
       ..hintIsVisible = !value.hintIsVisible;
     notifyListeners();
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
@@ -126,7 +126,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void switchBoardMode(final BoardMode boardMode) {
     value
       ..mode = boardMode
-      ..hints = UnmodifiableListView([]);
+      ..hintsWithStepByStep = UnmodifiableListView([]);
     notifyListeners();
     if (boardMode == BoardMode.freePlay && value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
@@ -138,7 +138,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void _requestLatestHintList(final String movesAtRequest) {
-    value.hints = UnmodifiableListView([]);
+    value.hintsWithStepByStep = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
     _edaxServerPort.send(
       HintOneByOneRequest(
@@ -248,15 +248,15 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentMoves = message.moves;
     } else if (message is HintOneByOneResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {
-        value.hints = UnmodifiableListView([]);
+        value.hintsWithStepByStep = UnmodifiableListView([]);
       } else {
         value
-          ..hints = UnmodifiableListView(
-            [...value.hints]
-              ..removeWhere((final hint) => hint.move == message.hint.move)
-              ..add(message.hint),
+          ..hintsWithStepByStep = UnmodifiableListView(
+            [...value.hintsWithStepByStep]
+              ..removeWhere((final el) => el.hint.move == message.hint.move)
+              ..add(HintWithStepByStep(hint: message.hint, isLastStep: message.isLastStep)),
           )
-          ..bestScore = value.hints.map<int>((final h) => h.score).reduce(max);
+          ..bestScore = value.hintsWithStepByStep.map<int>((final el) => el.hint.score).reduce(max);
       }
     } else if (message is CountBestpathResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {

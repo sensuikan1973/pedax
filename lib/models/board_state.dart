@@ -15,7 +15,7 @@ class BoardState {
   late int level;
   late bool hintStepByStep;
   late bool countBestpathAvailability;
-  UnmodifiableListView<Hint> hints = UnmodifiableListView([]);
+  UnmodifiableListView<HintWithStepByStep> hintsWithStepByStep = UnmodifiableListView([]);
   UnmodifiableListView<CountBestpathResultWithMove> countBestpathList = UnmodifiableListView([]);
   bool edaxInitOnce = false;
   String currentMoves = '';
@@ -64,4 +64,14 @@ class CountBestpathResultWithMove {
   });
   final CountBestpathResult countBestpathList;
   final String rootMove;
+}
+
+@immutable
+class HintWithStepByStep {
+  const HintWithStepByStep({
+    required this.hint,
+    required this.isLastStep,
+  });
+  final Hint hint;
+  final bool isLastStep;
 }
