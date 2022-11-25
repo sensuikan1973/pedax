@@ -1,1 +1,1 @@
-minor improvement of performance.
+The step-by-step evaluation value display function has been fixed, as it was not always semi-transparent.
