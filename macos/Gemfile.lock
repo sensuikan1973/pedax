@@ -148,7 +148,7 @@ GEM
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     httpclient (2.8.3)
-    jmespath (1.6.1)
+    jmespath (1.6.2)
     json (2.6.2)
     jwt (2.5.0)
     memoist (0.16.2)
@@ -212,6 +212,7 @@ PLATFORMS
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
