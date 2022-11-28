@@ -70,13 +70,10 @@ class EdaxAsset {
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
-    if (bookFilePath.isEmpty) {
+    if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
-    } else if (!File(bookFilePath).existsSync()) {
-      final bookData = await _bookAssetData;
-      File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
 
@@ -89,11 +86,9 @@ class EdaxAsset {
     if (evalDataSha256 == currentEvalDataSha256) return;
 
     final evalFilePath = await option.val;
-    if (evalFilePath.isEmpty) {
+    if (!File(evalFilePath).existsSync()) {
       File(await option.appDefaultValue).writeAsBytesSync(evalData, flush: true);
       await option.update(await option.appDefaultValue);
-    } else if (!File(evalFilePath).existsSync()) {
-      File(evalFilePath).writeAsBytesSync(evalData, flush: true);
     }
 
     await pref.setString('libedax_eval_sha256', evalDataSha256);
