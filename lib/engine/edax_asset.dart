@@ -88,7 +88,14 @@ class EdaxAsset {
     final currentEvalDataSha256 = pref.getString('libedax_eval_sha256');
     if (evalDataSha256 == currentEvalDataSha256) return;
 
-    File(await option.val).writeAsBytesSync(evalData, flush: true);
+    final evalFilePath = await option.val;
+    if (evalFilePath.isEmpty) {
+      File(await option.appDefaultValue).writeAsBytesSync(evalData, flush: true);
+      await option.update(await option.appDefaultValue);
+    } else if (!File(evalFilePath).existsSync()) {
+      File(evalFilePath).writeAsBytesSync(evalData, flush: true);
+    }
+
     await pref.setString('libedax_eval_sha256', evalDataSha256);
   }
 
