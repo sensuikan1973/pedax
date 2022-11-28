@@ -82,15 +82,14 @@ class EdaxAsset {
 
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
-    final evalFilePath = await option.val;
-    if (evalFilePath.isEmpty) {
-      final evalData = await _evalAssetData;
-      File(await option.appDefaultValue).writeAsBytesSync(evalData.buffer.asUint8List());
-      await option.update(await option.appDefaultValue);
-    } else if (!File(evalFilePath).existsSync()) {
-      final evalData = await _evalAssetData;
-      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List(), flush: true);
-    }
+    final evalData = (await _evalAssetData).buffer.asUint8List();
+    final evalDataSha256 = sha256.convert(evalData).toString();
+    final pref = await _preferences;
+    final currentEvalDataSha256 = pref.getString('libedax_eval_sha256');
+    if (evalDataSha256 == currentEvalDataSha256) return;
+
+    File(await option.val).writeAsBytesSync(evalData, flush: true);
+    await pref.setString('libedax_eval_sha256', evalDataSha256);
   }
 
   // REF: https://github.com/flutter/flutter/issues/17160
