@@ -70,27 +70,28 @@ class EdaxAsset {
   Future<void> _setupBookData() async {
     const option = BookFileOption();
     final bookFilePath = await option.val;
-    if (bookFilePath.isEmpty) {
+    if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
       File(await option.appDefaultValue).writeAsBytesSync(bookData.buffer.asUint8List());
       await option.update(await option.appDefaultValue);
-    } else if (!File(bookFilePath).existsSync()) {
-      final bookData = await _bookAssetData;
-      File(bookFilePath).writeAsBytesSync(bookData.buffer.asUint8List(), flush: true);
     }
   }
 
   Future<void> _setupEvalData() async {
     const option = EvalFileOption();
+    final evalData = (await _evalAssetData).buffer.asUint8List();
+    final evalDataSha256 = sha256.convert(evalData).toString();
+    final pref = await _preferences;
+    final currentEvalDataSha256 = pref.getString('libedax_eval_sha256');
+    if (evalDataSha256 == currentEvalDataSha256) return;
+
     final evalFilePath = await option.val;
-    if (evalFilePath.isEmpty) {
-      final evalData = await _evalAssetData;
-      File(await option.appDefaultValue).writeAsBytesSync(evalData.buffer.asUint8List());
+    if (!File(evalFilePath).existsSync()) {
+      File(await option.appDefaultValue).writeAsBytesSync(evalData, flush: true);
       await option.update(await option.appDefaultValue);
-    } else if (!File(evalFilePath).existsSync()) {
-      final evalData = await _evalAssetData;
-      File(evalFilePath).writeAsBytesSync(evalData.buffer.asUint8List(), flush: true);
     }
+
+    await pref.setString('libedax_eval_sha256', evalDataSha256);
   }
 
   // REF: https://github.com/flutter/flutter/issues/17160
