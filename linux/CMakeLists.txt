@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.22.0)
+# https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md#tools
+cmake_minimum_required(VERSION 3.24.1)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "pedax")

@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.22.0)
+# https://github.com/actions/runner-images/blob/main/images/win/Windows2022-Readme.md#tools
+# https://learn.microsoft.com/ja-jp/visualstudio/install/visual-studio-build-numbers-and-release-dates?view=vs-2022
+# https://learn.microsoft.com/ja-jp/visualstudio/releases/2022/release-notes#1741--visual-studio-2022-version-1741
+cmake_minimum_required(VERSION 3.24.1)
 project(pedax LANGUAGES CXX)
 
 set(BINARY_NAME "pedax")
