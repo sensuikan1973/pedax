@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.22.0)
+# https://github.com/actions/runner-images/blob/main/images/win/Windows2022-Readme.md#tools
+cmake_minimum_required(VERSION 3.25.0)
 project(pedax LANGUAGES CXX)
 
 set(BINARY_NAME "pedax")
