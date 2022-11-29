@@ -108,6 +108,9 @@ jobs:
           files: ./coverage/lcov.widget_test.info
           flags: widget_test,${{ matrix.os }}
           fail_ci_if_error: true
+          # See: https://github.com/codecov/codecov-action/issues/837
+          # https://app.codecov.io/gh/sensuikan1973/pedax/settings
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: run integration test with retry
         uses: nick-invision/retry@v2
@@ -120,3 +123,6 @@ jobs:
           files: ./coverage/lcov.integration_test.info
           flags: integration_test,${{ matrix.os }}
           fail_ci_if_error: true
+          # See: https://github.com/codecov/codecov-action/issues/837
+          # https://app.codecov.io/gh/sensuikan1973/pedax/settings
+          token: ${{ secrets.CODECOV_TOKEN }}
