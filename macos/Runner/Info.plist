@@ -18,7 +18,7 @@
 		<string>ja</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)$(BUNDLE_NAME_SUFFIX)</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleDisplayName</key>
