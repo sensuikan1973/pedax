@@ -86,9 +86,7 @@ dart fix --apply
 
 #### release
 
-1. create `new_release` branch.
-2. create PR by https://github.com/sensuikan1973/pedax/compare/new_release?expand=1&template=new_release.md&title=prepare+for+release+%60X%2EY%2EZ%60.
-3. create release by https://github.com/sensuikan1973/pedax/actions/workflows/create_release.yaml.
+Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
 
 ##### deploy to apple store
 

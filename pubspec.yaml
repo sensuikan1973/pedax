@@ -57,6 +57,7 @@ dependencies:
       branch: main
 
 dev_dependencies:
+  cider: ^0.1.1
   file_selector_platform_interface: ^2.4.0
   flutter_test:
     sdk: flutter

@@ -2,14 +2,12 @@
 # See: https://flutter.dev/desktop#distribution
 # REF: https://github.com/flutter/gallery/blob/master/.github/workflows/release.yml
 
-name: Create release
+name: Create Release
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'tag'
-        required: true
+  pull_request:
+    branches: [prepare_for_release] # See: .github/workflows/create_release_pr.yaml
 
 jobs:
   create_release:
@@ -50,6 +48,10 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
+
+      - name: inject current version
+        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: prepare to pack
@@ -77,7 +79,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.inputs.tag }}
+          tag_name: ${{ env.CURRENT_VERSION }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
           generate_release_notes: true
           # body: This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
