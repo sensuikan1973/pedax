@@ -53,9 +53,8 @@ jobs:
         run: flutter pub get
 
       - name: inject current version
-        run: |
-          echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
-          echo ${{ env.CURRENT_VERSION }}
+        shell: bash
+        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
