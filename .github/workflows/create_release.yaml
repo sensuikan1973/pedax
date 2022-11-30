@@ -6,6 +6,8 @@ name: Create Release
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [prepare_for_release]
 
 jobs:
   create_release:
