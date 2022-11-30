@@ -86,7 +86,7 @@ dart fix --apply
 
 #### release
 
-Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release.yaml.
+Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
 
 ##### deploy to apple store
 
