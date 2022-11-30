@@ -21,7 +21,7 @@ on:
         description: '[ja] release note for macos'
         default: '軽微なパフォーマンス改善を行いました。'
         required: true
-      release_note_em_for_macos:
+      release_note_en_for_macos:
         type: string
         description: '[en] release note for macos'
         default: 'minor improvement of performance.'
@@ -55,7 +55,7 @@ jobs:
       - name: update release note
         run: |
           echo ${{ github.event.inputs.release_note_ja_for_macos }} > macos/fastlane/metadata/ja/release_notes.txt
-          echo ${{ github.event.inputs.release_note_ja_for_macos }} > macos/fastlane/metadata/en-US/release_notes.txt
+          echo ${{ github.event.inputs.release_note_en_for_macos }} > macos/fastlane/metadata/en-US/release_notes.txt
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
