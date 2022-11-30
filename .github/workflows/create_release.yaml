@@ -2,14 +2,10 @@
 # See: https://flutter.dev/desktop#distribution
 # REF: https://github.com/flutter/gallery/blob/master/.github/workflows/release.yml
 
-name: Create release
+name: Create Release
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'tag'
-        required: true
 
 jobs:
   create_release:
@@ -73,11 +69,14 @@ jobs:
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
 
+      - name: inject current version
+        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
       - uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.inputs.tag }}
+          tag_name: ${{ env.CURRENT_VERSION }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
           generate_release_notes: true
           # body: This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
