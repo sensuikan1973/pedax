@@ -48,6 +48,10 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
+
+      - name: inject current version
+        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: prepare to pack
@@ -70,9 +74,6 @@ jobs:
           mkdir -p ${{ env.PUBLISH_DIR }}
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
-
-      - name: inject current version
-        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - uses: softprops/action-gh-release@v1
         env:
