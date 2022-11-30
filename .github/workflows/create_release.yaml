@@ -7,10 +7,13 @@ name: Create Release
 on:
   workflow_dispatch:
   pull_request:
-    branches: [prepare_for_release] # See: .github/workflows/create_release_pr.yaml
+    branches: [main]
+    types: [closed]
 
 jobs:
   create_release:
+    # See: .github/workflows/create_release_pr.yaml
+    if: ${{ github.head_ref == 'prepare_for_release' }}
     env:
       PUBLISH_DIR: publish
     runs-on: ${{ matrix.os }}
