@@ -77,8 +77,6 @@ jobs:
             See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
           branch: prepare_for_release
           delete-branch: true
-          labels: |
-            mac
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge
