@@ -294,7 +294,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.8.0"
+    version: "5.9.0"
   logger:
     dependency: "direct main"
     description:
@@ -730,5 +730,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.4 <3.0.0"
+  dart: ">=2.18.5 <3.0.0"
   flutter: ">=3.3.8"
