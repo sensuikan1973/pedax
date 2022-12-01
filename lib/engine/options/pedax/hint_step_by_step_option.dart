@@ -11,7 +11,7 @@ class HintStepByStepOption implements EnginePedaxOption<bool> {
   String get prefKey => 'hintStepByStep';
 
   @override
-  Future<bool> get appDefaultValue async => true;
+  Future<bool> get appDefaultValue async => false;
 
   @override
   Future<bool> get val async {
