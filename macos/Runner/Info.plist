@@ -22,7 +22,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleDisplayName</key>
-	<string>$(PRODUCT_NAME)$(BUNDLE_NAME_SUFFIX)</string>
+	<string>$(PRODUCT_NAME)$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleVersion</key>
