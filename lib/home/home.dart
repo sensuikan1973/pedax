@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../board/pedax_board.dart';
@@ -416,10 +417,15 @@ class _HomeState extends State<Home> {
         PopupMenuItem<_Menu>(
           value: _Menu(
             _MenuType.about,
-            () => showAboutDialog(
-              context: context,
-              applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
-            ),
+            () async {
+              final packageInfo = await PackageInfo.fromPlatform();
+              showAboutDialog(
+                context: context,
+                applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+                applicationName: packageInfo.appName,
+                applicationVersion: packageInfo.version,
+              );
+            },
           ),
           child: Text(AppLocalizations.of(context)!.about),
         ),
