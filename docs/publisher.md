@@ -14,7 +14,7 @@ Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.y
 
 ### [Mac App Store ](https://apps.apple.com/app/pedax/id1557500142)
 
-```sh
+```zsh
 REVISION=xxx
 P8_PATH=xxx
 SENTRY_DSN=xxx
