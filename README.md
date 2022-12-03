@@ -45,8 +45,13 @@ flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 
 ### Architecture
 
-The technical point of pedax is that pedax needs to call _expensive_ _native(C)_ logic such as computing evaluation value.  
-I have to use [isolate](https://dart.dev/guides/language/concurrency) with ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) skillfully to achieve _seamless non-blocking_ UI.
+The technical point of pedax is as follows. 
+
+- pedax needs to call _Expensive_ _Native(C)_ logic such as computing evaluation value.  
+- _Native(C)_ logic needs allocated large data. It's desirable to daemonize _Native(C)_ process on background.
+
+So, I have to use [isolate](https://dart.dev/guides/language/concurrency) with ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) skillfully to achieve _seamless non-blocking_ UI.
+
 
 ```mermaid
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
@@ -80,7 +85,7 @@ sequenceDiagram
     MainIsolate ->> MainIsolate: update UI
   else heavy EdaxCommand
     note right of EdaxServer: spawn another isolate not to block EdaxServer.<br>Then, EdaxServer can accept other requests.
-    EdaxServer ->>+ EphemeralWorker: spawn and notify MainIsolate SendPort
+    EdaxServer ->>+ EphemeralWorker: spawn and notify Main Isolate SendPort
     EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute requested EdaxCommand
