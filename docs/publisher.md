@@ -1,5 +1,9 @@
 # Document for Publisher [sensuikan1973](https://github.com/sensuikan1973)
 
+## monitoring
+
+- [Sentry](https://sentry.io/organizations/naoki-shimizu/issues/?project=6595416)
+
 ## upgrade external assets
 
 ```zsh

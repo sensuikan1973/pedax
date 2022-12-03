@@ -71,4 +71,3 @@ flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
 - linux
   - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
-- [Sentry](https://sentry.io/organizations/naoki-shimizu/issues/?project=6595416)
