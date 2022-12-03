@@ -78,38 +78,6 @@ flutter analyze .
 dart fix --apply
 ```
 
-#### upgrade external assets
-
-```sh
-./scripts/fetch_libedax_assets.sh
-```
-
-### release
-
-Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
-
-#### deploy to apple store
-
-```sh
-REVISION=xxx
-P8_PATH=xxx
-SENTRY_DSN=xxx
-
-ASC_KEY_ID=xxx \
-ASC_ISSUER_ID=xxx \
-APPLE_ID=xxx \
-ITC_TEAM_ID=xxx \
-./scripts/deploy_macos_app_to_app_store.sh \
--revision "$REVISION" -p8-file-path "$P8_PATH" -sentry-dsn "$SENTRY_DSN" --skip-test
-```
-
-After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
-
-#### deploy to microsoft store
-
-1. download `pedax.msix` from the release.
-2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
-
 ### reference
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)

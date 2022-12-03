@@ -33,3 +33,7 @@ GitHub Actions:
 
 codecov:
   - .codecov.yml
+
+documentation:
+  - docs/**/*
+  - README.md
