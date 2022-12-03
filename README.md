@@ -65,7 +65,7 @@ sequenceDiagram
   User ->> MainIsolate: launch pedax
   MainIsolate ->> EdaxServer: spawn
   EdaxServer ->> MainIsolate: notify my SendPort<br/>and start listening
-  EdaxServer ->> EdaxProcess: initialize
+  EdaxServer ->> EdaxProcess: initialize via ffi
 
   User ->> MainIsolate: action (e.g. tap)
   MainIsolate ->> EdaxServer: request EdaxCommand<br/>via SendPort
