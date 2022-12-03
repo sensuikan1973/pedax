@@ -42,7 +42,7 @@
 ./scripts/setup_flutter.sh
 
 # https://docs.flutter.dev/desktop#create-and-run
-flutter run --dart-define "SENTRY_DSN=xxx" # env is optional.
+flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
 ### reference
