@@ -1,22 +1,22 @@
 # Document for Publisher [sensuikan1973](https://github.com/sensuikan1973)
 
-## monitoring
+## Monitoring
 
 - [Sentry](https://sentry.io/organizations/naoki-shimizu/issues/?project=6595416)
 
-## upgrade external assets
+## Upgrade external assets
 
 ```zsh
 ./scripts/fetch_libedax_assets.sh
 ```
 
-## deploy
+## Deploy
 
-### 1) create [GitHub Release](https://github.com/sensuikan1973/pedax/releases)
+### 1) Create [GitHub Release](https://github.com/sensuikan1973/pedax/releases)
 
 Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
 
-### 2) deploy
+### 2) Deploy
 
 #### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
 
