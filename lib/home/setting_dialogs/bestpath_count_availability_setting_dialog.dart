@@ -9,8 +9,8 @@ import '../../engine/options/pedax/bestpath_count_opponent_lower_limit.dart';
 import '../../engine/options/pedax/bestpath_count_player_lower_limit.dart';
 import '../../models/board_notifier.dart';
 
-class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
-  BestpathCountAvailabilitySettingDialog({super.key});
+class bestpathCountSettingDialog extends StatelessWidget {
+  bestpathCountSettingDialog({super.key});
 
   BestpathCountAvailabilityOption get _availabilityOption => const BestpathCountAvailabilityOption();
   final _enabled = ValueNotifier<bool?>(null);
@@ -24,7 +24,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.bestpathCountAvailabilitySetting, textAlign: TextAlign.center),
+        title: Text(AppLocalizations.of(context)!.bestpathCountSetting, textAlign: TextAlign.center),
         content: FutureBuilder<bool>(
           future: _availabilityOption.val,
           builder: (final context, final snapshot) {
@@ -36,7 +36,7 @@ class BestpathCountAvailabilitySettingDialog extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(AppLocalizations.of(context)!.bestpathCountAvailabilityDescription),
+                    Text(AppLocalizations.of(context)!.bestpathCountDescription),
                     Switch(
                       value: _enabled.value!,
                       onChanged: (final value) async {
