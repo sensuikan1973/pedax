@@ -9,8 +9,8 @@ import '../../engine/options/pedax/bestpath_count_opponent_lower_limit.dart';
 import '../../engine/options/pedax/bestpath_count_player_lower_limit.dart';
 import '../../models/board_notifier.dart';
 
-class bestpathCountSettingDialog extends StatelessWidget {
-  bestpathCountSettingDialog({super.key});
+class BestpathCountSettingDialog extends StatelessWidget {
+  BestpathCountSettingDialog({super.key});
 
   BestpathCountAvailabilityOption get _availabilityOption => const BestpathCountAvailabilityOption();
   final _enabled = ValueNotifier<bool?>(null);
