@@ -36,7 +36,7 @@
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
-### run
+### Run
 
 ```sh
 ./scripts/setup_flutter.sh
@@ -45,7 +45,7 @@
 flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
-### architecture
+### Architecture
 
 ```mermaid
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
@@ -89,11 +89,11 @@ sequenceDiagram
   end
 ```
 
-### references
+### References
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
 - [Desktop support for Flutter](https://flutter.dev/desktop)
-  - [Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
+  - [official prototype Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
   - [official experimental desktop app sample](https://github.com/flutter/samples/tree/master/experimental/desktop_photo_search)
   - [Real World example "Flutter Gallery"](https://github.com/flutter/gallery)
   - [Real World example "authpass"](https://github.com/authpass/authpass)
