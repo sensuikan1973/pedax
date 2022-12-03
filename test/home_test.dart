@@ -339,6 +339,8 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.about));
         await tester.pumpAndSettle();
         expect(find.byType(AboutDialog), findsOneWidget);
+        expect(find.text('pedax.test'), findsOneWidget);
+        expect(find.text('0.0.0'), findsOneWidget);
         await waitEdaxServerResponse(tester);
       });
     });

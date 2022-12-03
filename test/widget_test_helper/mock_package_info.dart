@@ -6,7 +6,7 @@ void mockPackageInfo() {
   PackageInfo.setMockInitialValues(
     appName: 'pedax.test',
     packageName: 'sensuikan1973.pedax.test',
-    version: '0.0.0.',
+    version: '0.0.0',
     buildNumber: '1',
     buildSignature: 'foo',
     installerStore: null,
