@@ -7,7 +7,7 @@
 <div>
   <br/>
   <br/>
-  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
+  <em>pedax</em> is Reversi Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
@@ -16,7 +16,7 @@
       <b>Mac/Windows/Linux</b> are supported. <a href="https://sensuikan1973.github.io/pedax/">You can install from Mac App Store or Microsoft Store</a>.
     </li>
     <li>
-      <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
+      <b>Seamlessly</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
     </li>
     <li>
       <b>Customizable</b> important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
