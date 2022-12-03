@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../engine/options/native/book_file_option.dart';
 import '../../engine/options/native/eval_file_option.dart';
@@ -44,8 +45,14 @@ class CopyLocalInfoShorcut implements PedaxShorcut {
         },
       );
     }
+    final packageInfo = await PackageInfo.fromPlatform();
     // https://dart.dev/guides/libraries/library-tour#decoding-and-encoding-json
     final jsonText = jsonEncode({
+      'app': {
+        'name': packageInfo.appName,
+        'version': packageInfo.version,
+        'buildNumber': packageInfo.buildNumber,
+      },
       'config': {
         'bestpathCountAvailabilityOption': await const BestpathCountAvailabilityOption().val,
         'bestpathCountPlayerLowerLimitOption': await const BestpathCountPlayerLowerLimitOption().val,
