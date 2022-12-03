@@ -406,11 +406,11 @@ class _HomeState extends State<Home> {
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
-                child: BestpathCountAvailabilitySettingDialog(),
+                child: BestpathCountSettingDialog(),
               ),
             ),
           ),
-          child: Text(AppLocalizations.of(context)!.bestpathCountAvailabilitySetting),
+          child: Text(AppLocalizations.of(context)!.bestpathCountSetting),
         ),
         const PopupMenuDivider(),
         PopupMenuItem<_Menu>(

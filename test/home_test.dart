@@ -545,15 +545,55 @@ Future<void> main() async {
 
         await tester.tap(find.byIcon(Icons.menu));
         await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.bestpathCountAvailabilitySetting));
+        await tester.tap(find.text(l10nEn.bestpathCountSetting));
         await tester.pumpAndSettle();
-        expect(find.text(l10nEn.bestpathCountAvailabilitySetting), findsOneWidget);
+        expect(find.text(l10nEn.bestpathCountSetting), findsOneWidget);
         expect(find.byType(TextFormField), findsNWidgets(2));
         await tester.tap(find.byType(Switch));
         await tester.pumpAndSettle();
         await tester.tapAt(const Offset(1, 1));
         await tester.pumpAndSettle();
-        expect(find.byType(BestpathCountAvailabilitySettingDialog), findsNothing);
+        expect(find.byType(BestpathCountSettingDialog), findsNothing);
+        await waitEdaxServerResponse(tester);
+      });
+    });
+
+    testWidgets('update bestpath count player lower limit', (final tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.bestpathCountSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.bestpathCountSetting), findsOneWidget);
+        expect(find.byType(EditableText), findsNWidgets(2));
+        final playerLowerLimitTextForm = find.byType(EditableText).at(0);
+        await tester.enterText(playerLowerLimitTextForm, 1.toString());
+        await tester.tapAt(const Offset(1, 1));
+        await tester.pumpAndSettle();
+        expect(find.byType(BestpathCountSettingDialog), findsNothing);
+        await waitEdaxServerResponse(tester);
+      });
+    });
+
+    testWidgets('update bestpath count opponent lower limit', (final tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
+
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.bestpathCountSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.bestpathCountSetting), findsOneWidget);
+        expect(find.byType(EditableText), findsNWidgets(2));
+        final opponentLowerLimitTextForm = find.byType(EditableText).at(1);
+        await tester.enterText(opponentLowerLimitTextForm, 1.toString());
+        await tester.tapAt(const Offset(1, 1));
+        await tester.pumpAndSettle();
+        expect(find.byType(BestpathCountSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
     });
