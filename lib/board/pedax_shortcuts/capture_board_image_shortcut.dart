@@ -22,8 +22,11 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
-      (keyEvent.isControlPressed && keyEvent.isKeyPressed(LogicalKeyboardKey.keyP)) ||
-      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyP));
+      (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
+      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
+
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyP;
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments argus) async {

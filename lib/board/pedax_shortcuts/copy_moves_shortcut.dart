@@ -18,8 +18,8 @@ class CopyMovesShorcut implements PedaxShorcut {
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
-      (keyEvent.isControlPressed && keyEvent.isKeyPressed(LogicalKeyboardKey.keyC)) ||
-      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(LogicalKeyboardKey.keyC));
+      (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
+      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => Clipboard.setData(
