@@ -71,7 +71,7 @@ sequenceDiagram
   alt light EdaxCommand
     EdaxServer ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
-    EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
+    EdaxProcess ->> EdaxProcess: execute requested EdaxCommand
     EdaxProcess ->> EdaxServer: return result
     EdaxServer ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
@@ -80,7 +80,7 @@ sequenceDiagram
     EdaxServer ->>+ EphemeralWorker: spawn
     EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
-    EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
+    EdaxProcess ->> EdaxProcess: execute requested EdaxCommand
     EdaxProcess ->> EphemeralWorker: return result
     EphemeralWorker ->>- MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
