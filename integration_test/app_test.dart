@@ -103,19 +103,19 @@ Future<void> main() async {
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(CopyLocalInfoShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(CopyLocalInfoShorcut.logicalKey);
+      await tester.pumpAndSettle();
 
       // copy board image
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(CaptureBoardImageShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(CaptureBoardImageShorcut.logicalKey);
+      await tester.pumpAndSettle();
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(CopyMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(CopyMovesShorcut.logicalKey);
+      await tester.pumpAndSettle();
       final clipboardDataMoves = await Clipboard.getData(Clipboard.kTextPlain);
       expect(clipboardDataMoves?.text, 'F5');
 
