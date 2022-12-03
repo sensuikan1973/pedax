@@ -80,7 +80,7 @@ sequenceDiagram
     MainIsolate ->> MainIsolate: update UI
   else heavy EdaxCommand
     note right of EdaxServer: spawn another isolate not to block EdaxServer.<br>Then, EdaxServer can accept other requests.
-    EdaxServer ->>+ EphemeralWorker: spawn
+    EdaxServer ->>+ EphemeralWorker: spawn and notify MainIsolate SendPort
     EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute requested EdaxCommand
