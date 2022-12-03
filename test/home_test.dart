@@ -31,12 +31,14 @@ import 'widget_test_helper/fake_file_selector.dart';
 import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/fake_url_launcher.dart';
 import 'widget_test_helper/libedax_assets.dart';
+import 'widget_test_helper/mock_package_info.dart';
 
 Future<void> main() async {
   setUpAll(() async {
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
+    mockPackageInfo();
     fakeUrlLauncher();
     fakeFileSelector();
   });
@@ -337,6 +339,8 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.about));
         await tester.pumpAndSettle();
         expect(find.byType(AboutDialog), findsOneWidget);
+        expect(find.text('pedax.test'), findsOneWidget);
+        expect(find.text('0.0.0'), findsOneWidget);
         await waitEdaxServerResponse(tester);
       });
     });
