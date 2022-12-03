@@ -64,6 +64,8 @@ sequenceDiagram
 
   User ->> MainIsolate: launch pedax
   MainIsolate ->> EdaxServer: spawn
+  EdaxServer ->> MainIsolate: notify my sendPort
+  EdaxServer ->> EdaxProcess: initialize
 
   %% TODO: write
 ```
