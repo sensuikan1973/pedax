@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-echo "See: https://docs.flutter.dev/desktop#windows"
+echo "See: https://docs.flutter.dev/development/platform-integration/windows/building"
 
 flutter pub run msix:create
 
