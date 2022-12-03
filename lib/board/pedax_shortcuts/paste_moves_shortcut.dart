@@ -23,7 +23,7 @@ class PasteMovesShorcut implements PedaxShorcut {
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async {
-    final clipboardData = await Clipboard.getData('text/plain');
+    final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
     if (clipboardData == null || clipboardData.text == null) return;
     args.boardNotifier
       ..requestInit()

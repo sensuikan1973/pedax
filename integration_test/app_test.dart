@@ -95,18 +95,26 @@ Future<void> main() async {
       await tester.tapAt(const Offset(1, 1));
       await tester.pumpAndSettle();
 
+      // copy board image
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyP);
+
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      final clipboardData = await Clipboard.getData('text/plain');
-      expect(clipboardData?.text, 'F5');
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyC);
+      final clipboardDataMoves = await Clipboard.getData(Clipboard.kTextPlain);
+      expect(clipboardDataMoves?.text, 'F5');
 
       // paste moves
       await Clipboard.setData(const ClipboardData(text: 'c4'));
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
       await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyV);
       await tester.pumpAndSettle();
 
       // arrange discs mode
