@@ -7,7 +7,7 @@
 <div>
   <br/>
   <br/>
-  <em>pedax</em> is Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
+  <em>pedax</em> is Reversi Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
@@ -16,7 +16,7 @@
       <b>Mac/Windows/Linux</b> are supported. <a href="https://sensuikan1973.github.io/pedax/">You can install from Mac App Store or Microsoft Store</a>.
     </li>
     <li>
-      <b>Comfortably</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
+      <b>Seamlessly</b>, you can see <code>evaluation value</code>, e.g. <code>+4</code>, <code>-10</code>.
     </li>
     <li>
       <b>Customizable</b> important options, e.g. <code>book file path</code>, <code>search level</code>, <code>advanced indicator</code>.
@@ -36,79 +36,14 @@
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
-### setup
+### run
 
 ```sh
 ./scripts/setup_flutter.sh
+
+# https://docs.flutter.dev/desktop#create-and-run
+flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
-
-### [format](https://docs.flutter.dev/development/tools/formatting)
-
-```sh
-flutter format -l 120 .
-```
-
-### [run](https://docs.flutter.dev/desktop#create-and-run)
-
-```sh
-flutter run --dart-define "SENTRY_DSN=xxx" # env is optional.
-```
-
-### [test](https://docs.flutter.dev/testing)
-
-#### [widget test](https://docs.flutter.dev/testing#widget-tests)
-
-```sh
-flutter test --concurrency=1
-```
-
-#### [integration test](https://docs.flutter.dev/testing#integration-tests)
-
-```sh
-flutter test integration_test
-```
-
-#### [linter](https://dart-lang.github.io/linter/lints/)
-
-```sh
-flutter analyze .
-
-# auto fix
-# See: https://flutter.dev/docs/development/tools/flutter-fix#applying-project-wide-fixes
-dart fix --apply
-```
-
-#### fetch libedax assets as pedax assets
-
-```sh
-./scripts/fetch_libedax_assets.sh
-```
-
-#### release
-
-Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
-
-##### deploy to apple store
-
-```sh
-REVISION=xxx
-P8_PATH=xxx
-SENTRY_DSN=xxx
-
-ASC_KEY_ID=xxx \
-ASC_ISSUER_ID=xxx \
-APPLE_ID=xxx \
-ITC_TEAM_ID=xxx \
-./scripts/deploy_macos_app_to_app_store.sh \
--revision "$REVISION" -p8-file-path "$P8_PATH" -sentry-dsn "$SENTRY_DSN" --skip-test
-```
-
-After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
-
-##### deploy to microsoft store
-
-1. download `pedax.msix` from the release.
-2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
 
 ### reference
 
@@ -136,4 +71,3 @@ After that, submit [Apple developer console](https://developer.apple.com/account
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
 - linux
   - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
-- [Sentry](https://sentry.io/organizations/naoki-shimizu/issues/?project=6595416)

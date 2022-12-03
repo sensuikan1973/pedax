@@ -32,6 +32,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  # https://docs.flutter.dev/development/tools/formatting
   flutter_format:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -45,6 +46,8 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - run: flutter format -l 120 --set-exit-if-changed .
 
+  # https://docs.flutter.dev/reference/flutter-cli#flutter-commands
+  # https://flutter.dev/docs/development/tools/flutter-fix#applying-project-wide-fixes
   flutter_analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -60,6 +63,7 @@ jobs:
         run: flutter pub get
       - run: flutter analyze --fatal-infos --fatal-warnings .
 
+  # https://docs.flutter.dev/testing
   flutter_tests:
     needs: [flutter_format, flutter_analyze]
     runs-on: ${{ matrix.os }}
@@ -97,6 +101,7 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
+      # https://docs.flutter.dev/testing#widget-tests
       - name: run widget test with retry
         uses: nick-invision/retry@v2
         with:
@@ -112,6 +117,7 @@ jobs:
           # https://app.codecov.io/gh/sensuikan1973/pedax/settings
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      # https://docs.flutter.dev/testing#integration-tests
       - name: run integration test with retry
         uses: nick-invision/retry@v2
         with:
