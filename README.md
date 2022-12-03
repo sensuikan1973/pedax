@@ -71,16 +71,18 @@ sequenceDiagram
   MainIsolate ->> EdaxServer: request EdaxCommand<br/>via SendPort
 
   alt light command
-    EdaxServer ->> EdaxProcess: stop EdaxCommand being executed
-    EdaxProcess ->> EdaxProcess: execute EdaxCommand
+    EdaxServer ->> EdaxProcess: request EdaxCommand via ffi
+    EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
+    EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
     EdaxProcess ->> EdaxServer: result
     EdaxServer ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
   else heavy command
     note right of EdaxServer: spawn another isolate not to block EdaxServer.<br>Then, EdaxServer can accept other requests.
     EdaxServer ->>+ EphemeralWorker: spawn
-    EphemeralWorker ->> EdaxProcess: stop EdaxCommand being executed
-    EdaxProcess ->> EdaxProcess: execute EdaxCommand
+    EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
+    EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
+    EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
     EdaxProcess ->> EphemeralWorker: result
     EphemeralWorker ->>- MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
