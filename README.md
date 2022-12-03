@@ -63,7 +63,7 @@ sequenceDiagram
   link EdaxProcess: origin source(C) @ https://github.com/sensuikan1973/edax-reversi/tree/libedax_sensuikan1973
 
   User ->> MainIsolate: launch pedax
-  MainIsolate ->> EdaxServer: spawn
+  MainIsolate ->> EdaxServer: spawn and notify my SendPort
   EdaxServer ->> MainIsolate: notify my SendPort<br/>and start listening
   EdaxServer ->> EdaxProcess: initialize via ffi
 
