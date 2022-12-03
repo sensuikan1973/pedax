@@ -45,6 +45,14 @@
 flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
+## architecture
+
+```mermaid
+flowchart LR
+    id1(View) -- User action --> id2(Controller) -- Update -->  id1
+    id2(Controller) -- Update --> id3(Model) -- Notify --> id2
+```
+
 ### reference
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
