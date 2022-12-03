@@ -45,6 +45,9 @@ flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 
 ### Architecture
 
+The technical point of pedax is that pedax needs to call _expensive_ _native(C)_ logic such as computing evaluation value **seamlessly**.  
+So, I have to use ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) with [isolate](https://dart.dev/guides/language/concurrency) skillfully.
+
 ```mermaid
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
 sequenceDiagram
