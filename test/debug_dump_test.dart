@@ -9,12 +9,14 @@ import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/libedax_assets.dart';
+import 'widget_test_helper/mock_package_info.dart';
 
 void main() {
   setUpAll(() async {
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
+    mockPackageInfo();
   });
   setUp(() => Logger.level = Level.nothing);
 

@@ -31,12 +31,14 @@ import 'widget_test_helper/fake_file_selector.dart';
 import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/fake_url_launcher.dart';
 import 'widget_test_helper/libedax_assets.dart';
+import 'widget_test_helper/mock_package_info.dart';
 
 Future<void> main() async {
   setUpAll(() async {
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
+    mockPackageInfo();
     fakeUrlLauncher();
     fakeFileSelector();
   });
