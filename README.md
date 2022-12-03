@@ -51,23 +51,40 @@ flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
 sequenceDiagram
   actor User
-
   participant MainIsolate as Main Isolate
   participant EdaxServer as Edax Server
   participant EphemeralWorker as Ephemeral Worker
   participant EdaxProcess as Edax Process [C]
 
   link EdaxServer: source @ https://github.com/sensuikan1973/pedax/tree/main/lib/engine
+  link EdaxServer: caller @ https://github.com/sensuikan1973/pedax/blob/main/lib/models/board_notifier.dart
   link EphemeralWorker: source @ https://github.com/sensuikan1973/pedax/tree/main/lib/engine
   link EdaxProcess: binding source (Dart) @ https://github.com/sensuikan1973/libedax4dart
   link EdaxProcess: origin source(C) @ https://github.com/sensuikan1973/edax-reversi/tree/libedax_sensuikan1973
 
   User ->> MainIsolate: launch pedax
   MainIsolate ->> EdaxServer: spawn
-  EdaxServer ->> MainIsolate: notify my sendPort
+  EdaxServer ->> MainIsolate: notify my SendPort<br/>and start listening
   EdaxServer ->> EdaxProcess: initialize
 
-  %% TODO: write
+  User ->> MainIsolate: action (e.g. tap)
+  MainIsolate ->> EdaxServer: request EdaxCommand<br/>via SendPort
+
+  alt light command
+    EdaxServer ->> EdaxProcess: stop EdaxCommand being executed
+    EdaxProcess ->> EdaxProcess: execute EdaxCommand
+    EdaxProcess ->> EdaxServer: result
+    EdaxServer ->> MainIsolate: notify result
+    MainIsolate ->> MainIsolate: update UI
+  else heavy command
+    note right of EdaxServer: spawn isolate<rb/>to block EdaxServer.<br>Then, EdaxServer can accept other requests.
+    EdaxServer ->> EphemeralWorker: spawn
+    EphemeralWorker ->> EdaxProcess: stop EdaxCommand being executed
+    EdaxProcess ->> EdaxProcess: execute EdaxCommand
+    EdaxProcess ->> EphemeralWorker: result
+    EphemeralWorker ->> MainIsolate: notify result
+    MainIsolate ->> MainIsolate: update UI
+  end
 ```
 
 ### references
