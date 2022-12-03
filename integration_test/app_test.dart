@@ -10,6 +10,7 @@ import 'package:logger/logger.dart';
 
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/capture_board_image_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/copy_local_info.dart';
 import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/square.dart';
@@ -97,6 +98,12 @@ Future<void> main() async {
       expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
       await tester.tapAt(const Offset(1, 1));
       await tester.pumpAndSettle();
+
+      // copy local info
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(CopyLocalInfoShorcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyUpEvent(CopyLocalInfoShorcut.logicalKey);
 
       // copy board image
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);

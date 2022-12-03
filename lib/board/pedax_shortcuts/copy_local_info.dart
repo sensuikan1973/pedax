@@ -32,7 +32,7 @@ class CopyLocalInfoShorcut implements PedaxShorcut {
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async {
-    final compactHintsWithStepByStep = List<Map<String, String>>.empty();
+    final compactHintsWithStepByStep = List<Map<String, String>>.empty(growable: true);
     for (final h in args.boardNotifier.value.hintsWithStepByStep) {
       compactHintsWithStepByStep.add(
         {
