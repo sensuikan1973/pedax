@@ -70,14 +70,14 @@ sequenceDiagram
   User ->> MainIsolate: action (e.g. tap)
   MainIsolate ->> EdaxServer: request EdaxCommand<br/>via SendPort
 
-  alt light command
+  alt light EdaxCommand
     EdaxServer ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
     EdaxProcess ->> EdaxServer: return result
     EdaxServer ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
-  else heavy command
+  else heavy EdaxCommand
     note right of EdaxServer: spawn another isolate not to block EdaxServer.<br>Then, EdaxServer can accept other requests.
     EdaxServer ->>+ EphemeralWorker: spawn
     EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
