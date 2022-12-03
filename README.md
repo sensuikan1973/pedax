@@ -36,46 +36,13 @@
 ![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 
-### setup
+### run
 
 ```sh
 ./scripts/setup_flutter.sh
-```
 
-### [format](https://docs.flutter.dev/development/tools/formatting)
-
-```sh
-flutter format -l 120 .
-```
-
-### [run](https://docs.flutter.dev/desktop#create-and-run)
-
-```sh
+# https://docs.flutter.dev/desktop#create-and-run
 flutter run --dart-define "SENTRY_DSN=xxx" # env is optional.
-```
-
-### [test](https://docs.flutter.dev/testing)
-
-#### [widget test](https://docs.flutter.dev/testing#widget-tests)
-
-```sh
-flutter test --concurrency=1
-```
-
-#### [integration test](https://docs.flutter.dev/testing#integration-tests)
-
-```sh
-flutter test integration_test
-```
-
-### [linter](https://dart-lang.github.io/linter/lints/)
-
-```sh
-flutter analyze .
-
-# auto fix
-# See: https://flutter.dev/docs/development/tools/flutter-fix#applying-project-wide-fixes
-dart fix --apply
 ```
 
 ### reference
