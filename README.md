@@ -45,15 +45,24 @@
 flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
-## architecture
+### architecture
 
 ```mermaid
-flowchart LR
-    id1(View) -- User action --> id2(Controller) -- Update -->  id1
-    id2(Controller) -- Update --> id3(Model) -- Notify --> id2
+%% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
+sequenceDiagram
+  actor User
+  participant Main Isolate
+  participant Edax Server
+  participant Edax Ephemeral Worker
+  participant Edax Process
+
+  User ->> Main Isolate : launch pedax
+  Main Isolate ->> Edax Server: spawn
+
+  %% TODO: write
 ```
 
-### reference
+### references
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
 - [Desktop support for Flutter](https://flutter.dev/desktop)
