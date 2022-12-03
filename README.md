@@ -92,16 +92,15 @@ sequenceDiagram
 ### References
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
-- [Desktop support for Flutter](https://flutter.dev/desktop)
+- [Flutter on Desktop](https://flutter.dev/desktop)
   - [official prototype Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
-  - [official experimental desktop app sample](https://github.com/flutter/samples/tree/master/experimental/desktop_photo_search)
-  - [Real World example "Flutter Gallery"](https://github.com/flutter/gallery)
-  - [Real World example "authpass"](https://github.com/authpass/authpass)
-  - [Real World example "Mixin Messenger Desktop"](https://github.com/MixinNetwork/flutter-app)
-    - plugins: https://github.com/MixinNetwork/flutter-plugins
-- [Binding to native code using dart:ffi](https://flutter.dev/docs/development/platform-integration/c-interop)
-- [macos](https://developer.apple.com/account/#/overview)
-  - [Flutter macOS-specific support](https://flutter.dev/desktop#macos-specific-support)
+  - [official desktop app sample | Photo Search app](https://github.com/flutter/samples/tree/master/desktop_photo_search)
+  - Real World example
+    - [Flutter Gallery](https://github.com/flutter/gallery)
+    - [authpass](https://github.com/authpass/authpass)
+    - [Mixin Messenger Desktop](https://github.com/MixinNetwork/flutter-app)
+      - useful plugins: https://github.com/MixinNetwork/flutter-plugins
+- macos
   - [App Sandbox](https://developer.apple.com/documentation/security/app_sandbox)
     - [Enabling App Sandbox](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW1)
     - [About App Sandbox](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html#//apple_ref/doc/uid/TP40011183-CH1-SW1)
@@ -109,9 +108,7 @@ sequenceDiagram
   - [macOS distribution](https://developer.apple.com/jp/macos/distribution/)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
   - [Notarizing macOS Software Before Distribution](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution)
-- [windows](https://partner.microsoft.com/ja-jp/dashboard/windows/overview)
+- windows
   - [How to publish your MSIX package to the Microsoft Store?](https://www.advancedinstaller.com/msix-publish-microsoft-store.html)
   - [windows sandbox](https://docs.microsoft.com/ja-jp/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview)
   - [DevOps for Windows Desktop Apps Using GitHub Actions](https://github.com/microsoft/github-actions-for-desktop-apps)
-- linux
-  - [Build and release a Linux app](https://flutter.dev/docs/deployment/linux)
