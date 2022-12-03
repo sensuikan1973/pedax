@@ -74,15 +74,15 @@ sequenceDiagram
     EdaxServer ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute EdaxCommand
     EdaxProcess ->> EdaxServer: result
-    EdaxServer ->> MainIsolate: notify result
+    EdaxServer ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
   else heavy command
-    note right of EdaxServer: spawn isolate<rb/>to block EdaxServer.<br>Then, EdaxServer can accept other requests.
+    note right of EdaxServer: spawn another isolate not to block EdaxServer.<br>Then, EdaxServer can accept other requests.
     EdaxServer ->> EphemeralWorker: spawn
     EphemeralWorker ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute EdaxCommand
     EdaxProcess ->> EphemeralWorker: result
-    EphemeralWorker ->> MainIsolate: notify result
+    EphemeralWorker ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
   end
 ```
