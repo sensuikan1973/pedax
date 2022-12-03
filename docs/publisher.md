@@ -12,7 +12,7 @@ Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.y
 
 ## deploy
 
-### [Mac App Store ](https://apps.apple.com/app/pedax/id1557500142)
+### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
 
 ```zsh
 REVISION=xxx
