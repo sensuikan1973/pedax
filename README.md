@@ -84,11 +84,11 @@ dart fix --apply
 ./scripts/fetch_libedax_assets.sh
 ```
 
-#### release
+### release
 
 Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
 
-##### deploy to apple store
+#### deploy to apple store
 
 ```sh
 REVISION=xxx
@@ -105,7 +105,7 @@ ITC_TEAM_ID=xxx \
 
 After that, submit [Apple developer console](https://developer.apple.com/account/#/overview).
 
-##### deploy to microsoft store
+#### deploy to microsoft store
 
 1. download `pedax.msix` from the release.
 2. update and submit [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
