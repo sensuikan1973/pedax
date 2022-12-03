@@ -68,7 +68,7 @@ flutter test --concurrency=1
 flutter test integration_test
 ```
 
-#### [linter](https://dart-lang.github.io/linter/lints/)
+### [linter](https://dart-lang.github.io/linter/lints/)
 
 ```sh
 flutter analyze .
