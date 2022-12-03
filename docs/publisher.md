@@ -10,13 +10,15 @@
 ./scripts/fetch_libedax_assets.sh
 ```
 
-## create [GitHub Release](https://github.com/sensuikan1973/pedax/releases)
+## deploy
+
+### 1) create [GitHub Release](https://github.com/sensuikan1973/pedax/releases)
 
 Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.yaml.
 
-## deploy
+### 2) deploy
 
-### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
+#### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
 
 ```zsh
 REVISION=xxx
@@ -33,7 +35,7 @@ ITC_TEAM_ID=xxx \
 
 After that, submit on [Apple developer console](https://developer.apple.com/account/#/overview).
 
-### [Microsoft Store](https://apps.microsoft.com/store/detail/pedax/9NLNZCKH0L9H)
+#### [Microsoft Store](https://apps.microsoft.com/store/detail/pedax/9NLNZCKH0L9H)
 
 1. download `pedax.msix` from the [GitHub Release](https://github.com/sensuikan1973/pedax/releases).
 2. update and submit on [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
