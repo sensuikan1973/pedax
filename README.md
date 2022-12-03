@@ -78,7 +78,7 @@ flutter analyze .
 dart fix --apply
 ```
 
-#### fetch libedax assets as pedax assets
+#### upgrade external assets
 
 ```sh
 ./scripts/fetch_libedax_assets.sh
