@@ -74,7 +74,7 @@ sequenceDiagram
     EdaxServer ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
-    EdaxProcess ->> EdaxServer: result
+    EdaxProcess ->> EdaxServer: return result
     EdaxServer ->> MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
   else heavy command
@@ -83,7 +83,7 @@ sequenceDiagram
     EphemeralWorker ->> EdaxProcess: request EdaxCommand via ffi
     EdaxProcess ->> EdaxProcess: stop EdaxCommand being executed
     EdaxProcess ->> EdaxProcess: execute EdaxCommand requested
-    EdaxProcess ->> EphemeralWorker: result
+    EdaxProcess ->> EphemeralWorker: return result
     EphemeralWorker ->>- MainIsolate: notify result via SenPort
     MainIsolate ->> MainIsolate: update UI
   end
