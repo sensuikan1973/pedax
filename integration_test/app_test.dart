@@ -10,7 +10,7 @@ import 'package:logger/logger.dart';
 
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/capture_board_image_shortcut.dart';
-import 'package:pedax/board/pedax_shortcuts/copy_local_info.dart';
+import 'package:pedax/board/pedax_shortcuts/copy_local_info_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/square.dart';
