@@ -9,6 +9,8 @@
 	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>
 
+	<!-- https://developer.apple.com/documentation/security/app_sandbox -->
+	<!-- https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html#//apple_ref/doc/uid/TP40011183-CH1-SW1 -->
 	<!-- See: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW18 -->
 	<key>com.apple.security.files.bookmarks.app-scope</key>
 	<true/>
