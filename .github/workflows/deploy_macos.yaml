@@ -3,9 +3,8 @@ name: Flutter Deployment MacOS
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
-    types: [closed]
+  release:
+    types: [created]
 
 jobs:
   run_macos_deployment_script:
