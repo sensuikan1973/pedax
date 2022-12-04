@@ -4,7 +4,7 @@ name: Flutter Deployment MacOS
 on:
   workflow_dispatch:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
   run_macos_deployment:
