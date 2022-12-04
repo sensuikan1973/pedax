@@ -14,9 +14,9 @@ default_platform(:mac)
 
 platform :mac do
   desc "deploy app store"
-  lane :deploy_app_store do
+  lane :deploy_app_store do |options|
     # See: https://docs.fastlane.tools/actions/setup_ci/
-    # setup_ci() if is_ci # for keychain
+    setup_ci() if ENV['CI'] # https://docs.fastlane.tools/best-practices/continuous-integration/github/
 
     # See: https://appstoreconnect.apple.com/access/api
     # REF: https://developer.apple.com/videos/play/wwdc2018/303/
@@ -25,7 +25,7 @@ platform :mac do
     api_key = app_store_connect_api_key(
       key_id: ENV['ASC_KEY_ID'],
       issuer_id: ENV['ASC_ISSUER_ID'],
-      key_content: ENV['ASC_KEY_CONTENT'],
+      key_content: ENV['ASC_KEY_CONTENT_BASE64_ENCODED'],
       is_key_content_base64: true,
     )
 
@@ -39,7 +39,8 @@ platform :mac do
       api_key: api_key,
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
-      readonly: is_ci,
+      readonly: ENV['CI'],
+      git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"]
     )
 
     # See: Appfile
@@ -53,6 +54,9 @@ platform :mac do
       export_method: "app-store",
     )
 
+    next if options[:verify_only]
+    # NOTE: If https://github.com/fastlane/fastlane/pull/20738 is resolved, I want to verify_only option.
+
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
     # See: https://docs.fastlane.tools/actions/upload_to_app_store/
     upload_to_app_store(
@@ -63,7 +67,8 @@ platform :mac do
       skip_screenshots: true,
       precheck_include_in_app_purchases: false,
       force: true, # skip verification of HTML preview
-      # skip_binary_upload: true, # for debug
+      submit_for_review: true,
+      # verify_only: options[:verify_only],
     )
   end
 end

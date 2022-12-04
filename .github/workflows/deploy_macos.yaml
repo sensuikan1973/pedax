@@ -1,31 +1,17 @@
 ---
-name: Flutter Deployment MacOS dry-run
+name: Flutter Deployment MacOS
 
 on:
-  pull_request:
-    paths:
-      - 'macos/**'
-      - '.ruby-version'
-      - 'scripts/deploy_macos_app_to_app_store.sh'
-      - '.github/workflows/deploy_macos_dry_run.yaml'
-      - 'pubspec.*'
-      - 'scripts/setup_flutter.sh'
-  push:
-    branches: [main]
-    paths:
-      - 'macos/**'
-      - '.ruby-version'
-      - 'scripts/deploy_macos_app_to_app_store.sh'
-      - '.github/workflows/deploy_macos_dry_run.yaml'
-      - 'pubspec.*'
-      - 'scripts/setup_flutter.sh'
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
-  dry_run_macos_deployment:
+  run_macos_deployment:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
+      # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#release
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.8.0
         with:
@@ -38,7 +24,7 @@ jobs:
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - uses: ruby/setup-ruby@v1
-      - name: dry-run deployment script
+      - name: run deployment script
         shell: zsh {0}
         env:
           # https://docs.fastlane.tools/best-practices/continuous-integration/github/
@@ -50,8 +36,8 @@ jobs:
           ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          SENTRY_DSN: https://example.com
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
           echo $ZSH_NAME $ZSH_VERSION
           ./scripts/deploy_macos_app_to_app_store.sh \
-          -revision "$GITHUB_SHA" --skip-test --dry-run
+          -revision "$GITHUB_SHA" --skip-test
