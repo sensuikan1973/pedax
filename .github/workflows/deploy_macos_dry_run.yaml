@@ -22,7 +22,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  dry_run_macos_deployment_script:
+  dry_run_macos_deployment:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
@@ -38,7 +38,7 @@ jobs:
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - uses: ruby/setup-ruby@v1
-      - name: dry-run deployment script with retry
+      - name: dry-run deployment script
         shell: zsh {0}
         env:
           # https://docs.fastlane.tools/best-practices/continuous-integration/github/

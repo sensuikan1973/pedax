@@ -26,7 +26,7 @@ jobs:
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - uses: ruby/setup-ruby@v1
-      - name: dry-run deployment script with retry
+      - name: run deployment script
         shell: zsh {0}
         env:
           # https://docs.fastlane.tools/best-practices/continuous-integration/github/
