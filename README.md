@@ -93,14 +93,4 @@ sequenceDiagram
   end
 ```
 
-### References
-
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
-- [Flutter on Desktop](https://flutter.dev/desktop)
-  - [official prototype Desktop Plugins](https://github.com/google/flutter-desktop-embedding/tree/master/plugins)
-  - [official desktop app sample | Photo Search app](https://github.com/flutter/samples/tree/master/desktop_photo_search)
-  - Real World example
-    - [Flutter Gallery](https://github.com/flutter/gallery)
-    - [authpass](https://github.com/authpass/authpass)
-    - [Mixin Messenger Desktop](https://github.com/MixinNetwork/flutter-app)
-      - useful plugins: https://github.com/MixinNetwork/flutter-plugins
