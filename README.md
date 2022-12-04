@@ -45,13 +45,12 @@ flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
 
 ### Architecture
 
-The technical point of pedax is as follows. 
+The technical point of pedax is as follows.
 
-- pedax needs to call _Expensive_ _Native(C)_ logic such as computing evaluation value.  
+- pedax needs to call _Expensive_ _Native(C)_ logic such as computing evaluation value.
 - _Native(C)_ logic needs allocated large data. It's desirable to daemonize _Native(C)_ process on background.
 
 So, I have to use [isolate](https://dart.dev/guides/language/concurrency) with ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) skillfully to achieve _seamless non-blocking_ UI.
-
 
 ```mermaid
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
@@ -106,9 +105,6 @@ sequenceDiagram
     - [Mixin Messenger Desktop](https://github.com/MixinNetwork/flutter-app)
       - useful plugins: https://github.com/MixinNetwork/flutter-plugins
 - macos
-  - [App Sandbox](https://developer.apple.com/documentation/security/app_sandbox)
-    - [Enabling App Sandbox](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW1)
-    - [About App Sandbox](https://developer.apple.com/library/archive/documentation/Security/Conceptual/AppSandboxDesignGuide/AboutAppSandbox/AboutAppSandbox.html#//apple_ref/doc/uid/TP40011183-CH1-SW1)
   - [Harded Runtime](https://developer.apple.com/documentation/security/hardened_runtime)
   - [macOS distribution](https://developer.apple.com/jp/macos/distribution/)
   - [Distribute outside the Mac App Store (macOS)](https://help.apple.com/xcode/mac/current/#/dev033e997ca)
