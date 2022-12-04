@@ -13,7 +13,7 @@ import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/redo_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/rotate180_shortcut.dart';
-import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility.dart';
+import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
 import 'package:pedax/board/square.dart';

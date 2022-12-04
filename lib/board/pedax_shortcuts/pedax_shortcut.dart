@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 
 import '../../models/board_notifier.dart';
 import 'capture_board_image_shortcut.dart';
-import 'copy_local_info.dart';
+import 'copy_local_info_shortcut.dart';
 import 'copy_moves_shortcut.dart';
 import 'init_shortcut.dart';
 import 'new_shortcut.dart';
@@ -11,7 +11,7 @@ import 'paste_moves_shortcut.dart';
 import 'redo_all_shortcut.dart';
 import 'redo_shortcut.dart';
 import 'rotate180_shortcut.dart';
-import 'switch_hint_visibility.dart';
+import 'switch_hint_visibility_shortcut.dart';
 import 'undo_all_shortcut.dart';
 import 'undo_shortcut.dart';
 
