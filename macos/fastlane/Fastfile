@@ -54,7 +54,7 @@ platform :mac do
       export_method: "app-store",
     )
 
-    break if options[:verify_only]
+    next if options[:verify_only]
     # NOTE: If https://github.com/fastlane/fastlane/pull/20738 is resolved, I want to verify_only option.
 
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
