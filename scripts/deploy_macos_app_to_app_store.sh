@@ -35,7 +35,6 @@ fi
 flutter build macos --release --dart-define SENTRY_DSN="${opthash[-sentry-dsn]}"
 
 cd macos
-
 bundle --version
 ruby --version
 
