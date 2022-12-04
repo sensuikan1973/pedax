@@ -81,6 +81,9 @@ flutter:
     - assets/libedax/data/
     - assets/libedax/dll/
 
+# windows desktop app is not sandboxed
+# - https://docs.microsoft.com/ja-jp/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
+# - https://learn.microsoft.com/ja-jp/windows/msix/desktop/desktop-to-uwp-behind-the-scenes
 msix_config: # See: https://pub.dev/packages/msix#-configuring-your-installer
   store: true
   display_name: pedax
