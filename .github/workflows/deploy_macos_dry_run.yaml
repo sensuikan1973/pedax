@@ -50,9 +50,9 @@ jobs:
           ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
           MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          SENTRY_DSN: https://example.com
         run: |
           echo $ZSH_NAME $ZSH_VERSION
           REVISION=$GITHUB_SHA
           ./scripts/deploy_macos_app_to_app_store.sh \
-          -revision "$REVISION" -sentry-dsn "https://example.com" \
-          --dry-run --skip-test
+          -revision "$REVISION" --dry-run --skip-test

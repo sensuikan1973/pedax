@@ -8,15 +8,10 @@ set -euxo pipefail
 # shellcheck disable=SC2168
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
-zparseopts -D -F -A opthash -- -dry-run -skip-test revision: sentry-dsn:
+zparseopts -D -F -A opthash -- -dry-run -skip-test revision:
 
 if [[ -z "${opthash[(i)-revision]}" ]]; then
   echo "revision is required"
-  exit
-fi
-
-if [ -z "${opthash[(i)-sentry-dsn]}" ]; then
-  echo "sentry-dsn is required"
   exit
 fi
 
@@ -32,7 +27,7 @@ if [[ -z "${opthash[(i)--skip-test]}" ]]; then
 fi
 
 # See: https://flutter.dev/desktop#macos
-flutter build macos --release --dart-define SENTRY_DSN="${opthash[-sentry-dsn]}"
+flutter build macos --release --dart-define SENTRY_DSN="$SENTRY_DSN"
 
 cd macos
 bundle --version
