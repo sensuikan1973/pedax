@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 
 import '../../models/board_notifier.dart';
 import 'capture_board_image_shortcut.dart';
+import 'copy_local_info.dart';
 import 'copy_moves_shortcut.dart';
 import 'init_shortcut.dart';
 import 'new_shortcut.dart';
@@ -41,4 +42,5 @@ List<PedaxShorcut> get shortcutList => const [
       SwitchHintVisibilityShorcut(),
       Rotate180Shorcut(),
       CaptureBoardImageShorcut(),
+      CopyLocalInfoShorcut(),
     ];

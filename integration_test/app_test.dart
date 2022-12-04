@@ -9,6 +9,10 @@ import 'package:integration_test/integration_test.dart';
 import 'package:logger/logger.dart';
 
 import 'package:pedax/board/pedax_board.dart';
+import 'package:pedax/board/pedax_shortcuts/capture_board_image_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/copy_local_info.dart';
+import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
+import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/main.dart' as pedax;
@@ -95,26 +99,32 @@ Future<void> main() async {
       await tester.tapAt(const Offset(1, 1));
       await tester.pumpAndSettle();
 
+      // copy local info
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(CopyLocalInfoShorcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      await tester.pumpAndSettle();
+
       // copy board image
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyP);
+      await tester.sendKeyEvent(CaptureBoardImageShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyP);
+      await tester.pumpAndSettle();
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyC);
+      await tester.sendKeyEvent(CopyMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyC);
+      await tester.pumpAndSettle();
       final clipboardDataMoves = await Clipboard.getData(Clipboard.kTextPlain);
       expect(clipboardDataMoves?.text, 'F5');
 
       // paste moves
       await Clipboard.setData(const ClipboardData(text: 'c4'));
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(LogicalKeyboardKey.keyV);
+      await tester.sendKeyEvent(PasteMovesShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(LogicalKeyboardKey.keyV);
+      await tester.sendKeyUpEvent(PasteMovesShorcut.logicalKey);
       await tester.pumpAndSettle();
 
       // arrange discs mode

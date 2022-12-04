@@ -13,6 +13,11 @@ class PasteMovesShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelPasteMoves;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyV;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
+
   @override
   String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
@@ -29,9 +34,4 @@ class PasteMovesShorcut implements PedaxShorcut {
       ..requestInit()
       ..requestPlay(clipboardData.text!);
   }
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyV;
-
-  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }

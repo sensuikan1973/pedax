@@ -13,6 +13,11 @@ class InitShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelInit;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyI;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
+
   @override
   String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
@@ -23,9 +28,4 @@ class InitShorcut implements PedaxShorcut {
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestInit();
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyI;
-
-  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }

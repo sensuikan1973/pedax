@@ -11,6 +11,9 @@ class SwitchHintVisibilityShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelSwitchHintVisibility;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyH;
+
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();
 
@@ -19,7 +22,4 @@ class SwitchHintVisibilityShorcut implements PedaxShorcut {
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.switchHintVisibility();
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyH;
 }

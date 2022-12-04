@@ -13,26 +13,28 @@ class ShortcutCheatsheetDialog extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.shortcutCheatsheet, textAlign: TextAlign.center),
-        content: Table(
-          defaultColumnWidth: const IntrinsicColumnWidth(),
-          border: TableBorder.all(),
-          children: List.generate(
-            shortcutList.length,
-            (final k) => TableRow(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    shortcutList[k].label(AppLocalizations.of(context)!),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
+        content: SingleChildScrollView(
+          child: Table(
+            defaultColumnWidth: const IntrinsicColumnWidth(),
+            border: TableBorder.all(),
+            children: List.generate(
+              shortcutList.length,
+              (final k) => TableRow(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      shortcutList[k].label(AppLocalizations.of(context)!),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(shortcutList[k].keys, textAlign: TextAlign.center, maxLines: 1),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(shortcutList[k].keys, textAlign: TextAlign.center, maxLines: 1),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

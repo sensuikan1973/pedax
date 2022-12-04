@@ -11,6 +11,9 @@ class UndoAllShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelUndoAll;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyS;
+
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();
 
@@ -19,7 +22,4 @@ class UndoAllShorcut implements PedaxShorcut {
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndoAll();
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyS;
 }

@@ -47,5 +47,6 @@
   "shortcutLabelInit": "init board",
   "shortcutLabelNew": "new board based on disc arranges",
   "shortcutLabelCaptureBoardImageShorcut": "capture board image to clipboard",
+  "shortcutLabelCopyLocalInfo": "copy local info",
   "chooseBookFile": "choose"
 }
