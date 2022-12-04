@@ -11,9 +11,8 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
+      # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#release
       - uses: actions/checkout@v3
-        with:
-          ref: $GITHUB_SHA
       - uses: subosito/flutter-action@v2.8.0
         with:
           cache: true
