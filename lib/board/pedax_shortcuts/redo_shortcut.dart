@@ -11,19 +11,19 @@ class RedoShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelRedo;
 
-  @override
-  String get keys => '${logicalKey.keyLabel.toUpperCase()} or →';
-
-  @override
-  bool fired(final RawKeyEvent keyEvent) =>
-      keyEvent.isKeyPressed(logicalKey) || keyEvent.isKeyPressed(logicalKeyArrowRight);
-
-  @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();
-
   @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyR;
+  static LogicalKeyboardKey get logicalKeyR => LogicalKeyboardKey.keyR;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKeyArrowRight => LogicalKeyboardKey.arrowRight;
+
+  @override
+  String get keys => '${logicalKeyR.keyLabel.toUpperCase()} or →';
+
+  @override
+  bool fired(final RawKeyEvent keyEvent) =>
+      keyEvent.isKeyPressed(logicalKeyR) || keyEvent.isKeyPressed(logicalKeyArrowRight);
+
+  @override
+  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();
 }

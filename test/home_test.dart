@@ -84,7 +84,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-        await tester.sendKeyEvent(UndoShorcut.logicalKey);
+        await tester.sendKeyEvent(UndoShorcut.logicalKeyU);
         await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 3);
@@ -92,7 +92,7 @@ Future<void> main() async {
         expectStoneNum(tester, SquareType.white, 3);
         expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
-        await tester.sendKeyEvent(RedoShorcut.logicalKey);
+        await tester.sendKeyEvent(RedoShorcut.logicalKeyR);
         await waitEdaxServerResponse(tester);
         await tester.pump();
         expectStoneNum(tester, SquareType.black, 5);

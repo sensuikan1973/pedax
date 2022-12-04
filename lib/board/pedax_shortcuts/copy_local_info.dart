@@ -23,6 +23,11 @@ class CopyLocalInfoShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyLocalInfo;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyL;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
+
   @override
   String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
@@ -77,9 +82,4 @@ class CopyLocalInfoShorcut implements PedaxShorcut {
     });
     await Clipboard.setData(ClipboardData(text: jsonText));
   }
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyL;
-
-  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }

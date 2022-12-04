@@ -17,16 +17,18 @@ class CaptureBoardImageShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShorcut;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyP;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
+
   @override
-  String get keys => Platform.isMacOS ? '⌃P or ⌘P' : 'Ctrl + P';
+  String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
   bool fired(final RawKeyEvent keyEvent) =>
       (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
       (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyP;
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments argus) async {

@@ -13,6 +13,11 @@ class CopyMovesShorcut implements PedaxShorcut {
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyMoves;
 
+  @visibleForTesting
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyC;
+
+  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
+
   @override
   String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
@@ -25,9 +30,4 @@ class CopyMovesShorcut implements PedaxShorcut {
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => Clipboard.setData(
         ClipboardData(text: args.boardNotifier.value.currentMovesWithoutPassString),
       );
-
-  @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyC;
-
-  String get _keyLabel => logicalKey.keyLabel.toUpperCase();
 }
