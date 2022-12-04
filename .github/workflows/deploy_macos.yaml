@@ -1,0 +1,46 @@
+---
+name: Flutter Deployment MacOS
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  run_macos_deployment_script:
+    # See: .github/workflows/create_release_pr.yaml
+    if: ${{ github.head_ref == 'prepare_for_release' && github.event.pull_request.merged == true }}
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2.8.0
+        with:
+          cache: true
+      - name: setup flutter channel
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
+        run: ./scripts/setup_flutter.sh
+      - name: setup flutter desktop
+        shell: zsh {0}
+        run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+
+      - uses: ruby/setup-ruby@v1
+      - name: dry-run deployment script with retry
+        shell: zsh {0}
+        env:
+          # https://docs.fastlane.tools/best-practices/continuous-integration/github/
+          # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_KEY_CONTENT_BASE64_ENCODED: ${{ secrets.ASC_KEY_CONTENT_BASE64_ENCODED }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        run: |
+          echo $ZSH_NAME $ZSH_VERSION
+          REVISION=$GITHUB_SHA
+          ./scripts/deploy_macos_app_to_app_store.sh \
+          -revision "$REVISION" -sentry-dsn "https://example.com" \
+          --skip-test

@@ -20,7 +20,7 @@ Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.y
 
 #### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
 
-TODO: write about workflow.
+Use https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml.
 
 #### [Microsoft Store](https://apps.microsoft.com/store/detail/pedax/9NLNZCKH0L9H)
 
