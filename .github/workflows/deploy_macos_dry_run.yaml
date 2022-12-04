@@ -50,7 +50,7 @@ jobs:
           ASC_ISSUER_ID=${{ secrets.ASC_ISSUER_ID }} \
           APPLE_ID=${{ secrets.APPLE_ID }} \
           ITC_TEAM_ID=${{ secrets.ITC_TEAM_ID }} \
-          MATCH_GIT_BASIC_AUTHORIZATION=${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          MATCH_GIT_BASIC_AUTHORIZATION=${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }} \
           MATCH_PASSWORD=${{ secrets.MATCH_PASSWORD }} \
           ./scripts/deploy_macos_app_to_app_store.sh \
           -revision "$REVISION" -sentry-dsn "https://example.com" \
