@@ -44,6 +44,7 @@ jobs:
           echo $ZSH_NAME $ZSH_VERSION
           REVISION=$GITHUB_SHA
 
+          # See: https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
           ASC_KEY_ID=${{ secrets.ASC_KEY_ID }} \
           ASC_KEY_CONTENT_BASE64_ENCODED=${{ secrets.ASC_KEY_CONTENT_BASE64_ENCODED }}
           ASC_ISSUER_ID=${{ secrets.ASC_ISSUER_ID }} \
