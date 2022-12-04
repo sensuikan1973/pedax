@@ -16,7 +16,7 @@ platform :mac do
   desc "deploy app store"
   lane :deploy_app_store do |options|
     # See: https://docs.fastlane.tools/actions/setup_ci/
-    # setup_ci() if is_ci # for keychain
+    setup_ci() if ENV['CI'] # https://docs.fastlane.tools/best-practices/continuous-integration/github/
 
     # See: https://appstoreconnect.apple.com/access/api
     # REF: https://developer.apple.com/videos/play/wwdc2018/303/
@@ -65,7 +65,7 @@ platform :mac do
       precheck_include_in_app_purchases: false,
       force: true, # skip verification of HTML preview
       submit_for_review: true,
-      verify_only: options[:verify_only]
+      verify_only: options[:verify_only],
     )
   end
 end
