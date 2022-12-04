@@ -14,7 +14,7 @@ default_platform(:mac)
 
 platform :mac do
   desc "deploy app store"
-  lane :deploy_app_store do
+  lane :deploy_app_store do |options|
     # See: https://docs.fastlane.tools/actions/setup_ci/
     # setup_ci() if is_ci # for keychain
 
@@ -63,7 +63,8 @@ platform :mac do
       skip_screenshots: true,
       precheck_include_in_app_purchases: false,
       force: true, # skip verification of HTML preview
-      # skip_binary_upload: true, # for debug
+      submit_for_review: true,
+      verify_only: options[:verify_only]
     )
   end
 end

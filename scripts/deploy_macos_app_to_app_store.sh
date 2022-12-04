@@ -53,9 +53,9 @@ export ASC_KEY_CONTENT
 
 git diff --exit-code
 
+# require ENV variables. See: macos/fastlane/Fastfile
 if [[ -n "${opthash[(i)--dry-run]}" ]]; then
-  echo "exit without running fastlane deploy_app_store, because dry-run option is specified"
-  exit
+  bundle exec fastlane deploy_app_store verify_only:true
+else
+  bundle exec fastlane deploy_app_store
 fi
-
-bundle exec fastlane deploy_app_store # require ENV variables. See: macos/fastlane/Fastfile
