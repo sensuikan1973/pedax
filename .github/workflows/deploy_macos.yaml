@@ -7,7 +7,7 @@ on:
     types: [created]
 
 jobs:
-  run_macos_deployment_script:
+  run_macos_deployment:
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
