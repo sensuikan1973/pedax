@@ -39,7 +39,7 @@ platform :mac do
       api_key: api_key,
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
-      readonly: is_ci,
+      readonly: ENV['CI'],
       git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"]
     )
 
