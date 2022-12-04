@@ -39,5 +39,5 @@ jobs:
           echo $ZSH_NAME $ZSH_VERSION
           REVISION=$GITHUB_SHA
           ./scripts/deploy_macos_app_to_app_store.sh \
-          -revision "$REVISION" -sentry-dsn "https://example.com" \
+          -revision "$REVISION" -sentry-dsn ${{ secrets.SENTRY_DSN }} \
           --skip-test
