@@ -40,6 +40,7 @@ platform :mac do
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
       readonly: is_ci,
+      git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"]
     )
 
     # See: Appfile
