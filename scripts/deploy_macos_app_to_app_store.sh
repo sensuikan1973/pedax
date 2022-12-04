@@ -8,15 +8,10 @@ set -euxo pipefail
 # shellcheck disable=SC2168
 local -A opthash
 # See: https://zsh.sourceforge.io/Doc/Release/Zsh-Modules.html#The-zsh_002fzutil-Module
-zparseopts -D -F -A opthash -- -dry-run -skip-test revision: p8-file-path: sentry-dsn:
+zparseopts -D -F -A opthash -- -dry-run -skip-test revision: sentry-dsn:
 
 if [[ -z "${opthash[(i)-revision]}" ]]; then
   echo "revision is required"
-  exit
-fi
-
-if [ -z "${opthash[(i)-p8-file-path]}" ]; then
-  echo "p8-file-path is required"
   exit
 fi
 
@@ -47,9 +42,6 @@ ruby --version
 bundle config set --local deployment 'true'
 bundle install
 bundle exec fastlane list
-
-ASC_KEY_CONTENT=$(base64 --input="${opthash[-p8-file-path]}")
-export ASC_KEY_CONTENT
 
 git diff --exit-code
 
