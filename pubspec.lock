@@ -200,6 +200,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_lints:
+    dependency: transitive
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -295,6 +302,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.9.0"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   logger:
     dependency: "direct main"
     description:
@@ -462,7 +476,7 @@ packages:
       name: pedantic_sensuikan1973
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.6.0"
+    version: "4.0.1"
   petitparser:
     dependency: transitive
     description:
