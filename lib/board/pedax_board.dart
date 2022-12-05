@@ -27,7 +27,7 @@ class PedaxBoard extends StatefulWidget {
   static const double defaultFrameWidth = 24;
 
   @override
-  _PedaxBoardState createState() => _PedaxBoardState();
+  PedaxBoardState createState() => PedaxBoardState();
 
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
@@ -39,7 +39,7 @@ class PedaxBoard extends StatefulWidget {
   }
 }
 
-class _PedaxBoardState extends State<PedaxBoard> {
+class PedaxBoardState extends State<PedaxBoard> {
   final _bookFileOption = const BookFileOption();
   late final BoardNotifier _boardNotifier;
   int get _squareNumPerLine => 8;

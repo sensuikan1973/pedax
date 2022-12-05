@@ -29,10 +29,10 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   final _edaxAsset = const EdaxAsset();
   double get _pedaxBoardBodyLength => min(
         MediaQuery.of(context).size.width * 0.8,
