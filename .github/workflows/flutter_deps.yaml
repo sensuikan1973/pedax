@@ -31,9 +31,6 @@ jobs:
       - run: flutter pub upgrade --null-safety
       - run: flutter pub upgrade --major-versions
 
-
-      - run: dart fix --apply
-
       - name: upgrade external binary
         shell: zsh {0}
         run: ./scripts/fetch_libedax_assets.sh
