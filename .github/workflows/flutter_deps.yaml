@@ -28,7 +28,9 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter pub upgrade --null-safety && flutter pub upgrade --major-versions
+      - run: flutter pub upgrade --null-safety
+      - run: flutter pub upgrade --major-versions
+
 
       - run: dart fix --apply
 
