@@ -3,7 +3,7 @@
 # See: https://github.com/koalaman/shellcheck/issues/809
 # shellcheck shell=bash
 
-set -euxo pipefail
+set -uxo pipefail
 
 mkdir -p assets/libedax
 data_dst=assets/libedax/data
@@ -22,9 +22,7 @@ function unpack_dyamic_library() {
   lib_name=$3
   dll_dst=$4
   curl -L "$asset_url" -o "$tmp_dst/${platform}_asset.zip"
-  # For windows, I add quiet option.
-  # 「warning:  libedax_assets_tmp/windows_asset.zip appears to use backslashes as path separators」
-  unzip "$tmp_dst/${platform}_asset.zip" -d "$tmp_dst/${platform}" --quiet
+  unzip "$tmp_dst/${platform}_asset.zip" -d "$tmp_dst/${platform}"
   mv "$tmp_dst/${platform}/libedax_output/bin/${lib_name}" "$dll_dst"
 }
 
