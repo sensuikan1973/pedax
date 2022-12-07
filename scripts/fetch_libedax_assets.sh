@@ -3,7 +3,7 @@
 # See: https://github.com/koalaman/shellcheck/issues/809
 # shellcheck shell=bash
 
-set -uxo pipefail
+set -euxo pipefail
 
 mkdir -p assets/libedax
 data_dst=assets/libedax/data
