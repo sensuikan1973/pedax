@@ -28,12 +28,3 @@ updates:
       interval: "daily"
       time: "18:00"
     labels: ["GitHub Actions", "dependencies"]
-
-#   # See: https://github.blog/changelog/2022-04-05-pub-beta-support-for-dependabot-version-updates/
-#   - package-ecosystem: "pub"
-#     directory: "/"
-#     schedule:
-#       interval: "daily"
-#       time: "18:00"
-#     labels: ["dependencies"]
-#     versioning-strategy: increase
