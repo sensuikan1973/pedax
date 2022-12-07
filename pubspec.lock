@@ -301,7 +301,7 @@ packages:
       name: libedax4dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.9.2"
+    version: "5.9.0"
   lints:
     dependency: transitive
     description:
