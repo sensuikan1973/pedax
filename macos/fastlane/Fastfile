@@ -76,7 +76,7 @@ platform :mac do
         export_compliance_encryption_updated: false,
         export_compliance_app_type: nil,
         export_compliance_uses_encryption: true, # e.g. HTTPS
-        export_compliance_is_exempt: true,
+        export_compliance_is_exempt: false,
         export_compliance_contains_third_party_cryptography: false,
         export_compliance_contains_proprietary_cryptography: false,
         export_compliance_available_on_french_store: false, # avoid to upload legal documentation, and french is not important region for pedax.
