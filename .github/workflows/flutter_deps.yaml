@@ -32,7 +32,7 @@ jobs:
       - run: flutter pub upgrade --major-versions
 
       # https://github.com/flutter/flutter/issues/73845#issue-785022394
-      - run: flutter build macos
+      - run: rm macos/Podfile.lock && flutter build macos
 
       - name: upgrade external binary
         shell: zsh {0}
