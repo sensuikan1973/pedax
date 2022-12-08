@@ -1,6 +1,4 @@
 ---
-# TODO: If https://github.com/dependabot/dependabot-core/issues/2166 has been resolved, this workflow becomes unnecessary.
-
 name: Upgrade Flutter Dependencies
 
 on:
