@@ -69,7 +69,7 @@ platform :mac do
       force: true, # skip verification of HTML preview
       submit_for_review: true,
       # verify_only: options[:verify_only],
-      # https://docs.fastlane.tools/actions/deliver/#compliance-and-idfa-settings
+      # https://github.com/fastlane/fastlane/blob/master/spaceship/lib/spaceship/tunes/app_submission.rb
       submission_information: {
         export_compliance_platform: 'macos',
         export_compliance_compliance_required: false,
