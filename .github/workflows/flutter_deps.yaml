@@ -1,6 +1,4 @@
 ---
-# TODO: If https://github.com/dependabot/dependabot-core/issues/2166 has been resolved, this workflow becomes unnecessary.
-
 name: Upgrade Flutter Dependencies
 
 on:
@@ -11,7 +9,7 @@ on:
 jobs:
   upgrade_flutter_dependencies:
     runs-on: macos-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2.8.0
@@ -28,9 +26,11 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter pub upgrade && flutter pub upgrade --major-versions
+      - run: flutter pub upgrade --null-safety
+      - run: flutter pub upgrade --major-versions
 
-      - run: dart fix --apply
+      # https://github.com/flutter/flutter/issues/73845#issue-785022394
+      - run: rm macos/Podfile.lock && flutter build macos
 
       - name: upgrade external binary
         shell: zsh {0}
