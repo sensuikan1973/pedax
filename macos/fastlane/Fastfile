@@ -71,6 +71,10 @@ platform :mac do
       # verify_only: options[:verify_only],
       # https://github.com/fastlane/fastlane/blob/master/spaceship/lib/spaceship/tunes/app_submission.rb
       submission_information: {
+        add_id_info_serves_ads: false,
+        add_id_info_tracks_action: false,
+        add_id_info_tracks_install: false,
+        add_id_info_uses_idfa: false,
         export_compliance_platform: 'macos',
         export_compliance_compliance_required: false,
         export_compliance_encryption_updated: false,
