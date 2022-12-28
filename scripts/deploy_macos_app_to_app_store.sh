@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# https://appstoreconnect.apple.com/apps
+
 # See: https://github.com/koalaman/shellcheck/issues/809
 # shellcheck shell=bash
 
