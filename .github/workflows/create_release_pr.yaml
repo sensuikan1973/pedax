@@ -19,12 +19,12 @@ on:
       release_note_ja_for_macos:
         type: string
         description: '[ja] release note for macos'
-        default: '軽微なパフォーマンス改善を行いました。'
+        default: '安定性向上のための軽微な改善を行いました。'
         required: true
       release_note_en_for_macos:
         type: string
         description: '[en] release note for macos'
-        default: 'minor improvement of performance.'
+        default: 'minor improvement of stability.'
         required: true
 
 jobs:
