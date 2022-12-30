@@ -1,1 +1,1 @@
-minor improvement of performance.
+minor improvement of stability.
