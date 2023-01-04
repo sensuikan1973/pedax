@@ -117,7 +117,7 @@ bool Win32Window::CreateAndShow(const std::wstring& title,
   double scale_factor = dpi / 96.0;
 
   HWND window = CreateWindow(
-      // See: https://github.com/leanflutter/window_manager#windows
+      // See: https://github.com/leanflutter/window_manager#hidden-at-launch
       // window_class, title.c_str(), WS_OVERLAPPEDWINDOW | WS_VISIBLE,
       window_class, title.c_str(),
       WS_OVERLAPPEDWINDOW, // do not add WS_VISIBLE since the window will be shown later

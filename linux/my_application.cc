@@ -49,7 +49,7 @@ static void my_application_activate(GApplication* application) {
   }
 
   gtk_window_set_default_size(window, 1280, 720);
-  // See: https://github.com/leanflutter/window_manager#linux
+  // See: https://github.com/leanflutter/window_manager#hidden-at-launch
   // gtk_widget_show(GTK_WIDGET(window));
   gtk_widget_realize(GTK_WIDGET(window));
 
