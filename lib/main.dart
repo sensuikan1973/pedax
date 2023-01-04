@@ -14,7 +14,7 @@ const pedaxWindowMinSize = Size(550, 680);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await _ensureWindowMinSize(); // https://github.com/flutter/flutter/issues/30736
+  setWindowMinSize(pedaxWindowMinSize); // https://github.com/flutter/flutter/issues/30736
 
   // https://github.com/sensuikan1973/pedax/issues/1159
   await windowManager.ensureInitialized(); // https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
@@ -26,7 +26,7 @@ Future<void> main() async {
   // https://docs.sentry.io/platforms/flutter/usage/#tips-for-catching-errors
   // https://docs.flutter.dev/testing/errors#errors-caught-by-flutter
   FlutterError.onError = (errorDetails) async {
-    Logger().e(errorDetails.exception);
+    Logger().d(errorDetails.exception);
     await Sentry.captureException(errorDetails.exception, stackTrace: errorDetails.stack);
   };
 
