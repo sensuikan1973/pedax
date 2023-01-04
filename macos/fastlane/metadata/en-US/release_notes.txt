@@ -1,1 +1,1 @@
-minor improvement of stability.
+At launch, restore window size and position at previous.
