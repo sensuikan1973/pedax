@@ -86,6 +86,8 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
         // debugShowCheckedModeBanner: false,
       );
 
+  // NOTE: linux is not supported.
+  // https://github.com/leanflutter/window_manager#onwindowresized--macos--windows
   @override
   Future<void> onWindowResize() async {
     final pref = await SharedPreferences.getInstance();
