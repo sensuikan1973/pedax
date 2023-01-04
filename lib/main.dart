@@ -18,7 +18,7 @@ Future<void> main() async {
 
   // https://github.com/sensuikan1973/pedax/issues/1159
   await windowManager.ensureInitialized(); // https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
-  await _setWindowFrame(); // // NOTE: have a window blink. https://github.com/flutter/flutter/issues/30736#issuecomment-707217183
+  await _setWindowFrame(); // NOTE: have a window blink. https://github.com/flutter/flutter/issues/30736#issuecomment-707217183
 
   // If you feel debug log is noisy, you can change log level.
   // Logger.level = Level.info;
