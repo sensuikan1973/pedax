@@ -53,10 +53,10 @@ Future<void> _setWindowFrame() async {
   final windowInfo = await getWindowInfo();
   setWindowFrame(
     Rect.fromLTWH(
-      await PedaxApp.windowInfoFrameLeft ?? windowInfo.frame.left,
-      await PedaxApp.windowInfoFrameTop ?? windowInfo.frame.top,
-      await PedaxApp.windowInfoFrameWidth ?? pedaxWindowMinSize.width,
-      await PedaxApp.windowInfoFrameHeight ?? pedaxWindowMinSize.height,
+      await PedaxApp.savedWindowFrameLeft ?? windowInfo.frame.left,
+      await PedaxApp.savedWindowFrameTop ?? windowInfo.frame.top,
+      await PedaxApp.savedWindowFrameWidth ?? pedaxWindowMinSize.width,
+      await PedaxApp.savedWindowFrameHeight ?? pedaxWindowMinSize.height,
     ),
   );
 }
