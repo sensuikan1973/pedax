@@ -49,7 +49,8 @@ static void my_application_activate(GApplication* application) {
   }
 
   gtk_window_set_default_size(window, 1280, 720);
-  // See: https://github.com/leanflutter/window_manager#hidden-at-launch
+  // TODO: https://github.com/leanflutter/window_manager#hidden-at-launch
+  // change to gtk_widget_realize cause integration test failure with unclear error. https://github.com/sensuikan1973/pedax/pull/1160#issuecomment-1371509093
   gtk_widget_show(GTK_WIDGET(window));
   // gtk_widget_realize(GTK_WIDGET(window));
 
