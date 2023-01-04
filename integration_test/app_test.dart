@@ -38,6 +38,8 @@ Future<void> main() async {
       await pedax.main();
       await tester.pumpAndSettle();
 
+      await Future<void>.delayed(const Duration(seconds: 1));
+
       final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
       final l10n = AppLocalizations.of(context)!;
 
