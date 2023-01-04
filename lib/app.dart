@@ -59,6 +59,7 @@ class PedaxApp extends StatefulWidget {
   }
 }
 
+// See: https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
 class _PedaxAppState extends State<PedaxApp> with WindowListener {
   @override
   void initState() {
