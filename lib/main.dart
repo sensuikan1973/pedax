@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart'; // ignore: unused_import
+import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
@@ -13,7 +14,11 @@ const pedaxWindowMinSize = Size(550, 680);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await _ensureMinWindowSize();
+  await _ensureWindowMinSize(); // https://github.com/flutter/flutter/issues/30736
+
+  // https://github.com/sensuikan1973/pedax/issues/1159
+  await windowManager.ensureInitialized(); // https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
+  await _setWindowFrame();
 
   // If you feel debug log is noisy, you can change log level.
   // Logger.level = Level.info;
@@ -44,20 +49,14 @@ Future<void> main() async {
   );
 }
 
-// See: https://github.com/flutter/flutter/issues/30736
-Future<void> _ensureMinWindowSize() async {
-  setWindowMinSize(pedaxWindowMinSize);
-
+Future<void> _setWindowFrame() async {
   final windowInfo = await getWindowInfo();
-  if (windowInfo.frame.width >= pedaxWindowMinSize.width && windowInfo.frame.height >= pedaxWindowMinSize.height) {
-    return;
-  }
-
   setWindowFrame(
-    Rect.fromCenter(
-      center: windowInfo.frame.center,
-      width: pedaxWindowMinSize.width,
-      height: pedaxWindowMinSize.height,
+    Rect.fromLTWH(
+      await PedaxApp.windowInfoFrameLeft ?? windowInfo.frame.left,
+      await PedaxApp.windowInfoFrameTop ?? windowInfo.frame.top,
+      await PedaxApp.windowInfoFrameWidth ?? pedaxWindowMinSize.width,
+      await PedaxApp.windowInfoFrameHeight ?? pedaxWindowMinSize.height,
     ),
   );
 }
