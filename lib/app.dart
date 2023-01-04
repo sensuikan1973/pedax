@@ -107,7 +107,7 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
     await pref.setDouble(_sharedPrefereceWindowFrameTopKey, windowInfo.frame.top);
   }
 
-  // https://github.com/leanflutter/window_manager#windows
+  // https://github.com/leanflutter/window_manager#hidden-at-launch
   @override
   void onWindowFocus() {
     setState(() {});
