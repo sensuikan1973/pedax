@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -93,24 +91,20 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   // https://github.com/leanflutter/window_manager#onwindowresized--macos--windows
   @override
   Future<void> onWindowResize() async {
-    if (Platform.isMacOS || Platform.isWindows) {
-      final pref = await SharedPreferences.getInstance();
-      final windowInfo = await getWindowInfo();
-      await pref.setDouble(_sharedPrefereceWindowFrameWidthKey, windowInfo.frame.width);
-      await pref.setDouble(_sharedPrefereceWindowFrameHeightKey, windowInfo.frame.height);
-    }
+    final pref = await SharedPreferences.getInstance();
+    final windowInfo = await getWindowInfo();
+    await pref.setDouble(_sharedPrefereceWindowFrameWidthKey, windowInfo.frame.width);
+    await pref.setDouble(_sharedPrefereceWindowFrameHeightKey, windowInfo.frame.height);
   }
 
   // NOTE: linux is not supported.
   // https://github.com/leanflutter/window_manager/tree/v0.2.9#onwindowmoved--macos--windows
   @override
   Future<void> onWindowMoved() async {
-    if (Platform.isMacOS || Platform.isWindows) {
-      final pref = await SharedPreferences.getInstance();
-      final windowInfo = await getWindowInfo();
-      await pref.setDouble(_sharedPrefereceWindowFrameLeftKey, windowInfo.frame.left);
-      await pref.setDouble(_sharedPrefereceWindowFrameTopKey, windowInfo.frame.top);
-    }
+    final pref = await SharedPreferences.getInstance();
+    final windowInfo = await getWindowInfo();
+    await pref.setDouble(_sharedPrefereceWindowFrameLeftKey, windowInfo.frame.left);
+    await pref.setDouble(_sharedPrefereceWindowFrameTopKey, windowInfo.frame.top);
   }
 
   // https://github.com/leanflutter/window_manager#hidden-at-launch
