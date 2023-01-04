@@ -37,7 +37,6 @@ Future<void> main() async {
     await tester.runAsync(() async {
       await pedax.main();
       await tester.pumpAndSettle();
-
       await tester.pumpAndSettle(); // for waitUntilReadyToShow
 
       final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
