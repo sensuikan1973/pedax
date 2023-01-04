@@ -17,8 +17,12 @@ Future<void> main() async {
 
   // https://github.com/sensuikan1973/pedax/issues/1159
   await windowManager.ensureInitialized(); // https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
-  setWindowMinSize(pedaxWindowMinSize); // https://github.com/flutter/flutter/issues/30736
-  await _setWindowFrame();
+  windowManager.waitUntilReadyToShow(null, () async {
+    setWindowMinSize(pedaxWindowMinSize); // https://github.com/flutter/flutter/issues/30736
+    await _setWindowFrame();
+    await windowManager.show();
+    await windowManager.focus();
+  });
 
   // If you feel debug log is noisy, you can change log level.
   // Logger.level = Level.info;
