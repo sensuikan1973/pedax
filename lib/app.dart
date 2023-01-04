@@ -97,8 +97,10 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
     await pref.setDouble(_sharedPrefereceWindowFrameHeightKey, windowInfo.frame.height);
   }
 
+  // NOTE: linux is not supported.
+  // https://github.com/leanflutter/window_manager/tree/v0.2.9#onwindowmoved--macos--windows
   @override
-  Future<void> onWindowMove() async {
+  Future<void> onWindowMoved() async {
     final pref = await SharedPreferences.getInstance();
     final windowInfo = await getWindowInfo();
     await pref.setDouble(_sharedPrefereceWindowFrameLeftKey, windowInfo.frame.left);
