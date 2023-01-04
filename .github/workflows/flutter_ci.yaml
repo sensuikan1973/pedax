@@ -84,7 +84,7 @@ jobs:
             integration_test_command: |
               touch ./coverage/lcov.integration_test.info
               timeout 240 xvfb-run -a \
-              flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
+              flutter test integration_test --coverage --coverage-path=./coverage/lcov.integration_test.info \
               || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
     steps:
       - uses: actions/checkout@v3
