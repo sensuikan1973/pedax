@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -29,6 +29,7 @@ class RedoResponse implements ResponseSchema<RedoRequest> {
   final Move? lastMove;
 }
 
+@doNotStore
 RedoResponse executeRedo(final LibEdax edax, final RedoRequest request) {
   edax.edaxStop();
   for (var i = 0; i < request.times; i++) {

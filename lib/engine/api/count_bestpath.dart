@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -38,6 +38,7 @@ class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
   final CountBestpathResult countBestpathResult;
 }
 
+@doNotStore
 Stream<CountBestpathResponse> executeCountBestpath(
   final LibEdax edax,
   final CountBestpathRequest request,

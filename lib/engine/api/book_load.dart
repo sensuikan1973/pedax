@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -19,6 +19,7 @@ class BookLoadResponse implements ResponseSchema<BookLoadRequest> {
   final BookLoadRequest request;
 }
 
+@doNotStore
 BookLoadResponse executeBookLoad(final LibEdax edax, final BookLoadRequest request) {
   edax
     ..edaxStop()

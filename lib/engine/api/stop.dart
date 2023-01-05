@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -17,6 +17,7 @@ class StopResponse implements ResponseSchema<StopRequest> {
   final StopRequest request;
 }
 
+@doNotStore
 StopResponse executeStop(final LibEdax edax, final StopRequest request) {
   edax.edaxStop();
   return StopResponse(request: request);

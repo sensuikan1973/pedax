@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -40,6 +40,7 @@ class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
 List<int> generateLevelList3Steps(final int maxLevel) =>
     [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
 
+@doNotStore
 Stream<HintOneByOneResponse> executeHintOneByOne(
   final LibEdax edax,
   final HintOneByOneRequest request,

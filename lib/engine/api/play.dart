@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -29,6 +29,7 @@ class PlayResponse implements ResponseSchema<PlayRequest> {
   final Move? lastMove;
 }
 
+@doNotStore
 PlayResponse executePlay(final LibEdax edax, final PlayRequest request) {
   edax
     ..edaxStop()

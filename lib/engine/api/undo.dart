@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -29,6 +29,7 @@ class UndoResponse implements ResponseSchema<UndoRequest> {
   final Move? lastMove;
 }
 
+@doNotStore
 UndoResponse executeUndo(final LibEdax edax, final UndoRequest request) {
   edax.edaxStop();
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();

@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -20,6 +20,7 @@ class SetOptionResponse implements ResponseSchema<SetOptionRequest> {
   final SetOptionRequest request;
 }
 
+@doNotStore
 SetOptionResponse executeSetOption<T extends Object>(final LibEdax edax, final SetOptionRequest<T> request) {
   edax
     ..edaxStop()

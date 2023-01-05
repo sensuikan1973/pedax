@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -44,6 +44,7 @@ class SetboardResponse implements ResponseSchema<SetboardRequest> {
   final Move? lastMove;
 }
 
+@doNotStore
 SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest request) {
   edax.edaxStop();
 

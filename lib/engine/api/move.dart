@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -29,6 +29,7 @@ class MoveResponse implements ResponseSchema<MoveRequest> {
   final Move? lastMove;
 }
 
+@doNotStore
 MoveResponse executeMove(final LibEdax edax, final MoveRequest request) {
   edax
     ..edaxStop()

@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
+import 'package:meta/meta.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
@@ -23,6 +23,7 @@ class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithP
   final List<Move> moveList;
 }
 
+@doNotStore
 GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(
   final LibEdax edax,
   final GetBookMoveWithPositionRequest request,
