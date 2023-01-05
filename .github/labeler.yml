@@ -1,7 +1,6 @@
 ---
 mac:
   - macos/**/*
-  - .ruby-version
   - .github/scripts/macos/**/*
   - scripts/deploy_macos_app_to_app_store.sh
 
