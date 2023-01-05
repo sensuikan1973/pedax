@@ -37,3 +37,6 @@ codecov:
 documentation:
   - docs/**/*
   - README.md
+
+fastlane:
+  - macos/fastlane/**/*
