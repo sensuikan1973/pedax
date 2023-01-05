@@ -109,6 +109,7 @@ jobs:
           timeout_minutes: 5
           max_attempts: 3
           command: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
+      # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
           files: ./coverage/lcov.widget_test.info
@@ -125,6 +126,7 @@ jobs:
           timeout_minutes: 5
           max_attempts: 3
           command: ${{ matrix.integration_test_command }}
+      # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
           files: ./coverage/lcov.integration_test.info
