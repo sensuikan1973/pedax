@@ -50,7 +50,7 @@ Future<void> _runAppWithSentry() async {
     await Sentry.captureException(errorDetails.exception, stackTrace: errorDetails.stack);
   };
 
-  // https://github.com/getsentry/sentry-dart/tree/6.17.0/flutter#usage
+  // https://github.com/getsentry/sentry-dart/tree/6.18.1/flutter#usage
   // https://docs.flutter.dev/testing/errors#errors-not-caught-by-flutter
   PlatformDispatcher.instance.onError = (error, stack) {
     Sentry.captureException(error, stackTrace: stack);
