@@ -78,7 +78,7 @@ jobs:
           branch: prepare_for_release
           delete-branch: true
           labels: |
-            "prepare for release"
+            prepare for release
 
       # See: https://github.com/peter-evans/create-pull-request/tree/main#auto-merge
       - name: enable auto-merge
