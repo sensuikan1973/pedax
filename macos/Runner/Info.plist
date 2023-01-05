@@ -29,7 +29,7 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<!-- https://developer.apple.com/documentation/security/complying_with_encryption_export_regulations -->
 	<key>ITSAppUsesNonExemptEncryption</key>
-	<true/>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.board-games</string>
 	<key>LSApplicationQueriesSchemes</key>
