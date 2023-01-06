@@ -75,7 +75,7 @@ SPEC CHECKSUMS:
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
   Sentry: 08884c523575ec0f6690d94ed3ccb0246a1600bf
   sentry_flutter: 91ebe7757a166b34ff432a0d550d22cd010d44d2
-  shared_preferences_macos: a64dc611287ed6cbe28fd1297898db1336975727
+  shared_preferences_macos: 8b221d457159a85f478c0b9d2f19aeae9feff475
   window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
   window_size: 339dafa0b27a95a62a843042038fa6c3c48de195
 
