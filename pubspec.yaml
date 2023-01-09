@@ -48,9 +48,9 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.11 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.5
-  sentry_flutter: ^6.18.1
+  sentry_flutter: ^6.18.2
   shared_preferences: ^2.0.15
-  window_manager: ^0.2.9 # for "onWindowResize" and "onWindowMoved"
+  window_manager: ^0.3.0 # for "onWindowResize" and "onWindowMoved"
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
