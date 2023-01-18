@@ -322,7 +322,7 @@ packages:
       name: logging_appenders
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.0+1"
   macos_secure_bookmarks:
     dependency: "direct main"
     description:
