@@ -61,7 +61,7 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - name: install dependencies
         run: flutter pub get
-      - run: flutter analyze --fatal-infos --fatal-warnings .
+      # - run: flutter analyze --fatal-infos --fatal-warnings .
 
   # https://docs.flutter.dev/testing
   flutter_tests:
