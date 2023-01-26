@@ -71,7 +71,7 @@ jobs:
     strategy:
       # fail-fast: false
       matrix:
-        os: [windows-latest, macos-12, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
           - os: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
