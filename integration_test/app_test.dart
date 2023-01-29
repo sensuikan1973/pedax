@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:logger/logger.dart'; // ignore: unused_import
 
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/capture_board_image_shortcut.dart';
@@ -30,9 +29,7 @@ Future<void> main() async {
     fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
-    // Logger.level = Level.nothing;
   });
-
   testWidgets('home', (final tester) async {
     await tester.runAsync(() async {
       await pedax.main();
