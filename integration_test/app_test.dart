@@ -31,6 +31,8 @@ Future<void> main() async {
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
   testWidgets('home', (final tester) async {
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
     await tester.runAsync(() async {
       await pedax.main();
       await tester.pumpAndSettle();
