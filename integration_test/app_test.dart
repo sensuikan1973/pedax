@@ -34,6 +34,7 @@ Future<void> main() async {
     await tester.pumpAndSettle(const Duration(seconds: 10));
 
     await tester.runAsync(() async {
+      await tester.pumpAndSettle(const Duration(seconds: 10));
       await pedax.main();
       await tester.pumpAndSettle(const Duration(seconds: 10));
 
