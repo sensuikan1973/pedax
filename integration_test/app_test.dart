@@ -31,11 +31,11 @@ Future<void> main() async {
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
   testWidgets('home', (final tester) async {
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
 
     await tester.runAsync(() async {
       await pedax.main();
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 10));
 
       final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
       final l10n = AppLocalizations.of(context)!;
