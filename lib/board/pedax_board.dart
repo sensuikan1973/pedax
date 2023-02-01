@@ -56,7 +56,7 @@ class PedaxBoardState extends State<PedaxBoard> {
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
     RawKeyboard.instance.addListener(_handleRawKeyEvent);
     Future<void>.delayed(
-      const Duration(seconds: 0),
+      Duration.zero,
       () async {
         final bookFilePath = await _bookFileOption.val;
         _boardNotifier.requestBookLoad(bookFilePath);
