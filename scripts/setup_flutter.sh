@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-flutter channel stable
+flutter channel dev
 
 flutter config --enable-macos-desktop
 flutter config --enable-windows-desktop
