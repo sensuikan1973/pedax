@@ -74,17 +74,17 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   }
 
   @override
-  Widget build(final BuildContext context) => MaterialApp(
-        onGenerateTitle: (final context) => AppLocalizations.of(context)!.appTitle,
-        theme: ThemeData(primarySwatch: Colors.brown),
-        home: ChangeNotifierProvider(
-          create: (final _) => BoardNotifier(),
-          child: const Home(),
+  Widget build(final BuildContext context) => ChangeNotifierProvider(
+        create: (final _) => BoardNotifier(),
+        child: MaterialApp(
+          onGenerateTitle: (final context) => AppLocalizations.of(context)!.appTitle,
+          theme: ThemeData(primarySwatch: Colors.brown),
+          home: const Home(),
+          localizationsDelegates: PedaxApp.localizationsDelegates,
+          supportedLocales: PedaxApp.supportedLocales,
+          // locale: localeEn,
+          // debugShowCheckedModeBanner: false,
         ),
-        localizationsDelegates: PedaxApp.localizationsDelegates,
-        supportedLocales: PedaxApp.supportedLocales,
-        // locale: localeEn,
-        // debugShowCheckedModeBanner: false,
       );
 
   // NOTE: linux is not supported.
