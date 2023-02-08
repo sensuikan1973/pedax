@@ -283,10 +283,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      sha256: "3686865febd85c57a632d87a0fb1f0a8a9ef602fdb68d909c3e9aa29ec70fd24"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "4.0.13"
   integration_test:
     dependency: "direct dev"
     description: flutter
@@ -416,10 +416,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: e3de4d9f52543ad6e4b0f534991e1303cbd379d24be28dd241ac60bd9439a201
+      sha256: "03ba3b6e82d576593adbfc71243f8c165c97bee9ffd7e5c462eb0b2d83bfc3fd"
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.0"
+    version: "3.8.0"
   nested:
     dependency: transitive
     description:
@@ -600,18 +600,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: c64db3444237ff747c5a68f5214897bcb078de248785d0d816e3c55ab94dd71d
+      sha256: "81c1f32496ff04476d6ddfe5894215b1034d185301d2e3dffd272853392c5ea7"
       url: "https://pub.dev"
     source: hosted
-    version: "6.19.0"
+    version: "6.20.1"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: a76cf5180d571535fb8fc3bf10358ab385d78134fcf652d0e03ba7741525ab09
+      sha256: "5ca2c8d86c220f7ad3109bedceb2c51b0e90bac5218e732be98ea2cba8006461"
       url: "https://pub.dev"
     source: hosted
-    version: "6.19.0"
+    version: "6.20.1"
   shared_preferences:
     dependency: "direct main"
     description:
