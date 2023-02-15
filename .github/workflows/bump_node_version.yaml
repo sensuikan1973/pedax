@@ -24,6 +24,13 @@ jobs:
           nodenv install $latest_version
           nodenv local $latest_version
 
+      # https://github.com/actions/setup-node/issues/206#issuecomment-774538395
+      - uses: nodenv/actions/node-version@main
+        id: nodenv
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '${{ steps.nodenv.outputs.node-version }}'
+
       - name: install website dependencies, and build
         working-directory: website
         run: yarn install && yarn build
