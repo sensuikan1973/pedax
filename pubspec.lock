@@ -125,10 +125,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
+      sha256: "9fdbf71baeb250fc9da847f6cb2052196f62c19906a3657adfc18631a667d316"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.6"
+    version: "5.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -360,10 +360,10 @@ packages:
     dependency: transitive
     description:
       name: logging_appenders
-      sha256: "2cbb63639a05865adae1564caf12cdca262295e2b5a960fdd379d7782cd6d3c7"
+      sha256: "37ce606697ebf272629a83cc775145bb22641ecc232ca8492364dc329b03836e"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0+2"
+    version: "1.0.1"
   macos_secure_bookmarks:
     dependency: "direct main"
     description:
@@ -416,10 +416,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: "03ba3b6e82d576593adbfc71243f8c165c97bee9ffd7e5c462eb0b2d83bfc3fd"
+      sha256: b09203311ed6b21f61f06add7003d8a95a54763735898cee6b9cfbd01989bfaf
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.0"
+    version: "3.8.1"
   nested:
     dependency: transitive
     description:
