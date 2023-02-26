@@ -50,7 +50,7 @@ dependencies:
   provider: ^6.0.5
   sentry_flutter: ^6.20.1
   shared_preferences: ^2.0.18
-  window_manager: ^0.3.0 # for "onWindowResize" and "onWindowMoved"
+  window_manager: ^0.3.1 # for "onWindowResize" and "onWindowMoved"
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
