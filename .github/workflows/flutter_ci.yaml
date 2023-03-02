@@ -69,7 +69,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
-      # fail-fast: false
+      fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
@@ -104,7 +104,7 @@ jobs:
 
       # https://docs.flutter.dev/testing#widget-tests
       - name: widget test
-        run: flutter test --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
+        run: flutter test --verbose --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
