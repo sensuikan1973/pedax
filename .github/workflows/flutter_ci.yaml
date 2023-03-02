@@ -69,7 +69,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
-      # fail-fast: false
+      fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
