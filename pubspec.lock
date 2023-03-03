@@ -157,18 +157,18 @@ packages:
     dependency: "direct main"
     description:
       name: file_selector
-      sha256: "3e7f5a2e97262989862ebe10d5d20076978c1ca3febfedff30d9d1d35e29ea55"
+      sha256: "1ebc23f487172ac2cb9ead80fa2fab09af75e1e8239cbf8ef6d62b623991f785"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.2+3"
+    version: "0.9.2+4"
   file_selector_ios:
     dependency: transitive
     description:
       name: file_selector_ios
-      sha256: "2a107ed6abe4f9e93cb3c45c7ceeaeb791ed17ef7518030cb13a766a61483532"
+      sha256: "3b11c87f5ade8ab98be53d378beddd2ef95ad1b605be61f1663e3c09f3ed4c66"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0+3"
+    version: "0.5.1"
   file_selector_linux:
     dependency: "direct main"
     description:
@@ -520,10 +520,10 @@ packages:
     dependency: "direct dev"
     description:
       name: pedantic_sensuikan1973
-      sha256: d892f635d152bfb34f01e7c8e0bca46e5ac5ecde26bb0c31f99ac294ef49b6bb
+      sha256: "332e2e8f793cf890a3c8c7ebe641b61c11242d4a085cca64fd5b0854173ffd69"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.0"
+    version: "4.3.0"
   petitparser:
     dependency: transitive
     description:
