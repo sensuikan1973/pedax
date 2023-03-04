@@ -26,6 +26,8 @@ class BookFilePathSettingDialog extends StatelessWidget {
                   onPressed: () async {
                     const typeGroup = XTypeGroup(label: 'edax book file', extensions: ['dat']);
                     final openedFile = await openFile(acceptedTypeGroups: [typeGroup]);
+                    debugPrint('###############');
+                    debugPrint(openedFile?.path);
                     if (openedFile != null) _selectedFilePath.value = openedFile.path;
                   },
                   child: Text(AppLocalizations.of(context)!.chooseBookFile),
