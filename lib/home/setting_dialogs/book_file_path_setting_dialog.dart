@@ -53,14 +53,14 @@ class BookFilePathSettingDialog extends StatelessWidget {
 
               final newBookFilePath = _selectedFilePath.value!;
               final currentBookFilePath = await _option.val;
-              // ignore: use_build_context_synchronously
-              if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
-
-              await _option.update(newBookFilePath);
-              // ignore: use_build_context_synchronously
-              context.read<BoardNotifier>().requestBookLoad(await _option.val);
-              // ignore: use_build_context_synchronously
-              Navigator.pop(context);
+              if (context.mounted) {
+                if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
+                await _option.update(newBookFilePath);
+                if (context.mounted) {
+                  context.read<BoardNotifier>().requestBookLoad(newBookFilePath);
+                  Navigator.pop(context);
+                }
+              }
             },
             child: Text(AppLocalizations.of(context)!.updateSettingOnDialog),
           ),

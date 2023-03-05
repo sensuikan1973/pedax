@@ -419,13 +419,14 @@ class HomeState extends State<Home> {
             _MenuType.about,
             () async {
               final packageInfo = await PackageInfo.fromPlatform();
-              // ignore: use_build_context_synchronously
-              showAboutDialog(
-                context: context,
-                applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
-                applicationName: packageInfo.appName,
-                applicationVersion: packageInfo.version,
-              );
+              if (mounted) {
+                showAboutDialog(
+                  context: context,
+                  applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+                  applicationName: packageInfo.appName,
+                  applicationVersion: packageInfo.version,
+                );
+              }
             },
           ),
           child: Text(AppLocalizations.of(context)!.about),
