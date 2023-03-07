@@ -68,7 +68,7 @@ class EdaxAsset {
   }
 
   Future<void> _setupBookData() async {
-    const option = BookFileOption();
+    final option = BookFileOption();
     final bookFilePath = await option.val;
     if (!File(bookFilePath).existsSync()) {
       final bookData = await _bookAssetData;
