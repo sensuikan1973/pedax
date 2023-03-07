@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-@immutable
 abstract class EngineOption<T> {
   String get prefKey;
 
