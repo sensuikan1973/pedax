@@ -9,9 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'engine_native_option.dart';
 
-@immutable
 class BookFileOption implements EngineNativeOption<String> {
-  const BookFileOption();
+  BookFileOption();
+
+  FileSystemEntity? _macosBookmarkResolvedFile;
 
   @override
   String get nativeName => '-book-file';
@@ -34,13 +35,14 @@ class BookFileOption implements EngineNativeOption<String> {
     if (!Platform.isMacOS) return pref.getString(prefKey) ?? await appDefaultValue;
 
     final bookmark = pref.getString(bookmarkPrefKey);
-    if (bookmark == null || bookmark.isEmpty) return pref.getString(prefKey) ?? await appDefaultValue;
+    if (bookmark == null || bookmark.isEmpty) {
+      return pref.getString(prefKey) ?? await appDefaultValue;
+    }
     final secureBookmarks = SecureBookmarks();
-    final resolvedFile = await secureBookmarks.resolveBookmark(bookmark);
-    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(resolvedFile);
-    if (isOutOfSandbox) Logger().i('access ${resolvedFile.path} which is out of sandbox.');
-    return resolvedFile.path;
-    // await secureBookmarks.stopAccessingSecurityScopedResource(resolvedFile);
+    _macosBookmarkResolvedFile = await secureBookmarks.resolveBookmark(bookmark);
+    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
+    if (isOutOfSandbox) Logger().i('access ${_macosBookmarkResolvedFile!.path} which is out of sandbox.');
+    return _macosBookmarkResolvedFile!.path;
   }
 
   @override
@@ -65,7 +67,9 @@ class BookFileOption implements EngineNativeOption<String> {
 
   Future<void> stopAccessingSecurityScopedResource() async {
     if (!Platform.isMacOS) return;
-    await SecureBookmarks().stopAccessingSecurityScopedResource(File(await val));
+    if (_macosBookmarkResolvedFile != null) {
+      await SecureBookmarks().stopAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
+    }
   }
 
   @visibleForTesting

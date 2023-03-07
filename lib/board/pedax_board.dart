@@ -40,7 +40,7 @@ class PedaxBoard extends StatefulWidget {
 }
 
 class PedaxBoardState extends State<PedaxBoard> {
-  final _bookFileOption = const BookFileOption();
+  final _bookFileOption = BookFileOption();
   late final BoardNotifier _boardNotifier;
   int get _squareNumPerLine => 8;
   double get _stoneMargin => (widget.bodyLength / _squareNumPerLine) * 0.1;
