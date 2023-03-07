@@ -39,11 +39,10 @@ class BookFileOption implements EngineNativeOption<String> {
       return pref.getString(prefKey) ?? await appDefaultValue;
     }
     final secureBookmarks = SecureBookmarks();
-    FileSystemEntity macosBookmarkResolvedFile = await secureBookmarks.resolveBookmark(bookmark);
-    _macosBookmarkResolvedFile = macosBookmarkResolvedFile;
-    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(macosBookmarkResolvedFile);
-    if (isOutOfSandbox) Logger().i('access ${macosBookmarkResolvedFile.path} which is out of sandbox.');
-    return macosBookmarkResolvedFile.path;
+    _macosBookmarkResolvedFile = await secureBookmarks.resolveBookmark(bookmark);
+    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
+    if (isOutOfSandbox) Logger().i('access ${_macosBookmarkResolvedFile!.path} which is out of sandbox.');
+    return _macosBookmarkResolvedFile!.path;
   }
 
   @override
