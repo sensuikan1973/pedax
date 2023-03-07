@@ -1,1 +1,1 @@
-minor improvement of stability.
+fix bug of selecting/updating book file path
