@@ -136,7 +136,7 @@ bool Win32Window::Create(const std::wstring& title,
 
   HWND window = CreateWindow(
       // See: https://github.com/leanflutter/window_manager#hidden-at-launch
-      // From Flutter 3.3, WS_OVERLAPPEDWINDOW is used by default.
+      // After I follow https://docs.flutter.dev/development/platform-integration/windows/run-loop-migration, WS_OVERLAPPEDWINDOW is used by default.
       window_class, title.c_str(), WS_OVERLAPPEDWINDOW,
       Scale(origin.x, scale_factor), Scale(origin.y, scale_factor),
       Scale(size.width, scale_factor), Scale(size.height, scale_factor),
