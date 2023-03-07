@@ -6,6 +6,7 @@ import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'engine_native_option.dart';
@@ -49,10 +50,13 @@ class BookFileOption implements EngineNativeOption<String> {
     } on PlatformException catch (err) {
       // https://github.com/sensuikan1973/pedax/issues/945
       // https://github.com/authpass/macos_secure_bookmarks/blob/9f851051b6eb55c01985c7e50aaf5b4075a6469a/macos/Classes/SecureBookmarksPlugin.swift#L70
-      Logger().e('resolveBookmark cause PlatformException. $err.');
-      await pref.setString(bookmarkPrefKey, ''); // reset
-      return appDefaultValue;
+      if (err.message != null && err.message!.contains('NSCocoaErrorDomain Code=')) {
+        Logger().e('PlatformException. $err.');
+        await pref.setString(bookmarkPrefKey, ''); // reset
+        return appDefaultValue;
+      }
     }
+    return appDefaultValue;
   }
 
   @override
