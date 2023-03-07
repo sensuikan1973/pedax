@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:macos_secure_bookmarks/macos_secure_bookmarks.dart';
 import 'package:meta/meta.dart';
@@ -39,10 +40,19 @@ class BookFileOption implements EngineNativeOption<String> {
       return pref.getString(prefKey) ?? await appDefaultValue;
     }
     final secureBookmarks = SecureBookmarks();
-    _macosBookmarkResolvedFile = await secureBookmarks.resolveBookmark(bookmark);
-    final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
-    if (isOutOfSandbox) Logger().i('access ${_macosBookmarkResolvedFile!.path} which is out of sandbox.');
-    return _macosBookmarkResolvedFile!.path;
+
+    try {
+      _macosBookmarkResolvedFile = await secureBookmarks.resolveBookmark(bookmark);
+      final isOutOfSandbox = await secureBookmarks.startAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
+      if (isOutOfSandbox) Logger().i('access ${_macosBookmarkResolvedFile!.path} which is out of sandbox.');
+      return _macosBookmarkResolvedFile!.path;
+    } on PlatformException catch (err) {
+      // https://github.com/sensuikan1973/pedax/issues/945
+      // https://github.com/authpass/macos_secure_bookmarks/blob/9f851051b6eb55c01985c7e50aaf5b4075a6469a/macos/Classes/SecureBookmarksPlugin.swift#L70
+      Logger().e('resolveBookmark cause PlatformException. $err.');
+      await pref.setString(bookmarkPrefKey, ''); // reset
+      return appDefaultValue;
+    }
   }
 
   @override
