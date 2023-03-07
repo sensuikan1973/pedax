@@ -63,7 +63,7 @@ class CopyLocalInfoShorcut implements PedaxShorcut {
         'bestpathCountPlayerLowerLimitOption': await const BestpathCountPlayerLowerLimitOption().val,
         'bestpathCountOpponentLowerLimitOption': await const BestpathCountOpponentLowerLimitOption().val,
         'hintStepByStepOption': await const HintStepByStepOption().val,
-        'bookFileOption': await const BookFileOption().val,
+        'bookFileOption': await BookFileOption().val,
         'evalFileOption': await const EvalFileOption().val,
         'levelOption': await const LevelOption().val,
         'nTasksOption': await const NTasksOption().val,

@@ -15,7 +15,7 @@ class BookFilePathSettingDialog extends StatefulWidget {
 }
 
 class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
-  final _option = const BookFileOption();
+  final _option = BookFileOption();
   final _selectedFilePath = ValueNotifier<String?>(null);
 
   @override
