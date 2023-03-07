@@ -379,7 +379,7 @@ class HomeState extends State<Home> {
               context: context,
               builder: (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
-                child: BookFilePathSettingDialog(),
+                child: const BookFilePathSettingDialog(),
               ),
             ),
           ),

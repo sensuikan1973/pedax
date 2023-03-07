@@ -7,9 +7,14 @@ import '../../engine/options/native/book_file_option.dart';
 import '../../models/board_notifier.dart';
 
 @immutable
-class BookFilePathSettingDialog extends StatelessWidget {
-  BookFilePathSettingDialog({super.key});
+class BookFilePathSettingDialog extends StatefulWidget {
+  const BookFilePathSettingDialog({super.key});
 
+  @override
+  State<BookFilePathSettingDialog> createState() => _BookFilePathSettingDialogState();
+}
+
+class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
   final _option = const BookFileOption();
   final _selectedFilePath = ValueNotifier<String?>(null);
 
