@@ -53,7 +53,7 @@ dependencies:
   window_manager: ^0.3.1 # for "onWindowResize" and "onWindowMoved"
   window_size:
     git:
-      # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/window_size
+      # See: https://github.com/google/flutter-desktop-embedding/tree/main/plugins/window_size
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
       # https://dart.dev/tools/pub/dependencies#git-packages
