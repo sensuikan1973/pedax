@@ -33,7 +33,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
   final _levelOption = const LevelOption();
-  final _bookFileOption = const BookFileOption();
+  final _bookFileOption = BookFileOption();
   final _bestpathCountPlayerLowerLimitOption = const BestpathCountPlayerLowerLimitOption();
   final _bestpathCountOpponentLowerLimitOption = const BestpathCountOpponentLowerLimitOption();
 
