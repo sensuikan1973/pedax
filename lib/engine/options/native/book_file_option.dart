@@ -49,7 +49,7 @@ class BookFileOption implements EngineNativeOption<String> {
     } on PlatformException catch (err) {
       // https://github.com/sensuikan1973/pedax/issues/945
       // https://github.com/authpass/macos_secure_bookmarks/blob/9f851051b6eb55c01985c7e50aaf5b4075a6469a/macos/Classes/SecureBookmarksPlugin.swift#L70
-      if (err.message != null && err.message!.contains('NSCocoaErrorDomain Code=')) {
+      if (err.message != null && err.message!.contains('NSCocoaErrorDomain Code=4')) {
         Logger().e('PlatformException. $err.');
         await pref.setString(bookmarkPrefKey, ''); // reset
         return appDefaultValue;
