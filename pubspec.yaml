@@ -32,7 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
   file_selector: ^0.9.2+4
-  file_selector_linux: ^0.9.1+1
+  file_selector_linux: ^0.9.1+2
   flutter:
     sdk: flutter
   flutter_localizations:
