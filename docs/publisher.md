@@ -20,7 +20,8 @@ Use https://github.com/sensuikan1973/pedax/actions/workflows/create_release_pr.y
 
 #### [Mac App Store](https://apps.apple.com/app/pedax/id1557500142)
 
-Use https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml.
+Use https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml.  
+App Store Connect: https://appstoreconnect.apple.com/
 
 #### [Microsoft Store](https://apps.microsoft.com/store/detail/pedax/9NLNZCKH0L9H)
 
