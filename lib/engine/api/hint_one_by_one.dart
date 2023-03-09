@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
 
+import '../options/native/level_option.dart';
 import 'request_schema.dart';
 import 'response_schema.dart';
 
@@ -45,11 +46,12 @@ Stream<HintOneByOneResponse> executeHintOneByOne(
   final HintOneByOneRequest request,
 ) async* {
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
+  const levelOption = LevelOption();
   for (final level in levelList) {
     edax.edaxStop();
     request.logger.d('stopped edax search');
     edax
-      ..edaxSetOption('-level', level.toString())
+      ..edaxSetOption(levelOption.nativeName, level.toString())
       ..edaxHintPrepare();
     request.logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
     while (true) {
