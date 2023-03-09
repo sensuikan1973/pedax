@@ -33,8 +33,9 @@
 ## Development
 
 ![Flutter CI](https://github.com/sensuikan1973/pedax/workflows/Flutter%20CI/badge.svg)
-![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
+![Flutter Build](https://github.com/sensuikan1973/pedax/workflows/Flutter%20Build/badge.svg)
+[![Flutter Deployment MacOS](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml)
 
 ### Run
 
