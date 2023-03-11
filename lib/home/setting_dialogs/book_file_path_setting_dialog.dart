@@ -61,11 +61,13 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               final newBookFilePath = _selectedFilePath.value!;
               final isValidBookFilePath = _validateBookFilePath(newBookFilePath);
               if (!isValidBookFilePath) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
-                  duration: const Duration(seconds: 5),
-                ));
-                return;
+                if (!context.mounted) return;
+                return await showDialog(
+                  context: context,
+                  builder: (_) => SimpleDialog(
+                    title: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
+                  ),
+                );
               }
 
               final currentBookFilePath = await _option.val;
