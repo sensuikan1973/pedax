@@ -63,8 +63,10 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               if (!isValidBookFilePath) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('invalid file path'),
+                  duration: Duration(seconds: 3),
                 ));
                 if (context.mounted) return Navigator.pop(context);
+                return;
               }
 
               final currentBookFilePath = await _option.val;
@@ -85,7 +87,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
   bool _validateBookFilePath(String filePath) {
     // See: https://github.com/sensuikan1973/pedax/issues/592
     if (Platform.isWindows) {
-      return RegExp(r'[ -~]').hasMatch(filePath);
+      return RegExp(r'^([ -~]|[¥])+$').hasMatch(filePath); // ref: https://stackoverflow.com/a/14608823
     }
     return true;
   }
