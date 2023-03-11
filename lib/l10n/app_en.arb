@@ -8,6 +8,7 @@
   "freePlayMode": "free play mode",
   "arrangeDiscsMode": "disc arrange mode",
   "bookFilePathSetting": "edax book file path",
+  "bookFilePathInvalidMessage": "Select ASCII file path",
   "about": "About pedax",
   "cancelOnDialog": "Cancel",
   "updateSettingOnDialog": "Update",

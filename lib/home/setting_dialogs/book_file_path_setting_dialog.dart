@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
@@ -57,6 +59,17 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               if (_selectedFilePath.value == null) return;
 
               final newBookFilePath = _selectedFilePath.value!;
+              final isValidBookFilePath = _validateBookFilePath(newBookFilePath);
+              if (!isValidBookFilePath) {
+                if (!context.mounted) return;
+                return await showDialog(
+                  context: context,
+                  builder: (_) => SimpleDialog(
+                    title: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
+                  ),
+                );
+              }
+
               final currentBookFilePath = await _option.val;
               if (context.mounted) {
                 if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
@@ -71,4 +84,12 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
           ),
         ],
       );
+
+  bool _validateBookFilePath(String filePath) {
+    // See: https://github.com/sensuikan1973/pedax/issues/592
+    if (Platform.isWindows) {
+      return RegExp(r'^([ -~]|[¥])+$').hasMatch(filePath); // ref: https://stackoverflow.com/a/14608823
+    }
+    return true;
+  }
 }
