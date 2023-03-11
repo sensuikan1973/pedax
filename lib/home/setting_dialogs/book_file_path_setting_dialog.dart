@@ -61,9 +61,9 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               final newBookFilePath = _selectedFilePath.value!;
               final isValidBookFilePath = _validateBookFilePath(newBookFilePath);
               if (!isValidBookFilePath) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('invalid file path'),
-                  duration: Duration(seconds: 3),
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
+                  duration: const Duration(seconds: 3),
                 ));
                 if (context.mounted) return Navigator.pop(context);
                 return;

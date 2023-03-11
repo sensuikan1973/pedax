@@ -5,6 +5,7 @@
   "freePlayMode": "自由打ちモード",
   "arrangeDiscsMode": "盤面配置モード",
   "bookFilePathSetting": "book ファイルのパス",
+  "bookFilePathInvalidMessage": "日本語や絵文字を含むパスは指定できません",
   "about": "このアプリについて",
   "cancelOnDialog": "キャンセル",
   "updateSettingOnDialog": "更新する",
