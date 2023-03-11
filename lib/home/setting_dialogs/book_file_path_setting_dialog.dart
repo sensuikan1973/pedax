@@ -63,7 +63,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               if (!isValidBookFilePath) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
-                  duration: const Duration(seconds: 3),
+                  duration: const Duration(seconds: 5),
                 ));
                 return;
               }
