@@ -1,4 +1,1 @@
-The following bugs have been fixed.
-
-* A bug that prevented level setting updates from being immediately reflected, requiring a restart, has been fixed.
-* Fixed a bug in which the stp by step hint level increase didn't work and didn't make sense in some situations regarding the display of the rating value steps.
+minor improvement of stability.
