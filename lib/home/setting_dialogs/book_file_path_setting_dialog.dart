@@ -65,7 +65,6 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
                   content: Text(AppLocalizations.of(context)!.bookFilePathInvalidMessage),
                   duration: const Duration(seconds: 3),
                 ));
-                if (context.mounted) return Navigator.pop(context);
                 return;
               }
 
