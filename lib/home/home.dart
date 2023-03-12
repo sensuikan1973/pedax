@@ -54,7 +54,7 @@ class HomeState extends State<Home> {
     super.initState();
     Future(() async {
       await _setUpEdaxServer(context.read<BoardNotifier>());
-      await _showAppleSiciliconMacAnnotation();
+      await _showAppleSiciliconMacAnnotation(); // See: https://github.com/sensuikan1973/pedax/issues/1328#issuecomment-1461678071
     });
   }
 
@@ -438,7 +438,6 @@ class HomeState extends State<Home> {
   Future<void> _showAppleSiciliconMacAnnotation() async {
     if (!await _isAppleSiliconMac()) return;
     if (context.mounted) {
-      // See: https://github.com/sensuikan1973/pedax/issues/1328#issuecomment-1461678071
       await showDialog<void>(
         context: context,
         barrierDismissible: false,
