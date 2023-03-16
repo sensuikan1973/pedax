@@ -107,6 +107,7 @@ Future<void> main() async {
       await tester.sendKeyEvent(CaptureBoardImageShorcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
+      await Future<void>.delayed(const Duration(seconds: 1));
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
