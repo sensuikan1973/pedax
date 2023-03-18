@@ -40,7 +40,8 @@ platform :mac do
       app_identifier: 'com.done.sensuikan1973.pedax',
       type: "appstore",
       readonly: ENV['CI'],
-      git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"]
+      git_basic_authorization: ENV["MATCH_GIT_BASIC_AUTHORIZATION"],
+      force: true, # Renew the provisioning profiles every time you run match
     )
 
     # See: Appfile
