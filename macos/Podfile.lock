@@ -13,13 +13,13 @@ PODS:
     - FlutterMacOS
   - screen_retriever (0.0.1):
     - FlutterMacOS
-  - Sentry/HybridSDK (8.0.0):
-    - SentryPrivate (= 8.0.0)
+  - Sentry/HybridSDK (8.3.1):
+    - SentryPrivate (= 8.3.1)
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
-    - Sentry/HybridSDK (= 8.0.0)
-  - SentryPrivate (8.0.0)
+    - Sentry/HybridSDK (= 8.3.1)
+  - SentryPrivate (8.3.1)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -78,9 +78,9 @@ SPEC CHECKSUMS:
   pasteboard: 9b69dba6fedbb04866be632205d532fe2f6b1d99
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   screen_retriever: 59634572a57080243dd1bf715e55b6c54f241a38
-  Sentry: 2158a4621096dcd0a3a4f7c80b84b04dde261035
-  sentry_flutter: 30937beb4ee3b76576d02f77bb1fba47c812d16b
-  SentryPrivate: 1e3acf96ee818a8d0d95b8e922d39ab6be338ea0
+  Sentry: 316f997b2f89557014ae9919f0d0c71e6e43c01e
+  sentry_flutter: f0e51fac01e46af2e16f0a7458e3014bbc131ff5
+  SentryPrivate: 63dd9ee25187d20427ab7b5d03054df149912c23
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   window_manager: 3a1844359a6295ab1e47659b1a777e36773cd6e8
   window_size: 339dafa0b27a95a62a843042038fa6c3c48de195
