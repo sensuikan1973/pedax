@@ -2056,9 +2056,9 @@
   integrity sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==
 
 "@types/node@*":
-  version "18.15.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.3.tgz#f0b991c32cfc6a4e7f3399d6cb4b8cf9a0315014"
-  integrity sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==
+  version "18.15.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.4.tgz#92a6b286f95716094f9d23cc0d7fdc1abf842661"
+  integrity sha512-q+/59YJ44RRlff9wTBWGpDSDXn0CdTzROLccYTQYLal0HgjLZVKBnN2DlBNiAO4TpZ7qJYBhmoRm5eP6ESNFQw==
 
 "@types/node@^17.0.5":
   version "17.0.45"
@@ -4750,9 +4750,9 @@ jest-worker@^29.1.2:
     supports-color "^8.0.0"
 
 joi@^17.6.0:
-  version "17.8.4"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.8.4.tgz#f2d91ab8acd3cca4079ba70669c65891739234aa"
-  integrity sha512-jjdRHb5WtL+KgSHvOULQEPPv4kcl+ixd1ybOFQq3rWLgEEqc03QMmilodL0GVJE14U/SQDXkUhQUSZANGDH/AA==
+  version "17.9.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.9.0.tgz#52e161b6c91fc229799c3c948f0d219628423393"
+  integrity sha512-PWirKfKoZL3kWHfkGKzdCLGv23c00rI31PKVDMg33b/ANe+bMC/ZPdEnHAoHzn5Hy6BTg3J0A2yRVKzT64e6Xw==
   dependencies:
     "@hapi/hoek" "^9.0.0"
     "@hapi/topo" "^5.0.0"
