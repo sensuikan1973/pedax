@@ -13,7 +13,7 @@ jobs:
     steps:
       # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#release
       - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.9.0
+      - uses: subosito/flutter-action@v2.10.0
         with:
           cache: true
       - name: setup flutter channel
