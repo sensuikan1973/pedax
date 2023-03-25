@@ -25,7 +25,7 @@ version: 4.3.0+87
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=2.19.5 <4.0.0"
-  flutter: ^3.7.7 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  flutter: ^3.7.8 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.2
