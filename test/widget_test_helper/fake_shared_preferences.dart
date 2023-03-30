@@ -11,9 +11,9 @@ const _bestpathCountAvailabilityOption = BestpathCountAvailabilityOption();
 // See: https://github.com/flutter/plugins/blob/debc272fb02a61832f92af717a6e0cb3ebce5c9a/packages/shared_preferences/shared_preferences/lib/shared_preferences.dart#L17
 const _keyPrefix = 'flutter.';
 
-@isTest
 // See: https://github.com/sensuikan1973/pedax/issues/522
 // See: https://pub.dev/packages/shared_preferences#testing
+@isTest
 Future<void> fakeSharedPreferences({
   final String? evalFilePath,
   final String? bookFilePath,
