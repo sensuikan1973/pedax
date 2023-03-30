@@ -13,7 +13,6 @@ const _keyPrefix = 'flutter.';
 
 @isTest
 // See: https://github.com/sensuikan1973/pedax/issues/522
-// See: https://github.com/flutter/packages/blob/main/packages/shared_preferences/shared_preferences/test/shared_preferences_test.dart
 // See: https://pub.dev/packages/shared_preferences#testing
 Future<void> fakeSharedPreferences({
   final String? evalFilePath,
@@ -30,6 +29,7 @@ Future<void> fakeSharedPreferences({
   SharedPreferencesStorePlatform.instance = FakeSharedPreferencesStore(pref);
 }
 
+// See: https://github.com/flutter/packages/blob/main/packages/shared_preferences/shared_preferences/test/shared_preferences_test.dart
 @isTest
 class FakeSharedPreferencesStore implements SharedPreferencesStorePlatform {
   FakeSharedPreferencesStore(Map<String, Object> data) : backend = InMemorySharedPreferencesStore.withData(data);
