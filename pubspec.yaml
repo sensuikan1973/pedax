@@ -70,7 +70,7 @@ dev_dependencies:
   path_provider_platform_interface: ^2.0.6
   pedantic_sensuikan1973: ^4.3.0
   plugin_platform_interface: ^2.1.4
-  shared_preferences_platform_interface: ^2.1.1
+  shared_preferences_platform_interface: 2.1.1
 
 flutter:
   uses-material-design: true
