@@ -38,7 +38,7 @@ jobs:
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
         id: create_pull_request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           # See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
           # See: https://github.com/peter-evans/create-pull-request/issues/48#issuecomment-537478081
