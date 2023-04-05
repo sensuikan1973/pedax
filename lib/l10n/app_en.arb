@@ -4,7 +4,6 @@
     "description": "app title"
   },
   "initializingEngine": "initializing engine...",
-  "appleSiliconMacAnnotation": "There's a bug that can cause incorrect evaluation to be displayed only on Apple Silicon Mac. \nIt's recommend that you follow the instructions at https://support.apple.com/ja-jp/HT211861 and 'Open using Rosetta' for pedax.",
   "modeSelectionTooltip": "show mode selection",
   "freePlayMode": "free play mode",
   "arrangeDiscsMode": "disc arrange mode",

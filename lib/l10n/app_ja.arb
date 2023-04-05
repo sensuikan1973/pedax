@@ -1,7 +1,6 @@
 {
   "appTitle": "pedax",
   "initializingEngine": "エンジンの立ち上げ中...",
-  "appleSiliconMacAnnotation": "Apple Silicon Mac でのみ、誤った評価値が表示されうるバグが確認されております。\nお手数ですが、https://support.apple.com/ja-jp/HT211861 に従い、pedax を「Rosetta を使用して開く」ことを推奨しています。",
   "modeSelectionTooltip": "モードの選択肢を表示",
   "freePlayMode": "自由打ちモード",
   "arrangeDiscsMode": "盤面配置モード",
