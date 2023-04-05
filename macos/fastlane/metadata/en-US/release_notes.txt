@@ -1,1 +1,1 @@
-minor improvement of stability.
+fix the bug that evaluation values is incorrect on apple silicon mac.
