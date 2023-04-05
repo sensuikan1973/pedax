@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -54,7 +53,6 @@ class HomeState extends State<Home> {
     super.initState();
     Future(() async {
       await _setUpEdaxServer(context.read<BoardNotifier>());
-      await _showAppleSiciliconMacAnnotation(); // See: https://github.com/sensuikan1973/pedax/issues/1328#issuecomment-1461678071
     });
   }
 
@@ -434,33 +432,6 @@ class HomeState extends State<Home> {
           child: Text(AppLocalizations.of(context)!.about),
         ),
       ];
-
-  Future<void> _showAppleSiciliconMacAnnotation() async {
-    if (!await _isAppleSiliconMac()) return;
-    if (context.mounted) {
-      await showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => AlertDialog(
-          title: SelectableText(AppLocalizations.of(context)!.appleSiliconMacAnnotation),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.confirmedOnDialog),
-            )
-          ],
-        ),
-      );
-    }
-  }
-
-  Future<bool> _isAppleSiliconMac() async {
-    if (!Platform.isMacOS) return false;
-
-    final machineType = await Process.run('uname', ['-m']);
-    return machineType.stdout.toString().contains('arm64');
-  }
 }
 
 @immutable
