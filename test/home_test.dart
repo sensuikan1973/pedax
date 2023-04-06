@@ -18,7 +18,7 @@ import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/setting_dialogs/bestpath_count_availability_setting_dialog.dart';
-import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
+// import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/n_tasks_setting_dialog.dart';
