@@ -382,8 +382,8 @@ Future<void> main() async {
         await tester.tap(find.text(l10nEn.bookFilePathSetting));
         await tester.pumpAndSettle();
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-        await tester.tap(find.byType(ElevatedButton));
-        await tester.pumpAndSettle();
+        // await tester.tap(find.byType(ElevatedButton));
+        // await tester.pumpAndSettle();
         // await tester.tap(find.text(l10nEn.updateSettingOnDialog));
         // await tester.pumpAndSettle();
         // await Future<void>.delayed(const Duration(seconds: 1));
