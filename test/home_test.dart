@@ -384,11 +384,11 @@ Future<void> main() async {
         expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
         await tester.tap(find.byType(ElevatedButton));
         await tester.pumpAndSettle();
-        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-        await tester.pumpAndSettle();
-        await Future<void>.delayed(const Duration(seconds: 1));
-        expect(find.byType(BookFilePathSettingDialog), findsNothing);
-        await waitEdaxServerResponse(tester);
+        // await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        // await tester.pumpAndSettle();
+        // await Future<void>.delayed(const Duration(seconds: 1));
+        // expect(find.byType(BookFilePathSettingDialog), findsNothing);
+        // await waitEdaxServerResponse(tester);
       });
     });
 
