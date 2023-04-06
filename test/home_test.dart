@@ -33,15 +33,19 @@ import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/mock_package_info.dart';
 
 Future<void> main() async {
-  setUpAll(() async {
+  // setUpAll(() async {
+  //   await prepareLibedaxAssets();
+  //   await fakeSharedPreferences();
+  //   mockSecureBookmark();
+  //   mockPackageInfo();
+  // });
+  setUp(() async {
+    Logger.level = Level.nothing;
+    fakeFileSelector();
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
     mockPackageInfo();
-  });
-  setUp(() async {
-    Logger.level = Level.nothing;
-    fakeFileSelector();
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
