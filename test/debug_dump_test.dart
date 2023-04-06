@@ -44,5 +44,5 @@ void main() {
         await waitEdaxServerResponse(tester);
       });
     });
-  });
+  }, skip: 'debugDump for only coverage is noisy');
 }
