@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:libedax4dart/libedax4dart.dart';
@@ -28,15 +27,6 @@ class PedaxBoard extends StatefulWidget {
 
   @override
   PedaxBoardState createState() => PedaxBoardState();
-
-  @override
-  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('bodyColor', bodyColor))
-      ..add(DoubleProperty('bodyLength', bodyLength))
-      ..add(DoubleProperty('frameWidth', frameWidth));
-  }
 }
 
 class PedaxBoardState extends State<PedaxBoard> {
@@ -242,11 +232,5 @@ class PedaxBoardState extends State<PedaxBoard> {
     final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
     if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
     return color;
-  }
-
-  @override
-  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BoardNotifier>('boardNotifier', _boardNotifier));
   }
 }

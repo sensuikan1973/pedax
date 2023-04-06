@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -42,23 +41,6 @@ class Square extends StatelessWidget {
           child: isLastMove ? Stack(children: [_stone, _lastMoveMark()]) : _stone,
         ),
       );
-
-  @override
-  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DoubleProperty('margin', margin))
-      ..add(DoubleProperty('length', length))
-      ..add(EnumProperty<SquareType>('type', type))
-      ..add(StringProperty('coordinate', coordinate))
-      ..add(DiagnosticsProperty<void Function()>('onTap', onTap))
-      ..add(IntProperty('score', score))
-      ..add(IntProperty('bestpathCountOfBlack', bestpathCountOfBlack))
-      ..add(IntProperty('bestpathCountOfWhite', bestpathCountOfWhite))
-      ..add(DiagnosticsProperty<bool>('isLastMove', isLastMove))
-      ..add(DiagnosticsProperty<bool>('isBookMove', isBookMove))
-      ..add(ColorProperty('scoreColor', scoreColor));
-  }
 
   Widget get _stone {
     switch (type) {
