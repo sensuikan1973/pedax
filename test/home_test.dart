@@ -38,10 +38,10 @@ Future<void> main() async {
     await fakeSharedPreferences();
     mockSecureBookmark();
     mockPackageInfo();
-    fakeFileSelector();
   });
   setUp(() async {
     Logger.level = Level.nothing;
+    fakeFileSelector();
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
