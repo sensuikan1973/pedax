@@ -50,4 +50,10 @@ class FakeSharedPreferencesStore implements SharedPreferencesStorePlatform {
 
   @override
   Future<bool> setValue(String valueType, String key, Object value) => backend.setValue(valueType, key, value);
+
+  @override
+  Future<bool> clearWithPrefix(String prefix) => backend.clearWithPrefix(prefix);
+
+  @override
+  Future<Map<String, Object>> getAllWithPrefix(String prefix) => backend.getAllWithPrefix(prefix);
 }
