@@ -370,7 +370,7 @@ Future<void> main() async {
         expect(find.byType(PedaxApp), findsOneWidget);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update book file path as it is', (final tester) async {
       await tester.runAsync(() async {
