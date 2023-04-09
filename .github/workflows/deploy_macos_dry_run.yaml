@@ -38,7 +38,9 @@ jobs:
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - name: bump version
-        run: flutter pub run cider bump patch --bump-build --pre ci
+        run: |
+          flutter pub get
+          flutter pub run cider bump patch --bump-build --pre ci
 
       - uses: ruby/setup-ruby@v1
       - name: dry-run deployment script
