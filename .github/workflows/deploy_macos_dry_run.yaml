@@ -66,4 +66,4 @@ jobs:
         run: |
           echo $ZSH_NAME $ZSH_VERSION
           ./scripts/deploy_macos_app_to_app_store.sh \
-          -revision "$GITHUB_SHA" --skip-test --dry-run
+          -revision $(git rev-parse HEAD) --skip-test --dry-run
