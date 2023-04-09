@@ -55,9 +55,6 @@ platform :mac do
       export_method: "app-store",
     )
 
-    next if options[:verify_only]
-    # NOTE: If https://github.com/fastlane/fastlane/pull/20738 is resolved, I want to verify_only option.
-
     # See: https://appstoreconnect.apple.com/apps/1557500142/appstore
     # See: https://docs.fastlane.tools/actions/upload_to_app_store/
     upload_to_app_store(
@@ -69,7 +66,7 @@ platform :mac do
       precheck_include_in_app_purchases: false,
       force: true, # skip verification of HTML preview
       submit_for_review: true,
-      # verify_only: options[:verify_only],
+      verify_only: options[:verify_only],
       # https://github.com/fastlane/fastlane/blob/master/spaceship/lib/spaceship/tunes/app_submission.rb
       submission_information: {
         add_id_info_serves_ads: false,
