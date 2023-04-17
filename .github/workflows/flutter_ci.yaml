@@ -30,7 +30,7 @@ on:
       - '.codecov.yml'
       - 'scripts/setup_flutter.sh'
   workflow_dispatch:
-  
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
