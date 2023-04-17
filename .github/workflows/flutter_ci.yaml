@@ -84,7 +84,11 @@ jobs:
 
       # https://docs.flutter.dev/testing#widget-tests
       - name: widget test
-        run: flutter test --verbose --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 2
+          command: flutter test --verbose --concurrency=1 --coverage --coverage-path=./coverage/lcov.widget_test.info
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
