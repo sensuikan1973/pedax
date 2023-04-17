@@ -24,8 +24,8 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 5.1.0+90
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: ">=2.19.6 <4.0.0"
-  flutter: ^3.7.11 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  sdk: ">=2.18.6 <4.0.0"
+  flutter: ^3.3.10 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.2
@@ -39,7 +39,7 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.4.0
   intl: ^0.17.0 # Use the pinned version from flutter_localizations
-  libedax4dart: ^6.2.1
+  libedax4dart: ^6.4.0
   logger: ^1.3.0
   macos_secure_bookmarks: ^0.2.1
   meta: ^1.8.0
@@ -60,15 +60,15 @@ dependencies:
       ref: main
 
 dev_dependencies:
-  cider: ^0.1.5
+  cider: ^0.1.3
   file_selector_platform_interface: ^2.4.1
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^3.10.1
+  msix: ^3.9.1
   path_provider_platform_interface: ^2.0.6
-  pedantic_sensuikan1973: ^4.3.0
+  pedantic_sensuikan1973: ^4.4.0
   plugin_platform_interface: ^2.1.4
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
