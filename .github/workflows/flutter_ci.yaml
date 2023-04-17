@@ -72,6 +72,7 @@ jobs:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        flutter-revision: ["3.3.10", ''] # empty is stable channel. See: scripts/setup_flutter.sh
         include:
           - os: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
@@ -93,7 +94,7 @@ jobs:
           cache: true
       - name: setup flutter channel
         shell: bash
-        run: ./scripts/setup_flutter.sh
+        run: ./scripts/setup_flutter.sh ${{ matrix.flutter-revision }}
       - name: setup flutter desktop
         shell: bash
         run: ${{ matrix.setup_for_flutter_desktop_script }}
