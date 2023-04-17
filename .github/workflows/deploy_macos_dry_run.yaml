@@ -3,23 +3,13 @@ name: Flutter Deployment MacOS dry-run
 
 on:
   pull_request:
-    paths:
-      - 'macos/**'
-      - '.ruby-version'
-      - 'scripts/deploy_macos_app_to_app_store.sh'
-      - '.github/workflows/deploy_macos_dry_run.yaml'
-      - 'pubspec.*'
-      - 'scripts/setup_flutter.sh'
   push:
     branches: [main]
-    paths:
-      - 'macos/**'
-      - '.ruby-version'
-      - 'scripts/deploy_macos_app_to_app_store.sh'
-      - '.github/workflows/deploy_macos_dry_run.yaml'
-      - 'pubspec.*'
-      - 'scripts/setup_flutter.sh'
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   dry_run_macos_deployment:
