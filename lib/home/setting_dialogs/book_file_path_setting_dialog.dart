@@ -61,7 +61,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               final newBookFilePath = _selectedFilePath.value!;
               final isValidBookFilePath = _validateBookFilePath(newBookFilePath);
               if (!isValidBookFilePath) {
-                if (!context.mounted) return;
+                if (!mounted) return;
                 return await showDialog(
                   context: context,
                   builder: (_) => SimpleDialog(
@@ -71,10 +71,10 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               }
 
               final currentBookFilePath = await _option.val;
-              if (context.mounted) {
+              if (mounted) {
                 if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
                 await _option.update(newBookFilePath);
-                if (context.mounted) {
+                if (mounted) {
                   context.read<BoardNotifier>().requestBookLoad(newBookFilePath);
                   Navigator.pop(context);
                 }
