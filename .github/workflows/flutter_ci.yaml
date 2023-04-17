@@ -72,15 +72,17 @@ jobs:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
-        flutter-revision: ["3.3.10", ''] # empty is stable channel. See: scripts/setup_flutter.sh
         include:
           - os: windows-latest
+            flutter-revision: '' # empty is stable channel. See: scripts/setup_flutter.sh
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: macos-latest
+            flutter-revision: ["3.3.10", '']
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: ubuntu-latest
+            flutter-revision: ''
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
               touch ./coverage/lcov.integration_test.info
