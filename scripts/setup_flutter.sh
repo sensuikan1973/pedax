@@ -2,12 +2,20 @@
 
 set -euxo pipefail
 
-flutter channel stable
 flutter clean
-flutter upgrade
 
 # TODO: remove this workaround, if https://github.com/sensuikan1973/pedax/issues/1221#issuecomment-1510596373 is resolved.
-# foooo
+flutter_revision=${1:-""}
+if [ -n "$flutter_revision" ]; then
+  flutter_repository_path=$(flutter doctor --verbose | grep "Flutter version" | awk -F ' at ' '{print $2}')
+  cd "$flutter_repository_path"
+  git remote update --prune
+  git checkout "$flutter_revision"
+  cd -
+else
+  flutter channel stable
+  flutter upgrade
+fi
 
 flutter config --enable-macos-desktop
 flutter config --enable-windows-desktop
