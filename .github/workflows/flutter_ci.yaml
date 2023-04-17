@@ -3,32 +3,8 @@ name: Flutter CI
 
 on:
   pull_request:
-    paths:
-      - '**.dart'
-      - 'pubspec.*'
-      - 'analysis_options.yaml'
-      - '.github/workflows/flutter_ci.yaml'
-      - '.github/scripts/**'
-      - 'macos/**'
-      - 'linux/**'
-      - 'windows/**'
-      - 'assets/**'
-      - '.codecov.yml'
-      - 'scripts/setup_flutter.sh'
   push:
     branches: [main]
-    paths:
-      - '**.dart'
-      - 'pubspec.*'
-      - 'analysis_options.yaml'
-      - '.github/workflows/flutter_ci.yaml'
-      - '.github/scripts/**'
-      - 'macos/**'
-      - 'linux/**'
-      - 'windows/**'
-      - 'assets/**'
-      - '.codecov.yml'
-      - 'scripts/setup_flutter.sh'
   workflow_dispatch:
 
 concurrency:
