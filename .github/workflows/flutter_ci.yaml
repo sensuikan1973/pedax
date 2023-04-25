@@ -51,12 +51,12 @@ jobs:
     strategy:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows-latest, macos-13, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
           - os: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: macos-latest
+          - os: macos-13
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: ubuntu-latest
