@@ -173,10 +173,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_selector_linux
-      sha256: "39eb2bec65a532ff81816123ee0f08d4993ee2a3cd82d88c7e4b64275e565b54"
+      sha256: d17c5e450192cdc40b718804dfb4eaf79a71bed60ee9530703900879ba50baa3
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1+2"
+    version: "0.9.1+3"
   file_selector_macos:
     dependency: transitive
     description:
@@ -205,10 +205,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_windows
-      sha256: "92f1d84f070405506ee4564eec848a0ad5576d7fe6388227ec237c97f5330dac"
+      sha256: ce9a800f6425d76b71255644241f4e7f466bee8970ede16add523239a9739ef2
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1+7"
+    version: "0.9.1+8"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -480,10 +480,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: da97262be945a72270513700a92b39dd2f4a54dad55d061687e2e37a6390366a
+      sha256: "3e58242edc02624f2c712e3f8bea88e0e341c4ae1abd3a6ff661318a3aefd829"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.25"
+    version: "2.0.26"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -600,18 +600,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "9b005f502dfd84ca085dfa660dd4f16f7891c1b4b6300fda7c340330e61525d6"
+      sha256: cce8f5d696c7083e6915477b455de2134b689aff69bc31249844646f91a52ac7
       url: "https://pub.dev"
     source: hosted
-    version: "7.4.2"
+    version: "7.5.0"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: bb537f6fedbe4c634aaf1a430d5efce8329e355b57dc2e0c224d8a2a3e54c4ac
+      sha256: a772ad8abafdcf4ac04568bf3469cc541761412fd664a7aa99d9578fd0933a09
       url: "https://pub.dev"
     source: hosted
-    version: "7.4.2"
+    version: "7.5.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -624,10 +624,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "7fa90471a6875d26ad78c7e4a675874b2043874586891128dc5899662c97db46"
+      sha256: "5d7b3bd0400bdd0c03e59a3d3d5314651141a145b58196cd9018b12a2adc0c1b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.3"
   shared_preferences_foundation:
     dependency: transitive
     description:
