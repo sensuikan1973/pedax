@@ -46,20 +46,23 @@ jobs:
   # https://docs.flutter.dev/testing
   flutter_tests:
     needs: [flutter_format, flutter_analyze]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 20
     strategy:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
-      matrix:
-        os: [windows-latest, macos-13, ubuntu-latest] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+      matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+        os: [windows, macos, ubuntu] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
         include:
-          - os: windows-latest
+          - os: windows
+            runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: macos-13
+          - os: macos
+            runner_machine: macos-13 # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: ubuntu-latest
+          - os: ubuntu
+            runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
               touch ./coverage/lcov.integration_test.info
