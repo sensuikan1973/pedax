@@ -79,6 +79,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
               debugPrint(currentBookFilePath);
               if (context.mounted) {
                 if (newBookFilePath == currentBookFilePath) return Navigator.pop(context);
+                debugPrint('edax に update request 投げるよ!');
                 await _option.update(newBookFilePath);
                 if (context.mounted) {
                   context.read<BoardNotifier>().requestBookLoad(newBookFilePath);
