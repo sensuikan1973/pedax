@@ -9,6 +9,7 @@ import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
+import 'widget_test_helper/fake_file_selector.dart';
 import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/mock_package_info.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
     await fakeSharedPreferences(evalFilePath: '', bookFilePath: '');
     mockSecureBookmark();
     mockPackageInfo();
+    fakeFileSelector();
   });
   setUp(() => Logger.level = Level.nothing);
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
@@ -47,6 +49,8 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.bookFilePathSetting));
       await tester.pumpAndSettle();
       expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pumpAndSettle();
       await tester.tap(find.text(l10nEn.updateSettingOnDialog));
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
