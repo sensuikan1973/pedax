@@ -9,6 +9,7 @@ import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
+import 'widget_test_helper/fake_file_selector.dart';
 import 'widget_test_helper/fake_shared_preferences.dart';
 import 'widget_test_helper/libedax_assets.dart';
 import 'widget_test_helper/mock_package_info.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
     await fakeSharedPreferences(evalFilePath: '', bookFilePath: '');
     mockSecureBookmark();
     mockPackageInfo();
+    fakeFileSelector();
   });
   setUp(() => Logger.level = Level.nothing);
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
