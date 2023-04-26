@@ -60,6 +60,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
 
               final newBookFilePath = _selectedFilePath.value!;
               final isValidBookFilePath = _validateBookFilePath(newBookFilePath);
+              debugPrint(newBookFilePath);
               if (!isValidBookFilePath) {
                 if (!context.mounted) return;
                 return await showDialog(
