@@ -16,24 +16,27 @@ concurrency:
 
 jobs:
   flutter_build_desktop_app:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 20
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu, windows, macos]
         include: # See: https://docs.github.com/ja/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#using-environment-variables-in-a-matrix
-          - os: ubuntu-latest
+          - os: ubuntu
+            runner_machine: ubuntu-latest
             subcommand: linux
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release
-          - os: windows-latest
+          - os: windows
+            runner_machine: windows-latest
             subcommand: windows
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/runner/Release
-          - os: macos-latest
+          - os: macos
+            runner_machine: macos-latest
             subcommand: macos
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
