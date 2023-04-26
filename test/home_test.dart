@@ -385,8 +385,11 @@ Future<void> main() async {
         await tester.tap(find.byType(ElevatedButton));
         await tester.pumpAndSettle();
         await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        debugPrint('tapped');
         await tester.pumpAndSettle();
+        debugPrint('settled');
         await Future<void>.delayed(const Duration(seconds: 1));
+        debugPrint('delayed');
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
