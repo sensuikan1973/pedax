@@ -440,10 +440,10 @@ packages:
     dependency: "direct main"
     description:
       name: package_info_plus
-      sha256: de41e74b0ea9a3e524c68f35099af1fdeb4885625aeb277d2e01a42d6bd7b293
+      sha256: "10259b111176fba5c505b102e3a5b022b51dd97e30522e906d6922c745584745"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
