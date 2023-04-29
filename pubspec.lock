@@ -205,10 +205,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_windows
-      sha256: ce9a800f6425d76b71255644241f4e7f466bee8970ede16add523239a9739ef2
+      sha256: ef246380b66d1fb9089fc65622c387bf3780bca79f533424c31d07f12c2c7fd8
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1+8"
+    version: "0.9.2"
   flutter:
     dependency: "direct main"
     description: flutter
