@@ -291,6 +291,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentMoves = message.moves;
     } else if (message is SetOptionResponse) {
       // do nothing
+    } else if (message is StopResponse) {
+      // do nothing
     } else {
       _logger.w('response ${message.runtimeType} is not supported');
     }
