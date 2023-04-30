@@ -17,6 +17,7 @@ import '../engine/api/redo.dart';
 import '../engine/api/rotate.dart';
 import '../engine/api/set_option.dart';
 import '../engine/api/setboard.dart';
+import '../engine/api/stop.dart';
 import '../engine/api/undo.dart';
 import '../engine/edax_server.dart';
 import '../engine/options/native/book_file_option.dart';
@@ -101,9 +102,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
 
   Future<void> switchHintVisibility() async {
+    _edaxServerPort.send(const StopRequest());
     value
-      ..hintsWithStepByStep = UnmodifiableListView([])
-      ..hintIsVisible = !value.hintIsVisible;
+      ..hintIsVisible = !value.hintIsVisible
+      ..hintsWithStepByStep = UnmodifiableListView([]);
     notifyListeners();
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
@@ -288,6 +290,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is SetOptionResponse) {
+      // do nothing
+    } else if (message is StopResponse) {
       // do nothing
     } else {
       _logger.w('response ${message.runtimeType} is not supported');
