@@ -181,10 +181,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_macos
-      sha256: "48ec16f6d0423bfb5c2ff712f4a282e8def40404d5c4b3c0bd64d19c6c3c8796"
+      sha256: "6290eec24fc4cc62535fe609e0c6714d3c1306191dc8c3b0319eaecc09423a3a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1+1"
+    version: "0.9.2"
   file_selector_platform_interface:
     dependency: "direct dev"
     description:
@@ -376,10 +376,10 @@ packages:
     dependency: transitive
     description:
       name: markdown
-      sha256: d95a9d12954aafc97f984ca29baaa7690ed4d9ec4140a23ad40580bcdb6c87f5
+      sha256: "8e332924094383133cee218b676871f42db2514f1f6ac617b6cf6152a7faab8e"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.2"
+    version: "7.1.0"
   marker:
     dependency: transitive
     description:
@@ -416,10 +416,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: "0849c1cd50735993b6c5111a33a114c76722493747eb0a84d6130a5d82b5f30e"
+      sha256: "2b094025eb77940d2cea64ec2d1d918a6bf87ef4518eb9155def9a8855831bdc"
       url: "https://pub.dev"
     source: hosted
-    version: "3.11.0"
+    version: "3.11.1"
   nested:
     dependency: transitive
     description:
@@ -600,18 +600,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: cce8f5d696c7083e6915477b455de2134b689aff69bc31249844646f91a52ac7
+      sha256: "8f2ff67c168c640567093f9f80f6cdfa34c009b89fb81732e896b9e95c3b87e8"
       url: "https://pub.dev"
     source: hosted
-    version: "7.5.0"
+    version: "7.5.1"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: a772ad8abafdcf4ac04568bf3469cc541761412fd664a7aa99d9578fd0933a09
+      sha256: "4de19f8b353eac472609f6c42b2bb0dd38d5a128c3e4a6ac6c0a9574b85fde47"
       url: "https://pub.dev"
     source: hosted
-    version: "7.5.0"
+    version: "7.5.1"
   shared_preferences:
     dependency: "direct main"
     description:

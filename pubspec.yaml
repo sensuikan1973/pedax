@@ -48,7 +48,7 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.14 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.0.5
-  sentry_flutter: ^7.5.0
+  sentry_flutter: ^7.5.1
   shared_preferences: ^2.1.0
   window_manager: ^0.3.2 # for "onWindowResize" and "onWindowMoved"
   window_size:
@@ -66,7 +66,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  msix: ^3.11.0
+  msix: ^3.11.1
   path_provider_platform_interface: ^2.0.6
   pedantic_sensuikan1973: ^4.4.0
   plugin_platform_interface: ^2.1.4
