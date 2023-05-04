@@ -61,7 +61,7 @@ dependencies:
 
 dev_dependencies:
   cider: ^0.1.5
-  file_selector_platform_interface: ^2.4.1
+  file_selector_platform_interface: ^2.5.0
   flutter_test:
     sdk: flutter
   integration_test:
