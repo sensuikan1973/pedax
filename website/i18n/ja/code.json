@@ -21,7 +21,7 @@
     "message": "img/ja/custom_options_view.png"
   },
   "custom_options_description": {
-    "message": "book ファイルや評価値の段階表示などを変更可能"
+    "message": "book ファイルや評価値の段階表示などをsettei可能"
   },
   "mac_app_store_badge": {
     "message": "img/ja/mac_app_store.svg"
