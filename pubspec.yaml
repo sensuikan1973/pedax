@@ -24,7 +24,7 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 version: 5.4.0+93
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: ">=2.19.6 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ^3.7.12 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
