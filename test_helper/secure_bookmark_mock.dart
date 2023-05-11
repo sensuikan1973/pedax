@@ -8,10 +8,13 @@ import 'package:meta/meta.dart';
 @isTest
 void mockSecureBookmark() {
   if (!Platform.isMacOS) return;
-  const MethodChannel('codeux.design/macos_secure_bookmarks').setMockMethodCallHandler((final methodCall) async {
-    if (methodCall.method == 'startAccessingSecurityScopedResource') return false;
-    if (methodCall.method == 'stopAccessingSecurityScopedResource') return false;
-    if (methodCall.method == 'bookmarkData') return '';
-    return null;
-  });
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    const MethodChannel('codeux.design/macos_secure_bookmarks'),
+    (final methodCall) async {
+      if (methodCall.method == 'startAccessingSecurityScopedResource') return false;
+      if (methodCall.method == 'stopAccessingSecurityScopedResource') return false;
+      if (methodCall.method == 'bookmarkData') return '';
+      return null;
+    },
+  );
 }
