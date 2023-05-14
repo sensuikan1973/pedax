@@ -1,1 +1,1 @@
-minor improvement of stability.
+The shortcut key to move to the final move has been changed from E to F.
