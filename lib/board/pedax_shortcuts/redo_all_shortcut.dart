@@ -15,7 +15,7 @@ class RedoAllShorcut implements PedaxShorcut {
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedoAll();
 
   @visibleForTesting
-  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyE;
+  static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyF;
 
   @override
   String get keys => logicalKey.keyLabel.toUpperCase();
