@@ -41,7 +41,7 @@
 
 ```sh
 ./scripts/setup_flutter.sh
-flutter run --dart-define "SENTRY_DSN=xxx" # env is optional
+flutter run --device-id macos --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
 ### Architecture
