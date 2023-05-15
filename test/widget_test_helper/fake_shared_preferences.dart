@@ -17,13 +17,14 @@ const _keyPrefix = 'flutter.';
 Future<void> fakeSharedPreferences({
   final String? evalFilePath,
   final String? bookFilePath,
-  final bool enableBestpathCount = true,
+  final bool? enableBestpathCount,
   final String? bookmarkPrefKey,
 }) async {
   final pref = {
     '$_keyPrefix${_evalFileOption.prefKey}': evalFilePath ?? await _evalFileOption.appDefaultValue,
     '$_keyPrefix${_bookFileOption.prefKey}': bookFilePath ?? await _bookFileOption.appDefaultValue,
-    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}': enableBestpathCount,
+    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}':
+        enableBestpathCount ?? await _bestpathCountAvailabilityOption.appDefaultValue,
     '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': bookmarkPrefKey ?? '',
   };
   SharedPreferencesStorePlatform.instance = FakeSharedPreferencesStore(pref);
