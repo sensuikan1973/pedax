@@ -25,7 +25,7 @@ source ./scripts/setup_flutter.sh
 
 if [[ -z "${opthash[(i)--skip-test]}" ]]; then
   flutter test --concurrency=1
-  flutter test integration_test
+  flutter test integration_test --device-id macos
 fi
 
 # See: https://flutter.dev/desktop#macos
