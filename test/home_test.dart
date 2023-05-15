@@ -387,20 +387,22 @@ Future<void> main() async {
 
           await tester.tap(find.byIcon(Icons.menu));
           await tester.pumpAndSettle();
+          Logger().d('opened menu');
           await tester.tap(find.text(l10nEn.bookFilePathSetting));
           await tester.pumpAndSettle();
+          Logger().d('opened book file path setting');
           expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+          Logger().d('will tap update button');
           await tester.tap(find.byType(ElevatedButton));
           await tester.pumpAndSettle();
-          debugPrint('will tap update button');
+          Logger().d('tapped update button');
           await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-          debugPrint('tapped update button before delay');
           await tester.pumpAndSettle();
           await Future<void>.delayed(const Duration(seconds: 1));
-          debugPrint('tapped update button after delay');
+          Logger().d('finished delay');
           expect(find.byType(BookFilePathSettingDialog), findsNothing);
           await waitEdaxServerResponse(tester);
-          debugPrint('finished');
+          Logger().d('finished all');
         });
       },
       // // TODO: resolve https://github.com/sensuikan1973/pedax/issues/1404
