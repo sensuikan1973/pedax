@@ -401,8 +401,8 @@ Future<void> main() async {
           await waitEdaxServerResponse(tester);
         });
       },
-      // TODO: resolve https://github.com/sensuikan1973/pedax/issues/1404
-      skip: Platform.isWindows,
+      // // TODO: resolve https://github.com/sensuikan1973/pedax/issues/1404
+      // skip: Platform.isWindows,
     );
 
     testWidgets('read n-tasks', (final tester) async {
