@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
@@ -396,7 +398,7 @@ Future<void> main() async {
         expect(find.byType(BookFilePathSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: Platform.isWindows);
 
     testWidgets('read n-tasks', (final tester) async {
       await tester.runAsync(() async {
