@@ -381,6 +381,7 @@ Future<void> main() async {
     testWidgets(
       'update book file path as it is',
       (final tester) async {
+        Logger.level = Level.debug;
         await tester.runAsync(() async {
           await tester.pumpWidget(const PedaxApp());
           await waitEdaxSetuped(tester);
@@ -404,6 +405,7 @@ Future<void> main() async {
           await waitEdaxServerResponse(tester);
           Logger().d('finished all');
         });
+        Logger.level = Level.nothing;
       },
       // // TODO: resolve https://github.com/sensuikan1973/pedax/issues/1404
       // skip: Platform.isWindows,
