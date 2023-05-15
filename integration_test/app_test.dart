@@ -15,6 +15,7 @@ import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/main.dart' as pedax;
+import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import '../test/widget_test_helper/fake_shared_preferences.dart';
@@ -24,6 +25,8 @@ import '../test_helper/secure_bookmark_mock.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  // https://github.com/leanflutter/window_manager/blob/92944c1291cadeb9faed7f8083bced147620e3de/example/integration_test/window_manager_test.dart#LL10C23-L10C40
+  await windowManager.ensureInitialized();
 
   setUp(() {
     fakeSharedPreferences(); // always first launch
