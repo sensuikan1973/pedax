@@ -143,7 +143,7 @@ Future<void> main() async {
 
         await tester.sendKeyEvent(RedoAllShorcut.logicalKey);
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -151,7 +151,7 @@ Future<void> main() async {
 
         await tester.tap(find.byIcon(FontAwesomeIcons.anglesLeft));
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['e4', 'd5'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -159,7 +159,7 @@ Future<void> main() async {
 
         await tester.tap(find.byIcon(FontAwesomeIcons.anglesRight));
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -167,7 +167,7 @@ Future<void> main() async {
 
         await tester.sendKeyEvent(SwitchHintVisibilityShorcut.logicalKey);
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['d5', 'e3', 'e4', 'e5', 'f5'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -175,7 +175,7 @@ Future<void> main() async {
 
         await tester.sendKeyEvent(Rotate180Shorcut.logicalKey);
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 5);
         expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'd6', 'e4'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -185,7 +185,7 @@ Future<void> main() async {
         await tester.sendKeyEvent(NewShorcut.logicalKey);
         await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
@@ -195,7 +195,7 @@ Future<void> main() async {
         await tester.sendKeyEvent(InitShorcut.logicalKey);
         await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
         await waitEdaxServerResponse(tester);
-        await tester.pump();
+        await tester.pump(const Duration(microseconds: 300));
         expectStoneNum(tester, SquareType.black, 2);
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
