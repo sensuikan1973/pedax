@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
@@ -380,30 +378,25 @@ Future<void> main() async {
       });
     });
 
-    testWidgets(
-      'update book file path as it is',
-      (final tester) async {
-        await tester.runAsync(() async {
-          await tester.pumpWidget(const PedaxApp());
-          await waitEdaxSetuped(tester);
+    testWidgets('update book file path as it is', (final tester) async {
+      await tester.runAsync(() async {
+        await tester.pumpWidget(const PedaxApp());
+        await waitEdaxSetuped(tester);
 
-          await tester.tap(find.byIcon(Icons.menu));
-          await tester.pumpAndSettle();
-          await tester.tap(find.text(l10nEn.bookFilePathSetting));
-          await tester.pumpAndSettle();
-          expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
-          await tester.tap(find.byType(ElevatedButton));
-          await tester.pumpAndSettle();
-          await tester.tap(find.text(l10nEn.updateSettingOnDialog));
-          await tester.pumpAndSettle();
-          await Future<void>.delayed(const Duration(seconds: 1));
-          expect(find.byType(BookFilePathSettingDialog), findsNothing);
-          await waitEdaxServerResponse(tester);
-        });
-      },
-      // TODO: resolve https://github.com/sensuikan1973/pedax/issues/1404
-      skip: Platform.isWindows,
-    );
+        await tester.tap(find.byIcon(Icons.menu));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.bookFilePathSetting));
+        await tester.pumpAndSettle();
+        expect(find.text(l10nEn.bookFilePathSetting), findsOneWidget);
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l10nEn.updateSettingOnDialog));
+        await tester.pumpAndSettle();
+        await Future<void>.delayed(const Duration(seconds: 1));
+        expect(find.byType(BookFilePathSettingDialog), findsNothing);
+        await waitEdaxServerResponse(tester);
+      });
+    });
 
     testWidgets('read n-tasks', (final tester) async {
       await tester.runAsync(() async {
