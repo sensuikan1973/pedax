@@ -42,21 +42,21 @@ Future<void> main() async {
       await tester.tap(find.text(l10nEn.arrangeDiscsMode));
       await tester.pumpAndSettle();
 
-      // arrange black disc
-      await tester.tap(find.byKey(const Key('switchArrangeTargetToBlack')));
-      await tester.pumpAndSettle();
-      await tester.tap(findByCoordinate('h8'));
-      await waitEdaxServerResponse(tester);
-      await tester.pump();
-      expectStoneNum(tester, SquareType.black, 3);
-      expectStoneCoordinates(tester, ['d5', 'e4', 'h8'], SquareType.black);
-      expectStoneNum(tester, SquareType.white, 2);
-      expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
-
       // arrange white disc
       await tester.tap(find.byKey(const Key('switchArrangeTargetToWhite')));
       await tester.pumpAndSettle();
       await tester.tap(findByCoordinate('a8'));
+      await waitEdaxServerResponse(tester);
+      await tester.pump();
+      expectStoneNum(tester, SquareType.black, 2);
+      expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
+      expectStoneNum(tester, SquareType.white, 3);
+      expectStoneCoordinates(tester, ['d4', 'e5', 'a8'], SquareType.white);
+
+      // arrange black disc
+      await tester.tap(find.byKey(const Key('switchArrangeTargetToBlack')));
+      await tester.pumpAndSettle();
+      await tester.tap(findByCoordinate('h8'));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
