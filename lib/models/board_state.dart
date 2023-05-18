@@ -52,7 +52,7 @@ class BoardState {
   int get arrangeTargetColor {
     if (arrangeTargetSquareType == ArrangeTargetType.black) return TurnColor.black;
     if (arrangeTargetSquareType == ArrangeTargetType.white) return TurnColor.white;
-    throw Exception('arrangeTargetSquareType $arrangeTargetSquareType is invalid');
+    return currentColor;
   }
 }
 
