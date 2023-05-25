@@ -102,12 +102,15 @@ class Square extends StatelessWidget {
         ),
       );
 
-  Container _lastMoveMark() => Container(
-        height: length / 3,
-        width: length / 3,
-        margin: EdgeInsets.all(length / 3),
-        color: Colors.red,
-      );
+  Container _lastMoveMark() {
+    final markLength = length / 5;
+    return Container(
+      height: markLength,
+      width: markLength,
+      margin: EdgeInsets.all(markLength * 2),
+      color: Colors.red,
+    );
+  }
 
   String _scoreString(final int score) => score >= 0 ? '+$score' : score.toString();
 }
