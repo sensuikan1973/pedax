@@ -3,7 +3,7 @@
 
 codecov:
   notify:
-    after_n_builds: 18
+    after_n_builds: 17
     require_ci_to_pass: yes
 
 coverage:
