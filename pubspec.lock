@@ -61,10 +61,10 @@ packages:
     dependency: "direct dev"
     description:
       name: cider
-      sha256: "714a853bf92701b982496df0bd601c0cf2d882cfc1f2d41ae9aff2b20cee016a"
+      sha256: "74d96930575f97d83e0a3a5cd26d27d10c38961b1b41346eebe5baabf0f56940"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.5"
+    version: "0.1.6"
   cli_util:
     dependency: transitive
     description:
@@ -133,10 +133,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: e44ce32c01f02c54a101551def8586f15d6189b4f999d4420aad38995ac62e6d
+      sha256: b99b1d56dc0d5dece70957023af002dbd49614b4a1bf86d3a254af3fe781bdf2
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.0"
+    version: "5.2.0+1"
   fake_async:
     dependency: transitive
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: "direct dev"
     description:
       name: file_selector_platform_interface
-      sha256: bf15ba6978161e4bb28beeb7cc8106d9d7febcfaf9f7daeab11ba5f54fa8148e
+      sha256: "2a7f4bbf7bd2f022ecea85bfb1754e87f7dd403a9abc17a84a4fa2ddfe2abc0a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.0"
+    version: "2.5.1"
   file_selector_web:
     dependency: transitive
     description:
@@ -275,10 +275,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
+      sha256: "4c3f04bfb64d3efd508d06b41b825542f08122d30bda4933fb95c069d22a4fa3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.6"
+    version: "1.0.0"
   http_parser:
     dependency: transitive
     description:
@@ -424,10 +424,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: c4ac0055da46764d9dca51f2f53b488294080fc8dc2de5730866558a37c6c07a
+      sha256: bf151b9a1648985e7604672ade54c8df693566099d0731e318548c47d54676e6
       url: "https://pub.dev"
     source: hosted
-    version: "3.14.1"
+    version: "3.14.2"
   nested:
     dependency: transitive
     description:
@@ -632,10 +632,10 @@ packages:
     dependency: "direct main"
     description:
       name: shared_preferences
-      sha256: "16d3fb6b3692ad244a695c0183fca18cf81fd4b821664394a781de42386bf022"
+      sha256: "396f85b8afc6865182610c0a2fc470853d56499f75f7499e2a73a9f0539d23d0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   shared_preferences_android:
     dependency: transitive
     description:
