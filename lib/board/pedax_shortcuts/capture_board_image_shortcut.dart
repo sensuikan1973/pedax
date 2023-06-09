@@ -11,11 +11,11 @@ import 'package:path_provider/path_provider.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class CaptureBoardImageShorcut implements PedaxShorcut {
-  const CaptureBoardImageShorcut();
+class CaptureBoardImageShortcut implements PedaxShortcut {
+  const CaptureBoardImageShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShorcut;
+  String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShortcut;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyP;

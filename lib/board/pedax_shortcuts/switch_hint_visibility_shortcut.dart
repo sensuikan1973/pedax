@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'pedax_shortcut.dart';
 
 @immutable
-class SwitchHintVisibilityShorcut implements PedaxShorcut {
-  const SwitchHintVisibilityShorcut();
+class SwitchHintVisibilityShortcut implements PedaxShortcut {
+  const SwitchHintVisibilityShortcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelSwitchHintVisibility;

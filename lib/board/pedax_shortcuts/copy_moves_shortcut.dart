@@ -7,8 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'pedax_shortcut.dart';
 
 @immutable
-class CopyMovesShorcut implements PedaxShorcut {
-  const CopyMovesShorcut();
+class CopyMovesShortcut implements PedaxShortcut {
+  const CopyMovesShortcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyMoves;

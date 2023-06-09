@@ -7,7 +7,7 @@ import '../../board/pedax_shortcuts/pedax_shortcut.dart';
 class ShortcutCheatsheetDialog extends StatelessWidget {
   const ShortcutCheatsheetDialog({required this.shortcutList, super.key});
 
-  final List<PedaxShorcut> shortcutList;
+  final List<PedaxShortcut> shortcutList;
 
   @override
   Widget build(final BuildContext context) => AlertDialog(

@@ -101,20 +101,20 @@ Future<void> main() async {
 
       // copy local info
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CopyLocalInfoShorcut.logicalKey);
+      await tester.sendKeyEvent(CopyLocalInfoShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
 
       // copy board image
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CaptureBoardImageShorcut.logicalKey);
+      await tester.sendKeyEvent(CaptureBoardImageShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CopyMovesShorcut.logicalKey);
+      await tester.sendKeyEvent(CopyMovesShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
       final clipboardDataMoves = await Clipboard.getData(Clipboard.kTextPlain);
@@ -123,9 +123,9 @@ Future<void> main() async {
       // paste moves
       await Clipboard.setData(const ClipboardData(text: 'c4'));
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(PasteMovesShorcut.logicalKey);
+      await tester.sendKeyEvent(PasteMovesShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyUpEvent(PasteMovesShorcut.logicalKey);
+      await tester.sendKeyUpEvent(PasteMovesShortcut.logicalKey);
       await tester.pumpAndSettle();
 
       // arrange discs mode

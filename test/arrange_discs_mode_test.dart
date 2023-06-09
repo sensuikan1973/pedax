@@ -92,7 +92,7 @@ Future<void> main() async {
 
       // edaxNew
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(NewShorcut.logicalKey);
+      await tester.sendKeyEvent(NewShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await waitEdaxServerResponse(tester);
       await tester.pump();
@@ -102,7 +102,7 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['e5', 'a8'], SquareType.white);
 
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(InitShorcut.logicalKey);
+      await tester.sendKeyEvent(InitShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await waitEdaxServerResponse(tester);
       await tester.pump();
