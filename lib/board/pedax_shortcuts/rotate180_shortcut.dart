@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'pedax_shortcut.dart';
 
 @immutable
-class Rotate180Shorcut implements PedaxShorcut {
-  const Rotate180Shorcut();
+class Rotate180Shortcut implements PedaxShortcut {
+  const Rotate180Shortcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelRotate180;

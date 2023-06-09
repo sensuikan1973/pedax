@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_
 import 'pedax_shortcut.dart';
 
 @immutable
-class UndoShorcut implements PedaxShorcut {
-  const UndoShorcut();
+class UndoShortcut implements PedaxShortcut {
+  const UndoShortcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelUndo;

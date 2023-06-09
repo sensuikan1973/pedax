@@ -16,7 +16,7 @@ import 'undo_all_shortcut.dart';
 import 'undo_shortcut.dart';
 
 @immutable
-abstract class PedaxShorcut {
+abstract class PedaxShortcut {
   String label(final AppLocalizations localizations);
   String get keys;
   bool fired(final RawKeyEvent keyEvent);
@@ -30,17 +30,17 @@ class PedaxShortcutEventArguments {
   final GlobalKey captureKey;
 }
 
-List<PedaxShorcut> get shortcutList => const [
-      InitShorcut(),
-      NewShorcut(),
-      UndoShorcut(),
-      RedoShorcut(),
-      UndoAllShorcut(),
-      RedoAllShorcut(),
-      CopyMovesShorcut(),
-      PasteMovesShorcut(),
-      SwitchHintVisibilityShorcut(),
-      Rotate180Shorcut(),
-      CaptureBoardImageShorcut(),
-      CopyLocalInfoShorcut(),
+List<PedaxShortcut> get shortcutList => const [
+      InitShortcut(),
+      NewShortcut(),
+      UndoShortcut(),
+      RedoShortcut(),
+      UndoAllShortcut(),
+      RedoAllShortcut(),
+      CopyMovesShortcut(),
+      PasteMovesShortcut(),
+      SwitchHintVisibilityShortcut(),
+      Rotate180Shortcut(),
+      CaptureBoardImageShortcut(),
+      CopyLocalInfoShortcut(),
     ];

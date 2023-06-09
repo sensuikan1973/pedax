@@ -17,8 +17,8 @@ import '../../engine/options/pedax/hint_step_by_step_option.dart';
 import 'pedax_shortcut.dart';
 
 @immutable
-class CopyLocalInfoShorcut implements PedaxShorcut {
-  const CopyLocalInfoShorcut();
+class CopyLocalInfoShortcut implements PedaxShortcut {
+  const CopyLocalInfoShortcut();
 
   @override
   String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyLocalInfo;
