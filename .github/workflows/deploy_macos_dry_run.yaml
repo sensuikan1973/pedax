@@ -30,7 +30,7 @@ jobs:
       - name: bump version
         run: |
           flutter pub get
-          flutter pub run cider bump patch --bump-build --pre ci
+          dart run cider bump patch --bump-build --pre ci
 
       - name: git commmit
         run: |
