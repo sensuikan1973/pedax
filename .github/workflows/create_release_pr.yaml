@@ -47,10 +47,10 @@ jobs:
         run: flutter pub get
 
       - name: bump version
-        run: flutter pub run cider bump ${{ github.event.inputs.version_bump_part }} --bump-build
+        run: dart run cider bump ${{ github.event.inputs.version_bump_part }} --bump-build
 
       - name: inject current version
-        run: echo "CURRENT_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
+        run: echo "CURRENT_VERSION=$(dart run cider version)" >> $GITHUB_ENV
 
       - name: update release note
         run: |
