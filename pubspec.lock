@@ -61,10 +61,10 @@ packages:
     dependency: "direct dev"
     description:
       name: cider
-      sha256: "74d96930575f97d83e0a3a5cd26d27d10c38961b1b41346eebe5baabf0f56940"
+      sha256: "9523d2f326caea6fbf8a1b6eeb9f1d80acf26a3eeaf5a2eaabfd8b90aaf811b8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6"
+    version: "0.2.1"
   cli_util:
     dependency: transitive
     description:
@@ -133,10 +133,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: b99b1d56dc0d5dece70957023af002dbd49614b4a1bf86d3a254af3fe781bdf2
+      sha256: dfda195cbf351d538054297bbd509d8046d336194ea218655f2c326c65711d1e
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.0+1"
+    version: "5.2.1"
   fake_async:
     dependency: transitive
     description:
@@ -324,14 +324,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
-  klizma:
-    dependency: transitive
-    description:
-      name: klizma
-      sha256: "3bb0ed5cc183274e39d48fa42a61484e4dda3dc52970aa902379c7403cd7f0f2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1"
   libedax4dart:
     dependency: "direct main"
     description:

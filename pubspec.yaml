@@ -60,7 +60,7 @@ dependencies:
       ref: main
 
 dev_dependencies:
-  cider: ^0.1.6
+  cider: ^0.2.1
   file_selector_platform_interface: ^2.5.1
   flutter_test:
     sdk: flutter
