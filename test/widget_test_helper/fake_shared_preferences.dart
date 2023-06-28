@@ -3,6 +3,7 @@ import 'package:pedax/engine/options/native/book_file_option.dart';
 import 'package:pedax/engine/options/native/eval_file_option.dart';
 import 'package:pedax/engine/options/pedax/bestpath_count_availability_option.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_platform_interface.dart';
+import 'package:shared_preferences_platform_interface/types.dart';
 
 const _evalFileOption = EvalFileOption();
 final _bookFileOption = BookFileOption();
@@ -56,5 +57,12 @@ class FakeSharedPreferencesStore implements SharedPreferencesStorePlatform {
   Future<bool> clearWithPrefix(String prefix) => backend.clearWithPrefix(prefix);
 
   @override
+  Future<bool> clearWithParameters(ClearParameters parameters) => backend.clearWithParameters(parameters);
+
+  @override
   Future<Map<String, Object>> getAllWithPrefix(String prefix) => backend.getAllWithPrefix(prefix);
+
+  @override
+  Future<Map<String, Object>> getAllWithParameters(GetAllParameters parameters) =>
+      backend.getAllWithParameters(parameters);
 }
