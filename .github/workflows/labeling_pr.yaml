@@ -7,7 +7,7 @@ on:
   pull_request_target: # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#pull_request_target
 
 jobs:
-  labeling:
+  labeling_pr:
     permissions:
       contents: read
       pull-requests: write
