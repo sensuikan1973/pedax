@@ -40,7 +40,7 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   intl: any # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
   libedax4dart: ^7.3.0
-  logger: ^1.4.0
+  logger: ^2.0.1
   macos_secure_bookmarks: ^0.2.1
   meta: ^1.9.1
   package_info_plus: ^4.0.2
