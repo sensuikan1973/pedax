@@ -20,7 +20,7 @@ void main() {
     mockPackageInfo();
     mockWindowsManager();
   });
-  setUp(() => Logger.level = Level.nothing);
+  setUp(() => Logger.level = Level.off);
   testWidgets('launch app', (final tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
