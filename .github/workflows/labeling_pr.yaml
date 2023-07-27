@@ -16,8 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          repository: "sensuikan1973/dotfiles"
       # See: https://github.com/actions/labeler/issues/575
       - uses: actions/labeler@master
         with:
