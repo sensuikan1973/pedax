@@ -368,10 +368,10 @@ packages:
     dependency: transitive
     description:
       name: logging_appenders
-      sha256: "69e6f077fa0f416dbb0d926fdb066dd686245ac5bd36e8fefce6ee4783d3c766"
+      sha256: "1fb8a008c04246f4677a0d034d69779a5975e56e02573a5162240239b247e239"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0+1"
   macos_secure_bookmarks:
     dependency: "direct main"
     description:
