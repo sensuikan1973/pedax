@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: e0902a06f0e00414e4e3438a084580161279f137aeb862274710f29ec10cf01e
+      sha256: "20071638cbe4e5964a427cfa0e86dce55d060bc7d82d56f3554095d7239a8765"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.9"
+    version: "3.4.2"
   args:
     dependency: transitive
     description:
@@ -133,10 +133,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: ce75a1b40947fea0a0e16ce73337122a86762e38b982e1ccb909daa3b9bc4197
+      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.2"
+    version: "5.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_macos
-      sha256: "182c3f8350cee659f7b115e956047ee3dc672a96665883a545e81581b9a82c72"
+      sha256: b15c3da8bd4908b9918111fa486903f5808e388b8d1c559949f584725a6594d6
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3+2"
+    version: "0.9.3+3"
   file_selector_platform_interface:
     dependency: "direct dev"
     description:
@@ -299,10 +299,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: a72242c9a0ffb65d03de1b7113bc4e189686fc07c7147b8b41811d0dd0e0d9bf
+      sha256: "6e703d5e2f8c63fb31a77753915c1ec8baebde8088844e0d29f71b8f0b108888"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.17"
+    version: "4.1.0"
   integration_test:
     dependency: "direct dev"
     description: flutter
@@ -352,10 +352,10 @@ packages:
     dependency: "direct main"
     description:
       name: logger
-      sha256: ba3bc83117b2b49bdd723c0ea7848e8285a0fbc597ba09203b20d329d020c24a
+      sha256: "6bbb9d6f7056729537a4309bda2e74e18e5d9f14302489cc1e93f33b3fe32cac"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.2+1"
   logging:
     dependency: transitive
     description:
@@ -424,10 +424,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: "76c87b8207323803169626a55afd78bbb8413c984df349a76598b9fbf9224677"
+      sha256: "114d2f280b2b985f0cc11db982cdc648a1311a80340908a1a1130f42411088cd"
       url: "https://pub.dev"
     source: hosted
-    version: "3.16.1"
+    version: "3.16.2"
   nested:
     dependency: transitive
     description:
@@ -616,18 +616,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "39c23342fc96105da449914f7774139a17a0ca8a4e70d9ad5200171f7e47d6ba"
+      sha256: "830667eadc0398fea3a3424ed1b74568e2db603a42758d0922e2f2974ce55a60"
       url: "https://pub.dev"
     source: hosted
-    version: "7.9.0"
+    version: "7.10.1"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: ff68ab31918690da004a42e20204242a3ad9ad57da7e2712da8487060ac9767f
+      sha256: "6730f41b304c6fb0fa590dacccaf73ba11082fc64b274cfe8a79776f2b95309c"
       url: "https://pub.dev"
     source: hosted
-    version: "7.9.0"
+    version: "7.10.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -773,10 +773,10 @@ packages:
     dependency: transitive
     description:
       name: version_manipulation
-      sha256: "2fcb0597589e894082ebde9140b5c018c0858215eef39539d87c200e3da82ec0"
+      sha256: "9ef166939794d5bd80309cc6dbfe33c9f81674ba1c73ac117a866fd2dc746846"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   vm_service:
     dependency: transitive
     description:
@@ -805,10 +805,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "9e82a402b7f3d518fb9c02d0e9ae45952df31b9bf34d77baf19da2de03fc2aaa"
+      sha256: c97defd418eef4ec88c0d1652cdce84b9f7b63dd7198e266d06ac1710d527067
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.7"
+    version: "5.0.8"
   window_manager:
     dependency: "direct main"
     description:
