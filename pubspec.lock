@@ -299,10 +299,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "6e703d5e2f8c63fb31a77753915c1ec8baebde8088844e0d29f71b8f0b108888"
+      sha256: "93d1141eb65fe62414d5492de96ca2bff97eba0ca9218a89ad407a6f201fcadf"
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.1.2"
   integration_test:
     dependency: "direct dev"
     description: flutter
