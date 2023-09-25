@@ -336,10 +336,10 @@ packages:
     dependency: "direct main"
     description:
       name: libedax4dart
-      sha256: "64c5399b7edfce14e92cb669be2f2ad5fce2786571bace53df689a744fadee4f"
+      sha256: "1dcd1cf981dcb585269dfc44760969f12e8eb11dc5bb1e3ff03e2fa3d84a36be"
       url: "https://pub.dev"
     source: hosted
-    version: "7.9.0"
+    version: "7.10.0"
   lints:
     dependency: transitive
     description:
@@ -424,10 +424,10 @@ packages:
     dependency: "direct dev"
     description:
       name: msix
-      sha256: "114d2f280b2b985f0cc11db982cdc648a1311a80340908a1a1130f42411088cd"
+      sha256: "4099b8e5bdc0f448bc7c87514adc7bfbcd821e057ab32d22904eff4065bfb302"
       url: "https://pub.dev"
     source: hosted
-    version: "3.16.2"
+    version: "3.16.3"
   nested:
     dependency: transitive
     description:
