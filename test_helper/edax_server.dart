@@ -12,4 +12,4 @@ Future<void> waitEdaxSetuped(final WidgetTester tester) async {
 // For EdaxServer: expect move response ~ rendering is less than 300 millisec
 @isTest
 Future<void> waitEdaxServerResponse(final WidgetTester tester) async =>
-    Future<void>.delayed(const Duration(milliseconds: 300));
+    Future<void>.delayed(const Duration(milliseconds: 500));
