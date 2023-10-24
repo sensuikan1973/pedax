@@ -25,7 +25,7 @@ jobs:
       # https://github.com/actions/setup-node/issues/206#issuecomment-774538395
       - uses: nodenv/actions/node-version@main
         id: nodenv
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '${{ steps.nodenv.outputs.node-version }}'
 
