@@ -21,11 +21,11 @@ issue_tracker: https://github.com/sensuikan1973/pedax/issues
 #
 # NOTE: you can't specify duplicated build number.
 # See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
-version: 6.16.0+112
+version: 6.21.0+117
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: ">=3.0.6 <4.0.0"
-  flutter: ^3.10.6 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  sdk: ">=3.1.0 <4.0.0"
+  flutter: ^3.13.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.3
