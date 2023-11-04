@@ -212,15 +212,9 @@ class PedaxBoardState extends State<PedaxBoard> {
 
   int? _bestpathCount(final int color, final CountBestpathResultWithMove? countBestpathResultWithMove) {
     if (countBestpathResultWithMove == null) return null;
-    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
-    final isYourTurn = currentColor == color;
-
-    /// NOTE:
-    /// Why "when isYourTurn == true, show opponent value" ?
-    /// -> See: [CountBestpathResponse] class in lib/engine/api/count_bestpath.dart.
-    return isYourTurn
-        ? countBestpathResultWithMove.countBestpathList.position.nOpponentBestpaths
-        : countBestpathResultWithMove.countBestpathList.position.nPlayerBestpaths;
+    return countBestpathResultWithMove.countBestpathList.playerColor == color
+        ? countBestpathResultWithMove.countBestpathList.position.nPlayerBestpaths
+        : countBestpathResultWithMove.countBestpathList.position.nOpponentBestpaths;
   }
 
   Color? _scoreColor({
