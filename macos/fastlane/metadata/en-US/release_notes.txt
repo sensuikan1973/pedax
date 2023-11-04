@@ -1,1 +1,1 @@
-minor improvement of stability.
+fix the bug that best count path is wrong when the moves include PASS.
