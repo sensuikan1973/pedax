@@ -336,10 +336,10 @@ packages:
     dependency: "direct main"
     description:
       name: libedax4dart
-      sha256: "171d0404ccb540c9581074bae1ebd4b9ac97a66cc78c48c8119c2e3fb21f66ec"
+      sha256: "36c249a3160a0197c0148310ee0a5bd63d40e0f132abd6ec86f8622def5dea38"
       url: "https://pub.dev"
     source: hosted
-    version: "7.16.0"
+    version: "7.17.0"
   lints:
     dependency: transitive
     description:
