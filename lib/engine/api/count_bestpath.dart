@@ -32,6 +32,9 @@ class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
   final CountBestpathRequest request;
   final String rootMove;
 
+  /// NOTE:
+  /// The color of the position in this result is the opposite of that in the request.
+  /// It's due to executeCountBestpath algorism and book/position structure.
   final CountBestpathResult countBestpathResult;
 }
 
@@ -53,20 +56,10 @@ Stream<CountBestpathResponse> executeCountBestpath(
     edax.edaxBookStopCountBestpath();
     final moves = request.movesAtRequest + move.moveString;
     final bookMoveListWithPosition = edax.edaxGetBookMoveWithPositionByMoves(moves);
-    final board = bookMoveListWithPosition.position.board;
-
-    final symetryMoveX = symetryMove(move.x, bookMoveListWithPosition.symetry);
-    final lastMoveSquarePlayer = edax.edaxBoardGetSquareColor(board, symetryMoveX);
-    int positionPlayerColor = -1; // empty.
-    if (lastMoveSquarePlayer == 0) {
-      positionPlayerColor = edax.edaxGetCurrentPlayer();
-    } else if (lastMoveSquarePlayer == 1) {
-      positionPlayerColor = edax.edaxGetOpponentPlayer();
-    }
 
     final result = edax.edaxBookCountBoardBestpath(
-      board,
-      playerColor: positionPlayerColor,
+      bookMoveListWithPosition.position.board,
+      playerColor: edax.edaxGetCurrentPlayer(),
       playerLowerLimit: request.playerLowerLimit,
       opponentLowerLimit: request.opponentLowerLimit,
     );
