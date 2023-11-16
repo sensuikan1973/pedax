@@ -10,7 +10,8 @@ dart run msix:create
 # REF: https://github.com/sensuikan1973/pedax/pull/71#issuecomment-798849250
 # REF: https://github.com/sensuikan1973/pedax/pull/83#issuecomment-803240876
 system32_path="/c/Windows/System32"
-# ls "$system32_path" # debug print
+ls "$system32_path" # debug print
+ls "build/windows/runner" # debug print
 
 dest_path="build/windows/runner/Release/"
 mkdir "$dest_path"
