@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
@@ -36,6 +37,15 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding.instance.renderView.configuration = new TestViewConfiguration(
+      size: const Size(2048, 1024),
+    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
+    // for (final renderview in RendererBinding.instance.renderViews) {
+    //   renderview.configuration = TestViewConfiguration.fromView(
+    //     view: renderview.flutterView,
+    //     size: const Size(2048, 1024),
+    //   ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
+    // }
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
