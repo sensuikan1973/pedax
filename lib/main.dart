@@ -14,7 +14,7 @@ const pedaxWindowMinSize = Size(550, 680);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Logger.level = Level.nothing; // If you feel debug log is noisy, you can change log level.
+  // Logger.level = Level.off; // If you feel debug log is noisy, you can change log level.
   await _setupWindow();
   await _runAppWithSentry();
 }

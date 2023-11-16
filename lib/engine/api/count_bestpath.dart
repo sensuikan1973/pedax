@@ -56,6 +56,7 @@ Stream<CountBestpathResponse> executeCountBestpath(
     edax.edaxBookStopCountBestpath();
     final moves = request.movesAtRequest + move.moveString;
     final bookMoveListWithPosition = edax.edaxGetBookMoveWithPositionByMoves(moves);
+
     final result = edax.edaxBookCountBoardBestpath(
       bookMoveListWithPosition.position.board,
       playerColor: edax.edaxGetCurrentPlayer(),
