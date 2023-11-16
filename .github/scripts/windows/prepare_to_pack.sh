@@ -13,6 +13,7 @@ system32_path="/c/Windows/System32"
 # ls "$system32_path" # debug print
 
 dest_path="build/windows/runner/Release/"
+mkdir "$dest_path"
 cp "$system32_path/vcruntime140.dll" $dest_path
 cp "$system32_path/vcruntime140_1.dll" $dest_path
 cp "$system32_path/msvcp140.dll" $dest_path
