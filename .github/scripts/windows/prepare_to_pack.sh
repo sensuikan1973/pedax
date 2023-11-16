@@ -10,10 +10,9 @@ dart run msix:create
 # REF: https://github.com/sensuikan1973/pedax/pull/71#issuecomment-798849250
 # REF: https://github.com/sensuikan1973/pedax/pull/83#issuecomment-803240876
 system32_path="/c/Windows/System32"
-ls "$system32_path" # debug print
-ls "build/windows/runner" # debug print
+# ls "$system32_path" # debug print
 
-dest_path="build/windows/runner/Release/"
+dest_path="build/windows/x64/runner/Release/"
 mkdir "$dest_path"
 cp "$system32_path/vcruntime140.dll" $dest_path
 cp "$system32_path/vcruntime140_1.dll" $dest_path
