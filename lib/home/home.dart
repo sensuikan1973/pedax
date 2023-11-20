@@ -194,6 +194,8 @@ class HomeState extends State<Home> {
             )
             .toList(),
       ),
+      backgroundColor: Colors.brown,
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
       centerTitle: true,
       actions: [
         IconButton(
