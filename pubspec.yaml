@@ -43,7 +43,7 @@ dependencies:
   logger: ^2.0.1
   macos_secure_bookmarks: ^0.2.1
   meta: ^1.9.1
-  package_info_plus: ^4.0.2
+  package_info_plus: ^5.0.1
   pasteboard: ^0.2.0
   path: ^1.8.3
   path_provider: ^2.0.15 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
