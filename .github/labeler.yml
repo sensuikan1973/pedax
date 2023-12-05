@@ -1,51 +1,51 @@
 ---
 mac:
   - changed-files:
-    - any-glob-to-any-file: macos/**/*
-    - any-glob-to-any-file: .github/scripts/macos/**/*
-    - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
+      - any-glob-to-any-file: macos/**/*
+      - any-glob-to-any-file: .github/scripts/macos/**/*
+      - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
 
 linux:
   - changed-files:
-    - any-glob-to-any-file: linux/**/*
-    - any-glob-to-any-file: assets/libedax/dll/libedax.so
-    - any-glob-to-any-file: .github/scripts/linux/**/*
+      - any-glob-to-any-file: linux/**/*
+      - any-glob-to-any-file: assets/libedax/dll/libedax.so
+      - any-glob-to-any-file: .github/scripts/linux/**/*
 
 windows:
   - changed-files:
-    - any-glob-to-any-file: windows/**/*
-    - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
-    - any-glob-to-any-file: .github/scripts/windows/**/*
+      - any-glob-to-any-file: windows/**/*
+      - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
+      - any-glob-to-any-file: .github/scripts/windows/**/*
 
 website:
   - changed-files:
-    - any-glob-to-any-file: website/**/*
+      - any-glob-to-any-file: website/**/*
 
 libedax:
   - changed-files:
-    - any-glob-to-any-file: scripts/fetch_libedax_assets.sh
-    - any-glob-to-any-file: assets/libedax/dll/libedax.so
-    - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
-    - any-glob-to-any-file: macos/libedax.universal.dylib
+      - any-glob-to-any-file: scripts/fetch_libedax_assets.sh
+      - any-glob-to-any-file: assets/libedax/dll/libedax.so
+      - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
+      - any-glob-to-any-file: macos/libedax.universal.dylib
 
 GitHub Actions:
   - changed-files:
-    - any-glob-to-any-file: .github/workflows/**/*
-    - any-glob-to-any-file: .github/scripts/**/*
-    - any-glob-to-any-file: .github/dependabot.yml
-    - any-glob-to-any-file: .github/labeler.yml
-    - any-glob-to-any-file: .github/.typos_config.toml
+      - any-glob-to-any-file: .github/workflows/**/*
+      - any-glob-to-any-file: .github/scripts/**/*
+      - any-glob-to-any-file: .github/dependabot.yml
+      - any-glob-to-any-file: .github/labeler.yml
+      - any-glob-to-any-file: .github/.typos_config.toml
 
 codecov:
   - changed-files:
-    - any-glob-to-any-file: .codecov.yml
+      - any-glob-to-any-file: .codecov.yml
 
 documentation:
   - changed-files:
-    - any-glob-to-any-file: docs/**/*
-    - any-glob-to-any-file: README.md
+      - any-glob-to-any-file: docs/**/*
+      - any-glob-to-any-file: README.md
 
 fastlane:
   - changed-files:
-    - any-glob-to-any-file: macos/fastlane/**/*
-    - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
+      - any-glob-to-any-file: macos/fastlane/**/*
+      - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
