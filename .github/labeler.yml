@@ -1,42 +1,51 @@
 ---
 mac:
-  - macos/**/*
-  - .github/scripts/macos/**/*
-  - scripts/deploy_macos_app_to_app_store.sh
+  - changed-files:
+    - any-glob-to-any-file: macos/**/*
+    - any-glob-to-any-file: .github/scripts/macos/**/*
+    - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
 
 linux:
-  - linux/**/*
-  - assets/libedax/dll/libedax.so
-  - .github/scripts/linux/**/*
+  - changed-files:
+    - any-glob-to-any-file: linux/**/*
+    - any-glob-to-any-file: assets/libedax/dll/libedax.so
+    - any-glob-to-any-file: .github/scripts/linux/**/*
 
 windows:
-  - windows/**/*
-  - assets/libedax/dll/libedax-x64.dll
-  - .github/scripts/windows/**/*
+  - changed-files:
+    - any-glob-to-any-file: windows/**/*
+    - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
+    - any-glob-to-any-file: .github/scripts/windows/**/*
 
 website:
-  - website/**/*
+  - changed-files:
+    - any-glob-to-any-file: website/**/*
 
 libedax:
-  - scripts/fetch_libedax_assets.sh
-  - assets/libedax/dll/libedax.so
-  - assets/libedax/dll/libedax-x64.dll
-  - macos/libedax.universal.dylib
+  - changed-files:
+    - any-glob-to-any-file: scripts/fetch_libedax_assets.sh
+    - any-glob-to-any-file: assets/libedax/dll/libedax.so
+    - any-glob-to-any-file: assets/libedax/dll/libedax-x64.dll
+    - any-glob-to-any-file: macos/libedax.universal.dylib
 
 GitHub Actions:
-  - .github/workflows/**/*
-  - .github/scripts/**/*
-  - .github/dependabot.yml
-  - .github/labeler.yml
-  - .github/.typos_config.toml
+  - changed-files:
+    - any-glob-to-any-file: .github/workflows/**/*
+    - any-glob-to-any-file: .github/scripts/**/*
+    - any-glob-to-any-file: .github/dependabot.yml
+    - any-glob-to-any-file: .github/labeler.yml
+    - any-glob-to-any-file: .github/.typos_config.toml
 
 codecov:
-  - .codecov.yml
+  - changed-files:
+    - any-glob-to-any-file: .codecov.yml
 
 documentation:
-  - docs/**/*
-  - README.md
+  - changed-files:
+    - any-glob-to-any-file: docs/**/*
+    - any-glob-to-any-file: README.md
 
 fastlane:
-  - macos/fastlane/**/*
-  - scripts/deploy_macos_app_to_app_store.sh
+  - changed-files:
+    - any-glob-to-any-file: macos/fastlane/**/*
+    - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
