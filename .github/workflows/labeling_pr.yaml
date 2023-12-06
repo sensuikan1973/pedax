@@ -16,8 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      # See: https://github.com/actions/labeler/issues/575
-      - uses: actions/labeler@master
+      - uses: actions/labeler@v5
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          dot: true
+          sync-labels: true
