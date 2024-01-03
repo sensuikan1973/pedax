@@ -4,8 +4,6 @@ This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern 
 
 ## Installation
 
-yarn: https://yarnpkg.com/getting-started/install
-
 ```console
 yarn install
 ```
