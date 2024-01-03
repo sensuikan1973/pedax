@@ -1,5 +1,5 @@
 ---
-name: Upgrade Ruby Version
+name: Upgrade Ruby and Bundler Version
 
 on:
   schedule:
@@ -26,6 +26,9 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
 
+      - run: bundle update --bundler
+        working-directory: macos
+
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
       - name: create PR
         id: create_pull_request
@@ -44,7 +47,7 @@ jobs:
 
             ---
             See: https://github.com/peter-evans/create-pull-request/blob/master/docs/concepts-guidelines.md#triggering-further-workflow-runs
-          branch: cron_upgrade_ruby_version
+          branch: cron_upgrade_ruby_and_bundler_version
           delete-branch: true
           labels: |
             dependencies
