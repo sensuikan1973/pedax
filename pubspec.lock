@@ -165,18 +165,18 @@ packages:
     dependency: "direct main"
     description:
       name: file_selector
-      sha256: "84eaf3e034d647859167d1f01cfe7b6352488f34c1b4932635012b202014c25b"
+      sha256: "070062b9fca7482baf60af671219086e188e50dd80497393e7d58532b56215d3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   file_selector_android:
     dependency: transitive
     description:
       name: file_selector_android
-      sha256: a2d50f9de59861605b866467a55d681a0ca7bc108129c0bd33e74fa602dd0249
+      sha256: "4c9301e823824ba19236e050bb3324cee942f52ade8810ea68adfa98431aa618"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0+5"
+    version: "0.5.0+6"
   file_selector_ios:
     dependency: transitive
     description:
@@ -205,10 +205,10 @@ packages:
     dependency: "direct dev"
     description:
       name: file_selector_platform_interface
-      sha256: "0aa47a725c346825a2bd396343ce63ac00bda6eff2fbc43eabe99737dede8262"
+      sha256: a3994c26f10378a039faa11de174d7b78eb8f79e4dd0af2a451410c1a5c3f66b
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.6.2"
   file_selector_web:
     dependency: transitive
     description:
@@ -480,10 +480,10 @@ packages:
     dependency: "direct main"
     description:
       name: path_provider
-      sha256: a1aa8aaa2542a6bc57e381f132af822420216c80d4781f7aa085ca3229208aaa
+      sha256: b27217933eeeba8ff24845c34003b003b2b22151de3c908d0e679e8fe1aa078b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   path_provider_android:
     dependency: transitive
     description:
@@ -512,10 +512,10 @@ packages:
     dependency: "direct dev"
     description:
       name: path_provider_platform_interface
-      sha256: "94b1e0dd80970c1ce43d5d4e050a9918fce4f4a775e6142424c30a29a363265c"
+      sha256: "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   path_provider_windows:
     dependency: transitive
     description:
@@ -664,10 +664,10 @@ packages:
     dependency: "direct dev"
     description:
       name: shared_preferences_platform_interface
-      sha256: d4ec5fc9ebb2f2e056c617112aa75dcf92fc2e4faaf2ae999caa297473f75d8a
+      sha256: "22e2ecac9419b4246d7c22bfbbda589e3acf5c0351137d87dd2939d984d37c3b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   shared_preferences_web:
     dependency: transitive
     description:
