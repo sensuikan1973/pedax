@@ -173,10 +173,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_android
-      sha256: "4c9301e823824ba19236e050bb3324cee942f52ade8810ea68adfa98431aa618"
+      sha256: "1cd66575f063b689e041aec836905ba7be18d76c9f0634d0d75daec825f67095"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0+6"
+    version: "0.5.0+7"
   file_selector_ios:
     dependency: transitive
     description:
@@ -225,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+1"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -765,10 +773,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "8c951c9cb6504b2aa6b3666e6de504032d9baec24bf4cbabd3eea9edd73d4d77"
+      sha256: cd210a09f7c18cbe5a02511718e0334de6559871052c90a90c0cca46a4aa81c8
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.2"
+    version: "4.3.3"
   vector_math:
     dependency: transitive
     description:
