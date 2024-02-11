@@ -190,7 +190,7 @@ class PedaxBoardState extends State<PedaxBoard> {
     if (boardMode == BoardMode.freePlay && type == SquareType.empty) {
       _boardNotifier.requestMove(move2String(move));
     } else if (boardMode == BoardMode.arrangeDiscs) {
-      _boardNotifier.requestSetboard(move);
+      _boardNotifier.requestSetboard([move]);
     }
   }
 
