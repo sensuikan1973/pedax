@@ -89,11 +89,12 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
-  void requestSetboard(final int move) {
+  void requestSetboard(final List<int> replacementTargetMoves) {
+    final arrangeTargetChar = replacementTargetMoves.map((m) => SquareReplacement(m, value.arrangeTargetChar)).toList();
     _edaxServerPort.send(
       SetboardRequest(
         currentColor: value.arrangeTargetColor,
-        replacementTargets: [SquareReplacement(move, value.arrangeTargetChar)],
+        replacementTargets: arrangeTargetChar,
         logger: _logger,
       ),
     );
