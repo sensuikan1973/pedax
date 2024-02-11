@@ -114,6 +114,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void switchArrangeTarget(final ArrangeTargetType arrangeTargetType) {
     value.arrangeTargetSquareType = arrangeTargetType;
     notifyListeners();
+    requestSetboard([]);
   }
 
   void switchHintStepByStep({required final bool enabled}) {
