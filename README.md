@@ -38,14 +38,7 @@
 [![Flutter Deployment MacOS](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml)
 [![Deploy Website](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml)
 
-### Run
-
-```sh
-./scripts/setup_flutter.sh
-flutter run --device-id macos --dart-define "SENTRY_DSN=xxx" # env is optional
-```
-
-### Architecture
+## Architecture
 
 The technical point of pedax is as follows.
 
@@ -96,3 +89,10 @@ sequenceDiagram
 ```
 
 - [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
+
+### Run
+
+```sh
+./scripts/setup_flutter.sh
+flutter run --device-id macos --dart-define "SENTRY_DSN=xxx" # env is optional
+```
