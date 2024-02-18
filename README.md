@@ -38,7 +38,7 @@
 [![Flutter Deployment MacOS](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml)
 [![Deploy Website](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml)
 
-## Architecture
+### Architecture
 
 The technical point of pedax is as follows.
 
