@@ -21,5 +21,5 @@ class RedoAllShortcut implements PedaxShortcut {
   String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(final RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
+  bool fired(final KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
 }

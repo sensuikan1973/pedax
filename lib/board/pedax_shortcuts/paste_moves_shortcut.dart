@@ -22,9 +22,9 @@ class PasteMovesShortcut implements PedaxShortcut {
   String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
-  bool fired(final RawKeyEvent keyEvent) =>
-      (keyEvent.isControlPressed && keyEvent.isKeyPressed(logicalKey)) ||
-      (keyEvent.data.isModifierPressed(ModifierKey.metaModifier) && keyEvent.isKeyPressed(logicalKey));
+  bool fired(final KeyEvent keyEvent) =>
+      (HardwareKeyboard.instance.isControlPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey)) ||
+      (HardwareKeyboard.instance.isMetaPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey));
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async {

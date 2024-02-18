@@ -21,8 +21,9 @@ class RedoShortcut implements PedaxShortcut {
   String get keys => '${logicalKeyR.keyLabel.toUpperCase()} or →';
 
   @override
-  bool fired(final RawKeyEvent keyEvent) =>
-      keyEvent.isKeyPressed(logicalKeyR) || keyEvent.isKeyPressed(logicalKeyArrowRight);
+  bool fired(final KeyEvent keyEvent) =>
+      HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyR) ||
+      HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyArrowRight);
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();

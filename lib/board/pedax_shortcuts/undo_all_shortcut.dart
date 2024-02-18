@@ -18,7 +18,7 @@ class UndoAllShortcut implements PedaxShortcut {
   String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(final RawKeyEvent keyEvent) => keyEvent.isKeyPressed(logicalKey);
+  bool fired(final KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndoAll();
