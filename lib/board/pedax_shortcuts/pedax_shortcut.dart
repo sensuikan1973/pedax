@@ -19,7 +19,7 @@ import 'undo_shortcut.dart';
 abstract class PedaxShortcut {
   String label(final AppLocalizations localizations);
   String get keys;
-  bool fired(final RawKeyEvent keyEvent);
+  bool fired(final KeyEvent keyEvent);
   Future<void> runEvent(final PedaxShortcutEventArguments argus);
 }
 

@@ -21,8 +21,9 @@ class UndoShortcut implements PedaxShortcut {
   String get keys => '${logicalKeyU.keyLabel.toUpperCase()} or ←';
 
   @override
-  bool fired(final RawKeyEvent keyEvent) =>
-      keyEvent.isKeyPressed(logicalKeyU) || keyEvent.isKeyPressed(logicalKeyArrowLeft);
+  bool fired(final KeyEvent keyEvent) =>
+      HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyU) ||
+      HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyArrowLeft);
 
   @override
   Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndo();

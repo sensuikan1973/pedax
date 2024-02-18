@@ -44,7 +44,7 @@ class PedaxBoardState extends State<PedaxBoard> {
   void initState() {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
-    RawKeyboard.instance.addListener(_handleRawKeyEvent);
+    HardwareKeyboard.instance.addHandler(_handleKeyEvent);
     Future<void>.delayed(
       Duration.zero,
       () async {
@@ -134,16 +134,17 @@ class PedaxBoardState extends State<PedaxBoard> {
         ),
       );
 
-  Future<void> _handleRawKeyEvent(final RawKeyEvent event) async {
-    if (!mounted) return;
+  bool _handleKeyEvent(final KeyEvent event) {
+    if (!mounted) return false;
     final targetEvents = shortcutList.where((final el) => el.fired(event));
     final targetEvent = targetEvents.isEmpty ? null : targetEvents.first;
-    await targetEvent?.runEvent(
+    targetEvent?.runEvent(
       PedaxShortcutEventArguments(
         context.read<BoardNotifier>(),
         _captureKey,
       ),
     );
+    return true;
   }
 
   Square _square(final int y, final int x) {
