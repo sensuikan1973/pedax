@@ -40,4 +40,4 @@ jobs:
         run: |
           echo $ZSH_NAME $ZSH_VERSION
           ./scripts/deploy_macos_app_to_app_store.sh \
-          -revision "$GITHUB_SHA" --skip-test
+          -revision "$GITHUB_SHA"
