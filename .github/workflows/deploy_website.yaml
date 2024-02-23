@@ -1,5 +1,5 @@
 ---
-# See: https://docusaurus.io/docs/deployment#deploying-to-github-pages
+# See: https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions
 
 name: Deploy Website
 
