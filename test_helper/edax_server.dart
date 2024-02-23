@@ -7,6 +7,7 @@ Future<void> waitEdaxSetuped(final WidgetTester tester) async {
   await tester.pump(); // after spawning EdaxServer has completed, render UI.
   await Future<void>.delayed(const Duration(seconds: 1)); // wait EdaxServer execute edax_init.
   await tester.pump(); // after edax init has completed, render UI.
+  await tester.pumpAndSettle();
 }
 
 // For EdaxServer: expect move response ~ rendering is less than 300 millisec
