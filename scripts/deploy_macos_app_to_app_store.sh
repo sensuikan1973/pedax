@@ -43,7 +43,7 @@ git diff --exit-code
 
 # require ENV variables. See: macos/fastlane/Fastfile.
 if [[ -n "${opthash[(i)--dry-run]}" ]]; then
-  bundle exec fastlane deploy_app_store verify_only:true
+  bundle exec fastlane deploy_app_store verify_only:true --verbose
 else
-  bundle exec fastlane deploy_app_store
+  bundle exec fastlane deploy_app_store --verbose
 fi
