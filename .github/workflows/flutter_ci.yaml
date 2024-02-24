@@ -56,20 +56,20 @@ jobs:
           - os: windows
             runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
-            integration_test_command: flutter test integration_test --device-id windows --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+            integration_test_command: flutter test integration_test --device-id windows --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info --concurrency 1
           - os: macos
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
             runner_machine: macos-13
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-            integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+            integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info --concurrency 1
           - os: ubuntu
             runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
               touch ./coverage/lcov.integration_test.info
               timeout 240 xvfb-run -a \
-              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
+              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info --concurrency 1 \
               || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
     steps:
       - uses: actions/checkout@v4
