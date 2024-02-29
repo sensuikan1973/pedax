@@ -45,7 +45,7 @@ The technical point of pedax is as follows.
 - pedax needs to call _Expensive_ _Native(C)_ logic such as computing evaluation value.
 - _Native(C)_ logic needs allocated large data. It's desirable to daemonize _Native(C)_ process.
 
-So, I have to use [isolate](https://dart.dev/guides/language/concurrency) with ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) skillfully to achieve _seamless non-blocking_ UI.
+So, I have to use [isolate](https://dart.dev/guides/language/concurrency) with ffi([libedax4dart](https://github.com/sensuikan1973/libedax4dart)) to achieve _seamless non-blocking_ UI.
 
 ```mermaid
 %% https://mermaid-js.github.io/mermaid/#/sequenceDiagram
