@@ -25,26 +25,26 @@ import 'api/undo.dart';
 // NOTE: top level function for `isolate.spawn`.
 @doNotStore
 Future<void> startEdaxServer(final StartEdaxServerParams params) async {
-  final server = EdaxServer(dllPath: params.dllPath, logger: params.logger);
+  final server = EdaxServer(dllPath: params.dllPath, logLevel: params.logLevel);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
 @immutable
 class StartEdaxServerParams {
-  const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters, this.logger);
+  const StartEdaxServerParams(this.parentSendPort, this.dllPath, this.initLibedaxParameters, this.logLevel);
   final SendPort parentSendPort;
   final String dllPath;
   final List<String> initLibedaxParameters;
-  final Logger logger;
+  final Level logLevel;
 }
 
 @doNotStore
 class EdaxServer {
   EdaxServer({
     required final String dllPath,
-    required final Logger logger,
+    required final Level logLevel,
   })  : _dllPath = dllPath,
-        _logger = logger;
+        _logger = Logger(level: logLevel);
 
   final String _dllPath;
   final Logger _logger;

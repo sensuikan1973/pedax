@@ -12,13 +12,13 @@ class HintOneByOneRequest implements RequestSchema {
     required this.level,
     required this.stepByStep,
     required this.movesAtRequest,
-    required this.logger,
+    required this.logLevel,
   });
 
   final int level;
   final bool stepByStep;
   final String movesAtRequest;
-  final Logger logger;
+  final Level logLevel;
 }
 
 @immutable
@@ -47,23 +47,24 @@ Stream<HintOneByOneResponse> executeHintOneByOne(
 ) async* {
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   const levelOption = LevelOption();
+  final logger = Logger(level: request.logLevel);
   for (final level in levelList) {
     edax.edaxStop();
-    request.logger.d('stopped edax search');
+    logger.d('stopped edax search');
     edax
       ..edaxSetOption(levelOption.nativeName, level.toString())
       ..edaxHintPrepare();
-    request.logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
+    logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
     while (true) {
       final currentMoves = edax.edaxGetMoves();
       if (currentMoves != request.movesAtRequest) {
-        request.logger.d(
+        logger.d(
           'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"',
         );
         return;
       }
 
-      request.logger.d('will call edaxHintNextNoMultiPvDepth');
+      logger.d('will call edaxHintNextNoMultiPvDepth');
       final hint = edax.edaxHintNextNoMultiPvDepth();
       if (hint.isNoMove) break;
       yield HintOneByOneResponse(request: request, hint: hint, level: level, isLastStep: level == levelList.last);

@@ -18,12 +18,12 @@ class SetboardRequest implements RequestSchema {
   const SetboardRequest({
     required this.currentColor,
     required this.replacementTargets,
-    required this.logger,
+    required this.logLevel,
   });
 
   final int currentColor;
   final List<SquareReplacement> replacementTargets;
-  final Logger logger;
+  final Level logLevel;
 }
 
 @immutable
@@ -55,7 +55,8 @@ SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest reque
   final currentColorChar = request.currentColor == TurnColor.black ? ColorChar.black : ColorChar.white;
   boardStr = boardStr.replaceFirst(RegExp('.'), currentColorChar, 64);
 
-  request.logger.d('setboard $boardStr');
+  final logger = Logger(level: request.logLevel);
+  logger.d('setboard $boardStr');
   edax.edaxSetboard(boardStr);
 
   return SetboardResponse(
