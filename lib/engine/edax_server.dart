@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:logger/logger.dart';
-// import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 import 'api/book_get_move_with_position.dart';
@@ -26,7 +25,7 @@ import 'api/undo.dart';
 // NOTE: top level function for `isolate.spawn`.
 @doNotStore
 Future<void> startEdaxServer(final StartEdaxServerParams params) async {
-  final server = EdaxServer(dllPath: params.dllPath);
+  final server = EdaxServer(dllPath: params.dllPath, logLevel: params.logLevel);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
 
@@ -37,19 +36,18 @@ class StartEdaxServerParams {
   final String dllPath;
   final List<String> initLibedaxParameters;
   final Level logLevel;
-  // final Logger logger;
 }
 
 @doNotStore
 class EdaxServer {
   EdaxServer({
     required final String dllPath,
-    // required final Logger logger,
-  }) : _dllPath = dllPath;
-  // _logger = logger;
+    required final Level logLevel,
+  })  : _dllPath = dllPath,
+        _logger = Logger(level: logLevel);
 
   final String _dllPath;
-  // final Logger _logger;
+  final Logger _logger;
 
   final _receivePort = ReceivePort();
   SendPort get sendPort => _receivePort.sendPort;
@@ -66,12 +64,12 @@ class EdaxServer {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
-    // _logger.d('sent my port to parentSendPort');
+    _logger.d('sent my port to parentSendPort');
 
     final edax = LibEdax(_dllPath)
       ..libedaxInitialize(initLibedaxParameters)
       ..edaxInit();
-    // _logger.i('libedax has initialized with $initLibedaxParameters');
+    _logger.i('libedax has initialized with $initLibedaxParameters');
 
     _registerApiHandler(parentSendPort, edax);
   }
@@ -79,7 +77,7 @@ class EdaxServer {
   void _registerApiHandler(final SendPort parentSendPort, final LibEdax edax) =>
       // ignore: avoid_annotating_with_dynamic
       _receivePort.listen((final dynamic message) async {
-        // _logger.d('received request "${message.runtimeType}"');
+        _logger.d('received request "${message.runtimeType}"');
         if (message is MoveRequest) {
           parentSendPort.send(executeMove(edax, message));
         } else if (message is PlayRequest) {
@@ -92,12 +90,12 @@ class EdaxServer {
               continue;
             }
             if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
-              // _logger.d(
-              //   '''
-              // The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
-              // It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
-              // ''',
-              // );
+              _logger.d(
+                '''
+              The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
+              ''',
+              );
               break;
             }
             _computingHintOneByOne = true;
@@ -128,12 +126,12 @@ class EdaxServer {
               continue;
             }
             if (_latestCountBestpathRequest.movesAtRequest != message.movesAtRequest) {
-              // _logger.d(
-              //   '''
-              // The CountBestpathRequest (moves: ${message.movesAtRequest}) has dropped.
-              // It is because a new CountBestpathRequest (moves: ${_latestCountBestpathRequest.movesAtRequest}) has been received after that.
-              // ''',
-              // );
+              _logger.d(
+                '''
+              The CountBestpathRequest (moves: ${message.movesAtRequest}) has dropped.
+              It is because a new CountBestpathRequest (moves: ${_latestCountBestpathRequest.movesAtRequest}) has been received after that.
+              ''',
+              );
               break;
             }
             _computingCountBestpath = true;
@@ -151,7 +149,7 @@ class EdaxServer {
         } else if (message is BookLoadRequest) {
           if (_computingBookLoading) return;
           _computingBookLoading = true;
-          // _logger.i('will load book file. path: ${message.file}');
+          _logger.i('will load book file. path: ${message.file}');
           await compute(_computeBookLoad, _ComputeBookLoadParams(_dllPath, message, parentSendPort));
           _computingBookLoading = false;
         } else if (message is SetOptionRequest) {
@@ -163,7 +161,7 @@ class EdaxServer {
         } else if (message is ShutdownRequest) {
           parentSendPort.send(executeShutdown(edax, message));
           _receivePort.close();
-          // _logger.i('shutdowned');
+          _logger.i('shutdowned');
         } else {
           // _logger.w('request ${message.runtimeType} is not supported');
         }

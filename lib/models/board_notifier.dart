@@ -95,7 +95,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       SetboardRequest(
         currentColor: value.arrangeTargetColor,
         replacementTargets: arrangeTargetChar,
-        // logger: _logger,
+        logLevel: Logger.level,
       ),
     );
   }
@@ -149,7 +149,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
-        // logger: _logger,
+        logLevel: Logger.level,
       ),
     );
   }
@@ -169,7 +169,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           movesAtRequest: movesAtRequest,
           playerLowerLimit: await _bestpathCountPlayerLowerLimitOption.val,
           opponentLowerLimit: await _bestpathCountOpponentLowerLimitOption.val,
-          // logger: _logger,
+          logLevel: Logger.level,
         ),
       );
     }
