@@ -11,13 +11,13 @@ class CountBestpathRequest implements RequestSchema {
     required this.movesAtRequest,
     required this.playerLowerLimit,
     required this.opponentLowerLimit,
-    required this.logger,
+    // required this.logger,
   });
 
   final String movesAtRequest;
   final int playerLowerLimit;
   final int opponentLowerLimit;
-  final Logger logger;
+  // final Logger logger;
 }
 
 @immutable
@@ -46,9 +46,9 @@ Stream<CountBestpathResponse> executeCountBestpath(
   for (final move in rootBookMoveListWithPosition.moveList) {
     final currentMoves = edax.edaxGetMoves();
     if (currentMoves != request.movesAtRequest) {
-      request.logger.d(
-        'count bestpath process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"',
-      );
+      // request.logger.d(
+      //   'count bestpath process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"',
+      // );
       edax.edaxBookStopCountBestpath();
       return;
     }

@@ -53,7 +53,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }) async {
     await Isolate.spawn(
       startEdaxServer,
-      StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, _logger),
+      StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, Logger.level),
     );
     _receiveStream = _receivePort.asBroadcastStream();
     _edaxServerPort = await _receiveStream.first as SendPort;
@@ -95,7 +95,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       SetboardRequest(
         currentColor: value.arrangeTargetColor,
         replacementTargets: arrangeTargetChar,
-        logger: _logger,
+        // logger: _logger,
       ),
     );
   }
@@ -149,7 +149,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         level: value.level,
         stepByStep: value.hintStepByStep,
         movesAtRequest: movesAtRequest,
-        logger: _logger,
+        // logger: _logger,
       ),
     );
   }
@@ -169,7 +169,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
           movesAtRequest: movesAtRequest,
           playerLowerLimit: await _bestpathCountPlayerLowerLimitOption.val,
           opponentLowerLimit: await _bestpathCountOpponentLowerLimitOption.val,
-          logger: _logger,
+          // logger: _logger,
         ),
       );
     }
