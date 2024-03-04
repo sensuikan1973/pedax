@@ -163,7 +163,7 @@ class EdaxServer {
           _receivePort.close();
           _logger.i('shutdowned');
         } else {
-          // _logger.w('request ${message.runtimeType} is not supported');
+          _logger.w('request ${message.runtimeType} is not supported');
         }
       });
 }
