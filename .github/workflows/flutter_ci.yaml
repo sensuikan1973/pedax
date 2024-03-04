@@ -57,7 +57,7 @@ jobs:
             runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             # workaround for https://github.com/sensuikan1973/pedax/pull/1746#issuecomment-1975666851
-            widget_test_command: flutter test --verbose --concurrency 1
+            widget_test_command: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency 1
             integration_test_command: flutter test integration_test --device-id windows --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: macos
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
