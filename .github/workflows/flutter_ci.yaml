@@ -93,7 +93,7 @@ jobs:
 
       # https://docs.flutter.dev/testing#widget-tests
       - name: widget test
-        run: ${{ matrix.integration_test_command }}
+        run: ${{ matrix.widget_test_command }}
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v3
         with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
