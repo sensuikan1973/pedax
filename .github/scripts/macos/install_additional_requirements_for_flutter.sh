@@ -1,8 +1,9 @@
 #!/bin/bash
 set -euxo pipefail
 
-# CocoaPods
-gem update cocoapods # use latest version
-pod repo update
+# See: https://docs.flutter.dev/platform-integration/desktop#additional-macos-requirements
 
-# See: https://docs.flutter.dev/desktop#additional-macos-requirements
+# CocoaPods
+gem update --system # use latest rubygems
+gem update cocoapods # use latest cocoapods
+pod repo update
