@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:logger/logger.dart';
+import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
 import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
@@ -49,7 +49,7 @@ Future<void> main() async {
     mockWindowsManager();
   });
   setUp(() async {
-    // Logger.level = Level.off;
+    Logger.level = Level.warning;
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
