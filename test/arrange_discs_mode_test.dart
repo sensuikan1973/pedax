@@ -33,7 +33,7 @@ Future<void> main() async {
     mockWindowsManager();
   });
   setUp(() async {
-    Logger.level = Level.off;
+    Logger.level = Level.debug;
   });
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
