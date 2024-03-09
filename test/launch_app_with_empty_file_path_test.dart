@@ -30,7 +30,7 @@ Future<void> main() async {
     fakeFileSelector();
     mockWindowsManager();
   });
-  setUp(() => Logger.level = Level.off);
+  setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
   testWidgets('launch app', (final tester) async {
     await tester.runAsync(() async {

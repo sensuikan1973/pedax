@@ -28,7 +28,7 @@ void main() {
     fakeFileSelector();
     mockWindowsManager();
   });
-  setUp(() => Logger.level = Level.off);
+  setUp(() => Logger.level = Level.debug);
   testWidgets('launch app', (final tester) async {
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());

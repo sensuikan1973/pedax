@@ -9,7 +9,7 @@ const _evalFileOption = EvalFileOption();
 final _bookFileOption = BookFileOption();
 const _bestpathCountAvailabilityOption = BestpathCountAvailabilityOption();
 
-// See: https://github.com/flutter/plugins/blob/debc272fb02a61832f92af717a6e0cb3ebce5c9a/packages/shared_preferences/shared_preferences/lib/shared_preferences.dart#L17
+// See: https://github.com/flutter/packages/blob/d489d84c359b5ad6849ece9b97c75e1925ed762d/packages/shared_preferences/shared_preferences/lib/shared_preferences.dart#L18
 const _keyPrefix = 'flutter.';
 
 // See: https://github.com/sensuikan1973/pedax/issues/522
@@ -28,6 +28,7 @@ Future<void> fakeSharedPreferences({
         enableBestpathCount ?? await _bestpathCountAvailabilityOption.appDefaultValue,
     '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': bookmarkPrefKey ?? '',
   };
+
   SharedPreferencesStorePlatform.instance = FakeSharedPreferencesStore(pref);
 }
 

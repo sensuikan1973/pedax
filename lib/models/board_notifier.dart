@@ -275,6 +275,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ]);
       }
     } else if (message is BookLoadResponse) {
+      _logger.i('book has been loaded.');
       value.bookLoadStatus = BookLoadStatus.loaded;
       await _onMovesChanged(value.currentMoves);
       await _bookFileOption.stopAccessingSecurityScopedResource();
