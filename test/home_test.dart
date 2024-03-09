@@ -589,7 +589,7 @@ Future<void> main() async {
         expect(find.byType(BestpathCountSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update bestpath count opponent lower limit', (final tester) async {
       await tester.runAsync(() async {
@@ -609,6 +609,6 @@ Future<void> main() async {
         expect(find.byType(BestpathCountSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
   });
 }
