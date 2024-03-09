@@ -16,15 +16,18 @@ const _keyPrefix = 'flutter.';
 // See: https://pub.dev/packages/shared_preferences#testing
 @isTest
 Future<void> fakeSharedPreferences({
-  final bool hasEvalFilePath = false,
-  final bool hasBookFilePath = false,
+  final String? evalFilePath,
+  final String? bookFilePath,
+  final bool? enableBestpathCount,
+  final String? bookmarkPrefKey,
 }) async {
-  var pref = <String, Object>{
-    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}': await _bestpathCountAvailabilityOption.appDefaultValue,
-    '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': '',
+  final pref = {
+    '$_keyPrefix${_evalFileOption.prefKey}': evalFilePath ?? await _evalFileOption.appDefaultValue,
+    '$_keyPrefix${_bookFileOption.prefKey}': bookFilePath ?? await _bookFileOption.appDefaultValue,
+    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}':
+        enableBestpathCount ?? await _bestpathCountAvailabilityOption.appDefaultValue,
+    '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': bookmarkPrefKey ?? '',
   };
-  if (hasEvalFilePath) pref['$_keyPrefix${_evalFileOption.prefKey}'] = await _evalFileOption.appDefaultValue;
-  if (hasEvalFilePath) pref['$_keyPrefix${_bookFileOption.prefKey}'] = await _bookFileOption.appDefaultValue;
 
   SharedPreferencesStorePlatform.instance = FakeSharedPreferencesStore(pref);
 }
