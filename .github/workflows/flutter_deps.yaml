@@ -22,7 +22,7 @@ jobs:
 
       - name: setup flutter desktop
         shell: bash
-        run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+        run: .github/scripts/windows/install_additional_requirements_for_flutter.sh
 
       - run: flutter pub get
 
