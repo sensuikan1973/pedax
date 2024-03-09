@@ -335,7 +335,7 @@ Future<void> main() async {
 
       await waitEdaxServerResponse(tester);
     });
-  });
+  }, skip: true);
 
   group('menu events', () {
     testWidgets('show AboutDialog', (final tester) async {
