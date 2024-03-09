@@ -199,6 +199,7 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -297,6 +298,7 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -329,6 +331,7 @@ Future<void> main() async {
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 }
