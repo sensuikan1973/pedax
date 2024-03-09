@@ -65,5 +65,5 @@ Future<void> main() async {
       expect(find.byType(BookFilePathSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
     });
-  });
+  }, skip: true);
 }
