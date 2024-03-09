@@ -205,6 +205,8 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d5', 'e4'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 2);
         expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
+
+        await waitEdaxServerResponse(tester);
       });
     });
 
@@ -301,6 +303,8 @@ Future<void> main() async {
         expectStoneCoordinates(tester, ['d3', 'd4', 'd5', 'e4', 'e5', 'f5', 'f7'], SquareType.black);
         expectStoneNum(tester, SquareType.white, 6);
         expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
+
+        await waitEdaxServerResponse(tester);
       });
     });
   });
