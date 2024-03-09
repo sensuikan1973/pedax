@@ -9,25 +9,23 @@ const _evalFileOption = EvalFileOption();
 final _bookFileOption = BookFileOption();
 const _bestpathCountAvailabilityOption = BestpathCountAvailabilityOption();
 
-// See: https://github.com/flutter/plugins/blob/debc272fb02a61832f92af717a6e0cb3ebce5c9a/packages/shared_preferences/shared_preferences/lib/shared_preferences.dart#L17
+// See: https://github.com/flutter/packages/blob/d489d84c359b5ad6849ece9b97c75e1925ed762d/packages/shared_preferences/shared_preferences/lib/shared_preferences.dart#L18
 const _keyPrefix = 'flutter.';
 
 // See: https://github.com/sensuikan1973/pedax/issues/522
 // See: https://pub.dev/packages/shared_preferences#testing
 @isTest
 Future<void> fakeSharedPreferences({
-  final String? evalFilePath,
-  final String? bookFilePath,
-  final bool? enableBestpathCount,
-  final String? bookmarkPrefKey,
+  final bool hasEvalFilePath = false,
+  final bool hasBookFilePath = false,
 }) async {
-  final pref = {
-    '$_keyPrefix${_evalFileOption.prefKey}': evalFilePath ?? await _evalFileOption.appDefaultValue,
-    '$_keyPrefix${_bookFileOption.prefKey}': bookFilePath ?? await _bookFileOption.appDefaultValue,
-    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}':
-        enableBestpathCount ?? await _bestpathCountAvailabilityOption.appDefaultValue,
-    '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': bookmarkPrefKey ?? '',
+  var pref = <String, Object>{
+    '$_keyPrefix${_bestpathCountAvailabilityOption.prefKey}': await _bestpathCountAvailabilityOption.appDefaultValue,
+    '$_keyPrefix${_bookFileOption.bookmarkPrefKey}': '',
   };
+  if (hasEvalFilePath) pref['$_keyPrefix${_evalFileOption.prefKey}'] = await _evalFileOption.appDefaultValue;
+  if (hasEvalFilePath) pref['$_keyPrefix${_bookFileOption.prefKey}'] = await _bookFileOption.appDefaultValue;
+
   SharedPreferencesStorePlatform.instance = FakeSharedPreferencesStore(pref);
 }
 

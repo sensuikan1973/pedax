@@ -24,7 +24,7 @@ Future<void> main() async {
       size: const Size(2048, 1024),
     ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
-    await fakeSharedPreferences(evalFilePath: '', bookFilePath: '');
+    await fakeSharedPreferences(hasEvalFilePath: false, hasBookFilePath: false);
     mockSecureBookmark();
     mockPackageInfo();
     fakeFileSelector();
