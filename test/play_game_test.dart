@@ -41,9 +41,7 @@ Future<void> main() async {
     fakeFileSelector();
     mockWindowsManager();
   });
-  setUp(() async {
-    Logger.level = Level.debug;
-  });
+  setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   testWidgets('a game without pass', (final tester) async {
@@ -199,7 +197,6 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
       await waitEdaxServerResponse(tester);
-      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -298,7 +295,6 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
       await waitEdaxServerResponse(tester);
-      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -331,7 +327,6 @@ Future<void> main() async {
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
       await waitEdaxServerResponse(tester);
-      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 }
