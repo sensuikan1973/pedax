@@ -51,6 +51,7 @@ Future<void> main() async {
       expect(find.text('pedax.test'), findsOneWidget);
       expect(find.text('0.0.0'), findsOneWidget);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -63,8 +64,8 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 3));
   });
 
   testWidgets('read book file path', (final tester) async {
@@ -81,6 +82,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(PedaxApp), findsOneWidget);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -101,6 +103,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(BookFilePathSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -118,6 +121,7 @@ Future<void> main() async {
       await tester.pump();
       expect(find.byType(PedaxApp), findsOneWidget);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -137,6 +141,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(NTasksSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -156,6 +161,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(NTasksSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -175,6 +181,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(NTasksSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -192,6 +199,7 @@ Future<void> main() async {
       await tester.pump();
       expect(find.byType(PedaxApp), findsOneWidget);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -211,6 +219,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(LevelSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -230,6 +239,7 @@ Future<void> main() async {
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(find.byType(LevelSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -249,6 +259,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(HintStepByStepSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -269,6 +280,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(BestpathCountSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -289,6 +301,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(BestpathCountSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 
@@ -309,6 +322,7 @@ Future<void> main() async {
       await tester.pumpAndSettle();
       expect(find.byType(BestpathCountSettingDialog), findsNothing);
       await waitEdaxServerResponse(tester);
+      Future<void>.delayed(const Duration(seconds: 2));
     });
   });
 }
