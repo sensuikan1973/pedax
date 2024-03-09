@@ -53,7 +53,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('show shortcut cheatsheet', (final tester) async {
@@ -67,7 +66,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('read book file path', (final tester) async {
@@ -86,7 +84,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update book file path as it is', (final tester) async {
@@ -108,7 +105,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('read n-tasks', (final tester) async {
@@ -127,7 +123,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update n-tasks with valid num', (final tester) async {
@@ -148,7 +143,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update n-tasks with invalid small num', (final tester) async {
@@ -169,7 +163,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update n-tasks with invalid large num', (final tester) async {
@@ -190,7 +183,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('read level', (final tester) async {
@@ -209,7 +201,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update level with valid num', (final tester) async {
@@ -230,7 +221,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update level with invalid num', (final tester) async {
@@ -251,7 +241,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('off hint step-by-step', (final tester) async {
@@ -272,7 +261,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('on bestpath count availability', (final tester) async {
@@ -294,7 +282,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update bestpath count player lower limit', (final tester) async {
@@ -316,7 +303,6 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 
   testWidgets('update bestpath count opponent lower limit', (final tester) async {
@@ -338,6 +324,5 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
       Future<void>.delayed(const Duration(seconds: 2));
     });
-    Future<void>.delayed(const Duration(seconds: 2));
   });
 }
