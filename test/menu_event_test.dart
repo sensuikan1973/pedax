@@ -64,6 +64,7 @@ Future<void> main() async {
       expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
       await waitEdaxServerResponse(tester);
     });
+    Future<void>.delayed(const Duration(seconds: 3));
   });
 
   testWidgets('read book file path', (final tester) async {
