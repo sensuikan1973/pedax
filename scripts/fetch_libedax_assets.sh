@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # See: https://github.com/flutter/flutter/issues/33227
 
 # See: https://github.com/koalaman/shellcheck/issues/809
