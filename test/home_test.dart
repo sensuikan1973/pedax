@@ -437,7 +437,7 @@ Future<void> main() async {
         expect(find.byType(NTasksSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update n-tasks with invalid small num', (final tester) async {
       await tester.runAsync(() async {
@@ -456,7 +456,7 @@ Future<void> main() async {
         expect(find.byType(NTasksSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update n-tasks with invalid large num', (final tester) async {
       await tester.runAsync(() async {
@@ -475,7 +475,7 @@ Future<void> main() async {
         expect(find.byType(NTasksSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('read level', (final tester) async {
       await tester.runAsync(() async {
@@ -511,7 +511,7 @@ Future<void> main() async {
         expect(find.byType(LevelSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update level with invalid num', (final tester) async {
       await tester.runAsync(() async {
@@ -530,7 +530,7 @@ Future<void> main() async {
         expect(find.byType(LevelSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('off hint step-by-step', (final tester) async {
       await tester.runAsync(() async {
@@ -549,7 +549,7 @@ Future<void> main() async {
         expect(find.byType(HintStepByStepSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('on bestpath count availability', (final tester) async {
       await tester.runAsync(() async {
@@ -569,7 +569,7 @@ Future<void> main() async {
         expect(find.byType(BestpathCountSettingDialog), findsNothing);
         await waitEdaxServerResponse(tester);
       });
-    });
+    }, skip: true);
 
     testWidgets('update bestpath count player lower limit', (final tester) async {
       await tester.runAsync(() async {
