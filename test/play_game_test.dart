@@ -298,37 +298,37 @@ Future<void> main() async {
 
       await waitEdaxServerResponse(tester);
     });
+  });
 
-    testWidgets('paste moves, and copy moves', (final tester) async {
-      const moves = 'f5f6';
-      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-        SystemChannels.platform,
-        (final methodCall) async {
-          if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
-          return null;
-        },
-      );
-      await tester.runAsync(() async {
-        await tester.pumpWidget(const PedaxApp());
-        await waitEdaxSetuped(tester);
+  testWidgets('paste moves, and copy moves', (final tester) async {
+    const moves = 'f5f6';
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      (final methodCall) async {
+        if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
+        return null;
+      },
+    );
+    await tester.runAsync(() async {
+      await tester.pumpWidget(const PedaxApp());
+      await waitEdaxSetuped(tester);
 
-        // paste
-        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-        await tester.sendKeyEvent(PasteMovesShortcut.logicalKey);
-        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      // paste
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(PasteMovesShortcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
-        await tester.pumpAndSettle();
-        await waitEdaxServerResponse(tester);
-        await tester.pumpAndSettle();
-        expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
+      await tester.pumpAndSettle();
+      await waitEdaxServerResponse(tester);
+      await tester.pumpAndSettle();
+      expectStoneNum(tester, SquareType.black, 3); // e4, d5, f5
 
-        // copy
-        await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-        await tester.sendKeyEvent(CopyMovesShortcut.logicalKey);
-        await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
+      // copy
+      await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
+      await tester.sendKeyEvent(CopyMovesShortcut.logicalKey);
+      await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
 
-        await waitEdaxServerResponse(tester);
-      });
+      await waitEdaxServerResponse(tester);
     });
   });
 }
