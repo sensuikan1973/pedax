@@ -17,7 +17,7 @@ jobs:
           cache: true
       - run: flutter doctor -v
       - name: setup flutter channel
-        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
+        shell: bash
         run: ./scripts/setup_flutter.sh
 
       - name: setup flutter desktop
@@ -33,7 +33,7 @@ jobs:
       - run: rm macos/Podfile.lock && flutter build macos
 
       - name: upgrade external binary
-        shell: zsh {0}
+        shell: bash
         run: ./scripts/fetch_libedax_assets.sh
 
       # See: https://github.com/peter-evans/create-pull-request/tree/master#reference-example
