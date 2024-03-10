@@ -124,7 +124,7 @@ jobs:
             runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             integration_test_command: |
-              touch ./coverage/lcov.integration_test.info
+              mkdir -p ./coverage
               timeout 240 xvfb-run -a \
               flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
               || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
@@ -143,7 +143,7 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-      - name: integration test # https://docs.flutter.dev/testing#integration-tests
+      - name: integration test
         run: ${{ matrix.integration_test_command }}
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v4
