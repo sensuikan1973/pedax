@@ -61,6 +61,10 @@ jobs:
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+          - os: macos-apple-silicon
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-14
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
           - os: ubuntu
             runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
@@ -109,6 +113,11 @@ jobs:
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+            integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+          - os: macos-apple-silicon
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-14
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: ubuntu
