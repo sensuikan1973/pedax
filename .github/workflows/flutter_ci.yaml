@@ -51,12 +51,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-        os: [windows, macos, ubuntu]
+        os: [windows, macos-intel-silicon, macos-apple-silicon, ubuntu]
         include:
           - os: windows
             runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
-          - os: macos
+          - os: macos-intel-silicon
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
@@ -102,14 +102,14 @@ jobs:
     strategy:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-        os: [windows, macos, ubuntu]
+        os: [windows, macos-intel-silicon, macos-apple-silicon, ubuntu]
         include:
           - os: windows
             runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             # workaround for https://github.com/sensuikan1973/pedax/pull/1746#issuecomment-1975666851
             integration_test_command: flutter test integration_test --device-id windows --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: macos
+          - os: macos-intel-silicon
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
