@@ -43,35 +43,88 @@ jobs:
         run: flutter pub get
       - run: flutter analyze --fatal-infos --fatal-warnings .
 
-  # https://docs.flutter.dev/testing
-  flutter_tests:
+  # https://docs.flutter.dev/testing/overview#widget-tests
+  flutter_widget_test:
     needs: [flutter_format, flutter_analyze]
     runs-on: ${{ matrix.runner_machine }}
-    timeout-minutes: 20
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+        os: [windows, macos-intel-silicon, macos-apple-silicon, ubuntu]
+        include:
+          - os: windows
+            runner_machine: windows-latest
+            setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
+          - os: macos-intel-silicon
+            # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-13
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+          - os: macos-apple-silicon
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-14
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+          - os: ubuntu
+            runner_machine: ubuntu-latest
+            setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          cache: true
+      - name: setup flutter channel
+        shell: bash
+        run: ./scripts/setup_flutter.sh
+      - name: setup flutter desktop
+        shell: bash
+        run: ${{ matrix.setup_for_flutter_desktop_script }}
+      - name: doctor
+        run: flutter doctor -v
+      - name: install dependencies
+        run: flutter pub get
+      - name: widget test
+        run: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency=1
+      - uses: codecov/codecov-action@v4 # https://docs.codecov.com/docs/merging-reports#multiple-languages
+        with: # ref: https://github.com/codecov/codecov-action/blob/v4.1.0/.github/workflows/main.yml
+          files: ./coverage/lcov.widget_test.info
+          flags: widget_test,${{ matrix.os }}
+          fail_ci_if_error: true
+          # See: https://github.com/codecov/codecov-action/issues/837
+          # https://app.codecov.io/gh/sensuikan1973/pedax/settings
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  # https://docs.flutter.dev/testing#integration-tests
+  flutter_integration_test:
+    needs: [flutter_format, flutter_analyze]
+    runs-on: ${{ matrix.runner_machine }}
+    timeout-minutes: 15
     strategy:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-        os: [windows, macos, ubuntu] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows, macos-intel-silicon, macos-apple-silicon, ubuntu]
         include:
           - os: windows
             runner_machine: windows-latest
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             # workaround for https://github.com/sensuikan1973/pedax/pull/1746#issuecomment-1975666851
-            widget_test_command: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency=1
             integration_test_command: flutter test integration_test --device-id windows --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
-          - os: macos
+          - os: macos-intel-silicon
             # Why isn't this macos-latest ? -> workaround for https://github.com/sensuikan1973/pedax/pull/1443
-            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-            widget_test_command: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency=1
+            integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+          - os: macos-apple-silicon
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-14
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             integration_test_command: flutter test integration_test --device-id macos --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
           - os: ubuntu
             runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
-            widget_test_command: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency=1
             integration_test_command: |
-              touch ./coverage/lcov.integration_test.info
+              mkdir -p ./coverage
               timeout 240 xvfb-run -a \
               flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
               || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
@@ -90,26 +143,11 @@ jobs:
         run: flutter doctor -v
       - name: install dependencies
         run: flutter pub get
-
-      # https://docs.flutter.dev/testing#widget-tests
-      - name: widget test
-        run: ${{ matrix.widget_test_command }}
-      # https://docs.codecov.com/docs/merging-reports#multiple-languages
-      - uses: codecov/codecov-action@v4
-        with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
-          files: ./coverage/lcov.widget_test.info
-          flags: widget_test,${{ matrix.os }}
-          fail_ci_if_error: true
-          # See: https://github.com/codecov/codecov-action/issues/837
-          # https://app.codecov.io/gh/sensuikan1973/pedax/settings
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-      # https://docs.flutter.dev/testing#integration-tests
       - name: integration test
         run: ${{ matrix.integration_test_command }}
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v4
-        with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
+        with: # ref: https://github.com/codecov/codecov-action/blob/v4.1.0/.github/workflows/main.yml
           files: ./coverage/lcov.integration_test.info
           flags: integration_test,${{ matrix.os }}
           fail_ci_if_error: true
