@@ -82,7 +82,7 @@ jobs:
       - name: widget test
         run: flutter test --verbose --coverage --coverage-path=./coverage/lcov.widget_test.info --concurrency=1
       - uses: codecov/codecov-action@v4 # https://docs.codecov.com/docs/merging-reports#multiple-languages
-        with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
+        with: # ref: https://github.com/codecov/codecov-action/blob/v4.1.0/.github/workflows/main.yml
           files: ./coverage/lcov.widget_test.info
           flags: widget_test,${{ matrix.os }}
           fail_ci_if_error: true
@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false # for https://github.com/sensuikan1973/pedax/issues/1221
       matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-        os: [windows, macos, ubuntu] # pedax uses ffi package(libedax4dart), so run widget test on multiple OS.
+        os: [windows, macos, ubuntu]
         include:
           - os: windows
             runner_machine: windows-latest
@@ -138,7 +138,7 @@ jobs:
         run: ${{ matrix.integration_test_command }}
       # https://docs.codecov.com/docs/merging-reports#multiple-languages
       - uses: codecov/codecov-action@v4
-        with: # ref: https://github.com/codecov/codecov-action/blob/v3.1.0/.github/workflows/main.yml
+        with: # ref: https://github.com/codecov/codecov-action/blob/v4.1.0/.github/workflows/main.yml
           files: ./coverage/lcov.integration_test.info
           flags: integration_test,${{ matrix.os }}
           fail_ci_if_error: true
