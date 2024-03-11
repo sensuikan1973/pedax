@@ -79,7 +79,7 @@ jobs:
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
 
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         env:
           # https://github.com/softprops/action-gh-release/issues/59
           GITHUB_TOKEN: ${{ secrets.PAT }}
