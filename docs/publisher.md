@@ -33,6 +33,6 @@ App Store Connect: https://appstoreconnect.apple.com/
 > Your certificate 'XXXXXXXXXX.cer' is not valid, please check end date and renew it if necessary
 
 ```sh
-bundle exec fastlane match nuke distribution --platform macos --additional_cert_types mac_installer_distribution
+MATCH_GIT_BASIC_AUTHORIZATION="xxx" MATCH_PASSWORD="xxx" bundle exec fastlane match nuke distribution --platform macos --additional_cert_types mac_installer_distribution
 bundle exec fastlane match appstore --platform macos --additional_cert_types mac_installer_distribution
 ```
