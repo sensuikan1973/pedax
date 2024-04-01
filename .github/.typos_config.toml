@@ -1,7 +1,13 @@
 # See: https://github.com/crate-ci/typos#false-positives
 
 [files]
-extend-exclude = ["assets/**/*", "macos/**/*.pbxproj", "macos/**/*.xib", "website/static/**/*"]
+extend-exclude = [
+    "assets/**/*",
+    "macos/**/*.pbxproj",
+    "macos/**/*.xib",
+    "website/static/**/*",
+    "windows/runner/win32_window.cpp"
+]
 
 [default.extend-words]
 symetry = "symetry" # See: https://choi.lavox.net/edax/ref_command_basic?s[]=symetry#symetry_%E9%9A%A0%E3%81%97%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89
