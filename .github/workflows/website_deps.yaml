@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  upgrade_flutter_dependencies:
+  upgrade_website_dependencies:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
