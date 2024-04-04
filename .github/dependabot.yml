@@ -1,17 +1,16 @@
 ---
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/about-dependabot-version-updates
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-version-updates
-# REF: https://dependabot.com/docs/config-file/validator/
 version: 2
 
 # See: https://docs.github.com/ja/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
 updates:
-  - package-ecosystem: "npm"
-    directory: "/website"
-    schedule:
-      interval: "daily"
-      time: "18:00"
-    labels: ["website", "dependencies"]
+  # - package-ecosystem: "npm"
+  #   directory: "/website"
+  #   schedule:
+  #     interval: "daily"
+  #     time: "18:00"
+  #   labels: ["website", "dependencies"]
 
   - package-ecosystem: "bundler"
     directory: "/macos"
