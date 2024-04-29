@@ -165,10 +165,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_android
-      sha256: "1cd66575f063b689e041aec836905ba7be18d76c9f0634d0d75daec825f67095"
+      sha256: "0ece00cdf9fdff851dc1390eaa7d8ab01abfeb555a76e7a3f2e03bdfb9611367"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0+7"
+    version: "0.5.1"
   file_selector_ios:
     dependency: transitive
     description:
