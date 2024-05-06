@@ -173,10 +173,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_ios
-      sha256: "0a1196a9c5795858aa315332da2fb5c4bcfdcb312d8a4e27651f765b87904431"
+      sha256: "7160121e434910ec23717bde3a0c514ca039e8c97b791ff35d1786da38abcb4a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1+9"
+    version: "0.5.2"
   file_selector_linux:
     dependency: "direct main"
     description:
@@ -189,10 +189,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_macos
-      sha256: b15c3da8bd4908b9918111fa486903f5808e388b8d1c559949f584725a6594d6
+      sha256: f42eacb83b318e183b1ae24eead1373ab1334084404c8c16e0354f9a3e55d385
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3+3"
+    version: "0.9.4"
   file_selector_platform_interface:
     dependency: "direct dev"
     description:
