@@ -142,6 +142,7 @@ Future<void> main() async {
       expectStoneCoordinates(tester, ['c4', 'd4', 'd5', 'e4', 'a8'], SquareType.black);
       expectStoneNum(tester, SquareType.white, 1);
       expectStoneCoordinates(tester, ['e5'], SquareType.white);
+      await tester.pumpAndSettle();
     });
   });
 }
