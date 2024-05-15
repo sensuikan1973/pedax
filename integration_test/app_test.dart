@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
@@ -14,6 +13,7 @@ import 'package:pedax/board/pedax_shortcuts/copy_moves_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/paste_moves_shortcut.dart';
 import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
+import 'package:pedax/l10n/app_localizations.dart';
 import 'package:pedax/main.dart' as pedax;
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
