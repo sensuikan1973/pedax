@@ -45,7 +45,7 @@ jobs:
 
   # https://docs.flutter.dev/testing/overview#widget-tests
   flutter_widget_test:
-    needs: [flutter_format, flutter_analyze]
+    needs: [flutter_format]
     runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 15
     strategy:
@@ -96,7 +96,7 @@ jobs:
 
   # https://docs.flutter.dev/testing#integration-tests
   flutter_integration_test:
-    needs: [flutter_format, flutter_analyze]
+    needs: [flutter_format]
     runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 15
     strategy:
