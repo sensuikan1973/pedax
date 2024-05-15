@@ -127,7 +127,8 @@ jobs:
             # https://stackoverflow.com/a/72072757
             integration_test_command: |
               mkdir -p ./coverage
-              xvfb-run -a flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+              timeout 240 xvfb-run -a \
+              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
 
     steps:
       - uses: actions/checkout@v4
