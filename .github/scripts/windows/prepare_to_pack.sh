@@ -3,6 +3,7 @@ set -euxo pipefail
 
 echo "See: https://docs.flutter.dev/platform-integration/windows/building#distributing-windows-apps"
 
+flutter packages pub get
 dart run msix:create
 
 # For developers which want to run `.exe` directly, I repack ***.dll.
