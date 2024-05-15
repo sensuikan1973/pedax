@@ -127,7 +127,7 @@ jobs:
             integration_test_command: |
               mkdir -p ./coverage
               xvfb-run -a \
-              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
+              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
 
     steps:
       - uses: actions/checkout@v4
