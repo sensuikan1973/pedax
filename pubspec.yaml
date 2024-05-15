@@ -77,7 +77,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
-  generate: false # for synthetic-package
+  generate: false # for synthetic-package. for https://github.com/sensuikan1973/pedax/pull/1890#issuecomment-2111442778
 
   # See: https://flutter.dev/docs/development/ui/assets-and-images
   assets:
