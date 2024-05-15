@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:pedax/l10n/app_localizations.dart';
 
 import '../../engine/options/native/book_file_option.dart';
 import '../../engine/options/native/eval_file_option.dart';

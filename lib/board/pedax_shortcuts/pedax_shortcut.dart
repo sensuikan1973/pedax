@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
+import 'package:pedax/l10n/app_localizations.dart';
 
 import '../../models/board_notifier.dart';
 import 'capture_board_image_shortcut.dart';

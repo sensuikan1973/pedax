@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
+import 'package:pedax/l10n/app_localizations.dart';
 
 import 'pedax_shortcut.dart';
 

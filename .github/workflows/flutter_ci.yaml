@@ -123,11 +123,13 @@ jobs:
           - os: ubuntu
             runner_machine: ubuntu-latest
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
+            # https://github.com/flutter/flutter/issues/90676#issuecomment-1229973541
+            # https://stackoverflow.com/a/72072757
             integration_test_command: |
               mkdir -p ./coverage
               timeout 240 xvfb-run -a \
-              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info \
-              || ( [[ $? -eq 124 ]] && echo "WARNING: timeout" )
+              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0

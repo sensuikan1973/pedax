@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ignore: depend_on_referenced_packages
+import 'package:pedax/l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
 
