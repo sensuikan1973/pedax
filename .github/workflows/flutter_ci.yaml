@@ -127,8 +127,7 @@ jobs:
             # https://stackoverflow.com/a/72072757
             integration_test_command: |
               mkdir -p ./coverage
-              sudo xvfb -a -screen 0 1280x1024x24 > /dev/null 2>&1 &
-              flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
+              xvfb-run -a -s '-screen 0 1024x768x24 +extension GLX' flutter test integration_test --device-id linux --verbose --coverage --coverage-path=./coverage/lcov.integration_test.info
 
     steps:
       - uses: actions/checkout@v4
