@@ -57,3 +57,6 @@ macos/fastlane/report.xml
 macos/vendor
 macos/*.app*
 macos/*.pkg
+
+# l10n
+lib/l10n/*.dart
