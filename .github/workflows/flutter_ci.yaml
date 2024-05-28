@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-        os: [windows, macos-intel-silicon, macos-apple-silicon, ubuntu]
+        os: [windows, macos-intel-silicon, macos-latest, ubuntu]
         include:
           - os: windows
             runner_machine: windows-latest
@@ -61,7 +61,7 @@ jobs:
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-13
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-          - os: macos-apple-silicon
+          - os: macos-latest
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-14
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
