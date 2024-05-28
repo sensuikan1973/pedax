@@ -2509,9 +2509,9 @@ ajv@^8.0.0, ajv@^8.9.0:
     uri-js "^4.4.1"
 
 algoliasearch-helper@^3.13.3:
-  version "3.20.0"
-  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.20.0.tgz#1f31b11c0df9881d0086c8e7f64b4ccd66d78148"
-  integrity sha512-6EVhAmVug0+hdRHWbubF7hLHHhLoQ8NjLk6iS6d4k5chWawpS5EDexrF6Jx/hPZvUKIeNrzsbTpjAkcvrjNLHg==
+  version "3.21.0"
+  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.21.0.tgz#d28fdb61199b5c229714788bfb812376b18aaf28"
+  integrity sha512-hjVOrL15I3Y3K8xG0icwG1/tWE+MocqBrhW6uVBWpU+/kVEMK0BnM2xdssj6mZM61eJ4iRxHR0djEI3ENOpR8w==
   dependencies:
     "@algolia/events" "^4.0.1"
 
@@ -2860,9 +2860,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.30001599:
-  version "1.0.30001623"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001623.tgz#e982099dcb229bb6ab35f5aebe2f8d79ccf6e8a8"
-  integrity sha512-X/XhAVKlpIxWPpgRTnlgZssJrF0m6YtRA0QDWgsBNT12uZM6LPRydR7ip405Y3t1LamD8cP2TZFEDZFBf5ApcA==
+  version "1.0.30001624"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001624.tgz#0ec4c8fa7a46e5b785477c70b38a56d0b10058eb"
+  integrity sha512-0dWnQG87UevOCPYaOR49CBcLBwoZLpws+k6W37nLjWUhumP1Isusj0p2u+3KhjNloRWK9OKMgjBBzPujQHw4nA==
 
 ccount@^2.0.0:
   version "2.0.1"
@@ -7261,9 +7261,9 @@ safe-buffer@5.2.1, safe-buffer@>=5.1.0, safe-buffer@^5.1.0, safe-buffer@~5.2.0:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 sax@^1.2.4:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.0.tgz#829d8c11eb6a8728d3b86cdeea4fc3893342b5e7"
-  integrity sha512-G3nn4N8SRaR9NsCqEUHfTlfTM/Fgza1yfb8JP2CEmzYuHtHWza5Uf+g7nuUQq96prwu0GiGyPgDw752+j4fzQQ==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.1.tgz#44cc8988377f126304d3b3fc1010c733b929ef0f"
+  integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
 
 scheduler@^0.23.2:
   version "0.23.2"
