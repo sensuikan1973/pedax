@@ -16,23 +16,34 @@ jobs:
     if: ${{ github.head_ref == 'prepare_for_release' && github.event.pull_request.merged == true }}
     env:
       PUBLISH_DIR: publish
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 30
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-intel-silicon, macos-latest]
         include:
           - os: ubuntu-latest
+            runner_machine: ubuntu-latest
             subcommand: linux
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/linux/prepare_to_pack.sh
             distribution_path: build/linux/x64/release/bundle # https://docs.flutter.dev/desktop#linux
           - os: windows-latest
+            runner_machine: windows-latest
             subcommand: windows
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/x64/runner/Release # https://docs.flutter.dev/release/breaking-changes/windows-build-architecture
+          - os: macos-intel-silicon
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-13
+            subcommand: macos
+            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
+            prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
+            distribution_path: build/macos/Build/Products/release
           - os: macos-latest
+            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+            runner_machine: macos-latest
             subcommand: macos
             setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
@@ -71,13 +82,13 @@ jobs:
         run: |-
           mkdir -p ${{ env.PUBLISH_DIR }}
           cd ${{ matrix.distribution_path }}
-          powershell Compress-Archive -Path ./* -DestinationPath $Env:GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
+          powershell Compress-Archive -Path ./* -DestinationPath $Env:GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
       - name: compress files (macOS, Linux)
         if: runner.os == 'macOS' || runner.os == 'Linux'
         run: |-
           mkdir -p ${{ env.PUBLISH_DIR }}
           cd ${{ matrix.distribution_path }}
-          zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip .
+          zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip .
 
       - uses: softprops/action-gh-release@v2
         env:
@@ -85,7 +96,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
           tag_name: ${{ env.CURRENT_VERSION }}
-          files: ${{ env.PUBLISH_DIR }}/pedax-${{ runner.os }}.zip
+          files: ${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
           generate_release_notes: true
           # body: This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
           # append_body: true
