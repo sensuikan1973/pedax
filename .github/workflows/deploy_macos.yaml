@@ -9,7 +9,7 @@ on:
 jobs:
   run_macos_deployment:
     runs-on: macos-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#release
       - uses: actions/checkout@v4
