@@ -88,7 +88,7 @@ sequenceDiagram
   end
 ```
 
-- [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+)
+[`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+sort%3Acreated-asc)
 
 ### Run
 
