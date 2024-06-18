@@ -152,7 +152,7 @@ GEM
     httpclient (2.8.3)
     jmespath (1.6.2)
     json (2.7.2)
-    jwt (2.8.1)
+    jwt (2.8.2)
       base64
     mini_magick (4.13.1)
     mini_mime (1.1.5)
