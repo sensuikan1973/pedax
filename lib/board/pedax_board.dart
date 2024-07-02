@@ -144,7 +144,7 @@ class PedaxBoardState extends State<PedaxBoard> {
         _captureKey,
       ),
     );
-    return true;
+    return false;
   }
 
   Square _square(final int y, final int x) {
