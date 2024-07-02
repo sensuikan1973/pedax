@@ -1,1 +1,1 @@
-minor improvement of stability.
+Fixed a bug that prevented text input in dialogs.
