@@ -125,10 +125,10 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: "77befdddf51050e1635a04d2bcfff230089ce7294e642d00da58cd079c0de0c8"
+      sha256: e17f6b3097b8c51b72c74c9f071a605c47bcc8893839bd66732457a5ebe73714
       url: "https://pub.dev"
     source: hosted
-    version: "5.5.0"
+    version: "5.5.0+1"
   dio_web_adapter:
     dependency: transitive
     description:
