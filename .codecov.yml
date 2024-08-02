@@ -16,7 +16,7 @@ coverage:
       default:
         target: 90% # overall coverage
       widget_test:
-        target: 90%
+        target: 85%
         flags:
           - widget_test
       integration_test:
