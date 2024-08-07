@@ -51,9 +51,7 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    Future(() async {
-      await _setUpEdaxServer(context.read<BoardNotifier>());
-    });
+    _setUpEdaxServer(context.read<BoardNotifier>());
   }
 
   Future<void> _setUpEdaxServer(final BoardNotifier boardNotifier) async {
