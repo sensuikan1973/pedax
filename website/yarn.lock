@@ -2126,9 +2126,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.6.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.6.0.tgz#b604c9a628760221905c1b272fd6aee661f45042"
-  integrity sha512-QyR8d5bmq+eR72TwQDfujwShHMcIrWIYsaQFtXRE58MHPTEKUNxjxvl0yS0qPMds5xbSDWtp7ZpvGFtd7dfMdQ==
+  version "22.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.6.1.tgz#e531a45f4d78f14a8468cb9cdc29dc9602afc7ac"
+  integrity sha512-V48tCfcKb/e6cVUigLAaJDAILdMP0fUW6BidkPK4GpGjXcfbnoHasCZDwz3N3yVt5we2RHm4XTQCpv0KJz9zqw==
   dependencies:
     undici-types "~6.19.2"
 
@@ -2189,9 +2189,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "18.3.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.8.tgz#1672ab19993f8aca7c7dc844c07d5d9e467d5a79"
-  integrity sha512-syBUrW3/XpnW4WJ41Pft+I+aPoDVbrBVQGEnbD7NijDGlVC+8gV/XKRY+7vMDlfPpbwYt0l1vd/Sj8bJGMbs9Q==
+  version "18.3.9"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.9.tgz#2cdf5f425ec8a133d67e9e3673909738b783db20"
+  integrity sha512-+BpAVyTpJkNWWSSnaLBk6ePpHLOGJKnEQNbINNovPWzvEUyAe3e+/d494QdEh71RekM/qV7lw6jzf1HGrJyAtQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -3625,9 +3625,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.4:
-  version "1.5.27"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.27.tgz#5203ce5d6054857d84ba84d3681cbe59132ade78"
-  integrity sha512-o37j1vZqCoEgBuWWXLHQgTN/KDKe7zwpiY5CPeq2RvUqOyJw9xnrULzZAEVQ5p4h+zjMk7hgtOoPdnLxr7m/jw==
+  version "1.5.28"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.28.tgz#aee074e202c6ee8a0030a9c2ef0b3fe9f967d576"
+  integrity sha512-VufdJl+rzaKZoYVUijN13QcXVF5dWPZANeFTLNy+OSpHdDL5ynXTF35+60RSBbaQYB1ae723lQXHCrf4pyLsMw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
