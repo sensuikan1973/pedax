@@ -37,10 +37,10 @@ packages:
     dependency: transitive
     description:
       name: change
-      sha256: c92878d5d4f4960bda62201b5cae63f5d0aaaefc0377e856251920418070b96f
+      sha256: "65db7f966dc7e786687f49900a94c5f08b0eb9ca8c4a3e7eed3a55e980b455e2"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.3"
+    version: "0.7.4"
   characters:
     dependency: transitive
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_macos
-      sha256: f42eacb83b318e183b1ae24eead1373ab1334084404c8c16e0354f9a3e55d385
+      sha256: cb284e267f8e2a45a904b5c094d2ba51d0aabfc20b1538ab786d9ef7dc2bf75c
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.4"
+    version: "0.9.4+1"
   file_selector_platform_interface:
     dependency: "direct dev"
     description:
