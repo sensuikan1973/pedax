@@ -372,9 +372,9 @@
     "@babel/types" "^7.26.0"
 
 "@babel/parser@^7.25.9", "@babel/parser@^7.26.0":
-  version "7.26.0"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.26.0.tgz#710a75a7d805a8f72753154e451474e9795b121c"
-  integrity sha512-aP8x5pIw3xvYr/sXT+SEUwyhrXT8rUJRZltK/qN3Db80dcKpTett8cJxHyjk+xYSVXvNnl2SfcJVjbwxpOSscA==
+  version "7.26.1"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.26.1.tgz#44e02499960df2cdce2c456372a3e8e0c3c5c975"
+  integrity sha512-reoQYNiAJreZNsJzyrDNzFQ+IQ5JFiIzAHJg9bn94S3l+4++J7RsIhNMoB+lgP/9tpmiAQqspv+xfdxTSzREOw==
   dependencies:
     "@babel/types" "^7.26.0"
 
@@ -2016,9 +2016,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.8.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.8.0.tgz#193c6f82f9356ce0e6bba86b59f2ffe06e7e320b"
-  integrity sha512-84rafSBHC/z1i1E3p0cJwKA+CfYDNSXX9WSZBRopjIzLET8oNt6ht2tei4C7izwDeEiLLfdeSVBv1egOH916hg==
+  version "22.8.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.8.1.tgz#b39d4b98165e2ae792ce213f610c7c6108ccfa16"
+  integrity sha512-k6Gi8Yyo8EtrNtkHXutUu2corfDf9su95VYVP10aGYMMROM6SAItZi0w1XszA6RtWTHSVp5OeFof37w0IEqCQg==
   dependencies:
     undici-types "~6.19.8"
 
@@ -2721,9 +2721,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001669:
-  version "1.0.30001669"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001669.tgz#fda8f1d29a8bfdc42de0c170d7f34a9cf19ed7a3"
-  integrity sha512-DlWzFDJqstqtIVx1zeSpIMLjunf5SmwOw0N2Ck/QSQdS8PLS4+9HrLaYei4w8BIAL7IB/UEDu889d8vhCTPA0w==
+  version "1.0.30001671"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001671.tgz#c660a8a0bf6bb8eedaac683d29074e455e84e3f1"
+  integrity sha512-jocyVaSSfXg2faluE6hrWkMgDOiULBMca4QLtDT39hw1YxaIPHWc1CcTCKkPmHgGH6tKji6ZNbMSmUAvENf2/A==
 
 ccount@^2.0.0:
   version "2.0.1"
@@ -3487,9 +3487,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.41:
-  version "1.5.46"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.46.tgz#69c98f809a3ea669386263d672f4d920be71da3a"
-  integrity sha512-1XDk0Z8/YRgB2t5GeEg8DPK592DLjVmd/5uwAu6c/S4Z0CUwV/RwYqe5GWxQqcoN3bJ5U7hYMiMRPZzpCzSBhQ==
+  version "1.5.47"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.47.tgz#ef0751bc19b28be8ee44cd8405309de3bf3b20c7"
+  integrity sha512-zS5Yer0MOYw4rtK2iq43cJagHZ8sXN0jDHDKzB+86gSBSAI4v07S97mcq+Gs2vclAxSh1j7vOAHxSVgduiiuVQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
