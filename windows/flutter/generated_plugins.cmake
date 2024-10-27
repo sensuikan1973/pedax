@@ -5,7 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   pasteboard
-  screen_retriever
+  screen_retriever_windows
   window_manager
   window_size
 )
