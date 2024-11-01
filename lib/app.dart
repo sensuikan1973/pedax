@@ -9,10 +9,10 @@ import 'package:window_size/window_size.dart';
 import 'home/home.dart';
 import 'models/board_notifier.dart';
 
-const _sharedPrefereceWindowFrameWidthKey = 'windowFrameWidth';
-const _sharedPrefereceWindowFrameHeightKey = 'windowFrameHeight';
-const _sharedPrefereceWindowFrameLeftKey = 'windowFrameLeft';
-const _sharedPrefereceWindowFrameTopKey = 'windowFrameTop';
+const _sharedPreferenceWindowFrameWidthKey = 'windowFrameWidth';
+const _sharedPreferenceWindowFrameHeightKey = 'windowFrameHeight';
+const _sharedPreferenceWindowFrameLeftKey = 'windowFrameLeft';
+const _sharedPreferenceWindowFrameTopKey = 'windowFrameTop';
 
 @immutable
 class PedaxApp extends StatefulWidget {
@@ -40,22 +40,22 @@ class PedaxApp extends StatefulWidget {
 
   static Future<double?> get savedWindowFrameWidth async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getDouble(_sharedPrefereceWindowFrameWidthKey);
+    return pref.getDouble(_sharedPreferenceWindowFrameWidthKey);
   }
 
   static Future<double?> get savedWindowFrameHeight async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getDouble(_sharedPrefereceWindowFrameHeightKey);
+    return pref.getDouble(_sharedPreferenceWindowFrameHeightKey);
   }
 
   static Future<double?> get savedWindowFrameLeft async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getDouble(_sharedPrefereceWindowFrameLeftKey);
+    return pref.getDouble(_sharedPreferenceWindowFrameLeftKey);
   }
 
   static Future<double?> get savedWindowFrameTop async {
     final pref = await SharedPreferences.getInstance();
-    return pref.getDouble(_sharedPrefereceWindowFrameTopKey);
+    return pref.getDouble(_sharedPreferenceWindowFrameTopKey);
   }
 }
 
@@ -93,8 +93,8 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   Future<void> onWindowResized() async {
     final pref = await SharedPreferences.getInstance();
     final windowInfo = await getWindowInfo();
-    await pref.setDouble(_sharedPrefereceWindowFrameWidthKey, windowInfo.frame.width);
-    await pref.setDouble(_sharedPrefereceWindowFrameHeightKey, windowInfo.frame.height);
+    await pref.setDouble(_sharedPreferenceWindowFrameWidthKey, windowInfo.frame.width);
+    await pref.setDouble(_sharedPreferenceWindowFrameHeightKey, windowInfo.frame.height);
   }
 
   // NOTE: linux is not supported.
@@ -103,8 +103,8 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   Future<void> onWindowMoved() async {
     final pref = await SharedPreferences.getInstance();
     final windowInfo = await getWindowInfo();
-    await pref.setDouble(_sharedPrefereceWindowFrameLeftKey, windowInfo.frame.left);
-    await pref.setDouble(_sharedPrefereceWindowFrameTopKey, windowInfo.frame.top);
+    await pref.setDouble(_sharedPreferenceWindowFrameLeftKey, windowInfo.frame.left);
+    await pref.setDouble(_sharedPreferenceWindowFrameTopKey, windowInfo.frame.top);
   }
 
   // https://github.com/leanflutter/window_manager#hidden-at-launch
