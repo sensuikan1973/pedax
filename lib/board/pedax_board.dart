@@ -231,7 +231,7 @@ class PedaxBoardState extends State<PedaxBoard> {
     required final bool searchHasCompleted,
   }) {
     final color = isBestMove ? Colors.lightBlue[200] : Colors.lime;
-    if (!searchHasCompleted && !isBookMove) return color?.withOpacity(0.3);
+    if (!searchHasCompleted && !isBookMove) return color?.withValues(alpha: 0.3);
     return color;
   }
 }
