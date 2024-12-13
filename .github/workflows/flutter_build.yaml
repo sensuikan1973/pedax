@@ -17,7 +17,7 @@ concurrency:
 jobs:
   flutter_build_desktop_app:
     runs-on: ${{ matrix.runner_machine }}
-    timeout-minutes: 20
+    timeout-minutes: 40
     strategy:
       fail-fast: false # I want results from all OSes even if one fails.
       matrix:
