@@ -552,10 +552,10 @@ packages:
     dependency: "direct dev"
     description:
       name: pedantic_sensuikan1973
-      sha256: c8ffc13ea63105c3958d47a66dda725429a44b74b51997c19ffcf1bee2e361d4
+      sha256: "64ca9caeb84e338b7b24de510e8611690297f3745debd7fdd5df8071d45a6700"
       url: "https://pub.dev"
     source: hosted
-    version: "5.7.0"
+    version: "5.8.1"
   petitparser:
     dependency: transitive
     description:
