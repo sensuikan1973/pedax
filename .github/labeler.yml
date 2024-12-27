@@ -4,6 +4,7 @@ mac:
       - any-glob-to-any-file: macos/**/*
       - any-glob-to-any-file: .github/scripts/macos/**/*
       - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
+      - any-glob-to-any-file: .ruby-version
 
 linux:
   - changed-files:
