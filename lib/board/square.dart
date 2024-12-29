@@ -19,7 +19,7 @@ class Square extends StatelessWidget {
 
   final SquareType type;
   final double length;
-  final double margin; // margin to image
+  final double margin;
   final String coordinate;
   final void Function()? onTap;
   final int? score;
