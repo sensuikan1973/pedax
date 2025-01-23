@@ -57,7 +57,9 @@ class PedaxBoardState extends State<PedaxBoard> {
         future: _bookFileOption.val,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            _boardNotifier.requestBookLoad(snapshot.data!);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _boardNotifier.requestBookLoad(snapshot.data!);
+            });
             return _board;
           }
           return const Center(child: CupertinoActivityIndicator());
