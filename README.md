@@ -35,7 +35,7 @@
 [![Flutter CI](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_ci.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_ci.yaml)
 [![codecov](https://codecov.io/gh/sensuikan1973/pedax/branch/main/graph/badge.svg?token=DoMWFhOPN3)](https://codecov.io/gh/sensuikan1973/pedax)
 [![Flutter Build](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_build.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_build.yaml)
-[![Flutter Deployment MacOS](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml)
+[![Flutter Deployment MacOS](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml/badge.svg?event=release)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_macos.yaml)
 [![Deploy Website](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/deploy_website.yaml)
 
 ### Architecture
