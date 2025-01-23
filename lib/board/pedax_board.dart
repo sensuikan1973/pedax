@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:libedax4dart/libedax4dart.dart';
@@ -45,13 +44,6 @@ class PedaxBoardState extends State<PedaxBoard> {
     super.initState();
     _boardNotifier = context.read<BoardNotifier>()..requestInit();
     HardwareKeyboard.instance.addHandler(_handleKeyEvent);
-    Future<void>.delayed(
-      Duration.zero,
-      () async {
-        final bookFilePath = await _bookFileOption.val;
-        _boardNotifier.requestBookLoad(bookFilePath);
-      },
-    );
   }
 
   @override
@@ -61,7 +53,18 @@ class PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
-  Widget build(final BuildContext context) => RepaintBoundary(
+  Widget build(final BuildContext context) => FutureBuilder<String>(
+        future: _bookFileOption.val,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _boardNotifier.requestBookLoad(snapshot.data!);
+            return _board;
+          }
+          return const Center(child: CupertinoActivityIndicator());
+        },
+      );
+
+  Widget get _board => RepaintBoundary(
         key: _captureKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
