@@ -55,6 +55,12 @@ class PedaxBoardState extends State<PedaxBoard> {
   }
 
   @override
+  void dispose() {
+    HardwareKeyboard.instance.removeHandler(_handleKeyEvent);
+    super.dispose();
+  }
+
+  @override
   Widget build(final BuildContext context) => RepaintBoundary(
         key: _captureKey,
         child: Column(
