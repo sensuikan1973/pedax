@@ -28,7 +28,7 @@ App Store Connect: https://appstoreconnect.apple.com/
 1. download `pedax.msix` from the [GitHub Release](https://github.com/sensuikan1973/pedax/releases).
 2. update and submit on [Microsoft developer console](https://partner.microsoft.com/ja-jp/dashboard/products/9NLNZCKH0L9H/overview).
 
-## Macos/Fastlane
+## macOS/Fastlane
 
 > Your certificate 'XXXXXXXXXX.cer' is not valid, please check end date and renew it if necessary
 
