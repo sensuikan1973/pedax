@@ -68,7 +68,7 @@ dev_dependencies:
     sdk: flutter
   msix: ^3.16.8
   path_provider_platform_interface: ^2.1.2
-  pedantic_sensuikan1973: ^5.9.0
+  pedantic_sensuikan1973: ^5.10.0
   plugin_platform_interface: ^2.1.8
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
