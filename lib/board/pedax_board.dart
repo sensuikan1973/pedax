@@ -172,7 +172,6 @@ class PedaxBoardState extends State<PedaxBoard> {
     final scoreColor = hintWithStepByStep == null
         ? null
         : _scoreColor(
-            score: hintWithStepByStep.hint.score,
             isBookMove: isBookMove,
             isBestMove: hintWithStepByStep.hint.score == bestScore,
             searchHasCompleted: hintWithStepByStep.isLastStep,
@@ -231,7 +230,6 @@ class PedaxBoardState extends State<PedaxBoard> {
   }
 
   Color? _scoreColor({
-    required final int? score,
     required final bool isBookMove,
     required final bool isBestMove,
     required final bool searchHasCompleted,
