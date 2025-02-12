@@ -22,11 +22,7 @@ class CountBestpathRequest implements RequestSchema {
 
 @immutable
 class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
-  const CountBestpathResponse({
-    required this.rootMove,
-    required this.countBestpathResult,
-    required this.request,
-  });
+  const CountBestpathResponse({required this.rootMove, required this.countBestpathResult, required this.request});
 
   @override
   final CountBestpathRequest request;
@@ -38,10 +34,7 @@ class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
   final CountBestpathResult countBestpathResult;
 }
 
-Stream<CountBestpathResponse> executeCountBestpath(
-  final LibEdax edax,
-  final CountBestpathRequest request,
-) async* {
+Stream<CountBestpathResponse> executeCountBestpath(final LibEdax edax, final CountBestpathRequest request) async* {
   final rootBookMoveListWithPosition = edax.edaxGetBookMoveWithPositionByMoves(request.movesAtRequest);
   final logger = Logger(level: request.logLevel);
   for (final move in rootBookMoveListWithPosition.moveList) {
@@ -64,10 +57,6 @@ Stream<CountBestpathResponse> executeCountBestpath(
       playerLowerLimit: request.playerLowerLimit,
       opponentLowerLimit: request.opponentLowerLimit,
     );
-    yield CountBestpathResponse(
-      rootMove: move.moveString,
-      countBestpathResult: result,
-      request: request,
-    );
+    yield CountBestpathResponse(rootMove: move.moveString, countBestpathResult: result, request: request);
   }
 }

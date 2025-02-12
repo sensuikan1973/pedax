@@ -40,24 +40,18 @@ class CopyLocalInfoShortcut implements PedaxShortcut {
   Future<void> runEvent(final PedaxShortcutEventArguments args) async {
     final compactHintsWithStepByStep = List<Map<String, String>>.empty(growable: true);
     for (final h in args.boardNotifier.value.hintsWithStepByStep) {
-      compactHintsWithStepByStep.add(
-        {
-          'isLastStep': h.isLastStep.toString(),
-          'hint.moveString': h.hint.moveString,
-          'hint.scoreString': h.hint.scoreString,
-          'hint.isBookMove': h.hint.isBookMove.toString(),
-          'hint.depth': h.hint.depth.toString(),
-        },
-      );
+      compactHintsWithStepByStep.add({
+        'isLastStep': h.isLastStep.toString(),
+        'hint.moveString': h.hint.moveString,
+        'hint.scoreString': h.hint.scoreString,
+        'hint.isBookMove': h.hint.isBookMove.toString(),
+        'hint.depth': h.hint.depth.toString(),
+      });
     }
     final packageInfo = await PackageInfo.fromPlatform();
     // https://dart.dev/guides/libraries/library-tour#decoding-and-encoding-json
     final jsonText = jsonEncode({
-      'app': {
-        'name': packageInfo.appName,
-        'version': packageInfo.version,
-        'buildNumber': packageInfo.buildNumber,
-      },
+      'app': {'name': packageInfo.appName, 'version': packageInfo.version, 'buildNumber': packageInfo.buildNumber},
       'config': {
         'bestpathCountAvailabilityOption': await const BestpathCountAvailabilityOption().val,
         'bestpathCountPlayerLowerLimitOption': await const BestpathCountPlayerLowerLimitOption().val,
@@ -78,7 +72,7 @@ class CopyLocalInfoShortcut implements PedaxShortcut {
         'bookHasBeenLoaded': args.boardNotifier.value.bookHasBeenLoaded,
         'positionFullNum': args.boardNotifier.value.positionFullNum,
         'hintsWithStepByStep': compactHintsWithStepByStep,
-      }
+      },
     });
     await Clipboard.setData(ClipboardData(text: jsonText));
   }

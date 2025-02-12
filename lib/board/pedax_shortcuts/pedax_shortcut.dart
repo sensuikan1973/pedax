@@ -31,16 +31,16 @@ class PedaxShortcutEventArguments {
 }
 
 List<PedaxShortcut> get shortcutList => const [
-      InitShortcut(),
-      NewShortcut(),
-      UndoShortcut(),
-      RedoShortcut(),
-      UndoAllShortcut(),
-      RedoAllShortcut(),
-      CopyMovesShortcut(),
-      PasteMovesShortcut(),
-      SwitchHintVisibilityShortcut(),
-      Rotate180Shortcut(),
-      CaptureBoardImageShortcut(),
-      CopyLocalInfoShortcut(),
-    ];
+  InitShortcut(),
+  NewShortcut(),
+  UndoShortcut(),
+  RedoShortcut(),
+  UndoAllShortcut(),
+  RedoAllShortcut(),
+  CopyMovesShortcut(),
+  PasteMovesShortcut(),
+  SwitchHintVisibilityShortcut(),
+  Rotate180Shortcut(),
+  CaptureBoardImageShortcut(),
+  CopyLocalInfoShortcut(),
+];

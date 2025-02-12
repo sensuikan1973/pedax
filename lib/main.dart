@@ -57,17 +57,14 @@ Future<void> _runAppWithSentry() async {
     return true;
   };
 
-  await SentryFlutter.init(
-    (options) {
-      // https://docs.sentry.io/platforms/flutter/#configure
-      // https://pub.dev/documentation/sentry/latest/sentry_io/SentryOptions-class.html
-      options
-        ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
-        ..tracesSampleRate = 1.0
-        ..debug = kDebugMode;
-    },
-    appRunner: () => _runApp(),
-  );
+  await SentryFlutter.init((options) {
+    // https://docs.sentry.io/platforms/flutter/#configure
+    // https://pub.dev/documentation/sentry/latest/sentry_io/SentryOptions-class.html
+    options
+      ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
+      ..tracesSampleRate = 1.0
+      ..debug = kDebugMode;
+  }, appRunner: () => _runApp());
 }
 
 Future<void> _runApp() async => runApp(const PedaxApp());

@@ -14,32 +14,32 @@ class HintStepByStepSettingDialog extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.hintStepByStepSetting, textAlign: TextAlign.center),
-        content: FutureBuilder<bool>(
-          future: _option.val,
-          builder: (final context, final snapshot) {
-            if (snapshot.hasData) _enabled.value = snapshot.data;
-            return ValueListenableBuilder<bool?>(
-              valueListenable: _enabled,
-              builder: (final _, final value, final __) {
-                if (value == null) return const CupertinoActivityIndicator();
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(AppLocalizations.of(context)!.hintStepByStepDescription),
-                    Switch(
-                      value: _enabled.value!,
-                      onChanged: (final value) async {
-                        context.read<BoardNotifier>().switchHintStepByStep(enabled: value);
-                        await _option.update(value);
-                        _enabled.value = value;
-                      },
-                    ),
-                  ],
-                );
-              },
+    title: Text(AppLocalizations.of(context)!.hintStepByStepSetting, textAlign: TextAlign.center),
+    content: FutureBuilder<bool>(
+      future: _option.val,
+      builder: (final context, final snapshot) {
+        if (snapshot.hasData) _enabled.value = snapshot.data;
+        return ValueListenableBuilder<bool?>(
+          valueListenable: _enabled,
+          builder: (final _, final value, final __) {
+            if (value == null) return const CupertinoActivityIndicator();
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(AppLocalizations.of(context)!.hintStepByStepDescription),
+                Switch(
+                  value: _enabled.value!,
+                  onChanged: (final value) async {
+                    context.read<BoardNotifier>().switchHintStepByStep(enabled: value);
+                    await _option.update(value);
+                    _enabled.value = value;
+                  },
+                ),
+              ],
             );
           },
-        ),
-      );
+        );
+      },
+    ),
+  );
 }

@@ -11,11 +11,7 @@ class GetBookMoveWithPositionRequest implements RequestSchema {
 
 @immutable
 class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithPositionRequest> {
-  const GetBookMoveWithPositionResponse({
-    required this.position,
-    required this.moveList,
-    required this.request,
-  });
+  const GetBookMoveWithPositionResponse({required this.position, required this.moveList, required this.request});
 
   @override
   final GetBookMoveWithPositionRequest request;
@@ -28,9 +24,5 @@ GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(
   final GetBookMoveWithPositionRequest request,
 ) {
   final result = edax.edaxGetBookMoveWithPosition();
-  return GetBookMoveWithPositionResponse(
-    position: result.position,
-    moveList: result.moveList,
-    request: request,
-  );
+  return GetBookMoveWithPositionResponse(position: result.position, moveList: result.moveList, request: request);
 }

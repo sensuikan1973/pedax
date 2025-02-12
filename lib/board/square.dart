@@ -34,13 +34,13 @@ class Square extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          margin: EdgeInsets.all(margin),
-          child: isLastMove ? Stack(children: [_stone, _lastMoveMark()]) : _stone,
-        ),
-      );
+    behavior: HitTestBehavior.opaque,
+    onTap: onTap,
+    child: Container(
+      margin: EdgeInsets.all(margin),
+      child: isLastMove ? Stack(children: [_stone, _lastMoveMark()]) : _stone,
+    ),
+  );
 
   Widget get _stone {
     switch (type) {
@@ -62,54 +62,39 @@ class Square extends StatelessWidget {
   }
 
   SizedBox _evaluationText() {
-    final scoreText = Text(
-      _scoreString(score!),
-      style: TextStyle(color: scoreColor, fontSize: _scoreFontSize),
-    );
-    final child = isBookMove
-        ? Stack(
-            children: [
-              Center(child: scoreText),
-              Positioned(
-                top: 0,
-                right: 0,
-                // REF: https://emojipedia.org/notebook/
-                child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
-              ),
-              if (bestpathCountOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestpathCountOfBlackText),
-              if (bestpathCountOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestpathCountOfWhiteText)
-            ],
-          )
-        : Center(child: scoreText);
+    final scoreText = Text(_scoreString(score!), style: TextStyle(color: scoreColor, fontSize: _scoreFontSize));
+    final child =
+        isBookMove
+            ? Stack(
+              children: [
+                Center(child: scoreText),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  // REF: https://emojipedia.org/notebook/
+                  child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
+                ),
+                if (bestpathCountOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestpathCountOfBlackText),
+                if (bestpathCountOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestpathCountOfWhiteText),
+              ],
+            )
+            : Center(child: scoreText);
     return SizedBox(height: length, width: length, child: child);
   }
 
   Text get _bestpathCountOfBlackText => Text(
-        bestpathCountOfBlack.toString(),
-        style: TextStyle(
-          fontSize: _bestpathCountFontSize,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-        ),
-      );
+    bestpathCountOfBlack.toString(),
+    style: TextStyle(fontSize: _bestpathCountFontSize, color: Colors.black, fontWeight: FontWeight.bold),
+  );
 
   Text get _bestpathCountOfWhiteText => Text(
-        bestpathCountOfWhite.toString(),
-        style: TextStyle(
-          fontSize: _bestpathCountFontSize,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      );
+    bestpathCountOfWhite.toString(),
+    style: TextStyle(fontSize: _bestpathCountFontSize, color: Colors.white, fontWeight: FontWeight.bold),
+  );
 
   Container _lastMoveMark() {
     final markLength = length / 5;
-    return Container(
-      height: markLength,
-      width: markLength,
-      margin: EdgeInsets.all(markLength * 2),
-      color: Colors.red,
-    );
+    return Container(height: markLength, width: markLength, margin: EdgeInsets.all(markLength * 2), color: Colors.red);
   }
 
   String _scoreString(final int score) => score >= 0 ? '+$score' : score.toString();

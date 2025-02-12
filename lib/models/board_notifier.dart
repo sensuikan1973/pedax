@@ -268,10 +268,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       } else {
         value.countBestpathList = UnmodifiableListView([
           ...value.countBestpathList,
-          CountBestpathResultWithMove(
-            countBestpathList: message.countBestpathResult,
-            rootMove: message.rootMove,
-          )
+          CountBestpathResultWithMove(countBestpathList: message.countBestpathResult, rootMove: message.rootMove),
         ]);
       }
     } else if (message is BookLoadResponse) {

@@ -27,7 +27,6 @@ class CopyMovesShortcut implements PedaxShortcut {
       (HardwareKeyboard.instance.isMetaPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey));
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => Clipboard.setData(
-        ClipboardData(text: args.boardNotifier.value.currentMovesWithoutPassString),
-      );
+  Future<void> runEvent(final PedaxShortcutEventArguments args) async =>
+      Clipboard.setData(ClipboardData(text: args.boardNotifier.value.currentMovesWithoutPassString));
 }

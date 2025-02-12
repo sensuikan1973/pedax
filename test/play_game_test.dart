@@ -300,13 +300,10 @@ Future<void> main() async {
 
   testWidgets('paste moves, and copy moves', (final tester) async {
     const moves = 'f5f6';
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
-      SystemChannels.platform,
-      (final methodCall) async {
-        if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
-        return null;
-      },
-    );
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (final methodCall) async {
+      if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
+      return null;
+    });
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
