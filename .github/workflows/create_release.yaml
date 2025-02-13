@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-intel-silicon, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
             runner_machine: ubuntu-latest
@@ -34,13 +34,6 @@ jobs:
             setup_for_flutter_desktop_script: .github/scripts/windows/install_additional_requirements_for_flutter.sh
             prepare_to_pack_script: .github/scripts/windows/prepare_to_pack.sh
             distribution_path: build/windows/x64/runner/Release # https://docs.flutter.dev/release/breaking-changes/windows-build-architecture
-          - os: macos-intel-silicon
-            # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
-            runner_machine: macos-13
-            subcommand: macos
-            setup_for_flutter_desktop_script: .github/scripts/macos/install_additional_requirements_for_flutter.sh
-            prepare_to_pack_script: .github/scripts/macos/prepare_to_pack.sh
-            distribution_path: build/macos/Build/Products/release
           - os: macos-latest
             # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
             runner_machine: macos-latest
