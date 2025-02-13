@@ -54,7 +54,6 @@ jobs:
         with:
           cache: true
       - uses: maxim-lobanov/setup-xcode@v1
-        if: runner.os == 'macOS'
         with:
           xcode-version: latest-stable
       - name: setup flutter channel
