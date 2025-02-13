@@ -39,13 +39,13 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.8.0
   intl: ^0.19.0 # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
-  libedax4dart: ^7.32.0
+  libedax4dart: ^7.37.0
   logger: ^2.5.0
   macos_secure_bookmarks: ^0.2.1
-  meta: ^1.15.0
+  meta: ^1.16.0
   package_info_plus: ^8.2.1
   pasteboard: ^0.3.0
-  path: ^1.9.0
+  path: ^1.9.1
   path_provider: ^2.1.5 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.1.2
   sentry_flutter: ^8.13.0
@@ -68,7 +68,7 @@ dev_dependencies:
     sdk: flutter
   msix: ^3.16.8
   path_provider_platform_interface: ^2.1.2
-  pedantic_sensuikan1973: ^5.10.0
+  pedantic_sensuikan1973: ^5.11.0
   plugin_platform_interface: ^2.1.8
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
