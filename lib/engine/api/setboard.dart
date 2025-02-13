@@ -15,11 +15,7 @@ class SquareReplacement {
 
 @immutable
 class SetboardRequest implements RequestSchema {
-  const SetboardRequest({
-    required this.currentColor,
-    required this.replacementTargets,
-    required this.logLevel,
-  });
+  const SetboardRequest({required this.currentColor, required this.replacementTargets, required this.logLevel});
 
   final int currentColor;
   final List<SquareReplacement> replacementTargets;

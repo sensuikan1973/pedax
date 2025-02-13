@@ -37,10 +37,8 @@ class BoardState {
   int get blackDiscCount => currentColor == TurnColor.black ? squaresOfPlayer.length : squaresOfOpponent.length;
   int get whiteDiscCount => currentColor == TurnColor.white ? squaresOfPlayer.length : squaresOfOpponent.length;
 
-  String get currentMovesWithoutPassString => currentMoves.replaceAll(
-        RegExp('(${MoveMark.passStringOfBlack})|(${MoveMark.passStringOfWhite})'),
-        '',
-      );
+  String get currentMovesWithoutPassString =>
+      currentMoves.replaceAll(RegExp('(${MoveMark.passStringOfBlack})|(${MoveMark.passStringOfWhite})'), '');
   int get currentMovesCountWithoutPass => currentMovesWithoutPassString.length ~/ 2;
 
   String get arrangeTargetChar {
@@ -64,20 +62,14 @@ enum ArrangeTargetType { black, white, empty }
 
 @immutable
 class CountBestpathResultWithMove {
-  const CountBestpathResultWithMove({
-    required this.countBestpathList,
-    required this.rootMove,
-  });
+  const CountBestpathResultWithMove({required this.countBestpathList, required this.rootMove});
   final CountBestpathResult countBestpathList;
   final String rootMove;
 }
 
 @immutable
 class HintWithStepByStep {
-  const HintWithStepByStep({
-    required this.hint,
-    required this.isLastStep,
-  });
+  const HintWithStepByStep({required this.hint, required this.isLastStep});
   final Hint hint;
   final bool isLastStep;
 }

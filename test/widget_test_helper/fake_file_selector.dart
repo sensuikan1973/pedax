@@ -12,13 +12,11 @@ void fakeFileSelector() {
 class FakeFileSelector extends Fake
     with
         MockPlatformInterfaceMixin // ignore: prefer_mixin
-    implements
-        FileSelectorPlatform {
+    implements FileSelectorPlatform {
   @override
   Future<XFile?> openFile({
     List<XTypeGroup>? acceptedTypeGroups,
     String? initialDirectory,
     String? confirmButtonText,
-  }) async =>
-      null;
+  }) async => null;
 }

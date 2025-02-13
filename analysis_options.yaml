@@ -1,6 +1,9 @@
 ---
 include: package:pedantic_sensuikan1973/analysis_options.yaml
 
+formatter:
+  page_width: 120
+
 analyzer:
   exclude:
     - lib/l10n/*.dart

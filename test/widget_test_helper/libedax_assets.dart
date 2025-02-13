@@ -25,8 +25,7 @@ void _copyDylibForTestOnMacOS() {
 class FakePathProviderPlatform extends Fake
     with
         MockPlatformInterfaceMixin // ignore: prefer_mixin
-    implements
-        PathProviderPlatform {
+    implements PathProviderPlatform {
   FakePathProviderPlatform({required this.tempDir});
 
   final Directory tempDir;

@@ -41,10 +41,7 @@ class HintOneByOneResponse implements ResponseSchema<HintOneByOneRequest> {
 List<int> generateLevelList3Steps(final int maxLevel) =>
     [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
 
-Stream<HintOneByOneResponse> executeHintOneByOne(
-  final LibEdax edax,
-  final HintOneByOneRequest request,
-) async* {
+Stream<HintOneByOneResponse> executeHintOneByOne(final LibEdax edax, final HintOneByOneRequest request) async* {
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   const levelOption = LevelOption();
   final logger = Logger(level: request.logLevel);

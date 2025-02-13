@@ -34,10 +34,8 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   final _edaxAsset = const EdaxAsset();
-  double get _pedaxBoardBodyLength => min(
-        MediaQuery.of(context).size.width * 0.8,
-        MediaQuery.of(context).size.height * 0.7,
-      );
+  double get _pedaxBoardBodyLength =>
+      min(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.height * 0.7);
   double get _discCountImageSize => _pedaxBoardBodyLength / 12;
   double get _discCountFontSize => _discCountImageSize * 0.4;
   double get _positionInfoFontSize => _discCountImageSize * 0.4;
@@ -69,34 +67,36 @@ class HomeState extends State<Home> {
   Widget build(final BuildContext context) {
     final edaxServerSpawned = context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxServerSpawned);
     if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
-    final bookLoadStatus =
-        context.select<BoardNotifier, BookLoadStatus?>((final notifier) => notifier.value.bookLoadStatus);
+    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>(
+      (final notifier) => notifier.value.bookLoadStatus,
+    );
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
       appBar: _appBar,
-      body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
-          ? _body
-          : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
+      body:
+          context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
+              ? _body
+              : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
   }
 
   Widget get _body => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      PedaxBoard(bodyLength: _pedaxBoardBodyLength, bodyColor: _boardBodyColor),
+      Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PedaxBoard(bodyLength: _pedaxBoardBodyLength, bodyColor: _boardBodyColor),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
-              const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
-              SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
-            ],
-          ),
-          _bottomItems,
+          SizedBox(width: _pedaxBoardBodyLength / 2, child: _movesCountText),
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 15)),
+          SizedBox(width: _pedaxBoardBodyLength / 2, child: _positionInfoText),
         ],
-      );
+      ),
+      _bottomItems,
+    ],
+  );
 
   Widget get _bottomItems {
     final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
@@ -105,23 +105,24 @@ class HomeState extends State<Home> {
   }
 
   Widget get _freePlayOperationItems => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          _undoAllButton,
-          _undoButton,
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-          _blackDiscCount,
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-          _whiteDiscCount,
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-          _redoButton,
-          _redoAllButton,
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      _undoAllButton,
+      _undoButton,
+      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+      _blackDiscCount,
+      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+      _whiteDiscCount,
+      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+      _redoButton,
+      _redoAllButton,
+    ],
+  );
 
   Widget get _arrangeTargetSelection {
-    final currentArrangeTargetSquareType =
-        context.select<BoardNotifier, ArrangeTargetType>((final notifier) => notifier.value.arrangeTargetSquareType);
+    final currentArrangeTargetSquareType = context.select<BoardNotifier, ArrangeTargetType>(
+      (final notifier) => notifier.value.arrangeTargetSquareType,
+    );
     final selectedMark = Border.all(color: Colors.red, width: 2);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -183,14 +184,11 @@ class HomeState extends State<Home> {
           child: Text(_boardModeString(boardMode)),
         ),
         onSelected: (final boardMode) => context.read<BoardNotifier>().switchBoardMode(boardMode),
-        itemBuilder: (final context) => BoardMode.values
-            .map(
-              (final mode) => PopupMenuItem<BoardMode>(
-                value: mode,
-                child: Text(_boardModeString(mode)),
-              ),
-            )
-            .toList(),
+        itemBuilder:
+            (final context) =>
+                BoardMode.values
+                    .map((final mode) => PopupMenuItem<BoardMode>(value: mode, child: Text(_boardModeString(mode))))
+                    .toList(),
       ),
       backgroundColor: Colors.brown,
       titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
@@ -199,10 +197,11 @@ class HomeState extends State<Home> {
         IconButton(
           icon: const Icon(FontAwesomeIcons.keyboard),
           padding: const EdgeInsets.all(12),
-          onPressed: () async => showDialog<void>(
-            context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
-          ),
+          onPressed:
+              () async => showDialog<void>(
+                context: context,
+                builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
+              ),
         ),
         Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
       ],
@@ -219,28 +218,28 @@ class HomeState extends State<Home> {
   }
 
   Widget get _undoAllButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.anglesLeft),
-        iconSize: _undoOrRedoIconSize,
-        onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
-      );
+    icon: const Icon(FontAwesomeIcons.anglesLeft),
+    iconSize: _undoOrRedoIconSize,
+    onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
+  );
 
   Widget get _undoButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.angleLeft),
-        iconSize: _undoOrRedoIconSize,
-        onPressed: () => context.read<BoardNotifier>().requestUndo(),
-      );
+    icon: const Icon(FontAwesomeIcons.angleLeft),
+    iconSize: _undoOrRedoIconSize,
+    onPressed: () => context.read<BoardNotifier>().requestUndo(),
+  );
 
   Widget get _redoButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.angleRight),
-        iconSize: _undoOrRedoIconSize,
-        onPressed: () => context.read<BoardNotifier>().requestRedo(),
-      );
+    icon: const Icon(FontAwesomeIcons.angleRight),
+    iconSize: _undoOrRedoIconSize,
+    onPressed: () => context.read<BoardNotifier>().requestRedo(),
+  );
 
   Widget get _redoAllButton => IconButton(
-        icon: const Icon(FontAwesomeIcons.anglesRight),
-        iconSize: _undoOrRedoIconSize,
-        onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
-      );
+    icon: const Icon(FontAwesomeIcons.anglesRight),
+    iconSize: _undoOrRedoIconSize,
+    onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
+  );
 
   Widget get _blackDiscCount {
     final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
@@ -253,15 +252,16 @@ class HomeState extends State<Home> {
           decoration: BoxDecoration(
             color: Colors.black,
             shape: BoxShape.circle,
-            border: currentColor == TurnColor.black
-                ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
-                : null,
+            border:
+                currentColor == TurnColor.black
+                    ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
+                    : null,
           ),
         ),
         Text(
           context.select<BoardNotifier, int>((final notifier) => notifier.value.blackDiscCount).toString(),
           style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
-        )
+        ),
       ],
     );
   }
@@ -277,15 +277,16 @@ class HomeState extends State<Home> {
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
-            border: currentColor == TurnColor.white
-                ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
-                : Border.all(),
+            border:
+                currentColor == TurnColor.white
+                    ? Border.all(color: _currentColorBorderColor, width: _currentColorBoardWidth)
+                    : Border.all(),
           ),
         ),
         Text(
           context.select<BoardNotifier, int>((final notifier) => notifier.value.whiteDiscCount).toString(),
           style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
-        )
+        ),
       ],
     );
   }
@@ -297,9 +298,7 @@ class HomeState extends State<Home> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center),
-        ),
+        SnackBar(content: Text(AppLocalizations.of(context)!.finishedLoadingBookFile, textAlign: TextAlign.center)),
       );
     });
   }
@@ -318,18 +317,17 @@ class HomeState extends State<Home> {
 
   Text get _positionInfoText {
     final positionFullNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.positionFullNum);
-    final data = positionFullNum == 0
-        ? AppLocalizations.of(context)!.noPositionInfo
-        : AppLocalizations.of(context)!.positionInfo(positionFullNum);
-    return Text(
-      data,
-      style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold),
-    );
+    final data =
+        positionFullNum == 0
+            ? AppLocalizations.of(context)!.noPositionInfo
+            : AppLocalizations.of(context)!.positionInfo(positionFullNum);
+    return Text(data, style: TextStyle(fontSize: _positionInfoFontSize, fontWeight: FontWeight.bold));
   }
 
   Text get _movesCountText {
-    final movesCount =
-        context.select<BoardNotifier, int>((final notifier) => notifier.value.currentMovesCountWithoutPass);
+    final movesCount = context.select<BoardNotifier, int>(
+      (final notifier) => notifier.value.currentMovesCountWithoutPass,
+    );
     return Text(
       AppLocalizations.of(context)!.movesCount(movesCount),
       textAlign: TextAlign.end,
@@ -338,100 +336,98 @@ class HomeState extends State<Home> {
   }
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
-        icon: const Icon(Icons.menu),
-        onSelected: (final menu) => menu.onSelected(),
-        itemBuilder: (final context) => _popupMenuEntries,
-      );
+    icon: const Icon(Icons.menu),
+    onSelected: (final menu) => menu.onSelected(),
+    itemBuilder: (final context) => _popupMenuEntries,
+  );
 
   List<PopupMenuEntry<_Menu>> get _popupMenuEntries => [
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.level,
-            () async => showDialog<void>(
-              context: context,
-              builder: (final _) => ChangeNotifierProvider.value(
-                value: context.read<BoardNotifier>(),
-                child: LevelSettingDialog(),
-              ),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.levelSetting),
+    PopupMenuItem<_Menu>(
+      value: _Menu(
+        _MenuType.level,
+        () async => showDialog<void>(
+          context: context,
+          builder:
+              (final _) =>
+                  ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: LevelSettingDialog()),
         ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.hintStepByStep,
-            () async => showDialog<void>(
-              context: context,
-              builder: (final _) => ChangeNotifierProvider.value(
+      ),
+      child: Text(AppLocalizations.of(context)!.levelSetting),
+    ),
+    const PopupMenuDivider(),
+    PopupMenuItem<_Menu>(
+      value: _Menu(
+        _MenuType.hintStepByStep,
+        () async => showDialog<void>(
+          context: context,
+          builder:
+              (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
                 child: HintStepByStepSettingDialog(),
               ),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.hintStepByStepSetting),
         ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.bookFilePath,
-            () async => showDialog<void>(
-              context: context,
-              builder: (final _) => ChangeNotifierProvider.value(
+      ),
+      child: Text(AppLocalizations.of(context)!.hintStepByStepSetting),
+    ),
+    const PopupMenuDivider(),
+    PopupMenuItem<_Menu>(
+      value: _Menu(
+        _MenuType.bookFilePath,
+        () async => showDialog<void>(
+          context: context,
+          builder:
+              (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
                 child: const BookFilePathSettingDialog(),
               ),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
         ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.nTasks,
-            () async => showDialog<void>(
-              context: context,
-              builder: (final _) => ChangeNotifierProvider.value(
-                value: context.read<BoardNotifier>(),
-                child: NTasksSettingDialog(),
-              ),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.nTasksSetting),
+      ),
+      child: Text(AppLocalizations.of(context)!.bookFilePathSetting),
+    ),
+    const PopupMenuDivider(),
+    PopupMenuItem<_Menu>(
+      value: _Menu(
+        _MenuType.nTasks,
+        () async => showDialog<void>(
+          context: context,
+          builder:
+              (final _) =>
+                  ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: NTasksSettingDialog()),
         ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.bestpathCountAvailability,
-            () async => showDialog<void>(
-              context: context,
-              builder: (final _) => ChangeNotifierProvider.value(
+      ),
+      child: Text(AppLocalizations.of(context)!.nTasksSetting),
+    ),
+    const PopupMenuDivider(),
+    PopupMenuItem<_Menu>(
+      value: _Menu(
+        _MenuType.bestpathCountAvailability,
+        () async => showDialog<void>(
+          context: context,
+          builder:
+              (final _) => ChangeNotifierProvider.value(
                 value: context.read<BoardNotifier>(),
                 child: BestpathCountSettingDialog(),
               ),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context)!.bestpathCountSetting),
         ),
-        const PopupMenuDivider(),
-        PopupMenuItem<_Menu>(
-          value: _Menu(
-            _MenuType.about,
-            () async {
-              final packageInfo = await PackageInfo.fromPlatform();
-              if (mounted) {
-                showAboutDialog(
-                  context: context,
-                  applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
-                  applicationName: packageInfo.appName,
-                  applicationVersion: packageInfo.version,
-                );
-              }
-            },
-          ),
-          child: Text(AppLocalizations.of(context)!.about),
-        ),
-      ];
+      ),
+      child: Text(AppLocalizations.of(context)!.bestpathCountSetting),
+    ),
+    const PopupMenuDivider(),
+    PopupMenuItem<_Menu>(
+      value: _Menu(_MenuType.about, () async {
+        final packageInfo = await PackageInfo.fromPlatform();
+        if (mounted) {
+          showAboutDialog(
+            context: context,
+            applicationIcon: Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
+            applicationName: packageInfo.appName,
+            applicationVersion: packageInfo.version,
+          );
+        }
+      }),
+      child: Text(AppLocalizations.of(context)!.about),
+    ),
+  ];
 }
 
 @immutable
@@ -441,11 +437,4 @@ class _Menu {
   final void Function() onSelected;
 }
 
-enum _MenuType {
-  bookFilePath,
-  nTasks,
-  level,
-  hintStepByStep,
-  bestpathCountAvailability,
-  about,
-}
+enum _MenuType { bookFilePath, nTasks, level, hintStepByStep, bestpathCountAvailability, about }
