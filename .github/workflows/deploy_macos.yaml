@@ -13,6 +13,10 @@ jobs:
     steps:
       # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#release
       - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        if: runner.os == 'macOS'
+        with:
+          xcode-version: latest-stable
       - uses: subosito/flutter-action@v2.18.0
         with:
           cache: true
