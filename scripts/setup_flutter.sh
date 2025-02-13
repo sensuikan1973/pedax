@@ -8,6 +8,9 @@ flutter config --enable-macos-desktop
 flutter config --enable-windows-desktop
 flutter config --enable-linux-desktop
 
+# https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers
+flutter config --enable-swift-package-manager
+
 # disable platforms that I won’t develop for.
 # See: https://docs.flutter.dev/desktop#set-up
 flutter config --no-enable-ios
