@@ -154,7 +154,8 @@ GEM
     highline (2.0.3)
     http-cookie (1.0.8)
       domain_name (~> 0.5)
-    httpclient (2.8.3)
+    httpclient (2.9.0)
+      mutex_m
     jmespath (1.6.2)
     json (2.10.1)
     jwt (2.10.1)
