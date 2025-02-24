@@ -3,7 +3,7 @@ name: Upgrade Flutter Dependencies
 
 on:
   schedule:
-    - cron: '0 21 * * *' # everyday, 21:00 (UTC)
+    - cron: '0 21 * * 5'
   workflow_dispatch:
 
 jobs:
