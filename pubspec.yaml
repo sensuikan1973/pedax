@@ -6,7 +6,6 @@ description: Reversi Board with edax.
 publish_to: none
 homepage: https://sensuikan1973.github.io/pedax/
 repository: https://github.com/sensuikan1973/pedax
-issue_tracker: https://github.com/sensuikan1973/pedax/issues
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
