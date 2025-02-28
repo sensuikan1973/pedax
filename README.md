@@ -86,11 +86,12 @@ sequenceDiagram
   end
 ```
 
-[`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+sort%3Acreated-asc)
-
 ### Run
 
 ```sh
 ./scripts/setup_flutter.sh
 flutter run --device-id macos --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
+
+### References
+- [`important` issues and PR](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+sort%3Acreated-asc)
