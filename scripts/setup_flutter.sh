@@ -22,7 +22,6 @@ flutter upgrade
 
 # useful flutter desktop sample
 # - https://github.com/flutter/samples/tree/master/desktop_photo_search
-# - https://github.com/flutter/gallery
 # - https://github.com/authpass/authpass
 # - https://github.com/MixinNetwork/flutter-app
 #   - useful plugins: https://github.com/MixinNetwork/flutter-plugins
