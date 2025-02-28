@@ -28,8 +28,6 @@
 </div>
 <br clear="all">
 
----
-
 ## Development
 
 [![Flutter CI](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_ci.yaml/badge.svg)](https://github.com/sensuikan1973/pedax/actions/workflows/flutter_ci.yaml)
