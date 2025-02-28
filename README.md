@@ -7,7 +7,7 @@
 <div>
   <br/>
   <br/>
-  <em>pedax</em> is Reversi Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi program.
+  <em>pedax</em> is Reversi Board GUI with <a href="https://sensuikan1973.github.io/edax-reversi">edax</a>, which is the strongest reversi engine.
   <br/>
   <br/>
   <em>pedax</em> has 4 features.
