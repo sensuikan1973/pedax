@@ -1,1 +1,1 @@
-minor improvement of stability.
+minor bug fix
