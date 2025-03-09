@@ -251,7 +251,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
     } else if (message is HintOneByOneResponse) {
-      if (message.request.movesAtRequest != value.currentMoves) {
+      if (message.request.movesAtRequest != value.currentMoves || value.hintIsVisible == false) {
         value.hintsWithStepByStep = UnmodifiableListView([]);
       } else {
         value
