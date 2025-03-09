@@ -186,7 +186,7 @@ packages:
     source: hosted
     version: "0.5.3+1"
   file_selector_linux:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: file_selector_linux
       sha256: "54cbbd957e1156d29548c7d9b9ec0c0ebb6de0a90452198683a7d23aed617a33"

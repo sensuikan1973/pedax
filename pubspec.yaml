@@ -29,9 +29,7 @@ environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
 dependencies:
   crypto: ^3.0.6
   cupertino_icons: ^1.0.8
-  # See: https://github.com/google/flutter-desktop-embedding/tree/master/plugins/file_selector
   file_selector: ^1.0.3
-  file_selector_linux: ^0.9.3+2
   flutter:
     sdk: flutter
   flutter_localizations:
