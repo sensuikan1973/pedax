@@ -49,4 +49,5 @@ documentation:
 fastlane:
   - changed-files:
       - any-glob-to-any-file: macos/fastlane/**/*
+      - any-glob-to-any-file: macos/Gemfile*
       - any-glob-to-any-file: scripts/deploy_macos_app_to_app_store.sh
