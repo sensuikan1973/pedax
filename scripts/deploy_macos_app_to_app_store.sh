@@ -27,8 +27,8 @@ source ./scripts/setup_flutter.sh
 flutter build macos --release --dart-define SENTRY_DSN="$SENTRY_DSN"
 
 cd macos
-bundle --version
 ruby --version
+bundle --version
 
 bundle config set --local deployment 'true'
 bundle install
