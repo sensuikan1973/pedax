@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.18.0
+      - uses: subosito/flutter-action@v2.19.0
         with:
           cache: true
       - name: setup flutter channel
@@ -39,7 +39,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.18.0
+      - uses: subosito/flutter-action@v2.19.0
         with:
           cache: true
       - name: setup flutter channel
@@ -71,7 +71,7 @@ jobs:
             setup_for_flutter_desktop_script: .github/scripts/linux/install_additional_requirements_for_flutter.sh
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.18.0
+      - uses: subosito/flutter-action@v2.19.0
         with:
           cache: true
       - name: setup flutter channel
@@ -127,7 +127,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.18.0
+      - uses: subosito/flutter-action@v2.19.0
         with:
           cache: true
       - name: setup flutter channel
