@@ -26,11 +26,7 @@ jobs:
         run: ./scripts/setup_flutter.sh
       - name: install dependencies
         run: flutter pub get
-      # while we wait for https://github.com/dart-lang/dart_style/issues/864
-      # - run: dart format . --set-exit-if-changed
-      - run: >-
-          find lib test integration_test -name '*.dart' -not -name 'app_localizations*.dart'
-          | xargs dart format --set-exit-if-changed
+      - run: dart format . --set-exit-if-changed
 
   # https://docs.flutter.dev/reference/flutter-cli#flutter-commands
   # https://flutter.dev/docs/development/tools/flutter-fix#applying-project-wide-fixes
