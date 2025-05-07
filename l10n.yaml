@@ -6,3 +6,5 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 synthetic-package: false # See: https://docs.flutter.dev/release/breaking-changes/flutter-generate-i10n-source
 output-dir: lib/l10n # https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#configuring-the-l10n-yaml-file
+header: |
+  // dart format off
