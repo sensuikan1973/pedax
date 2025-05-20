@@ -94,5 +94,5 @@ flutter run --device-id macos --dart-define "SENTRY_DSN=xxx" # env is optional
 ```
 
 ### References
-- [`important` issues](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+sort%3Acreated-asc)
+- [`important` issues](https://github.com/sensuikan1973/pedax/issues?q=label%3Aimportant+sort%3Acreated-desc)
 - https://dart.dev/language/concurrency
