@@ -1,7 +1,7 @@
 ---
 # See: https://github.com/crate-ci/typos/blob/master/docs/github-action.md
 
-name: Prevent typos
+name: typos
 
 on:
   push:
@@ -11,10 +11,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  check_typos:
+  typos:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: crate-ci/typos@master
+      - uses: crate-ci/typos@v1.32.0
         with:
-          config: .github/.typos_config.toml
+          config: .typos.toml
