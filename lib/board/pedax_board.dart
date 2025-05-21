@@ -86,17 +86,16 @@ class PedaxBoardState extends State<PedaxBoard> {
     height: widget.frameWidth,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children:
-          [
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-          ].map((final x) => Text(x, style: TextStyle(color: _coordinateLabelColor))).toList(),
+      children: [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+      ].map((final x) => Text(x, style: TextStyle(color: _coordinateLabelColor))).toList(),
     ),
   );
 
@@ -154,19 +153,19 @@ class PedaxBoardState extends State<PedaxBoard> {
       (final notifier) => notifier.value.countBestpathList,
     );
     final targetCountBestpathResultWithMove = countBestpathList.where((final el) => el.rootMove == moveString).toList();
-    final countBestpathResultWithMove =
-        targetCountBestpathResultWithMove.isEmpty ? null : targetCountBestpathResultWithMove.first;
+    final countBestpathResultWithMove = targetCountBestpathResultWithMove.isEmpty
+        ? null
+        : targetCountBestpathResultWithMove.first;
     final lastMove = context.select<BoardNotifier, Move?>((final notifier) => notifier.value.lastMove);
     final bestScore = context.select<BoardNotifier, int>((final notifier) => notifier.value.bestScore);
     final isBookMove = hintWithStepByStep != null && hintWithStepByStep.hint.isBookMove;
-    final scoreColor =
-        hintWithStepByStep == null
-            ? null
-            : _scoreColor(
-              isBookMove: isBookMove,
-              isBestMove: hintWithStepByStep.hint.score == bestScore,
-              searchHasCompleted: hintWithStepByStep.isLastStep,
-            );
+    final scoreColor = hintWithStepByStep == null
+        ? null
+        : _scoreColor(
+            isBookMove: isBookMove,
+            isBestMove: hintWithStepByStep.hint.score == bestScore,
+            searchHasCompleted: hintWithStepByStep.isLastStep,
+          );
     final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
     return Square(
       type: type,

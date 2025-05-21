@@ -64,96 +64,98 @@ class EdaxServer {
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
     _logger.d('sent my port to parentSendPort');
 
-    final edax =
-        LibEdax(_dllPath)
-          ..libedaxInitialize(initLibedaxParameters)
-          ..edaxInit();
+    final edax = LibEdax(_dllPath)
+      ..libedaxInitialize(initLibedaxParameters)
+      ..edaxInit();
     _logger.i('libedax has initialized with $initLibedaxParameters');
 
     _registerApiHandler(parentSendPort, edax);
   }
 
   void _registerApiHandler(final SendPort parentSendPort, final LibEdax edax) =>
-  // ignore: avoid_annotating_with_dynamic
-  _receivePort.listen((final dynamic message) async {
-    _logger.d('received request "${message.runtimeType}"');
-    if (message is MoveRequest) {
-      parentSendPort.send(executeMove(edax, message));
-    } else if (message is PlayRequest) {
-      parentSendPort.send(executePlay(edax, message));
-    } else if (message is HintOneByOneRequest) {
-      _latestHintntOneByOneRequest = message;
-      while (true) {
-        if (_computingHintOneByOne) {
-          await Future<void>.delayed(const Duration(milliseconds: 5));
-          continue;
-        }
-        if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
-          _logger.d('''
+      // ignore: avoid_annotating_with_dynamic
+      _receivePort.listen((final dynamic message) async {
+        _logger.d('received request "${message.runtimeType}"');
+        if (message is MoveRequest) {
+          parentSendPort.send(executeMove(edax, message));
+        } else if (message is PlayRequest) {
+          parentSendPort.send(executePlay(edax, message));
+        } else if (message is HintOneByOneRequest) {
+          _latestHintntOneByOneRequest = message;
+          while (true) {
+            if (_computingHintOneByOne) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
+              continue;
+            }
+            if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
+              _logger.d('''
               The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
               ''');
-          break;
-        }
-        _computingHintOneByOne = true;
-        await compute(_computeHintNext, _ComputeHintNextParams(_dllPath, _latestHintntOneByOneRequest, parentSendPort));
-        _computingHintOneByOne = false;
-        break;
-      }
-    } else if (message is InitRequest) {
-      parentSendPort.send(executeInit(edax, message));
-    } else if (message is NewRequest) {
-      parentSendPort.send(executeNew(edax, message));
-    } else if (message is RotateRequest) {
-      parentSendPort.send(executeRotate(edax, message));
-    } else if (message is UndoRequest) {
-      parentSendPort.send(executeUndo(edax, message));
-    } else if (message is RedoRequest) {
-      parentSendPort.send(executeRedo(edax, message));
-    } else if (message is GetBookMoveWithPositionRequest) {
-      parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
-    } else if (message is CountBestpathRequest) {
-      _latestCountBestpathRequest = message;
-      while (true) {
-        if (_computingCountBestpath) {
-          await Future<void>.delayed(const Duration(milliseconds: 5));
-          continue;
-        }
-        if (_latestCountBestpathRequest.movesAtRequest != message.movesAtRequest) {
-          _logger.d('''
+              break;
+            }
+            _computingHintOneByOne = true;
+            await compute(
+              _computeHintNext,
+              _ComputeHintNextParams(_dllPath, _latestHintntOneByOneRequest, parentSendPort),
+            );
+            _computingHintOneByOne = false;
+            break;
+          }
+        } else if (message is InitRequest) {
+          parentSendPort.send(executeInit(edax, message));
+        } else if (message is NewRequest) {
+          parentSendPort.send(executeNew(edax, message));
+        } else if (message is RotateRequest) {
+          parentSendPort.send(executeRotate(edax, message));
+        } else if (message is UndoRequest) {
+          parentSendPort.send(executeUndo(edax, message));
+        } else if (message is RedoRequest) {
+          parentSendPort.send(executeRedo(edax, message));
+        } else if (message is GetBookMoveWithPositionRequest) {
+          parentSendPort.send(executeGetBookMoveWithPosition(edax, message));
+        } else if (message is CountBestpathRequest) {
+          _latestCountBestpathRequest = message;
+          while (true) {
+            if (_computingCountBestpath) {
+              await Future<void>.delayed(const Duration(milliseconds: 5));
+              continue;
+            }
+            if (_latestCountBestpathRequest.movesAtRequest != message.movesAtRequest) {
+              _logger.d('''
               The CountBestpathRequest (moves: ${message.movesAtRequest}) has dropped.
               It is because a new CountBestpathRequest (moves: ${_latestCountBestpathRequest.movesAtRequest}) has been received after that.
               ''');
-          break;
+              break;
+            }
+            _computingCountBestpath = true;
+            await compute(
+              _computeCountBestpath,
+              _ComputeCountBestpathParams(_dllPath, _latestCountBestpathRequest, parentSendPort),
+            );
+            _computingCountBestpath = false;
+            break;
+          }
+        } else if (message is BookLoadRequest) {
+          if (_computingBookLoading) return;
+          _computingBookLoading = true;
+          _logger.i('will load book file. path: ${message.file}');
+          await compute(_computeBookLoad, _ComputeBookLoadParams(_dllPath, message, parentSendPort));
+          _computingBookLoading = false;
+        } else if (message is SetOptionRequest) {
+          parentSendPort.send(executeSetOption(edax, message));
+        } else if (message is SetboardRequest) {
+          parentSendPort.send(executeSetboard(edax, message));
+        } else if (message is StopRequest) {
+          parentSendPort.send(executeStop(edax, message));
+        } else if (message is ShutdownRequest) {
+          parentSendPort.send(executeShutdown(edax, message));
+          _receivePort.close();
+          _logger.i('shutdowned');
+        } else {
+          _logger.w('request ${message.runtimeType} is not supported');
         }
-        _computingCountBestpath = true;
-        await compute(
-          _computeCountBestpath,
-          _ComputeCountBestpathParams(_dllPath, _latestCountBestpathRequest, parentSendPort),
-        );
-        _computingCountBestpath = false;
-        break;
-      }
-    } else if (message is BookLoadRequest) {
-      if (_computingBookLoading) return;
-      _computingBookLoading = true;
-      _logger.i('will load book file. path: ${message.file}');
-      await compute(_computeBookLoad, _ComputeBookLoadParams(_dllPath, message, parentSendPort));
-      _computingBookLoading = false;
-    } else if (message is SetOptionRequest) {
-      parentSendPort.send(executeSetOption(edax, message));
-    } else if (message is SetboardRequest) {
-      parentSendPort.send(executeSetboard(edax, message));
-    } else if (message is StopRequest) {
-      parentSendPort.send(executeStop(edax, message));
-    } else if (message is ShutdownRequest) {
-      parentSendPort.send(executeShutdown(edax, message));
-      _receivePort.close();
-      _logger.i('shutdowned');
-    } else {
-      _logger.w('request ${message.runtimeType} is not supported');
-    }
-  });
+      });
 }
 
 @immutable

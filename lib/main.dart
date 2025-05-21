@@ -61,7 +61,8 @@ Future<void> _runAppWithSentry() async {
     // https://docs.sentry.io/platforms/flutter/#configure
     // https://pub.dev/documentation/sentry/latest/sentry_io/SentryOptions-class.html
     options
-      ..dsn = const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
+      ..dsn =
+          const String.fromEnvironment('SENTRY_DSN') // ignore: do_not_use_environment
       ..tracesSampleRate = 1.0
       ..debug = kDebugMode;
   }, appRunner: () => _runApp());
