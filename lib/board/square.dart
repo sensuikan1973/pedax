@@ -62,23 +62,25 @@ class Square extends StatelessWidget {
   }
 
   SizedBox _evaluationText() {
-    final scoreText = Text(_scoreString(score!), style: TextStyle(color: scoreColor, fontSize: _scoreFontSize));
-    final child =
-        isBookMove
-            ? Stack(
-              children: [
-                Center(child: scoreText),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  // REF: https://emojipedia.org/notebook/
-                  child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
-                ),
-                if (bestpathCountOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestpathCountOfBlackText),
-                if (bestpathCountOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestpathCountOfWhiteText),
-              ],
-            )
-            : Center(child: scoreText);
+    final scoreText = Text(
+      _scoreString(score!),
+      style: TextStyle(color: scoreColor, fontSize: _scoreFontSize),
+    );
+    final child = isBookMove
+        ? Stack(
+            children: [
+              Center(child: scoreText),
+              Positioned(
+                top: 0,
+                right: 0,
+                // REF: https://emojipedia.org/notebook/
+                child: Text('📓', style: TextStyle(fontSize: _notebookEmojiFontSize)),
+              ),
+              if (bestpathCountOfBlack != null) Positioned(bottom: 0, left: 0, child: _bestpathCountOfBlackText),
+              if (bestpathCountOfWhite != null) Positioned(bottom: 0, right: 0, child: _bestpathCountOfWhiteText),
+            ],
+          )
+        : Center(child: scoreText);
     return SizedBox(height: length, width: length, child: child);
   }
 

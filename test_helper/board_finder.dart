@@ -20,17 +20,16 @@ void expectStoneNum(final WidgetTester tester, final SquareType type, final int 
 
 @isTest
 void expectStoneCoordinates(final WidgetTester tester, final List<String> coordinates, final SquareType type) {
-  final finders =
-      coordinates
-          .map(
-            (final coordinate) => find.byWidgetPredicate((final widget) {
-              if (widget is! Square) return false;
-              final coordinateMatched =
-                  widget.coordinate == coordinate.toLowerCase() || widget.coordinate == coordinate.toUpperCase();
-              return coordinateMatched && widget.type == type;
-            }),
-          )
-          .toList();
+  final finders = coordinates
+      .map(
+        (final coordinate) => find.byWidgetPredicate((final widget) {
+          if (widget is! Square) return false;
+          final coordinateMatched =
+              widget.coordinate == coordinate.toLowerCase() || widget.coordinate == coordinate.toUpperCase();
+          return coordinateMatched && widget.type == type;
+        }),
+      )
+      .toList();
   for (final finder in finders) {
     expect(finder, findsOneWidget);
   }
