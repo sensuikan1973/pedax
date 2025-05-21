@@ -90,14 +90,69 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   void requestSetboard(final List<int> replacementTargetMoves) {
-    final arrangeTargetChar = replacementTargetMoves.map((m) => SquareReplacement(m, value.arrangeTargetChar)).toList();
+    // Get current board string (64 chars for board, 1 for player)
+    // board.string() returns the 64 squares followed by the player to move (X or O usually)
+    String currentBoardWithPlayer = value.board.string(value.currentColor);
+    if (currentBoardWithPlayer.length != 65) {
+        _logger.e("Error: value.board.string() did not return 65 characters. Got: ${currentBoardWithPlayer.length}. Current color: ${value.currentColor}");
+        // Fallback: use a default empty board string matching current color
+        final String playerChar = (value.currentColor == TurnColor.black) ? 'X' : 'O';
+        currentBoardWithPlayer = List.filled(64, '-').join('') + playerChar;
+    }
+
+    List<String> boardCharsList = currentBoardWithPlayer.substring(0, 64).split('');
+
+    for (final int moveOffset in replacementTargetMoves) {
+      if (moveOffset >= 0 && moveOffset < boardCharsList.length) {
+        boardCharsList[moveOffset] = value.arrangeTargetChar; // 'X', 'O', or '-'
+      }
+    }
+    final String newBoardChars = boardCharsList.join('');
+    final int colorForRequest = value.arrangeTargetColor; // This is already an int (TurnColor)
+
     _edaxServerPort.send(
       SetboardRequest(
-        currentColor: value.arrangeTargetColor,
-        replacementTargets: arrangeTargetChar,
+        boardChars: newBoardChars,
+        currentColor: colorForRequest,
         logLevel: Logger.level,
       ),
     );
+    _logger.d('Requested setboard (arrange mode) with ${replacementTargetMoves.length} changes. Board: $newBoardChars, Player: $colorForRequest');
+  }
+
+  void requestSetBoardFromString(final String positionString) {
+    if (positionString.length != 65) {
+      _logger.w('Invalid position string length: ${positionString.length}');
+      return;
+    }
+
+    final String boardChars = positionString.substring(0, 64);
+    final String playerTurnChar = positionString.substring(64);
+
+    int newCurrentColor;
+    if (playerTurnChar == 'X') { // Assuming 'X' maps to ColorChar.black
+      newCurrentColor = TurnColor.black;
+    } else if (playerTurnChar == 'O') { // Assuming 'O' maps to ColorChar.white
+      newCurrentColor = TurnColor.white;
+    } else {
+      _logger.w('Invalid player turn character in positionString: $playerTurnChar');
+      return;
+    }
+
+    _edaxServerPort.send(
+      SetboardRequest(
+        boardChars: boardChars, // The 64 character board string
+        currentColor: newCurrentColor, // The integer turn color
+        logLevel: Logger.level,
+      ),
+    );
+
+    if (value.mode != BoardMode.freePlay) {
+      value.mode = BoardMode.freePlay;
+      // Potentially notifyListeners() if mode change needs immediate UI update
+      // before SetboardResponse, though SetboardResponse will also notify.
+    }
+    _logger.d('Requested set board from string: $positionString');
   }
 
   void finishedNotifyBookHasBeenLoadedToUser() => value.bookLoadStatus = BookLoadStatus.notifiedToUser;
@@ -289,6 +344,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         ..currentColor = message.currentColor
         ..lastMove = message.lastMove
         ..currentMoves = message.moves;
+      await _onMovesChanged(message.moves);
     } else if (message is SetOptionResponse) {
       // do nothing
     } else if (message is StopResponse) {
@@ -296,5 +352,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     } else {
       _logger.w('response ${message.runtimeType} is not supported');
     }
+  }
+
+  @visibleForTesting
+  void testerSetEdaxServerPort(SendPort port) {
+    _edaxServerPort = port;
   }
 }

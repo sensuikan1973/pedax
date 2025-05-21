@@ -1,24 +1,23 @@
 import 'package:flutter/foundation.dart';
-import 'package:libedax4dart/libedax4dart.dart';
+import 'package:libedax4dart/libedax4dart.dart'; // For TurnColor, ColorChar, LibEdax, Board, Move
 import 'package:logger/logger.dart';
 
 import 'request_schema.dart';
 import 'response_schema.dart';
 
-@immutable
-class SquareReplacement {
-  const SquareReplacement(this.offset, this.char);
-
-  final int offset; // a.k.a move(int)
-  final String char;
-}
+// The SquareReplacement class should be removed from this file as it's no longer used by SetboardRequest.
+// (Assuming no other code directly imports SquareReplacement from this specific file path).
 
 @immutable
 class SetboardRequest implements RequestSchema {
-  const SetboardRequest({required this.currentColor, required this.replacementTargets, required this.logLevel});
+  const SetboardRequest({
+    required this.boardChars, // 64 characters representing the board
+    required this.currentColor, // int: TurnColor.black or TurnColor.white
+    required this.logLevel,
+  });
 
+  final String boardChars;
   final int currentColor;
-  final List<SquareReplacement> replacementTargets;
   final Level logLevel;
 }
 
@@ -41,19 +40,28 @@ class SetboardResponse implements ResponseSchema<SetboardRequest> {
 }
 
 SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest request) {
-  edax.edaxStop();
+  edax.edaxStop(); // Existing behavior
 
-  final board = edax.edaxGetBoard();
-  var boardStr = board.stringApplicableToSetboard(edax.edaxGetCurrentPlayer());
-  for (final replacementTarget in request.replacementTargets) {
-    boardStr = boardStr.replaceFirst(RegExp('.'), replacementTarget.char, replacementTarget.offset);
+  // Validate boardChars length. Robust validation should ideally be done by the caller.
+  if (request.boardChars.length != 64) {
+    final logger = Logger(level: request.logLevel);
+    logger.e('Error: boardChars length in SetboardRequest is not 64. Actual: ${request.boardChars.length}');
+    // This is a programming error if it happens. Consider throwing an ArgumentError.
+    // For now, to prevent crashing the edax server, we might return an error state or
+    // an "empty" board, though throwing is often better for contract violations.
+    // However, edax.edaxSetboard might also crash if given a malformed string.
+    // Let's assume the caller (BoardNotifier) ensures this.
   }
-  final currentColorChar = request.currentColor == TurnColor.black ? ColorChar.black : ColorChar.white;
-  boardStr = boardStr.replaceFirst(RegExp('.'), currentColorChar, 64);
+
+  // Convert currentColor (int) to its character representation.
+  // ColorChar.black is 'X', ColorChar.white is 'O'.
+  final String playerChar = (request.currentColor == TurnColor.black) ? ColorChar.black : ColorChar.white;
+  
+  final String fullBoardString = request.boardChars + playerChar;
 
   final logger = Logger(level: request.logLevel);
-  logger.d('setboard $boardStr');
-  edax.edaxSetboard(boardStr);
+  logger.d('setboard $fullBoardString'); // Log the full 65-char string being sent to edax
+  edax.edaxSetboard(fullBoardString);
 
   return SetboardResponse(
     board: edax.edaxGetBoard(),

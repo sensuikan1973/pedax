@@ -40,6 +40,10 @@
   "shortcutCheatsheet": "shortcut cheatsheet",
   "shortcutLabelCopyMoves": "copy moves",
   "shortcutLabelPasteMoves": "paste moves",
+  "shortcutLabelPastePosition": "Paste Position",
+  "@shortcutLabelPastePosition": {
+    "description": "Label for the menu item or shortcut that pastes a full board position from clipboard"
+  },
   "shortcutLabelRedoAll": "redo all",
   "shortcutLabelRedo": "redo",
   "shortcutLabelSwitchHintVisibility": "switch hint Visibility",
