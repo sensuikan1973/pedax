@@ -21,7 +21,7 @@ class HintStepByStepSettingDialog extends StatelessWidget {
         if (snapshot.hasData) _enabled.value = snapshot.data;
         return ValueListenableBuilder<bool?>(
           valueListenable: _enabled,
-          builder: (final _, final value, final __) {
+          builder: (final _, final value, final _) {
             if (value == null) return const CupertinoActivityIndicator();
             return Column(
               mainAxisSize: MainAxisSize.min,
