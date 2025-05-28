@@ -40,7 +40,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
             const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
             ValueListenableBuilder<String?>(
               valueListenable: _selectedFilePath,
-              builder: (final _, final value, final __) {
+              builder: (final _, final value, final _) {
                 if (value == null) return const Text(' ');
                 return Expanded(child: SelectableText(value));
               },
