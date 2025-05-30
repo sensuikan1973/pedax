@@ -47,7 +47,7 @@ dependencies:
   provider: ^6.1.5
   sentry_flutter: ^8.14.2
   shared_preferences: ^2.5.3
-  window_manager: ^0.4.3 # for "onWindowResize" and "onWindowMoved"
+  window_manager: ^0.5.0 # for "onWindowResize" and "onWindowMoved"
   window_size:
     git:
       # See: https://github.com/google/flutter-desktop-embedding/tree/main/plugins/window_size
@@ -65,7 +65,7 @@ dev_dependencies:
     sdk: flutter
   msix: ^3.16.9
   path_provider_platform_interface: ^2.1.2
-  pedantic_sensuikan1973: ^5.14.0
+  pedantic_sensuikan1973: ^5.15.0
   plugin_platform_interface: ^2.1.8
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
