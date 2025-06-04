@@ -63,7 +63,7 @@ class BookFileOption implements EngineNativeOption<String> {
     final pref = await _preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;
-      Logger().i('scpecified path is empty. So, pedax sets $newPath.');
+      Logger().i('specified path is empty. So, pedax sets $newPath.');
       await pref.setString(prefKey, newPath);
       return newPath;
     } else {
