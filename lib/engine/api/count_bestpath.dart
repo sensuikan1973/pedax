@@ -30,7 +30,7 @@ class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
 
   /// NOTE:
   /// The color of the position in this result is the opposite of that in the request.
-  /// It's due to executeCountBestpath algorism and book/position structure.
+  /// It's due to executeCountBestpath algorithm and book/position structure.
   final CountBestpathResult countBestpathResult;
 }
 
