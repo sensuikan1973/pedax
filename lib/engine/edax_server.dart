@@ -53,7 +53,7 @@ class EdaxServer {
 
   bool _computingBookLoading = false;
   bool _computingHintOneByOne = false;
-  late HintOneByOneRequest _latestHintntOneByOneRequest;
+  late HintOneByOneRequest _latestHintOneByOneRequest;
   bool _computingCountBestpath = false;
   late CountBestpathRequest _latestCountBestpathRequest;
 
@@ -81,23 +81,23 @@ class EdaxServer {
         } else if (message is PlayRequest) {
           parentSendPort.send(executePlay(edax, message));
         } else if (message is HintOneByOneRequest) {
-          _latestHintntOneByOneRequest = message;
+          _latestHintOneByOneRequest = message;
           while (true) {
             if (_computingHintOneByOne) {
               await Future<void>.delayed(const Duration(milliseconds: 5));
               continue;
             }
-            if (_latestHintntOneByOneRequest.movesAtRequest != message.movesAtRequest) {
+            if (_latestHintOneByOneRequest.movesAtRequest != message.movesAtRequest) {
               _logger.d('''
               The HintOneByOneRequest (moves: ${message.movesAtRequest}) has dropped.
-              It is because a new HintOneByOneRequest (moves: ${_latestHintntOneByOneRequest.movesAtRequest}) has been received after that.
+              It is because a new HintOneByOneRequest (moves: ${_latestHintOneByOneRequest.movesAtRequest}) has been received after that.
               ''');
               break;
             }
             _computingHintOneByOne = true;
             await compute(
               _computeHintNext,
-              _ComputeHintNextParams(_dllPath, _latestHintntOneByOneRequest, parentSendPort),
+              _ComputeHintNextParams(_dllPath, _latestHintOneByOneRequest, parentSendPort),
             );
             _computingHintOneByOne = false;
             break;
