@@ -80,7 +80,6 @@ class BookFileOption implements EngineNativeOption<String> {
 
   Future<void> stopAccessingSecurityScopedResource() async {
     if (!Platform.isMacOS) return;
-
     if (_macosBookmarkResolvedFile != null) {
       await SecureBookmarks().stopAccessingSecurityScopedResource(_macosBookmarkResolvedFile!);
       _macosBookmarkResolvedFile = null;
