@@ -151,7 +151,7 @@ class EdaxServer {
         } else if (message is ShutdownRequest) {
           parentSendPort.send(executeShutdown(edax, message));
           _receivePort.close();
-          _logger.i('shutdowned');
+          _logger.i('shutdown');
         } else {
           _logger.w('request ${message.runtimeType} is not supported');
         }
