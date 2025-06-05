@@ -51,7 +51,6 @@ class EdaxServer {
   SendPort get sendPort => _receivePort.sendPort;
   String get serverName => 'EdaxServer';
 
-  bool _computingBookLoading = false;
   bool _computingHintOneByOne = false;
   late HintOneByOneRequest _latestHintOneByOneRequest;
   bool _computingCountBestpath = false;
@@ -137,11 +136,9 @@ class EdaxServer {
             break;
           }
         } else if (message is BookLoadRequest) {
-          if (_computingBookLoading) return;
-          _computingBookLoading = true;
           _logger.i('will load book file. path: ${message.file}');
-          await compute(_computeBookLoad, _ComputeBookLoadParams(_dllPath, message, parentSendPort));
-          _computingBookLoading = false;
+          final result = executeBookLoad(edax, message as BookLoadRequest);
+          parentSendPort.send(result);
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
         } else if (message is SetboardRequest) {
@@ -171,22 +168,6 @@ class _ComputeHintNextParams {
 Future<void> _computeHintNext(final _ComputeHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
-}
-
-@immutable
-class _ComputeBookLoadParams {
-  const _ComputeBookLoadParams(this.dllPath, this.request, this.listener);
-  final String dllPath;
-  final BookLoadRequest request;
-  final SendPort listener;
-}
-
-// NOTE: top level function for `compute`.
-@doNotStore
-void _computeBookLoad(final _ComputeBookLoadParams params) {
-  final edax = LibEdax(params.dllPath);
-  final result = executeBookLoad(edax, params.request);
-  params.listener.send(result);
 }
 
 @immutable
