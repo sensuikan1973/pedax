@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 import 'api/book_get_move_with_position.dart';
 import 'api/book_load.dart';
 import 'api/count_bestpath.dart';
+import 'api/notification_schema.dart';
 import 'api/hint_one_by_one.dart';
 import 'api/init.dart';
 import 'api/move.dart';
@@ -135,10 +136,30 @@ class EdaxServer {
             _computingCountBestpath = false;
             break;
           }
-        } else if (message is BookLoadRequest) {
+        }
+        // NOTE: Future Improvement for Book Loading
+        // The current book loading process (`executeBookLoad`) is synchronous within this EdaxServer isolate.
+        // This means that if loading a book file takes a significant amount of time, the entire EdaxServer
+        // (and thus the handling of any other requests) will be blocked until the book loading is complete.
+        // This can lead to an unresponsive server during these periods.
+        //
+        // True non-blocking (asynchronous) book loading would ideally require changes at a lower level:
+        // 1. `libedax4dart` (the Dart wrapper) would need to expose an asynchronous method for book loading.
+        // 2. The underlying native `libedax` library itself would need to support an asynchronous book loading
+        //    operation (e.g., by starting the load on a separate thread and providing a mechanism like a
+        //    callback or a Future to signal completion).
+        //
+        // Without such changes, any attempt to make this purely Dart-side asynchronous (e.g., by just
+        // wrapping `executeBookLoad` in a `Future.run` or spawning another Dart isolate just for this)
+        // wouldn't solve the fundamental issue, as the blocking FFI call to the native library would
+        // still stall the isolate it's running on. The `compute` function was previously used here,
+        // which offloads the work to a separate isolate, but that also has overhead and complexity.
+        // For now, a loading notification is sent, but the server remains blocked.
+        else if (message is BookLoadRequest) {
           _logger.i('will load book file. path: ${message.file}');
-          final result = executeBookLoad(edax, message as BookLoadRequest);
-          parentSendPort.send(result);
+          parentSendPort.send(BookLoadStatusNotification(status: 'loading'));
+          final response = executeBookLoad(edax, message as BookLoadRequest);
+          parentSendPort.send(response);
         } else if (message is SetOptionRequest) {
           parentSendPort.send(executeSetOption(edax, message));
         } else if (message is SetboardRequest) {

@@ -13,15 +13,21 @@ class BookLoadRequest implements RequestSchema {
 
 @immutable
 class BookLoadResponse implements ResponseSchema<BookLoadRequest> {
-  const BookLoadResponse({required this.request});
+  const BookLoadResponse({required this.request, required this.success, this.errorMessage});
 
   @override
   final BookLoadRequest request;
+  final bool success;
+  final String? errorMessage;
 }
 
 BookLoadResponse executeBookLoad(final LibEdax edax, final BookLoadRequest request) {
-  edax
-    ..edaxStop()
-    ..edaxBookLoad(request.file);
-  return BookLoadResponse(request: request);
+  try {
+    edax
+      ..edaxStop()
+      ..edaxBookLoad(request.file);
+    return BookLoadResponse(request: request, success: true);
+  } catch (e) {
+    return BookLoadResponse(request: request, success: false, errorMessage: e.toString());
+  }
 }
