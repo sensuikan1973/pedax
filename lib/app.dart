@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
+import 'package:provider/provider.dart'; // Added import
 
 import 'home/home.dart';
-import 'models/board_notifier.dart';
+import 'models/board_notifier.dart'; // Ensured this is present
 
 const _sharedPreferenceWindowFrameWidthKey = 'windowFrameWidth';
 const _sharedPreferenceWindowFrameHeightKey = 'windowFrameHeight';
@@ -71,6 +72,21 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   void dispose() {
     windowManager.removeListener(this);
     super.dispose();
+  }
+
+  @override
+  Future<void> onWindowClose() async {
+    final boardNotifier = Provider.of<BoardNotifier>(context, listen: false);
+    try {
+      await boardNotifier.shutdownEdaxServer();
+    } catch (e, s) {
+      // Log error if shutdown fails, but still proceed to destroy window
+      // It's good practice to log the stack trace as well for better debugging.
+      print('Error during EdaxServer shutdown: $e\n$s');
+    }
+    // IMPORTANT: `destroy` must be called AFTER awaiting your other async operations.
+    // It will terminate the application process.
+    await windowManager.destroy();
   }
 
   @override
