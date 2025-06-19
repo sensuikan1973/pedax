@@ -19,6 +19,11 @@ class HintOneByOneRequest implements RequestSchema {
   final bool stepByStep;
   final String movesAtRequest;
   final Level logLevel;
+
+  @override
+  String toString() {
+    return 'HintOneByOneRequest(level: $level, stepByStep: $stepByStep, movesAtRequest: "$movesAtRequest", logLevel: $logLevel)';
+  }
 }
 
 @immutable
@@ -42,28 +47,42 @@ List<int> generateLevelList3Steps(final int maxLevel) =>
     [(maxLevel / 3).floor(), (maxLevel / 1.5).floor(), maxLevel]..sort();
 
 Stream<HintOneByOneResponse> executeHintOneByOne(final LibEdax edax, final HintOneByOneRequest request) async* {
+  final logger = Logger(level: request.logLevel); // logger initialization moved up
+  logger.d('Executing HintOneByOne with request: $request'); // Log the request
+
   final levelList = request.stepByStep ? generateLevelList3Steps(request.level) : [request.level];
   const levelOption = LevelOption();
-  final logger = Logger(level: request.logLevel);
+
   for (final level in levelList) {
     edax.edaxStop();
-    logger.d('stopped edax search');
+    // logger.d('stopped edax search'); // Replaced by more specific log below
+    logger.d('Stopped edax search for level transition.');
+
+    logger.d('Preparing hint for level: $level, movesAtRequest: "${request.movesAtRequest}"');
     edax
       ..edaxSetOption(levelOption.nativeName, level.toString())
       ..edaxHintPrepare();
-    logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}');
+    // logger.d('prepared getting hint one by one.\nlevel: $level.\nmoves at request: ${request.movesAtRequest}'); // Replaced by more specific log
+    logger.d('Hint preparation complete for level: $level.');
+
     while (true) {
       final currentMoves = edax.edaxGetMoves();
       if (currentMoves != request.movesAtRequest) {
-        logger.d(
-          'hint process is aborted.\ncurrentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}"',
+        logger.w( // Changed to warning as this is an abort condition
+          'Hint process aborted. currentMoves "$currentMoves" is not equal to movesAtRequest "${request.movesAtRequest}" for level $level.',
         );
         return;
       }
 
-      logger.d('will call edaxHintNextNoMultiPvDepth');
+      logger.d(
+        'About to call edaxHintNextNoMultiPvDepth. Level: $level, RequestMoves: "${request.movesAtRequest}", CurrentEngineMoves: "$currentMoves"',
+      );
       final hint = edax.edaxHintNextNoMultiPvDepth();
-      if (hint.isNoMove) break;
+
+      if (hint.isNoMove) {
+        logger.d('edaxHintNextNoMultiPvDepth returned NoMove. Ending hint sequence for level $level.');
+        break;
+      }
       yield HintOneByOneResponse(request: request, hint: hint, level: level, isLastStep: level == levelList.last);
     }
   }
