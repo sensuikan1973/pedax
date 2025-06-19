@@ -21,11 +21,15 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
+    final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.instance;
+    final TestPlatformDispatcher testDispatcher = binding.window; // binding.window is a TestPlatformDispatcher
+
+    const Size logicalSize = Size(2048, 1024);
+    const double dpr = 1.0;
+
+    testDispatcher.devicePixelRatioTestValue = dpr;
+    // physicalSizeTestValue expects physical pixels.
+    testDispatcher.physicalSizeTestValue = Size(logicalSize.width * dpr, logicalSize.height * dpr);
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
