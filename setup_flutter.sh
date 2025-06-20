@@ -7,7 +7,7 @@ FLUTTER_SDK_DIR="$HOME/.flutter_sdk"
 
 git clone -b stable https://github.com/flutter/flutter.git "$FLUTTER_SDK_DIR"
 
-echo 'export PATH="$PATH:$FLUTTER_SDK_DIR/flutter/bin"' >> ~/.bashrc
+echo export PATH="$PATH:$FLUTTER_SDK_DIR/flutter/bin" >> ~/.bashrc
 source ~/.bashrc
 
 flutter doctor
