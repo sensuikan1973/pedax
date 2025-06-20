@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,11 +20,9 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
+    PlatformDispatcher.instance.views.first.physicalSize = const Size(2048, 1024);
+    PlatformDispatcher.instance.views.first.devicePixelRatio = 1.0;
+    // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
     await fakeSharedPreferences(evalFilePath: null, bookFilePath: null);
     mockSecureBookmark();
