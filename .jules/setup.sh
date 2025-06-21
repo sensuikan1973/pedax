@@ -4,12 +4,11 @@ set -euxo pipefail
 # https://docs.flutter.dev/get-started/install/linux/desktop#install-the-flutter-sdk
 # https://docs.flutter.dev/install/archive#main-channel
 
-FLUTTER_SDK_DIR="$HOME/.flutter_sdk"
+git clone https://github.com/flutter/flutter
+sudo mv flutter /usr/local/
+export PATH=$PATH:/usr/local/flutter/bin
+export PATH="$PATH:/usr/local/flutter/bin" >> ~/.bash_profile
 
-git clone -b stable https://github.com/flutter/flutter.git "$FLUTTER_SDK_DIR"
+flutter --version
 
-echo "export PATH='$PATH:$FLUTTER_SDK_DIR/bin'" >> ~/.bashrc
-#shellcheck disable=SC1090
-source ~/.bashrc
-
-flutter doctor
+./scripts/setup_flutter.sh
