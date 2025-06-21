@@ -22,10 +22,7 @@ void _copyDylibForTestOnMacOS() {
 }
 
 @isTest
-class FakePathProviderPlatform extends Fake
-    with
-        MockPlatformInterfaceMixin // ignore: prefer_mixin
-    implements PathProviderPlatform {
+class FakePathProviderPlatform extends Fake with MockPlatformInterfaceMixin implements PathProviderPlatform {
   FakePathProviderPlatform({required this.tempDir});
 
   final Directory tempDir;

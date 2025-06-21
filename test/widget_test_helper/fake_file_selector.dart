@@ -9,10 +9,7 @@ void fakeFileSelector() {
 }
 
 @isTest
-class FakeFileSelector extends Fake
-    with
-        MockPlatformInterfaceMixin // ignore: prefer_mixin
-    implements FileSelectorPlatform {
+class FakeFileSelector extends Fake with MockPlatformInterfaceMixin implements FileSelectorPlatform {
   @override
   Future<XFile?> openFile({
     List<XTypeGroup>? acceptedTypeGroups,
