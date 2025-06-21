@@ -21,11 +21,6 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
@@ -37,6 +32,7 @@ Future<void> main() async {
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   testWidgets('show AboutDialog', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -53,6 +49,7 @@ Future<void> main() async {
   });
 
   testWidgets('show shortcut cheatsheet', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -65,6 +62,7 @@ Future<void> main() async {
   });
 
   testWidgets('read book file path', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -82,6 +80,7 @@ Future<void> main() async {
   });
 
   testWidgets('update book file path as it is', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -102,6 +101,7 @@ Future<void> main() async {
   });
 
   testWidgets('read n-tasks', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -119,6 +119,7 @@ Future<void> main() async {
   });
 
   testWidgets('update n-tasks with valid num', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -138,6 +139,7 @@ Future<void> main() async {
   });
 
   testWidgets('update n-tasks with invalid small num', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -157,6 +159,7 @@ Future<void> main() async {
   });
 
   testWidgets('update n-tasks with invalid large num', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -176,6 +179,7 @@ Future<void> main() async {
   });
 
   testWidgets('read level', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -193,6 +197,7 @@ Future<void> main() async {
   });
 
   testWidgets('update level with valid num', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -212,6 +217,7 @@ Future<void> main() async {
   });
 
   testWidgets('update level with invalid num', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -231,6 +237,7 @@ Future<void> main() async {
   });
 
   testWidgets('off hint step-by-step', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -250,6 +257,7 @@ Future<void> main() async {
   });
 
   testWidgets('on bestpath count availability', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -270,6 +278,7 @@ Future<void> main() async {
   });
 
   testWidgets('update bestpath count player lower limit', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -290,6 +299,7 @@ Future<void> main() async {
   });
 
   testWidgets('update bestpath count opponent lower limit', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);

@@ -16,11 +16,6 @@ import 'widget_test_helper/mock_package_info.dart';
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
@@ -30,6 +25,7 @@ void main() {
   });
   setUp(() => Logger.level = Level.debug);
   testWidgets('launch app', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);

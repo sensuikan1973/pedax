@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,11 +28,6 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
     await fakeSharedPreferences();
     mockSecureBookmark();
@@ -45,6 +39,7 @@ Future<void> main() async {
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
 
   testWidgets('a game without pass', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -201,6 +196,7 @@ Future<void> main() async {
   });
 
   testWidgets('a game with pass', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -304,6 +300,7 @@ Future<void> main() async {
       if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
       return null;
     });
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
