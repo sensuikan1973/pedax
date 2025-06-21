@@ -18,11 +18,6 @@ import 'widget_test_helper/mock_package_info.dart';
 Future<void> main() async {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    // ignore: deprecated_member_use
-    WidgetsBinding.instance.renderView.configuration = TestViewConfiguration.fromView(
-      view: WidgetsBinding.instance.renderView.flutterView, // ignore: deprecated_member_use
-      size: const Size(2048, 1024),
-    ); // https://github.com/flutter/flutter/issues/12994#issuecomment-880199478
     await prepareLibedaxAssets();
     await fakeSharedPreferences(evalFilePath: null, bookFilePath: null);
     mockSecureBookmark();
@@ -33,6 +28,7 @@ Future<void> main() async {
   setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
   testWidgets('launch app', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
@@ -48,6 +44,7 @@ Future<void> main() async {
   });
 
   testWidgets('update book file path as it is', (final tester) async {
+    await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
