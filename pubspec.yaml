@@ -37,7 +37,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   intl: ^0.20.2 # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
   libedax4dart: ^7.49.0
-  logger: ^2.6.0
+  logger: ^2.6.1
   macos_secure_bookmarks: ^0.2.1
   meta: ^1.16.0
   package_info_plus: ^8.3.0
@@ -45,7 +45,7 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.5 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.1.5
-  sentry_flutter: ^9.4.1
+  sentry_flutter: ^9.5.0
   shared_preferences: ^2.5.3
   window_manager: ^0.5.1 # for "onWindowResize" and "onWindowMoved"
   window_size:
