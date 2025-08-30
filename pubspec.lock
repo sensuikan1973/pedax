@@ -173,10 +173,10 @@ packages:
     dependency: transitive
     description:
       name: file_selector_android
-      sha256: "3015702ab73987000e7ff2df5ddc99666d2bcd65cdb243f59da35729d3be6cff"
+      sha256: "4be8ae7374c81daf88e49084a1d68dfe68466ef38a6a3d711cc0b83d53e22465"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1+15"
+    version: "0.5.1+16"
   file_selector_ios:
     dependency: transitive
     description:
@@ -528,10 +528,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: d0d310befe2c8ab9e7f393288ccbb11b60c019c6b5afc21973eeee4dda2b35e9
+      sha256: "993381400e94d18469750e5b9dcb8206f15bc09f9da86b9e44a9b0092a0066db"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.17"
+    version: "2.2.18"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -712,10 +712,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "5bcf0772a761b04f8c6bf814721713de6f3e5d9d89caf8d3fe031b02a342379e"
+      sha256: a2608114b1ffdcbc9c120eb71a0e207c71da56202852d4aab8a5e30a82269e74
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.11"
+    version: "2.4.12"
   shared_preferences_foundation:
     dependency: transitive
     description:
