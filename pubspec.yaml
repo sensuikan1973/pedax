@@ -27,7 +27,7 @@ environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   flutter: ^3.32.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
-  crypto: ^3.0.6
+  crypto: ^3.0.7
   cupertino_icons: ^1.0.8
   file_selector: ^1.0.4
   flutter:
@@ -45,7 +45,7 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.5 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.1.5+1
-  sentry_flutter: ^9.7.0
+  sentry_flutter: ^9.8.0
   shared_preferences: ^2.5.3
   window_manager: ^0.5.1 # for "onWindowResize" and "onWindowMoved"
   window_size:
