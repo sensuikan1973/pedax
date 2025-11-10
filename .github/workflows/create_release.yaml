@@ -11,9 +11,28 @@ on:
     types: [closed]
 
 jobs:
-  create_release:
+  create_release: # devide this job to avoid duplicated release notes
     # See: .github/workflows/create_release_pr.yaml
     if: ${{ github.head_ref == 'prepare_for_release' && github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      current_version: ${{ env.CURRENT_VERSION }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: inject current version
+        shell: bash
+        run: echo "CURRENT_VERSION=$(dart run cider version)" >> $GITHUB_ENV
+      - uses: softprops/action-gh-release@v2
+        env:
+          # https://github.com/softprops/action-gh-release/issues/59
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          tag_name: ${{ env.CURRENT_VERSION }}
+          generate_release_notes: true
+          draft: true
+  build_and_upload:
+    needs: create_release
     env:
       PUBLISH_DIR: publish
     runs-on: ${{ matrix.runner_machine }}
@@ -56,10 +75,6 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
-      - name: inject current version
-        shell: bash
-        run: echo "CURRENT_VERSION=$(dart run cider version)" >> $GITHUB_ENV
-
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: prepare to pack
@@ -88,8 +103,17 @@ jobs:
           # https://github.com/softprops/action-gh-release/issues/59
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: ${{ env.CURRENT_VERSION }}
+          tag_name: ${{ needs.create_release.outputs.current_version }}
           files: ${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
-          generate_release_notes: true
-          # body: This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
-          # append_body: true
+  publish_release:
+    needs: [create_release, build_and_upload]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: softprops/action-gh-release@v2
+        env:
+          # https://github.com/softprops/action-gh-release/issues/59
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        with:
+          tag_name: ${{ needs.create_release.outputs.current_version }}
+          draft: false
