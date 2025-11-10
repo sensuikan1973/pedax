@@ -11,13 +11,15 @@ on:
     types: [closed]
 
 jobs:
-  create_release:
+  build:
     # See: .github/workflows/create_release_pr.yaml
     if: ${{ github.head_ref == 'prepare_for_release' && github.event.pull_request.merged == true }}
     env:
       PUBLISH_DIR: publish
     runs-on: ${{ matrix.runner_machine }}
     timeout-minutes: 30
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -56,9 +58,12 @@ jobs:
       - name: install dependencies
         run: flutter pub get
 
-      - name: inject current version
+      - name: get current version
+        id: get_version
         shell: bash
-        run: echo "CURRENT_VERSION=$(dart run cider version)" >> $GITHUB_ENV
+        run: |
+          VERSION=$(dart run cider version)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: build
         run: flutter build ${{ matrix.subcommand }} --release --dart-define SENTRY_DSN=${{ secrets.SENTRY_DSN }}
@@ -82,14 +87,26 @@ jobs:
           mkdir -p ${{ env.PUBLISH_DIR }}
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip .
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pedax-${{ matrix.os }}
+          path: ${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
 
+  create_release:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
       - uses: softprops/action-gh-release@v2
         env:
           # https://github.com/softprops/action-gh-release/issues/59
           GITHUB_TOKEN: ${{ secrets.PAT }}
         with:
-          tag_name: ${{ env.CURRENT_VERSION }}
-          files: ${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
+          tag_name: ${{ needs.build.outputs.version }}
+          files: artifacts/pedax-*/*.zip
           generate_release_notes: true
-          # body: This is created by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID.
-          # append_body: true
