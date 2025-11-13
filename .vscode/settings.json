@@ -15,5 +15,8 @@
     "*.arb": "json",
     "*.mdx": "markdown"
   },
-  "workbench.colorTheme": "Default Dark+"
+  "workbench.colorTheme": "Default Dark+",
+  "arb-editor.suppressedWarnings": [
+    "missing_metadata_for_key"
+  ],
 }
