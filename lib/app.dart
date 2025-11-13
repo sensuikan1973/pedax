@@ -22,15 +22,6 @@ class PedaxApp extends StatefulWidget {
   State<PedaxApp> createState() => _PedaxAppState();
 
   @visibleForTesting
-  static const supportedLocales = [localeEn, localeJa];
-
-  @visibleForTesting
-  static const localeEn = Locale('en', ''); // English, no country code
-
-  @visibleForTesting
-  static const localeJa = Locale('ja', ''); // Japanese, no country code
-
-  @visibleForTesting
   static const localizationsDelegates = [
     AppLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
@@ -81,7 +72,7 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
       theme: ThemeData(primarySwatch: Colors.brown),
       home: const Home(),
       localizationsDelegates: PedaxApp.localizationsDelegates,
-      supportedLocales: PedaxApp.supportedLocales,
+      supportedLocales: AppLocalizations.supportedLocales,
       // locale: localeEn,
       // debugShowCheckedModeBanner: false,
     ),

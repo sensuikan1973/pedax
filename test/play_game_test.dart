@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,7 +37,7 @@ Future<void> main() async {
     mockWindowsManager();
   });
   setUp(() => Logger.level = Level.debug);
-  final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
+  final l10nEn = await AppLocalizations.delegate.load(Locale('en'));
 
   testWidgets('a game without pass', (final tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));

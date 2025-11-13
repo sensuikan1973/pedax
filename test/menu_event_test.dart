@@ -29,7 +29,7 @@ Future<void> main() async {
     mockWindowsManager();
   });
   setUp(() => Logger.level = Level.debug);
-  final l10nEn = await AppLocalizations.delegate.load(PedaxApp.localeEn);
+  final l10nEn = await AppLocalizations.delegate.load(Locale('en'));
 
   testWidgets('show AboutDialog', (final tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
