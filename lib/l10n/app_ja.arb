@@ -1,4 +1,5 @@
 {
+  "@@locale": "ja",
   "appTitle": "pedax",
   "initializingEngine": "エンジンの立ち上げ中...",
   "modeSelectionTooltip": "モードの選択肢を表示",

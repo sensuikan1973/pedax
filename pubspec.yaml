@@ -36,10 +36,10 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.12.0
   intl: ^0.20.2 # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
-  libedax4dart: ^7.49.0
+  libedax4dart: ^7.60.0
   logger: ^2.6.2
   macos_secure_bookmarks: ^0.2.1
-  meta: ^1.16.0
+  meta: ^1.17.0
   package_info_plus: ^9.0.0
   pasteboard: ^0.4.0
   path: ^1.9.1
@@ -58,7 +58,7 @@ dependencies:
 
 dev_dependencies:
   cider: ^0.2.8
-  file_selector_platform_interface: ^2.6.2
+  file_selector_platform_interface: ^2.7.0
   flutter_test:
     sdk: flutter
   integration_test:

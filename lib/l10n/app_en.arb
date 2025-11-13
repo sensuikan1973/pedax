@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "appTitle": "pedax",
   "@appTitle": {
     "description": "app title"
