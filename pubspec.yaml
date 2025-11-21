@@ -29,7 +29,7 @@ environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
 dependencies:
   crypto: ^3.0.7
   cupertino_icons: ^1.0.8
-  file_selector: ^1.0.4
+  file_selector: ^1.1.0
   flutter:
     sdk: flutter
   flutter_localizations:
