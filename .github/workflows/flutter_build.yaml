@@ -82,7 +82,7 @@ jobs:
       - name: diff check
         run: git diff --exit-code
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: pedax-${{ matrix.os }}
           path: ${{ matrix.distribution_path }}
