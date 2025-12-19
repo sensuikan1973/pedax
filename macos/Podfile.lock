@@ -2,8 +2,6 @@ PODS:
   - FlutterMacOS (1.0.0)
   - macos_secure_bookmarks (0.0.3):
     - FlutterMacOS
-  - objective_c (0.0.1):
-    - FlutterMacOS
   - pasteboard (0.0.1):
     - FlutterMacOS
   - screen_retriever_macos (0.0.1):
@@ -14,7 +12,6 @@ PODS:
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
   - macos_secure_bookmarks (from `Flutter/ephemeral/.symlinks/plugins/macos_secure_bookmarks/macos`)
-  - objective_c (from `Flutter/ephemeral/.symlinks/plugins/objective_c/macos`)
   - pasteboard (from `Flutter/ephemeral/.symlinks/plugins/pasteboard/macos`)
   - screen_retriever_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos`)
   - window_size (from `Flutter/ephemeral/.symlinks/plugins/window_size/macos`)
@@ -24,8 +21,6 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   macos_secure_bookmarks:
     :path: Flutter/ephemeral/.symlinks/plugins/macos_secure_bookmarks/macos
-  objective_c:
-    :path: Flutter/ephemeral/.symlinks/plugins/objective_c/macos
   pasteboard:
     :path: Flutter/ephemeral/.symlinks/plugins/pasteboard/macos
   screen_retriever_macos:
@@ -36,7 +31,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
   macos_secure_bookmarks: cff041c4b377fa00941bb901aaec4d27fac5edf2
-  objective_c: e5f8194456e8fc943e034d1af00510a1bc29c067
   pasteboard: 9b69dba6fedbb04866be632205d532fe2f6b1d99
   screen_retriever_macos: 776e0fa5d42c6163d2bf772d22478df4b302b161
   window_size: 339dafa0b27a95a62a843042038fa6c3c48de195
