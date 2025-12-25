@@ -36,7 +36,7 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.12.0
   intl: ^0.20.2 # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
-  libedax4dart: ^7.61.0
+  libedax4dart: ^7.62.0
   logger: ^2.6.2
   macos_secure_bookmarks: ^0.2.1
   meta: ^1.17.0
@@ -65,7 +65,7 @@ dev_dependencies:
     sdk: flutter
   msix: ^3.16.12
   path_provider_platform_interface: ^2.1.2
-  pedantic_sensuikan1973: ^5.15.0
+  pedantic_sensuikan1973: ^5.16.0
   plugin_platform_interface: ^2.1.8
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
