@@ -38,7 +38,10 @@ class CaptureBoardImageShortcut implements PedaxShortcut {
     final pngByteData = await image.toByteData(format: ui.ImageByteFormat.png);
     final pngBytes = pngByteData!.buffer.asUint8List();
 
-    final file = File('${(await _tmpDir).path}/board_for_clipboard.png');
+    final tmpDir = await _tmpDir;
+    if (!tmpDir.existsSync()) await tmpDir.create(recursive: true);
+
+    final file = File('${tmpDir.path}/board_for_clipboard.png');
     await file.writeAsBytes(pngBytes);
     await Pasteboard.writeFiles([file.path]);
   }
