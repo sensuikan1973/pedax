@@ -101,20 +101,23 @@ Future<void> main() async {
 
       // copy local info
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CopyLocalInfoShortcut.logicalKey);
+      await tester.sendKeyDownEvent(CopyLocalInfoShortcut.logicalKey);
+      await tester.sendKeyUpEvent(CopyLocalInfoShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
 
       // copy board image
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CaptureBoardImageShortcut.logicalKey);
+      await tester.sendKeyDownEvent(CaptureBoardImageShortcut.logicalKey);
+      await tester.sendKeyUpEvent(CaptureBoardImageShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
       await Future<void>.delayed(const Duration(seconds: 1));
 
       // copy moves
       await tester.sendKeyDownEvent(LogicalKeyboardKey.control);
-      await tester.sendKeyEvent(CopyMovesShortcut.logicalKey);
+      await tester.sendKeyDownEvent(CopyMovesShortcut.logicalKey);
+      await tester.sendKeyUpEvent(CopyMovesShortcut.logicalKey);
       await tester.sendKeyUpEvent(LogicalKeyboardKey.control);
       await tester.pumpAndSettle();
       final clipboardDataMoves = await Clipboard.getData(Clipboard.kTextPlain);
