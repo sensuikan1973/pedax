@@ -9,6 +9,7 @@ dart run msix:create
 # See: https://docs.flutter.dev/platform-integration/windows/building#building-your-own-zip-file-for-windows
 # REF: https://github.com/sensuikan1973/pedax/pull/71#issuecomment-798849250
 # REF: https://github.com/sensuikan1973/pedax/pull/83#issuecomment-803240876
+# REF: https://github.com/authpass/authpass/blob/a582bd0f9fb74e2b96a27cb59d73118a08374b73/authpass/_tools/release.sh#L177
 system32_path="/c/Windows/System32"
 # ls "$system32_path" # debug print
 
