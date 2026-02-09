@@ -15,6 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: crate-ci/typos@v1.43.3
+      - uses: crate-ci/typos@v1.43.4
         with:
           config: .typos.toml
