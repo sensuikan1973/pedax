@@ -88,7 +88,7 @@ jobs:
           cd ${{ matrix.distribution_path }}
           zip -r $GITHUB_WORKSPACE/${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip .
       - name: upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: pedax-${{ matrix.os }}
           path: ${{ env.PUBLISH_DIR }}/pedax-${{ matrix.os }}.zip
