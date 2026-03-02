@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:async';
 import 'dart:isolate';
 import 'dart:math';
 
@@ -33,6 +34,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   late final SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
   late final Stream<dynamic> _receiveStream;
+  StreamSubscription<dynamic>? _receiveSubscription;
   final _levelOption = const LevelOption();
   final _bookFileOption = BookFileOption();
   final _bestpathCountPlayerLowerLimitOption = const BestpathCountPlayerLowerLimitOption();
@@ -40,6 +42,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   @override
   void dispose() {
+    _receiveSubscription?.cancel();
     _receivePort.close();
     super.dispose();
   }
@@ -55,12 +58,14 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       startEdaxServer,
       StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, Logger.level),
     );
+
     _receiveStream = _receivePort.asBroadcastStream();
     _edaxServerPort = await _receiveStream.first as SendPort;
     _logger.d('spawned edax server');
 
     // ignore: avoid_annotating_with_dynamic
-    _receiveStream.listen((final dynamic message) {
+    _receiveSubscription?.cancel();
+    _receiveSubscription = _receiveStream.listen((final dynamic message) {
       _updateStateByEdaxServerResponse(message);
       notifyListeners();
     });
