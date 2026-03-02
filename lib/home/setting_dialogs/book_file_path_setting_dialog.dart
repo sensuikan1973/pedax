@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../engine/options/native/book_file_option.dart';
 import '../../models/board_notifier.dart';
-import '../../windows/path.dart';
 
 @immutable
 class BookFilePathSettingDialog extends StatefulWidget {
@@ -84,7 +83,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
   bool _validateBookFilePath(String filePath) {
     // See: https://github.com/sensuikan1973/pedax/issues/592
     if (Platform.isWindows) {
-      return isWindowsAsciiPath(filePath);
+      return RegExp(r'^([ -~]|[¥])+$').hasMatch(filePath); // ref: https://stackoverflow.com/a/14608823
     }
     return true;
   }
