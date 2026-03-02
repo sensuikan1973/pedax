@@ -31,9 +31,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   BoardNotifier() : super(BoardState());
 
   final _logger = Logger();
-  late final SendPort _edaxServerPort;
+  Isolate? _edaxIsolate;
+  late SendPort _edaxServerPort;
   final _receivePort = ReceivePort();
-  late final Stream<dynamic> _receiveStream;
+  late final Stream<dynamic> _receiveStream = _receivePort.asBroadcastStream();
   StreamSubscription<dynamic>? _receiveSubscription;
   final _levelOption = const LevelOption();
   final _bookFileOption = BookFileOption();
@@ -42,6 +43,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
 
   @override
   void dispose() {
+    _edaxIsolate?.kill(priority: Isolate.immediate);
     _receiveSubscription?.cancel();
     _receivePort.close();
     super.dispose();
@@ -54,17 +56,19 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     required final bool hintStepByStep,
     required final bool bestpathCountAvailability,
   }) async {
-    await Isolate.spawn(
+    _edaxIsolate?.kill(priority: Isolate.immediate);
+
+    // ignore: avoid_annotating_with_dynamic
+    _receiveSubscription?.cancel();
+
+    _edaxIsolate = await Isolate.spawn(
       startEdaxServer,
       StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, Logger.level),
     );
 
-    _receiveStream = _receivePort.asBroadcastStream();
     _edaxServerPort = await _receiveStream.first as SendPort;
     _logger.d('spawned edax server');
 
-    // ignore: avoid_annotating_with_dynamic
-    _receiveSubscription?.cancel();
     _receiveSubscription = _receiveStream.listen((final dynamic message) {
       _updateStateByEdaxServerResponse(message);
       notifyListeners();
