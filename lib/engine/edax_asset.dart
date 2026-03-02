@@ -83,6 +83,7 @@ class EdaxAsset {
     final evalDataSha256 = sha256.convert(evalData).toString();
     final pref = await _preferences;
     final currentEvalDataSha256 = pref.getString('libedax_eval_sha256');
+
     if (evalDataSha256 == currentEvalDataSha256) return;
 
     final evalFilePath = await option.val;
