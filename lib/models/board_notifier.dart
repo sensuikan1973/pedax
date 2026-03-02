@@ -58,7 +58,6 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }) async {
     _edaxIsolate?.kill(priority: Isolate.immediate);
 
-    // ignore: avoid_annotating_with_dynamic
     _receiveSubscription?.cancel();
 
     _edaxIsolate = await Isolate.spawn(
@@ -69,6 +68,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _edaxServerPort = await _receiveStream.first as SendPort;
     _logger.d('spawned edax server');
 
+    // ignore: avoid_annotating_with_dynamic
     _receiveSubscription = _receiveStream.listen((final dynamic message) {
       _updateStateByEdaxServerResponse(message);
       notifyListeners();
