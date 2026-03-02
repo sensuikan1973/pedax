@@ -7,7 +7,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../windows/path.dart';
 import 'options/native/book_file_option.dart';
 import 'options/native/engine_native_option.dart';
 import 'options/native/eval_file_option.dart';
@@ -47,8 +46,7 @@ class EdaxAsset {
       // See: https://flutter.dev/docs/development/platform-integration/c-interop#compiled-dynamic-library-macos
       return libedaxName;
     }
-    if (Platform.isWindows) return p.join((await _windowsNativeAssetDir).path, libedaxName);
-    if (Platform.isLinux) return p.join((await _docDir).path, libedaxName);
+    if (Platform.isWindows || Platform.isLinux) return p.join((await _docDir).path, libedaxName);
     throw Exception('${Platform.operatingSystem} is not supported');
   }
 
@@ -64,9 +62,7 @@ class EdaxAsset {
       final currentLibedaxDataSha256 = pref.getString('libedax_dylib_sha256');
       if (libedaxDataSha256 == currentLibedaxDataSha256) return;
 
-      final libPath = await libedaxPath;
-      File(libPath).parent.createSync(recursive: true);
-      File(libPath).writeAsBytesSync(libedaxData, flush: true);
+      File(await libedaxPath).writeAsBytesSync(libedaxData, flush: true);
       await pref.setString('libedax_dylib_sha256', libedaxDataSha256);
     }
   }
@@ -88,31 +84,15 @@ class EdaxAsset {
     final pref = await _preferences;
     final currentEvalDataSha256 = pref.getString('libedax_eval_sha256');
 
-    var evalFilePath = await option.val;
+    if (evalDataSha256 == currentEvalDataSha256) return;
 
-    // https://github.com/sensuikan1973/pedax/issues/2869
-    if (Platform.isWindows && !isWindowsAsciiPath(evalFilePath)) {
-      final fallback = await option.appDefaultValue;
-      await option.update(fallback);
-      evalFilePath = fallback;
-    }
-
-    final evalFile = File(evalFilePath);
-    if (evalDataSha256 == currentEvalDataSha256 && evalFile.existsSync()) return;
-
-    if (!evalFile.existsSync()) {
-      evalFile.parent.createSync(recursive: true);
-      evalFile.writeAsBytesSync(evalData, flush: true);
-      await option.update(evalFilePath);
+    final evalFilePath = await option.val;
+    if (!File(evalFilePath).existsSync()) {
+      File(await option.appDefaultValue).writeAsBytesSync(evalData, flush: true);
+      await option.update(await option.appDefaultValue);
     }
 
     await pref.setString('libedax_eval_sha256', evalDataSha256);
-  }
-
-  Future<Directory> get _windowsNativeAssetDir async {
-    final programDataPedaxPath = windowsProgramDataPedaxPath;
-    if (programDataPedaxPath != null) return Directory(programDataPedaxPath);
-    return _docDir;
   }
 
   // REF: https://github.com/flutter/flutter/issues/17160

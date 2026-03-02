@@ -6,7 +6,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../windows/path.dart';
 import 'engine_native_option.dart';
 
 @immutable
@@ -23,14 +22,7 @@ class EvalFileOption implements EngineNativeOption<String> {
   // REF: native default value is `./data/eval.dat`
   //      https://github.com/abulmo/edax-reversi/blob/01899aecce8bc780517149c80f178fb478a17a0b/src/options.c#L322
   @override
-  Future<String> get appDefaultValue async {
-    // https://github.com/sensuikan1973/pedax/issues/2869
-    if (Platform.isWindows) {
-      final programDataPedaxPath = windowsProgramDataPedaxPath;
-      if (programDataPedaxPath != null) return p.join(programDataPedaxPath, _defaultFileName);
-    }
-    return p.join((await _docDir).path, _defaultFileName);
-  }
+  Future<String> get appDefaultValue async => p.join((await _docDir).path, _defaultFileName);
 
   String get _defaultFileName => 'eval.dat';
 
