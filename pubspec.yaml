@@ -20,7 +20,7 @@ repository: https://github.com/sensuikan1973/pedax
 #
 # NOTE: you can't specify duplicated build number.
 # See: https://appstoreconnect.apple.com/apps/1557500142/buildactivity
-version: 6.113.1+212
+version: 6.114.0+213
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
   sdk: ">=3.11.0 <4.0.0"
