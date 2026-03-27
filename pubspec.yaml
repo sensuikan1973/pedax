@@ -81,7 +81,12 @@ flutter:
   assets:
     - assets/images/
     - assets/libedax/data/
-    - assets/libedax/dll/
+    - path: assets/libedax/dll/libedax-x64.dll
+      platforms:
+        - windows
+    - path: assets/libedax/dll/libedax.so
+      platforms:
+        - linux
 
 # windows desktop app is not sandboxed
 # - https://docs.microsoft.com/ja-jp/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
