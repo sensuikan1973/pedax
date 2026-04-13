@@ -102,7 +102,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           path: artifacts
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         env:
           # https://github.com/softprops/action-gh-release/issues/59
           GITHUB_TOKEN: ${{ secrets.PAT }}
