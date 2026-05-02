@@ -3,6 +3,7 @@
         "dart-code.dart-code",
         "dart-code.flutter",
         "google.arb-editor",
+        "djbkwon.flutter-dependency-docs",
         "github.vscode-github-actions"
     ]
 }
