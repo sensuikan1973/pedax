@@ -55,6 +55,7 @@ jobs:
           fi
 
           mkdir -p "$RUNNER_TEMP/playwright"
+          mkdir -p "$RUNNER_TEMP/playwright/screenshots"
           cat <<'EOF' >"$RUNNER_TEMP/playwright/package.json"
           {
             "name": "website-integration-test",
@@ -64,21 +65,33 @@ jobs:
 
           cat <<'EOF' >"$RUNNER_TEMP/playwright/website.integration.spec.js"
           const { test, expect } = require('@playwright/test')
+          const path = require('path')
+          const screenshotDir = process.env.SCREENSHOT_DIR
 
           test('ja locale page is displayed', async ({ page }) => {
             const response = await page.goto('http://127.0.0.1:3000/pedax/')
             expect(response.ok()).toBeTruthy()
             await expect(page.getByText('edax 用のリバーシ盤')).toBeVisible()
+            await page.screenshot({ path: path.join(screenshotDir, 'ja-page.png'), fullPage: true })
           })
 
           test('en locale page is displayed', async ({ page }) => {
             const response = await page.goto('http://127.0.0.1:3000/pedax/en/')
             expect(response.ok()).toBeTruthy()
             await expect(page.getByText('Reversi Board with edax')).toBeVisible()
+            await page.screenshot({ path: path.join(screenshotDir, 'en-page.png'), fullPage: true })
           })
           EOF
 
           cd "$RUNNER_TEMP/playwright"
           npm install --no-fund --no-audit @playwright/test
           npx playwright install chromium
-          npx playwright test website.integration.spec.js --reporter=line
+          SCREENSHOT_DIR="$RUNNER_TEMP/playwright/screenshots" npx playwright test website.integration.spec.js --reporter=line
+
+      - name: Upload website locale screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-integration-screenshots
+          path: ${{ runner.temp }}/playwright/screenshots
+          if-no-files-found: warn
