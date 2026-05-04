@@ -1,0 +1,97 @@
+---
+name: Website Integration Test
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/website_integration_test.yaml'
+      - 'website/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/website_integration_test.yaml'
+      - 'website/**'
+  workflow_dispatch:
+
+jobs:
+  website_integration_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: website
+
+    steps:
+      - uses: actions/checkout@v6
+
+      # https://github.com/actions/setup-node/issues/206#issuecomment-774538395
+      - uses: nodenv/actions/node-version@main
+        id: nodenv
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '${{ steps.nodenv.outputs.node-version }}'
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+      - name: Verify JA/EN website pages with Playwright
+        run: |
+          yarn serve --port 3000 --host 127.0.0.1 >"$RUNNER_TEMP/docusaurus-serve.log" 2>&1 &
+
+          started=false
+          for i in {1..60}; do
+            if curl -fsS "http://127.0.0.1:3000/pedax/" >/dev/null && \
+              curl -fsS "http://127.0.0.1:3000/pedax/en/" >/dev/null; then
+              started=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$started" != "true" ]; then
+            cat "$RUNNER_TEMP/docusaurus-serve.log"
+            echo "Docusaurus server failed to start"
+            exit 1
+          fi
+
+          mkdir -p "$RUNNER_TEMP/playwright"
+          mkdir -p "$RUNNER_TEMP/playwright/screenshots"
+          cat <<'EOF' >"$RUNNER_TEMP/playwright/package.json"
+          {
+            "name": "website-integration-test",
+            "private": true
+          }
+          EOF
+
+          cat <<'EOF' >"$RUNNER_TEMP/playwright/website.integration.spec.js"
+          const { test, expect } = require('@playwright/test')
+          const path = require('path')
+          const screenshotDir = process.env.SCREENSHOT_DIR
+
+          test('ja locale page is displayed', async ({ page }) => {
+            const response = await page.goto('http://127.0.0.1:3000/pedax/')
+            expect(response.ok()).toBeTruthy()
+            await expect(page.getByText('edax 用のリバーシ盤')).toBeVisible()
+            await page.screenshot({ path: path.join(screenshotDir, 'ja-page.png'), fullPage: true })
+          })
+
+          test('en locale page is displayed', async ({ page }) => {
+            const response = await page.goto('http://127.0.0.1:3000/pedax/en/')
+            expect(response.ok()).toBeTruthy()
+            await expect(page.getByText('Reversi Board with edax')).toBeVisible()
+            await page.screenshot({ path: path.join(screenshotDir, 'en-page.png'), fullPage: true })
+          })
+          EOF
+
+          cd "$RUNNER_TEMP/playwright"
+          npm install --no-fund --no-audit @playwright/test
+          npx playwright install chromium
+          SCREENSHOT_DIR="$RUNNER_TEMP/playwright/screenshots" npx playwright test website.integration.spec.js --reporter=line
+
+      - name: Upload website locale screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-integration-screenshots
+          path: ${{ runner.temp }}/playwright/screenshots
+          if-no-files-found: warn

@@ -21,6 +21,7 @@ windows:
 website:
   - changed-files:
       - any-glob-to-any-file: website/**/*
+      - any-glob-to-any-file: .github/workflows/website_integration_test.yaml
 
 libedax:
   - changed-files:
