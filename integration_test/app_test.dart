@@ -93,7 +93,7 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
 
       // shortcut cheatsheet
-      await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
+      await tester.tap(find.byType(FaIcon).first);
       await tester.pumpAndSettle();
       expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
       await tester.tapAt(const Offset(1, 1));
