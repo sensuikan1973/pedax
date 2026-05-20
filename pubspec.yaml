@@ -23,8 +23,8 @@ repository: https://github.com/sensuikan1973/pedax
 version: 6.118.0+217
 
 environment: # See: https://dart.dev/tools/pub/pubspec#sdk-constraints
-  sdk: ">=3.11.0 <4.0.0"
-  flutter: ^3.41.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
+  sdk: ">=3.12.0 <4.0.0"
+  flutter: ^3.44.0 # See: https://flutter.dev/docs/development/tools/sdk/releases
 
 dependencies:
   crypto: ^3.0.7
