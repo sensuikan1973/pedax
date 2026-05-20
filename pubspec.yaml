@@ -37,16 +37,16 @@ dependencies:
   font_awesome_flutter: ^10.12.0
   intl: ^0.20.2 # https://docs.flutter.dev/accessibility-and-localization/internationalization#adding-your-own-localized-messages
   libedax4dart: ^7.67.0
-  logger: ^2.6.2
+  logger: ^2.7.0
   macos_secure_bookmarks: ^0.2.1
-  meta: ^1.17.0
-  package_info_plus: ^9.0.0
+  meta: ^1.18.0
+  package_info_plus: ^9.0.1
   pasteboard: ^0.5.0
   path: ^1.9.1
   path_provider: ^2.1.5 # See: https://flutter.dev/docs/cookbook/persistence/reading-writing-files
   provider: ^6.1.5+1
-  sentry_flutter: ^9.14.0
-  shared_preferences: ^2.5.4
+  sentry_flutter: ^9.20.0
+  shared_preferences: ^2.5.5
   window_manager: ^0.5.1 # for "onWindowResize" and "onWindowMoved"
   window_size:
     git:
@@ -69,7 +69,7 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.8
   # https://pub.dev/packages/shared_preferences_platform_interface/changelog#220
   # https://github.com/sensuikan1973/pedax/pull/1387#issuecomment-1489619974
-  shared_preferences_platform_interface: ^2.4.1
+  shared_preferences_platform_interface: ^2.4.2
 
 flutter:
   uses-material-design: true
