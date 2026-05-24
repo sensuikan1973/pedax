@@ -65,14 +65,14 @@ class BoardNotifier extends ValueNotifier<BoardState> {
       StartEdaxServerParams(_receivePort.sendPort, libedaxPath, initLibedaxParams, Logger.level),
     );
 
-    _edaxServerPort = await _receiveStream.first as SendPort;
-    _logger.d('spawned edax server');
-
     // ignore: avoid_annotating_with_dynamic
     _receiveSubscription = _receiveStream.listen((final dynamic message) async {
       await _updateStateByEdaxServerResponse(message);
       notifyListeners();
     });
+
+    _edaxServerPort = await _receiveStream.first as SendPort;
+    _logger.d('spawned edax server');
 
     value
       ..edaxServerSpawned = true
