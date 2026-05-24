@@ -69,8 +69,8 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _logger.d('spawned edax server');
 
     // ignore: avoid_annotating_with_dynamic
-    _receiveSubscription = _receiveStream.listen((final dynamic message) {
-      _updateStateByEdaxServerResponse(message);
+    _receiveSubscription = _receiveStream.listen((final dynamic message) async {
+      await _updateStateByEdaxServerResponse(message);
       notifyListeners();
     });
 
