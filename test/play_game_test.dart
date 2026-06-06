@@ -108,7 +108,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft));
+      await tester.tap(find.byType(FaIcon).at(3));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
@@ -116,7 +116,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 3);
       expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleRight));
+      await tester.tap(find.byType(FaIcon).at(4));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5);
@@ -140,7 +140,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.anglesLeft));
+      await tester.tap(find.byType(FaIcon).at(2));
       await waitEdaxServerResponse(tester);
       await tester.pump(const Duration(microseconds: 300));
       expectStoneNum(tester, SquareType.black, 2);
@@ -148,7 +148,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.anglesRight));
+      await tester.tap(find.byType(FaIcon).at(3));
       await waitEdaxServerResponse(tester);
       await tester.pump(const Duration(microseconds: 300));
       expectStoneNum(tester, SquareType.black, 5);
@@ -275,7 +275,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 6);
       expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleLeft)); // skip pass internally in engine.
+      await tester.tap(find.byType(FaIcon).at(3));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 8);
@@ -283,7 +283,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 4);
       expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.angleRight)); // skip pass internally in engine.
+      await tester.tap(find.byType(FaIcon).at(4));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 7);

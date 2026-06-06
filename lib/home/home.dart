@@ -192,7 +192,7 @@ class HomeState extends State<Home> {
       centerTitle: true,
       actions: [
         IconButton(
-          icon: const Icon(FontAwesomeIcons.keyboard),
+          icon: const FaIcon(FontAwesomeIcons.keyboard),
           padding: const EdgeInsets.all(12),
           onPressed: () async => showDialog<void>(
             context: context,
@@ -214,25 +214,25 @@ class HomeState extends State<Home> {
   }
 
   Widget get _undoAllButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.anglesLeft),
+    icon: const FaIcon(FontAwesomeIcons.anglesLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
   );
 
   Widget get _undoButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.angleLeft),
+    icon: const FaIcon(FontAwesomeIcons.angleLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndo(),
   );
 
   Widget get _redoButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.angleRight),
+    icon: const FaIcon(FontAwesomeIcons.angleRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedo(),
   );
 
   Widget get _redoAllButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.anglesRight),
+    icon: const FaIcon(FontAwesomeIcons.anglesRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
   );

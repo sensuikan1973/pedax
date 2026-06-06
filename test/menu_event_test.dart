@@ -8,8 +8,8 @@ import 'package:pedax/home/setting_dialogs/bestpath_count_availability_setting_d
 import 'package:pedax/home/setting_dialogs/book_file_path_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/hint_step_by_step_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
-import 'package:pedax/home/setting_dialogs/n_tasks_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
+import 'package:pedax/home/setting_dialogs/n_tasks_setting_dialog.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import '../test_helper/windows_manager_mock.dart';
@@ -54,7 +54,7 @@ Future<void> main() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.keyboard));
+      await tester.tap(find.byType(FaIcon).first);
       await tester.pumpAndSettle();
       expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
       await waitEdaxServerResponse(tester);
