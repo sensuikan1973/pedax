@@ -192,6 +192,7 @@ class HomeState extends State<Home> {
       centerTitle: true,
       actions: [
         IconButton(
+          key: const Key('shortcutCheatsheetButton'),
           icon: const FaIcon(FontAwesomeIcons.keyboard),
           padding: const EdgeInsets.all(12),
           onPressed: () async => showDialog<void>(

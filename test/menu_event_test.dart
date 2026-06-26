@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/home/setting_dialogs/bestpath_count_availability_setting_dialog.dart';
@@ -54,7 +53,7 @@ Future<void> main() async {
       await tester.pumpWidget(const PedaxApp());
       await waitEdaxSetuped(tester);
 
-      await tester.tap(find.byType(FaIcon).first);
+      await tester.tap(find.byKey(const Key('shortcutCheatsheetButton')));
       await tester.pumpAndSettle();
       expect(find.byType(ShortcutCheatsheetDialog), findsOneWidget);
       await waitEdaxServerResponse(tester);
