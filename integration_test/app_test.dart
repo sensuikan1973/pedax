@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:pedax/board/pedax_board.dart';
@@ -18,7 +19,6 @@ import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import '../test/widget_test_helper/fake_shared_preferences.dart';
-import '../test/widget_test_helper/libedax_assets.dart';
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
@@ -31,8 +31,6 @@ Future<void> main() async {
   setUp(() {
     fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
-    // ensure libedax assets are prepared for integration tests (copies dylib on macOS)
-    prepareLibedaxAssets();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
   testWidgets('home', (final tester) async {
@@ -95,9 +93,7 @@ Future<void> main() async {
       await waitEdaxServerResponse(tester);
 
       // shortcut cheatsheet
-      final shortcutCheatsheetButton = find.byKey(const Key('shortcutCheatsheetButton'));
-      expect(shortcutCheatsheetButton, findsOneWidget);
-      await tester.tap(shortcutCheatsheetButton);
+      await tester.tap(find.byType(FaIcon).first);
       await tester.pumpAndSettle();
       expect(find.text(l10n.shortcutCheatsheet), findsOneWidget);
       await tester.tapAt(const Offset(1, 1));
