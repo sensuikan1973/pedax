@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:pedax/app.dart';
 import 'package:pedax/board/pedax_board.dart';
@@ -108,7 +107,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(3));
+      await tester.tap(find.byKey(const Key('undoButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 3);
@@ -116,7 +115,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 3);
       expectStoneCoordinates(tester, ['d4', 'e4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(4));
+      await tester.tap(find.byKey(const Key('redoButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 5);
@@ -140,7 +139,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'f4'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(2));
+      await tester.tap(find.byKey(const Key('undoAllButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump(const Duration(microseconds: 300));
       expectStoneNum(tester, SquareType.black, 2);
@@ -148,7 +147,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 2);
       expectStoneCoordinates(tester, ['d4', 'e5'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(3));
+      await tester.tap(find.byKey(const Key('redoAllButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump(const Duration(microseconds: 300));
       expectStoneNum(tester, SquareType.black, 5);
@@ -275,7 +274,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 6);
       expectStoneCoordinates(tester, ['e7', 'f6', 'g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(3));
+      await tester.tap(find.byKey(const Key('undoButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 8);
@@ -283,7 +282,7 @@ Future<void> main() async {
       expectStoneNum(tester, SquareType.white, 4);
       expectStoneCoordinates(tester, ['g5', 'h4', 'h5', 'h6'], SquareType.white);
 
-      await tester.tap(find.byType(FaIcon).at(4));
+      await tester.tap(find.byKey(const Key('redoButton')));
       await waitEdaxServerResponse(tester);
       await tester.pump();
       expectStoneNum(tester, SquareType.black, 7);

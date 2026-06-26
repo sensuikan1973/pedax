@@ -215,24 +215,28 @@ class HomeState extends State<Home> {
   }
 
   Widget get _undoAllButton => IconButton(
+    key: const Key('undoAllButton'),
     icon: const FaIcon(FontAwesomeIcons.anglesLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
   );
 
   Widget get _undoButton => IconButton(
+    key: const Key('undoButton'),
     icon: const FaIcon(FontAwesomeIcons.angleLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndo(),
   );
 
   Widget get _redoButton => IconButton(
+    key: const Key('redoButton'),
     icon: const FaIcon(FontAwesomeIcons.angleRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedo(),
   );
 
   Widget get _redoAllButton => IconButton(
+    key: const Key('redoAllButton'),
     icon: const FaIcon(FontAwesomeIcons.anglesRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
