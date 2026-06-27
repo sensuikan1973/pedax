@@ -22,10 +22,10 @@ jobs:
         with:
           cache: true
       - name: setup flutter channel
-        shell: bash
+        shell: zsh {0} # See: https://github.com/actions/virtual-environments/issues/264#issuecomment-574032011
         run: ./scripts/setup_flutter.sh
       - name: setup flutter desktop
-        shell: bash
+        shell: zsh {0}
         run: .github/scripts/macos/install_additional_requirements_for_flutter.sh
 
       - name: bump version
@@ -41,7 +41,7 @@ jobs:
           git commit -m "temporary bump version for ci"
 
       - name: dry-run deployment script
-        shell: bash
+        shell: zsh {0}
         env:
           # https://docs.fastlane.tools/best-practices/continuous-integration/github/
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#using-encrypted-secrets-in-a-workflow
