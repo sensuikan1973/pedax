@@ -8,7 +8,7 @@ ruby --version
 # CocoaPods
 gem update --system # use latest rubygems
 gem update cocoapods # use latest cocoapods
-pod repo update
+# pod repo update
 
 pod --version
 pod env
