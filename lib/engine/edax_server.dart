@@ -40,9 +40,7 @@ class StartEdaxServerParams {
 
 @doNotStore
 class EdaxServer {
-  EdaxServer({required final String dllPath, required final Level logLevel})
-    : _dllPath = dllPath,
-      _logger = Logger(level: logLevel);
+  EdaxServer({required this._dllPath, required final Level logLevel}) : _logger = Logger(level: logLevel);
 
   final String _dllPath;
   final Logger _logger;
