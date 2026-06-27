@@ -192,7 +192,8 @@ class HomeState extends State<Home> {
       centerTitle: true,
       actions: [
         IconButton(
-          icon: const Icon(FontAwesomeIcons.keyboard),
+          key: const Key('shortcutCheatsheetButton'),
+          icon: const FaIcon(FontAwesomeIcons.keyboard),
           padding: const EdgeInsets.all(12),
           onPressed: () async => showDialog<void>(
             context: context,
@@ -214,25 +215,29 @@ class HomeState extends State<Home> {
   }
 
   Widget get _undoAllButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.anglesLeft),
+    key: const Key('undoAllButton'),
+    icon: const FaIcon(FontAwesomeIcons.anglesLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndoAll(),
   );
 
   Widget get _undoButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.angleLeft),
+    key: const Key('undoButton'),
+    icon: const FaIcon(FontAwesomeIcons.angleLeft),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestUndo(),
   );
 
   Widget get _redoButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.angleRight),
+    key: const Key('redoButton'),
+    icon: const FaIcon(FontAwesomeIcons.angleRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedo(),
   );
 
   Widget get _redoAllButton => IconButton(
-    icon: const Icon(FontAwesomeIcons.anglesRight),
+    key: const Key('redoAllButton'),
+    icon: const FaIcon(FontAwesomeIcons.anglesRight),
     iconSize: _undoOrRedoIconSize,
     onPressed: () => context.read<BoardNotifier>().requestRedoAll(),
   );
