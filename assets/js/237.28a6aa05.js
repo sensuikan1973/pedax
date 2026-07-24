@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkpedax||=[]).push([[237],{2237(e,t,s){s.r(t),s.d(t,{default:()=>u});s(6540);var n=s(1312),a=s(5500),d=s(1656),i=s(3363),r=s(4848);function u(){const e=(0,n.T)({id:"theme.NotFound.title",message:"Page Not Found"});return(0,r.jsxs)(r.Fragment,{children:[(0,r.jsx)(a.be,{title:e}),(0,r.jsx)(d.A,{children:(0,r.jsx)(i.A,{})})]})}}}]);

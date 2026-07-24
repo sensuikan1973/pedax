@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkpedax=globalThis.webpackChunkpedax||[]).push([[259],{4748(a){a.exports=JSON.parse('{"metadata":{"permalink":"/pedax/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":0,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
