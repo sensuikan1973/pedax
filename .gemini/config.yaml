@@ -1,9 +1,0 @@
----
-# See: https://developers.google.com/gemini-code-assist/docs/customize-gemini-behavior-github
-
-have_fun: false
-code_review:
-  pull_request_opened:
-    help: false
-    summary: false
-    code_review: true
