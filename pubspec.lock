@@ -299,10 +299,10 @@ packages:
     dependency: transitive
     description:
       name: get_it
-      sha256: "568d62f0e68666fb5d95519743b3c24a34c7f19d834b0658c46e26d778461f66"
+      sha256: "2b5c6b077aad30bba9782178baff6076a2044141f1d5f2f15b43bca3fbe74874"
       url: "https://pub.dev"
     source: hosted
-    version: "9.2.1"
+    version: "9.3.0"
   hooks:
     dependency: transitive
     description:
@@ -736,18 +736,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "4ec4df6c69b6c3392442a2eb098839f1b8f44901bbb89ec90444e63e70cadc44"
+      sha256: ab4c2b5874b201cd92e1d31daef67b82dcd2ad4b6ab06aea94c4fb6bc5b4b8cd
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-alpha.6"
+    version: "10.0.0-rc.0"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: "361594a6e97a66689047e6d51f2b36c32fa3c6ba25d57b2cf6ad417b63b1b30c"
+      sha256: "80adf158dd940eb265a89306133d37b8de1b30c45ddf73c8ba7e61f4f3345057"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-alpha.6"
+    version: "10.0.0-rc.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -885,10 +885,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: f36f9f3be64c6198714492bb455c11056e33e2f85d9a0b676a48301e44fdcf47
+      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.2"
+    version: "2.4.3"
   version_manipulation:
     dependency: transitive
     description:
