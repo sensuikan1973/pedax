@@ -125,26 +125,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      sha256: "41e005c33bd814be4d3096aff55b1908d419fde52ca656c8c47719ec745873cd"
+      sha256: b7cc2390aac296c083bea762859413eb1cf5b630c70e0c7e4d831018f762a8b2
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.9"
-  dio:
-    dependency: transitive
-    description:
-      name: dio
-      sha256: "852ec3b48cc431ac04fff978413c541502b67ffc3e26921e74e3d994694192c1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.11.1"
-  dio_web_adapter:
-    dependency: transitive
-    description:
-      name: dio_web_adapter
-      sha256: "3a1b2cd7be71086f38504956e3ebcd2837288d231ff454bafa78021244102bfc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
+    version: "2.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -436,22 +420,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
-  logging_appenders:
-    dependency: transitive
-    description:
-      name: logging_appenders
-      sha256: "7fefa09636824f312432721c0bf77967ab19003116650729bd202bdf98142d70"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0+1"
   macos_secure_bookmarks:
     dependency: "direct main"
     description:
       name: macos_secure_bookmarks
-      sha256: c3163875f8fd530a1654a7cf8aa426e6e208d28bf05724a1d4960e4b7d2ca1c6
+      sha256: a63bfaa715dc917158cfc7a5dfab2e323ecfa064e4ddba7f33095c56f56ffd17
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.1"
+    version: "0.3.0"
   markdown:
     dependency: transitive
     description:
@@ -492,14 +468,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.0"
-  mime:
-    dependency: transitive
-    description:
-      name: mime
-      sha256: bd47de35f07e27267e69c8c8b22edf9473bfee170a60d60fcc93730c5144b7f6
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   msix:
     dependency: "direct dev"
     description:
@@ -520,10 +488,10 @@ packages:
     dependency: transitive
     description:
       name: objective_c
-      sha256: ad56fd53a78ff6b1472fa59ff2a4e8b8ccabafc586fc263a1dfad0b99b5553e3
+      sha256: "5c80c2ad6e2c0397de5db38c6d653e69616a3397e13aa7633bf39eb668f2041b"
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.0"
+    version: "9.6.2"
   package_config:
     dependency: transitive
     description:
@@ -536,10 +504,10 @@ packages:
     dependency: "direct main"
     description:
       name: package_info_plus
-      sha256: "127e1751e37ffb2ff4658beeaca77bad0c27bf5f932bd3a501c2296926d4b481"
+      sha256: "73ef2cd5c11a7548f9b7f6fc2a4f6113de2e64aa2a70de63feede95548822908"
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.1"
+    version: "10.2.2"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -736,18 +704,18 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: ab4c2b5874b201cd92e1d31daef67b82dcd2ad4b6ab06aea94c4fb6bc5b4b8cd
+      sha256: "9af537233fc1bb2219bb6d105194a436be52a1acec088ddf1208cffab8b8699c"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-rc.0"
+    version: "10.0.0-rc.2"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: "80adf158dd940eb265a89306133d37b8de1b30c45ddf73c8ba7e61f4f3345057"
+      sha256: b76e71b908736998defa2c253de97f4e0a9bd3989da8496b5c0f41f980ebc29a
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-rc.0"
+    version: "10.0.0-rc.2"
   shared_preferences:
     dependency: "direct main"
     description:
