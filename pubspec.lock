@@ -704,26 +704,26 @@ packages:
     dependency: transitive
     description:
       name: sentry
-      sha256: "9af537233fc1bb2219bb6d105194a436be52a1acec088ddf1208cffab8b8699c"
+      sha256: "1c409bd2868210fcffd792a5a703d14049e019e30a705c7aa705a8985b92c114"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-rc.2"
+    version: "10.0.0"
   sentry_flutter:
     dependency: "direct main"
     description:
       name: sentry_flutter
-      sha256: b76e71b908736998defa2c253de97f4e0a9bd3989da8496b5c0f41f980ebc29a
+      sha256: "9c6e25e3bbdea1f8d779fbc43fa941e078c23972cb8881d2ebd6b82343b80aee"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0-rc.2"
+    version: "10.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
       name: shared_preferences
-      sha256: c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf
+      sha256: "1e85e0dccf5b4a016077fea7dfbb4a7cb39c759ac1596fcf60c06deadb7da91f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.5"
+    version: "2.5.6"
   shared_preferences_android:
     dependency: transitive
     description:
