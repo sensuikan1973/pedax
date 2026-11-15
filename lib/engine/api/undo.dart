@@ -39,7 +39,8 @@ UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();
   final lastMoveExcludingPass = edax.edaxGetLastMove();
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+  final isGameOver = edax.edaxIsGameOver();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !isGameOver) {
     edax.edaxRedo();
   }
 

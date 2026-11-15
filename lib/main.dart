@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:window_manager/legacy.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import 'app.dart';
@@ -20,14 +20,13 @@ Future<void> main() async {
 }
 
 Future<void> _setupWindow() async {
-  // https://github.com/sensuikan1973/pedax/issues/1159
-  await windowManager.ensureInitialized(); // https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
-  windowManager.waitUntilReadyToShow(null, () async {
-    setWindowMinSize(pedaxWindowMinSize); // https://github.com/flutter/flutter/issues/30736
-    await _changeWindowFrame();
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  final window = WindowManager.instance.getCurrent();
+  if (window == null) return;
+
+  setWindowMinSize(pedaxWindowMinSize); // https://github.com/flutter/flutter/issues/30736
+  await _changeWindowFrame();
+  window.show();
+  window.focus();
 }
 
 Future<void> _changeWindowFrame() async {

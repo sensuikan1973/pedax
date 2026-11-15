@@ -38,7 +38,8 @@ RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   final lastMoveExcludingPass = edax.edaxGetLastMove();
 
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+  final isGameOver = edax.edaxIsGameOver();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !isGameOver) {
     edax.edaxRedo();
   }
 
