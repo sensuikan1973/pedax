@@ -30,7 +30,7 @@ class NTasksOption implements EngineNativeOption<int> {
   }
 
   @override
-  Future<int> update(final int val) async {
+  Future<int> update(int val) async {
     final pref = await _preferences;
     if (val < 1 || Platform.numberOfProcessors < val) {
       final newN = await appDefaultValue;

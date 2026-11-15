@@ -17,7 +17,7 @@ class StopResponse implements ResponseSchema<StopRequest> {
   final StopRequest request;
 }
 
-StopResponse executeStop(final LibEdax edax, final StopRequest request) {
+StopResponse executeStop(LibEdax edax, StopRequest request) {
   edax.edaxStop();
   return StopResponse(request: request);
 }

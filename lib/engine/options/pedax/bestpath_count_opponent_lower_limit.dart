@@ -1,6 +1,7 @@
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'engine_pedax_option.dart';
 
 @immutable
@@ -21,7 +22,7 @@ class BestpathCountOpponentLowerLimitOption implements EnginePedaxOption<int> {
   }
 
   @override
-  Future<int> update(final int val) async {
+  Future<int> update(int val) async {
     final pref = await _preferences;
     await pref.setInt(prefKey, val);
     return val;

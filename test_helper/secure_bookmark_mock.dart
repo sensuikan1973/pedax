@@ -10,7 +10,7 @@ void mockSecureBookmark() {
   if (!Platform.isMacOS) return;
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
     const MethodChannel('codeux.design/macos_secure_bookmarks'),
-    (final methodCall) async {
+    (methodCall) async {
       if (methodCall.method == 'startAccessingSecurityScopedResource') return false;
       if (methodCall.method == 'stopAccessingSecurityScopedResource') return false;
       if (methodCall.method == 'bookmarkData') return '';

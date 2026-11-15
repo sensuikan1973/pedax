@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
@@ -9,6 +9,7 @@ import 'package:pedax/home/setting_dialogs/hint_step_by_step_setting_dialog.dart
 import 'package:pedax/home/setting_dialogs/level_setting_dialog.dart';
 import 'package:pedax/home/setting_dialogs/shortcut_cheatsheet_dialog.dart';
 import 'package:pedax/home/setting_dialogs/n_tasks_setting_dialog.dart';
+
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
 import '../test_helper/windows_manager_mock.dart';
@@ -30,7 +31,7 @@ Future<void> main() async {
   setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(Locale('en'));
 
-  testWidgets('show AboutDialog', (final tester) async {
+  testWidgets('show AboutDialog', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -47,7 +48,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('show shortcut cheatsheet', (final tester) async {
+  testWidgets('show shortcut cheatsheet', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -60,7 +61,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('read book file path', (final tester) async {
+  testWidgets('read book file path', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -78,7 +79,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update book file path as it is', (final tester) async {
+  testWidgets('update book file path as it is', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -99,7 +100,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('read n-tasks', (final tester) async {
+  testWidgets('read n-tasks', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -117,7 +118,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update n-tasks with valid num', (final tester) async {
+  testWidgets('update n-tasks with valid num', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -137,7 +138,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update n-tasks with invalid small num', (final tester) async {
+  testWidgets('update n-tasks with invalid small num', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -157,7 +158,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update n-tasks with invalid large num', (final tester) async {
+  testWidgets('update n-tasks with invalid large num', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -177,7 +178,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('read level', (final tester) async {
+  testWidgets('read level', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -195,7 +196,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update level with valid num', (final tester) async {
+  testWidgets('update level with valid num', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -215,7 +216,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update level with invalid num', (final tester) async {
+  testWidgets('update level with invalid num', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -235,7 +236,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('off hint step-by-step', (final tester) async {
+  testWidgets('off hint step-by-step', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -255,7 +256,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('on bestpath count availability', (final tester) async {
+  testWidgets('on bestpath count availability', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -276,7 +277,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update bestpath count player lower limit', (final tester) async {
+  testWidgets('update bestpath count player lower limit', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -297,7 +298,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('update bestpath count opponent lower limit', (final tester) async {
+  testWidgets('update bestpath count opponent lower limit', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());

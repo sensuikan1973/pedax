@@ -9,7 +9,7 @@ class UndoAllShortcut implements PedaxShortcut {
   const UndoAllShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelUndoAll;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelUndoAll;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyS;
@@ -18,8 +18,8 @@ class UndoAllShortcut implements PedaxShortcut {
   String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(final KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
+  bool fired(KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndoAll();
+  Future<void> runEvent(PedaxShortcutEventArguments args) async => args.boardNotifier.requestUndoAll();
 }

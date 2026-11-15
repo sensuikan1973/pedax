@@ -50,11 +50,11 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   Future<void> spawnEdaxServer({
-    required final String libedaxPath,
-    required final List<String> initLibedaxParams,
-    required final int level,
-    required final bool hintStepByStep,
-    required final bool bestpathCountAvailability,
+    required String libedaxPath,
+    required List<String> initLibedaxParams,
+    required int level,
+    required bool hintStepByStep,
+    required bool bestpathCountAvailability,
   }) async {
     _edaxIsolate?.kill(priority: Isolate.immediate);
 
@@ -69,7 +69,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     _logger.d('spawned edax server');
 
     // ignore: avoid_annotating_with_dynamic
-    _receiveSubscription = _receiveStream.listen((final dynamic message) async {
+    _receiveSubscription = _receiveStream.listen((dynamic message) async {
       await _updateStateByEdaxServerResponse(message);
       notifyListeners();
     });
@@ -87,18 +87,18 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   void requestInit() => _edaxServerPort.send(const InitRequest());
   void requestNew() => _edaxServerPort.send(const NewRequest());
   void requestRotate180() => _edaxServerPort.send(const RotateRequest(angle: 180));
-  void requestMove(final String move) => _edaxServerPort.send(MoveRequest(move));
-  void requestPlay(final String moves) => _edaxServerPort.send(PlayRequest(moves));
+  void requestMove(String move) => _edaxServerPort.send(MoveRequest(move));
+  void requestPlay(String moves) => _edaxServerPort.send(PlayRequest(moves));
   void requestUndo() => _edaxServerPort.send(const UndoRequest(times: 1));
   void requestUndoAll() => _edaxServerPort.send(const UndoRequest(times: 60));
   void requestRedo() => _edaxServerPort.send(const RedoRequest(times: 1));
   void requestRedoAll() => _edaxServerPort.send(const RedoRequest(times: 60));
-  void requestSetOption(final String name, final String optionValue) {
+  void requestSetOption(String name, String optionValue) {
     _edaxServerPort.send(SetOptionRequest(name, optionValue));
     if (name == _levelOption.nativeName) value.level = int.parse(optionValue);
   }
 
-  void requestSetboard(final List<int> replacementTargetMoves) {
+  void requestSetboard(List<int> replacementTargetMoves) {
     final arrangeTargetChar = replacementTargetMoves.map((m) => SquareReplacement(m, value.arrangeTargetChar)).toList();
     _edaxServerPort.send(
       SetboardRequest(
@@ -120,23 +120,23 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
-  void switchArrangeTarget(final ArrangeTargetType arrangeTargetType) {
+  void switchArrangeTarget(ArrangeTargetType arrangeTargetType) {
     value.arrangeTargetSquareType = arrangeTargetType;
     notifyListeners();
     requestSetboard([]);
   }
 
-  void switchHintStepByStep({required final bool enabled}) {
+  void switchHintStepByStep({required bool enabled}) {
     value.hintStepByStep = enabled;
     notifyListeners();
   }
 
-  void switchCountBestpathAvailability({required final bool enabled}) {
+  void switchCountBestpathAvailability({required bool enabled}) {
     value.countBestpathAvailability = enabled;
     if (!enabled) value.countBestpathList = UnmodifiableListView([]);
   }
 
-  void switchBoardMode(final BoardMode boardMode) {
+  void switchBoardMode(BoardMode boardMode) {
     value
       ..mode = boardMode
       ..hintsWithStepByStep = UnmodifiableListView([]);
@@ -144,13 +144,13 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     if (boardMode == BoardMode.freePlay && value.hintIsVisible) _requestLatestHintList(value.currentMoves);
   }
 
-  void requestBookLoad(final String path) {
+  void requestBookLoad(String path) {
     value.bookLoadStatus = BookLoadStatus.loading;
     notifyListeners();
     _edaxServerPort.send(BookLoadRequest(path));
   }
 
-  void _requestLatestHintList(final String movesAtRequest) {
+  void _requestLatestHintList(String movesAtRequest) {
     value.hintsWithStepByStep = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
     _edaxServerPort.send(
@@ -169,7 +169,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     }
   }
 
-  Future<void> _requestCountBestpath(final String movesAtRequest) async {
+  Future<void> _requestCountBestpath(String movesAtRequest) async {
     value.countBestpathList = UnmodifiableListView([]);
     if (!value.hintIsVisible) return;
     if (value.bookHasBeenLoaded) {
@@ -184,7 +184,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
     }
   }
 
-  Future<void> _onMovesChanged(final String moves) async {
+  Future<void> _onMovesChanged(String moves) async {
     _requestBookPosition();
     if (value.mode == BoardMode.freePlay) {
       _requestLatestHintList(moves);
@@ -193,7 +193,7 @@ class BoardNotifier extends ValueNotifier<BoardState> {
   }
 
   // ignore: avoid_annotating_with_dynamic
-  Future<void> _updateStateByEdaxServerResponse(final dynamic message) async {
+  Future<void> _updateStateByEdaxServerResponse(dynamic message) async {
     _logger.d('received response "${message.runtimeType}"');
     if (message is MoveResponse) {
       if (value.currentMoves != message.moves) await _onMovesChanged(message.moves);
@@ -266,10 +266,10 @@ class BoardNotifier extends ValueNotifier<BoardState> {
         value
           ..hintsWithStepByStep = UnmodifiableListView(
             [...value.hintsWithStepByStep]
-              ..removeWhere((final el) => el.hint.move == message.hint.move)
+              ..removeWhere((el) => el.hint.move == message.hint.move)
               ..add(HintWithStepByStep(hint: message.hint, isLastStep: message.isLastStep)),
           )
-          ..bestScore = value.hintsWithStepByStep.map<int>((final el) => el.hint.score).reduce(max);
+          ..bestScore = value.hintsWithStepByStep.map<int>((el) => el.hint.score).reduce(max);
       }
     } else if (message is CountBestpathResponse) {
       if (message.request.movesAtRequest != value.currentMoves) {

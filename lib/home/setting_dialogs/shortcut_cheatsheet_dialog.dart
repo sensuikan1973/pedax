@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 
 import '../../board/pedax_shortcuts/pedax_shortcut.dart';
@@ -10,7 +10,7 @@ class ShortcutCheatsheetDialog extends StatelessWidget {
   final List<PedaxShortcut> shortcutList;
 
   @override
-  Widget build(final BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) => AlertDialog(
     title: Text(AppLocalizations.of(context)!.shortcutCheatsheet, textAlign: TextAlign.center),
     content: SingleChildScrollView(
       child: Table(
@@ -18,7 +18,7 @@ class ShortcutCheatsheetDialog extends StatelessWidget {
         border: TableBorder.all(),
         children: List.generate(
           shortcutList.length,
-          (final k) => TableRow(
+          (k) => TableRow(
             children: [
               Padding(
                 padding: const EdgeInsets.all(10),

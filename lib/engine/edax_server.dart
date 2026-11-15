@@ -24,7 +24,7 @@ import 'api/undo.dart';
 
 // NOTE: top level function for `isolate.spawn`.
 @doNotStore
-Future<void> startEdaxServer(final StartEdaxServerParams params) async {
+Future<void> startEdaxServer(StartEdaxServerParams params) async {
   final server = EdaxServer(dllPath: params.dllPath, logLevel: params.logLevel);
   await server.start(params.parentSendPort, params.initLibedaxParameters);
 }
@@ -40,7 +40,7 @@ class StartEdaxServerParams {
 
 @doNotStore
 class EdaxServer {
-  EdaxServer({required this._dllPath, required final Level logLevel}) : _logger = Logger(level: logLevel);
+  EdaxServer({required this._dllPath, required Level logLevel}) : _logger = Logger(level: logLevel);
 
   final String _dllPath;
   final Logger _logger;
@@ -56,7 +56,7 @@ class EdaxServer {
   late CountBestpathRequest _latestCountBestpathRequest;
 
   // NOTE: I want to ensure EdaxServer `isolatable`. So, params depending on platform should be injectable.
-  Future<void> start(final SendPort parentSendPort, final List<String> initLibedaxParameters) async {
+  Future<void> start(SendPort parentSendPort, List<String> initLibedaxParameters) async {
     IsolateNameServer.registerPortWithName(sendPort, serverName);
 
     parentSendPort.send(_receivePort.sendPort); // NOTE: notify my port to parent
@@ -70,9 +70,9 @@ class EdaxServer {
     _registerApiHandler(parentSendPort, edax);
   }
 
-  void _registerApiHandler(final SendPort parentSendPort, final LibEdax edax) =>
+  void _registerApiHandler(SendPort parentSendPort, LibEdax edax) =>
       // ignore: avoid_annotating_with_dynamic
-      _receivePort.listen((final dynamic message) async {
+      _receivePort.listen((dynamic message) async {
         _logger.d('received request "${message.runtimeType}"');
         if (message is MoveRequest) {
           parentSendPort.send(executeMove(edax, message));
@@ -166,7 +166,7 @@ class _ComputeHintNextParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-Future<void> _computeHintNext(final _ComputeHintNextParams params) async {
+Future<void> _computeHintNext(_ComputeHintNextParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeHintOneByOne(edax, params.request).listen(params.listener.send).asFuture<void>();
 }
@@ -181,7 +181,7 @@ class _ComputeBookLoadParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-void _computeBookLoad(final _ComputeBookLoadParams params) {
+void _computeBookLoad(_ComputeBookLoadParams params) {
   final edax = LibEdax(params.dllPath);
   final result = executeBookLoad(edax, params.request);
   params.listener.send(result);
@@ -197,7 +197,7 @@ class _ComputeCountBestpathParams {
 
 // NOTE: top level function for `compute`.
 @doNotStore
-Future<void> _computeCountBestpath(final _ComputeCountBestpathParams params) async {
+Future<void> _computeCountBestpath(_ComputeCountBestpathParams params) async {
   final edax = LibEdax(params.dllPath);
   await executeCountBestpath(edax, params.request).listen(params.listener.send).asFuture<void>();
 }

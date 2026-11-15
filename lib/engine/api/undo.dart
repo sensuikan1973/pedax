@@ -29,7 +29,7 @@ class UndoResponse implements ResponseSchema<UndoRequest> {
   final Move? lastMove;
 }
 
-UndoResponse executeUndo(final LibEdax edax, final UndoRequest request) {
+UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   edax.edaxStop();
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();
   for (var i = 0; i < request.times; i++) {
@@ -39,7 +39,8 @@ UndoResponse executeUndo(final LibEdax edax, final UndoRequest request) {
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();
   final lastMoveExcludingPass = edax.edaxGetLastMove();
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+  final isGameOver = edax.edaxIsGameOver();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !isGameOver) {
     edax.edaxRedo();
   }
 

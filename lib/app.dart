@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
@@ -22,12 +21,7 @@ class PedaxApp extends StatefulWidget {
   State<PedaxApp> createState() => _PedaxAppState();
 
   @visibleForTesting
-  static const localizationsDelegates = [
-    AppLocalizations.delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ];
+  static const localizationsDelegates = [AppLocalizations.delegate, ...GlobalMaterialLocalizations.delegates];
 
   static Future<double?> get savedWindowFrameWidth async {
     final pref = await SharedPreferences.getInstance();
@@ -50,25 +44,36 @@ class PedaxApp extends StatefulWidget {
   }
 }
 
-// See: https://github.com/leanflutter/window_manager/tree/v0.2.9#usage
-class _PedaxAppState extends State<PedaxApp> with WindowListener {
+class _PedaxAppState extends State<PedaxApp> {
+  late final ListenerId _windowListenerId;
+
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    _windowListenerId = WindowManager.instance.addListener(_onWindowEvent);
   }
 
   @override
   void dispose() {
-    windowManager.removeListener(this);
+    WindowManager.instance.removeListener(_windowListenerId);
     super.dispose();
   }
 
+  Future<void> _onWindowEvent(WindowEvent event) async {
+    if (event is WindowResizedEvent) {
+      await _saveWindowSize();
+    } else if (event is WindowMovedEvent) {
+      await _saveWindowPosition();
+    } else if (event is WindowFocusedEvent && mounted) {
+      setState(() {});
+    }
+  }
+
   @override
-  Widget build(final BuildContext context) => ChangeNotifierProvider(
-    create: (final _) => BoardNotifier(),
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (_) => BoardNotifier(),
     child: MaterialApp(
-      onGenerateTitle: (final context) => AppLocalizations.of(context)!.appTitle,
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: ThemeData(primarySwatch: Colors.brown),
       home: const Home(),
       localizationsDelegates: PedaxApp.localizationsDelegates,
@@ -78,29 +83,17 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
     ),
   );
 
-  // NOTE: linux is not supported.
-  // https://github.com/leanflutter/window_manager#onwindowresized--macos--windows
-  @override
-  Future<void> onWindowResized() async {
+  Future<void> _saveWindowSize() async {
     final pref = await SharedPreferences.getInstance();
     final windowInfo = await getWindowInfo();
     await pref.setDouble(_sharedPreferenceWindowFrameWidthKey, windowInfo.frame.width);
     await pref.setDouble(_sharedPreferenceWindowFrameHeightKey, windowInfo.frame.height);
   }
 
-  // NOTE: linux is not supported.
-  // https://github.com/leanflutter/window_manager/tree/v0.2.9#onwindowmoved--macos--windows
-  @override
-  Future<void> onWindowMoved() async {
+  Future<void> _saveWindowPosition() async {
     final pref = await SharedPreferences.getInstance();
     final windowInfo = await getWindowInfo();
     await pref.setDouble(_sharedPreferenceWindowFrameLeftKey, windowInfo.frame.left);
     await pref.setDouble(_sharedPreferenceWindowFrameTopKey, windowInfo.frame.top);
-  }
-
-  // https://github.com/leanflutter/window_manager#hidden-at-launch
-  @override
-  void onWindowFocus() {
-    setState(() {});
   }
 }

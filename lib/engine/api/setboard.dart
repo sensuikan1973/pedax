@@ -40,7 +40,7 @@ class SetboardResponse implements ResponseSchema<SetboardRequest> {
   final Move? lastMove;
 }
 
-SetboardResponse executeSetboard(final LibEdax edax, final SetboardRequest request) {
+SetboardResponse executeSetboard(LibEdax edax, SetboardRequest request) {
   edax.edaxStop();
 
   final board = edax.edaxGetBoard();

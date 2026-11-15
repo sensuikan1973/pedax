@@ -1,6 +1,6 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +15,6 @@ import 'package:pedax/board/square.dart';
 import 'package:pedax/home/home.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:pedax/main.dart' as pedax;
-import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
 import '../test/widget_test_helper/fake_shared_preferences.dart';
@@ -25,20 +24,17 @@ import '../test_helper/secure_bookmark_mock.dart';
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  // https://github.com/leanflutter/window_manager/blob/92944c1291cadeb9faed7f8083bced147620e3de/example/integration_test/window_manager_test.dart#LL10C23-L10C40
-  await windowManager.ensureInitialized();
-
   setUp(() {
     fakeSharedPreferences(); // always first launch
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
-  testWidgets('home', (final tester) async {
+  testWidgets('home', (tester) async {
     await tester.runAsync(() async {
       await pedax.main();
       await tester.pumpAndSettle();
 
-      final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
+      final context = tester.element(find.byWidgetPredicate((widget) => widget is Home));
       final l10n = AppLocalizations.of(context)!;
 
       expect(find.text(l10n.freePlayMode), findsOneWidget);

@@ -21,7 +21,7 @@ class CopyLocalInfoShortcut implements PedaxShortcut {
   const CopyLocalInfoShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelCopyLocalInfo;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelCopyLocalInfo;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyL;
@@ -32,12 +32,12 @@ class CopyLocalInfoShortcut implements PedaxShortcut {
   String get keys => Platform.isMacOS ? '^$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
-  bool fired(final KeyEvent keyEvent) =>
+  bool fired(KeyEvent keyEvent) =>
       (HardwareKeyboard.instance.isControlPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey)) ||
       (HardwareKeyboard.instance.isMetaPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey));
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async {
+  Future<void> runEvent(PedaxShortcutEventArguments args) async {
     final compactHintsWithStepByStep = List<Map<String, String>>.empty(growable: true);
     for (final h in args.boardNotifier.value.hintsWithStepByStep) {
       compactHintsWithStepByStep.add({

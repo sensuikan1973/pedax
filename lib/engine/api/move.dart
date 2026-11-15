@@ -29,7 +29,7 @@ class MoveResponse implements ResponseSchema<MoveRequest> {
   final Move? lastMove;
 }
 
-MoveResponse executeMove(final LibEdax edax, final MoveRequest request) {
+MoveResponse executeMove(LibEdax edax, MoveRequest request) {
   edax
     ..edaxStop()
     ..edaxMove(request.move);
@@ -37,7 +37,8 @@ MoveResponse executeMove(final LibEdax edax, final MoveRequest request) {
   final lastMoveExcludingPass = edax.edaxGetLastMove();
 
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+  final isGameOver = edax.edaxIsGameOver();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !isGameOver) {
     edax.edaxMove(currentColor == TurnColor.black ? MoveMark.passStringOfBlack : MoveMark.passStringOfWhite);
   }
 

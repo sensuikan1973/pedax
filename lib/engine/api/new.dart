@@ -27,7 +27,7 @@ class NewResponse implements ResponseSchema<NewRequest> {
   final Move? lastMove;
 }
 
-NewResponse executeNew(final LibEdax edax, final NewRequest request) {
+NewResponse executeNew(LibEdax edax, NewRequest request) {
   edax
     ..edaxStop()
     ..edaxNew();

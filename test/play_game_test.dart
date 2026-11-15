@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
@@ -16,6 +16,7 @@ import 'package:pedax/board/pedax_shortcuts/switch_hint_visibility_shortcut.dart
 import 'package:pedax/board/pedax_shortcuts/undo_all_shortcut.dart';
 import 'package:pedax/board/pedax_shortcuts/undo_shortcut.dart';
 import 'package:pedax/board/square.dart';
+
 import '../test_helper/board_finder.dart';
 import '../test_helper/edax_server.dart';
 import '../test_helper/secure_bookmark_mock.dart';
@@ -38,7 +39,7 @@ Future<void> main() async {
   setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(Locale('en'));
 
-  testWidgets('a game without pass', (final tester) async {
+  testWidgets('a game without pass', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -195,7 +196,7 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('a game with pass', (final tester) async {
+  testWidgets('a game with pass', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());
@@ -294,9 +295,9 @@ Future<void> main() async {
     });
   });
 
-  testWidgets('paste moves, and copy moves', (final tester) async {
+  testWidgets('paste moves, and copy moves', (tester) async {
     const moves = 'f5f6';
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (final methodCall) async {
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (methodCall) async {
       if (methodCall.method == 'Clipboard.getData') return const <String, dynamic>{'text': moves};
       return null;
     });

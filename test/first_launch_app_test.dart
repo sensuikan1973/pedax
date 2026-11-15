@@ -24,7 +24,7 @@ void main() {
     mockWindowsManager();
   });
   setUp(() => Logger.level = Level.debug);
-  testWidgets('launch app', (final tester) async {
+  testWidgets('launch app', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());

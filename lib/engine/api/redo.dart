@@ -29,7 +29,7 @@ class RedoResponse implements ResponseSchema<RedoRequest> {
   final Move? lastMove;
 }
 
-RedoResponse executeRedo(final LibEdax edax, final RedoRequest request) {
+RedoResponse executeRedo(LibEdax edax, RedoRequest request) {
   edax.edaxStop();
   for (var i = 0; i < request.times; i++) {
     edax.edaxRedo();
@@ -38,7 +38,8 @@ RedoResponse executeRedo(final LibEdax edax, final RedoRequest request) {
   final lastMoveExcludingPass = edax.edaxGetLastMove();
 
   final currentColor = edax.edaxGetCurrentPlayer();
-  if (edax.edaxGetMobilityCount(currentColor) == 0 && !edax.edaxIsGameOver()) {
+  final isGameOver = edax.edaxIsGameOver();
+  if (edax.edaxGetMobilityCount(currentColor) == 0 && !isGameOver) {
     edax.edaxRedo();
   }
 

@@ -34,7 +34,7 @@ class CountBestpathResponse implements ResponseSchema<CountBestpathRequest> {
   final CountBestpathResult countBestpathResult;
 }
 
-Stream<CountBestpathResponse> executeCountBestpath(final LibEdax edax, final CountBestpathRequest request) async* {
+Stream<CountBestpathResponse> executeCountBestpath(LibEdax edax, CountBestpathRequest request) async* {
   final rootBookMoveListWithPosition = edax.edaxGetBookMoveWithPositionByMoves(request.movesAtRequest);
   final logger = Logger(level: request.logLevel);
   for (final move in rootBookMoveListWithPosition.moveList) {

@@ -9,10 +9,10 @@ class Rotate180Shortcut implements PedaxShortcut {
   const Rotate180Shortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelRotate180;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelRotate180;
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRotate180();
+  Future<void> runEvent(PedaxShortcutEventArguments args) async => args.boardNotifier.requestRotate180();
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyM;
@@ -21,5 +21,5 @@ class Rotate180Shortcut implements PedaxShortcut {
   String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(final KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
+  bool fired(KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
 }
