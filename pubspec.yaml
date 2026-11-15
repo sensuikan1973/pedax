@@ -56,6 +56,8 @@ dependencies:
       # https://dart.dev/tools/pub/dependencies#git-packages
       ref: main
 
+  cupertino_ui: any
+  material_ui: any
 dev_dependencies:
   cider: ^0.2.10
   file_selector_platform_interface: ^2.7.0

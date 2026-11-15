@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:file_selector/file_selector.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -21,11 +21,11 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
   final _selectedFilePath = ValueNotifier<String?>(null);
 
   @override
-  Widget build(final BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) => AlertDialog(
     title: Text(AppLocalizations.of(context)!.bookFilePathSetting, textAlign: TextAlign.center),
     content: FutureBuilder<String>(
       future: _option.val,
-      builder: (final _, final snapshot) {
+      builder: (_, snapshot) {
         if (snapshot.hasData) _selectedFilePath.value = snapshot.data;
         return Row(
           children: [
@@ -40,7 +40,7 @@ class _BookFilePathSettingDialogState extends State<BookFilePathSettingDialog> {
             const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
             ValueListenableBuilder<String?>(
               valueListenable: _selectedFilePath,
-              builder: (final _, final value, final _) {
+              builder: (_, value, _) {
                 if (value == null) return const Text(' ');
                 return Expanded(child: SelectableText(value));
               },

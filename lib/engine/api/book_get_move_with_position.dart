@@ -19,10 +19,7 @@ class GetBookMoveWithPositionResponse implements ResponseSchema<GetBookMoveWithP
   final List<Move> moveList;
 }
 
-GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(
-  final LibEdax edax,
-  final GetBookMoveWithPositionRequest request,
-) {
+GetBookMoveWithPositionResponse executeGetBookMoveWithPosition(LibEdax edax, GetBookMoveWithPositionRequest request) {
   final result = edax.edaxGetBookMoveWithPosition();
   return GetBookMoveWithPositionResponse(position: result.position, moveList: result.moveList, request: request);
 }

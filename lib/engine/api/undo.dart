@@ -29,7 +29,7 @@ class UndoResponse implements ResponseSchema<UndoRequest> {
   final Move? lastMove;
 }
 
-UndoResponse executeUndo(final LibEdax edax, final UndoRequest request) {
+UndoResponse executeUndo(LibEdax edax, UndoRequest request) {
   edax.edaxStop();
   if (edax.edaxGetLastMove().isPass) edax.edaxUndo();
   for (var i = 0; i < request.times; i++) {

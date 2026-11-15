@@ -9,7 +9,7 @@ class RedoShortcut implements PedaxShortcut {
   const RedoShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelRedo;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelRedo;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKeyR => LogicalKeyboardKey.keyR;
@@ -21,10 +21,10 @@ class RedoShortcut implements PedaxShortcut {
   String get keys => '${logicalKeyR.keyLabel.toUpperCase()} or →';
 
   @override
-  bool fired(final KeyEvent keyEvent) =>
+  bool fired(KeyEvent keyEvent) =>
       HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyR) ||
       HardwareKeyboard.instance.isLogicalKeyPressed(logicalKeyArrowRight);
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();
+  Future<void> runEvent(PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedo();
 }

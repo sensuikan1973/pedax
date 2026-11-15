@@ -19,7 +19,7 @@ class BookLoadResponse implements ResponseSchema<BookLoadRequest> {
   final BookLoadRequest request;
 }
 
-BookLoadResponse executeBookLoad(final LibEdax edax, final BookLoadRequest request) {
+BookLoadResponse executeBookLoad(LibEdax edax, BookLoadRequest request) {
   edax
     ..edaxStop()
     ..edaxBookLoad(request.file);

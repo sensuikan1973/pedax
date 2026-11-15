@@ -15,7 +15,7 @@ class CaptureBoardImageShortcut implements PedaxShortcut {
   const CaptureBoardImageShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShortcut;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelCaptureBoardImageShortcut;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyP;
@@ -26,12 +26,12 @@ class CaptureBoardImageShortcut implements PedaxShortcut {
   String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
-  bool fired(final KeyEvent keyEvent) =>
+  bool fired(KeyEvent keyEvent) =>
       (HardwareKeyboard.instance.isControlPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey)) ||
       (HardwareKeyboard.instance.isMetaPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey));
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments argus) async {
+  Future<void> runEvent(PedaxShortcutEventArguments argus) async {
     final boundary = argus.captureKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
     // See: https://api.flutter.dev/flutter/rendering/RenderRepaintBoundary/toImage.html
     final image = await boundary.toImage(pixelRatio: 3);

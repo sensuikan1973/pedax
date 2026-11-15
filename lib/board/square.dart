@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class Square extends StatelessWidget {
@@ -33,7 +33,7 @@ class Square extends StatelessWidget {
   double get _notebookEmojiFontSize => length * 0.25;
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
     behavior: HitTestBehavior.opaque,
     onTap: onTap,
     child: Container(
@@ -99,7 +99,7 @@ class Square extends StatelessWidget {
     return Container(height: markLength, width: markLength, margin: EdgeInsets.all(markLength * 2), color: Colors.red);
   }
 
-  String _scoreString(final int score) => score >= 0 ? '+$score' : score.toString();
+  String _scoreString(int score) => score >= 0 ? '+$score' : score.toString();
 }
 
 enum SquareType { black, white, empty }

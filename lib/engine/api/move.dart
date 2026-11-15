@@ -29,7 +29,7 @@ class MoveResponse implements ResponseSchema<MoveRequest> {
   final Move? lastMove;
 }
 
-MoveResponse executeMove(final LibEdax edax, final MoveRequest request) {
+MoveResponse executeMove(LibEdax edax, MoveRequest request) {
   edax
     ..edaxStop()
     ..edaxMove(request.move);

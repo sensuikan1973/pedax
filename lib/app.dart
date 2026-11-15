@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -65,10 +67,10 @@ class _PedaxAppState extends State<PedaxApp> with WindowListener {
   }
 
   @override
-  Widget build(final BuildContext context) => ChangeNotifierProvider(
-    create: (final _) => BoardNotifier(),
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (_) => BoardNotifier(),
     child: MaterialApp(
-      onGenerateTitle: (final context) => AppLocalizations.of(context)!.appTitle,
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       theme: ThemeData(primarySwatch: Colors.brown),
       home: const Home(),
       localizationsDelegates: PedaxApp.localizationsDelegates,

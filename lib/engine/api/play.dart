@@ -29,7 +29,7 @@ class PlayResponse implements ResponseSchema<PlayRequest> {
   final Move? lastMove;
 }
 
-PlayResponse executePlay(final LibEdax edax, final PlayRequest request) {
+PlayResponse executePlay(LibEdax edax, PlayRequest request) {
   edax
     ..edaxStop()
     ..edaxPlay(request.moves);

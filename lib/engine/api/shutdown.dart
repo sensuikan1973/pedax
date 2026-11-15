@@ -17,7 +17,7 @@ class ShutdownResponse implements ResponseSchema<ShutdownRequest> {
   final ShutdownRequest request;
 }
 
-ShutdownResponse executeShutdown(final LibEdax edax, final ShutdownRequest request) {
+ShutdownResponse executeShutdown(LibEdax edax, ShutdownRequest request) {
   edax
     ..edaxStop()
     ..libedaxTerminate()

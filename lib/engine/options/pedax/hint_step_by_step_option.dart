@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'engine_pedax_option.dart';
 
 @immutable
@@ -20,7 +21,7 @@ class HintStepByStepOption implements EnginePedaxOption<bool> {
   }
 
   @override
-  Future<bool> update(final bool val) async {
+  Future<bool> update(bool val) async {
     final pref = await _preferences;
     await pref.setBool(prefKey, val);
     return val;

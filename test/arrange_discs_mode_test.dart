@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,7 +30,7 @@ Future<void> main() async {
   setUp(() => Logger.level = Level.debug);
   final l10nEn = await AppLocalizations.delegate.load(Locale('en'));
 
-  testWidgets('arrange discs, and play', (final tester) async {
+  testWidgets('arrange discs, and play', (tester) async {
     await tester.binding.setSurfaceSize(const Size(2048, 1024));
     await tester.runAsync(() async {
       await tester.pumpWidget(const PedaxApp());

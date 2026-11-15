@@ -5,5 +5,5 @@ abstract class EngineOption<T> {
 
   Future<T> get val;
 
-  Future<T> update(final T val);
+  Future<T> update(T val);
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -13,15 +13,15 @@ class HintStepByStepSettingDialog extends StatelessWidget {
   final _enabled = ValueNotifier<bool?>(null);
 
   @override
-  Widget build(final BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) => AlertDialog(
     title: Text(AppLocalizations.of(context)!.hintStepByStepSetting, textAlign: TextAlign.center),
     content: FutureBuilder<bool>(
       future: _option.val,
-      builder: (final context, final snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.hasData) _enabled.value = snapshot.data;
         return ValueListenableBuilder<bool?>(
           valueListenable: _enabled,
-          builder: (final _, final value, final _) {
+          builder: (_, value, _) {
             if (value == null) return const CupertinoActivityIndicator();
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class HintStepByStepSettingDialog extends StatelessWidget {
                 Text(AppLocalizations.of(context)!.hintStepByStepDescription),
                 Switch(
                   value: _enabled.value!,
-                  onChanged: (final value) async {
+                  onChanged: (value) async {
                     context.read<BoardNotifier>().switchHintStepByStep(enabled: value);
                     await _option.update(value);
                     _enabled.value = value;

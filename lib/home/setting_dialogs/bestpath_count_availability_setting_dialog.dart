@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:libedax4dart/libedax4dart.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +23,15 @@ class BestpathCountSettingDialog extends StatelessWidget {
   final _hintTextOfLowerLimit = 'default is ${BookCountBoardBestPathLowerLimit.best.toString()} (= only best move)';
 
   @override
-  Widget build(final BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) => AlertDialog(
     title: Text(AppLocalizations.of(context)!.bestpathCountSetting, textAlign: TextAlign.center),
     content: FutureBuilder<bool>(
       future: _availabilityOption.val,
-      builder: (final context, final snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.hasData) _enabled.value = snapshot.data;
         return ValueListenableBuilder<bool?>(
           valueListenable: _enabled,
-          builder: (final _, final value, final _) {
+          builder: (_, value, _) {
             if (value == null) return const CupertinoActivityIndicator();
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -39,7 +39,7 @@ class BestpathCountSettingDialog extends StatelessWidget {
                 Text(AppLocalizations.of(context)!.bestpathCountDescription),
                 Switch(
                   value: _enabled.value!,
-                  onChanged: (final value) async {
+                  onChanged: (value) async {
                     context.read<BoardNotifier>().switchCountBestpathAvailability(enabled: value);
                     await _availabilityOption.update(value);
                     _enabled.value = value;
@@ -51,7 +51,7 @@ class BestpathCountSettingDialog extends StatelessWidget {
                   future: Future(
                     () async => Future.wait([_playerLowerLimitOption.val, _playerLowerLimitOption.appDefaultValue]),
                   ),
-                  builder: (final _, final snapshot) {
+                  builder: (_, snapshot) {
                     if (snapshot.hasData) {
                       final currentPlayerLowerLimit = snapshot.data!.first.toString();
                       final playerLowerLimitAppDefault = snapshot.data![1].toString();
@@ -81,7 +81,7 @@ class BestpathCountSettingDialog extends StatelessWidget {
                   future: Future(
                     () async => Future.wait([_opponentLowerLimitOption.val, _opponentLowerLimitOption.appDefaultValue]),
                   ),
-                  builder: (final _, final snapshot) {
+                  builder: (_, snapshot) {
                     if (snapshot.hasData) {
                       final currentOpponentLowerLimit = snapshot.data!.first.toString();
                       final opponentLowerLimitAppDefault = snapshot.data![1].toString();

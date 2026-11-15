@@ -29,7 +29,7 @@ class RotateResponse implements ResponseSchema<RotateRequest> {
   final Move? lastMove;
 }
 
-RotateResponse executeRotate(final LibEdax edax, final RotateRequest request) {
+RotateResponse executeRotate(LibEdax edax, RotateRequest request) {
   edax.edaxRotate(request.angle);
   final moves = edax.edaxGetMoves();
   return RotateResponse(

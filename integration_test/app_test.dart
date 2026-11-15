@@ -1,6 +1,6 @@
 // See: https://flutter.dev/docs/testing/integration-tests
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,12 +33,12 @@ Future<void> main() async {
     mockSecureBookmark();
     setWindowFrame(Rect.fromLTRB(0, 0, pedax.pedaxWindowMinSize.width, pedax.pedaxWindowMinSize.height));
   });
-  testWidgets('home', (final tester) async {
+  testWidgets('home', (tester) async {
     await tester.runAsync(() async {
       await pedax.main();
       await tester.pumpAndSettle();
 
-      final context = tester.element(find.byWidgetPredicate((final widget) => widget is Home));
+      final context = tester.element(find.byWidgetPredicate((widget) => widget is Home));
       final l10n = AppLocalizations.of(context)!;
 
       expect(find.text(l10n.freePlayMode), findsOneWidget);

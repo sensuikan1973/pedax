@@ -27,7 +27,7 @@ class InitResponse implements ResponseSchema<InitRequest> {
   final Move? lastMove;
 }
 
-InitResponse executeInit(final LibEdax edax, final InitRequest request) {
+InitResponse executeInit(LibEdax edax, InitRequest request) {
   edax
     ..edaxStop()
     ..edaxInit();

@@ -59,7 +59,7 @@ class BookFileOption implements EngineNativeOption<String> {
   }
 
   @override
-  Future<String> update(final String val) async {
+  Future<String> update(String val) async {
     final pref = await _preferences;
     if (val.isEmpty) {
       final newPath = await appDefaultValue;

@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:pedax/board/square.dart';
 
 @isTest
-void expectLastMove(final WidgetTester tester, final String coordinate) {
+void expectLastMove(WidgetTester tester, String coordinate) {
   final finder = findByCoordinate(coordinate);
   expect(finder, findsOneWidget);
   final square = tester.firstWidget<Square>(finder);
@@ -11,7 +11,7 @@ void expectLastMove(final WidgetTester tester, final String coordinate) {
 }
 
 @isTest
-void expectStoneNum(final WidgetTester tester, final SquareType type, final int n) {
+void expectStoneNum(WidgetTester tester, SquareType type, int n) {
   final finder = _findSquareByType(type);
   expect(finder, findsWidgets);
   final squares = tester.widgetList<Square>(finder);
@@ -19,10 +19,10 @@ void expectStoneNum(final WidgetTester tester, final SquareType type, final int 
 }
 
 @isTest
-void expectStoneCoordinates(final WidgetTester tester, final List<String> coordinates, final SquareType type) {
+void expectStoneCoordinates(WidgetTester tester, List<String> coordinates, SquareType type) {
   final finders = coordinates
       .map(
-        (final coordinate) => find.byWidgetPredicate((final widget) {
+        (coordinate) => find.byWidgetPredicate((widget) {
           if (widget is! Square) return false;
           final coordinateMatched =
               widget.coordinate == coordinate.toLowerCase() || widget.coordinate == coordinate.toUpperCase();
@@ -36,12 +36,12 @@ void expectStoneCoordinates(final WidgetTester tester, final List<String> coordi
 }
 
 @isTest
-Finder findByCoordinate(final String coordinate) => find.byWidgetPredicate((final widget) {
+Finder findByCoordinate(String coordinate) => find.byWidgetPredicate((widget) {
   if (widget is! Square) return false;
   return widget.coordinate == coordinate.toLowerCase() || widget.coordinate == coordinate.toUpperCase();
 });
 
-Finder _findSquareByType(final SquareType type) => find.byWidgetPredicate((final widget) {
+Finder _findSquareByType(SquareType type) => find.byWidgetPredicate((widget) {
   if (widget is! Square) return false;
   return widget.type == type;
 });

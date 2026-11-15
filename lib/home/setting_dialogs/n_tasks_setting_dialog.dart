@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -15,11 +15,11 @@ class NTasksSettingDialog extends StatelessWidget {
   final _textController = TextEditingController();
 
   @override
-  Widget build(final BuildContext context) => AlertDialog(
+  Widget build(BuildContext context) => AlertDialog(
     title: Text(AppLocalizations.of(context)!.nTasksSetting, textAlign: TextAlign.center),
     content: FutureBuilder<int>(
       future: _option.val,
-      builder: (final _, final snapshot) {
+      builder: (_, snapshot) {
         if (snapshot.hasData) _textController.text = snapshot.data!.toString();
         return TextFormField(
           controller: _textController,

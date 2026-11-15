@@ -16,10 +16,10 @@ const _keyPrefix = 'flutter.';
 // See: https://pub.dev/packages/shared_preferences#testing
 @isTest
 Future<void> fakeSharedPreferences({
-  final String? evalFilePath,
-  final String? bookFilePath,
-  final bool? enableBestpathCount,
-  final String? bookmarkPrefKey,
+  String? evalFilePath,
+  String? bookFilePath,
+  bool? enableBestpathCount,
+  String? bookmarkPrefKey,
 }) async {
   final pref = {
     '$_keyPrefix${_evalFileOption.prefKey}': evalFilePath ?? await _evalFileOption.appDefaultValue,

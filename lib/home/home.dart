@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:pedax/l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:libedax4dart/libedax4dart.dart';
@@ -52,7 +52,7 @@ class HomeState extends State<Home> {
     _setUpEdaxServer(context.read<BoardNotifier>());
   }
 
-  Future<void> _setUpEdaxServer(final BoardNotifier boardNotifier) async {
+  Future<void> _setUpEdaxServer(BoardNotifier boardNotifier) async {
     await _edaxAsset.setupDllAndData();
     await boardNotifier.spawnEdaxServer(
       libedaxPath: await _edaxAsset.libedaxPath,
@@ -64,18 +64,16 @@ class HomeState extends State<Home> {
   }
 
   @override
-  Widget build(final BuildContext context) {
-    final edaxServerSpawned = context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxServerSpawned);
+  Widget build(BuildContext context) {
+    final edaxServerSpawned = context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxServerSpawned);
     if (!edaxServerSpawned) return const Center(child: CupertinoActivityIndicator());
-    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>(
-      (final notifier) => notifier.value.bookLoadStatus,
-    );
+    final bookLoadStatus = context.select<BoardNotifier, BookLoadStatus?>((notifier) => notifier.value.bookLoadStatus);
     if (bookLoadStatus == BookLoadStatus.loading) _showSnackBarOfBookLoading();
     if (bookLoadStatus == BookLoadStatus.loaded) _showSnackBarOfBookLoaded();
 
     return Scaffold(
       appBar: _appBar,
-      body: context.select<BoardNotifier, bool>((final notifier) => notifier.value.edaxInitOnce)
+      body: context.select<BoardNotifier, bool>((notifier) => notifier.value.edaxInitOnce)
           ? _body
           : Center(child: Text(AppLocalizations.of(context)!.initializingEngine)),
     );
@@ -98,7 +96,7 @@ class HomeState extends State<Home> {
   );
 
   Widget get _bottomItems {
-    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
+    final boardMode = context.select<BoardNotifier, BoardMode>((notifier) => notifier.value.mode);
     if (boardMode == BoardMode.arrangeDiscs) return _arrangeTargetSelection;
     return _freePlayOperationItems;
   }
@@ -120,7 +118,7 @@ class HomeState extends State<Home> {
 
   Widget get _arrangeTargetSelection {
     final currentArrangeTargetSquareType = context.select<BoardNotifier, ArrangeTargetType>(
-      (final notifier) => notifier.value.arrangeTargetSquareType,
+      (notifier) => notifier.value.arrangeTargetSquareType,
     );
     final selectedMark = Border.all(color: Colors.red, width: 2);
     return Row(
@@ -171,7 +169,7 @@ class HomeState extends State<Home> {
   }
 
   AppBar get _appBar {
-    final boardMode = context.select<BoardNotifier, BoardMode>((final notifier) => notifier.value.mode);
+    final boardMode = context.select<BoardNotifier, BoardMode>((notifier) => notifier.value.mode);
     return AppBar(
       leading: _menu(),
       title: PopupMenuButton<BoardMode>(
@@ -182,9 +180,9 @@ class HomeState extends State<Home> {
           decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(10)),
           child: Text(_boardModeString(boardMode)),
         ),
-        onSelected: (final boardMode) => context.read<BoardNotifier>().switchBoardMode(boardMode),
-        itemBuilder: (final context) => BoardMode.values
-            .map((final mode) => PopupMenuItem<BoardMode>(value: mode, child: Text(_boardModeString(mode))))
+        onSelected: (boardMode) => context.read<BoardNotifier>().switchBoardMode(boardMode),
+        itemBuilder: (context) => BoardMode.values
+            .map((mode) => PopupMenuItem<BoardMode>(value: mode, child: Text(_boardModeString(mode))))
             .toList(),
       ),
       backgroundColor: Colors.brown,
@@ -197,7 +195,7 @@ class HomeState extends State<Home> {
           padding: const EdgeInsets.all(12),
           onPressed: () async => showDialog<void>(
             context: context,
-            builder: (final _) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
+            builder: (_) => ShortcutCheatsheetDialog(shortcutList: shortcutList),
           ),
         ),
         Image.asset('assets/images/pedax_logo.png', height: kToolbarHeight),
@@ -205,7 +203,7 @@ class HomeState extends State<Home> {
     );
   }
 
-  String _boardModeString(final BoardMode boardMode) {
+  String _boardModeString(BoardMode boardMode) {
     switch (boardMode) {
       case BoardMode.freePlay:
         return AppLocalizations.of(context)!.freePlayMode;
@@ -243,7 +241,7 @@ class HomeState extends State<Home> {
   );
 
   Widget get _blackDiscCount {
-    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    final currentColor = context.select<BoardNotifier, int>((notifier) => notifier.value.currentColor);
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -259,7 +257,7 @@ class HomeState extends State<Home> {
           ),
         ),
         Text(
-          context.select<BoardNotifier, int>((final notifier) => notifier.value.blackDiscCount).toString(),
+          context.select<BoardNotifier, int>((notifier) => notifier.value.blackDiscCount).toString(),
           style: TextStyle(color: Colors.white, fontSize: _discCountFontSize),
         ),
       ],
@@ -267,7 +265,7 @@ class HomeState extends State<Home> {
   }
 
   Widget get _whiteDiscCount {
-    final currentColor = context.select<BoardNotifier, int>((final notifier) => notifier.value.currentColor);
+    final currentColor = context.select<BoardNotifier, int>((notifier) => notifier.value.currentColor);
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -283,7 +281,7 @@ class HomeState extends State<Home> {
           ),
         ),
         Text(
-          context.select<BoardNotifier, int>((final notifier) => notifier.value.whiteDiscCount).toString(),
+          context.select<BoardNotifier, int>((notifier) => notifier.value.whiteDiscCount).toString(),
           style: TextStyle(color: Colors.black, fontSize: _discCountFontSize),
         ),
       ],
@@ -292,7 +290,7 @@ class HomeState extends State<Home> {
 
   void _showSnackBarOfBookLoaded() {
     context.read<BoardNotifier>().finishedNotifyBookHasBeenLoadedToUser();
-    WidgetsBinding.instance.addPostFrameCallback((final _) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future<void>.delayed(const Duration(seconds: 1));
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -303,7 +301,7 @@ class HomeState extends State<Home> {
   }
 
   void _showSnackBarOfBookLoading() {
-    WidgetsBinding.instance.addPostFrameCallback((final _) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -315,7 +313,7 @@ class HomeState extends State<Home> {
   }
 
   Text get _positionInfoText {
-    final positionFullNum = context.select<BoardNotifier, int>((final notifier) => notifier.value.positionFullNum);
+    final positionFullNum = context.select<BoardNotifier, int>((notifier) => notifier.value.positionFullNum);
     final data = positionFullNum == 0
         ? AppLocalizations.of(context)!.noPositionInfo
         : AppLocalizations.of(context)!.positionInfo(positionFullNum);
@@ -326,9 +324,7 @@ class HomeState extends State<Home> {
   }
 
   Text get _movesCountText {
-    final movesCount = context.select<BoardNotifier, int>(
-      (final notifier) => notifier.value.currentMovesCountWithoutPass,
-    );
+    final movesCount = context.select<BoardNotifier, int>((notifier) => notifier.value.currentMovesCountWithoutPass);
     return Text(
       AppLocalizations.of(context)!.movesCount(movesCount),
       textAlign: TextAlign.end,
@@ -338,8 +334,8 @@ class HomeState extends State<Home> {
 
   PopupMenuButton<_Menu> _menu() => PopupMenuButton<_Menu>(
     icon: const Icon(Icons.menu),
-    onSelected: (final menu) => menu.onSelected(),
-    itemBuilder: (final context) => _popupMenuEntries,
+    onSelected: (menu) => menu.onSelected(),
+    itemBuilder: (context) => _popupMenuEntries,
   );
 
   List<PopupMenuEntry<_Menu>> get _popupMenuEntries => [
@@ -348,7 +344,7 @@ class HomeState extends State<Home> {
         _MenuType.level,
         () async => showDialog<void>(
           context: context,
-          builder: (final _) =>
+          builder: (_) =>
               ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: LevelSettingDialog()),
         ),
       ),
@@ -360,7 +356,7 @@ class HomeState extends State<Home> {
         _MenuType.hintStepByStep,
         () async => showDialog<void>(
           context: context,
-          builder: (final _) =>
+          builder: (_) =>
               ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: HintStepByStepSettingDialog()),
         ),
       ),
@@ -372,7 +368,7 @@ class HomeState extends State<Home> {
         _MenuType.bookFilePath,
         () async => showDialog<void>(
           context: context,
-          builder: (final _) => ChangeNotifierProvider.value(
+          builder: (_) => ChangeNotifierProvider.value(
             value: context.read<BoardNotifier>(),
             child: const BookFilePathSettingDialog(),
           ),
@@ -386,7 +382,7 @@ class HomeState extends State<Home> {
         _MenuType.nTasks,
         () async => showDialog<void>(
           context: context,
-          builder: (final _) =>
+          builder: (_) =>
               ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: NTasksSettingDialog()),
         ),
       ),
@@ -398,7 +394,7 @@ class HomeState extends State<Home> {
         _MenuType.bestpathCountAvailability,
         () async => showDialog<void>(
           context: context,
-          builder: (final _) =>
+          builder: (_) =>
               ChangeNotifierProvider.value(value: context.read<BoardNotifier>(), child: BestpathCountSettingDialog()),
         ),
       ),

@@ -9,10 +9,10 @@ class RedoAllShortcut implements PedaxShortcut {
   const RedoAllShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelRedoAll;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelRedoAll;
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedoAll();
+  Future<void> runEvent(PedaxShortcutEventArguments args) async => args.boardNotifier.requestRedoAll();
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyF;
@@ -21,5 +21,5 @@ class RedoAllShortcut implements PedaxShortcut {
   String get keys => logicalKey.keyLabel.toUpperCase();
 
   @override
-  bool fired(final KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
+  bool fired(KeyEvent keyEvent) => HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey);
 }

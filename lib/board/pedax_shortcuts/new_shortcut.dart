@@ -11,7 +11,7 @@ class NewShortcut implements PedaxShortcut {
   const NewShortcut();
 
   @override
-  String label(final AppLocalizations localizations) => localizations.shortcutLabelNew;
+  String label(AppLocalizations localizations) => localizations.shortcutLabelNew;
 
   @visibleForTesting
   static LogicalKeyboardKey get logicalKey => LogicalKeyboardKey.keyN;
@@ -22,10 +22,10 @@ class NewShortcut implements PedaxShortcut {
   String get keys => Platform.isMacOS ? '⌃$_keyLabel or ⌘$_keyLabel' : 'Ctrl + $_keyLabel';
 
   @override
-  bool fired(final KeyEvent keyEvent) =>
+  bool fired(KeyEvent keyEvent) =>
       (HardwareKeyboard.instance.isControlPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey)) ||
       (HardwareKeyboard.instance.isMetaPressed && HardwareKeyboard.instance.isLogicalKeyPressed(logicalKey));
 
   @override
-  Future<void> runEvent(final PedaxShortcutEventArguments args) async => args.boardNotifier.requestNew();
+  Future<void> runEvent(PedaxShortcutEventArguments args) async => args.boardNotifier.requestNew();
 }
